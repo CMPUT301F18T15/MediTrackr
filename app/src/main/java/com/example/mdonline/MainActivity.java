@@ -1,12 +1,8 @@
 package com.example.mdonline;
 
-import android.graphics.Color;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,19 +17,32 @@ public class MainActivity extends AppCompatActivity {
         final ImageView search = (ImageView) findViewById(R.id.search);
         final ImageView profile = (ImageView) findViewById(R.id.profile);
 
+        problems.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
+
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                problems.setColorFilter(getResources().getColor(R.color.colorPrimary));
-                map.setColorFilter(getResources().getColor(R.color.colorPrimary));
-                camera.setColorFilter(getResources().getColor(R.color.colorPrimary));
-                search.setColorFilter(getResources().getColor(R.color.colorPrimary));
-                profile.setColorFilter(getResources().getColor(R.color.colorPrimary));
-
                 ImageView image = (ImageView) v;
-                image.setColorFilter(Color.BLACK);
-                Log.d("test", v.getId()+"");
-                Log.d("test", problems.getId()+"");
+                problems.setImageDrawable(getResources().getDrawable(R.drawable.cross));
+                map.setImageDrawable(getResources().getDrawable(R.drawable.map));
+                camera.setImageDrawable(getResources().getDrawable(R.drawable.camera));
+                search.setImageDrawable(getResources().getDrawable(R.drawable.search));
+                profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
+                if(v == problems){
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
+                }
+                else if (v == map) {
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
+                }
+                else if (v == camera) {
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full));
+                }
+                else if (v == search) {
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.search_full));
+                }
+                else{
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.person_full));
+                }
             }
         };
         problems.setOnClickListener(listener);

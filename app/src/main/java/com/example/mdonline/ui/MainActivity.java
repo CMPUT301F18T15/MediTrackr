@@ -1,9 +1,11 @@
-package com.example.mdonline;
+package com.example.mdonline.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.mdonline.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("MediDoc");
+
+
         final ImageView problems = (ImageView) findViewById(R.id.problems);
         final ImageView map = (ImageView) findViewById(R.id.map);
         final ImageView camera = (ImageView) findViewById(R.id.camera);

@@ -1,6 +1,4 @@
-package com.example.mdonline;
-
-import java.util.ArrayList;
+package com.example.meditrackr;
 
 public class Doctor {
     private String id;

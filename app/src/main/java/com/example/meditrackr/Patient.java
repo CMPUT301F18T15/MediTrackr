@@ -1,4 +1,4 @@
-package com.example.mdonline;
+package com.example.meditrackr;
 
 public class Patient {
     private String id;

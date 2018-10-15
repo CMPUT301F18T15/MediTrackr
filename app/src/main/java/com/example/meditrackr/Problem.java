@@ -1,4 +1,4 @@
-package com.example.mdonline;
+package com.example.meditrackr;
 
 import java.util.ArrayList;
 import java.util.Date;

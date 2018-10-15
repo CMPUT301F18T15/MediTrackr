@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MD Online</string>
+    <string name="app_name">Medi Trackr</string>
     <string-array name="user_options">
             <item>Patient</item>
             <item>Doctor</item>

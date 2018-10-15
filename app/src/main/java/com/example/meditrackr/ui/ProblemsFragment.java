@@ -1,4 +1,4 @@
-package com.example.mdonline.ui;
+package com.example.meditrackr.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,12 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.mdonline.R;
+import com.example.meditrackr.R;
 
-public class LoginFragment extends Fragment {
+public class ProblemsFragment extends Fragment {
 
-    public static LoginFragment newInstance(){
-        LoginFragment fragment = new LoginFragment();
+    public static ProblemsFragment newInstance(){
+        ProblemsFragment fragment = new ProblemsFragment();
         return fragment;
     }
 
@@ -19,7 +19,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_login, container, false);
+                R.layout.fragment_problems, container, false);
 
         return rootView;
     }

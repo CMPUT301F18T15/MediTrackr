@@ -1,4 +1,4 @@
-package com.example.mdonline;
+package com.example.meditrackr;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

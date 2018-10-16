@@ -3,14 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background2">
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="158dp"
+        android:layout_height="137dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/trackr"
+        app:srcCompat="@drawable/non_gender_neutral_logo_please_dont_get_upset" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="0dp"
         android:layout_height="75dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="24dp"
         android:background="#FFFFFF"
         android:drawableLeft="@drawable/icon_user"
         android:drawablePadding="10dp"
@@ -22,7 +36,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/login_button"
@@ -33,7 +47,7 @@
         android:background="@drawable/gradient"
         android:text="LOGIN"
         android:textAlignment="center"
-        android:textColor="#020202"
+        android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
@@ -45,14 +59,12 @@
         style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Sign Up"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:text="Not a member? Sign Up."
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />
+
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_left"
@@ -68,6 +80,49 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.85" />
 
+    <TextView
+        android:id="@+id/medi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="70dp"
+        android:fontFamily="@font/brandon"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="48dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="medi" />
+
+    <TextView
+        android:id="@+id/trackr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:fontFamily="@font/brandon"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="trackr" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="42dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/trackr"
+        app:layout_constraintStart_toEndOf="@+id/medi"
+        app:srcCompat="@drawable/black_dot" />
 
 
 </android.support.constraint.ConstraintLayout>

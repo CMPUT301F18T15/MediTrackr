@@ -6,4 +6,10 @@
     <color name="background_material_light">#ebf7fd</color>
     <color name="text_color_primary">#dd000000</color>
     <color name="foreground_material_light">#ffffff</color>
+
+    <color name="background">#f2f2f2</color>
+    <color name="editTextBackground">#FFFFFF</color>
+    <color name="editTextHint">#999999</color>
+    <color name="subtitle">#999999</color>
+    <color name="white">#FFFFFF</color>
 </resources>

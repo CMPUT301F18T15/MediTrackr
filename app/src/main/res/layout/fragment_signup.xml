@@ -102,7 +102,7 @@
         android:background="@drawable/gradient"
         android:text="CREATE ACCOUNT"
         android:textAlignment="center"
-        android:textColor="#020202"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"

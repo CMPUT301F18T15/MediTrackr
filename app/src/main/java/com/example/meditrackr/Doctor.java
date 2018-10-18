@@ -1,58 +1,24 @@
 package com.example.meditrackr;
 
-public class Doctor {
-    private String id;
-    private String email;
-    private String phone;
-    private String name;
-    private Patient patient;
+import java.util.ArrayList;
 
-    public Doctor(String id, String email, String phone, String name, Patient patient){
-        this.id = id;
-        this.email = email;
-        this.phone = phone;
-        this.name = name;
-        this.patient = patient;
+public class Doctor extends Profile{
+    private ArrayList<Patient> patients;
+
+    public Doctor(String username, String email, String phone, ArrayList<Patient> patients){
+        super(username, email, phone);
+        this.patients = patients;
     }
 
-    public String getId() {
-        return id;
+
+    public ArrayList<Patient> getPatients() {
+        return patients;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Patient getPatient(int index) {
+        return this.patients.get(index);
     }
-
-    public String getEmail() {
-        return email;
+    public void setPatient(int index, Patient patient){
+        this.patients.set(index, patient);
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
 }

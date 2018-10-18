@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="158dp"
-        android:layout_height="137dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginRight="6dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
@@ -24,7 +24,7 @@
         android:id="@+id/username"
         android:layout_width="0dp"
         android:layout_height="75dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:background="#FFFFFF"
         android:drawableLeft="@drawable/icon_user"
         android:drawablePadding="10dp"
@@ -71,57 +71,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.10" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.90" />
 
     <TextView
         android:id="@+id/medi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="90dp"
         android:fontFamily="@font/brandon"
-        android:text="TextView"
+        android:text="medi"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="48dp"
+        android:textSize="56dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="medi" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/trackr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
+        android:layout_marginTop="88dp"
         android:fontFamily="@font/brandon"
-        android:text="TextView"
+        android:text="trackr"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="trackr" />
+        android:textSize="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="17dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginBottom="52dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="42dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toStartOf="@+id/trackr"
-        app:layout_constraintStart_toEndOf="@+id/medi"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:srcCompat="@drawable/black_dot" />
 
 

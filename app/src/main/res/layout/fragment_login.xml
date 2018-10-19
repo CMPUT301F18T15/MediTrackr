@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background2">
 
-<<<<<<< HEAD
 
     <ImageView
         android:id="@+id/imageView"
@@ -12,7 +13,7 @@
         android:layout_height="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
@@ -52,17 +53,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/username" />
-
-    <Button
-        android:id="@+id/signup_button"
-        style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Not a member? Sign Up."
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
 
     <android.support.constraint.Guideline
@@ -111,7 +101,7 @@
         android:id="@+id/imageView2"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="52dp"
         android:layout_marginEnd="24dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="24dp"
@@ -121,8 +111,17 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:srcCompat="@drawable/black_dot" />
 
+    <TextView
+        android:id="@+id/not_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Not a member? Sign Up."
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+
 
 </android.support.constraint.ConstraintLayout>
-=======
-</FrameLayout>
->>>>>>> e21e7e893a1dd427933802457f42f257e834db02

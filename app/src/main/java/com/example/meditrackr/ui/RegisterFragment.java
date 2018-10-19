@@ -99,8 +99,6 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-<<<<<<< HEAD
-=======
         patientImage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -109,7 +107,6 @@ public class RegisterFragment extends Fragment {
             }
         });
 
->>>>>>> e21e7e893a1dd427933802457f42f257e834db02
         return rootView;
     }
 

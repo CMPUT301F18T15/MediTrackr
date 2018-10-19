@@ -59,8 +59,6 @@ public class RegisterFragment extends Fragment {
         });
 
 
-
-
         return rootView;
     }
 

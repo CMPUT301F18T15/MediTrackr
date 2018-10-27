@@ -16,14 +16,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.Doctor;
+import com.example.meditrackr.ElasticSearch;
 import com.example.meditrackr.Patient;
+import com.example.meditrackr.Problem;
 import com.example.meditrackr.Profile;
 import com.example.meditrackr.R;
 import com.example.meditrackr.SaveLoadController;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class RegisterFragment extends Fragment {
+
     public static RegisterFragment newInstance(){
         RegisterFragment fragment = new RegisterFragment();
         return fragment;
@@ -48,24 +53,28 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(checkInputs(username, email, phoneNumber, doctorImage, patientImage)){
-                    Profile profile;
                     if(doctorImage.isSelected()){
-                        profile = new Doctor(
+                        Doctor doctor = new Doctor(
+                                null,
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
-                                null
+                                new ArrayList<Patient>()
                         );
+                        SaveLoadController.saveDoctor(getContext(),doctor);
                     }
                     else {
-                        profile = new Patient(
+                        Patient patient = new Patient(
+                                null,
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
-                                null
+                                null,
+                                new ArrayList<Problem>()
                         );
+                        SaveLoadController.savePatient(getContext(),patient);
+
                     }
-                    SaveLoadController.saveProfile(getContext(), profile);
 
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
@@ -78,7 +87,7 @@ public class RegisterFragment extends Fragment {
         });
 
 
-        // onclick listener for signup
+        // onclick listener for login
         alreadyMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

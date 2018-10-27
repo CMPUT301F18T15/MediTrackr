@@ -1,12 +1,13 @@
 package com.example.meditrackr;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Doctor extends Profile{
+public class Doctor extends Profile implements Serializable {
     private ArrayList<Patient> patients;
 
-    public Doctor(String username, String email, String phone, ArrayList<Patient> patients){
-        super(username, email, phone);
+    public Doctor(String id, String username, String email, String phone, ArrayList<Patient> patients){
+        super(id, username, email, phone);
         this.patients = patients;
     }
 

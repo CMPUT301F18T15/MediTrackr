@@ -18,7 +18,7 @@ public class Patient extends Profile implements Serializable {
     }
 
     public Problem getProblem(int index) {return this.problems.get(index);}
-    public void setProblem(int index, Problem problems) {this.problems.set(index, problems);}
+    public void setProblem(int index, Problem problem) {this.problems.set(index, problem);}
     public Doctor getDoctor(int index) {
         return this.doctors.get(index);
     }

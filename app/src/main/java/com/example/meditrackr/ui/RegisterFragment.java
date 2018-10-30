@@ -39,7 +39,7 @@ public class RegisterFragment extends Fragment {
         final EditText username = (EditText) rootView.findViewById(R.id.username);
         final EditText email = (EditText) rootView.findViewById(R.id.email);
         final EditText phoneNumber = (EditText) rootView.findViewById(R.id.phone_number);
-        final ImageView doctorImage = (ImageView) rootView.findViewById(R.id.doctor);
+        final ImageView doctorImage = (ImageView) rootView.findViewById(R.id.careProvider);
         final ImageView patientImage = (ImageView) rootView.findViewById(R.id.patient);
         final Button createAccount = (Button) rootView.findViewById(R.id.signup_button);
         final TextView alreadyMember = (TextView) rootView.findViewById(R.id.already_member);

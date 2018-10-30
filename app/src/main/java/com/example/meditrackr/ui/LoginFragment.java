@@ -13,11 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.Doctor;
+import com.example.meditrackr.CareProvider;
 import com.example.meditrackr.Patient;
-import com.example.meditrackr.Profile;
 import com.example.meditrackr.R;
-import com.example.meditrackr.Record;
 import com.example.meditrackr.SaveLoadController;
 
 public class LoginFragment extends Fragment {
@@ -42,8 +40,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                Doctor doctor = SaveLoadController.loadDoctor(getContext(), username.getText().toString());
-                if(doctor == null){
+                CareProvider careProvider = SaveLoadController.loadDoctor(getContext(), username.getText().toString());
+                if(careProvider == null){
                     Patient patient = SaveLoadController.loadPatient(getContext(), username.getText().toString());
                     if(patient == null){
                         Toast toast = Toast.makeText(getContext(), "Username doesn't exist!", Toast.LENGTH_LONG);
@@ -55,7 +53,7 @@ public class LoginFragment extends Fragment {
                     }
                 }
                 else{
-                    bundle.putSerializable("doctor", doctor);
+                    bundle.putSerializable("careProvider", careProvider);
                 }
 
                 Intent intent = new Intent(getActivity(), MainActivity.class);

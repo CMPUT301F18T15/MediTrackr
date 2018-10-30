@@ -3,7 +3,7 @@ package com.example.meditrackr.controllers;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.meditrackr.Doctor;
+import com.example.meditrackr.CareProvider;
 import com.example.meditrackr.Patient;
 import com.example.meditrackr.Profile;
 import com.google.gson.Gson;
@@ -40,8 +40,8 @@ public class ElasticSearchController {
                     index = new Index.Builder(patient).index("cmput301f18t15_meditrackr").type("Patient").id(profile.getId()).build();
                 }
                 catch(ClassCastException e){
-                    Doctor doctor  = (Doctor) profile;
-                    index = new Index.Builder(doctor).index("cmput301f18t15_meditrackr").type("Doctor").id(profile.getId()).build();
+                    CareProvider careProvider = (CareProvider) profile;
+                    index = new Index.Builder(careProvider).index("cmput301f18t15_meditrackr").type("CareProvider").id(profile.getId()).build();
                 }
                 try {
                     DocumentResult result = client.execute(index);
@@ -74,7 +74,7 @@ public class ElasticSearchController {
 
             Search search = new Search.Builder(query)
                     .addIndex("cmput301f18t15")
-                    .addType("Doctor")
+                    .addType("CareProvider")
                     .addType("Patient")
                     .build();
             try {

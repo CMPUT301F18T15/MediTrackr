@@ -15,15 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.Doctor;
-import com.example.meditrackr.ElasticSearch;
+import com.example.meditrackr.CareProvider;
 import com.example.meditrackr.Patient;
 import com.example.meditrackr.Problem;
-import com.example.meditrackr.Profile;
 import com.example.meditrackr.R;
 import com.example.meditrackr.SaveLoadController;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -54,14 +50,14 @@ public class RegisterFragment extends Fragment {
             public void onClick(View v) {
                 if(checkInputs(username, email, phoneNumber, doctorImage, patientImage)){
                     if(doctorImage.isSelected()){
-                        Doctor doctor = new Doctor(
+                        CareProvider careProvider = new CareProvider(
                                 null,
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
                                 new ArrayList<Patient>()
                         );
-                        SaveLoadController.saveDoctor(getContext(),doctor);
+                        SaveLoadController.saveDoctor(getContext(), careProvider);
                     }
                     else {
                         Patient patient = new Patient(

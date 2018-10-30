@@ -4,25 +4,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Patient extends Profile implements Serializable {
-    private ArrayList<Doctor> doctors;
+    private ArrayList<CareProvider> careProviders;
     private ArrayList<Problem> problems;
 
-    public Patient(String id, String username, String email, String phone, ArrayList<Doctor> doctor, ArrayList<Problem> problems) {
+    public Patient(String id, String username, String email, String phone, ArrayList<CareProvider> careProvider, ArrayList<Problem> problems) {
         super(id, username, email, phone);
-        this.doctors = doctors;
+        this.careProviders = careProviders;
         this.problems = problems;
     }
 
-    public ArrayList<Doctor> getDoctors() {
-        return doctors;
+    public ArrayList<CareProvider> getCareProviders() {
+        return careProviders;
     }
 
     public Problem getProblem(int index) {return this.problems.get(index);}
     public void setProblem(int index, Problem problems) {this.problems.set(index, problems);}
-    public Doctor getDoctor(int index) {
-        return this.doctors.get(index);
+    public CareProvider getDoctor(int index) {
+        return this.careProviders.get(index);
     }
-    public void setDoctor(int index, Doctor doctors){
-        this.doctors.set(index, doctors);
+    public void setDoctor(int index, CareProvider doctors){
+        this.careProviders.set(index, doctors);
     }
 }

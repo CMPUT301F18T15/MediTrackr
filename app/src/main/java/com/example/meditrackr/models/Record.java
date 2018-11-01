@@ -5,6 +5,10 @@ import android.support.annotation.NonNull;
 
 import java.util.Date;
 
+/**
+ * Created by Skryt on Oct 24, 2018
+ */
+
 public class Record {
     private Bitmap[] images;
     private Date date;

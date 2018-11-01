@@ -1,11 +1,13 @@
 package com.example.meditrackr.models;
 
-import com.example.meditrackr.callbacks.Person;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Patient extends Profile implements Serializable, Person {
+/**
+ * Created by Skryt on Oct 24, 2018
+ */
+
+public class Patient extends Profile implements Serializable{
     private ArrayList<CareProvider> careProviders;
     private ArrayList<Problem> problems;
 

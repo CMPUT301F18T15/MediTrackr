@@ -1,10 +1,10 @@
 package com.example.meditrackr;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import com.example.meditrackr.models.Problem;
+import com.example.meditrackr.models.Record;
+
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,16 +17,22 @@ public class ProblemJUnitTest {
      * Trivial getters & setters testing omitted.
      */
 
-    private final String initTitle = "Initial Title";
-    private final Date initDate = new Date();
-    private final String initDesc = "Initial Description";
-    private final ArrayList<> initRecords = new ArrayList<Record>;
+    private Problem problem;
 
-    private Problem problem = new Problem
-            (initTitle, initDate, initDesc, initRecords);
+
+    // Initialize problem
+    @Before
+    private void initJUnitTest() {
+        final String initTitle = "Initial Title";
+        final Date initDate = new Date();
+        final String initDesc = "Initial Description";
+        final ArrayList initRecords = new ArrayList<Record>();
+        problem = new Problem(initTitle, initDate, initDesc, initRecords);
+    }
 
     // Should not be able to set title if length > MAX_TITLE_LENGTH
     // Currently assuming MAX_TITLE_LENGTH = 30
+    @Test
     public void TitleSizeTest() {
         final String longTitle = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDE"; // length = 31
         problem.setTitle(longTitle);
@@ -35,6 +41,7 @@ public class ProblemJUnitTest {
 
     // Should not be able to set description if length > MAX_DESC_LENGTH;
     // Currently assuming MAX_DESC_LENGTH = 300;
+    @Test
     public void DescSizeTest() {
         String longDesc = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCD";
         for (short i = 0; i < 10; i++)
@@ -44,4 +51,9 @@ public class ProblemJUnitTest {
         assertNotEquals("Description too long", longDesc.length(), problem.getDescription());
     }
 
+    // Test adding of a reminder schedule for a problem -- Stub
+    @Test
+    public void ReminderTest() {
+        fail("No implementation right now");
+    }
 }

@@ -1,9 +1,11 @@
 package com.example.meditrackr;
 
+import com.example.meditrackr.callbacks.Person;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Patient extends Profile implements Serializable {
+public class Patient extends Profile implements Serializable, Person {
     private ArrayList<CareProvider> careProviders;
     private ArrayList<Problem> problems;
 

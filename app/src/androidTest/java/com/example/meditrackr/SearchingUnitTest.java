@@ -37,7 +37,7 @@ public class SearchingUnitTest {
         Keyword generalKeyword = new GeneralKeyword("");
         keyword.add(generalKeyword);
         assertTrue(keyword.length() == 0);
-        system.out.println("Search input line cannot be left blank");
+        System.out.println("Search input line cannot be left blank");
     }
 
     // Checks whether the keyword search is able to match up to another string
@@ -46,7 +46,7 @@ public class SearchingUnitTest {
         Keyword generalKeyword = new GeneralKeyword("Black tongue");
         keyword.add(generalKeyword);
         assertFalse(exampleGeneralKeywords.hasKeyword(keyword));
-        system.out.println("General Keyword does not match any keywords in list");
+        System.out.println("General Keyword does not match any keywords in list");
     }
 
     // Checks whether the keyword search is able to match up to another string
@@ -55,7 +55,7 @@ public class SearchingUnitTest {
         Keyword generalKeyword = new GeneralKeyword("Itchy Ear");
         keyword.add(generalKeyword);
         assertTrue(exampleGeneralKeywords.hasKeyword(keyword));
-        system.out.println("General Keyword matches with a keyword in list");
+        System.out.println("General Keyword matches with a keyword in list");
     }
 
    // Next 3 methods are for Geo-location keywords
@@ -64,7 +64,7 @@ public class SearchingUnitTest {
         Keyword locationKeyword = new LocationKeyword("");
         keyword.add(locationKeyword);
         assertTrue(keyword.length() == 0);
-       system.out.println("Search input line cannot be left blank");
+        System.out.println("Search input line cannot be left blank");
    }
 
     // Checks whether the keyword search is able to match up to another string
@@ -73,7 +73,7 @@ public class SearchingUnitTest {
         Keyword locationKeyword = new LocationKeyword("Sweden");
         keyword.add(locationKeyword);
         assertFalse(exampleLocationKeywords.hasKeyword(keyword));
-        system.out.println("Geo-location does not match any keywords in list");
+        System.out.println("Geo-location does not match any keywords in list");
     }
 
     // Checks whether the keyword search is able to match up to another string
@@ -82,7 +82,7 @@ public class SearchingUnitTest {
         Keyword locationKeyword = new LocationKeyword("South Africa");
         keyword.add(locationKeyword);
         assertTrue(exampleLocationKeywords.hasKeyword(keyword));
-        system.out.println("Geo-location matches with a keyword in list");
+        System.out.println("Geo-location matches with a keyword in list");
     }
 
     // Next 3 methods are for Body-location keywords
@@ -91,7 +91,7 @@ public class SearchingUnitTest {
         Keyword bodyKeyword = new BodyKeyword("");
         keyword.add(BodyKeyword);
         assertTrue(keyword.length() == 0);
-        system.out.println("Search input line cannot be left blank");
+        System.out.println("Search input line cannot be left blank");
     }
 
     // Checks whether the keyword search is able to match up to another string
@@ -100,7 +100,7 @@ public class SearchingUnitTest {
         Keyword bodyKeyword = new BodyKeyword("wrist");
         keyword.add(bodyKeyword);
         assertFalse(exampleBodyKeywords.hasKeyword(keyword));
-        system.out.println("Body location does not match with any keywords in list");
+        System.out.println("Body location does not match with any keywords in list");
     }
 
     // Checks whether the keyword search is able to match up to another string
@@ -109,7 +109,7 @@ public class SearchingUnitTest {
         Keyword bodyKeyword = new BodyKeyword("heel");
         keyword.add(bodyKeyword);
         assertTrue(exampleBodyKeywords.hasKeyword(keyword));
-        system.out.println("Body location matches with a keyword in list");
+        System.out.println("Body location matches with a keyword in list");
     }
 
 }

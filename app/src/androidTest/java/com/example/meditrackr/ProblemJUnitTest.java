@@ -17,12 +17,6 @@ public class ProblemJUnitTest {
      * Trivial getters & setters testing omitted.
      */
 
-    /**
-     should be able to add individual records of different types (Photo, comment, etc)
-     so we probably want new getters and setters for that
-     should be able to add a reminder schedule for a problem (Record Details: Use Case 6).
-     */
-
     private final String initTitle = "Initial Title";
     private final Date initDate = new Date();
     private final String initDesc = "Initial Description";
@@ -49,4 +43,5 @@ public class ProblemJUnitTest {
         problem.setDescription(longDesc);
         assertNotEquals("Description too long", longDesc.length(), problem.getDescription());
     }
+
 }

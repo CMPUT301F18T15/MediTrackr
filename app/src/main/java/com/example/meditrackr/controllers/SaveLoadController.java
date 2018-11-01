@@ -1,7 +1,10 @@
-package com.example.meditrackr;
+package com.example.meditrackr.controllers;
 
 import android.content.Context;
 
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.ElasticSearch;
+import com.example.meditrackr.models.Patient;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;

@@ -15,11 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.CareProvider;
-import com.example.meditrackr.Patient;
-import com.example.meditrackr.Problem;
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.R;
-import com.example.meditrackr.SaveLoadController;
+import com.example.meditrackr.controllers.SaveLoadController;
 
 import java.util.ArrayList;
 

@@ -3,9 +3,9 @@ package com.example.meditrackr.controllers;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.meditrackr.CareProvider;
-import com.example.meditrackr.Patient;
-import com.example.meditrackr.Profile;
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Profile;
 import com.google.gson.Gson;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;

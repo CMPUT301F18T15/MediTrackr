@@ -1,4 +1,4 @@
-package com.example.meditrackr;
+package com.example.meditrackr.models;
 
 import java.io.Serializable;
 

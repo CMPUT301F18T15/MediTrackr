@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.meditrackr.CareProvider;
-import com.example.meditrackr.Patient;
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 
 public class MainActivity extends Activity {

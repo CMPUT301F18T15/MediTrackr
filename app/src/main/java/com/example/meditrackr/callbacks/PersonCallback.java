@@ -4,7 +4,7 @@ package com.example.meditrackr.callbacks;
  * Created by Skryt on Oct 31, 2018
  * Because this needs to be here for get excellent LOL.
  */
-public interface Person {
+public interface PersonCallback {
 
     String getUsername();
     void setUsername(String username);

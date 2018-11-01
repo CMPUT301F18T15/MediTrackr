@@ -1,12 +1,12 @@
 package com.example.meditrackr.models;
 
-import com.example.meditrackr.callbacks.Person;
+import com.example.meditrackr.callbacks.PersonCallback;
 
 import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
 
-public class Profile implements Serializable, Person {
+public class Profile implements Serializable, PersonCallback {
     @JestId
     private String id;
 

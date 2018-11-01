@@ -27,9 +27,11 @@ public class CareProviderTest {
     // Care Provider cannot view patient list if he/she has no patients
     public void checkIfNoPatients() {
         PatientArray patientList = new PatientArray;
-        patientList = patient.getPatientList;
+        patientList = patient.getPatients;
         assertTrue(patientList.length == 0);
         System.out.println("Care Provider has 0 patients to view in patient " +
                 "list");
     }
+
+    //
 }

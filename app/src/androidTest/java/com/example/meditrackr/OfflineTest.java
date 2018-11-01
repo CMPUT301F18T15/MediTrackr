@@ -25,7 +25,7 @@ public class OfflineTest {
         public String problemTitle = "Itchy nose";
         public String problemDesc = "I have an itchy nose";
         problem.setTitle(problemTitle);
-        problem.setDescription(problemDesc);
+        problem.setComment(problemDesc);
         assertEquals("Problem title should be Itchy Nose", problemTitle, problem.getTitle);
         system.out.println("Problem file was not corrupted while adding offline");
     }

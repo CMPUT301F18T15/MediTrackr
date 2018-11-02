@@ -20,12 +20,14 @@ public class PatientTest {
     @Test
     public void checkIfNoDoc() {
         final Patient tempPatient =
-        final CareProvider tempCareProvider = new CareProvider
+        final  ArrayList<Doctor> docList = new ArrayList<>();
+        final Patient tempPatient = new Patient
+                ("", "", "", "", docList);
         assertFalse("patient has no Health care provider",
                 tempPatient.doctors().size() == 0);
     }
 
-    // Check to make sure that patients credentials are not empty
+    // Check if a patient has empty credentials
     @Test
     public void checkUsername() {
 

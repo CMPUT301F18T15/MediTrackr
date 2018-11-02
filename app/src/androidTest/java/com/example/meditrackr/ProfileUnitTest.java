@@ -63,8 +63,7 @@ public class ProfileUnitTest {
   // use this to keep track if there is an @
   count = 0;
   for(i in Profile.email){
-    if(i ==' ')
-      system.out.print("Email adress not valid (Spaces are not allowed)" )
+   
     // email must have a @
     if(i == '@')
       count = 1;

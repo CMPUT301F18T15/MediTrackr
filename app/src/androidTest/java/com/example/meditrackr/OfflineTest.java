@@ -1,10 +1,8 @@
 package com.example.meditrackr;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import com.example.meditrackr.models.Problem;
+
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
@@ -15,19 +13,26 @@ public class OfflineTest {
 
     private Problem problem;
 
-    // OfflineTest constructor method
-    public OfflineTest() {
-        super(com.example.meditrackr.Problem.class);
+    // Checks whether the created problem was corrupted when made offline
+    @Test
+    public void checkForCorruptFile() {
+        final String problemTitle = "Itchy nose";
+        final String problemDesc = "I have an itchy nose";
+        problem.setTitle(problemTitle);
+        problem.setDescription(problemDesc);
+        assertEquals("Problem title should be Itchy Nose", problemTitle, problem.getTitle());
     }
 
-    // Checks whether the created problem was corrupted when made offline
-    public void checkForCorruptFile() {
-        public String problemTitle = "Itchy nose";
-        public String problemDesc = "I have an itchy nose";
-        problem.setTitle(problemTitle);
-        problem.setComment(problemDesc);
-        assertEquals("Problem title should be Itchy Nose", problemTitle, problem.getTitle);
-        system.out.println("Problem file was not corrupted while adding offline");
+    // Testing for offline consistency -- deprecated functions?
+    // Currently a stub.
+    /*
+    @RunWith(AndroidJUnit4.class)
+    @LargeTest
+    public void testRestart() {
+        @Rule
+        public ActivityTestRule<LoginActivity> activityRule =
+                new ActivityTestRule(LoginActivity.class);
     }
+    */
 
 }

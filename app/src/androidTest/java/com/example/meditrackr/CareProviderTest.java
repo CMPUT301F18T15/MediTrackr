@@ -1,13 +1,12 @@
 package com.example.meditrackr;
 
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
-import com.example.meditrackr.models.Record;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -16,29 +15,37 @@ public class CareProviderTest {
      * Unit Test for Care Provider
      */
 
-    private Patient patient;
-    private int patientId;
-
-    //CareProviderTest constructor method
-    public CareProviderTest() {
-        super(com.example.meditrackr.CareProvider.java);
-    }
-
     // Check if the care provider has patients
-    // Care Provider cannot view patient list if he/she has no patients
+    // Care Provider cannot view patient list if they no patients
+    @Test
     public void checkIfNoPatients() {
-        PatientArray patientList = new PatientArray;
-        patientList = patient.getPatients;
-        assertTrue(patientList.length == 0);
-        System.out.println("Care Provider has 0 patients to view in patient " +
-                "list");
+        final ArrayList patientList = new ArrayList<Patient>();
+        final CareProvider tempCareProvider = new CareProvider
+                ("", "", "", "", patientList);
+        assertFalse("CareProvider has no patients",
+                tempCareProvider.getPatients().size() == 0);
     }
 
-    // Check whether the user ID exists
-    // Patient cannot be added to the care provider list if patient ID is
-    // invalid
-    public void checkpatientID() {
-        patientId = 12345;
-        assertNotEquals("Patient ID entered is not a valid patient ID", patientId, CareProvider.getPatient(12345));
+    // Check whether a care provider can set patients and retrieve them
+    @Test
+    public void checkPatientSet() {
+        final ArrayList patients = new ArrayList<Patient>();
+        final ArrayList providers = new ArrayList<CareProvider>();
+        final CareProvider tempCareProvider = new CareProvider
+                ("", "", "", "", patients);
+        providers.add(tempCareProvider);
+
+        final short patientID = 0;
+        final ArrayList problems = new ArrayList<Problem>();
+        final Patient newPatient = new Patient
+                ("", "", "", "", providers, problems);
+
+        tempCareProvider.setPatient(patientID, newPatient);
+
+        // Patient list retrieval
+        assertEquals("Patients list not set", patients, tempCareProvider.getPatients());
+        // Single patient retrieval
+        assertEquals("Patient ID not found", newPatient, tempCareProvider.getPatient(patientID));
+
     }
 }

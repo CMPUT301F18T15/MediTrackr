@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class PatientTest {
-    /**
-     * Unit Test for patient
-     */
+    
+    //Unit Test for patient
+    
 
     // Check if the patient changes the doctor and it can recognize that
     // patient will get no feed back if they have no doctor

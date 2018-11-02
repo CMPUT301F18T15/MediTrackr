@@ -24,6 +24,7 @@ public class PatientUnitTest {
 
     private Patient patient;
 
+
     // Initialize a simple problem to be used in the tests
     @Before
     public void initJUnitTest() {
@@ -35,6 +36,7 @@ public class PatientUnitTest {
 
     //check for getters omitted
 
+
     //should be able to call constructor of class without all contact information entered
     // (ie, there should be default values for some of the parameters or we should implement multiple constructors?)
 
@@ -42,6 +44,14 @@ public class PatientUnitTest {
     //check whether patient can swap Care Provider
     @Test
     public void checkSwapCareProvider() {
+    //create arrayList newCareProvider and swap it with current CareProvider
+    final ArrayList<CareProvider> oldproviders = new ArrayList<>();
+    final ArrayList<CareProvider> newproviders = new ArrayList<>();
+
+    final Patient tempPatient = new Patient
+                ("", "", "", "", providers, problems);
+
+        tempPatient.setCareProviders(newproviders);
     }
     */
 

@@ -63,7 +63,8 @@ public class ProfileUnitTest {
   // use this to keep track if there is an @
   count = 0;
   for(i in Profile.email){
-
+    if(i ==' ')
+      system.out.print("Email adress not valid (Spaces are not allowed)" )
     // email must have a @
     if(i == '@')
       count = 1;
@@ -75,8 +76,10 @@ public class ProfileUnitTest {
 
   // To DO check if last 4 chars is .com if sodo nothing
 
-  //else
-  // system.out.print("Email adress not valid (must end in .com)" )
+  if email.endsWith(".com")
+
+  else
+  system.out.print("Email adress not valid (must end in .com)" )
   }
 
 
@@ -99,7 +102,9 @@ public class ProfileUnitTest {
 
         // make sure its only 10 digits long
         len = profile.phone.length()
-        if(len != 10)
+        if(len == 0)
+            system.out.print("Please enter Phone Number" )
+        else if(len != 10)
           system.out.print("Phone Number must be only 10 digits long. no need to add () or -" )
 
     }

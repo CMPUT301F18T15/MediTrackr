@@ -2,6 +2,7 @@ package com.example.meditrackr;
 
 import android.graphics.Bitmap;
 
+import com.example.meditrackr.models.BodyLocation;
 import com.example.meditrackr.models.Record;
 
 import org.junit.Before;
@@ -31,8 +32,8 @@ public class RecordTest {
         final String initComment = "Initial Comment";
         // create a basic bitmap and set Bitmap.config to ARGB_8888
         final Bitmap[] images = {Bitmap.createBitmap(200, 200, ARGB_8888)};
-
-        final String bodyLocation = "front, 1, 1";
+        final double[] location = {1.0, 2.0};
+        final BodyLocation bodyLocation = new BodyLocation(location, "Front", "Arm");
 
         // NOTE: we treat the geolocation as an array of LONGITUDE, LATITUDE both in degrees
         final double[] geoLocation = {0, 0};
@@ -118,8 +119,9 @@ public class RecordTest {
     public void BodyLocationWithoutPhotoTest() {
         // a body location should not be added if the bitmap of photos is null
         record.setImages(null);
-        record.setBodyLocation("front, 12, 123");
-
+        final double[] location = {2.0, 3.0};
+        final BodyLocation bodyLocation = new BodyLocation(location, "Front", "Arm");
+        record.setBodyLocation(bodyLocation);
         assertNotEquals("Body location set when no image was specified",
                 "front, 12, 123", record.getBodyLocation());
     }
@@ -129,8 +131,9 @@ public class RecordTest {
         // a body location should not be added if the bitmap of photos is null
         record.setImages(null);
         // this should not be allowed because a photo cannot have negative coordinates
-        record.setBodyLocation("front, -12, -123");
-
+        final double[] location = {-12, -123};
+        final BodyLocation bodyLocation = new BodyLocation(location, "Front", "Arm");
+        record.setBodyLocation(bodyLocation);
         assertNotEquals("Body location set when coordinates were out of range",
                 "front, -12, -123", record.getBodyLocation());
     }

@@ -23,7 +23,17 @@ import static org.junit.Assert.*;
 public class PatientUnitTest {
 
     private Patient patient;
-    //check for getters and setter omitted
+
+    // Initialize a simple problem to be used in the tests
+    @Before
+    public void initJUnitTest() {
+        final ArrayList<Patient> patients = new ArrayList<>();
+        final ArrayList<CareProvider> providers = new ArrayList<>();
+        final ArrayList<Problem> problems = new ArrayList<>();
+        patient = new Patient("", "", "", "", providers, problems);
+    }
+
+    //check for getters omitted
 
     //should be able to call constructor of class without all contact information entered
     // (ie, there should be default values for some of the parameters or we should implement multiple constructors?)
@@ -38,7 +48,6 @@ public class PatientUnitTest {
     // Check whether a care provider can set patients and retrieve them
     @Test
     public void checkCareProviderSet() {
-        final ArrayList<Patient> patients = new ArrayList<>();
         final ArrayList<CareProvider> providers = new ArrayList<>();
         final ArrayList<Problem> problems = new ArrayList<>();
 
@@ -52,14 +61,13 @@ public class PatientUnitTest {
 
         tempPatient.setCareProviders(providers);
 
-
+        //careProvider list retrieval
         assertEquals("Providers list not set", providers, tempPatient.getCareProviders());
 
     }
 
     @Test
     public void checkProblemSet() {
-        final ArrayList<Patient> patients = new ArrayList<>();
         final ArrayList<CareProvider> providers = new ArrayList<>();
         final ArrayList<Problem> problems = new ArrayList<>();
         final Date initDate = new Date();
@@ -68,16 +76,13 @@ public class PatientUnitTest {
         final int problemID = 0;
         final Problem tempProblem = new Problem
                 ("", initDate, "", initRecords);
-        final Patient newPatient = new Patient
-                ("", "", "", "", providers, problems);
-        newPatient.setProblem(problemID, tempProblem);
+        patient.setProblem(problemID, tempProblem);
 
 
-        // Patient list retrieval
-        assertEquals("Problem not set", problems, newPatient.getProblem(problemID));
+        // Problem item retrieval
+        assertEquals("Problem not set", problems, patient.getProblem(problemID));
 
-        //getProblem
-        //setProblem
+
 
     }
 }

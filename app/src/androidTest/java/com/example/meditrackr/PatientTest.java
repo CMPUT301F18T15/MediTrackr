@@ -25,9 +25,9 @@ public class PatientTest {
                 tempPatient.doctors().size() == 0);
     }
 
-    // Check whether a patient can create a problem
+    // Check to make sure that patients credentials are not empty
     @Test
-    public void checkProblem() {
+    public void checkUsername() {
 
 
     }

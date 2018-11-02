@@ -11,7 +11,7 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-public class ProblemJUnitTest {
+public class ProblemUnitTest {
     /**
      * Unit Tests for Problem
      * Trivial getters & setters testing omitted.

@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.*;
 
-public class ElasticJUnitTest {
+public class ElasticSearchUnitTest {
     /**
      * Unit Tests for Elastic Search
      */

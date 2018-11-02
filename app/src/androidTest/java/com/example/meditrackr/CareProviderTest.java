@@ -17,10 +17,11 @@ public class CareProviderTest {
      */
 
     private Patient patient;
+    private int patientId;
 
     //CareProviderTest constructor method
     public CareProviderTest() {
-        super(com.example.meditrackr.CareProvider.class);
+        super(com.example.meditrackr.CareProvider.java);
     }
 
     // Check if the care provider has patients
@@ -33,5 +34,11 @@ public class CareProviderTest {
                 "list");
     }
 
-    //
+    // Check whether the user ID exists
+    // Patient cannot be added to the care provider list if patient ID is
+    // invalid
+    public void checkpatientID() {
+        patientId = 12345;
+        assertNotEquals("Patient ID entered is not a valid patient ID", patientId, CareProvider.getPatient(12345));
+    }
 }

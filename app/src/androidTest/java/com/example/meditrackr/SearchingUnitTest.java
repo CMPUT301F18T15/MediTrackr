@@ -27,7 +27,7 @@ public class SearchingUnitTest {
 
     // Constructor method for SearchingUnitTest
     public SearchingUnitTest() {
-        super(com.example.meditrackr.Searching.class);
+        super(com.example.meditrackr.ElasticSearch.java);
     }
 
     // First 3 methods are for general keyword search

@@ -1,7 +1,5 @@
 package com.example.meditrackr;
 
-import android.support.v4.net.ConnectivityManagerCompat;
-
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.ElasticSearch;
 import com.example.meditrackr.models.Patient;
@@ -78,12 +76,36 @@ public class ElasticJUnitTest {
                 (testID, testUsername, testEmail, testPhone, careProviders, problems);
         eSearchObj.addProfile(profile);
 
-        // Retrieve the added patient
+        // Retrieve the added patient and test its attributes
         final Patient retPatient = (Patient) eSearchObj.getProfile(testUsername);
-
-        // Test the attributes of the added patient
-        assertEquals("Incorrect CareProvider", Doctor, retPatient.getCareProviders());
+        assertEquals("Incorrect CareProvider Zero", Doctor, retPatient.getCareProviders().get(0));
         assertEquals("Incorrect Problem", hyperhidrosis, retPatient.getProblem(0));
+    }
+
+    @Test
+    public void canRetrieveCareProvider() throws ExecutionException, InterruptedException {
+        // Create a new problem with no records: RSI -- add to ArrayList problems
+        // This is so that we can initialize a patient and assign them to a care provider
+        final ArrayList problems = new ArrayList<Problem>();
+        final ArrayList noRecords = new ArrayList<Record>(0);
+        final Problem RSI = new Problem
+                ("RSI", new Date(), "Repetitive Strain Injury", noRecords);
+        problems.add(RSI);
+
+        // Create a CareProvider by first initializing the Actual arguments
+        final ArrayList doctors = new ArrayList<CareProvider>();
+        final ArrayList patients = new ArrayList<Patient>();
+        final CareProvider doctor = new CareProvider
+                ("67890", "Dr. House", "house@gmail.com", "7803126730", patients);
+        doctors.add(doctor);
+        final Patient patient = new Patient
+                ("10101", "Cookiezi", "cookie@gmail.com", "18002263001", doctors, problems);
+        doctor.setPatient(0, patient);
+
+        // Add CareProvider and retrieve them to test if it contains the patient.
+        eSearchObj.addProfile(doctor);
+        final CareProvider retCareProvider = (CareProvider) eSearchObj.getProfile(testUsername);
+        assertEquals("Incorrect Patient Zero", patient, retCareProvider.getPatient(0));
     }
 
 }

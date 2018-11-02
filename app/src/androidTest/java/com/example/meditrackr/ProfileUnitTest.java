@@ -20,8 +20,7 @@ public class ProfileUnitTest {
      */
     private Profile profile;
 
-
-// Initialize profile
+    // Initialize profile
     @Before
     public void initJUnitTest() {
         final String id = "initial user";

@@ -19,7 +19,7 @@ public class CareProviderTest {
     // Care Provider cannot view patient list if they no patients
     @Test
     public void checkIfNoPatients() {
-        final ArrayList patientList = new ArrayList<Patient>();
+        final ArrayList<Patient> patientList = new ArrayList<>();
         final CareProvider tempCareProvider = new CareProvider
                 ("", "", "", "", patientList);
         assertFalse("CareProvider has no patients",
@@ -29,14 +29,14 @@ public class CareProviderTest {
     // Check whether a care provider can set patients and retrieve them
     @Test
     public void checkPatientSet() {
-        final ArrayList patients = new ArrayList<Patient>();
-        final ArrayList providers = new ArrayList<CareProvider>();
+        final ArrayList<Patient> patients = new ArrayList<>();
+        final ArrayList<CareProvider> providers = new ArrayList<>();
         final CareProvider tempCareProvider = new CareProvider
                 ("", "", "", "", patients);
         providers.add(tempCareProvider);
 
-        final short patientID = 0;
-        final ArrayList problems = new ArrayList<Problem>();
+        final int patientID = 0;
+        final ArrayList<Problem> problems = new ArrayList<>();
         final Patient newPatient = new Patient
                 ("", "", "", "", providers, problems);
 

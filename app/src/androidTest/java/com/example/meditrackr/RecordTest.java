@@ -7,26 +7,24 @@ import com.example.meditrackr.models.Record;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import static android.graphics.Bitmap.Config.ARGB_8888;
+import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 public class RecordTest {
 
     /**
-     * Unit Tests for Problem
+     * Unit Tests for Record
      * Trivial getters & setters testing omitted.
      */
 
     private Record record;
 
 
-    // Initialize problem
+    // Initialize a simple record
     @Before
     public void initJUnitTest() {
         final String initTitle = "Initial Title";
@@ -36,7 +34,9 @@ public class RecordTest {
         final Bitmap[] images = {Bitmap.createBitmap(200, 200, ARGB_8888)};
 
         final String bodyLocation = "front, 1, 1";
-        final double[] geoLocation = {0};
+
+        // NOTE: we treat the geolocation as an array of LONGITUDE, LATITUDE both in degrees
+        final double[] geoLocation = {0, 0};
 
         record = new Record(initDate, images, initComment, initTitle, bodyLocation, geoLocation);
     }
@@ -49,7 +49,8 @@ public class RecordTest {
         final String longTitle = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDE"; // length = 31
         record.setTitle(longTitle);
         // check that the longTitle was not allowed or added successfully
-        assertNotEquals("Title was too long but was set anyway", longTitle, record.getTitle());
+        assertNotEquals("Title was too long but was set anyway",
+                longTitle, record.getTitle());
     }
 
     // Should not be able to set description if length > MAX_COMMENT_LENGTH;
@@ -64,7 +65,8 @@ public class RecordTest {
         longComment += "X";
         record.setComment(longComment);
         // check that the long comment was not allowed
-        assertNotEquals("Title was too long but was set anyway", longComment, record.getComment());
+        assertNotEquals("Comment was too long but was set anyway",
+                longComment, record.getComment());
     }
 
 
@@ -73,21 +75,21 @@ public class RecordTest {
         // check that adding too many photos (more than 10) is not allowed
         // this bitmap array contains 11 images
         Bitmap[] images = {Bitmap.createBitmap(200, 200, ARGB_8888),
-                           Bitmap.createBitmap(200, 200, ARGB_8888),
-                           Bitmap.createBitmap(200, 200, ARGB_8888),
-                           Bitmap.createBitmap(200, 200, ARGB_8888),
-                           Bitmap.createBitmap(200, 200, ARGB_8888),
-                           Bitmap.createBitmap(200, 200, ARGB_8888),
-                           Bitmap.createBitmap(200, 200, ARGB_8888),
-                           Bitmap.createBitmap(200, 200, ARGB_8888),
-                           Bitmap.createBitmap(200, 200, ARGB_8888),
-                           Bitmap.createBitmap(200, 200, ARGB_8888),
-                           Bitmap.createBitmap(200, 200, ARGB_8888),};
+                Bitmap.createBitmap(200, 200, ARGB_8888),
+                Bitmap.createBitmap(200, 200, ARGB_8888),
+                Bitmap.createBitmap(200, 200, ARGB_8888),
+                Bitmap.createBitmap(200, 200, ARGB_8888),
+                Bitmap.createBitmap(200, 200, ARGB_8888),
+                Bitmap.createBitmap(200, 200, ARGB_8888),
+                Bitmap.createBitmap(200, 200, ARGB_8888),
+                Bitmap.createBitmap(200, 200, ARGB_8888),
+                Bitmap.createBitmap(200, 200, ARGB_8888),
+                Bitmap.createBitmap(200, 200, ARGB_8888),};
 
         record.setImages(images);
         // check that the bitmap was not allowed
         assertNotEquals("Bitmap contained too many photos but was set anyway",
-                         images.length, record.getImages().length);
+                images.length, record.getImages().length);
     }
 
     @Test
@@ -112,4 +114,85 @@ public class RecordTest {
         assertNotEquals("Date set to a future timestamp, which should not be allowed",
                 currentDatePlusOne, record.getDate());
     }
+
+    @Test
+    public void BodyLocationWithoutPhotoTest() {
+        // a body location should not be added if the bitmap of photos is null
+        record.setImages(null);
+        record.setBodyLocation("front, 12, 123");
+
+        assertNotEquals("Body location set when no image was specified",
+                "front, 12, 123", record.getBodyLocation());
+    }
+
+    @Test
+    public void BodyLocationOutOfRange() {
+        // a body location should not be added if the bitmap of photos is null
+        record.setImages(null);
+        record.setBodyLocation("front, 12, 123");
+
+        assertNotEquals("Body location set when no image was specified",
+                "front, 12, 123", record.getBodyLocation());
+    }
+
+    @Test
+    public void GeoLocationWithoutPhotoTest() {
+        // a geolocation location should not be added if the bitmap of photos
+        // is null for this record
+        record.setImages(null);
+        double[] geoLocations = {12, 13};
+        record.setGeoLocation(geoLocations);
+
+        assertNotEquals("Geo-location set when no image was specified",
+                geoLocations, record.getGeoLocation());
+    }
+
+    @Test
+    public void InvalidGeoLocationTest() {
+        // valid latitudes are in the range of -90 to 90 degrees
+        // valid longitudes are in the range of -180 to 180 degrees
+
+        // set initial values for comparison
+        Bitmap[] images = {Bitmap.createBitmap(200, 200, ARGB_8888)};
+        record.setImages(images);
+        double[] geoLocations = {0, 0};
+        record.setGeoLocation(geoLocations);
+
+        // check that invalid geolocations are not allowed
+
+        // check values too low
+        geoLocations[0] = -181;
+        geoLocations[1] = -91;
+        record.setGeoLocation(geoLocations);
+
+        assertNotEquals("Geo-location was set to invalid values",
+                geoLocations, record.getGeoLocation());
+
+        // both values too large
+        geoLocations[0] = 181;
+        geoLocations[1] = 91;
+        record.setGeoLocation(geoLocations);
+
+        assertNotEquals("Geo-location was set to invalid values",
+                geoLocations, record.getGeoLocation());
+
+        // check that boundary values are still accepted
+        geoLocations[0] = 180;
+        geoLocations[1] = 90;
+        record.setGeoLocation(geoLocations);
+
+        assertEquals("Geo-location was not set even though value are valid",
+                geoLocations, record.getGeoLocation());
+
+
+        // check that boundary values are still accepted
+        geoLocations[0] = -180;
+        geoLocations[1] = -90;
+        record.setGeoLocation(geoLocations);
+
+        assertEquals("Geo-location was not set even though value are valid",
+                geoLocations, record.getGeoLocation());
+    }
+
+
 }

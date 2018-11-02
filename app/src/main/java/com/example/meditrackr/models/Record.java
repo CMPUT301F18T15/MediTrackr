@@ -15,6 +15,7 @@ public class Record {
     private String comment;
     private String title;
     private String bodyLocation;
+    // geolocation is an array of LONGITUDE, LATITUDE in degrees
     private double[] geoLocation;
 
 

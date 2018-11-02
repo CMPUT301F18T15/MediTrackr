@@ -14,11 +14,11 @@ public class Record {
     private Date date;
     private String comment;
     private String title;
-    private double bodyLocation;
+    private String bodyLocation;
     private double[] geoLocation;
 
 
-    public Record(@NonNull Date date, Bitmap[] images, String comment, String title, double bodylocation, double[] geoLocation) {
+    public Record(@NonNull Date date, Bitmap[] images, String comment, String title, String bodylocation, double[] geoLocation) {
         this.date = date;
         this.images = images;
         this.comment = comment;
@@ -59,11 +59,11 @@ public class Record {
         this.title = title;
     }
 
-    public double getBodyLocation() {
+    public String getBodyLocation() {
         return bodyLocation;
     }
 
-    public void setBodyLocation(double bodyLocation) {
+    public void setBodyLocation(String bodyLocation) {
         this.bodyLocation = bodyLocation;
     }
 

@@ -1,11 +1,13 @@
 package com.example.meditrackr;
 
 import com.example.meditrackr.models.Profile;
-import com.example.meditrackr.models.Record;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,94 +18,83 @@ public class ProfileUnitTest {
      * Unit Tests for Profile
      * Trivial getters & setters testing omitted.
      */
-     private Profile profile;
+    private Profile profile;
 
 
-     // Initialize profile
-     @Before
-     private void initPUnitTest() {
-         final String Username = '';
-         final Date Email = '';
-         final String Phone = '';
-         profile = new profile(Username, Email, Phone);
+    // Initialize profile
+    @Before
+    private void initJUnitTest() {
+        final String id = "initial user";
+        final String Username = "initial username";
+        final String Email = "initial email";
+        final String Phone = "initial phone";
+        profile = new Profile(id, Username, Email, Phone);
     }
 
-    // Username should not have spaces
+    // testing for inputting null or nothing into the username
     @Test
-    public boolean UsernameTest(){
-      final String usrName = 'test name';
-      profile.setUsername(usrName);
-
-      for(i in Profile.username){
-        if(i == ' '){
-          system.out.print("Can't have spaces in username" )
-        }
-      }
+    public void UsernameTestNull() {
+        final String usrName = null;
+        profile.setUsername(usrName);
+        assertNotNull("username cannot be null", profile.getUsername());
     }
 
-    // check to see if email adress is in proper form
-    //can't have a space in an email adress
+    // testing for username being less than 8
     @Test
-    public void EmailSpaceTest(){
-    final String WithSpace = 'test email@gmail.com';
-    profile.setEmail(WithSpace);
-    for(i in Profile.email){
-      if(i == ' '){
-        system.out.print("Can't have spaces in email" )
-      }
-    }
+    public void UsernameTestSizeSmall() {
+        final String shortTitle = "ABCDEFG"; // length = 7
+        profile.setUsername(shortTitle);
+        assertThat("Title too short", shortTitle.length(), greaterThan(8));
     }
 
-  //email adress must have @ and a '.com' at end
-  @Test
-  public void EmailTest(){
-  final String BadEmail = 'testemailgmail';
-  profile.setEmail(BadEmail);
-
-  // use this to keep track if there is an @
-  count = 0;
-  for(i in Profile.email){
-   
-    // email must have a @
-    if(i == '@')
-      count = 1;
-  }
-
-  // this is if there is no @
-  if(count == 0)
-    system.out.print("Email adress not valid (no @ detected)" )
-
-  // To DO check if last 4 chars is .com if sodo nothing
-
-  if Profile.email.endsWith(".com")
-
-  else
-  system.out.print("Email adress not valid (must end in .com)" )
-  }
-
-
-
-
-    //make sure phone is in proper form
+    // test for username not being too long
     @Test
-    public boolean PhoneTest(){
-      final String BadPhone = 'a123 45678';
-      profile.setPhone(BadPhone);
-      for(i in profile.phone){
-        // no spaces allowed
-        if(i == ' ')
-          system.out.print("Can't have spaces in Phone Number" )
+    public void UsernameTestSizeLarge() {
+        final String longTitle = "1234567890123456789012345678901234567890"; //length = 40
+        profile.setUsername(longTitle);
+        assertThat("title too long", longTitle.length(), lessThan(30));
+    }
 
-        //no letters allowed
-        if(i.isLetter)
-          system.out.print("Can't have letters in Phone Number" )
-        }
+    // testing for inputting null or nothing into the email
+    @Test
+    public void EmailSpaceTestNull() {
+        final String emailNull = null;
+        profile.setEmail(emailNull);
+        assertNotNull("email cannot be null", profile.getEmail());
+    }
 
-        // make sure its only 10 digits long
-        len = profile.phone.length()
-        if(len == 0)
-            system.out.print("Please enter Phone Number" )
-        else if(len != 10)
-          system.out.print("Phone Number must be only 10 digits long. no need to add () or -" )
+    // bad test to see if its an ectual email or not
+    @Test
+    public void EmailReal() {
+        final String email = "cokan@ualberta.ca";
+        profile.setEmail(email);
+        assertThat("is it an email ? ", email, containsString("@"));
+    }
+
+    // test for email containg .com/.edu/.ca
+    @Test
+    public void EmailEndTest() {
+        final String[] values = new String[1];
+        values[0] = ".ca";
+        final String email = "cokan@ualberta.ca";
+        assertThat("real email", email, containsString(values[1]));
 
     }
+
+    // testing for inputting null or nothing into phone
+    @Test
+    public void PhoneTestNull() {
+        final String phoneNUll = null;
+        profile.setEmail(phoneNUll);
+        assertNotNull("phone cannot be null", profile.getPhone());
+    }
+
+    // testing for length of string being 9 values
+    @Test
+    public void PhoneSize(){
+        final String phone = "1234567"; //lenth = 8
+        assertThat("a phone number has more than 8 integers", phone.length(), greaterThan(8));
+    }
+
+}
+

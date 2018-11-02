@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by Skryt on Oct 24, 2018
  */
 
-// Careprovider class
+// CareProvider class
 public class CareProvider extends Profile implements Serializable {
     private ArrayList<Patient> patients;
 

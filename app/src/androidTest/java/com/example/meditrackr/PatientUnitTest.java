@@ -60,20 +60,15 @@ public class PatientUnitTest {
     public void checkCareProviderSet() {
         final ArrayList<CareProvider> providers = new ArrayList<>();
         final ArrayList<Problem> problems = new ArrayList<>();
-
-        //set providers with one provider set tempPatient.set
-        final CareProvider tempCareProvider = new CareProvider
-                ("", "", "", "", patients);
-        providers.add(tempCareProvider);
-
         final Patient tempPatient = new Patient
                 ("", "", "", "", providers, problems);
-
+        final CareProvider tempCareProvider = new CareProvider(null,null, null, null, null);
+        tempCareProvider.setPatient(1, tempPatient);
         tempPatient.setCareProviders(providers);
 
         //careProvider list retrieval
-        assertEquals("Providers list not set", providers, tempPatient.getCareProviders());
-
+        assertEquals("CareProvider has a patient", tempCareProvider.getPatients().size(), 1);
+        assertEquals("Patient has a careprovider", tempPatient.getCareProviders().size(), 1);
     }
 
     @Test

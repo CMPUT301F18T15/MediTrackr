@@ -9,8 +9,8 @@ public class BodyLocation {
     private String bodyFace;
     private String bodyLocation;
 
-    public BodyLocation(double[] bodyCordinate, String bodyFace, String bodyLocation){
-        this.bodyCoordinate = bodyCordinate;
+    public BodyLocation(double[] bodyCoordinate, String bodyFace, String bodyLocation){
+        this.bodyCoordinate = bodyCoordinate;
         this.bodyFace = bodyFace;
         this.bodyLocation = bodyLocation;
     }

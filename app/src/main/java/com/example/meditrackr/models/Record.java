@@ -27,12 +27,12 @@ public class Record {
         this.geoLocation = geoLocation;
     }
 
-    public Bitmap[] getImagaes() {
+    public Bitmap[] getImages() {
         return images;
     }
 
-    public void setImagaes(Bitmap[] imagaes) {
-        this.images = imagaes;
+    public void setImages(Bitmap[] images) {
+        this.images = images;
     }
 
     public Date getDate() {

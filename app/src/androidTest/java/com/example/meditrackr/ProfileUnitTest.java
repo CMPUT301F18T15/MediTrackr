@@ -89,11 +89,11 @@ public class ProfileUnitTest {
         assertNotNull("phone cannot be null", profile.getPhone());
     }
 
-    // testing for length of string being 9 values
+    // testing for length of phone number > 8
     @Test
     public void PhoneSize(){
-        final String phone = "1234567"; //lenth = 8
-        assertThat("a phone number has more than 8 integers", phone.length(), greaterThan(8));
+        final String phone = "1234567"; //length = 8
+        assertThat("a phone number has more than 8 integers", phone.length(), greaterThan(7));
     }
 
 }

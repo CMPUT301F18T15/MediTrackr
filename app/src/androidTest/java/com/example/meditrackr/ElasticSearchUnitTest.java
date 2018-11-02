@@ -30,7 +30,7 @@ public class ElasticSearchUnitTest {
 
     // Initialization ran before each test
     @Before
-    private void initJUnitTest() {
+    public void initJUnitTest() {
         profile = new Profile(testID, testUsername, testEmail, testPhone);
     }
 

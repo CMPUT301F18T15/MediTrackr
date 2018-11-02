@@ -22,7 +22,7 @@ public class ProblemUnitTest {
 
     // Initialize problem
     @Before
-    private void initJUnitTest() {
+    public void initJUnitTest() {
         final String initTitle = "Initial Title";
         final Date initDate = new Date();
         final String initDesc = "Initial Description";

@@ -1,7 +1,11 @@
-package com.example.meditrackr;
+package com.example.meditrackr.models;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+/**
+ * Created by Skryt on Oct 24, 2018
+ */
 
 public class Problem {
     private String title;

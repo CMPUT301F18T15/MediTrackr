@@ -15,15 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.Doctor;
-import com.example.meditrackr.Patient;
-import com.example.meditrackr.Profile;
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.R;
-import com.example.meditrackr.SaveLoadController;
+import com.example.meditrackr.controllers.SaveLoadController;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
 
 public class RegisterFragment extends Fragment {
+
     public static RegisterFragment newInstance(){
         RegisterFragment fragment = new RegisterFragment();
         return fragment;
@@ -38,7 +39,7 @@ public class RegisterFragment extends Fragment {
         final EditText username = (EditText) rootView.findViewById(R.id.username);
         final EditText email = (EditText) rootView.findViewById(R.id.email);
         final EditText phoneNumber = (EditText) rootView.findViewById(R.id.phone_number);
-        final ImageView doctorImage = (ImageView) rootView.findViewById(R.id.doctor);
+        final ImageView doctorImage = (ImageView) rootView.findViewById(R.id.careProvider);
         final ImageView patientImage = (ImageView) rootView.findViewById(R.id.patient);
         final Button createAccount = (Button) rootView.findViewById(R.id.signup_button);
         final TextView alreadyMember = (TextView) rootView.findViewById(R.id.already_member);
@@ -48,24 +49,28 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(checkInputs(username, email, phoneNumber, doctorImage, patientImage)){
-                    Profile profile;
                     if(doctorImage.isSelected()){
-                        profile = new Doctor(
+                        CareProvider careProvider = new CareProvider(
+                                null,
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
-                                null
+                                new ArrayList<Patient>()
                         );
+                        SaveLoadController.saveDoctor(getContext(), careProvider);
                     }
                     else {
-                        profile = new Patient(
+                        Patient patient = new Patient(
+                                null,
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
-                                null
+                                null,
+                                new ArrayList<Problem>()
                         );
+                        SaveLoadController.savePatient(getContext(),patient);
+
                     }
-                    SaveLoadController.saveProfile(getContext(), profile);
 
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
@@ -78,7 +83,7 @@ public class RegisterFragment extends Fragment {
         });
 
 
-        // onclick listener for signup
+        // onclick listener for login
         alreadyMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

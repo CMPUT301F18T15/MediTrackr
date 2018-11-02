@@ -1,34 +1,38 @@
-package com.example.meditrackr;
+package com.example.meditrackr.models;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
 import java.util.Date;
 
+/**
+ * Created by Skryt on Oct 24, 2018
+ */
+
 public class Record {
-    private Bitmap[] imagaes;
+    private Bitmap[] images;
     private Date date;
     private String comment;
     private String title;
-    private int bodyLocation;
+    private String bodyLocation;
     private double[] geoLocation;
 
 
-    public Record(@NonNull Date date, Bitmap[] images, String comment, String title, int bodylocation, double[] geoLocation) {
+    public Record(@NonNull Date date, Bitmap[] images, String comment, String title, String bodylocation, double[] geoLocation) {
         this.date = date;
-        this.imagaes = images;
+        this.images = images;
         this.comment = comment;
         this.title = title;
         this.bodyLocation = bodylocation;
         this.geoLocation = geoLocation;
     }
 
-    public Bitmap[] getImagaes() {
-        return imagaes;
+    public Bitmap[] getImages() {
+        return images;
     }
 
-    public void setImagaes(Bitmap[] imagaes) {
-        this.imagaes = imagaes;
+    public void setImages(Bitmap[] images) {
+        this.images = images;
     }
 
     public Date getDate() {
@@ -55,11 +59,11 @@ public class Record {
         this.title = title;
     }
 
-    public int getBodyLocation() {
+    public String getBodyLocation() {
         return bodyLocation;
     }
 
-    public void setBodyLocation(int bodyLocation) {
+    public void setBodyLocation(String bodyLocation) {
         this.bodyLocation = bodyLocation;
     }
 

@@ -1,5 +1,6 @@
 package com.example.meditrackr.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,9 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.Profile;
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
-import com.example.meditrackr.SaveLoadController;
+import com.example.meditrackr.controllers.SaveLoadController;
 
 public class LoginFragment extends Fragment {
     public static LoginFragment newInstance() {
@@ -37,20 +39,26 @@ public class LoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Profile profile = SaveLoadController.loadProfile(getContext());
-                if(profile == null){
-                    Toast toast = Toast.makeText(getContext(), "Username doesn't exist!", Toast.LENGTH_LONG);
-                    toast.show();
+                Bundle bundle = new Bundle();
+                CareProvider careProvider = SaveLoadController.loadDoctor(getContext(), username.getText().toString());
+                if(careProvider == null){
+                    Patient patient = SaveLoadController.loadPatient(getContext(), username.getText().toString());
+                    if(patient == null){
+                        Toast toast = Toast.makeText(getContext(), "Username doesn't exist!", Toast.LENGTH_LONG);
+                        toast.show();
+                        return;
+                    }
+                    else{
+                        bundle.putSerializable("patient", patient);
+                    }
                 }
-                else {
-                    FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.addToBackStack(null);
-                    ProblemsFragment fragment = ProblemsFragment.newInstance();
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit();
+                else{
+                    bundle.putSerializable("careProvider", careProvider);
                 }
 
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

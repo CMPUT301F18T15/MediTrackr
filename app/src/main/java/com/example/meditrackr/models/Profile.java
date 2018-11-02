@@ -1,11 +1,21 @@
-package com.example.meditrackr;
+package com.example.meditrackr.models;
 
-public class Profile {
+import com.example.meditrackr.callbacks.PersonCallback;
+
+import java.io.Serializable;
+
+import io.searchbox.annotations.JestId;
+
+public class Profile implements Serializable, PersonCallback {
+    @JestId
+    private String id;
+
     private String username;
     private String email;
     private String phone;
 
-    public Profile(String username, String email, String phone){
+    public Profile(String id, String username, String email, String phone){
+        this.id = id;
         this.username = username;
         this.email = email;
         this.phone = phone;
@@ -33,6 +43,12 @@ public class Profile {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getId(){return id;}
+
+    public void setId(String id){
+        this.id = id;
     }
 
 }

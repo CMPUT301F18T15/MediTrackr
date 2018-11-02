@@ -1,11 +1,12 @@
 package com.example.meditrackr.ui;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 
 public class MainActivity extends Activity {
@@ -14,7 +15,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         final ImageView problems = (ImageView) findViewById(R.id.problems);
         final ImageView map = (ImageView) findViewById(R.id.map);
@@ -56,5 +56,18 @@ public class MainActivity extends Activity {
         search.setOnClickListener(listener);
         profile.setOnClickListener(listener);
 
+
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle.get("doctor") != null ){
+            CareProvider careProvider = (CareProvider) bundle.getSerializable("careProvider");
+
+        }
+        else{
+            Patient patient = (Patient) bundle.getSerializable("patient");
+        }
     }
+
+
+
 }

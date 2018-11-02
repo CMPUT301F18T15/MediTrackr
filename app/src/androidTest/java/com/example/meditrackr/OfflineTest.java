@@ -6,11 +6,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class OfflineTest {
-    /**
-     * Unit test for offline behavior
-     */
+/**
+ * Unit test for offline behavior
+ */
 
+public class OfflineTest {
     private Problem problem;
 
     // Checks whether the created problem was corrupted when made offline

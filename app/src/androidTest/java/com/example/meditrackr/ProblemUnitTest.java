@@ -12,12 +12,12 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-public class ProblemUnitTest {
-    /**
-     * Unit Tests for Problem
-     * Trivial getters & setters testing omitted.
-     */
+/**
+ * Unit Tests for Problem
+ * Trivial getters & setters testing omitted.
+ */
 
+public class ProblemUnitTest {
     private Problem problem;
 
 

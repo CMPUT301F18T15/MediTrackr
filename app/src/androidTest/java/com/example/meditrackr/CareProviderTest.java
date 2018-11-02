@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class CareProviderTest {
-    /**
-     * Unit Test for Care Provider
-     */
+/**
+ * Unit Test for Care Provider
+ */
 
+public class CareProviderTest {
     // Check if the care provider has patients
     // Care Provider cannot view patient list if they no patients
     @Test
@@ -25,6 +25,8 @@ public class CareProviderTest {
         assertFalse("CareProvider has no patients",
                 tempCareProvider.getPatients().size() == 0);
     }
+
+
 
     // Check whether a care provider can set patients and retrieve them
     @Test

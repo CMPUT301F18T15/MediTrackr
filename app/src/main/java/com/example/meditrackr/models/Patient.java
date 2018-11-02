@@ -7,18 +7,19 @@ import java.util.ArrayList;
  * Created by Skryt on Oct 24, 2018
  */
 
+// A Patient class holding all information pertaining to Patient
 public class Patient extends Profile implements Serializable{
     private ArrayList<CareProvider> careProviders;
     private ArrayList<Problem> problems;
 
-
-
+    // Patient constructor
     public Patient(String id, String username, String email, String phone, ArrayList<CareProvider> careProvider, ArrayList<Problem> problems) {
         super(id, username, email, phone);
         this.careProviders = careProviders;
         this.problems = problems;
     }
 
+    // Getters/Setters
     public ArrayList<CareProvider> getCareProviders() {
         return careProviders;
     }

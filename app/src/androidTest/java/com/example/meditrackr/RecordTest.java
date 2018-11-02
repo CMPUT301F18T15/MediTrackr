@@ -14,13 +14,12 @@ import static android.graphics.Bitmap.Config.ARGB_8888;
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * Unit Tests for Record
+ * Trivial getters & setters testing omitted.
+ */
+
 public class RecordTest {
-
-    /**
-     * Unit Tests for Record
-     * Trivial getters & setters testing omitted.
-     */
-
     private Record record;
 
 

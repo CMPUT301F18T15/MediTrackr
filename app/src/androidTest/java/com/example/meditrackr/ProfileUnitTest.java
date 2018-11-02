@@ -13,11 +13,12 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit Tests for Profile
+ * Trivial getters & setters testing omitted.
+ */
+
 public class ProfileUnitTest {
-    /**
-     * Unit Tests for Profile
-     * Trivial getters & setters testing omitted.
-     */
     private Profile profile;
 
     // Initialize profile

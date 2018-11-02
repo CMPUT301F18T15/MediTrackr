@@ -6,13 +6,14 @@ import java.util.Date;
 /**
  * Created by Skryt on Oct 24, 2018
  */
-
+// Profile that contains all information about Problem
 public class Problem {
     private String title;
     private Date date;
     private String description;
     private ArrayList<Record> records;
 
+    // Constructor
     public Problem(String title, Date date, String description, ArrayList<Record> records){
         this.title = title;
         this.date = date;
@@ -20,6 +21,7 @@ public class Problem {
         this.records = records;
     }
 
+    // Getters/Setters
     public String getTitle() {
         return title;
     }

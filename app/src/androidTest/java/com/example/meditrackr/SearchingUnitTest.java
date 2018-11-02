@@ -2,15 +2,15 @@ package com.example.meditrackr;
 
 import org.junit.Test;
 
-public class SearchingUnitTest {
-    /**
-     * Unit test for search functionality
-     * Structure based off JUnit Test Lab Slides and lonelyTwitter
-     *
-     * All JUnit tests for Searching are stubs because implementation
-     * for this feature of MediTrackr is reserved for later project parts
-     */
+/**
+ * Unit test for search functionality
+ * Structure based off JUnit Test Lab Slides and lonelyTwitter
+ *
+ * All JUnit tests for Searching are stubs because implementation
+ * for this feature of MediTrackr is reserved for later project parts
+ */
 
+public class SearchingUnitTest {
     private final String[] exampleGeneralKeywords = {"Weird bruise", "Orange finger",
             "Blue Rash", "Itchy Ear"};
     private final String[] exampleLocationKeywords = {"Canada", "US", "Singapore",

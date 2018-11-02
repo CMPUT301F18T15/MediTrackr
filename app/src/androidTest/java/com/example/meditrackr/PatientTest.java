@@ -10,18 +10,12 @@ package com.example.meditrackr;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
-
 import org.junit.Test;
-
 import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
+    // Unit Test Patient
 public class PatientTest {
-    
-    //Unit Test for patient
-    
-
     // Check if the patient changes the doctor and it can recognize that
     // patient will get no feed back if they have no doctor
     @Test

@@ -16,6 +16,9 @@ import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.*;
 
+/**
+ *  Patient Unit Class
+ */
 
 public class PatientUnitTest {
 

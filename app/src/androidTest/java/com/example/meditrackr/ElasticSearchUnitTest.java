@@ -16,10 +16,12 @@ import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit Tests for Elastic Search
+ */
+
 public class ElasticSearchUnitTest {
-    /**
-     * Unit Tests for Elastic Search
-     */
+
     private final String testID = "Test ID";
     private final String testUsername = "Test Username";
     private final String testEmail = "Test Email";

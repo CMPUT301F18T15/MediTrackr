@@ -6,14 +6,15 @@ import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
 
+// A profile class that holds all information pertaining to profile
 public class Profile implements Serializable, PersonCallback {
     @JestId
     private String id;
-
     private String username;
     private String email;
     private String phone;
 
+    // Constructor
     public Profile(String id, String username, String email, String phone){
         this.id = id;
         this.username = username;
@@ -21,10 +22,11 @@ public class Profile implements Serializable, PersonCallback {
         this.phone = phone;
     }
 
-
+    // Getters/Setters
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }

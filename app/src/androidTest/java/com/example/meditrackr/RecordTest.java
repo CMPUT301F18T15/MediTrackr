@@ -129,10 +129,11 @@ public class RecordTest {
     public void BodyLocationOutOfRange() {
         // a body location should not be added if the bitmap of photos is null
         record.setImages(null);
-        record.setBodyLocation("front, 12, 123");
+        // this should not be allowed because a photo cannot have negative coordinates
+        record.setBodyLocation("front, -12, -123");
 
-        assertNotEquals("Body location set when no image was specified",
-                "front, 12, 123", record.getBodyLocation());
+        assertNotEquals("Body location set when coordinates were out of range",
+                "front, -12, -123", record.getBodyLocation());
     }
 
     @Test

@@ -75,7 +75,7 @@ public class ProfileUnitTest {
 
   // To DO check if last 4 chars is .com if sodo nothing
 
-  if email.endsWith(".com")
+  if Profile.email.endsWith(".com")
 
   else
   system.out.print("Email adress not valid (must end in .com)" )

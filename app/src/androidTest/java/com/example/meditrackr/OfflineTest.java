@@ -17,7 +17,7 @@ public class OfflineTest {
 
     // OfflineTest constructor method
     public OfflineTest() {
-        super(com.example.meditrackr.OfflineBehavior.class);
+        super(com.example.meditrackr.Problem.class);
     }
 
     // Checks whether the created problem was corrupted when made offline

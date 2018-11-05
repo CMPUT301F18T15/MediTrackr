@@ -41,7 +41,7 @@ public class SaveLoadController {
 
     public static Patient loadPatient(Context context, String username){
         try {
-            FileInputStream stream = context.openFileInput(DOCTOR_FILE_NAME);
+            FileInputStream stream = context.openFileInput(PATIENT_FILE_NAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             Gson gson = new Gson();
             Patient patient = gson.fromJson(in, Patient.class);

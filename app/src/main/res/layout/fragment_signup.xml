@@ -97,12 +97,12 @@
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <ImageView
-        android:id="@+id/careProvider"
+        android:id="@+id/CareProvider"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="16dp"
         android:cropToPadding="true"
-        app:layout_constraintEnd_toStartOf="@+id/patient"
+        app:layout_constraintEnd_toStartOf="@+id/Patient"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/guideline_left"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,13 +110,13 @@
         app:srcCompat="@drawable/icon_doctor" />
 
     <ImageView
-        android:id="@+id/patient"
+        android:id="@+id/Patient"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/careProvider"
+        app:layout_constraintStart_toEndOf="@+id/CareProvider"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/patient" />
 
@@ -135,7 +135,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/patient" />
+        app:layout_constraintTop_toBottomOf="@+id/Patient" />
 
     <TextView
         android:id="@+id/already_member"

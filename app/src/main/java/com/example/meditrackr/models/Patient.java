@@ -13,8 +13,8 @@ public class Patient extends Profile implements Serializable{
     private ArrayList<Problem> problems;
 
     // Patient constructor
-    public Patient(String id, String username, String email, String phone, ArrayList<CareProvider> careProviders, ArrayList<Problem> problems) {
-        super(id, username, email, phone);
+    public Patient(String id, String username, String email, String phone, String profileType, ArrayList<CareProvider> careProviders, ArrayList<Problem> problems) {
+        super(id, username, email, phone, profileType);
         this.careProviders = careProviders;
         this.problems = problems;
     }

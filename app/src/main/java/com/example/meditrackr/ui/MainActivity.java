@@ -23,6 +23,10 @@ public class MainActivity extends Activity {
         final ImageView profile = (ImageView) findViewById(R.id.profile);
 
         problems.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
+        map.setImageDrawable(getResources().getDrawable(R.drawable.map));
+        camera.setImageDrawable(getResources().getDrawable(R.drawable.camera));
+        search.setImageDrawable(getResources().getDrawable(R.drawable.search));
+        profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override

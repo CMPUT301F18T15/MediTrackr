@@ -6,6 +6,7 @@ import java.util.Date;
 /**
  * Created by Skryt on Oct 24, 2018
  */
+
 // Profile that contains all information about Problem
 public class Problem {
     private String title;

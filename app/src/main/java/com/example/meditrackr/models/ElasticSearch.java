@@ -9,6 +9,8 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by Skryt on Oct 24, 2018
  */
+
+
 // ElasticSearch
 public class ElasticSearch {
     public ElasticSearch(){}
@@ -28,10 +30,11 @@ public class ElasticSearch {
         }
     }
 
-    // get a profile from the database
-    public Profile getProfile(String username) throws ExecutionException, InterruptedException {
-        ElasticSearchController.GetProfileTask getProfileTask = new ElasticSearchController.GetProfileTask();
-        getProfileTask.execute(username);
-        return getProfileTask.get();
+    // delete a profile from ElasticSearch and Phone
+    public void deleteProfile(String profile) {
+        ElasticSearchController.DeleteProfileTask deleteProfileTask = new ElasticSearchController.DeleteProfileTask();
+        deleteProfileTask.execute(profile);
     }
+
+
 }

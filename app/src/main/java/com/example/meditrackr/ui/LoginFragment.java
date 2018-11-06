@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,21 +41,16 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                CareProvider careProvider = SaveLoadController.loadDoctor(getContext(), username.getText().toString());
-                if(careProvider == null){
+                CareProvider careProvider = SaveLoadController.loadCareProvider(getContext(), username.getText().toString());
+                if(careProvider.equals("Patient")){
                     Patient patient = SaveLoadController.loadPatient(getContext(), username.getText().toString());
-                    if(patient == null){
-                        Toast toast = Toast.makeText(getContext(), "Username doesn't exist!", Toast.LENGTH_LONG);
-                        toast.show();
-                        return;
+                    Log.d("AddProfileTask", patient.getProblem(0).getDescription());
+                    bundle.putSerializable("patient", patient);
                     }
-                    else{
-                        bundle.putSerializable("patient", patient);
-                    }
-                }
                 else{
                     bundle.putSerializable("careProvider", careProvider);
                 }
+
 
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 intent.putExtras(bundle);

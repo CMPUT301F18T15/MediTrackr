@@ -5,9 +5,11 @@ import android.content.Context;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.ElasticSearch;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Profile;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -16,32 +18,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class SaveLoadController {
-    private static final String DOCTOR_FILE_NAME = "doctor.sav";
-    private static final String PATIENT_FILE_NAME = "patient.sav";
     private static ElasticSearch elasticSearch = new ElasticSearch();
 
 
-
-    public static CareProvider loadDoctor(Context context, String username){
-        try {
-            FileInputStream stream = context.openFileInput(DOCTOR_FILE_NAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(stream));
-            Gson gson = new Gson();
-            CareProvider careProvider = gson.fromJson(in, CareProvider.class);
-            if(careProvider.getUsername().equals(username)){
-                return careProvider;
-            }
-            return null;
-        }
-
-        catch (FileNotFoundException e) {
-            return null;
-        }
-    }
-
     public static Patient loadPatient(Context context, String username){
         try {
-            FileInputStream stream = context.openFileInput(PATIENT_FILE_NAME);
+            FileInputStream stream = context.openFileInput(username+".sav");
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             Gson gson = new Gson();
             Patient patient = gson.fromJson(in, Patient.class);
@@ -56,38 +38,58 @@ public class SaveLoadController {
         }
     }
 
-
-
-    public static void saveDoctor(Context context, CareProvider careProvider){
+    public static CareProvider loadCareProvider(Context context, String username){
         try {
-            FileOutputStream stream = context.openFileOutput(DOCTOR_FILE_NAME, 0);
-            OutputStreamWriter writer = new OutputStreamWriter(stream);
+            FileInputStream stream = context.openFileInput(username+".sav");
+            BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             Gson gson = new Gson();
-            gson.toJson(careProvider, writer);
-            writer.flush();
+            CareProvider careProvider = gson.fromJson(in, CareProvider.class);
+            if(careProvider.getUsername().equals(username)){
+                return careProvider;
+            }
+            return null;
         }
 
-        catch (IOException e) {
-            // do nothing
+        catch (FileNotFoundException e) {
+            return null;
         }
-        elasticSearch.addProfile(careProvider);
     }
 
-    public static void savePatient(Context context, Patient patient){
-        try {
-            FileOutputStream stream = context.openFileOutput(PATIENT_FILE_NAME, 0);
-            OutputStreamWriter writer = new OutputStreamWriter(stream);
-            Gson gson = new Gson();
-            gson.toJson(patient, writer);
-            writer.flush();
-        }
 
-        catch (IOException e) {
-            // do nothing
+    public static void save(Context context, Profile profile) {
+        if (profile.getProfileType().equals("CareProvider")) {
+            CareProvider careProvider = (CareProvider) profile;
+            try {
+                FileOutputStream stream = context.openFileOutput(profile.getUsername()+".sav", 0);
+                OutputStreamWriter writer = new OutputStreamWriter(stream);
+                Gson gson = new Gson();
+                gson.toJson(careProvider, writer);
+                writer.flush();
+            } catch (IOException e) {
+                // do nothing
+            }
+            elasticSearch.addProfile(careProvider);
+
+        } else {
+            Patient patient = (Patient) profile;
+            try {
+                FileOutputStream stream = context.openFileOutput(profile.getUsername()+".sav", 0);
+                OutputStreamWriter writer = new OutputStreamWriter(stream);
+                Gson gson = new Gson();
+                gson.toJson(patient, writer);
+                writer.flush();
+            } catch (IOException e) {
+                // do nothing
+            }
+            elasticSearch.addProfile(patient);
         }
-        elasticSearch.addProfile(patient);
     }
 
+    public static void delete(Context context, Profile profile){
+        String file = profile.getUsername()+".sav";
+        context.deleteFile(file);
+        elasticSearch.deleteProfile(profile.getId());
+    }
 
 }
 

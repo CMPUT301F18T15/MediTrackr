@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +13,6 @@
         android:id="@+id/problem_title"
         android:layout_width="0dp"
         android:layout_height="75dp"
-        android:layout_marginTop="75dp"
         android:background="@color/editTextBackground"
         android:enabled="false"
         android:hint="Problem"
@@ -22,9 +22,8 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="278dp"
+        tools:layout_editor_absoluteY="459dp" />
 
 
     <Button
@@ -32,16 +31,14 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="75dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/gradient"
         android:text="ADD"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/problem_title" />
+        tools:layout_editor_absoluteX="282dp"
+        tools:layout_editor_absoluteY="600dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -56,6 +53,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.90" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="83dp"
+        android:text="Add a             Problem or Record"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="103dp" />
 
 
 </android.support.constraint.ConstraintLayout>

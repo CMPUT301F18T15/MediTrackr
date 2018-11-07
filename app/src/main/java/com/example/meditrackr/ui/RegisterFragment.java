@@ -22,7 +22,6 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.SaveLoadController;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class RegisterFragment extends Fragment {
 
@@ -40,21 +39,17 @@ public class RegisterFragment extends Fragment {
         final EditText username = (EditText) rootView.findViewById(R.id.username);
         final EditText email = (EditText) rootView.findViewById(R.id.email);
         final EditText phoneNumber = (EditText) rootView.findViewById(R.id.phone_number);
-        final ImageView careProviderImage = (ImageView) rootView.findViewById(R.id.CareProvider);
+        final ImageView doctorImage = (ImageView) rootView.findViewById(R.id.CareProvider);
         final ImageView patientImage = (ImageView) rootView.findViewById(R.id.Patient);
         final Button createAccount = (Button) rootView.findViewById(R.id.signup_button);
         final TextView alreadyMember = (TextView) rootView.findViewById(R.id.already_member);
-        Problem problem = new Problem("sick", new Date(), "a bit sick", null);
-        // testing
-        final ArrayList<Problem> problems = new ArrayList<>();
-        problems.add(problem);
 
         // onclick listener for create account
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkInputs(username, email, phoneNumber, careProviderImage, patientImage)){
-                    if(careProviderImage.isSelected()){
+                if(checkInputs(username, email, phoneNumber, doctorImage, patientImage)){
+                    if(doctorImage.isSelected()){
                         CareProvider careProvider = new CareProvider(
                                 null,
                                 username.getText().toString().trim(),
@@ -63,7 +58,7 @@ public class RegisterFragment extends Fragment {
                                 "CareProvider",
                                 new ArrayList<Patient>()
                         );
-                        SaveLoadController.save(getContext(), careProvider);
+                        SaveLoadController.saveDoctor(getContext(), careProvider);
                     }
                     else {
                         Patient patient = new Patient(
@@ -73,9 +68,9 @@ public class RegisterFragment extends Fragment {
                                 phoneNumber.getText().toString().trim(),
                                 "Patient",
                                 null,
-                                problems
+                                new ArrayList<Problem>()
                         );
-                        SaveLoadController.save(getContext(),patient);
+                        SaveLoadController.savePatient(getContext(),patient);
 
                     }
 
@@ -103,10 +98,10 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        careProviderImage.setOnClickListener(new View.OnClickListener(){
+        doctorImage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                careProviderImage.setSelected(true);
+                doctorImage.setSelected(true);
                 patientImage.setSelected(false);
             }
         });
@@ -115,7 +110,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 patientImage.setSelected(true);
-                careProviderImage.setSelected(false);
+                doctorImage.setSelected(false);
             }
         });
 

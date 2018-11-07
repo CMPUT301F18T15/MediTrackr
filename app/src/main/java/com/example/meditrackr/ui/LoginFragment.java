@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.SaveLoadController;
-import com.example.meditrackr.models.Profile;
 
 public class LoginFragment extends Fragment {
     public static LoginFragment newInstance() {
@@ -42,19 +40,22 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                Profile profile = SaveLoadController.load(getContext(), username.getText().toString());
-                if(profile.getProfileType().equals("CareProvider")) {
-                    CareProvider careProvider = (CareProvider) profile;
+                CareProvider careProvider = SaveLoadController.loadDoctor(getContext(), username.getText().toString());
+                if(careProvider == null){
+                    Patient patient = SaveLoadController.loadPatient(getContext(), username.getText().toString());
+                    if(patient == null){
+                        Toast toast = Toast.makeText(getContext(), "Username doesn't exist!", Toast.LENGTH_LONG);
+                        toast.show();
+                        return;
+                    }
+                    else{
+                        bundle.putSerializable("patient", patient);
+                    }
+                }
+                else{
                     bundle.putSerializable("careProvider", careProvider);
-                } else if (profile.getProfileType().equals("Patient")) {
-                    Patient patient = (Patient) profile;
-                    Log.d("AddProfileTask", patient.getProblem(0).getTitle());
+                }
 
-                    bundle.putSerializable("patient", patient);
-                }
-                else {
-                    return;
-                }
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);

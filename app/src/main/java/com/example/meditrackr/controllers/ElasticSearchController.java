@@ -22,7 +22,6 @@ import io.searchbox.core.SearchResult;
 /**
  * Created by Skryt on Oct 24, 2018
  */
-
 public class ElasticSearchController {
 
     private static JestDroidClient client;
@@ -38,11 +37,11 @@ public class ElasticSearchController {
                 Index index;
                 try{
                     Patient patient  = (Patient) profile;
-                    index = new Index.Builder(patient).index("cmput301f18t15test").type("Profile").id(profile.getId()).build();
+                    index = new Index.Builder(patient).index("cmput301f18t15_meditrackr").type("Patient").id(profile.getId()).build();
                 }
                 catch(ClassCastException e){
                     CareProvider careProvider = (CareProvider) profile;
-                    index = new Index.Builder(careProvider).index("cmput301f18t15test").type("Profile").id(profile.getId()).build();
+                    index = new Index.Builder(careProvider).index("cmput301f18t15_meditrackr").type("CareProvider").id(profile.getId()).build();
                 }
                 try {
                     DocumentResult result = client.execute(index);
@@ -69,21 +68,21 @@ public class ElasticSearchController {
         @Override
         protected Profile doInBackground(String... username) {
             verifySettings();
-            CareProvider careProvider = null;
-
+            Profile profile = null;
 
             String query = "{\"query\": {\"match\": {\"username\":\"" + username[0] + "\" }}}";
 
             Search search = new Search.Builder(query)
-                    .addIndex("cmput301f18t15test")
+                    .addIndex("cmput301f18t15")
                     .addType("CareProvider")
+                    .addType("Patient")
                     .build();
             try {
                 SearchResult result = client.execute(search);
 
                 if (result.isSucceeded()) {
-                    careProvider = result.getSourceAsObject(CareProvider.class);
-                    Log.d("ElasticSearchCGET", new Gson().toJson(careProvider));
+                    profile = result.getSourceAsObject(Profile.class);
+                    Log.d("ElasticSearchCGET", new Gson().toJson(profile));
 
                 }
                 else {
@@ -95,26 +94,26 @@ public class ElasticSearchController {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
                 Log.i("Error", "Logging you in offline instead");
             }
-            return careProvider;
+            return profile;
         }
     }
 
-    public static class UpdatePatientTask extends AsyncTask<Patient, Void, Void> {
+    public static class UpdateProfileTask extends AsyncTask<Profile, Void, Void> {
 
         @Override
-        protected Void doInBackground(Patient... patients){
+        protected Void doInBackground(Profile... profiles){
             verifySettings();
-            for (Patient patient: patients) {
-                Index index = new Index.Builder(patient).index("cmput301f18t15test").type("Patient").id(patient.getId()).build();
+            for (Profile profile: profiles) {
+                Index index = new Index.Builder(profile).index("cmput301f18t15_meditrackr").type("Profile").id(profile.getId()).build();
 
                 try {
                     client.execute(index);
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
-                        Log.d("Success", patient.getId());
-                        patient.setId(result.getId());
+                        Log.d("Success", profile.getId());
+                        profile.setId(result.getId());
                         Log.i("Success", "Update successful");
-                        Log.i("Success", new Gson().toJson(patient));
+                        Log.i("Success", new Gson().toJson(profile));
                         Log.i("Success", result.getId());
                     }
                     else {
@@ -131,30 +130,32 @@ public class ElasticSearchController {
     }
 
 
-    public static class DeleteProfileTask extends AsyncTask<String, Void, Void> {
-        protected Void doInBackground(String... params) {
+    public static class DeleteProfileTask extends AsyncTask<Profile, Void, Void> {
+        protected Void doInBackground(Profile... profiles) {
             verifySettings();
 
-            String jestID = params[0];
-            Log.i("ESC.DeleteUserTask", jestID);
-            try {
-                DocumentResult result = client.execute(new Delete.Builder(jestID)
-                        .index("cmput301f18t15test")
-                        .type("Profile")
-                        .build());
-                if (result.isSucceeded()) {
-                    Log.i("ESC.DeleteUserTask", "The user was delete successfully.");
-                } else {
-                    Log.e("ESC.DeleteUserTask", "Failed to delete user.");
+            for (Profile profile : profiles) {
+                try {
+                    DocumentResult result = client.execute(new Delete.Builder(profile.getId())
+                            .index("cmput301f17t32_h4bit")
+                            .type("User")
+                            .build());
+                    if (result.isSucceeded()) {
+                        Log.i("ESC.DeleteUserTask", "The user was delete successfully.");
+                    } else {
+                        Log.e("ESC.DeleteUserTask", "Failed to delete user.");
+                    }
+                } catch (Exception e) {
+                    Log.e("ESC.UpdateUserTask", "Something went wrong when we tried to communicate with the elasticsearch server!");
                 }
-            } catch (Exception e) {
-                Log.e("ESC.UpdateUserTask", "Something went wrong when we tried to communicate with the elasticsearch server!");
+
             }
+
             return null;
         }
     }
 
-    private static void verifySettings() {
+    public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
             DroidClientConfig config = builder.build();

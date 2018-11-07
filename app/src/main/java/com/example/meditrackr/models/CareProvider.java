@@ -13,8 +13,8 @@ public class CareProvider extends Profile implements Serializable {
     private ArrayList<Patient> patients;
 
     // Constructor
-    public CareProvider(String id, String username, String email, String phone, String profileType, ArrayList<Patient> patients){
-        super(id, username, email, phone, profileType);
+    public CareProvider(String id, String username, String email, String user, String phone, ArrayList<Patient> patients){
+        super(id, username, email, phone, user);
         this.patients = patients;
     }
 

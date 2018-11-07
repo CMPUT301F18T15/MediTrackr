@@ -11,7 +11,6 @@ import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 
-import io.searchbox.core.SearchResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,13 +66,6 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(listener);
         profile.setOnClickListener(listener);
 
-        if(bundle.get("doctor") != null ){
-            CareProvider careProvider = (CareProvider) bundle.getSerializable("careProvider");
-
-        }
-        else{
-            Patient patient = (Patient) bundle.getSerializable("patient");
-        }
     }
 
     public void FragmentTransition(View v){

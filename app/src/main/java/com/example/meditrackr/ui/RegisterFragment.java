@@ -45,6 +45,7 @@ public class RegisterFragment extends Fragment {
         final Button createAccount = (Button) rootView.findViewById(R.id.signup_button);
         final TextView alreadyMember = (TextView) rootView.findViewById(R.id.already_member);
         Problem problem = new Problem("sick", new Date(), "a bit sick", null);
+        // testing
         final ArrayList<Problem> problems = new ArrayList<>();
         problems.add(problem);
 

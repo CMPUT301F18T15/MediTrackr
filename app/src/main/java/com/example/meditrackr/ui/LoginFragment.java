@@ -15,9 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.ElasticSearch;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.models.Profile;
 
 public class LoginFragment extends Fragment {
     public static LoginFragment newInstance() {
@@ -36,24 +38,17 @@ public class LoginFragment extends Fragment {
         final Button login = (Button) rootView.findViewById(R.id.login_button);
         final TextView signup = (TextView) rootView.findViewById(R.id.not_member);
 
+        ElasticSearch elasticSearch = new ElasticSearch();
+        elasticSearch.deleteProfile("AWbrgp9EZX1wzlETpmTw");
+
         // onclick listener for login
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                CareProvider careProvider = SaveLoadController.loadCareProvider(getContext(), username.getText().toString());
-                if(careProvider.equals("Patient")){
-                    Patient patient = SaveLoadController.loadPatient(getContext(), username.getText().toString());
-                    Log.d("AddProfileTask", patient.getProblem(0).getDescription());
-                    bundle.putSerializable("patient", patient);
-                    }
-                else{
-                    bundle.putSerializable("careProvider", careProvider);
-                }
-
-
+                Profile profile = SaveLoadController.load(getContext(), username.getText().toString());
+                Log.d("AddProfileTask", profile.getProfileType());
+                Log.d("AddProfileTask", profile.getUsername());
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

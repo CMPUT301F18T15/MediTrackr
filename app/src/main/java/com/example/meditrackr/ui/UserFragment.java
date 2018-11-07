@@ -17,11 +17,8 @@ import com.example.meditrackr.models.Profile;
  */
 
 public class UserFragment extends Fragment {
-    public static UserFragment newInstance(Profile profile){
+    public static UserFragment newInstance(){
         UserFragment fragment = new UserFragment();
-        final Bundle bundle = new Bundle();
-        bundle.putSerializable("patient", profile);
-        fragment.setArguments(bundle);
         return fragment;
     }
 

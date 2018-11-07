@@ -1,6 +1,7 @@
 package com.example.meditrackr.controllers;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.ElasticSearch;
@@ -21,7 +22,7 @@ public class SaveLoadController {
     private static ElasticSearch elasticSearch = new ElasticSearch();
 
 
-    public static Patient loadPatient(Context context, String username){
+    public static Patient load(Context context, String username){
         try {
             FileInputStream stream = context.openFileInput(username+".sav");
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));
@@ -38,22 +39,6 @@ public class SaveLoadController {
         }
     }
 
-    public static CareProvider loadCareProvider(Context context, String username){
-        try {
-            FileInputStream stream = context.openFileInput(username+".sav");
-            BufferedReader in = new BufferedReader(new InputStreamReader(stream));
-            Gson gson = new Gson();
-            CareProvider careProvider = gson.fromJson(in, CareProvider.class);
-            if(careProvider.getUsername().equals(username)){
-                return careProvider;
-            }
-            return null;
-        }
-
-        catch (FileNotFoundException e) {
-            return null;
-        }
-    }
 
 
     public static void save(Context context, Profile profile) {
@@ -72,6 +57,7 @@ public class SaveLoadController {
 
         } else {
             Patient patient = (Patient) profile;
+            Log.i("AddProfileTask", ((Patient) profile).getProblem(0).getDescription());
             try {
                 FileOutputStream stream = context.openFileOutput(profile.getUsername()+".sav", 0);
                 OutputStreamWriter writer = new OutputStreamWriter(stream);

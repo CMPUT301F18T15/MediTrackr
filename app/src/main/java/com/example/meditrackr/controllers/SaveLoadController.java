@@ -18,15 +18,13 @@ import java.io.OutputStreamWriter;
 public class SaveLoadController {
     private static ElasticSearch elasticSearch = new ElasticSearch();
 
-
-
     public static CareProvider loadDoctor(Context context, String username){
         try {
             FileInputStream stream = context.openFileInput(username+".sav");
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             Gson gson = new Gson();
             CareProvider careProvider = gson.fromJson(in, CareProvider.class);
-            if(careProvider.getUsername().equals(username) && careProvider.getUser().equals("CareProvider")){
+            if(careProvider.getUsername().equals(username) && careProvider.getUserType().equals("CareProvider")){
                 return careProvider;
             }
             return null;
@@ -43,7 +41,7 @@ public class SaveLoadController {
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             Gson gson = new Gson();
             Patient patient = gson.fromJson(in, Patient.class);
-            if(patient.getUsername().equals(username) && patient.getUser().equals("Patient")){
+            if(patient.getUsername().equals(username) && patient.getUserType().equals("Patient")){
                 return patient;
             }
             return null;

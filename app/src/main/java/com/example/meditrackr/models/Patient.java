@@ -9,27 +9,20 @@ import java.util.ArrayList;
 
 // A Patient class holding all information pertaining to Patient
 public class Patient extends Profile implements Serializable{
-    private ArrayList<CareProvider> careProviders;
-    private ArrayList<Problem> problems;
+    private CareProviderList careProviders = new CareProviderList();
+    private ProblemList problems = new ProblemList();
 
     // Patient constructor
-    public Patient(String id, String username, String email, String phone, String user, ArrayList<CareProvider> careProviders, ArrayList<Problem> problems) {
-        super(id, username, email, phone, user);
-        this.careProviders = careProviders;
-        this.problems = problems;
+    public Patient(String id, String username, String email, String phone, String userType) {
+        super(id, username, email, phone, userType);
     }
 
     // Getters/Setters
-    public ArrayList<CareProvider> getCareProviders() {
+    public CareProviderList getCareProviders() {
         return careProviders;
     }
-    public void setCareProviders(ArrayList<CareProvider> careProviders) {
-        this.careProviders = careProviders;
-    }
 
-    public Problem getProblem(int index) {return this.problems.get(index);}
-    public void setProblem(int index, Problem problem) {this.problems.set(index, problem);}
+    public ProblemList getProblems() {return this.problems;}
 
-
-    }
+}
 

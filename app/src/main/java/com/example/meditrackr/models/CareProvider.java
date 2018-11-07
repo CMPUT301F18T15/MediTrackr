@@ -10,22 +10,27 @@ import java.util.ArrayList;
 
 // CareProvider class
 public class CareProvider extends Profile implements Serializable {
-    private ArrayList<Patient> patients;
+    private PatientList patients = new PatientList();
 
     // Constructor
-    public CareProvider(String id, String username, String email, String user, String phone, ArrayList<Patient> patients){
-        super(id, username, email, phone, user);
-        this.patients = patients;
+    public CareProvider(String id, String username, String email, String phone, String userType){
+        super(id, username, email, phone, userType);
     }
 
     // Getters/Setters
-    public ArrayList<Patient> getPatients() {
-        return patients;
+    public PatientList getPatient() {
+        return this.patients;
     }
-    public Patient getPatient(int index) {
-        return this.patients.get(index);
+
+    public void addPatient(Patient patient){
+        patients.addPatient(patient);
     }
-    public void setPatient(int index, Patient patient){
-        this.patients.set(index, patient);
+
+    public void deletePatient(Patient patient) {
+        patients.deletePatient(patient);
     }
+    public Boolean patientExists(Patient patient){
+        return patients.patientUserIDExist(patient.getId());
+    }
+
 }

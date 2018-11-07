@@ -13,15 +13,14 @@ public class Profile implements Serializable, PersonCallback {
     private String username;
     private String email;
     private String phone;
-    private String user;
+    private String userType;
 
     // Constructor
-    public Profile(String id, String username, String email, String phone, String user){
+    public Profile(String id, String username, String email, String phone, String userType){
         this.id = id;
         this.username = username;
         this.email = email;
         this.phone = phone;
-        this.user = user;
     }
 
     // Getters/Setters
@@ -55,12 +54,12 @@ public class Profile implements Serializable, PersonCallback {
         this.id = id;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
 }

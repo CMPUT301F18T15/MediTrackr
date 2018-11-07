@@ -2,13 +2,13 @@ package com.example.meditrackr.models;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Skryt on Nov 7, 2018
+ */
+
 public class ProfileList {
+    private ArrayList<Profile> profiles = new ArrayList<>();
 
-    private ArrayList<Profile> profiles;
-
-    public ProfileList(){
-        profiles = new ArrayList<Profile>();
-    }
 
     public void addProfile(Profile profile){
         profiles.add(profile);

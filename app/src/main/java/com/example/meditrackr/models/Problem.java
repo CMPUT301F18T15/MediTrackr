@@ -13,14 +13,13 @@ public class Problem {
     private String title;
     private Date date;
     private String description;
-    private ArrayList<Record> records;
+    private RecordList records = new RecordList();
 
     // Constructor
-    public Problem(String title, Date date, String description, ArrayList<Record> records){
+    public Problem(String title, Date date, String description){
         this.title = title;
         this.date = date;
         this.description = description;
-        this.records = records;
     }
 
     // Getters/Setters
@@ -48,12 +47,8 @@ public class Problem {
         this.description = description;
     }
 
-    public ArrayList<Record> getRecords() {
+    public RecordList getRecords() {
         return records;
-    }
-
-    public void setRecords(ArrayList<Record> records) {
-        this.records = records;
     }
 
 }

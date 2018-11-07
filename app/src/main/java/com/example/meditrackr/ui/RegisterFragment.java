@@ -55,8 +55,7 @@ public class RegisterFragment extends Fragment {
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
-                                "CareProvider",
-                                new ArrayList<Patient>()
+                                "CareProvider"
                         );
                         SaveLoadController.saveDoctor(getContext(), careProvider);
                     }
@@ -66,9 +65,7 @@ public class RegisterFragment extends Fragment {
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
-                                "Patient",
-                                new ArrayList<CareProvider>(),
-                                new ArrayList<Problem>()
+                                "Patient"
                         );
                         SaveLoadController.savePatient(getContext(),patient);
 

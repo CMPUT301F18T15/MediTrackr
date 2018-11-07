@@ -25,7 +25,6 @@ public class ElasticSearch {
             return addProfileTask.get();
         }
         catch (Exception e){
-           Log.i("Error", "Failed to add user");
             return null;
         }
     }

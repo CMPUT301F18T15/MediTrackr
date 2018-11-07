@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.models.ElasticSearch;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.SaveLoadController;
@@ -38,17 +37,26 @@ public class LoginFragment extends Fragment {
         final Button login = (Button) rootView.findViewById(R.id.login_button);
         final TextView signup = (TextView) rootView.findViewById(R.id.not_member);
 
-        ElasticSearch elasticSearch = new ElasticSearch();
-        elasticSearch.deleteProfile("AWbrgp9EZX1wzlETpmTw");
-
         // onclick listener for login
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
                 Profile profile = SaveLoadController.load(getContext(), username.getText().toString());
-                Log.d("AddProfileTask", profile.getProfileType());
-                Log.d("AddProfileTask", profile.getUsername());
+                if(profile.getProfileType().equals("CareProvider")) {
+                    CareProvider careProvider = (CareProvider) profile;
+                    bundle.putSerializable("careProvider", careProvider);
+                } else if (profile.getProfileType().equals("Patient")) {
+                    Patient patient = (Patient) profile;
+                    Log.d("AddProfileTask", patient.getProblem(0).getTitle());
+
+                    bundle.putSerializable("patient", patient);
+                }
+                else {
+                    return;
+                }
                 Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

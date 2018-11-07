@@ -22,14 +22,14 @@ public class SaveLoadController {
     private static ElasticSearch elasticSearch = new ElasticSearch();
 
 
-    public static Patient load(Context context, String username){
+    public static Profile load(Context context, String username){
         try {
             FileInputStream stream = context.openFileInput(username+".sav");
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             Gson gson = new Gson();
-            Patient patient = gson.fromJson(in, Patient.class);
-            if(patient.getUsername().equals(username)){
-                return patient;
+            Profile profile = gson.fromJson(in, Profile.class);
+            if(profile.getUsername().equals(username)){
+                return profile;
             }
             return null;
         }
@@ -53,7 +53,7 @@ public class SaveLoadController {
             } catch (IOException e) {
                 // do nothing
             }
-            elasticSearch.addProfile(careProvider);
+            //elasticSearch.addProfile(careProvider);
 
         } else {
             Patient patient = (Patient) profile;
@@ -67,7 +67,7 @@ public class SaveLoadController {
             } catch (IOException e) {
                 // do nothing
             }
-            elasticSearch.addProfile(patient);
+            //elasticSearch.addProfile(patient);
         }
     }
 

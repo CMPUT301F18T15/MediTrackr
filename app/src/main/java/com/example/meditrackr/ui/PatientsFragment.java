@@ -1,30 +1,29 @@
 package com.example.meditrackr.ui;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.meditrackr.R;
 
-public class RecyclerProblemsFragment extends Fragment {
+/**
+ * Created by Skryt on Nov 08, 2018
+ */
 
-    public static RecyclerProblemsFragment newInstance(){
-        return new RecyclerProblemsFragment();
+public class PatientsFragment extends Fragment {
+
+    public static PatientsFragment newInstance(){
+        PatientsFragment fragment = new PatientsFragment();
+        return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_recycler_problems, container, false);
-
-
-        RecyclerView problemsList = (RecyclerView) rootView.findViewById(R.id.problems_list);
-
+                R.layout.fragment_patients, container, false);
 
         return rootView;
     }

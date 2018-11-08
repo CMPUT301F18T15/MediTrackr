@@ -40,7 +40,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                CareProvider careProvider = SaveLoadController.loadDoctor(getContext(), username.getText().toString());
+                CareProvider careProvider = SaveLoadController.loadCareProvider(getContext(), username.getText().toString());
                 if(careProvider == null){
                     Patient patient = SaveLoadController.loadPatient(getContext(), username.getText().toString());
                     if(patient == null){
@@ -49,11 +49,11 @@ public class LoginFragment extends Fragment {
                         return;
                     }
                     else{
-                        bundle.putSerializable("patient", patient);
+                        bundle.putSerializable("Patient", patient);
                     }
                 }
                 else{
-                    bundle.putSerializable("careProvider", careProvider);
+                    bundle.putSerializable("CareProvider", careProvider);
                 }
 
                 Intent intent = new Intent(getActivity(), MainActivity.class);

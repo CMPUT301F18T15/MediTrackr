@@ -7,7 +7,7 @@
     android:background="@color/background2">
 
     <ImageView
-        android:id="@+id/logo2"
+        android:id="@+id/meditrackr_logo"
         android:layout_width="0dp"
         android:layout_height="95dp"
         android:layout_marginStart="8dp"
@@ -24,7 +24,7 @@
     <EditText
         android:id="@+id/username"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="75dp"
         android:layout_marginTop="24dp"
         android:background="#FFFFFF"
         android:drawableLeft="@drawable/icon_user"
@@ -38,12 +38,12 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/logo2" />
+        app:layout_constraintTop_toBottomOf="@+id/meditrackr_logo" />
 
     <EditText
         android:id="@+id/phone_number"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="75dp"
         android:layout_marginTop="12dp"
         android:background="#FFFFFF"
         android:drawableLeft="@drawable/icon_phone"
@@ -62,7 +62,7 @@
     <EditText
         android:id="@+id/email"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="75dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"

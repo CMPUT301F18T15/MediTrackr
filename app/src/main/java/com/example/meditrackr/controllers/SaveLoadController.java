@@ -18,7 +18,7 @@ import java.io.OutputStreamWriter;
 public class SaveLoadController {
     private static ElasticSearch elasticSearch = new ElasticSearch();
 
-    public static CareProvider loadDoctor(Context context, String username){
+    public static CareProvider loadCareProvider(Context context, String username){
         try {
             FileInputStream stream = context.openFileInput(username+".sav");
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));

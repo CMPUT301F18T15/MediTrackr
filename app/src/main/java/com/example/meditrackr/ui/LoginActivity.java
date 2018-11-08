@@ -15,7 +15,6 @@ public class LoginActivity extends AppCompatActivity {
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.addToBackStack(null);
         LoginFragment fragment = LoginFragment.newInstance();
         transaction.replace(R.id.content, fragment);
         transaction.commit();

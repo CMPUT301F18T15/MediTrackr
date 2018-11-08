@@ -22,7 +22,7 @@ public class PatientList implements Serializable {
         patients.remove(patient);
     }
 
-    public Boolean patientUserIDExist(String userID){
+    public Boolean patientExists(String userID){
         for (Patient patient : patients){
             if (patient.getId().equals(userID)){
                 return true;

@@ -22,7 +22,16 @@ public class Patient extends Profile implements Serializable{
         return careProviders;
     }
 
+    public void deleteCareProvider(CareProvider careProvider) {
+        careProviders.deleteCareProvider(careProvider);
+    }
+    public Boolean careProviderExists(CareProvider careProvider){
+        return careProviders.careProviderExists(careProvider.getId());
+    }
+
     public ProblemList getProblems() {return this.problems;}
+
+
 
 }
 

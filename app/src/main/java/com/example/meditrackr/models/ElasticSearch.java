@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by Skryt on Oct 24, 2018
  */
+
 // ElasticSearch
 public class ElasticSearch {
     public ElasticSearch(){}

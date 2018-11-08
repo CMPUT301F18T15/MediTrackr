@@ -22,7 +22,7 @@ public class CareProviderList implements Serializable {
         careProviders.remove(careProvider);
     }
 
-    public Boolean careProviderIDExist(String userID){
+    public Boolean careProviderExists(String userID){
         for (CareProvider careProvider : careProviders){
             if (careProvider.getId().equals(userID)){
                 return true;

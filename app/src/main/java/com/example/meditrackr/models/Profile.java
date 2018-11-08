@@ -6,6 +6,10 @@ import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
 
+/**
+ * Created by Skryt on Nov 7, 2018
+ */
+
 // A profile class that holds all information pertaining to profile
 public class Profile implements Serializable, PersonCallback {
     @JestId

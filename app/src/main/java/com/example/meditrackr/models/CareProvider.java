@@ -30,7 +30,7 @@ public class CareProvider extends Profile implements Serializable {
         patients.deletePatient(patient);
     }
     public Boolean patientExists(Patient patient){
-        return patients.patientUserIDExist(patient.getId());
+        return patients.patientExists(patient.getId());
     }
 
 }

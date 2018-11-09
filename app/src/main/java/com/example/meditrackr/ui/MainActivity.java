@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.example.meditrackr.R;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(R.id.content, fragment);
             transaction.commit();
         }else{
-            PatientsFragment fragment = PatientsFragment.newInstance();
+            CareProviderPatientsFragment fragment = CareProviderPatientsFragment.newInstance();
             transaction.replace(R.id.content, fragment);
             transaction.commit();
 
@@ -96,9 +97,12 @@ public class MainActivity extends AppCompatActivity {
         String user;
         if(bundle.get("CareProvider") != null){
             user = "CareProvider";
+            Log.d("Login", bundle.get("CareProvider").toString());
         }
         else {
             user = "Patient";
+            Log.d("Login", bundle.get("Patient").toString());
+
         }
         return user;
     }

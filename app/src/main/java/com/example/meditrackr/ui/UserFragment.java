@@ -29,7 +29,7 @@ public class UserFragment extends Fragment {
                 R.layout.fragment_user, container, false);
 
         final Bundle bundle = getArguments();
-        final Profile profile = (Profile) bundle.getSerializable("patient");
+        final Profile profile = (Profile) bundle.getSerializable("Patient");
 
         // set ui definitions
         ImageView user_image = rootView.findViewById(R.id.user_image);

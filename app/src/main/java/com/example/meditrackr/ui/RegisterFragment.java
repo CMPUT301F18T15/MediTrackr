@@ -1,6 +1,7 @@
 package com.example.meditrackr.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -49,6 +50,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(checkInputs(username, email, phoneNumber, doctorImage, patientImage)){
+                    Bundle bundle = new Bundle();
                     if(doctorImage.isSelected()){
                         CareProvider careProvider = new CareProvider(
                                 null,
@@ -58,6 +60,8 @@ public class RegisterFragment extends Fragment {
                                 "CareProvider"
                         );
                         SaveLoadController.saveDoctor(getContext(), careProvider);
+                        bundle.putSerializable("CareProvider", careProvider);
+
                     }
                     else {
                         Patient patient = new Patient(
@@ -68,15 +72,12 @@ public class RegisterFragment extends Fragment {
                                 "Patient"
                         );
                         SaveLoadController.savePatient(getContext(),patient);
+                        bundle.putSerializable("Patient", patient);
 
                     }
-
-                    FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.addToBackStack(null);
-                    ProblemsFragment fragment = ProblemsFragment.newInstance();
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit();
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             }
         });

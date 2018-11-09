@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.meditrackr.R;
 
@@ -12,10 +13,10 @@ import com.example.meditrackr.R;
  * Created by Skryt on Nov 08, 2018
  */
 
-public class PatientsFragment extends Fragment {
+public class CareProviderSearchForPatientFragment extends Fragment {
 
-    public static PatientsFragment newInstance(){
-        PatientsFragment fragment = new PatientsFragment();
+    public static CareProviderSearchForPatientFragment newInstance(){
+        CareProviderSearchForPatientFragment fragment = new CareProviderSearchForPatientFragment();
         return fragment;
     }
 
@@ -23,9 +24,11 @@ public class PatientsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_patients, container, false);
+                R.layout.fragment_add_patient, container, false);
+
+        final EditText search = (EditText) rootView.findViewById(R.id.search_patient);
+
 
         return rootView;
     }
-
 }

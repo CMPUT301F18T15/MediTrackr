@@ -3,7 +3,6 @@ package com.example.meditrackr.controllers;
 import android.content.Context;
 
 import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.models.ElasticSearch;
 import com.example.meditrackr.models.Patient;
 import com.google.gson.Gson;
 
@@ -16,7 +15,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class SaveLoadController {
-    private static ElasticSearch elasticSearch = new ElasticSearch();
 
     public static CareProvider loadCareProvider(Context context, String username){
         try {
@@ -24,7 +22,7 @@ public class SaveLoadController {
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             Gson gson = new Gson();
             CareProvider careProvider = gson.fromJson(in, CareProvider.class);
-            if(careProvider.getUsername().equals(username) && careProvider.getUserType().equals("CareProvider")){
+            if(careProvider.getUsername().equals(username) && careProvider.getisCareProvider()){
                 return careProvider;
             }
             return null;
@@ -41,7 +39,7 @@ public class SaveLoadController {
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             Gson gson = new Gson();
             Patient patient = gson.fromJson(in, Patient.class);
-            if(patient.getUsername().equals(username) && patient.getUserType().equals("Patient")){
+            if(patient.getUsername().equals(username) && !patient.getisCareProvider()){
                 return patient;
             }
             return null;

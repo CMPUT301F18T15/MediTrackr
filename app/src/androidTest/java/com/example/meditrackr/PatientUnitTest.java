@@ -1,10 +1,8 @@
 package com.example.meditrackr;
 
 import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.models.ElasticSearch;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
-import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.Record;
 
 import org.junit.Before;
@@ -12,9 +10,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.ExecutionException;
-
-import static org.junit.Assert.*;
 
 /**
  *  Patient Unit Class

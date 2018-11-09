@@ -1,7 +1,6 @@
 package com.example.meditrackr;
 
 import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.models.ElasticSearch;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.models.Profile;

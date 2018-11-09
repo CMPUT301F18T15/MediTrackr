@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.example.meditrackr.R;
+import com.example.meditrackr.models.DataManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,16 +18,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // set ui attributes
         final ImageView problems = (ImageView) findViewById(R.id.problems);
         final ImageView map = (ImageView) findViewById(R.id.map);
         final ImageView camera = (ImageView) findViewById(R.id.camera);
         final ImageView search = (ImageView) findViewById(R.id.search);
         final ImageView profile = (ImageView) findViewById(R.id.profile);
         final Bundle bundle = getIntent().getExtras();
-        final String userType;
+        final boolean isCareProvider = DataManager.getIsCareProvider();
 
-        userType = getUserType(bundle);
-        setHomeView(userType);
+        // get userType
+        setHomeView(isCareProvider);
 
         problems.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
         map.setImageDrawable(getResources().getDrawable(R.drawable.map));
@@ -78,15 +80,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setHomeView(String userType){
+    public void setHomeView(boolean isCareProvider){
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        if(userType.equals("Patient")){
-            ProblemsFragment fragment = ProblemsFragment.newInstance();
+        if(isCareProvider){
+            CareProviderPatientsFragment fragment = CareProviderPatientsFragment.newInstance();
             transaction.replace(R.id.content, fragment);
             transaction.commit();
         }else{
-            CareProviderPatientsFragment fragment = CareProviderPatientsFragment.newInstance();
+            ProblemsFragment fragment = ProblemsFragment.newInstance();
             transaction.replace(R.id.content, fragment);
             transaction.commit();
 
@@ -97,11 +99,11 @@ public class MainActivity extends AppCompatActivity {
         String user;
         if(bundle.get("CareProvider") != null){
             user = "CareProvider";
-            Log.d("LoginUser", bundle.get("CareProvider").toString());
+            Log.d("LoginUser", "CareProvider");
         }
         else {
             user = "Patient";
-            Log.d("LoginUser", bundle.get("Patient").toString());
+            Log.d("LoginUser", "Patient");
 
         }
         return user;

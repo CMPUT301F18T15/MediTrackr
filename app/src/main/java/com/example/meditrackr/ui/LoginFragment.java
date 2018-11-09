@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.meditrackr.models.ElasticSearchController;
 import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.DataManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.models.Profile;
 
 public class LoginFragment extends Fragment {
     public static LoginFragment newInstance() {
@@ -31,7 +34,7 @@ public class LoginFragment extends Fragment {
 
 
         // set ui definitions
-        final EditText username = (EditText) rootView.findViewById(R.id.username);
+        final EditText username = rootView.findViewById(R.id.username);
         final Button login = (Button) rootView.findViewById(R.id.login_button);
         final TextView signup = (TextView) rootView.findViewById(R.id.not_member);
 
@@ -40,25 +43,31 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                CareProvider careProvider = SaveLoadController.loadCareProvider(getContext(), username.getText().toString());
-                if(careProvider == null){
-                    Patient patient = SaveLoadController.loadPatient(getContext(), username.getText().toString());
-                    if(patient == null){
-                        Toast toast = Toast.makeText(getContext(), "Username doesn't exist!", Toast.LENGTH_LONG);
-                        toast.show();
-                        return;
-                    }
-                    else{
-                        bundle.putSerializable("Patient", patient);
-                    }
-                }
-                else{
-                    bundle.putSerializable("CareProvider", careProvider);
-                }
+                Log.d("SearchProfile", "We are searching for the username: " + username.getText().toString());
+                String userName = username.getText().toString();
+                Profile profile = ElasticSearchController.searchProfile(userName);
+                    if(profile != null) {
+                        if (profile.getisCareProvider()) {
+                            CareProvider careProvider = (CareProvider) profile;
+                            bundle.putSerializable("CareProvider", careProvider);
+                            DataManager.setProfile(careProvider);
+                            Log.d("SearchProfile", "we logged in as careprovider");
 
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                        } else {
+                            Patient patient = (Patient) profile;
+                            bundle.putSerializable("Patient", patient);
+                            DataManager.setProfile(patient);
+                            Log.d("SearchProfile", "we logged in as patient");
+                        }
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    else {
+                        Log.d("SearchProfile", "We failed to return profile to LoginFragment");
+                        Toast.makeText(getContext(), "Username does not exist!", Toast.LENGTH_SHORT).show();
+                    }
+
             }
         });
 

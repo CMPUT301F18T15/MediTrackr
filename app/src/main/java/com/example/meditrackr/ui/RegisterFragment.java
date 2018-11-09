@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.meditrackr.models.DataManager;
+import com.example.meditrackr.models.ElasticSearchController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.SaveLoadController;
-
-import java.util.ArrayList;
 
 public class RegisterFragment extends Fragment {
+    public boolean isCareProvider;
 
     public static RegisterFragment newInstance(){
         RegisterFragment fragment = new RegisterFragment();
@@ -48,22 +48,28 @@ public class RegisterFragment extends Fragment {
         final Button createAccount = (Button) rootView.findViewById(R.id.signup_button);
         final TextView alreadyMember = (TextView) rootView.findViewById(R.id.already_member);
 
+
         // onclick listener for create account
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(checkInputs(username, email, phoneNumber, doctorImage, patientImage)){
                     Bundle bundle = new Bundle();
+                    boolean done;
                     if(doctorImage.isSelected()){
                         CareProvider careProvider = new CareProvider(
                                 null,
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
-                                "CareProvider"
+                                isCareProvider
                         );
-                        SaveLoadController.saveDoctor(getContext(), careProvider);
-                        bundle.putSerializable("CareProvider", careProvider);
+                        done = ElasticSearchController.addProfile(careProvider);
+                        if(done){
+                            bundle.putSerializable("CareProvider", careProvider);
+                            Log.d("Success", "Username: " + careProvider.getUsername() + " IsCareProvider: " + careProvider.getisCareProvider());
+                            DataManager.setProfile(careProvider);
+                        }
 
                     }
                     else {
@@ -72,15 +78,26 @@ public class RegisterFragment extends Fragment {
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
-                                "Patient"
+                                isCareProvider
                         );
-                        SaveLoadController.savePatient(getContext(),patient);
-                        bundle.putSerializable("Patient", patient);
+                        done = ElasticSearchController.addProfile(patient);
+                        if(done) {
+                            bundle.putSerializable("Patient", patient);
+                            Log.d("Success", "Username: " + patient.getUsername() + " isCareProvider: " + patient.getisCareProvider());
+                            DataManager.setProfile(patient);
+                        }
+
 
                     }
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+
+                    if(!done)
+                        Toast.makeText(getContext(), "Duplicated UserName", Toast.LENGTH_SHORT).show();
+                    else{
+                        Toast.makeText(getContext(), "Success to Sign Up", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -103,6 +120,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 doctorImage.setSelected(true);
+                isCareProvider = true;
                 careProviderTitle.setTypeface(careProviderTitle.getTypeface(), Typeface.BOLD);
                 patientImage.setSelected(false);
                 patientTitle.setTypeface(null, Typeface.NORMAL);
@@ -114,6 +132,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 patientImage.setSelected(true);
+                isCareProvider = false;
                 patientTitle.setTypeface(patientTitle.getTypeface(), Typeface.BOLD);
                 doctorImage.setSelected(false);
                 careProviderTitle.setTypeface(null, Typeface.NORMAL);

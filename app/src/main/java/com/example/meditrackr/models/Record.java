@@ -17,10 +17,10 @@ public class Record {
     private String title;
     private BodyLocation bodyLocation;
     // geolocation is an array of LONGITUDE, LATITUDE in degrees
-    private double[] geoLocation;
+    private Geolocation geoLocation;
 
     // Constructor
-    public Record(@NonNull Date date, Bitmap[] images, String comment, String title, BodyLocation bodylocation, double[] geoLocation) {
+    public Record(@NonNull Date date, Bitmap[] images, String comment, String title, BodyLocation bodylocation, Geolocation geoLocation) {
         this.date = date;
         this.images = images;
         this.comment = comment;
@@ -70,11 +70,11 @@ public class Record {
         this.bodyLocation = bodyLocation;
     }
 
-    public double[] getGeoLocation() {
+    public Geolocation getGeoLocation() {
         return geoLocation;
     }
 
-    public void setGeoLocation(double[] geoLocation) {
+    public void setGeoLocation(Geolocation geoLocation) {
         this.geoLocation = geoLocation;
     }
 

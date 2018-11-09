@@ -2,6 +2,7 @@ package com.example.meditrackr.ui;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -40,6 +41,8 @@ public class RegisterFragment extends Fragment {
         final EditText username = (EditText) rootView.findViewById(R.id.username);
         final EditText email = (EditText) rootView.findViewById(R.id.email);
         final EditText phoneNumber = (EditText) rootView.findViewById(R.id.phone_number);
+        final TextView careProviderTitle = (TextView) rootView.findViewById(R.id.display_careprovider);
+        final TextView patientTitle = (TextView) rootView.findViewById(R.id.display_patient);
         final ImageView doctorImage = (ImageView) rootView.findViewById(R.id.CareProvider);
         final ImageView patientImage = (ImageView) rootView.findViewById(R.id.Patient);
         final Button createAccount = (Button) rootView.findViewById(R.id.signup_button);
@@ -100,7 +103,10 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 doctorImage.setSelected(true);
+                careProviderTitle.setTypeface(careProviderTitle.getTypeface(), Typeface.BOLD);
                 patientImage.setSelected(false);
+                patientTitle.setTypeface(null, Typeface.NORMAL);
+
             }
         });
 
@@ -108,7 +114,10 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 patientImage.setSelected(true);
+                patientTitle.setTypeface(patientTitle.getTypeface(), Typeface.BOLD);
                 doctorImage.setSelected(false);
+                careProviderTitle.setTypeface(null, Typeface.NORMAL);
+
             }
         });
 

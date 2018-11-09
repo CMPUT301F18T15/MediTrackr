@@ -29,7 +29,6 @@ public class UserFragment extends Fragment {
                 R.layout.fragment_user, container, false);
 
         final Bundle bundle = getArguments();
-        final Profile profile = (Profile) bundle.getSerializable("Patient");
 
         // set ui definitions
         ImageView user_image = rootView.findViewById(R.id.user_image);
@@ -37,12 +36,9 @@ public class UserFragment extends Fragment {
         TextView email = rootView.findViewById(R.id.email);
         TextView phone = rootView.findViewById(R.id.phone);
 
-        username.setText(profile.getUsername());
-        email.setText(profile.getEmail());
-        phone.setText(profile.getPhone());
-
-
-
+        username.setText("Orest Cokan");
+        email.setText("cokan@ualberta.ca");
+        phone.setText("7806666666");
 
 
         return rootView;

@@ -97,11 +97,11 @@ public class MainActivity extends AppCompatActivity {
         String user;
         if(bundle.get("CareProvider") != null){
             user = "CareProvider";
-            Log.d("Login", bundle.get("CareProvider").toString());
+            Log.d("LoginUser", bundle.get("CareProvider").toString());
         }
         else {
             user = "Patient";
-            Log.d("Login", bundle.get("Patient").toString());
+            Log.d("LoginUser", bundle.get("Patient").toString());
 
         }
         return user;

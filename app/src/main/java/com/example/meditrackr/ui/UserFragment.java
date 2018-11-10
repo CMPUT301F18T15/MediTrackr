@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.models.Profile;
 
 
 /**
@@ -31,9 +30,9 @@ public class UserFragment extends Fragment {
         final Bundle bundle = getArguments();
 
         // set ui definitions
-        ImageView user_image = rootView.findViewById(R.id.user_image);
-        TextView username = rootView.findViewById(R.id.username);
-        TextView email = rootView.findViewById(R.id.email);
+        ImageView user_image = rootView.findViewById(R.id.patient_image);
+        TextView username = rootView.findViewById(R.id.search_username);
+        TextView email = rootView.findViewById(R.id.search_email);
         TextView phone = rootView.findViewById(R.id.phone);
 
         username.setText("Orest Cokan");

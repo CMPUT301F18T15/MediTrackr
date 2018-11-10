@@ -38,8 +38,8 @@ public class RegisterFragment extends Fragment {
                 R.layout.fragment_signup, container, false);
 
         // ui definitions
-        final EditText username = (EditText) rootView.findViewById(R.id.username);
-        final EditText email = (EditText) rootView.findViewById(R.id.email);
+        final EditText username = (EditText) rootView.findViewById(R.id.search_username);
+        final EditText email = (EditText) rootView.findViewById(R.id.search_email);
         final EditText phoneNumber = (EditText) rootView.findViewById(R.id.phone_number);
         final TextView careProviderTitle = (TextView) rootView.findViewById(R.id.display_careprovider);
         final TextView patientTitle = (TextView) rootView.findViewById(R.id.display_patient);

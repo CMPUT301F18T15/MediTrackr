@@ -34,19 +34,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/background2"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patients" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="50dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_patient_floating"
@@ -54,12 +48,11 @@
         android:layout_height="60dp"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
-        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:focusable="true"
         app:backgroundTint="?attr/colorPrimaryDark"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        tools:layout_editor_absoluteY="677dp" />
 
 </android.support.constraint.ConstraintLayout>

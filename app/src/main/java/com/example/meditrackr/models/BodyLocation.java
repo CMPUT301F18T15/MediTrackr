@@ -41,5 +41,4 @@ public class BodyLocation {
         this.bodyLocation = bodyLocation;
     }
 
-
 }

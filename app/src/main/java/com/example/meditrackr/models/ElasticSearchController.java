@@ -28,8 +28,8 @@ import io.searchbox.core.SearchResult;
 public class ElasticSearchController {
 
     private static JestClient client = null;
-    private static String INDEX_NAME = "cmput301f18t04test";
-    private static String PROFILE_TYPE = "user";
+    private static String INDEX_NAME = "cmput301f18t15test";
+    private static String PROFILE_TYPE = "profile";
     private static String IS_CAREPROVIDER = "isCareProvider";
 
 
@@ -57,7 +57,7 @@ public class ElasticSearchController {
         try {
             Profile profile = new ElasticSearchController.SearchProfileTask().execute(userName).get();
             if(profile==null){
-                Log.d("SearchProfile", "Our user is null");
+                Log.d("SearchProfile", "Our profile is null");
                 return null;
             }
             if(profile.getisCareProvider()){

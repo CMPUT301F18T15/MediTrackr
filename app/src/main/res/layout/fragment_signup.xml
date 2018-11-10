@@ -85,15 +85,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:text="Select Role"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/display_patient"
-        app:layout_constraintStart_toStartOf="@+id/display_careprovider"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/Patient"
+        app:layout_constraintStart_toStartOf="@+id/CareProvider"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <TextView
@@ -105,7 +105,7 @@
         android:layout_marginTop="8dp"
         android:text="Careprovider"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/CareProvider"
         app:layout_constraintStart_toStartOf="@+id/CareProvider"
         app:layout_constraintTop_toBottomOf="@+id/select_role_title" />
@@ -134,6 +134,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:cropToPadding="true"
+        android:background="@color/background2"
         app:layout_constraintEnd_toStartOf="@+id/Patient"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/guideline_left"

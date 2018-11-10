@@ -1,14 +1,9 @@
 package com.example.meditrackr.ui;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,11 +29,11 @@ import java.util.TimeZone;
  * Created by Skryt on Nov 08, 2018
  */
 
-public class ProblemAddFragment extends Fragment {
+public class PatientAddProblemFragment extends Fragment {
     Patient patient = DataManager.getPatient();
 
-    public static ProblemAddFragment newInstance(){
-        ProblemAddFragment fragment = new ProblemAddFragment();
+    public static PatientAddProblemFragment newInstance(){
+        PatientAddProblemFragment fragment = new PatientAddProblemFragment();
         return fragment;
     }
 
@@ -101,7 +96,7 @@ public class ProblemAddFragment extends Fragment {
 
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
-                    ProblemsFragment fragment = ProblemsFragment.newInstance();
+                    PatientProblemsFragment fragment = PatientProblemsFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
                 }

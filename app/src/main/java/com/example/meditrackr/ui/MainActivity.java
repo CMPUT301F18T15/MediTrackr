@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
                 if(v == problems){
                     image.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
-                    ProblemsFragment fragment = ProblemsFragment.newInstance();
+                    PatientProblemsFragment fragment = PatientProblemsFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
                 }
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(R.id.content, fragment);
             transaction.commit();
         }else{
-            ProblemsFragment fragment = ProblemsFragment.newInstance();
+            PatientProblemsFragment fragment = PatientProblemsFragment.newInstance();
             transaction.replace(R.id.content, fragment);
             transaction.commit();
 

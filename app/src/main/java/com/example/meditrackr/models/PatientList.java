@@ -10,6 +10,15 @@ import java.util.ArrayList;
 public class PatientList implements Serializable {
     private ArrayList<Patient> patients = new ArrayList<>();
 
+
+    public ArrayList<Patient> getProblems() {
+        return patients;
+    }
+
+    public Patient getPatient(int index){
+        return patients.get(index);
+    }
+
     public int getSize(){
         return patients.size();
     }

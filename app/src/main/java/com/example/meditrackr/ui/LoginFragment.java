@@ -34,7 +34,7 @@ public class LoginFragment extends Fragment {
 
 
         // set ui definitions
-        final EditText username = rootView.findViewById(R.id.username);
+        final EditText username = rootView.findViewById(R.id.search_username);
         final Button login = (Button) rootView.findViewById(R.id.login_button);
         final TextView signup = (TextView) rootView.findViewById(R.id.not_member);
 

@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/user_image"
+        android:id="@+id/patient_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/search_username"
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginStart="40dp"
@@ -39,15 +39,15 @@
         android:textColorHint="#999999"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:gravity="left"
+        android:gravity="left|center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_image" />
+        app:layout_constraintTop_toBottomOf="@+id/patient_image" />
 
 
     <TextView
-        android:id="@+id/email"
+        android:id="@+id/search_email"
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginStart="40dp"
@@ -59,7 +59,7 @@
         android:drawableLeft="@drawable/icon_email"
         android:drawablePadding="10dp"
         android:paddingLeft="20dp"
-        android:gravity="left"
+        android:gravity="left|center"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColorHint="#999999"
         android:textSize="16sp"
@@ -67,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/search_username" />
 
     <TextView
         android:id="@+id/phone"
@@ -79,18 +79,18 @@
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:background="#FFFFFF"
-        android:drawableLeft="@drawable/icon_email"
+        android:drawableLeft="@drawable/icon_phone"
         android:drawablePadding="10dp"
         android:paddingLeft="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColorHint="#999999"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:gravity="left"
+        android:gravity="left|center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/search_email" />
 
 
 

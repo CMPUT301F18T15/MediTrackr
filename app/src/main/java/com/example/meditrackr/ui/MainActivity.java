@@ -51,8 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
                 if(v == problems){
                     image.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
-                    ProblemsFragment fragment = ProblemsFragment.newInstance();
-                    transaction.replace(R.id.content, fragment);
+                    if(!isCareProvider) {
+                        ProblemsFragment fragment = ProblemsFragment.newInstance();
+                        transaction.replace(R.id.content, fragment);
+                    }
+                    else{
+                        CareProviderPatientsFragment fragment = CareProviderPatientsFragment.newInstance();
+                        transaction.replace(R.id.content, fragment);
+                    }
                     transaction.commit();
                 }
                 else if (v == map) {

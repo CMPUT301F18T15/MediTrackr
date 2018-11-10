@@ -9,7 +9,16 @@ import java.util.List;
  */
 
 public class ProblemList implements Serializable {
-    private List<Problem> problems = new ArrayList<>();
+    private ArrayList<Problem> problems = new ArrayList<>();
+
+
+    public ArrayList<Problem> getProblems() {
+        return problems;
+    }
+
+    public Problem getProblem(int index){
+        return problems.get(index);
+    }
 
     public void addProblem(Problem problem){
         problems.add(problem);

@@ -1,8 +1,11 @@
-package com.example.meditrackr.models;
+package com.example.meditrackr.controllers;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Profile;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.searchly.jestdroid.DroidClientConfig;
@@ -14,7 +17,6 @@ import java.util.concurrent.ExecutionException;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
-import io.searchbox.core.Delete;
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
@@ -77,9 +79,14 @@ public class ElasticSearchController {
         return null;
     }
 
-    // delete user
+    // delete profile
     public static void deleteUser(String userName){
         new ElasticSearchController.DeleteUserTask().execute(userName);
+    }
+
+    // update profile
+    public static void updateUser(Profile profile){
+        new ElasticSearchController.UpdateProfileTask().execute(profile);
     }
 
 
@@ -233,6 +240,34 @@ public class ElasticSearchController {
             } catch (IOException e) {
                 Log.d("DeleteUser", "Failed!");
                 e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+
+    private static class UpdateProfileTask extends AsyncTask<Profile, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(Profile... profiles) {
+            verifySettings();
+
+            Profile profile = profiles[0];
+            String username = profile.getUsername();
+
+            // Update the index with the unique userName
+            Index profileIndex = new Index.Builder(profile).index(INDEX_NAME).type(PROFILE_TYPE).id(username).build();
+
+            try {
+                // Execute the add action
+                DocumentResult result = client.execute(profileIndex);
+                if(result.isSucceeded()) {
+                    Log.d("UpdateProfile", "Updated it!");
+                }
+            } catch (IOException e) {
+                Log.d("UpdateProfile", "Failed!");
+                e.printStackTrace();
+                return null;
             }
             return null;
         }

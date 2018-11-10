@@ -31,7 +31,5 @@ public class Patient extends Profile implements Serializable{
 
     public ProblemList getProblems() {return this.problems;}
 
-
-
 }
 

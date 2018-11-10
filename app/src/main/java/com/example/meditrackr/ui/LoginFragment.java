@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.models.ElasticSearchController;
+import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.DataManager;
 import com.example.meditrackr.models.Patient;
@@ -49,18 +49,15 @@ public class LoginFragment extends Fragment {
                     if(profile != null) {
                         if (profile.getisCareProvider()) {
                             CareProvider careProvider = (CareProvider) profile;
-                            bundle.putSerializable("CareProvider", careProvider);
                             DataManager.setProfile(careProvider);
                             Log.d("SearchProfile", "we logged in as careprovider");
 
                         } else {
                             Patient patient = (Patient) profile;
-                            bundle.putSerializable("Patient", patient);
                             DataManager.setProfile(patient);
                             Log.d("SearchProfile", "we logged in as patient");
                         }
                         Intent intent = new Intent(getActivity(), MainActivity.class);
-                        intent.putExtras(bundle);
                         startActivity(intent);
                     }
                     else {

@@ -11,12 +11,12 @@ import java.util.Date;
 // Profile that contains all information about Problem
 public class Problem {
     private String title;
-    private Date date;
+    private String date;
     private String description;
     private RecordList records = new RecordList();
 
     // Constructor
-    public Problem(String title, Date date, String description){
+    public Problem(String title, String date, String description){
         this.title = title;
         this.date = date;
         this.description = description;
@@ -31,11 +31,11 @@ public class Problem {
         this.title = title;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

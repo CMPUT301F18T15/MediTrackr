@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,16 +17,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.meditrackr.R;
+import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.models.DataManager;
+import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Problem;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -33,6 +35,8 @@ import java.util.TimeZone;
  */
 
 public class ProblemAddFragment extends Fragment {
+    Patient patient = DataManager.getPatient();
+
     public static ProblemAddFragment newInstance(){
         ProblemAddFragment fragment = new ProblemAddFragment();
         return fragment;
@@ -46,11 +50,9 @@ public class ProblemAddFragment extends Fragment {
                 R.layout.fragment_add_problem, container, false);
 
         final EditText title = (EditText) rootView.findViewById(R.id.problem_title_field);
-        final EditText description = (EditText) rootView.findViewById(R.id.problem_description_field);
         final EditText dateSelector = (EditText) rootView.findViewById(R.id.problem_date_selector);
+        final EditText description = (EditText) rootView.findViewById(R.id.problem_description_field);
         final Button addButton = (Button) rootView.findViewById(R.id.problem_add_button);
-
-        // Date Picker (Source: https://goo.gl/nmN56M)
         final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.CANADA);
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
 
@@ -67,7 +69,6 @@ public class ProblemAddFragment extends Fragment {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, monthOfYear);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
                 // update the editText label
                 dateSelector.setText(format.format(calendar.getTime()));
             }
@@ -86,7 +87,39 @@ public class ProblemAddFragment extends Fragment {
                 datePicker.show();
             }
         });
+
+        // onclick listener for adding a problem
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkInputs(title, description, dateSelector)){
+                    Problem problem = new Problem(title.getText().toString(), dateSelector.getText().toString(), description.getText().toString());
+                    patient.getProblems().addProblem(problem);
+                    Log.d("ProblemAdd", patient.getProblems().getProblem(0).getTitle() + patient.getProblems().getProblem(0).getDate() + patient.getProblems().getProblem(0).getDescription());
+                    ElasticSearchController.updateUser(patient);
+                    Log.d("ProblemAdd", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
+
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    ProblemsFragment fragment = ProblemsFragment.newInstance();
+                    transaction.replace(R.id.content, fragment);
+                    transaction.commit();
+                }
+                else {
+                    Toast.makeText(getContext(), "Unable to add Problem", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         return rootView;
+    }
+
+    public boolean checkInputs(EditText title, EditText dateSelector, EditText description){
+        if((title != null && description != null)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

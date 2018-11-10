@@ -87,7 +87,7 @@ public class PatientAddProblemFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkInputs(title, description, dateSelector)){
+                if(checkInputs(title, description)){
                     Problem problem = new Problem(title.getText().toString(), dateSelector.getText().toString(), description.getText().toString());
                     patient.getProblems().addProblem(problem);
                     Log.d("ProblemAdd", patient.getProblems().getProblem(0).getTitle() + patient.getProblems().getProblem(0).getDate() + patient.getProblems().getProblem(0).getDescription());
@@ -108,8 +108,8 @@ public class PatientAddProblemFragment extends Fragment {
         return rootView;
     }
 
-    public boolean checkInputs(EditText title, EditText dateSelector, EditText description){
-        if((title != null && description != null)) {
+    public boolean checkInputs(EditText title, EditText description){
+        if(((title != null && !title.getText().toString().isEmpty()) && (description != null && !description.getText().toString().isEmpty()))){
             return true;
         }
         else {

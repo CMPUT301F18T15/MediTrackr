@@ -31,9 +31,9 @@ public class UserFragment extends Fragment {
 
         // set ui definitions
         ImageView user_image = rootView.findViewById(R.id.patient_image);
-        TextView username = rootView.findViewById(R.id.search_username);
-        TextView email = rootView.findViewById(R.id.search_email);
-        TextView phone = rootView.findViewById(R.id.phone);
+        TextView username = rootView.findViewById(R.id.patient_username);
+        TextView email = rootView.findViewById(R.id.patient_phone);
+        TextView phone = rootView.findViewById(R.id.patient_phone);
 
         username.setText("Orest Cokan");
         email.setText("cokan@ualberta.ca");

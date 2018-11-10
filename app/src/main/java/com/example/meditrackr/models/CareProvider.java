@@ -18,7 +18,7 @@ public class CareProvider extends Profile implements Serializable {
     }
 
     // Getters/Setters
-    public PatientList getPatient() {
+    public PatientList getPatients() {
         return this.patients;
     }
 

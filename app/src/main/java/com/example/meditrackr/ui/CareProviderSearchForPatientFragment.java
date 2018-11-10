@@ -2,8 +2,9 @@ package com.example.meditrackr.ui;
 
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.DataManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
 
@@ -24,6 +27,7 @@ import com.example.meditrackr.models.Profile;
 
 public class CareProviderSearchForPatientFragment extends Fragment {
     private Profile profile;
+    private CareProvider careProvider;
     private ConstraintLayout searchLayout;
     private ConstraintLayout searchDisplayPatient;
 
@@ -45,16 +49,13 @@ public class CareProviderSearchForPatientFragment extends Fragment {
         final Button searchPatientButton = (Button) rootView.findViewById(R.id.careprovider_search_for_patient_button);
 
         final ImageView patientProfileImage = (ImageView) rootView.findViewById(R.id.patient_image);
-        final TextView patientUsername = (TextView) rootView.findViewById(R.id.search_username);
-        final TextView patientEmail = (TextView) rootView.findViewById(R.id.search_email);
+        final TextView patientUsername = (TextView) rootView.findViewById(R.id.patient_username);
+        final TextView patientEmail = (TextView) rootView.findViewById(R.id.patient_phone);
         final TextView patientPhone = (TextView) rootView.findViewById(R.id.search_phone);
         final Button addPatientButton = (Button) rootView.findViewById(R.id.search_add_patient_button);
-
-
-
         changeViewVisibility(1);
 
-        // search for patient
+        // onclick listener search for patient
         searchPatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,12 +70,30 @@ public class CareProviderSearchForPatientFragment extends Fragment {
                 }
                 else {
                     Toast.makeText(getContext(), "User not found!", Toast.LENGTH_LONG).show();
-
                 }
+            }
+        });
 
+        addPatientButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                careProvider = DataManager.getCareProvider();
+                Patient patient = (Patient) profile;
+                careProvider.addPatient(patient);
+                ElasticSearchController.updateUser(careProvider);
+
+                // transition back to patients page
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.addToBackStack(null);
+                CareProviderPatientsFragment fragment = CareProviderPatientsFragment.newInstance();
+                transaction.replace(R.id.content, fragment);
+                transaction.commit();
 
             }
         });
+
+
 
         return rootView;
     }

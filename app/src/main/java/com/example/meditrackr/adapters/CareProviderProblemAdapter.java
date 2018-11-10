@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +13,19 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.DataManager;
-import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.models.ProblemList;
-import com.example.meditrackr.ui.PatientRecordsFragment;
+import com.example.meditrackr.models.PatientList;
+import com.example.meditrackr.ui.CareProviderProblemFragment;
 
+/**
+ * Created by Skryt on Nov 10, 2018
+ */
 
-public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder>{
+public class CareProviderProblemAdapter extends RecyclerView.Adapter<CareProviderProblemAdapter.ViewHolder>{
     private FragmentActivity activity;
-    private Patient patient = DataManager.getPatient();
-    private ProblemList problems = patient.getProblems();
+    private PatientList patients = DataManager.getCareProviderPatients();
 
     // constructor
-    public ProblemAdapter(FragmentActivity activity) {
+    public CareProviderProblemAdapter(FragmentActivity activity) {
         this.activity = activity;
     }
 
@@ -36,30 +38,28 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         return new ViewHolder(problemView, this);
     }
 
-
-
-    // set the data into each viewHolder (ie. place what each emotion has into the view)
+    // set the data into each viewHolder (ie. place place the patients info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.title.setText(problems.getProblem(position).getTitle());
-        holder.date.setText(problems.getProblem(position).getDate());
-        holder.description.setText(problems.getProblem(position).getDescription());
+        holder.title.setText(patients.getPatient(position).getProblems().getProblem(position).getTitle());
+        holder.date.setText(patients.getPatient(position).getProblems().getProblem(position).getDate());
+        holder.description.setText(patients.getPatient(position).getProblems().getProblem(position).getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return problems.getSize();
+        return patients.getSize();
     }
 
 
     // place each problem into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private ProblemAdapter adapter;
+        private CareProviderProblemAdapter adapter;
         public TextView title;
         public TextView date;
         public TextView description;
 
-        public ViewHolder(View itemView, final ProblemAdapter adapter){
+        public ViewHolder(View itemView, final CareProviderProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
             date = itemView.findViewById(R.id.problem_date);
@@ -69,17 +69,16 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
 
         }
 
-        // set onClick listener for each problem, so they can be edited
+        // set onClick listener for each patient, so they can be viewed
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            PatientRecordsFragment fragment = PatientRecordsFragment.newInstance(adapter.problems.getProblem(position).getRecords(), position);
+            CareProviderProblemFragment fragment = CareProviderProblemFragment.newInstance(position, adapter.patients.getPatient(position).getProblems());
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();
         }
     }
 }
-

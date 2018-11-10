@@ -1,6 +1,5 @@
 package com.example.meditrackr.ui;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,12 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.adapters.ProblemAdapter;
+import com.example.meditrackr.adapters.PatientProblemAdapter;
+import com.example.meditrackr.controllers.VerticalSpaceController;
 
 
 public class PatientProblemsFragment extends Fragment {
     //Patient patient = DataManager.getPatient();
-    private ProblemAdapter adapter;
+    private PatientProblemAdapter adapter;
 
     public static PatientProblemsFragment newInstance(){
         PatientProblemsFragment fragment = new PatientProblemsFragment();
@@ -35,15 +35,16 @@ public class PatientProblemsFragment extends Fragment {
         final RecyclerView problemList = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
 
         problemList.setHasFixedSize(false);
-        adapter = new ProblemAdapter(getActivity());
+        adapter = new PatientProblemAdapter(getActivity());
         problemList.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         problemList.setLayoutManager(manager);
         manager = new LinearLayoutManager(getActivity());
         problemList.setLayoutManager(manager);
 
-        VerticalSpaceItemDecoration decoration = new VerticalSpaceItemDecoration(50);
+        VerticalSpaceController decoration = new VerticalSpaceController(50);
         problemList.addItemDecoration(decoration);
+
 
 
         addProblem.setOnClickListener(new View.OnClickListener() {
@@ -61,22 +62,6 @@ public class PatientProblemsFragment extends Fragment {
 
         return rootView;
     }
-
-    public class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
-
-        private final int verticalSpaceHeight;
-
-        public VerticalSpaceItemDecoration(int verticalSpaceHeight) {
-            this.verticalSpaceHeight = verticalSpaceHeight;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
-                                   RecyclerView.State state) {
-            outRect.bottom = verticalSpaceHeight;
-        }
-    }
-
 
 
 }

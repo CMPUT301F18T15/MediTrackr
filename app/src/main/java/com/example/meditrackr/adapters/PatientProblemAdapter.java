@@ -11,22 +11,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.DataManager;
-import com.example.meditrackr.models.PatientList;
-import com.example.meditrackr.ui.CareProviderProblemFragment;
+import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.ProblemList;
+import com.example.meditrackr.ui.PatientRecordsFragment;
 
-/**
- * Created by Skryt on Nov 11, 2018
- */
 
-public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder>{
+public class PatientProblemAdapter extends RecyclerView.Adapter<PatientProblemAdapter.ViewHolder>{
     private FragmentActivity activity;
-    private CareProvider careProvider = DataManager.getCareProvider();
-    private PatientList patients = careProvider.getPatient();
+    private Patient patient = DataManager.getPatient();
+    private ProblemList problems = patient.getProblems();
 
     // constructor
-    public PatientAdapter(FragmentActivity activity) {
+    public PatientProblemAdapter(FragmentActivity activity) {
         this.activity = activity;
     }
 
@@ -35,53 +32,54 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View patientView = inflater.inflate(R.layout.patient_entry, parent, false);
-        return new ViewHolder(patientView, this);
+        View problemView = inflater.inflate(R.layout.problem_entry, parent, false);
+        return new ViewHolder(problemView, this);
     }
 
 
 
-    // set the data into each viewHolder (ie. place place the patients info into the view)
+    // set the data into each viewHolder (ie. place what each emotion has into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.patientUsername.setText(patients.getPatient(position).getUsername());
-        holder.patientEmail.setText(patients.getPatient(position).getEmail());
-        holder.patientPhone.setText(patients.getPatient(position).getPhone());
+        holder.title.setText(problems.getProblem(position).getTitle());
+        holder.date.setText(problems.getProblem(position).getDate());
+        holder.description.setText(problems.getProblem(position).getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return patients.getSize();
+        return problems.getSize();
     }
 
 
     // place each problem into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private PatientAdapter adapter;
-        public TextView patientUsername;
-        public TextView patientEmail;
-        public TextView patientPhone;
+        private PatientProblemAdapter adapter;
+        public TextView title;
+        public TextView date;
+        public TextView description;
 
-        public ViewHolder(View itemView, final PatientAdapter adapter){
+        public ViewHolder(View itemView, final PatientProblemAdapter adapter){
             super(itemView);
-            patientUsername = itemView.findViewById(R.id.patient_username);
-            patientEmail = itemView.findViewById(R.id.patient_email);
-            patientPhone = itemView.findViewById(R.id.patient_phone);
+            title = itemView.findViewById(R.id.problem_title);
+            date = itemView.findViewById(R.id.problem_date);
+            description = itemView.findViewById(R.id.problem_description);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
 
         }
 
-        // set onClick listener for each patient, so they can be viewed
+        // set onClick listener for each problem, so they can be edited
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            CareProviderProblemFragment fragment = CareProviderProblemFragment.newInstance(position, adapter.patients.getPatient(position).getProblems());
+            PatientRecordsFragment fragment = PatientRecordsFragment.newInstance(adapter.problems.getProblem(position).getRecords(), position);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();
         }
     }
 }
+

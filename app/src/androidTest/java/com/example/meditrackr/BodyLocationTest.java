@@ -43,7 +43,7 @@ public class BodyLocationTest {
         body.setBodyCoordinate(location);
         assertEquals("check to see if it set correctly", body.getBodyCoordinate(), location);
     }
-
+    // test to see if its a null cordinate
     @Test public void nullCoorinate(){
         body.setBodyCoordinate(null);
         assertEquals("testing to see if its empty", body.getBodyCoordinate(), null);

@@ -6,19 +6,20 @@ import java.util.Date;
 /**
  * Created by Skryt on Oct 24, 2018
  */
+
+
 // Profile that contains all information about Problem
 public class Problem {
     private String title;
-    private Date date;
+    private String date;
     private String description;
-    private ArrayList<Record> records;
+    private RecordList records = new RecordList();
 
     // Constructor
-    public Problem(String title, Date date, String description, ArrayList<Record> records){
+    public Problem(String title, String date, String description){
         this.title = title;
         this.date = date;
         this.description = description;
-        this.records = records;
     }
 
     // Getters/Setters
@@ -30,11 +31,11 @@ public class Problem {
         this.title = title;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -46,12 +47,8 @@ public class Problem {
         this.description = description;
     }
 
-    public ArrayList<Record> getRecords() {
+    public RecordList getRecords() {
         return records;
-    }
-
-    public void setRecords(ArrayList<Record> records) {
-        this.records = records;
     }
 
 }

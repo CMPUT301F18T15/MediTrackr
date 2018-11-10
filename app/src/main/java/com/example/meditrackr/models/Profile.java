@@ -6,6 +6,10 @@ import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
 
+/**
+ * Created by Skryt on Nov 7, 2018
+ */
+
 // A profile class that holds all information pertaining to profile
 public class Profile implements Serializable, PersonCallback {
     @JestId
@@ -13,13 +17,15 @@ public class Profile implements Serializable, PersonCallback {
     private String username;
     private String email;
     private String phone;
+    private boolean isCareProvider;
 
     // Constructor
-    public Profile(String id, String username, String email, String phone){
+    public Profile(String id, String username, String email, String phone, boolean isCareProvider){
         this.id = id;
         this.username = username;
         this.email = email;
         this.phone = phone;
+        this.isCareProvider = isCareProvider;
     }
 
     // Getters/Setters
@@ -51,6 +57,14 @@ public class Profile implements Serializable, PersonCallback {
 
     public void setId(String id){
         this.id = id;
+    }
+
+    public boolean getisCareProvider() {
+        return isCareProvider;
+    }
+
+    public void setisCareProvider(boolean isCareProvider) {
+        this.isCareProvider = isCareProvider;
     }
 
 }

@@ -7,50 +7,25 @@
     android:background="@color/background2">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="56dp"
-        app:layout_constraintBottom_toTopOf="@+id/username"
-        app:layout_constraintEnd_toStartOf="@+id/trackr2"
-        app:layout_constraintStart_toEndOf="@+id/medi2"
-        app:srcCompat="@drawable/black_dot" />
-
-    <TextView
-        android:id="@+id/trackr2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:fontFamily="@font/brandon"
-        android:text="trackr"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="56dp"
+        android:id="@+id/meditrackr_logo"
+        android:layout_width="0dp"
+        android:layout_height="95dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/medi2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="88dp"
-        android:fontFamily="@font/brandon"
-        android:text="medi"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="56dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="24dp"
         android:background="#FFFFFF"
         android:drawableLeft="@drawable/icon_user"
         android:drawablePadding="10dp"
@@ -59,17 +34,17 @@
         android:paddingLeft="20dp"
         android:textColor="#020202"
         android:textColorHint="#999999"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/trackr2" />
+        app:layout_constraintTop_toBottomOf="@+id/meditrackr_logo" />
 
     <EditText
         android:id="@+id/phone_number"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="12dp"
         android:background="#FFFFFF"
         android:drawableLeft="@drawable/icon_phone"
         android:drawablePadding="10dp"
@@ -78,7 +53,7 @@
         android:paddingLeft="20dp"
         android:textColor="#020202"
         android:textColorHint="#999999"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
@@ -87,8 +62,8 @@
     <EditText
         android:id="@+id/email"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
         android:background="#FFFFFF"
@@ -99,40 +74,83 @@
         android:paddingLeft="20dp"
         android:textColor="#020202"
         android:textColorHint="#999999"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/phone_number" />
 
-    <ImageView
-        android:id="@+id/careProvider"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="8dp"
+    <TextView
+        android:id="@+id/select_role_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="Select Role"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/Patient"
+        app:layout_constraintStart_toStartOf="@+id/CareProvider"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
+
+    <TextView
+        android:id="@+id/display_careprovider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Careprovider"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/CareProvider"
+        app:layout_constraintStart_toStartOf="@+id/CareProvider"
+        app:layout_constraintTop_toBottomOf="@+id/select_role_title" />
+
+    <TextView
+        android:id="@+id/display_patient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Patient"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/Patient"
+        app:layout_constraintStart_toStartOf="@+id/Patient"
+        app:layout_constraintTop_toBottomOf="@+id/select_role_title" />
+
+    <ImageView
+        android:id="@+id/CareProvider"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:cropToPadding="true"
-        app:layout_constraintEnd_toStartOf="@+id/patient"
+        android:background="@color/background2"
+        app:layout_constraintEnd_toStartOf="@+id/Patient"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/guideline_left"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/display_careprovider"
         app:srcCompat="@drawable/icon_doctor" />
 
     <ImageView
-        android:id="@+id/patient"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:id="@+id/Patient"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/careProvider"
-        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintStart_toEndOf="@+id/CareProvider"
+        app:layout_constraintTop_toBottomOf="@+id/display_patient"
         app:srcCompat="@drawable/patient" />
 
     <Button
@@ -140,17 +158,17 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="75dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/gradient"
         android:text="CREATE ACCOUNT"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/patient" />
+        app:layout_constraintTop_toBottomOf="@+id/Patient" />
 
     <TextView
         android:id="@+id/already_member"
@@ -161,6 +179,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/signup_button" />
 

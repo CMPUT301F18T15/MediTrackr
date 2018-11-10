@@ -1,10 +1,11 @@
 package com.example.meditrackr.controllers;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.models.ElasticSearch;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Profile;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -16,76 +17,40 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class SaveLoadController {
-    private static final String DOCTOR_FILE_NAME = "doctor.sav";
-    private static final String PATIENT_FILE_NAME = "patient.sav";
-    private static ElasticSearch elasticSearch = new ElasticSearch();
 
-
-
-    public static CareProvider loadDoctor(Context context, String username){
+    public static Profile loadProfile(Context context, String username){
         try {
-            FileInputStream stream = context.openFileInput(DOCTOR_FILE_NAME);
+            FileInputStream stream = context.openFileInput(username+".sav");
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             Gson gson = new Gson();
-            CareProvider careProvider = gson.fromJson(in, CareProvider.class);
-            if(careProvider.getUsername().equals(username)){
+            Profile profile = gson.fromJson(in, Profile.class);
+            if(profile.getisCareProvider()){
+                CareProvider careProvider = (CareProvider) profile;
+                Log.d("LoadProfile", "Careprovider: " + careProvider.getisCareProvider() + " and our username is: " + careProvider.getUsername());
                 return careProvider;
-            }
-            return null;
-        }
-
-        catch (FileNotFoundException e) {
-            return null;
-        }
-    }
-
-    public static Patient loadPatient(Context context, String username){
-        try {
-            FileInputStream stream = context.openFileInput(DOCTOR_FILE_NAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(stream));
-            Gson gson = new Gson();
-            Patient patient = gson.fromJson(in, Patient.class);
-            if(patient.getUsername().equals(username)){
+            } else {
+                Patient patient = (Patient) profile;
+                Log.d("SearchProfile", "Patient: " + patient.getisCareProvider() + " and our username is: " + patient.getUsername());
                 return patient;
             }
-            return null;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-
-        catch (FileNotFoundException e) {
-            return null;
-        }
+        return null;
     }
 
-
-
-    public static void saveDoctor(Context context, CareProvider careProvider){
+    public static void saveProfile(Context context, Profile profile){
         try {
-            FileOutputStream stream = context.openFileOutput(DOCTOR_FILE_NAME, 0);
+            FileOutputStream stream = context.openFileOutput(profile.getUsername()+".sav", 0);
             OutputStreamWriter writer = new OutputStreamWriter(stream);
             Gson gson = new Gson();
-            gson.toJson(careProvider, writer);
+            gson.toJson(profile, writer);
             writer.flush();
         }
 
         catch (IOException e) {
             // do nothing
         }
-        elasticSearch.addProfile(careProvider);
-    }
-
-    public static void savePatient(Context context, Patient patient){
-        try {
-            FileOutputStream stream = context.openFileOutput(PATIENT_FILE_NAME, 0);
-            OutputStreamWriter writer = new OutputStreamWriter(stream);
-            Gson gson = new Gson();
-            gson.toJson(patient, writer);
-            writer.flush();
-        }
-
-        catch (IOException e) {
-            // do nothing
-        }
-        elasticSearch.addProfile(patient);
     }
 
 

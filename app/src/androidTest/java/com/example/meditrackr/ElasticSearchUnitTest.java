@@ -1,7 +1,6 @@
 package com.example.meditrackr;
 
 import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.models.ElasticSearch;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.models.Profile;
@@ -22,18 +21,23 @@ import static org.junit.Assert.*;
 
 public class ElasticSearchUnitTest {
 
-    private final String testID = "Test ID";
+    private final String testID = null;
     private final String testUsername = "Test Username";
     private final String testEmail = "Test Email";
     private final String testPhone = "Test Phone";
+    private final ArrayList<Patient> patients = new ArrayList<>();
+    private final ArrayList<CareProvider> careProviders = new ArrayList<>();
+    private final ArrayList<Problem> problems = new ArrayList<>();
 
-    private Profile profile;
+    private Patient patient;
+    private CareProvider careProvider;
     private ElasticSearch eSearchObj = new ElasticSearch();
 
     // Initialization ran before each test
     @Before
     public void initJUnitTest() {
-        profile = new Profile(testID, testUsername, testEmail, testPhone);
+        patient = new Patient(null, testUsername, testEmail, testPhone, "Patient", careProviders, problems);
+        careProvider = new CareProvider(null, testUsername, testEmail, testPhone, "CareProvider", patients);
     }
 
     @Test

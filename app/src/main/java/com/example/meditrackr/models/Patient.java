@@ -26,7 +26,7 @@ public class Patient extends Profile implements Serializable{
         careProviders.deleteCareProvider(careProvider);
     }
     public Boolean careProviderExists(CareProvider careProvider){
-        return careProviders.careProviderExists(careProvider.getId());
+        return careProviders.careProviderExists(careProvider.getUsername());
     }
 
     public ProblemList getProblems() {return this.problems;}

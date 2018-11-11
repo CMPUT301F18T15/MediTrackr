@@ -11,12 +11,16 @@ public class PatientList implements Serializable {
     private ArrayList<Patient> patients = new ArrayList<>();
 
 
-    public ArrayList<Patient> getProblems() {
+    public ArrayList<Patient> getPatients() {
         return patients;
     }
 
     public Patient getPatient(int index){
         return patients.get(index);
+    }
+
+    public void setPatient(int index, Patient patient){
+        patients.set(index, patient);
     }
 
     public int getSize(){
@@ -31,9 +35,9 @@ public class PatientList implements Serializable {
         patients.remove(patient);
     }
 
-    public Boolean patientExists(String userID){
+    public Boolean patientExists(String username){
         for (Patient patient : patients){
-            if (patient.getId().equals(userID)){
+            if (patient.getUsername().equals(username)){
                 return true;
             }
         }

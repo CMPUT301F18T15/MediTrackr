@@ -1,6 +1,10 @@
 package com.example.meditrackr.models;
 
 
+import android.util.Log;
+
+import com.example.meditrackr.controllers.ElasticSearchController;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -17,13 +21,16 @@ public class CareProvider extends Profile implements Serializable {
         super(id, username, email, phone, isCareProvider);
     }
 
+
     // Getters/Setters
     public PatientList getPatients() {
         return this.patients;
     }
 
     public void addPatient(Patient patient){
-        patients.addPatient(patient);
+        if(!patients.patientExists(patient.getUsername())){
+            patients.addPatient(patient);
+        }
     }
 
     public void deletePatient(Patient patient) {
@@ -31,7 +38,7 @@ public class CareProvider extends Profile implements Serializable {
     }
 
     public Boolean patientExists(Patient patient){
-        return patients.patientExists(patient.getId());
+        return patients.patientExists(patient.getUsername());
     }
 
 }

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.example.meditrackr.R;
+import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.models.DataManager;
 
 public class MainActivity extends AppCompatActivity {

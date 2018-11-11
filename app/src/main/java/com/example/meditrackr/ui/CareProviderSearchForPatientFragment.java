@@ -79,21 +79,24 @@ public class CareProviderSearchForPatientFragment extends Fragment {
             public void onClick(View v) {
                 careProvider = DataManager.getCareProvider();
                 Patient patient = (Patient) profile;
-                careProvider.addPatient(patient);
-                ElasticSearchController.updateUser(careProvider);
+                if(!careProvider.getPatients().patientExists(patient.getUsername())) {
+                    careProvider.addPatient(patient);
+                    ElasticSearchController.updateUser(careProvider);
+                    // transition back to patients page
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.addToBackStack(null);
+                    CareProviderPatientsFragment fragment = CareProviderPatientsFragment.newInstance();
+                    transaction.replace(R.id.content, fragment);
+                    transaction.commit();
+                } else {
+                    changeViewVisibility(1);
+                    Toast.makeText(getContext(), "Cannot add the same patient twice!", Toast.LENGTH_LONG).show();
+                }
 
-                // transition back to patients page
-                FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.addToBackStack(null);
-                CareProviderPatientsFragment fragment = CareProviderPatientsFragment.newInstance();
-                transaction.replace(R.id.content, fragment);
-                transaction.commit();
 
             }
         });
-
-
 
         return rootView;
     }

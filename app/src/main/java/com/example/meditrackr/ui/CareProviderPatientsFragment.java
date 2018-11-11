@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.CareProviderPatientAdapter;
 import com.example.meditrackr.controllers.VerticalSpaceController;
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.DataManager;
 
 /**
  * Created by Skryt on Nov 08, 2018

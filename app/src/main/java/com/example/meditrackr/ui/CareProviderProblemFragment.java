@@ -11,13 +11,15 @@ import android.view.ViewGroup;
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.CareProviderProblemAdapter;
 import com.example.meditrackr.controllers.VerticalSpaceController;
+import com.example.meditrackr.models.CareProvider;
+import com.example.meditrackr.models.DataManager;
 import com.example.meditrackr.models.ProblemList;
 
 /**
  * Created by Skryt on Nov 10, 2018
  */
 
-public class CareProviderProblemFragment extends Fragment {
+public class CareProviderProblemFragment extends Fragment  {
     private CareProviderProblemAdapter adapter;
 
     public static CareProviderProblemFragment newInstance(int index, ProblemList problemList){
@@ -36,11 +38,11 @@ public class CareProviderProblemFragment extends Fragment {
                 R.layout.fragment_patient_problem, container, false);
 
         final RecyclerView patientList = (RecyclerView) rootView.findViewById(R.id.careprovider_view_patient);
-
+        final Bundle bundle = getArguments();
 
         // adapt items into recycler view
         patientList.setHasFixedSize(false);
-        adapter = new CareProviderProblemAdapter(getActivity());
+        adapter = new CareProviderProblemAdapter(getActivity(), bundle);
         patientList.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         patientList.setLayoutManager(manager);

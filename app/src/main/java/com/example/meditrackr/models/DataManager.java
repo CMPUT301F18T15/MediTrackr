@@ -1,5 +1,9 @@
 package com.example.meditrackr.models;
 
+import android.util.Log;
+
+import com.example.meditrackr.controllers.ElasticSearchController;
+
 public class DataManager {
     private static Profile profile;
 

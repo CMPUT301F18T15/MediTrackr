@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.DataManager;
+import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PatientList;
+import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.ui.CareProviderProblemFragment;
 
 /**
@@ -65,7 +67,7 @@ public class CareProviderPatientAdapter extends RecyclerView.Adapter<CareProvide
         public ViewHolder(View itemView, final CareProviderPatientAdapter adapter){
             super(itemView);
             patientUsername = itemView.findViewById(R.id.patient_username);
-            patientEmail = itemView.findViewById(R.id.patient_phone);
+            patientEmail = itemView.findViewById(R.id.patient_email);
             patientPhone = itemView.findViewById(R.id.patient_phone);
             itemView.setOnClickListener(this);
             this.adapter = adapter;

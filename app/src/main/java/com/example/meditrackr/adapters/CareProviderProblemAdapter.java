@@ -1,11 +1,11 @@
 package com.example.meditrackr.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +14,23 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.DataManager;
 import com.example.meditrackr.models.PatientList;
+import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.ui.CareProviderProblemFragment;
+
 
 /**
  * Created by Skryt on Nov 10, 2018
  */
 
-public class CareProviderProblemAdapter extends RecyclerView.Adapter<CareProviderProblemAdapter.ViewHolder>{
+public class CareProviderProblemAdapter extends RecyclerView.Adapter<CareProviderProblemAdapter.ViewHolder> {
     private FragmentActivity activity;
     private PatientList patients = DataManager.getCareProviderPatients();
+    private Bundle bundle;
 
     // constructor
-    public CareProviderProblemAdapter(FragmentActivity activity) {
+    public CareProviderProblemAdapter(FragmentActivity activity, Bundle bundle) {
         this.activity = activity;
+        this.bundle = bundle;
     }
 
     // display the view
@@ -41,9 +45,10 @@ public class CareProviderProblemAdapter extends RecyclerView.Adapter<CareProvide
     // set the data into each viewHolder (ie. place place the patients info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.title.setText(patients.getPatient(position).getProblems().getProblem(position).getTitle());
-        holder.date.setText(patients.getPatient(position).getProblems().getProblem(position).getDate());
-        holder.description.setText(patients.getPatient(position).getProblems().getProblem(position).getDescription());
+        ProblemList problemList = (ProblemList) bundle.getSerializable("PROBLEMS");
+        holder.title.setText(problemList.getProblem(position).getTitle());
+        holder.date.setText(problemList.getProblem(position).getDate());
+        holder.description.setText(problemList.getProblem(position).getDescription());
     }
 
     @Override

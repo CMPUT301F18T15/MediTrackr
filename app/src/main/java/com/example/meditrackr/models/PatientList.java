@@ -11,10 +11,6 @@ public class PatientList implements Serializable {
     private ArrayList<Patient> patients = new ArrayList<>();
 
 
-    public ArrayList<Patient> getPatients() {
-        return patients;
-    }
-
     public Patient getPatient(int index){
         return patients.get(index);
     }

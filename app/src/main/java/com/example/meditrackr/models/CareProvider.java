@@ -27,6 +27,10 @@ public class CareProvider extends Profile implements Serializable {
         return this.patients;
     }
 
+    public Patient getPatient(int index){
+        return this.patients.getPatient(index);
+    }
+
     public void addPatient(Patient patient){
         if(!patients.patientExists(patient.getUsername())){
             patients.addPatient(patient);

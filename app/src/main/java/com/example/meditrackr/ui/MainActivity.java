@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.example.meditrackr.R;
-import com.example.meditrackr.models.DataManager;
+import com.example.meditrackr.models.ProfileManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         final ImageView search = (ImageView) findViewById(R.id.search);
         final ImageView profile = (ImageView) findViewById(R.id.profile);
         final Bundle bundle = getIntent().getExtras();
-        final boolean isCareProvider = DataManager.getIsCareProvider();
+        final boolean isCareProvider = ProfileManager.getIsCareProvider();
 
         // get userType
         setHomeView(isCareProvider);
@@ -51,8 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
                 if(v == problems){
                     image.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
-                    ProblemsFragment fragment = ProblemsFragment.newInstance();
-                    transaction.replace(R.id.content, fragment);
+                    if(!isCareProvider) {
+                        PatientProblemsFragment fragment = PatientProblemsFragment.newInstance();
+                        transaction.replace(R.id.content, fragment);
+                    }
+                    else{
+                        CareProviderPatientsFragment fragment = CareProviderPatientsFragment.newInstance();
+                        transaction.replace(R.id.content, fragment);
+                    }
                     transaction.commit();
                 }
                 else if (v == map) {
@@ -88,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(R.id.content, fragment);
             transaction.commit();
         }else{
-            ProblemsFragment fragment = ProblemsFragment.newInstance();
+            PatientProblemsFragment fragment = PatientProblemsFragment.newInstance();
             transaction.replace(R.id.content, fragment);
             transaction.commit();
 

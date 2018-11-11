@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.models.DataManager;
+import com.example.meditrackr.models.ProfileManager;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
@@ -38,8 +38,8 @@ public class RegisterFragment extends Fragment {
                 R.layout.fragment_signup, container, false);
 
         // ui definitions
-        final EditText username = (EditText) rootView.findViewById(R.id.username);
-        final EditText email = (EditText) rootView.findViewById(R.id.email);
+        final EditText username = (EditText) rootView.findViewById(R.id.patient_username);
+        final EditText email = (EditText) rootView.findViewById(R.id.patient_phone);
         final EditText phoneNumber = (EditText) rootView.findViewById(R.id.phone_number);
         final TextView careProviderTitle = (TextView) rootView.findViewById(R.id.display_careprovider);
         final TextView patientTitle = (TextView) rootView.findViewById(R.id.display_patient);
@@ -68,7 +68,7 @@ public class RegisterFragment extends Fragment {
                         if(done){
                             bundle.putSerializable("CareProvider", careProvider);
                             Log.d("Success", "Username: " + careProvider.getUsername() + " IsCareProvider: " + careProvider.getisCareProvider());
-                            DataManager.setProfile(careProvider);
+                            ProfileManager.setProfile(careProvider);
                         }
 
                     }
@@ -84,7 +84,7 @@ public class RegisterFragment extends Fragment {
                         if(done) {
                             bundle.putSerializable("Patient", patient);
                             Log.d("Success", "Username: " + patient.getUsername() + " isCareProvider: " + patient.getisCareProvider());
-                            DataManager.setProfile(patient);
+                            ProfileManager.setProfile(patient);
                         }
 
 

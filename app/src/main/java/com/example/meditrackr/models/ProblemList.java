@@ -12,10 +12,6 @@ public class ProblemList implements Serializable {
     private ArrayList<Problem> problems = new ArrayList<>();
 
 
-    public ArrayList<Problem> getProblems() {
-        return problems;
-    }
-
     public Problem getProblem(int index){
         return problems.get(index);
     }

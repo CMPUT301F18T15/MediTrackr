@@ -1,14 +1,9 @@
 package com.example.meditrackr.ui;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.models.DataManager;
+import com.example.meditrackr.models.ProfileManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 
@@ -34,11 +29,11 @@ import java.util.TimeZone;
  * Created by Skryt on Nov 08, 2018
  */
 
-public class ProblemAddFragment extends Fragment {
-    Patient patient = DataManager.getPatient();
+public class PatientAddProblemFragment extends Fragment {
+    Patient patient = ProfileManager.getPatient();
 
-    public static ProblemAddFragment newInstance(){
-        ProblemAddFragment fragment = new ProblemAddFragment();
+    public static PatientAddProblemFragment newInstance(){
+        PatientAddProblemFragment fragment = new PatientAddProblemFragment();
         return fragment;
     }
 
@@ -92,7 +87,7 @@ public class ProblemAddFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkInputs(title, description, dateSelector)){
+                if(checkInputs(title, description)){
                     Problem problem = new Problem(title.getText().toString(), dateSelector.getText().toString(), description.getText().toString());
                     patient.getProblems().addProblem(problem);
                     Log.d("ProblemAdd", patient.getProblems().getProblem(0).getTitle() + patient.getProblems().getProblem(0).getDate() + patient.getProblems().getProblem(0).getDescription());
@@ -101,7 +96,7 @@ public class ProblemAddFragment extends Fragment {
 
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
-                    ProblemsFragment fragment = ProblemsFragment.newInstance();
+                    PatientProblemsFragment fragment = PatientProblemsFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
                 }
@@ -113,8 +108,8 @@ public class ProblemAddFragment extends Fragment {
         return rootView;
     }
 
-    public boolean checkInputs(EditText title, EditText dateSelector, EditText description){
-        if((title != null && description != null)) {
+    public boolean checkInputs(EditText title, EditText description){
+        if(((title != null && !title.getText().toString().isEmpty()) && (description != null && !description.getText().toString().isEmpty()))){
             return true;
         }
         else {

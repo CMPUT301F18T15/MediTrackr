@@ -22,7 +22,7 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/patient_username"
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginTop="24dp"
@@ -57,10 +57,10 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/patient_username" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/patient_phone"
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginTop="12dp"
@@ -94,7 +94,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/Patient"
         app:layout_constraintStart_toStartOf="@+id/CareProvider"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/patient_phone" />
 
     <TextView
         android:id="@+id/display_careprovider"
@@ -103,6 +103,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/background2"
         android:text="Careprovider"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textSize="18sp"

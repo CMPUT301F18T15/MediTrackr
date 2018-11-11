@@ -1,7 +1,6 @@
-package com.example.meditrackr.ui;
+package com.example.meditrackr.adapters;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,19 +11,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.models.DataManager;
+import com.example.meditrackr.models.ProfileManager;
 import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.models.ProblemList;
+import com.example.meditrackr.ui.PatientRecordsFragment;
 
 
-public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder>{
+public class PatientProblemAdapter extends RecyclerView.Adapter<PatientProblemAdapter.ViewHolder>{
     private FragmentActivity activity;
-    private Patient patient = DataManager.getPatient();
+    private Patient patient = ProfileManager.getPatient();
     private ProblemList problems = patient.getProblems();
 
     // constructor
-    public ProblemAdapter(FragmentActivity activity) {
+    public PatientProblemAdapter(FragmentActivity activity) {
         this.activity = activity;
     }
 
@@ -55,12 +54,12 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
 
     // place each problem into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private ProblemAdapter adapter;
+        private PatientProblemAdapter adapter;
         public TextView title;
         public TextView date;
         public TextView description;
 
-        public ViewHolder(View itemView, final ProblemAdapter adapter){
+        public ViewHolder(View itemView, final PatientProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
             date = itemView.findViewById(R.id.problem_date);
@@ -76,7 +75,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            RecordsFragment fragment = RecordsFragment.newInstance(adapter.problems.getProblem(position).getRecords(), position);
+            PatientRecordsFragment fragment = PatientRecordsFragment.newInstance(adapter.problems.getProblem(position).getRecords(), position);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();

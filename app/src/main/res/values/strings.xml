@@ -1,11 +1,63 @@
 <resources>
     <string name="app_name">Medi Trackr</string>
-    <string-array name="user_options">
-        <item>Patient</item>
-        <item>Doctor</item>
-    </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="meditrackr">medi trackr</string>
+    <string name="developer_orest">Orest Cokan</string>
 
+    <string name="password">Password</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="log_in">LOGIN</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="geo">Geo</string>
+    <string name="body">Body</string>
+    <string name="front">Front</string>
+    <string name="back">Back</string>
+    <string name="care_provider">Care Provider</string>
+    <string name="patient">Patient</string>
+    <string name="problems">Problems</string>
+    <string name="conditions">Problems</string>
+    <string name="condition_colon">Problem Details</string>
+    <string name="condition_name_colon">Problem Name:</string>
+    <string name="date_added_colon">Date Added:</string>
+    <string name="description_colon">Description:</string>
+    <string name="delete">Delete</string>
+    <string name="delete_record">Delete Record</string>
+    <string name="edit_record">Edit Record</string>
+    <string name="edit_condition">Edit Problem</string>
+    <string name="search_problems_or_records">Search Problems or Records</string>
+    <string name="contact_information">Contact Information</string>
+    <string name="condition_name">Problem Name</string>
+    <string name="condition">Problem</string>
+    <string name="description">Description</string>
+    <string name="patients">Patients</string>
+    <string name="patient_s_problems">Patient\'s Problems</string>
+    <string name="patient_name_colon">Patient Name:</string>
+    <string name="home">Home</string>
+    <string name="username_colon">Username:</string>
+    <string name="email_colon">Email:</string>
+    <string name="your_profile">Your Profile</string>
+    <string name="phone_colon">Phone:</string>
+    <string name="profile">Profile</string>
+    <string name="add_patient">Add Patient</string>
+    <string name="info">Info</string>
+    <string name="record_info">Record Info</string>
+    <string name="date_and_time_colon">Date and Time:</string>
+    <string name="comment_colon">Comment:</string>
+    <string name="location">Location</string>
+    <string name="body_location">Body Location</string>
+    <string name="add_record_title">Add A Record:</string>
+    <string name="add_record_record_title">Record Title:</string>
+    <string name="add_record_record_date">Date Start:</string>
+    <string name="add_record_record_description">Brief Description:</string>
+    <string name="add_record_button_add">Add</string>
+    <string name="add_problem_title">Add A Problem:</string>
+    <string name="add_problem_problem_title">Problem Title:</string>
+    <string name="add_problem_problem_date">Date Start:</string>
+    <string name="add_problem_problem_description">Brief Description:</string>
+    <string name="add_problem_button_add">Add</string>
+    <string name="profile_title">Your Profile:</string>
+    <string name="profile_username">Username:</string>
+    <string name="profile_email">Email:</string>
+    <string name="edit">EDIT</string>
 </resources>

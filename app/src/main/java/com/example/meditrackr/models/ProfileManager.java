@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.meditrackr.controllers.ElasticSearchController;
 
-public class DataManager {
+public class ProfileManager {
     private static Profile profile;
 
     public static Profile getProfile() {
@@ -12,7 +12,7 @@ public class DataManager {
     }
 
     public static void setProfile(Profile profile) {
-        DataManager.profile = profile;
+        ProfileManager.profile = profile;
     }
 
     public static Patient getPatient(){

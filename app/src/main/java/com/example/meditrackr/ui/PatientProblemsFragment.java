@@ -17,7 +17,7 @@ import com.example.meditrackr.controllers.VerticalSpaceController;
 
 
 public class PatientProblemsFragment extends Fragment {
-    //Patient patient = DataManager.getPatient();
+    //Patient patient = ProfileManager.getPatient();
     private PatientProblemAdapter adapter;
 
     public static PatientProblemsFragment newInstance(){

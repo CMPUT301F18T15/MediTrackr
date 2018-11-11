@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.models.DataManager;
+import com.example.meditrackr.models.ProfileManager;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
@@ -68,7 +68,7 @@ public class RegisterFragment extends Fragment {
                         if(done){
                             bundle.putSerializable("CareProvider", careProvider);
                             Log.d("Success", "Username: " + careProvider.getUsername() + " IsCareProvider: " + careProvider.getisCareProvider());
-                            DataManager.setProfile(careProvider);
+                            ProfileManager.setProfile(careProvider);
                         }
 
                     }
@@ -84,7 +84,7 @@ public class RegisterFragment extends Fragment {
                         if(done) {
                             bundle.putSerializable("Patient", patient);
                             Log.d("Success", "Username: " + patient.getUsername() + " isCareProvider: " + patient.getisCareProvider());
-                            DataManager.setProfile(patient);
+                            ProfileManager.setProfile(patient);
                         }
 
 

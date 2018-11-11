@@ -8,8 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.models.DataManager;
+import com.example.meditrackr.models.ProfileManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         final ImageView search = (ImageView) findViewById(R.id.search);
         final ImageView profile = (ImageView) findViewById(R.id.profile);
         final Bundle bundle = getIntent().getExtras();
-        final boolean isCareProvider = DataManager.getIsCareProvider();
+        final boolean isCareProvider = ProfileManager.getIsCareProvider();
 
         // get userType
         setHomeView(isCareProvider);

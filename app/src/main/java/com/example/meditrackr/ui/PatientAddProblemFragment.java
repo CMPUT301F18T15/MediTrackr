@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.models.DataManager;
+import com.example.meditrackr.models.ProfileManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 
@@ -30,7 +30,7 @@ import java.util.TimeZone;
  */
 
 public class PatientAddProblemFragment extends Fragment {
-    Patient patient = DataManager.getPatient();
+    Patient patient = ProfileManager.getPatient();
 
     public static PatientAddProblemFragment newInstance(){
         PatientAddProblemFragment fragment = new PatientAddProblemFragment();

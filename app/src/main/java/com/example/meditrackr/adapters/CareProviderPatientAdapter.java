@@ -12,10 +12,8 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.models.DataManager;
-import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.ProfileManager;
 import com.example.meditrackr.models.PatientList;
-import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.ui.CareProviderProblemFragment;
 
 /**
@@ -24,7 +22,7 @@ import com.example.meditrackr.ui.CareProviderProblemFragment;
 
 public class CareProviderPatientAdapter extends RecyclerView.Adapter<CareProviderPatientAdapter.ViewHolder>{
     private FragmentActivity activity;
-    private CareProvider careProvider = DataManager.getCareProvider();
+    private CareProvider careProvider = ProfileManager.getCareProvider();
     private PatientList patients = careProvider.getPatients();
 
     // constructor

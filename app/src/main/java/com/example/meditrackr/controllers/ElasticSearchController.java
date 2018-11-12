@@ -262,7 +262,7 @@ public class ElasticSearchController {
                 // Execute the add action
                 DocumentResult result = client.execute(profileIndex);
                 if(result.isSucceeded()) {
-                    Log.d("UpdateProfile", "Updated it!");
+                    Log.d("UpdateProfile", "Updated it! " + profile.getUsername());
                 }
             } catch (IOException e) {
                 Log.d("UpdateProfile", "Failed!");

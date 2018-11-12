@@ -1,4 +1,4 @@
-package com.example.meditrackr.models;
+package com.example.meditrackr.models.record;
 
 /**
  * Created by Skryt on Nov 1, 2018

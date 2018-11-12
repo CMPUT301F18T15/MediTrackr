@@ -1,4 +1,4 @@
-package com.example.meditrackr.ui;
+package com.example.meditrackr.ui.patient;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 
 import com.example.meditrackr.R;
 
-public class WowFragment extends Fragment {
+public class CameraFragment extends Fragment {
 
-    public static WowFragment newInstance(){
-        WowFragment fragment = new WowFragment();
+    public static CameraFragment newInstance(){
+        CameraFragment fragment = new CameraFragment();
         return fragment;
     }
 
@@ -19,7 +19,7 @@ public class WowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_wow, container, false);
+                R.layout.fragment_camera, container, false);
 
         return rootView;
     }

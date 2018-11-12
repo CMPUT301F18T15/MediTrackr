@@ -1,4 +1,4 @@
-package com.example.meditrackr.ui;
+package com.example.meditrackr.ui.patient;
 
 import android.app.DatePickerDialog;
 import android.support.v4.app.Fragment;
@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.models.ProfileManager;
+import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 
@@ -29,11 +29,11 @@ import java.util.TimeZone;
  * Created by Skryt on Nov 08, 2018
  */
 
-public class PatientAddProblemFragment extends Fragment {
+public class AddProblemFragment extends Fragment {
     Patient patient = ProfileManager.getPatient();
 
-    public static PatientAddProblemFragment newInstance(){
-        PatientAddProblemFragment fragment = new PatientAddProblemFragment();
+    public static AddProblemFragment newInstance(){
+        AddProblemFragment fragment = new AddProblemFragment();
         return fragment;
     }
 
@@ -96,7 +96,7 @@ public class PatientAddProblemFragment extends Fragment {
 
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
-                    PatientProblemsFragment fragment = PatientProblemsFragment.newInstance();
+                    ProblemsFragment fragment = ProblemsFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
                 }

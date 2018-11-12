@@ -41,6 +41,7 @@
             android:layout_marginTop="8dp"
             android:text="Orest Cokan"
             android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textColor="@color/colorPrimaryBlack"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +54,7 @@
             android:layout_marginTop="4dp"
             android:text="cokan@ualberta.ca"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/colorPrimaryBlack"
             android:textSize="18sp"
             android:textStyle="italic"
             app:layout_constraintStart_toStartOf="@+id/patient_username"
@@ -68,7 +70,9 @@
             android:text="780-868-2648"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/colorPrimaryBlack"
             android:textSize="18sp"
+            android:textStyle="italic"
             app:layout_constraintStart_toStartOf="@+id/patient_email"
             app:layout_constraintTop_toBottomOf="@+id/patient_email" />
 

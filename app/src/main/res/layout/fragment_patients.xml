@@ -20,6 +20,7 @@
         android:text="PATIENTS"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@color/colorPrimaryBlack"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

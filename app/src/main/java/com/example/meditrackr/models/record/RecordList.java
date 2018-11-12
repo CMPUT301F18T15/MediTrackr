@@ -1,4 +1,4 @@
-package com.example.meditrackr.models;
+package com.example.meditrackr.models.record;
 
 import java.io.Serializable;
 import java.util.ArrayList;

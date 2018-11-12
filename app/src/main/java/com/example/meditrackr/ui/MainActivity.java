@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.example.meditrackr.R;
-import com.example.meditrackr.models.ProfileManager;
+import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.ui.careprovider.PatientsFragment;
+import com.example.meditrackr.ui.patient.ProblemsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
                 if(v == problems){
                     image.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
                     if(!isCareProvider) {
-                        PatientProblemsFragment fragment = PatientProblemsFragment.newInstance();
+                        ProblemsFragment fragment = ProblemsFragment.newInstance();
                         transaction.replace(R.id.content, fragment);
                     }
                     else{
-                        CareProviderPatientsFragment fragment = CareProviderPatientsFragment.newInstance();
+                        PatientsFragment fragment = PatientsFragment.newInstance();
                         transaction.replace(R.id.content, fragment);
                     }
                     transaction.commit();
@@ -90,11 +92,11 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         if(isCareProvider){
-            CareProviderPatientsFragment fragment = CareProviderPatientsFragment.newInstance();
+            PatientsFragment fragment = PatientsFragment.newInstance();
             transaction.replace(R.id.content, fragment);
             transaction.commit();
         }else{
-            PatientProblemsFragment fragment = PatientProblemsFragment.newInstance();
+            ProblemsFragment fragment = ProblemsFragment.newInstance();
             transaction.replace(R.id.content, fragment);
             transaction.commit();
 

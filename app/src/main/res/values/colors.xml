@@ -4,7 +4,7 @@
     <color name="colorPrimaryBlack">#000000</color>
     <color name="colorPrimaryDark">#233142</color>
     <color name="colorAccent">#ff5500</color>
-    <color name="background_material_light">#ebf7fd</color>
+    <color name="background_material_light">#ededed</color>
     <color name="text_color_primary">#dd000000</color>
     <color name="background">#f2f2f2</color>
     <color name="background2">#EDEDED</color>

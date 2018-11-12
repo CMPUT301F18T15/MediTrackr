@@ -1,4 +1,4 @@
-package com.example.meditrackr.ui;
+package com.example.meditrackr.ui.patient;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

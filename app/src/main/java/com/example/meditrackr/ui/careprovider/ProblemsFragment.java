@@ -1,4 +1,4 @@
-package com.example.meditrackr.ui;
+package com.example.meditrackr.ui.careprovider;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,22 +9,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.adapters.CareProviderProblemAdapter;
+import com.example.meditrackr.adapters.careprovider.ProblemAdapter;
+import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.VerticalSpaceController;
-import com.example.meditrackr.models.ProblemList;
+import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.controllers.ProfileManager;
 
 /**
  * Created by Skryt on Nov 10, 2018
  */
 
-public class CareProviderProblemFragment extends Fragment  {
-    private CareProviderProblemAdapter adapter;
+public class ProblemsFragment extends Fragment  {
+    private ProblemAdapter adapter;
 
-    public static CareProviderProblemFragment newInstance(int index, ProblemList problemList){
-        CareProviderProblemFragment fragment = new CareProviderProblemFragment();
+    public static ProblemsFragment newInstance(int index){
+        ProblemsFragment fragment = new ProblemsFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("INDEX", index);
-        bundle.putSerializable("PROBLEMS", problemList);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -36,11 +37,13 @@ public class CareProviderProblemFragment extends Fragment  {
                 R.layout.fragment_patient_problem, container, false);
 
         final RecyclerView patientList = (RecyclerView) rootView.findViewById(R.id.careprovider_view_patient);
-        final Bundle bundle = getArguments();
+        int index = getArguments().getInt("INDEX");
+        String username = ProfileManager.getCareProvider().getPatient(index);
+        Patient patient = (Patient) ElasticSearchController.searchProfile(username);
 
         // adapt items into recycler view
         patientList.setHasFixedSize(false);
-        adapter = new CareProviderProblemAdapter(getActivity(), bundle);
+        adapter = new ProblemAdapter(getActivity(), patient.getProblems());
         patientList.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         patientList.setLayoutManager(manager);

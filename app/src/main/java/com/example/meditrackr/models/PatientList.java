@@ -8,36 +8,31 @@ import java.util.ArrayList;
  */
 
 public class PatientList implements Serializable {
-    private ArrayList<Patient> patients = new ArrayList<>();
+    private ArrayList<String> patients = new ArrayList<>();
 
 
-    public Patient getPatient(int index){
+    public String getPatient(int index){
         return patients.get(index);
     }
 
-    public void setPatient(int index, Patient patient){
-        patients.set(index, patient);
+    public void setPatient(int index, String username){
+        patients.set(index, username);
     }
 
     public int getSize(){
         return patients.size();
     }
 
-    public void addPatient(Patient patient){
-        patients.add(patient);
+    public void addPatient(String username){
+        patients.add(username);
     }
 
-    public void deletePatient(Patient patient){
-        patients.remove(patient);
+    public void deletePatient(String username){
+        patients.remove(username);
     }
 
     public Boolean patientExists(String username){
-        for (Patient patient : patients){
-            if (patient.getUsername().equals(username)){
-                return true;
-            }
-        }
-        return false;
+        return patients.contains(username);
     }
 
     public String toString(){

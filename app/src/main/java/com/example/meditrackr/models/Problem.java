@@ -1,7 +1,6 @@
 package com.example.meditrackr.models;
 
-import java.util.ArrayList;
-import java.util.Date;
+import com.example.meditrackr.models.record.RecordList;
 
 /**
  * Created by Skryt on Oct 24, 2018

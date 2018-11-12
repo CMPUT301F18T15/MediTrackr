@@ -1,4 +1,4 @@
-package com.example.meditrackr.adapters;
+package com.example.meditrackr.adapters.careprovider;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
@@ -11,20 +11,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.models.ProfileManager;
-import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
-import com.example.meditrackr.ui.PatientRecordsFragment;
+import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 
 
-public class PatientProblemAdapter extends RecyclerView.Adapter<PatientProblemAdapter.ViewHolder>{
+/**
+ * Created by Skryt on Nov 10, 2018
+ */
+
+public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder> {
     private FragmentActivity activity;
-    private Patient patient = ProfileManager.getPatient();
-    private ProblemList problems = patient.getProblems();
+    private ProblemList problems;
 
     // constructor
-    public PatientProblemAdapter(FragmentActivity activity) {
+    public ProblemAdapter(FragmentActivity activity, ProblemList problems) {
         this.activity = activity;
+        this.problems = problems;
     }
 
     // display the view
@@ -36,9 +38,7 @@ public class PatientProblemAdapter extends RecyclerView.Adapter<PatientProblemAd
         return new ViewHolder(problemView, this);
     }
 
-
-
-    // set the data into each viewHolder (ie. place what each emotion has into the view)
+    // set the data into each viewHolder (ie. place place the patients info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.title.setText(problems.getProblem(position).getTitle());
@@ -54,12 +54,12 @@ public class PatientProblemAdapter extends RecyclerView.Adapter<PatientProblemAd
 
     // place each problem into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private PatientProblemAdapter adapter;
+        private ProblemAdapter adapter;
         public TextView title;
         public TextView date;
         public TextView description;
 
-        public ViewHolder(View itemView, final PatientProblemAdapter adapter){
+        public ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
             date = itemView.findViewById(R.id.problem_date);
@@ -69,17 +69,16 @@ public class PatientProblemAdapter extends RecyclerView.Adapter<PatientProblemAd
 
         }
 
-        // set onClick listener for each problem, so they can be edited
+        // set onClick listener for each patient, so they can be viewed
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            PatientRecordsFragment fragment = PatientRecordsFragment.newInstance(adapter.problems.getProblem(position).getRecords(), position);
+            ProblemsFragment fragment = ProblemsFragment.newInstance(position);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();
         }
     }
 }
-

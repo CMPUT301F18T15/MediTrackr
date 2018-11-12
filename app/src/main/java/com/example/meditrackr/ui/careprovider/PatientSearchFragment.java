@@ -1,4 +1,4 @@
-package com.example.meditrackr.ui;
+package com.example.meditrackr.ui.careprovider;
 
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.models.ProfileManager;
+import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
 
@@ -25,14 +25,14 @@ import com.example.meditrackr.models.Profile;
  * Created by Skryt on Nov 08, 2018
  */
 
-public class CareProviderSearchForPatientFragment extends Fragment {
+public class PatientSearchFragment extends Fragment {
     private Profile profile;
     private CareProvider careProvider;
     private ConstraintLayout searchLayout;
     private ConstraintLayout searchDisplayPatient;
 
-    public static CareProviderSearchForPatientFragment newInstance(){
-        CareProviderSearchForPatientFragment fragment = new CareProviderSearchForPatientFragment();
+    public static PatientSearchFragment newInstance(){
+        PatientSearchFragment fragment = new PatientSearchFragment();
         return fragment;
     }
 
@@ -79,14 +79,14 @@ public class CareProviderSearchForPatientFragment extends Fragment {
             public void onClick(View v) {
                 careProvider = ProfileManager.getCareProvider();
                 Patient patient = (Patient) profile;
-                if(!careProvider.getPatients().patientExists(patient.getUsername())) {
-                    careProvider.addPatient(patient);
+                if(!careProvider.patientExists(patient.getUsername())) {
+                    careProvider.addPatient(patient.getUsername());
                     ElasticSearchController.updateUser(careProvider);
                     // transition back to patients page
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.addToBackStack(null);
-                    CareProviderPatientsFragment fragment = CareProviderPatientsFragment.newInstance();
+                    PatientsFragment fragment = PatientsFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
                 } else {

@@ -1,4 +1,4 @@
-package com.example.meditrackr.models;
+package com.example.meditrackr.models.record;
 
 import android.location.Location;
 

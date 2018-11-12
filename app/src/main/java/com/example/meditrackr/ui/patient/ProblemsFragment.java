@@ -1,4 +1,4 @@
-package com.example.meditrackr.ui;
+package com.example.meditrackr.ui.patient;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,18 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.adapters.CareProviderPatientAdapter;
+import com.example.meditrackr.adapters.patient.ProblemAdapter;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 
-/**
- * Created by Skryt on Nov 08, 2018
- */
 
-public class CareProviderPatientsFragment extends Fragment {
-    private CareProviderPatientAdapter adapter;
+public class ProblemsFragment extends Fragment {
+    //Patient patient = ProfileManager.getPatient();
+    private ProblemAdapter adapter;
 
-    public static CareProviderPatientsFragment newInstance(){
-        CareProviderPatientsFragment fragment = new CareProviderPatientsFragment();
+    public static ProblemsFragment newInstance(){
+        ProblemsFragment fragment = new ProblemsFragment();
         return fragment;
     }
 
@@ -31,34 +29,31 @@ public class CareProviderPatientsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_patients, container, false);
+                R.layout.fragment_problems, container, false);
 
-        // ui attributes
-        final FloatingActionButton searchForPatient = (FloatingActionButton) rootView.findViewById(R.id.add_patient_floating);
-        final RecyclerView patientList = (RecyclerView) rootView.findViewById(R.id.patients_recyclerview);
+        final FloatingActionButton addProblem = (FloatingActionButton) rootView.findViewById(R.id.add_problem_floating);
+        final RecyclerView problemList = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
 
-
-        // adapt items into recycler view
-        patientList.setHasFixedSize(false);
-        adapter = new CareProviderPatientAdapter(getActivity());
-        patientList.setAdapter(adapter);
+        problemList.setHasFixedSize(false);
+        adapter = new ProblemAdapter(getActivity());
+        problemList.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        patientList.setLayoutManager(manager);
+        problemList.setLayoutManager(manager);
         manager = new LinearLayoutManager(getActivity());
-        patientList.setLayoutManager(manager);
+        problemList.setLayoutManager(manager);
 
         VerticalSpaceController decoration = new VerticalSpaceController(50);
-        patientList.addItemDecoration(decoration);
+        problemList.addItemDecoration(decoration);
 
 
-        // search for patient onclick listener
-        searchForPatient.setOnClickListener(new View.OnClickListener() {
+
+        addProblem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.addToBackStack(null);
-                CareProviderSearchForPatientFragment fragment = CareProviderSearchForPatientFragment.newInstance();
+                AddProblemFragment fragment = AddProblemFragment.newInstance();
                 transaction.replace(R.id.content, fragment);
                 transaction.commit();
             }
@@ -67,5 +62,6 @@ public class CareProviderPatientsFragment extends Fragment {
 
         return rootView;
     }
+
 
 }

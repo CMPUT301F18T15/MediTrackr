@@ -1,7 +1,15 @@
 package com.example.meditrackr.models.record;
 
 /**
- * Created by Skryt on Nov 1, 2018
+ * This class will create a Body coordinate on our model and then associate it with with a body location
+ *
+ *
+ * @parama bodyCoordinate   this is an double integer which corresponds to a specific point on the body model
+ * @parama bodyFace
+ * @parama bodylocation     this is a string in which tells you what part of the body it is
+ * @return
+ * @author Orest Cokan
+ * @version 1.0 Oct 24, 2018.
  */
 
 public class BodyLocation {

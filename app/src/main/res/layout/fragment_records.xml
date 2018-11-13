@@ -7,14 +7,14 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/problems2"
+        android:id="@+id/RECORDS_TITLE"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
         android:text="RECORDS"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat"
@@ -28,18 +28,18 @@
         android:id="@+id/records_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
         android:background="@color/background2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/problems2" />
+        app:layout_constraintTop_toBottomOf="@+id/RECORDS_TITLE" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_record_floating"

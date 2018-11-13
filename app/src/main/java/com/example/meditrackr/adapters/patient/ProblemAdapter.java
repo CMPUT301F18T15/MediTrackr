@@ -46,6 +46,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         holder.title.setText(problems.getProblem(position).getTitle());
         holder.date.setText(problems.getProblem(position).getDate());
         holder.description.setText(problems.getProblem(position).getDescription());
+        holder.totalRecords.setText("Number of records: "+problems.getProblem(position).getRecords().getSize());
     }
 
     @Override
@@ -60,12 +61,14 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public TextView title;
         public TextView date;
         public TextView description;
+        public TextView totalRecords;
 
         public ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
             date = itemView.findViewById(R.id.problem_date);
             description = itemView.findViewById(R.id.problem_description);
+            totalRecords = itemView.findViewById(R.id.number_records_title);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
 

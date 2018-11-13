@@ -52,7 +52,7 @@ public class ProblemsFragment extends Fragment  {
         patientList.setLayoutManager(manager);
 
         // add spacing between views
-        VerticalSpaceController decoration = new VerticalSpaceController(50);
+        VerticalSpaceController decoration = new VerticalSpaceController(75);
         patientList.addItemDecoration(decoration);
 
         return rootView;

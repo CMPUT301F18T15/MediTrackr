@@ -9,9 +9,8 @@ import java.io.Serializable;
  * it also hold all the carproviders information id, email etc.
  *
  *
- * @param
- * @return
- * @author Orest Cokan
+ * @parama  PatientList     this is initially an empty list in which CareProvider can add Patients to it
+ * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  */
 

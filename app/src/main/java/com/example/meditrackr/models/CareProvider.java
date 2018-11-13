@@ -5,7 +5,15 @@ import java.io.Serializable;
 
 
 /**
- * Created by Skryt on Oct 24, 2018
+ * this is the care provider class. this allows a careprovider to view thier patients, add or delete
+ * a patient or check to see if a patient exists.
+ * it also hold all the carproviders information id, email etc.
+ *
+ *
+ * @param
+ * @return
+ * @author Orest Cokan
+ * @version 1.0 Oct 24, 2018.
  */
 
 // CareProvider class

@@ -2,8 +2,16 @@ package com.example.meditrackr.models.record;
 
 import java.io.Serializable;
 
+
 /**
- * Created by Skryt on Nov 08, 2018
+ * this class is a geolcoation point on a map. it will just keep the latitude and logitude of that geolocation
+ *
+ *
+ *
+ * @parama  longitude     this is of type double that is a decimal num of geolocations longitude
+ * @parama  longitude     this is of type double that is a decimal num of geolocations latitude
+ * @author  Orest Cokan
+ * @version 1.0 Nov 8, 2018.
  */
 
 public class Geolocation implements Serializable {

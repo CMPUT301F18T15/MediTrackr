@@ -67,7 +67,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
 
         }
 
-        // set onClick listener for each record so you can view it in greater detail
+        // set onClick listener for each record so you can view it in greater detail..
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();

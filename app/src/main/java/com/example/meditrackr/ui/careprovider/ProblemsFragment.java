@@ -25,7 +25,7 @@ public class ProblemsFragment extends Fragment  {
     public static ProblemsFragment newInstance(int index){
         ProblemsFragment fragment = new ProblemsFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("INDEX", index);
+        bundle.putInt("ProblemIndex", index);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -37,7 +37,8 @@ public class ProblemsFragment extends Fragment  {
                 R.layout.fragment_patient_problem, container, false);
 
         final RecyclerView patientList = (RecyclerView) rootView.findViewById(R.id.careprovider_view_patient);
-        int index = getArguments().getInt("INDEX");
+
+        int index = getArguments().getInt("ProblemIndex");
         String username = ProfileManager.getCareProvider().getPatient(index);
         Patient patient = (Patient) ElasticSearchController.searchProfile(username);
 

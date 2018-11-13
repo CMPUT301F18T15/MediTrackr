@@ -90,7 +90,6 @@ public class AddProblemFragment extends Fragment {
                 if(checkInputs(title, description)){
                     Problem problem = new Problem(title.getText().toString(), dateSelector.getText().toString(), description.getText().toString());
                     patient.getProblems().addProblem(problem);
-                    Log.d("ProblemAdd", patient.getProblems().getProblem(0).getTitle() + patient.getProblems().getProblem(0).getDate() + patient.getProblems().getProblem(0).getDescription());
                     ElasticSearchController.updateUser(patient);
                     Log.d("ProblemAdd", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
 

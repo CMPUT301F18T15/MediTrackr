@@ -47,7 +47,7 @@ public class PatientsFragment extends Fragment {
         manager = new LinearLayoutManager(getActivity());
         patientList.setLayoutManager(manager);
 
-        VerticalSpaceController decoration = new VerticalSpaceController(50);
+        VerticalSpaceController decoration = new VerticalSpaceController(75);
         patientList.addItemDecoration(decoration);
 
 

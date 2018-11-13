@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/patient_username"
         android:layout_width="0dp"
         android:layout_height="75dp"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/patient_image" />
 
 
-    <TextView
+    <EditText
         android:id="@+id/patient_email"
         android:layout_width="0dp"
         android:layout_height="75dp"
@@ -71,7 +71,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patient_username" />
 
-    <TextView
+    <EditText
         android:id="@+id/patient_phone"
         android:layout_width="0dp"
         android:layout_height="75dp"
@@ -96,7 +96,7 @@
         app:layout_constraintTop_toBottomOf="@+id/patient_email" />
 
     <Button
-        android:id="@+id/edit_button"
+        android:id="@+id/save_edits_button"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="75dp"
@@ -106,7 +106,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/gradient"
-        android:text="EDIT"
+        android:text="SAVE"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16sp"

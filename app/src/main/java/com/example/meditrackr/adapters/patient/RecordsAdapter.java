@@ -6,14 +6,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ProfileManager;
-import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.patient.RecordFragment;
 
@@ -45,7 +44,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.date.setText(records.getRecord(position).getDate());
-        holder.description.setText(records.getRecord(position).getDate());
+        holder.description.setText(records.getRecord(position).getDescription());
     }
 
     @Override
@@ -74,6 +73,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
+            Log.d("RecordsFragments", "index is: " + position);
             RecordFragment fragment = RecordFragment.newInstance(position);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);

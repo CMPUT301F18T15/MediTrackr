@@ -15,7 +15,7 @@ import com.example.meditrackr.R;
 public class RecordFragment extends Fragment {
 
     public static RecordFragment newInstance(int index) {
-        RecordsFragment fragment = new RecordsFragment();
+        RecordFragment fragment = new RecordFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("RecordIndex", index);
         fragment.setArguments(bundle);

@@ -42,7 +42,7 @@ public class ProblemsFragment extends Fragment {
         manager = new LinearLayoutManager(getActivity());
         problems.setLayoutManager(manager);
 
-        VerticalSpaceController decoration = new VerticalSpaceController(50);
+        VerticalSpaceController decoration = new VerticalSpaceController(75);
         problems.addItemDecoration(decoration);
 
 

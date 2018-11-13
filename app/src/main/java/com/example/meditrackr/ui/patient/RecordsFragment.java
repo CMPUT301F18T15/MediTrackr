@@ -1,5 +1,6 @@
 package com.example.meditrackr.ui.patient;
 
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -26,9 +27,10 @@ public class RecordsFragment extends Fragment {
     public static RecordsFragment newInstance(int index){
         RecordsFragment fragment = new RecordsFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("ProblemIndexPatient", index);
+        Log.d("test", index + "");
+        bundle.putInt("INDEX", index);
         fragment.setArguments(bundle);
-        return new RecordsFragment();
+        return fragment;
     }
 
     @Override
@@ -40,11 +42,10 @@ public class RecordsFragment extends Fragment {
         final RecyclerView records = (RecyclerView) rootView.findViewById(R.id.records_recyclerview);
         final FloatingActionButton addRecord = (FloatingActionButton) rootView.findViewById(R.id.add_record_floating);
 
-        int index = getArguments().getInt("ProblemIndexPatient");
-        Log.d("RecordsFragments", "we on are on index: " + index);
 
+        final int index = getArguments().getInt("INDEX");
+        Log.d("RecordsFragments", "we on are on index: " + index);
         RecordList recordList = patient.getProblem(index).getRecords();
-        Log.d("RecordsFragments", "date: " + recordList.getRecord(0).getDate());
 
         records.setHasFixedSize(false);
         adapter = new RecordsAdapter(getActivity(), recordList);
@@ -54,7 +55,7 @@ public class RecordsFragment extends Fragment {
         manager = new LinearLayoutManager(getActivity());
         records.setLayoutManager(manager);
 
-        VerticalSpaceController decoration = new VerticalSpaceController(50);
+        VerticalSpaceController decoration = new VerticalSpaceController(75);
         records.addItemDecoration(decoration);
 
 
@@ -65,7 +66,7 @@ public class RecordsFragment extends Fragment {
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.addToBackStack(null);
-                AddRecordFragment fragment = AddRecordFragment.newInstance(1);
+                AddRecordFragment fragment = AddRecordFragment.newInstance(index);
                 transaction.replace(R.id.content, fragment);
                 transaction.commit();
             }

@@ -63,7 +63,7 @@ public class AddRecordFragment extends Fragment {
 
 
 
-        final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, yyyy");
+        final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d. yyyy");
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
         dateSelector.setText(format.format(calendar.getTime()));
 

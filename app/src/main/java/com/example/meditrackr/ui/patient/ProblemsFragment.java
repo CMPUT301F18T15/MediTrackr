@@ -32,21 +32,21 @@ public class ProblemsFragment extends Fragment {
                 R.layout.fragment_problems, container, false);
 
         final FloatingActionButton addProblem = (FloatingActionButton) rootView.findViewById(R.id.add_problem_floating);
-        final RecyclerView problemList = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
+        final RecyclerView problems = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
 
-        problemList.setHasFixedSize(false);
+        problems.setHasFixedSize(false);
         adapter = new ProblemAdapter(getActivity());
-        problemList.setAdapter(adapter);
+        problems.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        problemList.setLayoutManager(manager);
+        problems.setLayoutManager(manager);
         manager = new LinearLayoutManager(getActivity());
-        problemList.setLayoutManager(manager);
+        problems.setLayoutManager(manager);
 
         VerticalSpaceController decoration = new VerticalSpaceController(50);
-        problemList.addItemDecoration(decoration);
+        problems.addItemDecoration(decoration);
 
 
-
+        // floating button on click listener to go to add problem
         addProblem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

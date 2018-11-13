@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.ui.patient.RecordsFragment;
 
@@ -75,7 +77,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            RecordsFragment fragment = RecordsFragment.newInstance(adapter.problems.getProblem(position).getRecords(), position);
+            Log.d("ProblemAdapter", "we are on index: " + position);
+            RecordsFragment fragment = RecordsFragment.newInstance(position);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();

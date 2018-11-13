@@ -1,35 +1,42 @@
 package com.example.meditrackr.models.record;
 
+import com.example.meditrackr.models.Problem;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 
 public class RecordList implements Serializable {
-    private ArrayList<Record> recordList = new ArrayList<>();
+    private ArrayList<Record> records = new ArrayList<>();
 
     public void addRecord(Record newRecord) {
-        recordList.add(newRecord);
+        records.add(newRecord);
     }
 
-    public void removeRecord(Record record){
-        recordList.remove(record);
+    public void removeRecord(int record){
+        records.remove(record);
     }
 
     public Boolean recordExists(Record record){
-        return recordList.contains(record);
+        return records.contains(record);
     }
 
     public int getIndex(Record record){
-        return recordList.indexOf(record);
+        return records.indexOf(record);
     }
 
     public int getSize(){
-        return recordList.size();
+        return records.size();
     }
 
-    public String toString(){
-        return recordList.toString();
+    public String toString() {
+        return records.toString();
     }
+
+    public Record getRecord(int index){
+        return records.get(index);
+    }
+
 
 
 }

@@ -12,19 +12,19 @@ import java.util.Date;
 // A basic record class that holds all information pertaining to record
 public class Record {
     private Bitmap[] images;
-    private Date date;
-    private String comment;
+    private String date;
+    private String description;
     private String title;
     private BodyLocation bodyLocation;
     // geolocation is an array of LONGITUDE, LATITUDE in degrees
     private Geolocation geoLocation;
 
     // Constructor
-    public Record(@NonNull Date date, Bitmap[] images, String comment, String title, BodyLocation bodylocation, Geolocation geoLocation) {
+    public Record(String title, String description, @NonNull String date, Bitmap[] images, BodyLocation bodylocation, Geolocation geoLocation) {
+        this.title = title;
+        this.description = description;
         this.date = date;
         this.images = images;
-        this.comment = comment;
-        this.title = title;
         this.bodyLocation = bodylocation;
         this.geoLocation = geoLocation;
     }
@@ -38,20 +38,20 @@ public class Record {
         this.images = images;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public String getComment() {
-        return comment;
+    public String getDescription() {
+        return description;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setDescription(String description) {
+        this.description= description;
     }
 
     public String getTitle() {

@@ -238,11 +238,12 @@
                 android:layout_width="52dp"
                 android:layout_height="27dp"
                 android:layout_marginTop="16dp"
-                android:text="Photos"
+                android:text="TextView"
                 android:textColor="@color/colorPrimaryBlack"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/reminder_title"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                tools:text="Photos" />
 
             <GridView
                 android:id="@+id/photo_grid_view"

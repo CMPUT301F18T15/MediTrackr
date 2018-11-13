@@ -92,8 +92,8 @@
         android:layout_marginTop="8dp"
         android:text="Not a member? Sign Up."
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textColor="@color/subtitle"
-        android:textSize="16sp"
+        android:textColor="@color/editTextHint"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />

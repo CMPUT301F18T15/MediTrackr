@@ -26,7 +26,6 @@ import com.example.meditrackr.ui.careprovider.ProblemsFragment;
  * beginning of javDocs
  *
  */
-beginning of java docs
 /
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder>{
     private FragmentActivity activity;

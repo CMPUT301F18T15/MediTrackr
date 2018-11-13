@@ -3,7 +3,6 @@ package com.example.meditrackr.models;
 
 import java.io.Serializable;
 
-
 /**
  * this is the care provider class. this allows a careprovider to view thier patients, add or delete
  * a patient or check to see if a patient exists.

@@ -16,7 +16,12 @@ import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.controllers.ProfileManager;
 
 /**
- * Created by Skryt on Nov 10, 2018
+ * shows all of the problems from patient in a list (recycler view)
+ *
+ * @parama  adapter
+ * @return  fragment
+ * @author  Orest Cokan
+ * @version 1.0 Nov 10, 2018.
  */
 
 public class ProblemsFragment extends Fragment  {

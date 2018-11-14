@@ -3,6 +3,8 @@ package com.example.meditrackr.models.record;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -10,8 +12,8 @@ import java.util.Date;
  */
 
 // A basic record class that holds all information pertaining to record
-public class Record {
-    private Bitmap[] images;
+public class Record implements Serializable {
+    private ArrayList<Bitmap> images;
     private String date;
     private String description;
     private String title;
@@ -20,7 +22,7 @@ public class Record {
     private Geolocation geoLocation;
 
     // Constructor
-    public Record(String title, String description, @NonNull String date, Bitmap[] images, BodyLocation bodylocation, Geolocation geoLocation) {
+    public Record(String title, String description, @NonNull String date, ArrayList<Bitmap> images, BodyLocation bodylocation, Geolocation geoLocation) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -30,11 +32,11 @@ public class Record {
     }
 
     // Getters/Setters
-    public Bitmap[] getImages() {
+    public ArrayList<Bitmap> getImages() {
         return images;
     }
 
-    public void setImages(Bitmap[] images) {
+    public void setImages(ArrayList<Bitmap> images) {
         this.images = images;
     }
 

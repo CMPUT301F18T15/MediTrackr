@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import com.example.meditrackr.R;
 
 /**
- * Created by Skryt on Nov 13, 2018
+ * @return  fragment
+ * @author  Orest Cokan
+ * @version 1.0 Nov 12, 2018.
  */
 
 public class CameraFragment extends Fragment {

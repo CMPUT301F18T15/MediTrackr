@@ -20,7 +20,16 @@ import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.models.record.RecordList;
 
 /**
- * Created by Skryt on Nov 12, 2018
+ * shows user a list of the records associated with that problem in a recycler view.
+ * in each item it the recycler view displays the date and the description with that record.
+ *
+ * when a user clicks on a record it will bring them to AddRecordFragment
+ *
+ * there is also a + icon that when pressed brings the user to addRecordFragment
+ *
+ * @return  fragment
+ * @author  Orest Cokan
+ * @version 1.0 Nov 12, 2018.
  */
 
 public class RecordFragment extends Fragment {

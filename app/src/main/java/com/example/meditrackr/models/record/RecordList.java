@@ -5,6 +5,16 @@ import com.example.meditrackr.models.Problem;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * this class creates a recordlist which stores all records.
+ * this class can add a record, remove a record, check to see if a record exists.
+ * find out the number of records in the list, find a specific record and
+ *
+ * tostring??????
+ * @parama ArrayList<Record>      creates a new empty list to put records in
+ * @author  Orest Cokan
+ * @version 1.0 Oct 24, 2018.
+ */
 
 public class RecordList implements Serializable {
     private ArrayList<Record> records = new ArrayList<>();

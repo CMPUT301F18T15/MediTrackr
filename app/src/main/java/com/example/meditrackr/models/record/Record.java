@@ -1,11 +1,8 @@
 package com.example.meditrackr.models.record;
 
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
+
 
 /**
  * Created by Skryt on Oct 24, 2018
@@ -13,7 +10,7 @@ import java.util.Date;
 
 // A basic record class that holds all information pertaining to record
 public class Record implements Serializable {
-    private ImageList images = new ImageList();
+    private ImageList images;
     private String date;
     private String description;
     private String title;

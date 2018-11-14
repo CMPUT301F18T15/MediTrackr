@@ -9,11 +9,13 @@ import com.example.meditrackr.models.Profile;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 
 public class SaveLoadController {
@@ -30,7 +32,7 @@ public class SaveLoadController {
                 return careProvider;
             } else {
                 Patient patient = (Patient) profile;
-                Log.d("SearchProfile", "Patient: " + patient.getisCareProvider() + " and our username is: " + patient.getUsername());
+                Log.d("LoadProfile", "Patient: " + patient.getisCareProvider() + " and our username is: " + patient.getUsername());
                 return patient;
             }
         } catch (FileNotFoundException e) {
@@ -39,20 +41,32 @@ public class SaveLoadController {
         return null;
     }
 
-    public static void saveProfile(Context context, Profile profile){
+    // save Profile to disk
+    public static void saveProfile(Context context, Profile profile) {
         try {
-            FileOutputStream stream = context.openFileOutput(profile.getUsername()+".sav", 0);
-            OutputStreamWriter writer = new OutputStreamWriter(stream);
-            Gson gson = new Gson();
-            gson.toJson(profile, writer);
-            writer.flush();
+            FileOutputStream stream = context.openFileOutput(profile.getUsername()+".sav",0);
+            ObjectOutputStream objStream = new ObjectOutputStream(stream);
+            objStream.writeObject(profile);
+            stream.close();
+            objStream.close();
+            Log.d("SaveProfile", "Save profile successful");
         }
-
-        catch (IOException e) {
-            // do nothing
+        catch(java.io.IOException e) {
+            Log.d("SaveProfile", "Save Profile Failed!");
         }
     }
 
+    // save a profile for the first time
+    public static boolean addNewProfile(Context context, Profile profile) {
+        File file = new File(context.getApplicationContext().getFilesDir(), profile.getUsername() + ".sav");
+        if (file.exists()) {
+                return false;
+        } else {
+            saveProfile(context, profile);
+            Log.d("AddProfile", "Added a new profile by the name of " + profile.getUsername());
+            return true;
+        }
+    }
 
 }
 

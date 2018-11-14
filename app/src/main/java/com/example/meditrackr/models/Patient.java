@@ -4,7 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by Skryt on Oct 24, 2018
+ * this class creates a patient which stores all information associated with the patient.
+ * the stored information is as gollows: (id, username, email, phone, isCareProvider)
+ * NOTE: isCareProvider should be false
+ *
+ * this class can also get the care providers associated with the patient and check to see if a care provider exists
+ * it can also get problems associated with the patient
+ *
+ * @parama  CareProviderList    creates a new list to put careproviders in (associated with the patient)
+ * @parama  ProblemList         creates a new list to put problems in (associated with the patient)
+ * @author  Orest Cokan
+ * @version 1.0 Oct 24, 2018.
  */
 
 // A Patient class holding all information pertaining to Patient

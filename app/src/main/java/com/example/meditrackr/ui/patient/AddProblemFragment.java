@@ -26,10 +26,9 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * shows all patients associated with the careProvider in a list (recycler view)
- * also has a search bar that lets care Provider search for a specific patient
+ * Allows user to add a title to the problem, change the date that was assigned and add a description.
+ * to create this problem user will press the add button
  *
- * @parama  adapter
  * @return  fragment
  * @author  Orest Cokan
  * @version 1.0 Nov 8, 2018.

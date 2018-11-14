@@ -7,7 +7,7 @@ import java.io.Serializable;
  * This class will create a Record.
  * a record will store the following: an image, a Date, a description, a title, and a body location.
  *
- * @parama  images          this is of type Bitmap this 
+ * @parama  images          this is of type Bitmap this
  * @parama  date            this is of type Date which just sores the date when the record was created
  * @parama  description     this is of type string which stores a short description of the record
  * @parama  title           this is of type string which will be how to identify the record

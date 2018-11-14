@@ -39,7 +39,7 @@ public class RecordFragment extends Fragment {
         // set ui attributes
         record = (Record) getArguments().getSerializable(
                 "Record");
-        recordImage.setImageBitmap(record.getImages().get(0));
+        recordImage.setImageBitmap(record.getImages().getImage(0));
 
 
 

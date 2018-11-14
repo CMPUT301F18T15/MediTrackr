@@ -49,8 +49,7 @@ public class AddRecordFragment extends Fragment {
 
     //image
     private ImageView imageTest;
-    ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
-
+    private Bitmap bitmap;
 
     private LocationController locationController;
 
@@ -96,9 +95,9 @@ public class AddRecordFragment extends Fragment {
                             recordTitle.getText().toString(),
                             recordDescrption.getText().toString(),
                             dateSelector.getText().toString(),
-                            bitmapArray,
                             null,
                             null);
+                    record.getImages().addImage(bitmap);
                     patient.getProblem(index).getRecords().addRecord(record);
                     ElasticSearchController.updateUser(patient);
                     Log.d("RecordAdd", "Profile: " + patient.getUsername() + " Records: " + patient.getProblem(index).getRecords());
@@ -154,11 +153,10 @@ public class AddRecordFragment extends Fragment {
 
                 // convert byte array to Bitmap
 
-                Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
+                bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                         byteArray.length);
                 Log.d("ImageTest", "do we get here");
                 imageTest.setImageBitmap(bitmap);
-                bitmapArray.add(bitmap);
                 Log.d("ImageTest", bitmap.toString());
 
 

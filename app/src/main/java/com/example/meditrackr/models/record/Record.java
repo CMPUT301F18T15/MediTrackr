@@ -13,7 +13,7 @@ import java.util.Date;
 
 // A basic record class that holds all information pertaining to record
 public class Record implements Serializable {
-    private ArrayList<Bitmap> images;
+    private ImageList images = new ImageList();
     private String date;
     private String description;
     private String title;
@@ -22,21 +22,20 @@ public class Record implements Serializable {
     private Geolocation geoLocation;
 
     // Constructor
-    public Record(String title, String description, @NonNull String date, ArrayList<Bitmap> images, BodyLocation bodylocation, Geolocation geoLocation) {
+    public Record(String title, String description, @NonNull String date, BodyLocation bodylocation, Geolocation geoLocation) {
         this.title = title;
         this.description = description;
         this.date = date;
-        this.images = images;
         this.bodyLocation = bodylocation;
         this.geoLocation = geoLocation;
     }
 
     // Getters/Setters
-    public ArrayList<Bitmap> getImages() {
+    public ImageList getImages() {
         return images;
     }
 
-    public void setImages(ArrayList<Bitmap> images) {
+    public void setImages(ImageList images) {
         this.images = images;
     }
 

@@ -1,12 +1,14 @@
 package com.example.meditrackr.models.record;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ImageList implements Serializable {
-    private ArrayList<Image> images = new ArrayList<>();
+    private ArrayList<Bitmap> images = new ArrayList<>();
 
-    public void addImage(Image newImage) {
+    public void addImage(Bitmap newImage) {
         images.add(newImage);
     }
 
@@ -14,11 +16,11 @@ public class ImageList implements Serializable {
         images.remove(image);
     }
 
-    public Boolean imageExists(Image image){
+    public Boolean imageExists(Bitmap image){
         return images.contains(image);
     }
 
-    public int getIndex(Record image){
+    public int getIndex(Bitmap image){
         return images.indexOf(image);
     }
 
@@ -30,7 +32,7 @@ public class ImageList implements Serializable {
         return images.toString();
     }
 
-    public Image getImage(int index){
+    public Bitmap getImage(int index){
         return images.get(index);
     }
 

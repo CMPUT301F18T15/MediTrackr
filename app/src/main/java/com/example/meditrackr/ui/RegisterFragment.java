@@ -25,6 +25,10 @@ import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
+
 public class RegisterFragment extends Fragment {
     public boolean isCareProvider;
 
@@ -104,7 +108,7 @@ public class RegisterFragment extends Fragment {
         });
 
 
-        // onclick listener for login
+        // onclick listener for login button
         alreadyMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +121,7 @@ public class RegisterFragment extends Fragment {
             }
         });
 
+        // onclick listener for doctor selected, does some UI stuff as well
         doctorImage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -129,6 +134,7 @@ public class RegisterFragment extends Fragment {
             }
         });
 
+        // onclick listener for patient select, does some UI stuff as well
         patientImage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

@@ -18,6 +18,10 @@ import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 
+/**
+ * Created by Skryt on Nov 5, 2018
+ */
+
 public class SaveLoadController {
 
     public static Profile loadProfile(Context context, String username){

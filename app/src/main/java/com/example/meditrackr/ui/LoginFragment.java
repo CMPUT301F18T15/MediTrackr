@@ -21,6 +21,10 @@ import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.Profile;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
+
 public class LoginFragment extends Fragment {
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();

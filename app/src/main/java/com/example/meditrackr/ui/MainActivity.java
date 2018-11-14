@@ -12,6 +12,10 @@ import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.ui.careprovider.PatientsFragment;
 import com.example.meditrackr.ui.patient.ProblemsFragment;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
+
 public class MainActivity extends AppCompatActivity {
 
 

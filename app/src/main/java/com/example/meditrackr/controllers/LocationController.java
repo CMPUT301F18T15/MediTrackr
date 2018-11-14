@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
+
 public class LocationController {
     private Geocoder geocoder;
     private int maxResults = 2;

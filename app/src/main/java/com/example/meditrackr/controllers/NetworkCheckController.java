@@ -13,6 +13,10 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
+
 
 public class NetworkCheckController {
     public boolean isNetWorkAvaliable(Context context){

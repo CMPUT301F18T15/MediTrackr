@@ -15,6 +15,10 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.patient.ProblemAdapter;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
+
 
 public class ProblemsFragment extends Fragment {
     //Patient patient = ProfileManager.getPatient();

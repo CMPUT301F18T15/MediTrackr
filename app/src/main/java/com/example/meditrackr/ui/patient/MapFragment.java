@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 
 import com.example.meditrackr.R;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
+
 public class MapFragment extends Fragment {
 
     public static MapFragment newInstance(){

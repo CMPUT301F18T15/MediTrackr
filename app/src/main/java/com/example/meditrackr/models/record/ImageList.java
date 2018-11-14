@@ -5,6 +5,11 @@ import android.graphics.Bitmap;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
+
+
 public class ImageList implements Serializable {
     private ArrayList<Bitmap> images = new ArrayList<>();
 

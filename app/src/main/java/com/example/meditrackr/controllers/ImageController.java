@@ -6,6 +6,9 @@ import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
 
 public class ImageController {
     //image

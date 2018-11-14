@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * find out the number of CP's in the list.
  *
  * tostring??????
- * @parama ArrayList<CareProvider>      creates a new empty list to put careProviders in in
+ * @parama ArrayList<CareProvider>      creates a new empty list to put careProviders in
  * @author  Orest Cokan
  * @version 1.0 Nov 7, 2018.
  */

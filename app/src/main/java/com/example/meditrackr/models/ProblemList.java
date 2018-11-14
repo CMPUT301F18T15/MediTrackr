@@ -5,7 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Skryt on Nov 7, 2018
+ * this class creates a ProblemList which stores all problems for a patient in one place.
+ * it uses getters and setters to store the problems.
+ * this class can add a problem, remove a problem, check to see if a problem exists.
+ * find out the number of problems in the list and it can also get the index of a certain problem
+ *
+ * tostring??????
+ * @parama ArrayList<Problem>      creates a new empty list to put Problems in
+ * @author  Orest Cokan
+ * @version 1.0 Nov 7, 2018.
  */
 
 public class ProblemList implements Serializable {

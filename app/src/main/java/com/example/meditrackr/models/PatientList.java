@@ -4,7 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by Skryt on Nov 7, 2018
+ * this class creates a PatientList which stores all Patients in one place.
+ * it uses getters and setters to store the patients.
+ * this class can add a patien, remove a patient, check to see if a patient exists.
+ * find out the number of patients in the list.
+ *
+ * tostring??????
+ * @parama ArrayList<String>      creates a new empty list to put patients in
+ * @author  Orest Cokan
+ * @version 1.0 Nov 7, 2018.
  */
 
 public class PatientList implements Serializable {

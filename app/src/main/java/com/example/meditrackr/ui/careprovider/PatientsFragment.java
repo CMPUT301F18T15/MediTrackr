@@ -16,9 +16,13 @@ import com.example.meditrackr.adapters.careprovider.PatientAdapter;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 
 /**
- * Created by Skryt on Nov 08, 2018
+ * shows all patients in a list (recycler view) also has a search bar that lets care Provider search for a specific patient
+ *
+ * @parama  adapter
+ * @return  fragment
+ * @author  Orest Cokan
+ * @version 1.0 Nov 8, 2018.
  */
-
 public class PatientsFragment extends Fragment {
     private PatientAdapter adapter;
 

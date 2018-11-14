@@ -30,7 +30,14 @@ import java.util.List;
 import java.util.TimeZone;
 
 /**
- * Created by Skryt on Nov 12, 2018
+ * Allows user to add a title to the record, change the date that was assigned and add a description.
+ * there is also a button that can add a daily reminder for any day(s) of the week
+ * also able to add photos which shows up in a grid view.
+ * to add all of this to the problem (as a record class) user will press the add button
+ *
+ * @return  fragment
+ * @author  Orest Cokan
+ * @version 1.0 Nov 12, 2018.
  */
 
 public class AddRecordFragment extends Fragment {

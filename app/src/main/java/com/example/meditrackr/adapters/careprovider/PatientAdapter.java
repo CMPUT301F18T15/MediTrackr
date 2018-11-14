@@ -22,11 +22,6 @@ import com.example.meditrackr.ui.careprovider.ProblemsFragment;
  * Created by Skryt on Nov 10, 2018
  */
 
-/**
- * beginning of javDocs
- *
- */
-/
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder>{
     private FragmentActivity activity;
     private CareProvider careProvider = ProfileManager.getCareProvider();

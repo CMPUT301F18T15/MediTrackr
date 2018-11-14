@@ -23,9 +23,13 @@ import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
 
 /**
- * Created by Skryt on Nov 08, 2018
+ *
+ *
+ * @parama  
+ * @return  fragment
+ * @author  Orest Cokan
+ * @version 1.0 Nov 10, 2018.
  */
-
 public class PatientSearchFragment extends Fragment {
     private Profile profile;
     private CareProvider careProvider;

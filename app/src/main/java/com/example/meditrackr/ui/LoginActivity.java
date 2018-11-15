@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import com.example.meditrackr.R;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override

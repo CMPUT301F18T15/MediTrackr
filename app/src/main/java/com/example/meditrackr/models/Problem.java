@@ -2,13 +2,15 @@ package com.example.meditrackr.models;
 
 import com.example.meditrackr.models.record.RecordList;
 
+import java.io.Serializable;
+
 /**
  * Created by Skryt on Oct 24, 2018
  */
 
 
 // Profile that contains all information about Problem
-public class Problem {
+public class Problem implements Serializable {
     private String title;
     private String date;
     private String description;

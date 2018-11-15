@@ -57,7 +57,7 @@
         android:textColor="@color/colorPrimaryBlack"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/problem_delete_button"
         app:layout_constraintStart_toStartOf="@+id/problem_title"
         app:layout_constraintTop_toBottomOf="@+id/problem_title" />
 
@@ -71,5 +71,34 @@
         android:textColor="@color/subtitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <net.steamcrafted.materialiconlib.MaterialIconView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/problem_edit_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@android:color/white"
+        android:scaleType="center"
+        app:layout_constraintBottom_toTopOf="@+id/problem_delete_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:materialIcon="folder_edit"
+        app:materialIconColor="#000"
+        app:materialIconSize="30dp" />
+
+    <net.steamcrafted.materialiconlib.MaterialIconView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/problem_delete_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@android:color/white"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/problem_edit_button"
+        app:materialIcon="delete"
+        app:materialIconColor="#000"
+        app:materialIconSize="30dp" />
 
 </android.support.constraint.ConstraintLayout>

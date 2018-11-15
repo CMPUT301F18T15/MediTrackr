@@ -7,6 +7,7 @@ import android.view.View;
 /**
  * Created by Skryt on Nov 10, 2018
  */
+
 public class VerticalSpaceController extends RecyclerView.ItemDecoration {
 
     private final int verticalSpaceHeight;

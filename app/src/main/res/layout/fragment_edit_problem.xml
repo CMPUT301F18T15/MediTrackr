@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background2"
-    android:orientation="vertical">
-
+    android:isScrollContainer="false"
+    >
 
     <TextView
-        android:id="@+id/add_problem"
+        android:id="@+id/edit_problem_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -18,7 +16,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
-        android:text="ADD PROBLEM"
+        android:text="EDIT PROBLEM"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="30sp"
@@ -27,9 +25,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <EditText
-        android:id="@+id/problem_title_field"
+        android:id="@+id/edit_problem_title_field"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginStart="40dp"
@@ -47,10 +44,10 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_problem" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_problem_title" />
 
     <EditText
-        android:id="@+id/problem_description_field"
+        android:id="@+id/edit_problem_description_field"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginStart="40dp"
@@ -69,10 +66,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/problem_date_selector" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_problem_date_selector" />
 
     <EditText
-        android:id="@+id/problem_date_selector"
+        android:id="@+id/edit_problem_date_selector"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginStart="40dp"
@@ -93,11 +90,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/problem_title_field" />
-
+        app:layout_constraintTop_toBottomOf="@+id/edit_problem_title_field" />
 
     <Button
-        android:id="@+id/problem_add_button"
+        android:id="@+id/edit_problem_save_button"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="match_parent"
         android:layout_height="75dp"
@@ -107,7 +103,7 @@
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/gradient"
-        android:text="ADD"
+        android:text="SAVE"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
@@ -115,6 +111,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/problem_description_field" />
-
+        app:layout_constraintTop_toBottomOf="@+id/edit_problem_description_field" />
 </android.support.constraint.ConstraintLayout>

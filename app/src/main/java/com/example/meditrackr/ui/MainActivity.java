@@ -12,6 +12,10 @@ import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.ui.careprovider.PatientsFragment;
 import com.example.meditrackr.ui.patient.ProblemsFragment;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -85,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         camera.setOnClickListener(listener);
         search.setOnClickListener(listener);
         profile.setOnClickListener(listener);
+
     }
 
 
@@ -102,20 +107,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-    public String getUserType(Bundle bundle){
-        String user;
-        if(bundle.get("CareProvider") != null){
-            user = "CareProvider";
-            Log.d("LoginUser", "CareProvider");
-        }
-        else {
-            user = "Patient";
-            Log.d("LoginUser", "Patient");
-
-        }
-        return user;
-    }
-
 
 }

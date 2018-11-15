@@ -20,6 +20,10 @@ import com.example.meditrackr.controllers.VerticalSpaceController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.RecordList;
 
+/**
+ * Created by Skryt on Nov 13, 2018
+ */
+
 public class RecordsFragment extends Fragment {
     private RecordsAdapter adapter;
     private Patient patient = ProfileManager.getPatient();

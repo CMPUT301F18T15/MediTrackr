@@ -38,7 +38,23 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 
 /**
- * Created by Skryt on Nov 5, 2018
+ * this class can load profiles, save profiles and create a new profile
+ *
+ * to load a new profile the class uses loadProfile which will search for the profile using a username
+ * and return either a careProvider profile or a patient profile.
+ * if no profile is found it will throw an exception (java.io.IOException | java.lang.ClassNotFoundException)
+ *
+ * to save a profile the class will use saveProfile. to do this it will take the username from
+ * the given profile and then overwrite the new profile data onto and the old profile date.
+ * if something goes wrong it throws an error(java.io.IOException)
+ *
+ * to add a new profile the class will use addNewProfile this will take a profile with information
+ * already in it and save it to the database. no errors are expected to come up so there are no exceptions
+ *
+ * @author Orest Cokan
+ * @version 2.0 Nov 5, 2018
+ * @throw java.io.IOException| java.lang.ClassNotFoundException
+ * @throw java.io.IOException
  */
 
 public class SaveLoadController {

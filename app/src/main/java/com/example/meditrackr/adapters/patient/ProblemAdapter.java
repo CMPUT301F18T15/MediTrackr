@@ -1,6 +1,8 @@
 package com.example.meditrackr.adapters.patient;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,8 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.meditrackr.R;
+
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
@@ -83,11 +85,32 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             deleteProblem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    adapter.problems.removeProblem(position);
-                    adapter.notifyItemRemoved(position);
-                    adapter.notifyItemRangeChanged(position,adapter.problems.getSize());
-                    Log.d("DeleteProblem", "Position: " + position);
+                    final int position = getAdapterPosition();
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(adapter.activity, R.style.AlertDialogStyle);
+                    builder1.setMessage("Are you sure you want to delete the problem?");
+                    builder1.setCancelable(true);
+                    builder1.setPositiveButton(
+                            "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    adapter.problems.removeProblem(position);
+                                    adapter.notifyItemRemoved(position);
+                                    adapter.notifyItemRangeChanged(position,adapter.problems.getSize());
+                                    Log.d("DeleteProblem", "Position: " + position);
+                                    dialog.cancel();
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
                 }
             });
 

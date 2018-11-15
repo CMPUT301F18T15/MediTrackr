@@ -18,10 +18,6 @@
  */
 package com.example.meditrackr.controllers;
 
-/**
- * Created by Skryt on Nov 14, 2018
- */
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -32,7 +28,9 @@ import java.net.Socket;
 import java.net.SocketAddress;
 
 /**
- * Created by Skryt on Nov 13, 2018
+ *
+ * @author Orest Cokan
+ * @version 2.0 Nov 14, 2018
  */
 
 

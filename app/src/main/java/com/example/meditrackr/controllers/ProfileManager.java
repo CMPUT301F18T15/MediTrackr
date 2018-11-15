@@ -25,13 +25,11 @@ import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
 
 /**
- * Team name CMPUT301F18T15
- * Author Skyrt
- * Created on Nov 7, 2018
- * Version 2.0
  * ProfileManager.java provides profile getter and setter methods, care provider getter
  * and patient getter method, and provides patient list for care providers
  *
+ * @author Orest Cokan
+ * @version 2.0 Nov 7, 2018
  */
 
 public class ProfileManager {

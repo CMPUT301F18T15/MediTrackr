@@ -40,4 +40,6 @@ public class CareProvider extends Profile implements Serializable {
     public Boolean patientExists(String username){
         return patients.patientExists(username);
     }
+
+    public String toString() { return this.getUsername(); }
 }

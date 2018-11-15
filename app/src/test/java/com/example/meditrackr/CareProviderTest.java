@@ -20,7 +20,7 @@ public class CareProviderTest {
     @Before
     public void newCareProvider() {
         careProvider = new CareProvider
-                ("", "", "", "", true);
+                ("", "", "", true);
     }
 
     @Test

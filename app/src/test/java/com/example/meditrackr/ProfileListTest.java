@@ -24,7 +24,7 @@ public class ProfileListTest {
     @Test
     public void addProfileTest() {
         final Profile tempProfile = new Profile
-                ("", "", "", "", false);
+                ("", "", "", false);
         profileList.addProfile(tempProfile);
         assertTrue("Profile not added to ProfileList",
                 profileList.size() != 0);
@@ -33,7 +33,7 @@ public class ProfileListTest {
     @Test
     public void removeProfileTest() {
         final Profile tempProfile = new Profile
-                ("", "", "", "", false);
+                ("", "", "", false);
         profileList.addProfile(tempProfile);
         profileList.removeProfile(tempProfile);
         assertTrue("Profile not removed from ProfileList",
@@ -43,7 +43,7 @@ public class ProfileListTest {
     @Test
     public void hasProfileTest() {
         final Profile tempProfile = new Profile
-                ("", "", "", "", false);
+                ("", "", "", false);
         profileList.addProfile(tempProfile);
         assertTrue("Profile not added to ProfileList",
                 profileList.containsProfile(tempProfile));

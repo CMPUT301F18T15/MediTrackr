@@ -18,11 +18,11 @@ public class ProfileTest {
     @Test
     public void substituteTest() {
         final Patient tempPatient = new Patient
-                ("", "", "", "", false);
+                ("", "", "", false);
         assertThat("Substituion of patient failure",
                 tempPatient, isA(Profile.class));
         final CareProvider tempProvider = new CareProvider
-                ("", "", "", "", true);
+                ("", "", "", true);
         assertThat("Substituion of care provider failure",
                 tempProvider, isA(Profile.class));
     }
@@ -36,15 +36,13 @@ public class ProfileTest {
         final boolean tempBool = true;
 
         final Profile profile = new Profile
-                ("", "", "", "", false);
+                ("", "", "", false);
 
-        profile.setId(id);
         profile.setUsername(username);
         profile.setEmail(email);
         profile.setPhone(phone);
         profile.setisCareProvider(tempBool);
 
-        assertEquals("ID mismatch", id, profile.getId());
         assertEquals("Username mismatch", username, profile.getUsername());
         assertEquals("Email mismatch", email, profile.getEmail());
         assertEquals("Phone number mismatch", phone, profile.getPhone());

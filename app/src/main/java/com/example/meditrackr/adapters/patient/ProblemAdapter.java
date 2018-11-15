@@ -108,8 +108,6 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             editProblem = itemView.findViewById(R.id.problem_edit_button);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
-<<<<<<< HEAD
-
 
             // onclick listener for delete problem
             deleteProblem.setOnClickListener(new View.OnClickListener() {
@@ -136,10 +134,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
 
                 }
             });
-=======
->>>>>>> patient/ProblemAdapter documentation-commit
         }
-
 
 
         // set onClick listener for each problem, so they can be edited

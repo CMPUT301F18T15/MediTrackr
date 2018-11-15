@@ -7,8 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.meditrackr.R;
 
 /**
- * Created by Skryt on Nov 13, 2018
+ * this activity only exists for LoginFragment to work
+ *
+ * @author  Orest Cokan
+ * @version 2.0 Nov 13, 2018.
+ * @deprecated  LoginFragment
  */
+
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -18,7 +18,11 @@ import com.example.meditrackr.ui.patient.AddRecordFragment;
 
 
 /**
- * Created by Skryt on Nov 4, 2018
+ * this fragment shows the users username, phone number, email and an image of the patient if they added one
+ * there is also a butto that will take the user to an edit profile fragment (UserEditFragment)
+ * @author  Orest Cokan
+ * @version 2.0 Nov 4, 2018.
+ * @see UserEditFragment
  */
 
 public class UserFragment extends Fragment {

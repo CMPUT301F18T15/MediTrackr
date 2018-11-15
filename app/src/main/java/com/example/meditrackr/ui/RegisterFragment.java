@@ -26,8 +26,30 @@ import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 
 /**
- * Created by Skryt on Nov 13, 2018
+ * this fragment lets a user create a profile
+ * the main parts to this fragment is a text box where user can input a username for their account
+ * if the username is already in use or invalid there will be a toast message letting the user try again
+ *
+ * there is a spot for the user to enter their phone number if phone number is invalid a toast message
+ * will prompt the user to try again
+ *
+ * there is a spot for the user to enter their email if the email is invalid a toast message
+ * will prompt the user to try again
+ *
+ * there are also two button for the user to indicate if they are a patient or care provider.
+ * if user doesn't choose one a toast message will appear to tell user to pick one
+ *
+ * lastly there is an login button which a user must press for all of the data they entered to
+ * be put into the database. if all entry's are good then user will be taken to the main page (MainActivity)
+ *
+ * there is also a already_member button which will take the user to the login page page (RegisterFragment)
+ *
+ * @author  Orest Cokan
+ * @version 2.0 Nov 13, 2018.
+ * @see MainActivity
+ * @see LoginFragment
  */
+
 
 public class RegisterFragment extends Fragment {
     public boolean isCareProvider;
@@ -166,7 +188,7 @@ public class RegisterFragment extends Fragment {
             phoneNumber.getText().clear();
             return false;
         } else if (!doctorImage.isSelected() && !patientImage.isSelected()){
-            Toast.makeText(getActivity(), "You messed up kiddo, choose either doctor patient", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "You messed up kiddo, choose either doctor or patient", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

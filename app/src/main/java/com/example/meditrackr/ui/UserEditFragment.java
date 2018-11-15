@@ -18,8 +18,14 @@ import com.example.meditrackr.models.Profile;
 
 
 /**
- * Created by Skryt on Nov 12, 2018
+ * this fragment allows the user to change thier username, phone number and email
+ * there is also a button that will change the information that they had to the new data and
+ * saves it to the database. after that it will take the user to the view profile fragment (UserFragment)
+ * @author  Orest Cokan
+ * @version 2.0 Nov 4, 2018.
+ * @see UserFragment
  */
+
 
 public class UserEditFragment extends Fragment {
     Profile profile = ProfileManager.getProfile();

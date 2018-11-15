@@ -27,7 +27,7 @@ import com.example.meditrackr.ui.patient.ProblemsFragment;
  * @see ProblemsFragment
  * @see com.example.meditrackr.ui.patient.MapFragment
  * @see com.example.meditrackr.ui.patient.CameraFragment
- * @see UserEditFragment
+ * @see UserFragment
  */
 
 public class MainActivity extends AppCompatActivity {

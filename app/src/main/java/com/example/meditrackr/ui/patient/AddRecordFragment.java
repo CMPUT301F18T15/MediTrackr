@@ -55,6 +55,7 @@ public class AddRecordFragment extends Fragment {
     private String date;
     private Patient patient = ProfileManager.getPatient();
 
+
     //indicator
     private static int IMG_RESULT = 1;
     private static final int IMAGE_REQUEST_CODE = 2;
@@ -148,6 +149,7 @@ public class AddRecordFragment extends Fragment {
             }
         };
 
+        // set onclick listeners
         for(Button button: days){
             button.setOnClickListener(listener);
         }
@@ -235,8 +237,9 @@ public class AddRecordFragment extends Fragment {
                 // populate image
                 for(int i = 0; i < bitmaps.length; i++){
                     if(bitmaps[i] == null){
-                        bitmaps[i] = bitmap;
-                        images[i].setImageBitmap(bitmaps[i]);
+                        Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 450, false);
+                        bitmaps[i] = newBitmap;
+                        images[i].setImageBitmap(newBitmap);
                         break;
                     }
                 }

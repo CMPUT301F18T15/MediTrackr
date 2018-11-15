@@ -7,12 +7,10 @@ import android.support.annotation.NonNull;
  * This class will create a Record.
  * a record will store the following: an image, a Date, a description, a title, and a body location.
  *
- * @parama  images          this is of type Bitmap this
- * @parama  date            this is of type Date which just sores the date when the record was created
- * @parama  description     this is of type string which stores a short description of the record
- * @parama  title           this is of type string which will be how to identify the record
- * @parama  bodyLocation    this is of type BodyLocation which holds all the relevant bodylocation information
- * @parama  geolocation     this is of type geolocation and will be a latitude/longitude point
+ * to store all of those it uses a getter function for that data type
+ * and then use a setter function related to that data type as well which will set the variable as
+ * that value that the getter function retrieved
+ *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  */

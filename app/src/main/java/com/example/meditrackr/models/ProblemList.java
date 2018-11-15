@@ -16,6 +16,10 @@ public class ProblemList implements Serializable {
         return problems.get(index);
     }
 
+    public void setProblem(int index, Problem problem){
+        problems.set(index, problem);
+    }
+
     public void addProblem(Problem problem){
         problems.add(problem);
     }

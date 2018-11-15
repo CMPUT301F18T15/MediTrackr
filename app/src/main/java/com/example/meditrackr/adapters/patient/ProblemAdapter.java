@@ -15,6 +15,7 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
+import com.example.meditrackr.ui.patient.EditProblemFragment;
 import com.example.meditrackr.ui.patient.RecordsFragment;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
@@ -94,6 +95,12 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             editProblem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    FragmentManager manager = adapter.activity.getSupportFragmentManager();
+                    FragmentTransaction transaction =  manager.beginTransaction();
+                    EditProblemFragment fragment = EditProblemFragment.newInstance(position);
+                    transaction.replace(R.id.content, fragment);
+                    transaction.commit();
 
                 }
             });

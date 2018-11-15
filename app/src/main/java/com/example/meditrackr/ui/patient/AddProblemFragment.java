@@ -33,7 +33,7 @@ import java.util.TimeZone;
  */
 
 public class AddProblemFragment extends Fragment {
-    Patient patient = ProfileManager.getPatient();
+    private Patient patient = ProfileManager.getPatient();
 
     public static AddProblemFragment newInstance(){
         AddProblemFragment fragment = new AddProblemFragment();

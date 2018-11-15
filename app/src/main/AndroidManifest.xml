@@ -16,7 +16,9 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="com.example.meditrackr.ui.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"
+                    android:windowSoftInputMode="adjustPan"
+                    />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

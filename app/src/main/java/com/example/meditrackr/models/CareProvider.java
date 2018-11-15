@@ -4,12 +4,16 @@ package com.example.meditrackr.models;
 import java.io.Serializable;
 
 /**
- * this is the care provider class. this allows a careprovider to view thier patients, add or delete
- * a patient or check to see if a patient exists.
- * it also hold all the carproviders information id, email etc.
+ * this is the careProvider class. this allows a care provider to view their patients
+ * this class can use getPatients to show the care provider the patients assigned to them
+ * this class can use getPatient to show the care provider information about a specific patient from a given index
+ * the class can use addPatient which will add a patient to the PatientList
+ * the class can use deletePatient which will delete a patient from the PatientList
+ * the class can also use patientExists to see if a patient exists in the Patientlist given the patients username.
+ *
+ * it also hold all the care providers information id, username, email phone, and isCareProvider (which will be true)
  *
  *
- * @parama  PatientList     this is initially an empty list in which CareProvider can add Patients to it
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  */

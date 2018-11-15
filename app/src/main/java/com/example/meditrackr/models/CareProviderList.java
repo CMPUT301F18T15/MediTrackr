@@ -5,11 +5,12 @@ import java.util.ArrayList;
 
 /**
  * this class creates a CareProviderList which stores all care providers in one place.
- * this class can add a care provider, remove a CP, check to see if a CP exists.
- * find out the number of CP's in the list.
+ * this class can use addCareProvider to add a care provider to the list
+ * the class can use deleteCareProvider to remove a CP from the list
+ * the class can use careProviderExists to check to see if a CP exists in the list.
+ * the class can also use getSize to find out the number of CP's in the list.
  *
  * tostring??????
- * @parama ArrayList<CareProvider>      creates a new empty list to put careProviders in
  * @author  Orest Cokan
  * @version 1.0 Nov 7, 2018.
  */

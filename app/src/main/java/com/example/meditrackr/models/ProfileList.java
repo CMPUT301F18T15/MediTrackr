@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 /**
  * this class creates a ProfileList which stores all profiles in one place for the database to use.
- * this class can add a profile, remove a profile, check to see if a profile exists.
- * find out the number of profiles in the list.
+ * this class can use addProfile to add a profile to the profileList
+ * this class can use removeProfile to  remove a profile from the profileList
+ * this class can use containsProfile to check to see if a profile exists
+ * this class can use size to find out the number of profiles in the list.
  *
- * @parama ArrayList<profile>      creates a new empty list to put profiles in
  * @author  Orest Cokan
  * @version 1.0 Nov 7, 2018.
  */

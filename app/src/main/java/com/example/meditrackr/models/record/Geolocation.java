@@ -5,11 +5,9 @@ import java.io.Serializable;
 
 /**
  * this class is a geolcoation point on a map. it will just keep the latitude and logitude of that geolocation
+ * uses a getter function to return a decimal of the geolocations longitude
+ * uses a getter function to return a decimal of the geolocations longitude
  *
- *
- *
- * @parama  longitude     this is of type double that is a decimal num of geolocations longitude
- * @parama  longitude     this is of type double that is a decimal num of geolocations latitude
  * @author  Orest Cokan
  * @version 1.0 Nov 8, 2018.
  */

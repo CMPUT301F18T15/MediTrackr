@@ -5,14 +5,15 @@ import java.util.ArrayList;
 
 /**
  * this class creates a patient which stores all information associated with the patient.
- * the stored information is as gollows: (id, username, email, phone, isCareProvider)
+ * the stored information is as follows: (id, username, email, phone, isCareProvider)
  * NOTE: isCareProvider should be false
  *
- * this class can also get the care providers associated with the patient and check to see if a care provider exists
- * it can also get problems associated with the patient
+ * this class can use getCareProviders to show the patient all care providers that this patient has
+ * this class can use deleteCareProvider to delete a care provider from their list
+ * this class can use careProviderExists to show if that care provider is in their list of assigned care providers
+ * this class can use  getProblems to see all problems associated with the patient
+ * this class can also use getProblem which will give the details about a specific problem from a given index
  *
- * @parama  CareProviderList    creates a new list to put careproviders in (associated with the patient)
- * @parama  ProblemList         creates a new list to put problems in (associated with the patient)
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  */

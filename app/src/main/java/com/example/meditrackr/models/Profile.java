@@ -8,12 +8,8 @@ import io.searchbox.annotations.JestId;
 /**
  * this class creates a profile which gets and stores all the profiles info:
  * id, username, email, phonenumber, isCareprovider
+ * this class uses getters and setters to get and set all of the variables associated with this class
  *
- * @parama  id              a string which the profile can be identified as
- * @parama  username        a string which the user logs in with
- * @parama  email           a string with the email that the user can be contacted at
- * @parama  phone           a string with the phone # that the user can be contacted at
- * @parama  isCareProvider  a boolean value that state true if this user is a careProvider. false if user is a patient
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  */

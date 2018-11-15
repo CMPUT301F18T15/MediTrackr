@@ -6,11 +6,8 @@ import java.io.Serializable;
 
 /**
  * this class creates a Problem which gets and stores all the problems title, date, description and records.
+ * this class uses getters and setter to get and set all the variables associated with that variable
  *
- * @parama  title           a title which the problem can be identified as
- * @parama  date            a time stamp which the problem was created
- * @parama  description     a brife string description of the problem
- * @parama  records         a record list to go along with the problem (ie photos, geolocation, etc)
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  */

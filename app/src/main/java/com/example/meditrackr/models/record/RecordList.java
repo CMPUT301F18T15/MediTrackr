@@ -7,11 +7,13 @@ import java.util.ArrayList;
 
 /**
  * this class creates a recordlist which stores all records.
- * this class can add a record, remove a record, check to see if a record exists.
- * find out the number of records in the list, find a specific record and
+ * this class uses addRecord to add a record to the list
+ * the class uses removeRecord to remove a record from the list
+ * the class uses recordExist to check to see if a record exists in the list
+ * the class can use getIndex to find the index of a specific item
+ * the class can use getSize find out the number of records in the list
+ * lastly the class can use getRecord to find a specific record given an index
  *
- * tostring??????
- * @parama ArrayList<Record>      creates a new empty list to put records in
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  */

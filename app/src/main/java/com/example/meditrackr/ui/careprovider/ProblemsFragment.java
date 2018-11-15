@@ -17,11 +17,12 @@ import com.example.meditrackr.controllers.ProfileManager;
 
 /**
  * shows all of the problems from patient in a list (recycler view)
+ * if care provider clicks on one of these problems it will take them to see the records associated
+ * with this problem (RecordsFragment)
  *
- * @parama  adapter
- * @return  fragment
  * @author  Orest Cokan
  * @version 1.0 Nov 10, 2018.
+ * @see RecordsFragment
  */
 
 public class ProblemsFragment extends Fragment  {

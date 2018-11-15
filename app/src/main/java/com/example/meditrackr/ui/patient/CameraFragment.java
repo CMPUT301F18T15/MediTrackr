@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.example.meditrackr.R;
 
 /**
- * @return  fragment
  * @author  Orest Cokan
  * @version 1.0 Nov 12, 2018.
  */

@@ -23,13 +23,15 @@ import com.example.meditrackr.models.record.RecordList;
  * shows user a list of the records associated with that problem in a recycler view.
  * in each item it the recycler view displays the date and the description with that record.
  *
- * when a user clicks on a record it will bring them to AddRecordFragment
+ * when a user clicks on a record it will bring them to a page where they can edit the
+ * record (AddRecordFragment)
  *
- * there is also a + icon that when pressed brings the user to addRecordFragment
+ * there is also a + icon that when pressed brings the user to a page where they
+ * can create a new record gor that problem (AddRecordFragment)
  *
- * @return  fragment
  * @author  Orest Cokan
  * @version 1.0 Nov 12, 2018.
+ * @see AddRecordFragment
  */
 
 public class RecordFragment extends Fragment {

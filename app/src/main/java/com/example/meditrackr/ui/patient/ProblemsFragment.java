@@ -22,13 +22,16 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
  * in each problem item it displays the date and number of records at the top.
  * it also displays the title with the description underneath the title.
  *
- * when a user clicks on a problem it will bring them to a records page with the records associated with that problem
+ * when a user clicks on a problem it will bring them to a records page with the records associated
+ * with that problem (RecordFragment)
  *
- * there is also a + icon that when pressed brings the user to addProblemFragment
+ * there is also a + icon that when pressed brings the user to the page to add a
+ * new problem(AddProblemFragment)
  *
- * @return  fragment
  * @author  Orest Cokan
  * @version 1.0 Nov 12, 2018.
+ * @see RecordFragment
+ * @see AddProblemFragment
  */
 
 public class ProblemsFragment extends Fragment {

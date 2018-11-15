@@ -26,7 +26,6 @@ import com.example.meditrackr.models.Profile;
  *shows all infoermation associated with the patient that showed up from the search
  *if no patient was found then it returns "User not found"
  *
- * @return  fragment 
  * @author  Orest Cokan
  * @version 1.0 Nov 10, 2018.
  */

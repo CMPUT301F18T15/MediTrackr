@@ -25,7 +25,10 @@ import android.graphics.BitmapFactory;
 import java.io.ByteArrayOutputStream;
 
 /**
- * Created by Skryt on Nov 13, 2018
+ * this class takes a file and and ends up resizing it if needed to the set maximum size set by
+ * the customer. once it is under the maximum size it will be displayed for the user to see
+ * @author Orest Cokan
+ * @version 1.0 Nov 13, 2018
  */
 
 public class ImageController {

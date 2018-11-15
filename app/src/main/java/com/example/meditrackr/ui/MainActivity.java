@@ -13,7 +13,18 @@ import com.example.meditrackr.ui.careprovider.PatientsFragment;
 import com.example.meditrackr.ui.patient.ProblemsFragment;
 
 /**
- * Created by Skryt on Nov 13, 2018
+ * for this activity it just shows a bar at the bottom with 5 buttons
+ * button 1 is a problems button which will take the user to the problems fragment
+ * button 2 is a map button which will take the user to the map fragment
+ * button 3 is a camera button which in the future will allow user to take a picture
+ * button 4 is a search button which will allow a user to search for their patients or careprovider
+ * depending on their account type
+ * button 5 is a person button which brings the user to a page where they can view or edit their
+ * profile info
+ *
+ * @return  fragment
+ * @author  Orest Cokan
+ * @version 2.0 Nov 13, 2018.
  */
 
 public class MainActivity extends AppCompatActivity {

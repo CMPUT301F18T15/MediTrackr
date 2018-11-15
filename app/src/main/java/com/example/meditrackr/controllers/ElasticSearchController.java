@@ -43,12 +43,37 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
- * Team name CMPUT301F18T15
- * Author Skyrt
- * Created on Oct 24, 2018
- * Version 1.0
  * ElasticSearchController.java enables the elasticsearch search engine
+ * this class can user addProfile to add a new user to the database if all entrys are valid if
+ * not it will throw an exception (InterruptedException or ExecutionException
  *
+ * this class can use searchProfile to search for a profile in the database. if it is found it will
+ * return the patient or care provider that is associated with the given username from the search
+ * if nothing is found it will return null. if there is an error durring the search it will throw an
+ * exception (InterruptedException or ExecutionException)
+ *
+ * this class can use deleteUser to delete a a profile from the database from a given username
+ *
+ * this class can use updateProfile to update a users profile from a given username
+ *
+ * this class uses SignUpTask while a user is creating a new account. this checks to make sure that
+ * the username doesn't already exist in the database if id doesn't then it will create the new account.
+ * if id does already exist then it will throw an exception (IOException)
+ *
+ * this class can use SearchProfileTask when a user is looking for a profile it will use the username
+ * and look in the database to find that username. if that username doesnt exist in the database
+ * then it will throw an exception (IOException)
+ *
+ * this class can use deleteProfileTask which will try to delete that username from the database
+ * if it works then it passes if it fails then it will throw an exception (IOException)
+ *
+ * this class can use updateProfileTask which will attempt to update the profile if it does no succeed
+ * it will thro an error (IOException)
+ * @author Orest Cokan
+ * @version 1.0 Oct 24, 2018
+ * @throws InterruptedException Throw exception if signup activity is interrupted
+ * @throws ExecutionException   Throw exception if signup activity is aborted
+ * @throws IOException
  */
 
 public class ElasticSearchController {

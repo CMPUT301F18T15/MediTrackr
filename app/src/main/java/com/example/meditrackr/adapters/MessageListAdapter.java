@@ -3,6 +3,7 @@ package com.example.meditrackr.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +46,11 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
         if (comment.getUsername().equals(ProfileManager.getProfile().getUsername())){
             // If the current user is the sender of the message
+            Log.d("Messaging", "We are the current user logged in : " + ProfileManager.getProfile().getUsername());
             return VIEW_TYPE_MESSAGE_SENT;
         } else {
             // If some other user sent the message
+            Log.d("Messaging", "We are not the current user logged in : " +comment.getUsername());
             return VIEW_TYPE_MESSAGE_RECEIVED;
         }
     }
@@ -98,7 +101,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             messageText.setText(comment.getComment());
 
             // Format the stored timestamp into a readable String using method.
-            timeText.setText(DateUtils.formatDateTime(comment.getDate()));
+            timeText.setText(DateUtils.formatTime(comment.getDate()));
         }
     }
 
@@ -119,7 +122,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             messageText.setText(comment.getComment());
 
             // Format the stored timestamp into a readable String using method.
-            timeText.setText(DateUtils.formatDateTime(comment.getDate()));
+            timeText.setText(DateUtils.formatTime(comment.getDate()));
 
             nameText.setText(comment.getUsername());
 

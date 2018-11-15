@@ -9,14 +9,13 @@ import java.util.Date;
 
 public class Comment {
     // attributes
-    private Long date;
+    private Long date = System.currentTimeMillis() % 1000;
     private String comment;
     private String username;
 
 
     // constructor
-    public Comment(Long date, String comment, String username) {
-        this.date = System.currentTimeMillis() % 1000;
+    public Comment(String comment, String username) {
         this.comment = comment;
         this.username = username;
     }

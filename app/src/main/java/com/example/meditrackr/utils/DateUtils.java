@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.meditrackr.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by Skryt on Nov 13, 2018
@@ -27,6 +29,12 @@ public class DateUtils {
     public static String formatTime(long timeInMillis) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         return dateFormat.format(timeInMillis);
+    }
+
+    public static String getTime(){
+        final SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy, hh:mm aaa");
+        final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
+        return format.format(calendar.getTime());
     }
 
     public static String formatTimeWithMarker(long timeInMillis) {

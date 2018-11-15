@@ -140,7 +140,6 @@ public class AddRecordFragment extends Fragment {
                         }
                         else {
                             days[i].setBackgroundColor(Color.parseColor("#ffffff"));
-
                         }
                         break;
                     }

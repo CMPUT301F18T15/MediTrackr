@@ -5,6 +5,10 @@ import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
 
+/**
+ * Created by Skryt on Nov 7, 2018
+ */
+
 public class ProfileManager {
     private static Profile profile;
 

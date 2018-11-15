@@ -13,8 +13,8 @@ public class CareProvider extends Profile implements Serializable {
     private PatientList patients = new PatientList();
 
     // Constructor
-    public CareProvider(String id, String username, String email, String phone, boolean isCareProvider){
-        super(id, username, email, phone, isCareProvider);
+    public CareProvider(String username, String email, String phone, boolean isCareProvider){
+        super(username, email, phone, true);
     }
 
 

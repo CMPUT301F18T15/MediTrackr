@@ -9,50 +9,74 @@ import com.example.meditrackr.models.Profile;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+
+/**
+ * Created by Skryt on Nov 5, 2018
+ */
 
 public class SaveLoadController {
 
     public static Profile loadProfile(Context context, String username){
         try {
             FileInputStream stream = context.openFileInput(username+".sav");
-            BufferedReader in = new BufferedReader(new InputStreamReader(stream));
-            Gson gson = new Gson();
-            Profile profile = gson.fromJson(in, Profile.class);
+            ObjectInputStream objStream = new ObjectInputStream(stream);
+            Profile profile = (Profile) objStream.readObject();
             if(profile.getisCareProvider()){
                 CareProvider careProvider = (CareProvider) profile;
                 Log.d("LoadProfile", "Careprovider: " + careProvider.getisCareProvider() + " and our username is: " + careProvider.getUsername());
+                stream.close();
+                objStream.close();
                 return careProvider;
             } else {
                 Patient patient = (Patient) profile;
-                Log.d("SearchProfile", "Patient: " + patient.getisCareProvider() + " and our username is: " + patient.getUsername());
+                Log.d("LoadProfile", "Patient: " + patient.getisCareProvider() + " and our username is: " + patient.getUsername());
+                stream.close();
+                objStream.close();
                 return patient;
             }
-        } catch (FileNotFoundException e) {
+        } catch (java.io.IOException | java.lang.ClassNotFoundException e) {
             e.printStackTrace();
         }
+        Log.d("LoadProfile", "failed to load: " + username + "   from memory");
         return null;
     }
 
-    public static void saveProfile(Context context, Profile profile){
+    // save Profile to disk
+    public static void saveProfile(Context context, Profile profile) {
         try {
-            FileOutputStream stream = context.openFileOutput(profile.getUsername()+".sav", 0);
-            OutputStreamWriter writer = new OutputStreamWriter(stream);
-            Gson gson = new Gson();
-            gson.toJson(profile, writer);
-            writer.flush();
+            FileOutputStream stream = context.openFileOutput(profile.getUsername()+".sav",0);
+            ObjectOutputStream objStream = new ObjectOutputStream(stream);
+            objStream.writeObject(profile);
+            stream.close();
+            objStream.close();
+            Log.d("SaveProfile", "Save profile: " + profile.getUsername() + "successful!");
         }
-
-        catch (IOException e) {
-            // do nothing
+        catch(java.io.IOException e) {
+            e.printStackTrace();
+            Log.d("SaveProfile", "Save Profile: " + profile.getUsername() + "  Failed! to disk");
         }
     }
 
+    // save a profile for the first time
+    public static boolean addNewProfile(Context context, Profile profile) {
+        File file = new File(context.getApplicationContext().getFilesDir(), profile.getUsername() + ".sav");
+        if (file.exists()) {
+                return false;
+        } else {
+            saveProfile(context, profile);
+            Log.d("AddProfile", "Added a new profile by the name of " + profile.getUsername());
+            return true;
+        }
+    }
 
 }
 

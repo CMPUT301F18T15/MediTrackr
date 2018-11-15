@@ -20,7 +20,19 @@ import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.Profile;
-
+/**
+ * the main parts to this fragment is a text box where user can input their username which will send
+ * that user name to the database to get their relevant information. if username is not in the database
+ * then it will provide a toast message saying that "username does not exist"
+ *
+ * there is an login button which a user must press for all of the previous mentiond actions to happen
+ *
+ * there is also a not_member button which will take the user to the signup page
+ *
+ * @return  fragment
+ * @author  Orest Cokan
+ * @version 1.0 Oct 24, 2018.
+ */
 public class LoginFragment extends Fragment {
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();

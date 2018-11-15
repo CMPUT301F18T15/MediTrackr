@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 // A basic record class that holds all information pertaining to record
 public class Record implements Serializable {
-    private ImageList images;
+    private ImageList images = new ImageList();
     private String date;
     private String description;
     private String title;

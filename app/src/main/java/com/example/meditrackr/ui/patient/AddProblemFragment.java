@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 
@@ -91,6 +92,7 @@ public class AddProblemFragment extends Fragment {
                     Problem problem = new Problem(title.getText().toString(), dateSelector.getText().toString(), description.getText().toString());
                     patient.getProblems().addProblem(problem);
                     ElasticSearchController.updateUser(patient);
+                    SaveLoadController.saveProfile(getContext(), patient);
                     Log.d("ProblemAdd", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
 
                     FragmentManager manager = getFragmentManager();
@@ -108,7 +110,8 @@ public class AddProblemFragment extends Fragment {
     }
 
     public boolean checkInputs(EditText title, EditText description){
-        if(((title != null && !title.getText().toString().isEmpty()) && (description != null && !description.getText().toString().isEmpty()))){
+        if(((title != null && !title.getText().toString().isEmpty())
+                && (description != null && !description.getText().toString().isEmpty()))){
             return true;
         }
         else {

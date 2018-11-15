@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
@@ -49,8 +50,9 @@ public class LoginFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 Log.d("SearchProfile", "We are searching for the username: " + username.getText().toString());
                 String userName = username.getText().toString();
-                Profile profile = ElasticSearchController.searchProfile(userName);
-                    if(profile != null) {
+                //Profile profile = ElasticSearchController.searchProfile(userName);
+                Profile profile = SaveLoadController.loadProfile(getContext(), userName);
+                if(profile != null) {
                         if (profile.getisCareProvider()) {
                             CareProvider careProvider = (CareProvider) profile;
                             ProfileManager.setProfile(careProvider);

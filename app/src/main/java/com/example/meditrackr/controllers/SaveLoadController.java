@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 
@@ -27,21 +28,25 @@ public class SaveLoadController {
     public static Profile loadProfile(Context context, String username){
         try {
             FileInputStream stream = context.openFileInput(username+".sav");
-            BufferedReader in = new BufferedReader(new InputStreamReader(stream));
-            Gson gson = new Gson();
-            Profile profile = gson.fromJson(in, Profile.class);
+            ObjectInputStream objStream = new ObjectInputStream(stream);
+            Profile profile = (Profile) objStream.readObject();
             if(profile.getisCareProvider()){
                 CareProvider careProvider = (CareProvider) profile;
                 Log.d("LoadProfile", "Careprovider: " + careProvider.getisCareProvider() + " and our username is: " + careProvider.getUsername());
+                stream.close();
+                objStream.close();
                 return careProvider;
             } else {
                 Patient patient = (Patient) profile;
                 Log.d("LoadProfile", "Patient: " + patient.getisCareProvider() + " and our username is: " + patient.getUsername());
+                stream.close();
+                objStream.close();
                 return patient;
             }
-        } catch (FileNotFoundException e) {
+        } catch (java.io.IOException | java.lang.ClassNotFoundException e) {
             e.printStackTrace();
         }
+        Log.d("LoadProfile", "failed to load: " + username + "   from memory");
         return null;
     }
 
@@ -53,10 +58,11 @@ public class SaveLoadController {
             objStream.writeObject(profile);
             stream.close();
             objStream.close();
-            Log.d("SaveProfile", "Save profile successful");
+            Log.d("SaveProfile", "Save profile: " + profile.getUsername() + "successful!");
         }
         catch(java.io.IOException e) {
-            Log.d("SaveProfile", "Save Profile Failed!");
+            e.printStackTrace();
+            Log.d("SaveProfile", "Save Profile: " + profile.getUsername() + "  Failed! to disk");
         }
     }
 

@@ -24,6 +24,7 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.Record;
 
@@ -100,6 +101,7 @@ public class AddRecordFragment extends Fragment {
                     record.getImages().addImage(bitmap);
                     patient.getProblem(index).getRecords().addRecord(record);
                     ElasticSearchController.updateUser(patient);
+                    SaveLoadController.saveProfile(getContext(), patient);
                     Log.d("RecordAdd", "Profile: " + patient.getUsername() + " Records: " + patient.getProblem(index).getRecords());
 
                     // transition back to all the records

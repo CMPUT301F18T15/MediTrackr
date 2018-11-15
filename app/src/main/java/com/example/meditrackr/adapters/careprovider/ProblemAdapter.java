@@ -15,6 +15,8 @@ import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.careprovider.RecordsFragment;
 
+import net.steamcrafted.materialiconlib.MaterialIconView;
+
 
 /**
  * Created by Skryt on Nov 10, 2018
@@ -46,7 +48,6 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         holder.date.setText(problems.getProblem(position).getDate());
         holder.description.setText(problems.getProblem(position).getDescription());
         holder.totalRecords.setText("Number of records: "+problems.getProblem(position).getRecords().getSize());
-
     }
 
     @Override
@@ -62,6 +63,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public TextView date;
         public TextView description;
         public TextView totalRecords;
+        public MaterialIconView deleteProblem;
+        public MaterialIconView editProblem;
 
 
         public ViewHolder(View itemView, final ProblemAdapter adapter){
@@ -69,7 +72,15 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             title = itemView.findViewById(R.id.problem_title);
             date = itemView.findViewById(R.id.problem_date);
             description = itemView.findViewById(R.id.problem_description);
+            totalRecords = itemView.findViewById(R.id.number_records_title);
+            deleteProblem = itemView.findViewById(R.id.problem_delete_button);
+            editProblem = itemView.findViewById(R.id.problem_edit_button);
             itemView.setOnClickListener(this);
+            // hide stuff from doctor
+            deleteProblem.setVisibility(View.INVISIBLE);
+            deleteProblem.setClickable(false);
+            editProblem.setVisibility(View.INVISIBLE);
+            editProblem.setClickable(false);
             this.adapter = adapter;
 
         }

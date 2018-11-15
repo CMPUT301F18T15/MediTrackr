@@ -1,3 +1,24 @@
+/*
+ *                     Apache 2.0 License Notice
+ *
+ *Licensed to the Apache Software Foundation (ASF) under one
+ *or more contributor license agreements.  See the NOTICE file
+ *distributed with this work for additional information
+ *regarding copyright ownership.  The ASF licenses this file
+ *to you under the Apache License, Version 2.0 (the
+ *"License"); you may not use this file except in compliance
+ *with the License.  You may obtain a copy of the License at
+
+ *  http://www.apache.org/licenses/LICENSE-2.0
+
+ *Unless required by applicable law or agreed to in writing,
+ *software distributed under the License is distributed on an
+ *"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ *KIND, either express or implied.  See the License for the
+ *specific language governing permissions and limitations
+ *under the License.
+ *
+ */
 package com.example.meditrackr.adapters.careprovider;
 
 import android.content.Context;
@@ -19,7 +40,12 @@ import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 
 /**
- * Created by Skryt on Nov 10, 2018
+ * Classname CMPUT301F18T15
+ * Author Skyrt
+ * Created on Nov 10, 2018
+ * Version 1.0
+ * PatientAdapter.java creates the RecyclerView Adapter for the Patient list
+ * RecyclerView
  */
 
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder>{
@@ -42,7 +68,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     }
 
 
-
     // set the data into each viewHolder (ie. place place the patients info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -58,7 +83,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     }
 
 
-    // place each problem into its corresponding view
+    // place each patient into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private PatientAdapter adapter;
         public TextView patientUsername;
@@ -75,13 +100,14 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
 
         }
 
+
         // set onClick listener for each patient, so they can be viewed
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            FragmentManager manager = adapter.activity.getSupportFragmentManager();
-            FragmentTransaction transaction =  manager.beginTransaction();
-            ProblemsFragment fragment = ProblemsFragment.newInstance(position);
+            FragmentManager manager = adapter.activity.getSupportFragmentManager();  //access Fragment class features
+            FragmentTransaction transaction =  manager.beginTransaction();  //allow editing on manager fragment
+            ProblemsFragment fragment = ProblemsFragment.newInstance(position);  //instantiate new Fragment
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();

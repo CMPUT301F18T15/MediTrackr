@@ -1,5 +1,24 @@
+/*
+ *Apache 2.0 License Notice
+ *
+ *Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.controllers;
 
+//imports
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -24,51 +43,61 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
- * Created by Skryt on Oct 24, 2018
+ * Team name CMPUT301F18T15
+ * Author Skyrt
+ * Created on Oct 24, 2018
+ * Version 1.0
+ * ElasticSearchController.java enables the elasticsearch search engine
+ *
  */
 
 public class ElasticSearchController {
-
     private static JestClient client = null;
     private static String INDEX_NAME = "cmput301f18t15test";
     private static String PROFILE_TYPE = "profile";
     private static String IS_CAREPROVIDER = "isCareProvider";
 
-
+    // Gets client
     public static JestClient getClient() {
         if(client==null)
-            verifySettings();
+            verifySettings(); // Sets client if its null
         return client;
     }
+
 
     // Sign up and add a profile
     public static Boolean addProfile(Profile profile){
         Boolean done = false;
         try {
-            done = new SignUpTask().execute(profile).get();
-        } catch (InterruptedException e) {
+            done = new SignUpTask().execute(profile).get(); // Complete signup if no exceptions caught
+        } catch (InterruptedException e) { //  Throw exception if signup activity is interrupted, stops signup activity
             e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (ExecutionException e) { // Throw exception if signup activity is aborted, stops signup activity
             e.printStackTrace();
         }
         return done;
     }
 
-    // search user
+
+    // Search user
     public static Profile searchProfile(String userName){
         try {
             Profile profile = new ElasticSearchController.SearchProfileTask().execute(userName).get();
+            // Checks whether profile type to search is null
             if(profile==null){
                 Log.d("SearchProfile", "Our profile is null");
                 return null;
             }
+            // Searches for care provider
             if(profile.getisCareProvider()){
                 CareProvider careProvider = (CareProvider) profile;
-                Log.d("SearchProfile", "Careprovider: " + careProvider.getisCareProvider() + " and our username is: " + careProvider.getUsername());
+                Log.d("SearchProfile", "Careprovider: " + careProvider.getisCareProvider() +
+                        " and our username is: " + careProvider.getUsername());
                 return careProvider;
-            } else {
+            } else { // Searches for patient
                 Patient patient = (Patient) profile;
-                Log.d("SearchProfile", "Patient: " + patient.getisCareProvider() + " and our username is: " + patient.getUsername());
+                Log.d("SearchProfile", "Patient: " + patient.getisCareProvider() +
+                        " and our username is: " + patient.getUsername());
                 return patient;
             }
         } catch (InterruptedException e) {
@@ -79,26 +108,30 @@ public class ElasticSearchController {
         return null;
     }
 
-    // delete profile
+
+    // Delete profile
     public static void deleteUser(String userName){
         new ElasticSearchController.DeleteUserTask().execute(userName);
     }
 
-    // update profile
+
+    // Update profile
     public static void updateUser(Profile profile){
         new ElasticSearchController.UpdateProfileTask().execute(profile);
     }
 
 
+    // Executes search when user is creating a profile
     private static class SignUpTask extends AsyncTask<Profile, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Profile... profiles) {
             verifySettings();
             Profile profile = profiles[0];
 
-            // attribute to check for duplicate user
+            // Attribute to check for duplicate user
             Boolean duplicated = false;
 
+            // Builds a JSON style query request
             String query = "{\n" +
                     "    \"query\": {\n" +
                     "        \"query_string\" : {\n" +
@@ -108,13 +141,14 @@ public class ElasticSearchController {
                     "}";
             Log.d("Success", "Searchquery username: " + profile.getUsername());
 
+            // Create a new search with format of above query request
             Search search = new Search.Builder(query)
-                    // multiple index or types can be added.
+                    // Multiple index or types can be added to query request
                     .addIndex(INDEX_NAME)
                     .addType(PROFILE_TYPE)
                     .build();
 
-            try {
+            try { // Execute search
                 SearchResult searchResult = client.execute(search);
                 if (searchResult.isSucceeded()) {
                     Log.d("Success", searchResult.getJsonString());
@@ -122,7 +156,8 @@ public class ElasticSearchController {
                     // check for duplicate user
                     if (searchResult.getTotal() != 0)
                         duplicated = true;
-                } else {
+
+                } else{ // If search is a success and has 0 results
                     Log.d("Success", "Nothing Found!");
                 }
             } catch (IOException e) {
@@ -149,6 +184,8 @@ public class ElasticSearchController {
         }
     }
 
+
+    // Executes search when user is looking for a profile
     private static class SearchProfileTask extends AsyncTask<String, Void, Profile>
     {
         @Override
@@ -157,7 +194,7 @@ public class ElasticSearchController {
 
             String username = userNames[0];
             Log.d("SearchProfile", "do in background: " + username);
-            // Build the query
+            // Build the query request
             String query = "{\n" +
                     "    \"query\": {\n" +
                     "        \"query_string\" : {\n" +
@@ -166,8 +203,9 @@ public class ElasticSearchController {
                     "    }\n" +
                     "}";
 
+            // Create a new search with format of above query request
             Search search = new Search.Builder(query)
-                    // multiple index or types can be added.
+                    // Multiple index or types can be added.
                     .addIndex(INDEX_NAME)
                     .addType(PROFILE_TYPE)
                     .build();
@@ -175,6 +213,7 @@ public class ElasticSearchController {
             // If the search actually works, then return the profile
             try {
                 SearchResult searchResult = client.execute(search);
+                // If search yields results
                 if(searchResult.isSucceeded() && searchResult.getSourceAsStringList().size()>0){
                     Log.d("SearchProfile", searchResult.getSourceAsStringList().get(0));
 
@@ -184,19 +223,19 @@ public class ElasticSearchController {
 
                     // Need isCareProvider to figure out what to return
                     Boolean isCareProvider = jsonObject.get(IS_CAREPROVIDER).getAsBoolean();
-                    if(isCareProvider){
+                    if(isCareProvider){ // Found care provider profile, so return care provider profile
                         CareProvider careProvider = searchResult.getSourceAsObjectList(CareProvider.class).get(0);
                         return careProvider;
                     }
-                    else{
+                    else{ // Found patient profile, so return patient profile
                         Patient patient = searchResult.getSourceAsObjectList(Patient.class).get(0);
                         return patient;
                     }
                 }
-                else{
+                else{ // If search did not yield results
                     Log.d("SearchProfile", "Nothing Found!");
                 }
-            } catch (IOException e) {
+            } catch (IOException e) { // Throws exception if unexpected input/output, and stops search
                 Log.d("SearchProfile", "Failed!");
                 e.printStackTrace();
             }
@@ -204,6 +243,8 @@ public class ElasticSearchController {
         }
     }
 
+
+    // Executes search when user is deleting a profile
     public static class DeleteUserTask extends AsyncTask<String, Void, Void>
     {
         @Override
@@ -212,7 +253,7 @@ public class ElasticSearchController {
 
             String username = userNames[0];
 
-            // Search query
+            // Builds search query
             String query = "{\n" +
                     "    \"query\": {\n" +
                     "        \"query_string\" : {\n" +
@@ -222,6 +263,7 @@ public class ElasticSearchController {
                     "}";
 
             DeleteByQuery deleteByQuery = new DeleteByQuery.Builder(query)
+                    // Multiple index or types can be added.
                     .addIndex(INDEX_NAME)
                     .addType(PROFILE_TYPE)
                     .build();
@@ -232,7 +274,7 @@ public class ElasticSearchController {
                 if(jestResult.isSucceeded()){
                     Log.d("DeleteUser", "Deleted!");
                 }
-                else{
+                else{ // If profile user is looking to delete does not exist
                     Log.d("DeleteUser", "Nothing Found!");
                 }
             } catch (IOException e) {
@@ -244,6 +286,7 @@ public class ElasticSearchController {
     }
 
 
+    // Executes search when user is updating their profile
     private static class UpdateProfileTask extends AsyncTask<Profile, Void, Void>
     {
         @Override
@@ -262,7 +305,7 @@ public class ElasticSearchController {
                 if(result.isSucceeded()) {
                     Log.d("UpdateProfile", "Updated it! " + profile.getUsername());
                 }
-            } catch (IOException e) {
+            } catch (IOException e) { // Throws exception if problem occurs with input/output
                 Log.d("UpdateProfile", "Failed!");
                 e.printStackTrace();
                 return null;
@@ -272,12 +315,13 @@ public class ElasticSearchController {
     }
 
 
+    // Client configuration
     public static void verifySettings() {
         if(client==null) {
+            // Specify host
             DroidClientConfig config = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080/").build();
-
             JestClientFactory factory = new JestClientFactory();
-            factory.setDroidClientConfig(config);
+            factory.setDroidClientConfig(config); // Sets JestClientFactory object to specified host
             client = factory.getObject();
         }
     }

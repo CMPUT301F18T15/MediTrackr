@@ -48,6 +48,7 @@ import static android.app.Activity.RESULT_OK;
 public class AddRecordFragment extends Fragment {
     private ArrayList<Integer> frequency;
     private List<String> frequencyButtons;
+    private String date;
 
     Patient patient = ProfileManager.getPatient();
 
@@ -85,7 +86,6 @@ public class AddRecordFragment extends Fragment {
         // general ui attributes
         final EditText recordTitle = (EditText) rootView.findViewById(R.id.record_title_field);
         final EditText recordDescrption = (EditText) rootView.findViewById(R.id.record_description_field);
-        final EditText dateSelector = (EditText) rootView.findViewById(R.id.record_date_field);
         final Button addImage = (Button) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
 
@@ -140,12 +140,10 @@ public class AddRecordFragment extends Fragment {
             button.setOnClickListener(listener);
         }
 
-
-        final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d. yyyy");
+        // set date
+        final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d yyyy, hh:mm aaa");
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
-        dateSelector.setText(format.format(calendar.getTime()));
-
-
+        date = format.format(calendar.getTime());
 
 
         //on click listener for adding a record
@@ -156,7 +154,7 @@ public class AddRecordFragment extends Fragment {
                     Record record = new Record(
                             recordTitle.getText().toString(),
                             recordDescrption.getText().toString(),
-                            dateSelector.getText().toString(),
+                            date,
                             null,
                             null);
                     for(Bitmap bitmap: bitmaps){

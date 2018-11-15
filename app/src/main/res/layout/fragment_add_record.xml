@@ -85,25 +85,6 @@
                     android:textSize="14sp" />
 
 
-                <EditText
-                    android:id="@+id/record_date_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginRight="40dp"
-                    android:background="@color/editTextBackground"
-                    android:clickable="true"
-                    android:focusable="false"
-                    android:hint="Start Date"
-                    android:inputType="text"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:textColor="@color/colorPrimaryBlack"
-                    android:textColorHint="@color/editTextHint"
-                    android:textSize="14sp" />
             </LinearLayout>
 
 
@@ -113,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
                 android:background="@color/background2"
@@ -150,7 +132,7 @@
             <TableLayout
                 android:id="@+id/tablepicturelayout"
                 android:layout_width="0dp"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
@@ -173,7 +155,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp" />
 
                     <ImageView
                         android:id="@+id/image_2"
@@ -182,7 +164,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp" />
 
                     <ImageView
                         android:id="@+id/image_3"
@@ -191,7 +173,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp" />
 
                 </TableRow>
 
@@ -206,7 +188,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp" />
 
                     <ImageView
                         android:id="@+id/image_5"
@@ -215,7 +197,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp" />
 
                     <ImageView
                         android:id="@+id/image_6"
@@ -224,13 +206,12 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp" />
                 </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
 
                     <ImageView
                         android:id="@+id/image_7"
@@ -239,7 +220,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp" />
 
                     <ImageView
                         android:id="@+id/image_8"
@@ -248,7 +229,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp" />
 
                     <ImageView
                         android:id="@+id/image_9"
@@ -257,7 +238,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp" />
                 </TableRow>
 
                 <TableRow

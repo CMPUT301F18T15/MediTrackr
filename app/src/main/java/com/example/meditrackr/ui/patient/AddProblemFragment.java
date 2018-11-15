@@ -29,7 +29,6 @@ import java.util.TimeZone;
  * Allows user to add a title to the problem, change the date that was assigned and add a description.
  * to create this problem user will press the add button
  *
- * @return  fragment
  * @author  Orest Cokan
  * @version 1.0 Nov 8, 2018.
  */

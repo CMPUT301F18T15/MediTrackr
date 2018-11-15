@@ -18,12 +18,13 @@ import com.example.meditrackr.controllers.VerticalSpaceController;
 /**
  * shows all patients associated with the careProvider in a list (recycler view)
  * also has a search bar that lets care Provider search for a specific patient
+ * if a care provider clicks on a patient in the view it will take them to see their problems (ProblemsFragment)
  *
- * @parama  adapter
- * @return  fragment
  * @author  Orest Cokan
  * @version 1.0 Nov 8, 2018.
+ * @see ProblemsFragment
  */
+
 public class PatientsFragment extends Fragment {
     private PatientAdapter adapter;
 

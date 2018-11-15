@@ -25,13 +25,16 @@ import com.example.meditrackr.models.record.RecordList;
  * in each record item it displays the date and description of the record.
  * it also displays the title with the description underneath the title.
  *
- * when a user clicks on a record it will bring them to a records page with the records associated with that problem
+ * when a user clicks on a record it will bring them to a records page with the details
+ * associated with that record (RecordFragment)
  *
- * there is also a + icon that when pressed brings the user to addRecordFragment
+ * there is also a + icon that when pressed brings the user to a page where they can add a
+ * new record (AddRecordFragment)
  *
- * @return  fragment
  * @author  Orest Cokan
  * @version 1.0 Nov 12, 2018.
+ * @see RecordFragment
+ * @see AddRecordFragment
  */
 
 public class RecordsFragment extends Fragment {

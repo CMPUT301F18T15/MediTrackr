@@ -35,7 +35,6 @@ import java.util.TimeZone;
  * also able to add photos which shows up in a grid view.
  * to add all of this to the problem (as a record class) user will press the add button
  *
- * @return  fragment
  * @author  Orest Cokan
  * @version 1.0 Nov 12, 2018.
  */

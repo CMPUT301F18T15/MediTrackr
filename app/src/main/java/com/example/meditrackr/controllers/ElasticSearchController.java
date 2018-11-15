@@ -102,10 +102,11 @@ public class ElasticSearchController {
             String query = "{\n" +
                     "    \"query\": {\n" +
                     "        \"query_string\" : {\n" +
-                    "            \"query\" : \"(userName:" + profile.getUsername() + " AND _type:" + PROFILE_TYPE + ")\" \n" +
+                    "            \"query\" : \"(username:" + profile.getUsername() + " AND _type:" + PROFILE_TYPE + ")\" \n" +
                     "        }\n" +
                     "    }\n" +
                     "}";
+            Log.d("Success", "Searchquery username: " + profile.getUsername());
 
             Search search = new Search.Builder(query)
                     // multiple index or types can be added.
@@ -115,14 +116,13 @@ public class ElasticSearchController {
 
             try {
                 SearchResult searchResult = client.execute(search);
-                if(searchResult.isSucceeded()){
+                if (searchResult.isSucceeded()) {
                     Log.d("Success", searchResult.getJsonString());
                     Log.d("Success", searchResult.getTotal().toString());
                     // check for duplicate user
-                    if(searchResult.getTotal()!=0)
+                    if (searchResult.getTotal() != 0)
                         duplicated = true;
-                }
-                else{
+                } else {
                     Log.d("Success", "Nothing Found!");
                 }
             } catch (IOException e) {
@@ -130,24 +130,22 @@ public class ElasticSearchController {
             }
 
             // If username is unique, then we can make a new account
-            if(!duplicated){
+            if (!duplicated) {
                 Index userNameIndex = new Index.Builder(profile).index(INDEX_NAME).type(PROFILE_TYPE).id(profile.getUsername()).build();
-                Log.d("Success", "We are adding the user by the name of "+ profile.getUsername());
-                try
-                {
+                Log.d("AddProfile", "We are adding the user by the name of " + profile.getUsername());
+                try {
                     DocumentResult result = client.execute(userNameIndex);
-                    if(result.isSucceeded()){
-                        Log.d("Success", "Success! profile added");
-                        Log.d("Succeed", "what is this: " + result.getId()+" "+result.getIndex()+" "+result.getType());
+                    if (result.isSucceeded()) {
+                        Log.d("AddProfile", "Success! profile added");
                     }
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 return true;
-            }
-            else
+            } else {
                 return false;
+            }
         }
     }
 

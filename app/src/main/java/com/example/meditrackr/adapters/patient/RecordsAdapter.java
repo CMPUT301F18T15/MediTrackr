@@ -74,7 +74,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
             Log.d("RecordsFragments", "index is: " + position);
-            RecordFragment fragment = RecordFragment.newInstance(position);
+            RecordFragment fragment = RecordFragment.newInstance(adapter.records.getRecord(position));
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();

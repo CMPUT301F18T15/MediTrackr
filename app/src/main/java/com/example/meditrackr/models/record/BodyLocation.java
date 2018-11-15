@@ -1,10 +1,12 @@
 package com.example.meditrackr.models.record;
 
+import java.io.Serializable;
+
 /**
  * Created by Skryt on Nov 1, 2018
  */
 
-public class BodyLocation {
+public class BodyLocation implements Serializable {
     private double[] bodyCoordinate;
     private String bodyFace;
     private String bodyLocation;

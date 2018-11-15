@@ -1,40 +1,38 @@
 package com.example.meditrackr.models.record;
 
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import java.io.Serializable;
 
-import java.util.Date;
 
 /**
  * Created by Skryt on Oct 24, 2018
  */
 
 // A basic record class that holds all information pertaining to record
-public class Record {
-    private Bitmap[] images;
+public class Record implements Serializable {
+    private ImageList images = new ImageList();
     private String date;
     private String description;
     private String title;
     private BodyLocation bodyLocation;
-    // geolocation is an array of LONGITUDE, LATITUDE in degrees
     private Geolocation geoLocation;
+    private boolean[] reminder;
 
     // Constructor
-    public Record(String title, String description, @NonNull String date, Bitmap[] images, BodyLocation bodylocation, Geolocation geoLocation) {
+    public Record(String title, String description, @NonNull String date, BodyLocation bodylocation, Geolocation geoLocation) {
         this.title = title;
         this.description = description;
         this.date = date;
-        this.images = images;
         this.bodyLocation = bodylocation;
         this.geoLocation = geoLocation;
     }
 
     // Getters/Setters
-    public Bitmap[] getImages() {
+    public ImageList getImages() {
         return images;
     }
 
-    public void setImages(Bitmap[] images) {
+    public void setImages(ImageList images) {
         this.images = images;
     }
 
@@ -76,6 +74,16 @@ public class Record {
 
     public void setGeoLocation(Geolocation geoLocation) {
         this.geoLocation = geoLocation;
+    }
+
+    public boolean[] getReminders() {
+        return reminder;
+    }
+
+    public boolean getReminder(int index) { return reminder[index];}
+
+    public void setReminder(boolean[] reminder) {
+        this.reminder = reminder;
     }
 
 

@@ -58,6 +58,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         this.activity = activity;
     }
 
+
     // display the view
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -77,6 +78,8 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         holder.patientPhone.setText(patient.getPhone());
     }
 
+
+    // get the number of problems in RecyclerView
     @Override
     public int getItemCount() {
         return patients.getSize();
@@ -90,6 +93,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         public TextView patientEmail;
         public TextView patientPhone;
 
+        //gets the corresponding data for each view
         public ViewHolder(View itemView, final PatientAdapter adapter){
             super(itemView);
             patientUsername = itemView.findViewById(R.id.patient_username);
@@ -97,9 +101,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             patientPhone = itemView.findViewById(R.id.patient_phone);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
-
         }
-
 
         // set onClick listener for each patient, so they can be viewed
         @Override

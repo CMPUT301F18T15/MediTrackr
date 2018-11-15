@@ -68,7 +68,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     }
 
 
-    // set the data into each viewHolder (ie. place place the patients info into the view)
+    // set the data into each viewHolder (ie. place the patient info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.patientUsername.setText(patients.getPatient(position));
@@ -110,7 +110,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             ProblemsFragment fragment = ProblemsFragment.newInstance(position);  //instantiate new Fragment
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
-            transaction.commit();
+            transaction.commit(); ////make permanent all changes performed in the transaction
         }
     }
 }

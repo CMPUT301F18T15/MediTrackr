@@ -1,3 +1,24 @@
+/*
+ *                     Apache 2.0 License Notice
+ *
+ *Licensed to the Apache Software Foundation (ASF) under one
+ *or more contributor license agreements.  See the NOTICE file
+ *distributed with this work for additional information
+ *regarding copyright ownership.  The ASF licenses this file
+ *to you under the Apache License, Version 2.0 (the
+ *"License"); you may not use this file except in compliance
+ *with the License.  You may obtain a copy of the License at
+
+ *  http://www.apache.org/licenses/LICENSE-2.0
+
+ *Unless required by applicable law or agreed to in writing,
+ *software distributed under the License is distributed on an
+ *"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ *KIND, either express or implied.  See the License for the
+ *specific language governing permissions and limitations
+ *under the License.
+ *
+ */
 package com.example.meditrackr.adapters.careprovider;
 
 import android.content.Context;
@@ -16,7 +37,12 @@ import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 
 
 /**
- * Created by Skryt on Nov 10, 2018
+ * Classname CMPUT301F18T15
+ * Author Skyrt
+ * Created on Nov 10, 2018
+ * Version 1.0
+ * ProblemAdapter.java creates the RecyclerView Adapter for the Problem list
+ * RecyclerView
  */
 
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder> {
@@ -38,7 +64,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         return new ViewHolder(problemView, this);
     }
 
-    // set the data into each viewHolder (ie. place place the patients info into the view)
+    // set the data into each viewHolder (ie. place the problem info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.title.setText(problems.getProblem(position).getTitle());
@@ -73,12 +99,12 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            FragmentManager manager = adapter.activity.getSupportFragmentManager();
-            FragmentTransaction transaction =  manager.beginTransaction();
-            ProblemsFragment fragment = ProblemsFragment.newInstance(position);
+            FragmentManager manager = adapter.activity.getSupportFragmentManager(); //access Fragment class features
+            FragmentTransaction transaction =  manager.beginTransaction(); //allow editing on manager fragment
+            ProblemsFragment fragment = ProblemsFragment.newInstance(position); //instantiate new Fragment
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
-            transaction.commit();
+            transaction.commit(); //make permanent all changes performed in the transaction
         }
     }
 }

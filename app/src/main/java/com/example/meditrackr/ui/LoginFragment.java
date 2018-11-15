@@ -27,14 +27,14 @@ import com.example.meditrackr.models.Profile;
  * that user name to the database to get their relevant information. if username is not in the database
  * then it will provide a toast message saying that "username does not exist"
  *
- * there is an login button which a user must press for all of the previous mentiond actions to happen
+ * there is an login button which a user must press for all of the previous mentioned actions to happen
  *
- * there is also a not_member button which will take the user to the signup page
+ * there is also a not_member button which will take the user to the signup page (RegisterFragment)
  *
- * @return  fragment
  * @author  Orest Cokan
-<<<<<<< HEAD
  * @version 2.0 Nov 13, 2018.
+ * @see MainActivity
+ * @see RegisterFragment
  */
 
 public class LoginFragment extends Fragment {

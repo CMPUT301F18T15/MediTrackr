@@ -22,10 +22,12 @@ import com.example.meditrackr.ui.patient.ProblemsFragment;
  * button 5 is a person button which brings the user to a page where they can view or edit their
  * profile info
  *
- * @return  fragment
  * @author  Orest Cokan
-<<<<<<< HEAD
  * @version 2.0 Nov 13, 2018.
+ * @see ProblemsFragment
+ * @see com.example.meditrackr.ui.patient.MapFragment
+ * @see com.example.meditrackr.ui.patient.CameraFragment
+ * @see UserEditFragment
  */
 
 public class MainActivity extends AppCompatActivity {

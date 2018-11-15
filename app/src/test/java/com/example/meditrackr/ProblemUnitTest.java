@@ -18,7 +18,7 @@ public class ProblemUnitTest {
 
     // Initialize a simple problem to be used in the tests
     @Before
-    public void initJUnitTest() {
+    public void initProblemTest() {
         final String initTitle = "";
         final String initDate = "";
         final String initDesc = "";
@@ -52,6 +52,8 @@ public class ProblemUnitTest {
         problem.getRecords().addRecord(record);
         assertTrue("Record not added to problem",
                 problem.getRecords().recordExists(record));
+        problem.getRecords().removeRecord(0);
+        assertFalse(problem.getRecords().recordExists(record));
     }
 
 }

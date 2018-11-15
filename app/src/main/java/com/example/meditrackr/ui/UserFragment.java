@@ -69,7 +69,7 @@ public class UserFragment extends Fragment {
         TextView phone = rootView.findViewById(R.id.patient_phone);
         Button editButton = rootView.findViewById(R.id.edit_button);
 
-        // Display username, email, and phone number
+        // Set users info in the page
         username.setText(profile.getUsername());
         email.setText(profile.getEmail());
         phone.setText(profile.getPhone());

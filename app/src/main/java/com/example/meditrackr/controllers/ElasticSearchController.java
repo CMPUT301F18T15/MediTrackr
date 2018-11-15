@@ -311,7 +311,6 @@ public class ElasticSearchController {
     }
 
 
-    // Executes search when user is updating their profile
     private static class UpdateProfileTask extends AsyncTask<Profile, Void, Void>
     {
         @Override
@@ -325,7 +324,6 @@ public class ElasticSearchController {
             Index profileIndex = new Index.Builder(profile).index(INDEX_NAME).type(PROFILE_TYPE).id(username).build();
 
             try {
-                // Execute the add action
                 DocumentResult result = client.execute(profileIndex);
                 if(result.isSucceeded()) {
                     Log.d("UpdateProfile", "Updated it! " + profile.getUsername());

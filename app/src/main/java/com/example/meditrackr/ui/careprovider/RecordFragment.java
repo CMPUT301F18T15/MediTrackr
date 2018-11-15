@@ -33,6 +33,6 @@ public class RecordFragment extends Fragment {
                 R.layout.fragment_record, container, false);
 
         return rootView;
-}
+    }
 }
 

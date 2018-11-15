@@ -26,12 +26,12 @@ import com.example.meditrackr.ui.careprovider.RecordFragment;
 
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder> {
     private FragmentActivity activity;
-    private ProblemList problems;
+    private static RecordList records;
 
     // constructor
     public RecordAdapter(FragmentActivity activity, RecordList records) {
         this.activity = activity;
-        this.problems = problems;
+        this.records = records;
     }
 
     // display the view
@@ -46,13 +46,13 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     // set the data into each viewHolder (ie. place place the patients info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.date.setText(problems.getProblem(position).getDate());
-        holder.description.setText(problems.getProblem(position).getDescription());
+        holder.date.setText(records.getRecord(position).getDate());
+        holder.description.setText(records.getRecord(position).getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return problems.getSize();
+        return records.getSize();
     }
 
 
@@ -64,8 +64,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
         public ViewHolder(View itemView, final RecordAdapter adapter){
             super(itemView);
-            date = itemView.findViewById(R.id.problem_date);
-            description = itemView.findViewById(R.id.problem_description);
+            date = itemView.findViewById(R.id.record_date);
+            description = itemView.findViewById(R.id.record_description);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
 
@@ -77,7 +77,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            RecordFragment fragment = RecordFragment.newInstance(position);
+            RecordFragment fragment = RecordFragment.newInstance(records.getRecord(position));
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();

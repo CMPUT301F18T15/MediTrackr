@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.ProblemList;
-import com.example.meditrackr.ui.careprovider.ProblemsFragment;
+import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.careprovider.RecordsFragment;
 
 
@@ -22,7 +22,7 @@ import com.example.meditrackr.ui.careprovider.RecordsFragment;
 
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder> {
     private FragmentActivity activity;
-    private ProblemList problems;
+    private static ProblemList problems;
 
     // constructor
     public ProblemAdapter(FragmentActivity activity, ProblemList problems) {
@@ -74,9 +74,10 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
+            RecordList records = problems.getProblem(position).getRecords();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            RecordsFragment fragment = RecordsFragment.newInstance(position);
+            RecordsFragment fragment = RecordsFragment.newInstance(records);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();

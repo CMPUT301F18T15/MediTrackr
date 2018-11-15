@@ -11,7 +11,6 @@ import com.example.meditrackr.R;
  *
  * @author  Orest Cokan
  * @version 2.0 Nov 13, 2018.
- * @deprecated  LoginFragment
  */
 
 

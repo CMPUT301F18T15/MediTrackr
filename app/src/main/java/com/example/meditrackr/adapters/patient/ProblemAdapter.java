@@ -1,5 +1,5 @@
 /*
- *                     Apache 2.0 License Notice
+ *           Apache 2.0 License Notice
  *
  *Licensed to the Apache Software Foundation (ASF) under one
  *or more contributor license agreements.  See the NOTICE file
@@ -21,6 +21,7 @@
  */
 package com.example.meditrackr.adapters.patient;
 
+//imports
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -42,7 +43,7 @@ import com.example.meditrackr.ui.patient.RecordsFragment;
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
 /**
- * Classname CMPUT301F18T15
+ * Team Name CMPUT301F18T15
  * Author Skyrt
  * Created on Nov 10, 2018
  * Version 1.0

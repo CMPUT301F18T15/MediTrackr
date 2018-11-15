@@ -9,7 +9,6 @@ import java.util.Date;
 
 public class Comment {
     // attributes
-    private CommentList comments = new CommentList();
     private Long date;
     private String comment;
     private String username;
@@ -23,14 +22,6 @@ public class Comment {
     }
 
     // getters/setters
-    public CommentList getComments() {
-        return comments;
-    }
-
-    public void setComments(CommentList comments) {
-        this.comments = comments;
-    }
-
     public Long getDate() {
         return date;
     }

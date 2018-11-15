@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.MessageListAdapter;
+import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Comment;
@@ -51,10 +52,11 @@ public class MessageListFragment extends Fragment {
         messageList.setHasFixedSize(false);
         adapter = new MessageListAdapter(getContext(), comments);
         messageList.setAdapter(adapter);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         messageList.setLayoutManager(manager);
-        manager = new LinearLayoutManager(getActivity());
         messageList.setLayoutManager(manager);
+        messageList.smoothScrollToPosition(comments.getSize()-1);
+
 
         // on click listener for send button
         sendbutton.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +72,8 @@ public class MessageListFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                     chatBox.setText(null);
                     SaveLoadController.saveProfile(getContext(), profile);
+                    ElasticSearchController.updateUser(profile);
+                    messageList.smoothScrollToPosition(comments.getSize()-1);
                 }
                 else{
                     Log.d("Messaging", "idiot user tried to imput an empty string");

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class MessageListFragment extends Fragment {
         final EditText chatBox = (EditText) rootView.findViewById(R.id.edittext_chatbox);
         final RecyclerView messageList = (RecyclerView) rootView.findViewById(R.id.reyclerview_message_list);
 
+        // initialize the messageList adapter
         messageList.setHasFixedSize(false);
         adapter = new MessageListAdapter(getContext(), comments);
         messageList.setAdapter(adapter);
@@ -58,7 +60,7 @@ public class MessageListFragment extends Fragment {
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!chatBox.getText().toString().isEmpty()) {
+                if(!chatBox.getText().toString().trim().isEmpty()) {
                     Comment comment = new Comment(
                             chatBox.getText().toString(),
                             profile.getUsername()
@@ -70,7 +72,8 @@ public class MessageListFragment extends Fragment {
                     SaveLoadController.saveProfile(getContext(), profile);
                 }
                 else{
-                    Toast.makeText(getContext(), "Please enter a valid format when sending a message!", Toast.LENGTH_LONG);
+                    Log.d("Messaging", "idiot user tried to imput an empty string");
+                    chatBox.setText(null);
                 }
             }
         });

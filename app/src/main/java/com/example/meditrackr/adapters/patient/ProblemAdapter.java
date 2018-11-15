@@ -69,6 +69,9 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public MaterialIconView deleteProblem;
         public MaterialIconView editProblem;
 
+
+
+
         public ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
@@ -79,6 +82,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             editProblem = itemView.findViewById(R.id.problem_edit_button);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
+
 
 
             // onclick listener for delete problem
@@ -113,6 +117,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                     alert11.show();
                 }
             });
+
+
 
             // onclick listener for edit a problem
             editProblem.setOnClickListener(new View.OnClickListener() {

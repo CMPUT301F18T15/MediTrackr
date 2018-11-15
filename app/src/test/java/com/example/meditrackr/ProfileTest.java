@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  * Unit Tests for Profile
  */
 
-public class ProfileUnitTest {
+public class ProfileTest {
 
     @Test
     public void substituteTest() {

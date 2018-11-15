@@ -15,7 +15,8 @@ import static org.junit.Assert.*;
  * Unit Tests for Patient
  */
 
-public class PatientUnitTest {
+public class PatientTest {
+
     private Patient patient;
 
     // Create a fresh patient every test -- Let Patient attributes

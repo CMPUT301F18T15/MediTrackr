@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  * Unit Tests for Problem
  */
 
-public class ProblemUnitTest {
+public class ProblemTest {
     private Problem problem;
 
     // Initialize a simple problem to be used in the tests

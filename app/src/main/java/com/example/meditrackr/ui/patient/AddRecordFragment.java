@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +34,9 @@ import com.example.meditrackr.models.record.Record;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 
 import static android.app.Activity.RESULT_OK;
@@ -42,27 +47,21 @@ import static android.app.Activity.RESULT_OK;
 
 public class AddRecordFragment extends Fragment {
     private ArrayList<Integer> frequency;
+    private List<String> frequencyButtons;
+
     Patient patient = ProfileManager.getPatient();
-    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
     //indicator
     private static final int IMAGE_REQUEST_CODE = 2;
 
 
     //image
-    private ImageView imageTest;
     private Bitmap bitmap;
-    private ImageView image1;
-    private ImageView image2;
-    private ImageView image3;
-    private ImageView image4;
-    private ImageView image5;
-    private ImageView image6;
-    private ImageView image7;
-    private ImageView image8;
-    private ImageView image9;
-    private ImageView image10;
+    private ImageView[] images = new ImageView[10];
+    private Bitmap[] bitmaps = new Bitmap[10];
 
+
+    // location
     private LocationController locationController;
 
 
@@ -91,23 +90,62 @@ public class AddRecordFragment extends Fragment {
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
 
         // ui attributes for all the images LMAO
-        image1 = (ImageView) rootView.findViewById(R.id.image_1);
-        image2 = (ImageView) rootView.findViewById(R.id.image_2);
-        image3 = (ImageView) rootView.findViewById(R.id.image_3);
-        image4 = (ImageView) rootView.findViewById(R.id.image_4);
-        image5 = (ImageView) rootView.findViewById(R.id.image_5);
-        image6 = (ImageView) rootView.findViewById(R.id.image_6);
-        image7 = (ImageView) rootView.findViewById(R.id.image_7);
-        image8 = (ImageView) rootView.findViewById(R.id.image_8);
-        image9 = (ImageView) rootView.findViewById(R.id.image_9);
-        image10 = (ImageView) rootView.findViewById(R.id.image_10);
+        images[0] = (ImageView) rootView.findViewById(R.id.image_1);
+        images[1] = (ImageView) rootView.findViewById(R.id.image_2);
+        images[2] = (ImageView) rootView.findViewById(R.id.image_3);
+        images[3] = (ImageView) rootView.findViewById(R.id.image_4);
+        images[4] = (ImageView) rootView.findViewById(R.id.image_5);
+        images[5] = (ImageView) rootView.findViewById(R.id.image_6);
+        images[6] = (ImageView) rootView.findViewById(R.id.image_7);
+        images[7] = (ImageView) rootView.findViewById(R.id.image_8);
+        images[8] = (ImageView) rootView.findViewById(R.id.image_9);
+        images[9] = (ImageView) rootView.findViewById(R.id.image_10);
+
+        // reminder memes
+        final Button[] days = new Button[]{
+            rootView.findViewById(R.id.add_button_1D),
+            rootView.findViewById(R.id.add_button_2D),
+            rootView.findViewById(R.id.add_button_3D),
+            rootView.findViewById(R.id.add_button_5D),
+            rootView.findViewById(R.id.add_button_1W),
+            rootView.findViewById(R.id.add_button_2W),
+            rootView.findViewById(R.id.add_button_1M)
+        };
+        final boolean[] selected = new boolean[7];
 
 
+        // onclick listener for reminder
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(int i = 0; i < selected.length; i++) {
+                    if(days[i].equals(v)) {
+                        selected[i] = !selected[i];
+                        if(selected[i]){
+                            Drawable background = ContextCompat.getDrawable(getContext(), R.drawable.gradient);
+                            days[i].setBackgroundDrawable(background);
+                        }
+                        else {
+                            days[i].setBackgroundColor(Color.parseColor("#ffffff"));
+
+                        }
+                        break;
+                    }
+
+                }
+            }
+        };
+
+        for(Button button: days){
+            button.setOnClickListener(listener);
+        }
 
 
         final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d. yyyy");
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
         dateSelector.setText(format.format(calendar.getTime()));
+
+
 
 
         //on click listener for adding a record
@@ -121,7 +159,9 @@ public class AddRecordFragment extends Fragment {
                             dateSelector.getText().toString(),
                             null,
                             null);
-                    record.getImages().addImage(bitmap);
+                    for(Bitmap bitmap: bitmaps){
+                        record.getImages().addImage(bitmap);
+                    }
                     patient.getProblem(index).getRecords().addRecord(record);
 
                     // save the shit
@@ -155,10 +195,6 @@ public class AddRecordFragment extends Fragment {
                 startActivityForResult(intent,
                         IMAGE_REQUEST_CODE);
                 Log.d("ImageTest", "do we get here2");
-                setImage(bitmaps, view);
-
-
-
             }
         });
 
@@ -180,23 +216,27 @@ public class AddRecordFragment extends Fragment {
                 byte[] byteArray = stream.toByteArray();
 
                 // convert byte array to Bitmap
-
                 bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                         byteArray.length);
                 Log.d("ImageTest", "do we get here");
-                bitmaps.add(bitmap);
-                //imageTest.setImageBitmap(bitmap);
+
+                // populate image
+                for(int i = 0; i < bitmaps.length; i++){
+                    if(bitmaps[i] == null){
+                        bitmaps[i] = bitmap;
+                        images[i].setImageBitmap(bitmaps[i]);
+                        break;
+                    }
+                }
                 Log.d("ImageTest", bitmap.toString());
             }
         }
     }
 
-    public void setImage(ArrayList<Bitmap> bitmaps,  View v){
-        for(Bitmap bitmap: bitmaps){
 
-        }
-    }
 
+
+    // check inputs
     public boolean checkInputs(EditText title, EditText description){
         if(((title != null && !title.getText().toString().isEmpty()) &&
                 (description != null && !description.getText().toString().isEmpty()))){

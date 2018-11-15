@@ -4,8 +4,6 @@ package com.example.meditrackr.adapters.careprovider;
  * Created by Skryt on Nov 15, 2018
  */
 
-package com.example.meditrackr.adapters.careprovider;
-
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -19,8 +17,7 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.RecordList;
-import com.example.meditrackr.ui.careprovider.ProblemsFragment;
-import com.example.meditrackr.ui.patient.RecordFragment;
+import com.example.meditrackr.ui.careprovider.RecordFragment;
 
 
 /**
@@ -49,7 +46,6 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     // set the data into each viewHolder (ie. place place the patients info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.title.setText(problems.getProblem(position).getTitle());
         holder.date.setText(problems.getProblem(position).getDate());
         holder.description.setText(problems.getProblem(position).getDescription());
     }

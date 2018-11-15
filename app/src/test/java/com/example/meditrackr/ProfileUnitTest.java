@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
 
 /**
  * Unit Tests for Profile
- * Omit trivial getters & setters
  */
 
 public class ProfileUnitTest {
@@ -51,4 +50,5 @@ public class ProfileUnitTest {
         assertEquals("Phone number mismatch", phone, profile.getPhone());
         assertEquals("Type mistmatch", tempBool, profile.getisCareProvider());
     }
+
 }

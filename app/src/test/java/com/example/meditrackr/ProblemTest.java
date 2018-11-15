@@ -48,7 +48,7 @@ public class ProblemTest {
     public void recordListTest() {
         final String recordName = "New record!";
         final Record record = new Record
-                (recordName, "", "", null, null, null);
+                (recordName, "", "", null, null);
         problem.getRecords().addRecord(record);
         assertTrue("Record not added to problem",
                 problem.getRecords().recordExists(record));

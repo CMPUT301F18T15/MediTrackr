@@ -24,7 +24,7 @@ public class PatientTest {
     @Before
     public void newPatient() {
         patient = new Patient
-                ("", "", "", "", false);
+                ("", "", "", false);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class PatientTest {
     public void addCareProviderTest() {
         final String tempID = "TempID";
         final CareProvider tempCareProvider = new CareProvider
-                (tempID, "", "", "", true);
+                (tempID, "", "", true);
         patient.getCareProviders().addCareProvider(tempCareProvider);
         assertTrue("Care provider not added to list",
                 patient.getCareProviders().careProviderExists(tempID));
@@ -46,7 +46,7 @@ public class PatientTest {
     @Test
     public void hasCareProviderTest() {
         final CareProvider tempCareProvider = new CareProvider
-                ("", "", "", "", true);
+                ("", "", "", true);
         patient.getCareProviders().addCareProvider(tempCareProvider);
         assertTrue("Care provider not added to patient",
                 patient.careProviderExists(tempCareProvider));
@@ -55,7 +55,7 @@ public class PatientTest {
     @Test
     public void deleteCareProviderTest() {
         final CareProvider tempCareProvider = new CareProvider
-                ("", "", "", "", true);
+                ("", "", "", true);
         patient.getCareProviders().addCareProvider(tempCareProvider);
         assertTrue(patient.careProviderExists(tempCareProvider));
 

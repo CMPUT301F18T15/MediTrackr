@@ -56,15 +56,14 @@
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
                     android:background="@color/editTextBackground"
-                    android:hint="Title"
-                    android:inputType="text"
+                    android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:selectAllOnFocus="false"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryBlack"
                     android:textColorHint="@color/editTextHint"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/record_description"
@@ -76,13 +75,12 @@
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
                     android:background="@color/editTextBackground"
-                    android:hint="Description"
-                    android:inputType="text"
+                    android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:textColor="@color/colorPrimaryBlack"
                     android:textColorHint="@color/editTextHint"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
 
                 <TextView
@@ -95,15 +93,13 @@
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
                     android:background="@color/editTextBackground"
-                    android:clickable="true"
                     android:focusable="false"
-                    android:hint="Start Date"
-                    android:inputType="text"
+                    android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:textColor="@color/colorPrimaryBlack"
                     android:textColorHint="@color/editTextHint"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
 
@@ -300,14 +296,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/reminder_title">
 
                     <Button
-                        android:id="@+id/button_1d"
+                        android:id="@+id/button_1D"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
-                        android:onClick="updateFrequency"
+                        android:clickable="false"
                         android:text="1D"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
@@ -321,7 +317,7 @@
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
-                        android:onClick="updateFrequency"
+                        android:clickable="false"
                         android:text="2D"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
@@ -335,7 +331,7 @@
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
-                        android:onClick="updateFrequency"
+                        android:clickable="false"
                         android:text="3D"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
@@ -349,49 +345,49 @@
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
-                        android:onClick="updateFrequency"
+                        android:clickable="false"
                         android:text="5D"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/button_1w"
+                        android:id="@+id/button_1W"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
-                        android:onClick="updateFrequency"
+                        android:clickable="false"
                         android:text="1W"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/button_2w"
+                        android:id="@+id/button_2W"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
-                        android:onClick="updateFrequency"
+                        android:clickable="false"
                         android:text="2W"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/button_1m"
+                        android:id="@+id/button_1M"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
-                        android:onClick="updateFrequency"
+                        android:clickable="false"
                         android:text="1M"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"

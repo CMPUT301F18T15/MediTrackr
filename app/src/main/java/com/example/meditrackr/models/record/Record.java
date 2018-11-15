@@ -15,8 +15,8 @@ public class Record implements Serializable {
     private String description;
     private String title;
     private BodyLocation bodyLocation;
-    // geolocation is an array of LONGITUDE, LATITUDE in degrees
     private Geolocation geoLocation;
+    private boolean[] reminder;
 
     // Constructor
     public Record(String title, String description, @NonNull String date, BodyLocation bodylocation, Geolocation geoLocation) {
@@ -74,6 +74,16 @@ public class Record implements Serializable {
 
     public void setGeoLocation(Geolocation geoLocation) {
         this.geoLocation = geoLocation;
+    }
+
+    public boolean[] getReminders() {
+        return reminder;
+    }
+
+    public boolean getReminder(int index) { return reminder[index];}
+
+    public void setReminder(boolean[] reminder) {
+        this.reminder = reminder;
     }
 
 

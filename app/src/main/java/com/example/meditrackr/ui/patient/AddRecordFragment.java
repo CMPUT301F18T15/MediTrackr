@@ -1,15 +1,19 @@
 package com.example.meditrackr.ui.patient;
 
 
+import android.Manifest;
 import android.content.Intent;
 
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
@@ -29,6 +34,7 @@ import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
 
 import java.io.ByteArrayOutputStream;
@@ -46,14 +52,13 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class AddRecordFragment extends Fragment {
-    private ArrayList<Integer> frequency;
-    private List<String> frequencyButtons;
     private String date;
-
-    Patient patient = ProfileManager.getPatient();
+    private Patient patient = ProfileManager.getPatient();
 
     //indicator
+    private static int IMG_RESULT = 1;
     private static final int IMAGE_REQUEST_CODE = 2;
+    private static final int GPS_REQUEST_CODE = 3;
 
 
     //image
@@ -64,6 +69,9 @@ public class AddRecordFragment extends Fragment {
 
     // location
     private LocationController locationController;
+    private double latitude;
+    private double longitude;
+    private String addressName;
 
 
     public static AddRecordFragment newInstance(int index) {
@@ -88,6 +96,7 @@ public class AddRecordFragment extends Fragment {
         final EditText recordDescrption = (EditText) rootView.findViewById(R.id.record_description_field);
         final Button addImage = (Button) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
+        final TextView addressView = (TextView) rootView.findViewById(R.id.addresss_field);
 
         // ui attributes for all the images LMAO
         images[0] = (ImageView) rootView.findViewById(R.id.image_1);
@@ -113,6 +122,9 @@ public class AddRecordFragment extends Fragment {
         };
         final boolean[] selected = new boolean[7];
 
+
+        // set address
+        setAddress(addressView);
 
         // onclick listener for reminder
         View.OnClickListener listener = new View.OnClickListener() {
@@ -151,12 +163,14 @@ public class AddRecordFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(checkInputs(recordTitle, recordDescrption)){
+                    Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
                     Record record = new Record(
                             recordTitle.getText().toString(),
                             recordDescrption.getText().toString(),
                             date,
                             null,
-                            null);
+                            geolocation);
+                    record.setReminder(selected);
                     for(Bitmap bitmap: bitmaps){
                         record.getImages().addImage(bitmap);
                     }
@@ -242,6 +256,49 @@ public class AddRecordFragment extends Fragment {
         }
         else {
             return false;
+        }
+    }
+
+    // function to set address
+    public void setAddress(TextView address) {
+        // address stuff
+        int flag = locationController.getGPS(getContext());
+        if (flag == 1) {
+            checkPermission(GPS_REQUEST_CODE);
+            Log.d("Address", "do we get here");
+            String addressName = locationController.getGpsAddressName(getContext());
+            longitude = locationController.getGpsLongitude();
+            latitude = locationController.getGpsLatitude();
+            address.setText(addressName);
+        } else {
+            Toast.makeText(getContext(), "please turn on GPS", Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+
+    private void checkPermission(int requestType) {
+        switch (requestType) {
+            // access to gps service
+            case GPS_REQUEST_CODE: {
+                final String permission = Manifest.permission.ACCESS_FINE_LOCATION;
+                // if no permission, ask for permission
+                if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
+                        Log.d("Address", "fails here");
+
+                    } else {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
+                        Log.d("Address", "fails here2");
+
+                    }
+                } else {
+                    // has permission, get gps
+                    locationController.getGpsCoordinate(getContext());
+                    Log.d("Address", "success");
+                }
+            }
         }
     }
 }

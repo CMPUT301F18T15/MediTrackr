@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 
 public class ImageList implements Serializable {
-    private transient  ArrayList<Bitmap> images = new ArrayList<>();
+    private transient ArrayList<Bitmap> images = new ArrayList<>();
 
     public void addImage(Bitmap newImage) {
         images.add(newImage);

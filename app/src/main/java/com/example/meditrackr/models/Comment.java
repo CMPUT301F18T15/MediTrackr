@@ -12,12 +12,14 @@ public class Comment {
     private CommentList comments = new CommentList();
     private Date date;
     private String comment;
+    private String username;
 
 
     // constructor
-    public Comment(Date date, String comment) {
+    public Comment(Date date, String comment, String username) {
         this.date = new Date();
         this.comment = comment;
+        this.username = username;
     }
 
     // getters/setters
@@ -41,8 +43,11 @@ public class Comment {
         this.comment = comment;
     }
 
-    public Comment getComment(int index){
-        return comments.getComment(index);
+    public String getComment(){
+        return comment;
     }
+    public void setUsername(String username){this.username = username;}
+
+    public String getUsername(String username){return username;}
 
 }

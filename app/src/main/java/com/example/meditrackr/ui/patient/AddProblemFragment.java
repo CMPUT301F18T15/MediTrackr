@@ -21,6 +21,8 @@ import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 
+import net.steamcrafted.materialiconlib.MaterialIconView;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -45,12 +47,16 @@ public class AddProblemFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_problem, container, false);
 
+        // ui attributes
         final EditText title = (EditText) rootView.findViewById(R.id.problem_title_field);
         final EditText dateSelector = (EditText) rootView.findViewById(R.id.problem_date_selector);
         final EditText description = (EditText) rootView.findViewById(R.id.problem_description_field);
         final Button addButton = (Button) rootView.findViewById(R.id.problem_add_button);
         final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.CANADA);
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
+
+
+
 
         // set the problem start date to the current date
         dateSelector.setText(format.format(calendar.getTime()));
@@ -70,6 +76,8 @@ public class AddProblemFragment extends Fragment {
             }
         };
 
+
+
         // when the date field is clicked on the add problem page
         dateSelector.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +91,8 @@ public class AddProblemFragment extends Fragment {
                 datePicker.show();
             }
         });
+
+
 
         // onclick listener for adding a problem
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +116,8 @@ public class AddProblemFragment extends Fragment {
                 }
             }
         });
+
+
         return rootView;
     }
 

@@ -14,9 +14,10 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.ui.patient.RecordsFragment;
+
+import net.steamcrafted.materialiconlib.MaterialIconView;
 
 
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder>{
@@ -62,6 +63,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public TextView date;
         public TextView description;
         public TextView totalRecords;
+        public MaterialIconView deleteProblem;
+        public MaterialIconView editProblem;
 
         public ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
@@ -69,10 +72,34 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             date = itemView.findViewById(R.id.problem_date);
             description = itemView.findViewById(R.id.problem_description);
             totalRecords = itemView.findViewById(R.id.number_records_title);
+            deleteProblem = itemView.findViewById(R.id.problem_delete_button);
+            editProblem = itemView.findViewById(R.id.problem_edit_button);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
 
+
+            // onclick listener for delete problem
+            deleteProblem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    adapter.problems.removeProblem(position);
+                    adapter.notifyItemRemoved(position);
+                    adapter.notifyItemRangeChanged(position,adapter.problems.getSize());
+                    Log.d("DeleteProblem", "Position: " + position);
+                }
+            });
+
+            // onclick listener for edit a problem
+            editProblem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
+
+
 
         // set onClick listener for each problem, so they can be edited
         @Override

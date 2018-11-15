@@ -24,6 +24,12 @@ public class ProblemList implements Serializable {
         problems.remove(problem);
     }
 
+    public void removeProblem(int index){
+        problems.remove(index);
+    }
+
+
+
     public int getIndex(Problem problem){
         return problems.indexOf(problem);
     }

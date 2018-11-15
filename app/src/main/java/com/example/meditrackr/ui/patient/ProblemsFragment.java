@@ -15,6 +15,8 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.patient.ProblemAdapter;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 
+import net.steamcrafted.materialiconlib.MaterialIconView;
+
 /**
  * Created by Skryt on Nov 13, 2018
  */
@@ -49,7 +51,6 @@ public class ProblemsFragment extends Fragment {
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         problems.addItemDecoration(decoration);
 
-
         // floating button on click listener to go to add problem
         addProblem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +63,6 @@ public class ProblemsFragment extends Fragment {
                 transaction.commit();
             }
         });
-
 
         return rootView;
     }

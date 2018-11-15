@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
@@ -37,7 +38,7 @@ public class PatientSearchFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_patient, container, false);
@@ -45,6 +46,7 @@ public class PatientSearchFragment extends Fragment {
         searchLayout = (ConstraintLayout) rootView.findViewById(R.id.search_constraint);
         searchDisplayPatient = (ConstraintLayout) rootView.findViewById(R.id.search_display_patient);
 
+        // ui attributes
         final EditText searchPatient = (EditText) rootView.findViewById(R.id.search_patient);
         final Button searchPatientButton = (Button) rootView.findViewById(R.id.careprovider_search_for_patient_button);
 
@@ -74,6 +76,7 @@ public class PatientSearchFragment extends Fragment {
             }
         });
 
+        // on click listener button to add a patient to your list
         addPatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +84,11 @@ public class PatientSearchFragment extends Fragment {
                 Patient patient = (Patient) profile;
                 if(!careProvider.patientExists(patient.getUsername())) {
                     careProvider.addPatient(patient.getUsername());
+
+                    // save both to ES and memory
                     ElasticSearchController.updateUser(careProvider);
+                    SaveLoadController.saveProfile(getContext(), careProvider);
+
                     // transition back to patients page
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();

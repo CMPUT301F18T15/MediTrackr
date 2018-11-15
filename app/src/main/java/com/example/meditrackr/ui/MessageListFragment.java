@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.MessageListAdapter;
@@ -57,14 +58,20 @@ public class MessageListFragment extends Fragment {
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Comment comment = new Comment(
-                        chatBox.getText().toString(),
-                        profile.getUsername()
-                );
-                comments.addComment(comment);
-                adapter.notifyDataSetChanged();
-                chatBox.setText(null);
-                SaveLoadController.saveProfile(getContext(), profile);
+                if(!chatBox.getText().toString().isEmpty()) {
+                    Comment comment = new Comment(
+                            chatBox.getText().toString(),
+                            profile.getUsername()
+
+                    );
+                    comments.addComment(comment);
+                    adapter.notifyDataSetChanged();
+                    chatBox.setText(null);
+                    SaveLoadController.saveProfile(getContext(), profile);
+                }
+                else{
+                    Toast.makeText(getContext(), "Please enter a valid format when sending a message!", Toast.LENGTH_LONG);
+                }
             }
         });
 

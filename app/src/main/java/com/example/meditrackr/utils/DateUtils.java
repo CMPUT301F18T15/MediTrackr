@@ -31,7 +31,7 @@ public class DateUtils {
         return dateFormat.format(timeInMillis);
     }
 
-    public static String getTime(){
+    public static String formatAppTime(){
         final SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy, hh:mm aaa");
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
         return format.format(calendar.getTime());

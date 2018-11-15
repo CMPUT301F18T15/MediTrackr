@@ -1,7 +1,5 @@
 package com.example.meditrackr.models;
 
-import android.graphics.Bitmap;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

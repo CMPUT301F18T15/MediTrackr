@@ -1,15 +1,17 @@
 package com.example.meditrackr.models;
 
-import java.util.ArrayList;
-import java.util.Date;
+import com.example.meditrackr.utils.DateUtils;
+
+import java.io.Serializable;
+
 
 /**
  * Created by Skryt on Nov 15, 2018
  */
 
-public class Comment {
+public class Comment implements Serializable {
     // attributes
-    private Long date = System.currentTimeMillis() % 1000;
+    private String date = DateUtils.formatAppTime();
     private String comment;
     private String username;
 
@@ -21,11 +23,11 @@ public class Comment {
     }
 
     // getters/setters
-    public Long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

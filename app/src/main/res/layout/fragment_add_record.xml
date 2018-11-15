@@ -18,242 +18,88 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/add_record"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
-                android:text="ADD RECORD"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/record_title_field"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
-                android:background="@color/editTextBackground"
-                android:hint="Title"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:selectAllOnFocus="false"
-                android:singleLine="true"
-                android:textColor="@color/colorPrimaryBlack"
-                android:textColorHint="@color/editTextHint"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_record" />
-
-            <EditText
-                android:id="@+id/record_description_field"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
-                android:background="@color/editTextBackground"
-                android:hint="Description"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:textColor="@color/colorPrimaryBlack"
-                android:textColorHint="@color/editTextHint"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/record_title_field" />
-
-            <EditText
-                android:id="@+id/record_date_field"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
-                android:background="@color/editTextBackground"
-                android:clickable="true"
-                android:focusable="false"
-                android:hint="Start Date"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:textColor="@color/colorPrimaryBlack"
-                android:textColorHint="@color/editTextHint"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/record_description_field" />
-
-
-            <TextView
-                android:id="@+id/reminder_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Reminder"
-                android:textColor="@color/colorPrimaryBlack"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/record_date_field"
-                app:layout_constraintTop_toBottomOf="@+id/record_date_field" />
-
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="34dp"
-                android:layout_marginLeft="34dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reminder_title">
+                android:layout_height="0dp"
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/button_m"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.14"
-                    android:background="@color/white"
-                    android:onClick="updateFrequency"
-                    android:text="M"
+
+                <TextView
+                    android:id="@+id/add_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginRight="40dp"
+                    android:text="ADD RECORD"
                     android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textSize="30sp"
                     android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/button_t"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.14"
-                    android:background="@color/white"
-                    android:onClick="updateFrequency"
-                    android:text="T"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/record_title_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@color/editTextBackground"
+                    android:hint="Title"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:selectAllOnFocus="false"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimaryBlack"
+                    android:textColorHint="@color/editTextHint"
+                    android:textSize="14sp" />
 
-                <Button
-                    android:id="@+id/button_w"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.14"
-                    android:background="@color/white"
-                    android:onClick="updateFrequency"
-                    android:text="W"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/record_description_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@color/editTextBackground"
+                    android:hint="Description"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/colorPrimaryBlack"
+                    android:textColorHint="@color/editTextHint"
+                    android:textSize="14sp" />
 
-                <Button
-                    android:id="@+id/button_r"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.14"
-                    android:background="@color/white"
-                    android:onClick="updateFrequency"
-                    android:text="R"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/button_f"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.14"
-                    android:background="@color/white"
-                    android:onClick="updateFrequency"
-                    android:text="F"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/button_sa"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.14"
-                    android:background="@color/white"
-                    android:onClick="updateFrequency"
-                    android:text="Sa"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/button_su"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.14"
-                    android:background="@color/white"
-                    android:onClick="updateFrequency"
-                    android:text="Su"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold" />
-
+                <EditText
+                    android:id="@+id/record_date_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@color/editTextBackground"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="Start Date"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/colorPrimaryBlack"
+                    android:textColorHint="@color/editTextHint"
+                    android:textSize="14sp" />
             </LinearLayout>
 
-
-            <TextView
-                android:id="@+id/photos_title"
-                android:layout_width="52dp"
-                android:layout_height="27dp"
-                android:layout_marginTop="16dp"
-                android:text="Photos"
-                android:textColor="@color/colorPrimaryBlack"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/reminder_title"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-            <Button
-                android:id="@+id/button_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Button"
-                app:layout_constraintStart_toEndOf="@+id/photos_title"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
             <TableLayout
                 android:id="@+id/tableLayout2"
@@ -265,8 +111,7 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_img">
+                app:layout_constraintStart_toStartOf="parent">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -347,9 +192,6 @@
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/gradient"
@@ -358,10 +200,165 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/photos_title"
+                    android:layout_width="52dp"
+                    android:layout_height="27dp"
+                    android:text="Photos"
+                    android:textColor="@color/colorPrimaryBlack"
+                    android:textSize="18sp"
+                    tools:layout_editor_absoluteX="40dp"
+                    tools:layout_editor_absoluteY="449dp" />
+
+                <Button
+                    android:id="@+id/button_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Button"
+                    tools:layout_editor_absoluteX="52dp"
+                    tools:layout_editor_absoluteY="498dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tableLayout2" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                <TextView
+                    android:id="@+id/reminder_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Photo Reminder"
+                    android:textColor="@color/colorPrimaryBlack"
+                    android:textSize="18sp"
+                    tools:layout_editor_absoluteX="40dp"
+                    tools:layout_editor_absoluteY="416dp" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginRight="40dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reminder_title">
+
+                    <Button
+                        android:id="@+id/button_1d3"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:onClick="updateFrequency"
+                        android:text="1D"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/button_2D3"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:onClick="updateFrequency"
+                        android:text="2D"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/button_3D3"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:onClick="updateFrequency"
+                        android:text="3D"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/button_5D3"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:onClick="updateFrequency"
+                        android:text="5D"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/button_1w3"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:onClick="updateFrequency"
+                        android:text="1W"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/button_2w3"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:onClick="updateFrequency"
+                        android:text="2W"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/button_1m3"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:onClick="updateFrequency"
+                        android:text="1M"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
 
         </android.support.constraint.ConstraintLayout>
 

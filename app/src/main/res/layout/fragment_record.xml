@@ -133,7 +133,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/reminder_title">
 
                 <Button
-                    android:id="@+id/button_m"
+                    android:id="@+id/button_1d"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -141,13 +141,13 @@
                     android:layout_weight="0.14"
                     android:background="@color/white"
                     android:onClick="updateFrequency"
-                    android:text="M"
+                    android:text="1D"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/button_t"
+                    android:id="@+id/button_2D"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -155,13 +155,13 @@
                     android:layout_weight="0.14"
                     android:background="@color/white"
                     android:onClick="updateFrequency"
-                    android:text="T"
+                    android:text="2D"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/button_w"
+                    android:id="@+id/button_3D"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -169,13 +169,13 @@
                     android:layout_weight="0.14"
                     android:background="@color/white"
                     android:onClick="updateFrequency"
-                    android:text="W"
+                    android:text="3D"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/button_r"
+                    android:id="@+id/button_5D"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -183,13 +183,13 @@
                     android:layout_weight="0.14"
                     android:background="@color/white"
                     android:onClick="updateFrequency"
-                    android:text="R"
+                    android:text="5D"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/button_f"
+                    android:id="@+id/button_1w"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -197,13 +197,13 @@
                     android:layout_weight="0.14"
                     android:background="@color/white"
                     android:onClick="updateFrequency"
-                    android:text="F"
+                    android:text="1W"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/button_sa"
+                    android:id="@+id/button_2w"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -211,13 +211,13 @@
                     android:layout_weight="0.14"
                     android:background="@color/white"
                     android:onClick="updateFrequency"
-                    android:text="Sa"
+                    android:text="2W"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/button_su"
+                    android:id="@+id/button_1m"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -225,7 +225,7 @@
                     android:layout_weight="0.14"
                     android:background="@color/white"
                     android:onClick="updateFrequency"
-                    android:text="Su"
+                    android:text="1M"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold" />

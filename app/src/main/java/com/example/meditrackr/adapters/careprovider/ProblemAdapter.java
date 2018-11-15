@@ -41,8 +41,8 @@ import com.example.meditrackr.ui.careprovider.ProblemsFragment;
  * Author Skyrt
  * Created on Nov 10, 2018
  * Version 1.0
- * ProblemAdapter.java creates the RecyclerView Adapter for the Problem list
- * RecyclerView
+ * careprovider\ProblemAdapter.java creates the RecyclerView Adapter for the Problem list
+ * RecyclerView for careprovider accounts
  */
 
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder> {
@@ -55,6 +55,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         this.problems = problems;
     }
 
+
     // display the view
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -64,6 +65,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         return new ViewHolder(problemView, this);
     }
 
+
     // set the data into each viewHolder (ie. place the problem info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -72,6 +74,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         holder.description.setText(problems.getProblem(position).getDescription());
     }
 
+    // get the number of problems in RecyclerView
     @Override
     public int getItemCount() {
         return problems.getSize();
@@ -85,6 +88,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public TextView date;
         public TextView description;
 
+        //gets the corresponding data for each view
         public ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
@@ -92,7 +96,6 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             description = itemView.findViewById(R.id.problem_description);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
-
         }
 
         // set onClick listener for each problem, so the problem can be viewed

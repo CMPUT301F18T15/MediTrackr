@@ -1,4 +1,4 @@
-package com.example.meditrackr.ui;
+package com.example.meditrackr.utils;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;

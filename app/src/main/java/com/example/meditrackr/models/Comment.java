@@ -10,14 +10,14 @@ import java.util.Date;
 public class Comment {
     // attributes
     private CommentList comments = new CommentList();
-    private Date date;
+    private Long date;
     private String comment;
     private String username;
 
 
     // constructor
-    public Comment(Date date, String comment, String username) {
-        this.date = new Date();
+    public Comment(Long date, String comment, String username) {
+        this.date = System.currentTimeMillis() % 1000;
         this.comment = comment;
         this.username = username;
     }
@@ -31,11 +31,11 @@ public class Comment {
         this.comments = comments;
     }
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 
@@ -48,6 +48,6 @@ public class Comment {
     }
     public void setUsername(String username){this.username = username;}
 
-    public String getUsername(String username){return username;}
+    public String getUsername(){return username;}
 
 }

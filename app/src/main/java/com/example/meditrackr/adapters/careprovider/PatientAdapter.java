@@ -109,8 +109,8 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             FragmentManager manager = adapter.activity.getSupportFragmentManager();  //access Fragment class features
             FragmentTransaction transaction =  manager.beginTransaction();  //allow editing on manager fragment
             ProblemsFragment fragment = ProblemsFragment.newInstance(position);  //instantiate new Fragment
-            transaction.addToBackStack(null);
-            transaction.replace(R.id.content, fragment);
+            transaction.addToBackStack(null); //allows user to bring back previous fragment when back button is pressed
+            transaction.replace(R.id.content, fragment); // Replace current fragment with new info
             transaction.commit(); ////make permanent all changes performed in the transaction
         }
     }

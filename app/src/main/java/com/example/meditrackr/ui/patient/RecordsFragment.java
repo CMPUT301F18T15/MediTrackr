@@ -21,7 +21,17 @@ import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.RecordList;
 
 /**
- * Created by Skryt on Nov 13, 2018
+ * shows user a list of their created records in a recycler view.
+ * in each record item it displays the date and description of the record.
+ * it also displays the title with the description underneath the title.
+ *
+ * when a user clicks on a record it will bring them to a records page with the records associated with that problem
+ *
+ * there is also a + icon that when pressed brings the user to addRecordFragment
+ *
+ * @return  fragment
+ * @author  Orest Cokan
+ * @version 1.0 Nov 13, 2018.
  */
 
 public class RecordsFragment extends Fragment {

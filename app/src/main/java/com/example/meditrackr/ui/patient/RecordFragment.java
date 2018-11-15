@@ -34,12 +34,12 @@ public class RecordFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_record, container, false);
 
-        final ImageView recordImage = rootView.findViewById(R.id.record_image);
+        //final ImageView recordImage = rootView.findViewById(R.id.record_image);
         Patient patient  = ProfileManager.getPatient();
         // set ui attributes
         record = (Record) getArguments().getSerializable(
                 "Record");
-        recordImage.setImageBitmap(record.getImages().getImage(0));
+        //recordImage.setImageBitmap(record.getImages().getImage(0));
 
 
 

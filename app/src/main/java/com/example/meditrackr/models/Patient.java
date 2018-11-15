@@ -14,7 +14,7 @@ public class Patient extends Profile implements Serializable{
 
     // Patient constructor
     public Patient(String username, String email, String phone, boolean isCareProvider) {
-        super(username, email, phone, isCareProvider);
+        super(username, email, phone, false);
     }
 
     // Getters/Setters

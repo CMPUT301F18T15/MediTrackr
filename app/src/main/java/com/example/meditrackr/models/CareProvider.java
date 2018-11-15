@@ -14,7 +14,7 @@ public class CareProvider extends Profile implements Serializable {
 
     // Constructor
     public CareProvider(String username, String email, String phone, boolean isCareProvider){
-        super(username, email, phone, isCareProvider);
+        super(username, email, phone, true);
     }
 
 

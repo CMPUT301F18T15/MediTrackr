@@ -43,6 +43,7 @@ import static android.app.Activity.RESULT_OK;
 public class AddRecordFragment extends Fragment {
     private ArrayList<Integer> frequency;
     Patient patient = ProfileManager.getPatient();
+    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
     //indicator
     private static final int IMAGE_REQUEST_CODE = 2;
@@ -51,6 +52,16 @@ public class AddRecordFragment extends Fragment {
     //image
     private ImageView imageTest;
     private Bitmap bitmap;
+    private ImageView image1;
+    private ImageView image2;
+    private ImageView image3;
+    private ImageView image4;
+    private ImageView image5;
+    private ImageView image6;
+    private ImageView image7;
+    private ImageView image8;
+    private ImageView image9;
+    private ImageView image10;
 
     private LocationController locationController;
 
@@ -72,13 +83,25 @@ public class AddRecordFragment extends Fragment {
         final int index = getArguments().getInt("INDEX");
         locationController = new LocationController(getContext());
 
-
+        // general ui attributes
         final EditText recordTitle = (EditText) rootView.findViewById(R.id.record_title_field);
         final EditText recordDescrption = (EditText) rootView.findViewById(R.id.record_description_field);
         final EditText dateSelector = (EditText) rootView.findViewById(R.id.record_date_field);
         final Button addImage = (Button) rootView.findViewById(R.id.button_img);
-        imageTest = (ImageView) rootView.findViewById(R.id.test_image);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
+
+        // ui attributes for all the images LMAO
+        image1 = (ImageView) rootView.findViewById(R.id.image_1);
+        image2 = (ImageView) rootView.findViewById(R.id.image_2);
+        image3 = (ImageView) rootView.findViewById(R.id.image_3);
+        image4 = (ImageView) rootView.findViewById(R.id.image_4);
+        image5 = (ImageView) rootView.findViewById(R.id.image_5);
+        image6 = (ImageView) rootView.findViewById(R.id.image_6);
+        image7 = (ImageView) rootView.findViewById(R.id.image_7);
+        image8 = (ImageView) rootView.findViewById(R.id.image_8);
+        image9 = (ImageView) rootView.findViewById(R.id.image_9);
+        image10 = (ImageView) rootView.findViewById(R.id.image_10);
+
 
 
 
@@ -100,6 +123,8 @@ public class AddRecordFragment extends Fragment {
                             null);
                     record.getImages().addImage(bitmap);
                     patient.getProblem(index).getRecords().addRecord(record);
+
+                    // save the shit
                     ElasticSearchController.updateUser(patient);
                     SaveLoadController.saveProfile(getContext(), patient);
                     Log.d("RecordAdd", "Profile: " + patient.getUsername() + " Records: " + patient.getProblem(index).getRecords());
@@ -129,12 +154,13 @@ public class AddRecordFragment extends Fragment {
                 Log.d("ImageTest", "do we get here");
                 startActivityForResult(intent,
                         IMAGE_REQUEST_CODE);
-                Log.d("ImageTest", "do we get here");
+                Log.d("ImageTest", "do we get here2");
+                setImage(bitmaps, view);
+
 
 
             }
         });
-
 
         return rootView;
     }
@@ -158,15 +184,18 @@ public class AddRecordFragment extends Fragment {
                 bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                         byteArray.length);
                 Log.d("ImageTest", "do we get here");
-                imageTest.setImageBitmap(bitmap);
+                bitmaps.add(bitmap);
+                //imageTest.setImageBitmap(bitmap);
                 Log.d("ImageTest", bitmap.toString());
-
-
             }
         }
     }
 
+    public void setImage(ArrayList<Bitmap> bitmaps,  View v){
+        for(Bitmap bitmap: bitmaps){
 
+        }
+    }
 
     public boolean checkInputs(EditText title, EditText description){
         if(((title != null && !title.getText().toString().isEmpty()) &&

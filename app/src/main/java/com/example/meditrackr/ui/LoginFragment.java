@@ -33,6 +33,7 @@ import com.example.meditrackr.models.Profile;
  *
  * @return  fragment
  * @author  Orest Cokan
+<<<<<<< HEAD
  * @version 2.0 Nov 13, 2018.
  */
 

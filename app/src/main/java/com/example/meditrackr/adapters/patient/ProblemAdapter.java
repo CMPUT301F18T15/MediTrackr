@@ -109,6 +109,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             itemView.setOnClickListener(this);
             this.adapter = adapter;
 
+
             // onclick listener for delete problem
             deleteProblem.setOnClickListener(new View.OnClickListener() {
                 @Override

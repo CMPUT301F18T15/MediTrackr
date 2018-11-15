@@ -3,6 +3,7 @@ package com.example.meditrackr.models.record;
 import java.io.Serializable;
 
 
+
 /**
  * this class is a geolcoation point on a map. it will just keep the latitude and logitude of that geolocation
  * uses a getter function to return a decimal of the geolocations longitude

@@ -40,12 +40,23 @@ import com.example.meditrackr.ui.patient.RecordsFragment;
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
 /**
- * Team Name CMPUT301F18T15
- * Author Skyrt
- * Created on Nov 10, 2018
- * Version 1.0
- * patient\ProblemAdapter.java creates the RecyclerView Adapter for the Problem list
- * RecyclerView for patient accounts
+ * this class will display all of the problems associated with the user (patient) in a recycler view
+ *
+ * there is also a onclick listener which when clicked will take the patient to a page with
+ * more detailed information about that problem so they can edit the problem.
+ *
+ * it uses onCreateViewHolder to create the recycler view and uses onBindViewHolder to put the problems
+ * into the recycler view.
+ *
+ * this class can use getItemCount to display the number of items (problems) in the recycler view
+ *
+ * this class uses viewHolder to put information to each problem into its own view so we wont display
+ * information from one problem as another. this function servers for an organization purpose.
+ * but it can also delete or edit a problem with corresponding buttons
+ *
+ * @author  Orest Cokan
+ * @version 1.0 Nov 10, 2018
+ * @see
  *
  */
 

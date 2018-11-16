@@ -34,12 +34,23 @@ import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 
 /**
- * Team Name CMPUT301F18T15
- * Author Skyrt
- * Created on Nov 10, 2018
- * Version 1.0
- * careprovider\ProblemAdapter.java creates the RecyclerView Adapter for the Problem list
- * RecyclerView for careprovider accounts
+ * this class will display all of the problems  in a recycler view for the patient that was clicked
+ * on from the previous page (PatientAdapter).
+ *
+ * there is also a onclick listener which when clicked will take the care provider to a page with
+ * more detailed information about that problem.
+ *
+ * it uses onCreateView to create the recycler view and uses onBindViewHolder to put the problem
+ * into the recycler view.
+ *
+ * this class can use getItemCount to display the number of items (problems) in the recycler view
+ *
+ * this class uses viewHolder to put information to each problem into its own view so we wont display
+ * information from one problem as another. this function servers mainly as an organization purpose
+ *
+ * @author  Orest Cokan
+ * @version 1.0 Nov 10, 2018
+ * @see PatientAdapter
  *
  */
 

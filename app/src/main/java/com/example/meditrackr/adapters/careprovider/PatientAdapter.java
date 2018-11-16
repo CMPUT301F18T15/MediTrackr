@@ -38,12 +38,22 @@ import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 
 /**
- * Team Name CMPUT301F18T15
- * Author Skyrt
- * Created on Nov 10, 2018
- * Version 1.0
- * PatientAdapter.java creates the RecyclerView Adapter for the Patient list
- * RecyclerView
+ * this class will display all of the patients information in a recycler view that a careprovider is
+ * assigned to.
+ * there is also a onclick listener which when clicked will take the care provider to a page with
+ * more detailed information about that patient.(ProblemAdapter)
+ *
+ * it uses onCreateView to create the recycler view and uses onBindViewHolder to put the patients
+ * information into the recycler view.
+ *
+ * this class can use getItemCount to display the number of items (patients) in the recycler view
+ *
+ * this class uses viewHolder to put information to each patient into its own view so we wont display
+ * information from one patient as another. this function servers mainly as an organization purpose
+ *
+ * @author  Orest Cokan
+ * @version 1.0 Nov 10, 2018
+ * @see ProblemAdapter
  *
  */
 

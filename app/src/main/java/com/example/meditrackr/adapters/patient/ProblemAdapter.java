@@ -1,5 +1,24 @@
+/*
+ *Apache 2.0 License Notice
+ *
+ *Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.adapters.patient;
 
+//imports
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +39,26 @@ import com.example.meditrackr.ui.patient.RecordsFragment;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
+/**
+ * this class will display all of the problems associated with the user (patient) in a recycler view
+ *
+ * there is also a onclick listener which when clicked will take the patient to a page with
+ * more detailed information about that problem so they can edit the problem.
+ *
+ * it uses onCreateViewHolder to create the recycler view and uses onBindViewHolder to put the problems
+ * into the recycler view.
+ *
+ * this class can use getItemCount to display the number of items (problems) in the recycler view
+ *
+ * this class uses viewHolder to put information to each problem into its own view so we wont display
+ * information from one problem as another. this function servers for an organization purpose.
+ * but it can also delete or edit a problem with corresponding buttons
+ *
+ * @author  Orest Cokan
+ * @version 1.0 Nov 10, 2018
+ * @see
+ *
+ */
 
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder>{
     private FragmentActivity activity;
@@ -31,18 +70,18 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         this.activity = activity;
     }
 
+
     // display the view
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) activity
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE); //creates view objects based on layouts in XML
         View problemView = inflater.inflate(R.layout.problem_entry, parent, false);
         return new ViewHolder(problemView, this);
     }
 
 
-
-    // set the data into each viewHolder (ie. place what each emotion has into the view)
+    // set the data into each viewHolder (ie. place the problem info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.title.setText(problems.getProblem(position).getTitle());
@@ -51,6 +90,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         holder.totalRecords.setText("Number of records: "+problems.getProblem(position).getRecords().getSize());
     }
 
+
+    // get the number of problems in RecyclerView
     @Override
     public int getItemCount() {
         return problems.getSize();
@@ -67,6 +108,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public MaterialIconView deleteProblem;
         public MaterialIconView editProblem;
 
+        //gets the corresponding data for each view
         public ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
@@ -107,7 +149,6 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         }
 
 
-
         // set onClick listener for each problem, so they can be edited
         @Override
         public void onClick(View v) {
@@ -116,7 +157,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             FragmentTransaction transaction =  manager.beginTransaction();
             Log.d("ProblemAdapter", "we are on index: " + position);
             RecordsFragment fragment = RecordsFragment.newInstance(position);
-            transaction.addToBackStack(null);
+            transaction.addToBackStack(null); //allows user to bring back previous fragment when back button is pressed
             transaction.replace(R.id.content, fragment);
             transaction.commit();
         }

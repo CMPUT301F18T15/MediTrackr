@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.models;
 
+//imports
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -33,9 +34,13 @@ import java.util.ArrayList;
  * @version 1.0 Nov 7, 2018.
  */
 
+// Class creates Care Provider List
 public class CareProviderList implements Serializable {
+
+    // Create list of care providers
     private ArrayList<CareProvider> careProviders = new ArrayList<>();
 
+    // Calls to Care Provider methods
     public int getSize(){
         return careProviders.size();
     }

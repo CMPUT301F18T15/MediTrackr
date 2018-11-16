@@ -18,7 +18,7 @@
  */
 package com.example.meditrackr.models;
 
-
+//imports
 import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
@@ -32,10 +32,11 @@ import io.searchbox.annotations.JestId;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A profile class that holds all information pertaining to profile
+// A Profile class that holds all information pertaining to Profile
 public class Profile implements Serializable {
     @JestId
 
+    // Initialize class variables
     private String username;
     private String email;
     private String phone;
@@ -43,7 +44,7 @@ public class Profile implements Serializable {
 
     // Constructor
     public Profile(String username, String email, String phone, boolean isCareProvider){
-
+        // Initialize class objects
         this.username = username;
         this.email = email;
         this.phone = phone;
@@ -74,7 +75,6 @@ public class Profile implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
 
     public boolean getisCareProvider() {
         return isCareProvider;

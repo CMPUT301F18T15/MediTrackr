@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.models;
 
+//imports
 import com.example.meditrackr.models.record.RecordList;
 
 import java.io.Serializable;
@@ -30,9 +31,10 @@ import java.io.Serializable;
  * @version 1.0 Oct 24, 2018.
  */
 
-
-// Profile that contains all information about Problem
+// A Problem class that holds all information pertaining to Problem
 public class Problem implements Serializable {
+
+    // Initialize class variables
     private String title;
     private String date;
     private String description;
@@ -40,6 +42,7 @@ public class Problem implements Serializable {
 
     // Constructor
     public Problem(String title, String date, String description){
+        // Initialize class objects
         this.title = title;
         this.date = date;
         this.description = description;

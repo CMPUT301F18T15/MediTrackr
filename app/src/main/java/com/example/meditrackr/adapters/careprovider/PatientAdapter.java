@@ -79,8 +79,12 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
+            CareProvider careProvider = ProfileManager.getCareProvider();
+            PatientList patients = careProvider.getPatients();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
+            Patient patient = (Patient) ElasticSearchController.searchProfile(patients.getPatient(position));
+            ProfileManager.setCarePatient(patient);
             ProblemsFragment fragment = ProblemsFragment.newInstance(position);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);

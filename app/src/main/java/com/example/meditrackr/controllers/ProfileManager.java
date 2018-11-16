@@ -11,6 +11,7 @@ import com.example.meditrackr.models.Profile;
 
 public class ProfileManager {
     private static Profile profile;
+    private static Patient carePatient;
 
     public static Profile getProfile() {
         return profile;
@@ -35,4 +36,15 @@ public class ProfileManager {
 
     // boolean, 1 for careprovider 0 for patient
     public static  boolean getIsCareProvider() {return profile.getisCareProvider();}
+
+
+    public static Patient getCarePatient() {
+        return carePatient;
+    }
+
+    public static void setCarePatient(Patient carePatient) {
+        ProfileManager.carePatient = carePatient;
+    }
+
 }
+

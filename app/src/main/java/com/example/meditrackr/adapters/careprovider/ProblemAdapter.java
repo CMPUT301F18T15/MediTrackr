@@ -92,7 +92,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             RecordList records = problems.getProblem(position).getRecords();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            RecordsFragment fragment = RecordsFragment.newInstance(records);
+            RecordsFragment fragment = RecordsFragment.newInstance(records, problems.getProblem(position).getComments());
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();

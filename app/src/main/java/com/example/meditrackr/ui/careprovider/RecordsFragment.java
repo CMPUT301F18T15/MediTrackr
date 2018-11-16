@@ -3,6 +3,8 @@ package com.example.meditrackr.ui.careprovider;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,11 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.careprovider.RecordAdapter;
+import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
+import com.example.meditrackr.models.CommentList;
+import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.RecordList;
+import com.example.meditrackr.ui.MessageListFragment;
+import com.example.meditrackr.ui.patient.ProblemsFragment;
 
 /**
  * Created by Skryt on Nov 10, 2018
@@ -22,11 +32,13 @@ import com.example.meditrackr.models.record.RecordList;
 
 public class RecordsFragment extends Fragment {
     private RecordAdapter adapter;
+    private Patient carePatient = ProfileManager.getCarePatient();
 
-    public static RecordsFragment newInstance(RecordList records) {
+    public static RecordsFragment newInstance(RecordList records, CommentList comments) {
         RecordsFragment fragment = new RecordsFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("Records", records);
+        bundle.putSerializable("Comments", comments);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -40,13 +52,43 @@ public class RecordsFragment extends Fragment {
         // ui attributes
         final RecyclerView recordsList = (RecyclerView) rootView.findViewById(R.id.records_recyclerview);
         final FloatingActionButton addRecord = (FloatingActionButton) rootView.findViewById(R.id.add_record_floating);
+        final TextView messageClick = (TextView) rootView.findViewById(R.id.message_click);
+        final TextView recordsClick = (TextView) rootView.findViewById(R.id.records_click);
+
+        RecordList records = (RecordList)getArguments().getSerializable("Records");
+        final CommentList comments = (CommentList) getArguments().getSerializable("Comments");
+
+        // onclick listener for messages
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(messageClick == v){
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.addToBackStack(null);
+                    MessageListFragment fragment = MessageListFragment.newInstance(comments);
+                    transaction.replace(R.id.content, fragment);
+                    transaction.commit();
+                }
+                else if (recordsClick == v) {
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.addToBackStack(null);
+                    com.example.meditrackr.ui.patient.ProblemsFragment fragment = ProblemsFragment.newInstance();
+                    transaction.replace(R.id.content, fragment);
+                    transaction.commit();
+                }
+            }
+        };
+
+        messageClick.setOnClickListener(listener);
+        recordsClick.setOnClickListener(listener);
 
         // hide the floating action button (lazy af)
         addRecord.setVisibility(View.INVISIBLE);
         addRecord.setClickable(false);
 
         // initialize adapter to put the records in the recyclerview
-        RecordList records = (RecordList)getArguments().getSerializable("Records");
         recordsList.setHasFixedSize(false);
         adapter = new RecordAdapter(getActivity(), records);
         recordsList.setAdapter(adapter);

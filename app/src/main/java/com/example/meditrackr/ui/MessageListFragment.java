@@ -19,6 +19,7 @@ import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Comment;
 import com.example.meditrackr.models.CommentList;
+import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
 
 /**
@@ -73,10 +74,10 @@ public class MessageListFragment extends Fragment {
                     chatBox.setText(null);
                     SaveLoadController.saveProfile(getContext(), profile);
                     ElasticSearchController.updateUser(profile);
-                    messageList.smoothScrollToPosition(comments.getSize()-1);
+                    messageList.smoothScrollToPosition(comments.getSize());
                 }
                 else{
-                    Log.d("Messaging", "idiot user tried to imput an empty string");
+                    Log.d("Messaging", "idiot user tried to input an empty string");
                     chatBox.setText(null);
                 }
             }

@@ -15,17 +15,18 @@ import static org.junit.Assert.*;
 public class ProblemListTest {
 
     private ProblemList problemList;
+    private Problem problem;
 
     @Before
     public void newProblemList() {
         problemList = new ProblemList();
+        problem = new Problem
+                ("Sample problem", "Today", "This is problematic");
     }
 
 
     @Test
     public void addProblemTest() {
-        final Problem problem = new Problem
-                ("", "", "");
         problemList.addProblem(problem);
         assertTrue("Problem not added to ProblemList",
                 problemList.getSize() != 0);
@@ -33,8 +34,6 @@ public class ProblemListTest {
 
     @Test
     public void deleteProblemIndexTest() {
-        final Problem problem = new Problem
-                ("", "", "");
         problemList.addProblem(problem);
         assertTrue(problemList.getSize() != 0);
 
@@ -45,8 +44,6 @@ public class ProblemListTest {
 
     @Test
     public void deleteProblemObjTest() {
-        final Problem problem = new Problem
-                ("", "", "");
         problemList.addProblem(problem);
         assertTrue(problemList.getSize() != 0);
 
@@ -57,8 +54,6 @@ public class ProblemListTest {
 
     @Test
     public void hasProblemTest() {
-        final Problem problem = new Problem
-                ("", "", "");
         problemList.addProblem(problem);
         assertTrue("Problem not added to ProblemList",
                 problemList.problemExists(problem));

@@ -18,7 +18,7 @@
  */
 package com.example.meditrackr.ui.patient;
 
-
+//imports
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -55,10 +55,13 @@ import com.example.meditrackr.models.record.RecordList;
  * @see AddRecordFragment
  */
 
+// Class creates the Records Fragment for patients
 public class RecordsFragment extends Fragment {
+    // Set variables
     private RecordsAdapter adapter;
     private Patient patient = ProfileManager.getPatient();
 
+    // Creates new instance fragment and saves it as a bundle
     public static RecordsFragment newInstance(int index){
         RecordsFragment fragment = new RecordsFragment();
         Bundle bundle = new Bundle();
@@ -68,40 +71,42 @@ public class RecordsFragment extends Fragment {
         return fragment;
     }
 
+    // Creates records fragments view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_records, container, false);
 
+        // Enable recycler view and add record button
         final RecyclerView records = (RecyclerView) rootView.findViewById(R.id.records_recyclerview);
         final FloatingActionButton addRecord = (FloatingActionButton) rootView.findViewById(R.id.add_record_floating);
 
-
+        // Set bundle number as the problem index number
         final int index = getArguments().getInt("INDEX");
         Log.d("RecordsFragments", "we on are on index: " + index);
-        RecordList recordList = patient.getProblem(index).getRecords();
+        RecordList recordList = patient.getProblem(index).getRecords(); // Get records for a certain problem
 
         records.setHasFixedSize(false);
-        adapter = new RecordsAdapter(getActivity(), recordList);
+        adapter = new RecordsAdapter(getActivity(), recordList); // Creates RecordsAdapter for recyclerview
         records.setAdapter(adapter);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        records.setLayoutManager(manager);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext()); // Creates LinearLayoutManager object for recyclerview
+        records.setLayoutManager(manager); // Set records layout context
         manager = new LinearLayoutManager(getActivity());
-        records.setLayoutManager(manager);
+        records.setLayoutManager(manager); // Set records layout activity
 
-        VerticalSpaceController decoration = new VerticalSpaceController(75);
+        VerticalSpaceController decoration = new VerticalSpaceController(75); // Reinforces vertical layout of fragment
         records.addItemDecoration(decoration);
 
 
-        // floating button on click listener to go to add a problem page
+        // Floating button on click listener to go to add a problem page
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                transaction.addToBackStack(null);
-                AddRecordFragment fragment = AddRecordFragment.newInstance(index);
+                transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
+                AddRecordFragment fragment = AddRecordFragment.newInstance(index); // Switch to AddRecordFragment
                 transaction.replace(R.id.content, fragment);
                 transaction.commit();
             }

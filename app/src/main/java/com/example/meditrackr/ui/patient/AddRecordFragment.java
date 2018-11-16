@@ -207,7 +207,7 @@ public class AddRecordFragment extends Fragment {
                     }
                     patient.getProblem(index).getRecords().addRecord(record);
 
-                    // Save record data
+                    // Save record data to ES and memory
                     ElasticSearchController.updateUser(patient);
                     SaveLoadController.saveProfile(getContext(), patient);
                     Log.d("RecordAdd", "Profile: " + patient.getUsername() + " Records: " + patient.getProblem(index).getRecords());

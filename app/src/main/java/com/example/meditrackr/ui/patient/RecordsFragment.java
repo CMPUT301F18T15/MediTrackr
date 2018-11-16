@@ -95,6 +95,7 @@ public class RecordsFragment extends Fragment {
         manager = new LinearLayoutManager(getActivity());
         records.setLayoutManager(manager); // Set records layout activity
 
+        // Add spacing between views
         VerticalSpaceController decoration = new VerticalSpaceController(75); // Reinforces vertical layout of fragment
         records.addItemDecoration(decoration);
 

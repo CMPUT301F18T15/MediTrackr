@@ -111,8 +111,8 @@ public class RegisterFragment extends Fragment {
                                 phoneNumber.getText().toString().trim(),
                                 isCareProvider
                         );
-                        done = ElasticSearchController.addProfile(careProvider); // Add care provider info to database
-                        finish = SaveLoadController.addNewProfile(getContext(),careProvider); // New care provider profile has been saved
+                        done = ElasticSearchController.addProfile(careProvider); // Add care provider info to memory
+                        finish = SaveLoadController.addNewProfile(getContext(),careProvider); // Add care provider info to ES
                         Log.d("Success", "elastic returned: " + done + " saveload returned " + finish);
                         if(finish || done){
                             bundle.putSerializable("CareProvider", careProvider); // Inserts a serializable care provider into the mapping of this bundle

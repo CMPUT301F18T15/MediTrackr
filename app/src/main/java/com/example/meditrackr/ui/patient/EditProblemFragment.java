@@ -128,7 +128,7 @@ public class EditProblemFragment extends Fragment {
                         problem.setDate(dateSelector.getText().toString());
                         problem.setDescription(description.getText().toString());
 
-                        // Save into database
+                        // Save problem into ES and memory
                         ElasticSearchController.updateUser(patient);
                         SaveLoadController.saveProfile(getContext(), patient);
                         Log.d("EditProblem", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());

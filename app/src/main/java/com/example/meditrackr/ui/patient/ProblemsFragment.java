@@ -84,7 +84,7 @@ public class ProblemsFragment extends Fragment {
         manager = new LinearLayoutManager(getActivity());
         problems.setLayoutManager(manager);
 
-
+        // Add spacing between views
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         problems.addItemDecoration(decoration);
 

@@ -123,9 +123,10 @@ public class AddProblemFragment extends Fragment {
                     // Set user inputs as data
                     Problem problem = new Problem(title.getText().toString(), dateSelector.getText().toString(), description.getText().toString());
                     patient.getProblems().addProblem(problem);
-                    ElasticSearchController.updateUser(patient); // Save problem data
-                    SaveLoadController.saveProfile(getContext(), patient);
+                    ElasticSearchController.updateUser(patient); // Save problem to ES
+                    SaveLoadController.saveProfile(getContext(), patient); // Save problem to memory
                     Log.d("ProblemAdd", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
+
 
                     // Transition back to ProblemsFragment after adding
                     FragmentManager manager = getFragmentManager();

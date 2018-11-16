@@ -113,12 +113,10 @@ public class RecordFragment extends Fragment {
             }
         }
 
-
         // Populate a record with data
         title.setText(record.getTitle());
         description.setText(record.getDescription());
         date.setText(record.getDate());
-
 
         // Populate with images
         try {

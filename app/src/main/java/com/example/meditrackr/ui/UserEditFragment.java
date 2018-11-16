@@ -83,7 +83,7 @@ public class UserEditFragment extends Fragment {
                 profile.setUsername(username.getText().toString());
                 profile.setEmail(email.getText().toString());
                 profile.setPhone(phone.getText().toString());
-                ElasticSearchController.updateUser(profile); // Updates user data in database
+                ElasticSearchController.updateUser(profile); // Saves profile in ES
 
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction(); // Allow editing on fragment

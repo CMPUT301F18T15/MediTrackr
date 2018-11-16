@@ -74,7 +74,7 @@ public class UserFragment extends Fragment {
         email.setText(profile.getEmail());
         phone.setText(profile.getPhone());
 
-        // Clicking on button allows user to switch to edit profile fragment
+        // Oncick listener for profile edit button
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

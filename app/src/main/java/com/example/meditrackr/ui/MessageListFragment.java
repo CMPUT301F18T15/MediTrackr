@@ -55,7 +55,7 @@ public class MessageListFragment extends Fragment {
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         messageList.setLayoutManager(manager);
         messageList.setLayoutManager(manager);
-        messageList.smoothScrollToPosition(comments.getSize()-1);
+        messageList.smoothScrollToPosition(comments.getSize());
 
 
         // on click listener for send button

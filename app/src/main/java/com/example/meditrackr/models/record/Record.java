@@ -19,12 +19,11 @@ public class Record implements Serializable {
     private boolean[] reminder;
 
     // Constructor
-    public Record(String title, String description, @NonNull String date, BodyLocation bodylocation, Geolocation geoLocation) {
+    public Record(String title, String description, @NonNull String date, BodyLocation bodylocation) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.bodyLocation = bodylocation;
-        this.geoLocation = geoLocation;
     }
 
     // Getters/Setters

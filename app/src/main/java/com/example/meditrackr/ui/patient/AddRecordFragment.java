@@ -10,11 +10,8 @@ import android.graphics.BitmapFactory;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -38,20 +35,13 @@ import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
-import com.example.meditrackr.ui.MainActivity;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.meditrackr.utils.DateUtils;
 
 import java.io.ByteArrayOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.TimeZone;
+
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.model.LatLng;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -68,6 +58,8 @@ public class AddRecordFragment extends Fragment {
     private static int IMG_RESULT = 1;
     private static final int IMAGE_REQUEST_CODE = 2;
     private static final int GPS_REQUEST_CODE = 3;
+    static final int PLACE_PICKER_REQUEST = 4;
+
 
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -84,10 +76,11 @@ public class AddRecordFragment extends Fragment {
 
     // location
     private LocationController locationController;
-    private FusedLocationProviderClient client;
     private double latitude;
     private double longitude;
     private String addressName;
+    private Place place;
+    private TextView addressView;
 
 
     public static AddRecordFragment newInstance(int index) {
@@ -112,7 +105,9 @@ public class AddRecordFragment extends Fragment {
         final EditText recordDescrption = (EditText) rootView.findViewById(R.id.record_description_field);
         final Button addImage = (Button) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
-        final TextView addressView = (TextView) rootView.findViewById(R.id.addresss_field);
+        addressView = (TextView) rootView.findViewById(R.id.addresss_field);
+        setInitialLocation();
+
 
         // ui attributes for all the images LMAO
         images[0] = (ImageView) rootView.findViewById(R.id.image_1);
@@ -167,9 +162,7 @@ public class AddRecordFragment extends Fragment {
         }
 
         // set date
-        final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d yyyy, hh:mm aaa");
-        final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
-        date = format.format(calendar.getTime());
+        date = DateUtils.formatAppTime();
 
 
         //on click listener for adding a record
@@ -182,9 +175,9 @@ public class AddRecordFragment extends Fragment {
                             recordTitle.getText().toString(),
                             recordDescrption.getText().toString(),
                             date,
-                            null,
-                            geolocation);
+                            null);
                     record.setReminder(selected);
+                    record.setGeoLocation(geolocation);
                     for(Bitmap bitmap: bitmaps){
                         record.getImages().addImage(bitmap);
                     }
@@ -224,50 +217,69 @@ public class AddRecordFragment extends Fragment {
             }
         });
 
-        // onclick listener for address
-        addressView.setOnClickListener(new View.OnClickListener() {
+        // pick a place
+        addressView.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MapActivity.class);
-                startActivity(intent);
+            public void onClick(View v){
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+                try{
+                    startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+                }
+                catch (Exception e){
+                    Log.d("Error","Place Picker Error");
+                }
+
+
             }
         });
+
 
         return rootView;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == IMAGE_REQUEST_CODE) {
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             Log.d("ImageTest", "do we get here");
             getActivity();
-            if (resultCode == RESULT_OK) {
-                Log.d("ImageTest", "do we get here");
-                Bitmap bmp = (Bitmap) data.getExtras().get("data");
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            Log.d("ImageTest", "do we get here");
+            Bitmap bmp = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-                assert bmp != null;
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
+            assert bmp != null;
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
 
-                // convert byte array to Bitmap
-                bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
-                        byteArray.length);
-                Log.d("ImageTest", "do we get here");
+            // convert byte array to Bitmap
+            bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
+                    byteArray.length);
+            Log.d("ImageTest", "do we get here");
 
-                // populate image
-                for(int i = 0; i < bitmaps.length; i++){
-                    if(bitmaps[i] == null){
-                        Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 450, false);
-                        bitmaps[i] = newBitmap;
-                        images[i].setImageBitmap(newBitmap);
-                        break;
-                    }
+            // populate image
+            for(int i = 0; i < bitmaps.length; i++){
+                if(bitmaps[i] == null){
+                    Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 450, false);
+                    bitmaps[i] = newBitmap;
+                    images[i].setImageBitmap(newBitmap);
+                    break;
                 }
-                Log.d("ImageTest", bitmap.toString());
             }
+            Log.d("ImageTest", bitmap.toString());
+        }
+        // we are getting a place location
+        else if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
+            place = PlacePicker.getPlace(data, getContext());
+            String toastMsg = String.format("Place: %s", place.getName());
+            addressView.setText(place.getName().toString());
+            addressName = place.getName().toString();
+            LatLng latLng = place.getLatLng();
+            latitude = latLng.latitude;
+            longitude = latLng.longitude;
+            Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG).show();
         }
     }
+
 
 
 
@@ -283,7 +295,44 @@ public class AddRecordFragment extends Fragment {
         }
     }
 
+    public void setInitialLocation() {
+        int flag = locationController.getGPS(getContext());
+        if (flag == 1) {
+            checkPermission(GPS_REQUEST_CODE);
+            addressName = locationController.getGpsAddressName(getContext());
+            longitude = locationController.getGpsLongitude();
+            latitude = locationController.getGpsLatitude();
+            addressName = addressName.replace(", null,", "").replace("null", "");
+            addressView.setText(addressName);
 
+        }
     }
 
+
+        private void checkPermission ( int requestType){
+            switch (requestType) {
+                // access to gps service
+                case GPS_REQUEST_CODE: {
+                    final String permission = Manifest.permission.ACCESS_FINE_LOCATION;
+                    // if no permission, ask for permission
+                    if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
+                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
+
+                        } else {
+                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
+
+                        }
+                    } else {
+                        // has permission, get gps
+                        locationController.getGpsCoordinate(getContext());
+
+                    }
+                    return;
+                }
+
+            }
+
+        }
+    }
 

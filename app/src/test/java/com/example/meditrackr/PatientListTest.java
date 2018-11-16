@@ -7,14 +7,21 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+
+/**
+ * PatientList Unit Tests
+ */
+
 public class PatientListTest {
     private PatientList patientList;
 
+    // Initialize an empty patient list
     @Before
     public void newPatientList() {
         patientList = new PatientList();
     }
 
+    // Test if patients can be added to the list
     @Test
     public void addPatientTest() {
         final String username = "Username";
@@ -23,6 +30,7 @@ public class PatientListTest {
                 patientList.getSize() != 0);
     }
 
+    // Test if a patient can be removed
     @Test
     public void deletePatientTest() {
         final String username = "Username";
@@ -32,6 +40,7 @@ public class PatientListTest {
                 patientList.getSize() == 0);
     }
 
+    // Test if an existing patient can be identified
     @Test
     public void hasPatientTest() {
         final String username = "Username";
@@ -44,6 +53,7 @@ public class PatientListTest {
                 patientList.patientExists(username));
     }
 
+    // Test if a patient can be overwritten
     @Test
     public void setOldPatientTest() {
         final String oldName = "Old";
@@ -52,16 +62,20 @@ public class PatientListTest {
         patientList.addPatient(oldName);
         assertTrue(patientList.patientExists(oldName));
 
+        // Set the old patient to the new patient
         patientList.setPatient(0, newName);
+
         assertTrue("New patient not set",
                 patientList.patientExists(newName));
         assertFalse("Old patient not reset",
                 patientList.patientExists(oldName));
 
+        // Test that the size is still 1
         assertTrue("Unexpected patient list size",
                 patientList.getSize() == 1);
     }
 
+    // Test if the patient list is printing its contents
     @Test
     public void printListTest() {
         final String firstPatient = "Bill";

@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+
 /**
  * Unit Tests for Problem
  */
@@ -32,11 +33,13 @@ public class ProblemTest {
         final String newDate = "New Date";
         final String newDesc = "New Desc";
         problem = new Problem(newTitle, newDate, newDesc);
+
         assertEquals(newTitle, problem.getTitle());
         assertEquals(newDate, problem.getDate());
         assertEquals(newDesc, problem.getDescription());
     }
 
+    // Test if a null string can be set
     @Test
     public void stringNullTest() {
         final String newTitle = null;
@@ -44,14 +47,19 @@ public class ProblemTest {
         assertNull("Title set was not null", problem.getTitle());
     }
 
+    // Test if a record can be added and deleted from the problem
     @Test
     public void recordListTest() {
         final String recordName = "New record!";
         final Record record = new Record
                 (recordName, "", "", null, null);
+
+        // Addition
         problem.getRecords().addRecord(record);
         assertTrue("Record not added to problem",
                 problem.getRecords().recordExists(record));
+
+        // Deletion
         problem.getRecords().removeRecord(0);
         assertFalse(problem.getRecords().recordExists(record));
     }

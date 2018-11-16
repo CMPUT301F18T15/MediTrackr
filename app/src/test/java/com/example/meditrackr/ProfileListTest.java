@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+
 /**
  * Unit tests for ProfileList
  */
@@ -15,41 +16,42 @@ import static org.junit.Assert.*;
 public class ProfileListTest {
 
     private ProfileList profileList;
+    private Profile profile;
 
+    // Set a new base profile and an empty profile list
     @Before
     public void newProfileList() {
         profileList = new ProfileList();
+        profile = new Profile("", "", "", false);
     }
 
+    // Test if the profile can be added to the list
     @Test
     public void addProfileTest() {
-        final Profile tempProfile = new Profile
-                ("", "", "", false);
-        profileList.addProfile(tempProfile);
+        profileList.addProfile(profile);
         assertTrue("Profile not added to ProfileList",
                 profileList.size() != 0);
     }
 
+    // Test if the profile can be removed
     @Test
     public void removeProfileTest() {
-        final Profile tempProfile = new Profile
-                ("", "", "", false);
-        profileList.addProfile(tempProfile);
-        profileList.removeProfile(tempProfile);
+        profileList.addProfile(profile);
+        profileList.removeProfile(profile);
         assertTrue("Profile not removed from ProfileList",
                 profileList.size() == 0);
     }
 
+    // Test if an existing profile can be identified from the list
     @Test
     public void hasProfileTest() {
-        final Profile tempProfile = new Profile
-                ("", "", "", false);
-        profileList.addProfile(tempProfile);
+        profileList.addProfile(profile);
         assertTrue("Profile not added to ProfileList",
-                profileList.containsProfile(tempProfile));
+                profileList.containsProfile(profile));
 
-        profileList.removeProfile(tempProfile);
+        // Delete profile and test if it is gone
+        profileList.removeProfile(profile);
         assertFalse("Profile not removed from ProfileList",
-                profileList.containsProfile(tempProfile));
+                profileList.containsProfile(profile));
     }
 }

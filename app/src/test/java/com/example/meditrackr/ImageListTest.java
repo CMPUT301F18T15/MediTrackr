@@ -18,6 +18,7 @@ public class ImageListTest {
     private ImageList imageList;
     private Bitmap image;
 
+    // Set an initial null bitmap and an empty ImageList
     @Before
     public void initImageList() {
         imageList = new ImageList();
@@ -25,7 +26,7 @@ public class ImageListTest {
         image = null;
     }
 
-
+    // Test if images are being added to the list
     @Test
     public void addImageTest() {
         imageList.addImage(image);
@@ -33,16 +34,19 @@ public class ImageListTest {
                 imageList.getSize() == 1);
     }
 
+    // Test if an image can be removed
     @Test
     public void removeImageTest() {
         imageList.addImage(image);
         assertTrue("Image not added to Image List",
                 imageList.getSize() == 1);
+
         imageList.removeImage(0);
         assertTrue("Image not removed from Image List",
                 imageList.getSize() == 0);
     }
 
+    // Test if an existing image can be identified from the list
     @Test
     public void hasImageTest() {
         imageList.addImage(image);
@@ -53,6 +57,7 @@ public class ImageListTest {
         assertEquals(imageList.getIndex(image), 0);
     }
 
+    // Test if the size of the list is updating
     @Test
     public void imageListSizeTest() {
         imageList.addImage(image);

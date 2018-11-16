@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+
 /**
  * Record Unit Tests
  */
@@ -17,6 +18,7 @@ import static org.junit.Assert.*;
 public class RecordTest {
     private Record record;
 
+    // Initialize a new base record
     @Before
     public void initRecord() {
         final double[] tempCoords = new double[2];
@@ -28,12 +30,14 @@ public class RecordTest {
                 ("", "", "", bodyLoc, geoLoc);
     }
 
+    // Test if the record can have its properties modified
     @Test
     public void setRecordTest() {
         final String newDate = "New Date";
         final String newDesc = "New Desc";
         final String newTitle = "New Title";
 
+        // Set the new properties
         record.setDate(newDate);
         record.setDescription(newDesc);
         record.setTitle(newTitle);
@@ -43,6 +47,7 @@ public class RecordTest {
         assertEquals(newTitle, record.getTitle());
     }
 
+    // Test if a body location can be set in the record
     @Test
     public void setBodyLocationTest() {
         final double[] tempCoords = new double[2];
@@ -60,6 +65,7 @@ public class RecordTest {
                 newBodyLoc, record.getBodyLocation());
     }
 
+    // Test if a geolocation can be set in the record
     @Test
     public void setGeoLocationTest() {
         final double newLatitude = 60;
@@ -74,6 +80,7 @@ public class RecordTest {
                 newGeoLoc, record.getGeoLocation());
     }
 
+    // Test if a reminder can be set in the record
     @Test
     public void setReminderTest() {
         final boolean[] reminders = new boolean[3];
@@ -83,13 +90,16 @@ public class RecordTest {
 
         record.setReminder(reminders);
 
+        // Test each reminder
         assertEquals(reminders[0], record.getReminder(0));
         assertEquals(reminders[1], record.getReminder(1));
         assertEquals(reminders[2], record.getReminder(2));
+
         assertEquals("Reminders mismatch or not set",
                 reminders, record.getReminders());
     }
 
+    // Test if images can be added to the record
     @Test
     public void setImageTest() {
         final ImageList imgList = new ImageList();

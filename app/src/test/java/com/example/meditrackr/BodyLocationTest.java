@@ -1,13 +1,16 @@
 package com.example.meditrackr;
 
-import com.example.meditrackr.models.BodyLocation;
+import com.example.meditrackr.models.record.BodyLocation;
+
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
+
 /**
- * Unit tests for BodyLocation
+ * BodyLocation Unit Tests
  */
+
 public class BodyLocationTest {
     private BodyLocation body;
 
@@ -43,9 +46,11 @@ public class BodyLocationTest {
         body.setBodyCoordinate(location);
         assertEquals("check to see if it set correctly", body.getBodyCoordinate(), location);
     }
+
     // test to see if its a null cordinate
     @Test public void nullCoorinate(){
         body.setBodyCoordinate(null);
         assertEquals("testing to see if its empty", body.getBodyCoordinate(), null);
     }
+    
 }

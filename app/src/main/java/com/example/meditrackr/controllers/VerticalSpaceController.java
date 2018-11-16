@@ -24,7 +24,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * Created by Skryt on Nov 10, 2018
+ * this class adds spaces between each item in a recycler view across the project.
+ * this allows for more of a comfortable experience for the user
+ *
+ * @author  Orest Cokan
+ * @version 1.0 Nov 10, 2018
+ *
  */
 
 // Class creates VerticalSpaceController for RecyclerView

@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (v == map) {
                     if(isServicesOK()) {
+                        Log.d("IsService", "why don't we get here");
                         image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
                         MapFragment fragment = MapFragment.newInstance();
                         transaction.replace(R.id.content, fragment);
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
         if(available == ConnectionResult.SUCCESS){
             //everything is okay, user can make map requests
             Log.d(TAG, "isServiceOK: Google play services is working");
+            return true;
         }else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
             // an error occured but we can resolve it
             Log.d(TAG, "IsServicesOK: an error occured but we can fit it");
@@ -137,8 +139,5 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public void init(){
-
-    }
 
 }

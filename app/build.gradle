@@ -34,4 +34,5 @@ dependencies {
     implementation 'net.steamcrafted:materialiconlib:1.1.5'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.android.support:gridlayout-v7:27.1.1'
+    implementation 'com.google.android.gms:play-services:12.0.1'
 }

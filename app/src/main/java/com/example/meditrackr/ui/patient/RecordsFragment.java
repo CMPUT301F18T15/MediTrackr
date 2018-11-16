@@ -16,11 +16,9 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.patient.RecordsAdapter;
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.MessageListFragment;
 
@@ -31,7 +29,6 @@ import com.example.meditrackr.ui.MessageListFragment;
 public class RecordsFragment extends Fragment {
     private RecordsAdapter adapter;
     private Patient patient = ProfileManager.getPatient();
-    private String username = patient.getUsername();
 
     public static RecordsFragment newInstance(int index){
         RecordsFragment fragment = new RecordsFragment();
@@ -76,12 +73,10 @@ public class RecordsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(messageClick == v){
-                    Profile profile = ElasticSearchController.searchProfile(username);
-                    Patient patient2 = (Patient) profile;
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.addToBackStack(null);
-                    MessageListFragment fragment = MessageListFragment.newInstance(patient2.getProblem(index).getComments());
+                    MessageListFragment fragment = MessageListFragment.newInstance(patient.getProblem(index).getComments());
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
                 }

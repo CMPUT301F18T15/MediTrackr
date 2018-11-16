@@ -1,5 +1,6 @@
 package com.example.meditrackr.ui;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -7,17 +8,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.ui.careprovider.PatientsFragment;
+import com.example.meditrackr.ui.patient.MapFragment;
 import com.example.meditrackr.ui.patient.ProblemsFragment;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 /**
  * Created by Skryt on Nov 13, 2018
  */
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String TAG = "MapFragment";
+    private static final int ERROR_DIALOG_REQUEST = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +75,12 @@ public class MainActivity extends AppCompatActivity {
                     transaction.commit();
                 }
                 else if (v == map) {
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
+                    if(isServicesOK()) {
+                        image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
+                        MapFragment fragment = MapFragment.newInstance();
+                        transaction.replace(R.id.content, fragment);
+                    }
+                    transaction.commit();
                 }
                 else if (v == camera) {
                     image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full));
@@ -104,8 +116,29 @@ public class MainActivity extends AppCompatActivity {
             ProblemsFragment fragment = ProblemsFragment.newInstance();
             transaction.replace(R.id.content, fragment);
             transaction.commit();
-
         }
+    }
+
+    public boolean isServicesOK(){
+        Log.d(TAG, "isServicesOK: checking google services version");
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
+        if(available == ConnectionResult.SUCCESS){
+            //everything is okay, user can make map requests
+            Log.d(TAG, "isServiceOK: Google play services is working");
+        }else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            // an error occured but we can resolve it
+            Log.d(TAG, "IsServicesOK: an error occured but we can fit it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }
+        else {
+            Toast.makeText(MainActivity.this, "You can't make map reqeuests", Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
+    public void init(){
+
     }
 
 }

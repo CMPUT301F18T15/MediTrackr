@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.models.record;
 
+//imports
 import com.example.meditrackr.models.Problem;
 
 import java.io.Serializable;
@@ -36,9 +37,13 @@ import java.util.ArrayList;
  * @version 1.0 Oct 24, 2018.
  */
 
+// Class creates Record List
 public class RecordList implements Serializable {
+
+    // Create array of records
     private ArrayList<Record> records = new ArrayList<>();
 
+    // Calls to RecordList methods
     public void addRecord(Record newRecord) {
         records.add(newRecord);
     }
@@ -66,7 +71,5 @@ public class RecordList implements Serializable {
     public Record getRecord(int index){
         return records.get(index);
     }
-
-
 
 }

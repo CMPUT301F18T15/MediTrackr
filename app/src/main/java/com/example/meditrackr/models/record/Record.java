@@ -33,8 +33,10 @@ import java.io.Serializable;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A basic record class that holds all information pertaining to record
+// A Record class that holds all information pertaining to Record
 public class Record implements Serializable {
+
+    // Initialize class variables
     private ImageList images = new ImageList();
     private String date;
     private String description;

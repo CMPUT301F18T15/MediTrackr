@@ -37,10 +37,10 @@ import java.util.ArrayList;
 // Class creates Care Provider List
 public class CareProviderList implements Serializable {
 
-    // Create list of care providers
+    // Create array of care providers
     private ArrayList<CareProvider> careProviders = new ArrayList<>();
 
-    // Calls to Care Provider methods
+    // Calls to CareProviderList methods
     public int getSize(){
         return careProviders.size();
     }

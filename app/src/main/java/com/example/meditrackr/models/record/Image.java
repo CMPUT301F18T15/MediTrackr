@@ -18,13 +18,14 @@
  */
 package com.example.meditrackr.models.record;
 
+//imports
 import java.io.Serializable;
 
 /**
  * Created by Skryt on Nov 14, 2018
  */
 
-
+// An Image class that holds all information pertaining to Image
 public class Image implements Serializable {
 
 }

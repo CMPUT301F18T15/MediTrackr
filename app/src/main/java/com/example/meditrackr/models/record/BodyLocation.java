@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.models.record;
 
+//imports
 import java.io.Serializable;
 
 /**
@@ -30,11 +31,15 @@ import java.io.Serializable;
  * @version 1.0 Oct 24, 2018.
  */
 
+// A BodyLocation class that holds all information pertaining to BodyLocation
 public class BodyLocation implements Serializable {
+
+    // Initialize class variables
     private double[] bodyCoordinate;
     private String bodyFace;
     private String bodyLocation;
 
+    // Constructor
     public BodyLocation(double[] bodyCoordinate, String bodyFace, String bodyLocation){
         this.bodyCoordinate = bodyCoordinate;
         this.bodyFace = bodyFace;
@@ -46,7 +51,6 @@ public class BodyLocation implements Serializable {
     public double[] getBodyCoordinate() {
         return bodyCoordinate;
     }
-
 
     public void setBodyCoordinate(double[] bodyCoordinate) {
         this.bodyCoordinate = bodyCoordinate;

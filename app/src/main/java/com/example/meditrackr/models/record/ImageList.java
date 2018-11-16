@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.models.record;
 
+//imports
 import android.graphics.Bitmap;
 
 import java.io.Serializable;
@@ -27,10 +28,13 @@ import java.util.ArrayList;
  * Created by Skryt on Nov 13, 2018
  */
 
-
+// Class creates Image List
 public class ImageList implements Serializable {
+
+    // Create array of bitmaps
     private transient ArrayList<Bitmap> images = new ArrayList<>();
 
+    // Calls to ImageList methods
     public void addImage(Bitmap newImage) {
         images.add(newImage);
     }

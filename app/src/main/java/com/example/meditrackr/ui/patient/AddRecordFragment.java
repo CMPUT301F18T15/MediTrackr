@@ -10,9 +10,11 @@ import android.graphics.BitmapFactory;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -36,6 +38,12 @@ import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
+import com.example.meditrackr.ui.MainActivity;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -76,6 +84,7 @@ public class AddRecordFragment extends Fragment {
 
     // location
     private LocationController locationController;
+    private FusedLocationProviderClient client;
     private double latitude;
     private double longitude;
     private String addressName;
@@ -130,8 +139,6 @@ public class AddRecordFragment extends Fragment {
         final boolean[] selected = new boolean[7];
 
 
-        // set address
-        setAddress(addressView);
 
         // onclick listener for reminder
         View.OnClickListener listener = new View.OnClickListener() {
@@ -217,6 +224,15 @@ public class AddRecordFragment extends Fragment {
             }
         });
 
+        // onclick listener for address
+        addressView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MapActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 
@@ -267,40 +283,7 @@ public class AddRecordFragment extends Fragment {
         }
     }
 
-    // function to set address
-    public void setAddress(TextView address) {
-        // address stuff
-        int flag = locationController.getGPS(getContext());
-        if (flag == 1) {
-            getLocationPermission();
-            Log.d("Address", "do we get here");
-            String addressName = locationController.getGpsAddressName(getContext());
-            longitude = locationController.getGpsLongitude();
-            latitude = locationController.getGpsLatitude();
-            address.setText(addressName);
-        } else {
-            Toast.makeText(getContext(), "please turn on GPS", Toast.LENGTH_LONG).show();
-        }
-
 
     }
-
-
-    private void getLocationPermission(){
-        String[] permissions ={Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION};
-
-        if(ContextCompat.checkSelfPermission(getContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(getContext(), COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                mLocationPersomissionsGranted = true;
-            }
-            else {
-                ActivityCompat.requestPermissions(getActivity(), permissions, LOCATION_PERMISSION_REQUEST_CODE);
-            }
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), permissions, LOCATION_PERMISSION_REQUEST_CODE);
-        }
-    }
-}
 
 

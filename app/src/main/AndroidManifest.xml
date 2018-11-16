@@ -37,6 +37,10 @@
         <activity android:name="com.example.meditrackr.ui.MainActivity" android:theme="@style/MainThemeNoActionBar">
 
         </activity>
+
+        <activity android:name="com.example.meditrackr.ui.patient.MapActivity" android:theme="@style/MainThemeNoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

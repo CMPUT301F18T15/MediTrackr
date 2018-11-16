@@ -1,6 +1,7 @@
 package com.example.meditrackr.ui;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.ui.careprovider.PatientsFragment;
-import com.example.meditrackr.ui.patient.MapFragment;
+import com.example.meditrackr.ui.patient.MapActivity;
 import com.example.meditrackr.ui.patient.ProblemsFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -23,7 +24,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
  */
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MapFragment";
+    private static final String TAG = "MapActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
     @Override
@@ -77,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
                 else if (v == map) {
                     if(isServicesOK()) {
                         Log.d("IsService", "why don't we get here");
-                        image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
-                        MapFragment fragment = MapFragment.newInstance();
-                        transaction.replace(R.id.content, fragment);
+                        //image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                        startActivity(intent);
                     }
                     transaction.commit();
                 }

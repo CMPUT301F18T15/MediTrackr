@@ -51,7 +51,7 @@ import java.util.TimeZone;
 
 // Class creates Edit Problem Fragment for patients
 public class EditProblemFragment extends Fragment {
-    // Set variables
+    // Initialize variables
     private Patient patient = ProfileManager.getPatient();
 
     // Creates new instance fragment and saves it as a bundle

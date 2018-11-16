@@ -34,7 +34,7 @@ import com.example.meditrackr.R;
 
 // Class creates Camera Fragment for patients
 public class CameraFragment extends Fragment {
-    // Set new CameraFragment object
+    // Initialize new CameraFragment object
     public static CameraFragment newInstance(){
         CameraFragment fragment = new CameraFragment();
         return fragment;

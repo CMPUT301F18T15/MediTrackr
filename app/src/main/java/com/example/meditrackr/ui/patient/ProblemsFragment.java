@@ -55,7 +55,7 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
 
 // Class creates Problems Fragment for patients
 public class ProblemsFragment extends Fragment {
-    // Set variable
+    // Initialize adapter and create new ProblemsFragment object
     // Patient patient = ProfileManager.getPatient();
     private ProblemAdapter adapter;
     public static ProblemsFragment newInstance(){
@@ -74,6 +74,7 @@ public class ProblemsFragment extends Fragment {
         final FloatingActionButton addProblem = (FloatingActionButton) rootView.findViewById(R.id.add_problem_floating);
         final RecyclerView problems = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
 
+
         // Initializes problem adapter, linear layout manager, and vertical space controller for recycler view
         problems.setHasFixedSize(false);
         adapter = new ProblemAdapter(getActivity());
@@ -82,6 +83,7 @@ public class ProblemsFragment extends Fragment {
         problems.setLayoutManager(manager);
         manager = new LinearLayoutManager(getActivity());
         problems.setLayoutManager(manager);
+
 
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         problems.addItemDecoration(decoration);

@@ -94,7 +94,7 @@ public class RecordFragment extends Fragment {
         images[8] = rootView.findViewById(R.id.record_image_9);
         images[9] = rootView.findViewById(R.id.record_image_10);
 
-        // reminder memes??
+        // Buttons for choosing reminder frequency
         final Button[] days = new Button[]{
                 rootView.findViewById(R.id.button_1D),
                 rootView.findViewById(R.id.button_2D),

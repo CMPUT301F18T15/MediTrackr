@@ -61,6 +61,12 @@ public class AddRecordFragment extends Fragment {
     private static final int IMAGE_REQUEST_CODE = 2;
     private static final int GPS_REQUEST_CODE = 3;
 
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private boolean mLocationPersomissionsGranted = false;
+
+
 
     //image
     private Bitmap bitmap;
@@ -266,7 +272,7 @@ public class AddRecordFragment extends Fragment {
         // address stuff
         int flag = locationController.getGPS(getContext());
         if (flag == 1) {
-            checkPermission(GPS_REQUEST_CODE);
+            getLocationPermission();
             Log.d("Address", "do we get here");
             String addressName = locationController.getGpsAddressName(getContext());
             longitude = locationController.getGpsLongitude();
@@ -279,28 +285,20 @@ public class AddRecordFragment extends Fragment {
 
     }
 
-    private void checkPermission(int requestType) {
-        switch (requestType) {
-            // access to gps service
-            case GPS_REQUEST_CODE: {
-                final String permission = Manifest.permission.ACCESS_FINE_LOCATION;
-                // if no permission, ask for permission
-                if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
-                        Log.d("Address", "fails here");
 
-                    } else {
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
-                        Log.d("Address", "fails here2");
+    private void getLocationPermission(){
+        String[] permissions ={Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION};
 
-                    }
-                } else {
-                    // has permission, get gps
-                    locationController.getGpsCoordinate(getContext());
-                    Log.d("Address", "success");
-                }
+        if(ContextCompat.checkSelfPermission(getContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            if(ContextCompat.checkSelfPermission(getContext(), COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                mLocationPersomissionsGranted = true;
             }
+            else {
+                ActivityCompat.requestPermissions(getActivity(), permissions, LOCATION_PERMISSION_REQUEST_CODE);
+            }
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), permissions, LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
 }

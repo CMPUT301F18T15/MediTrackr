@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.controllers;
 
+//imports
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -39,12 +40,12 @@ import java.net.SocketAddress;
  * @version 2.0 Nov 14, 2018
  */
 
-
+// Class connects app to internet
 public class NetworkCheckController {
-    public boolean isNetWorkAvaliable(Context context){
+    public boolean isNetWorkAvaliable(Context context){ // Connects to network
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo(); // Gets network connection
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
@@ -53,16 +54,18 @@ public class NetworkCheckController {
      * @return whether internet access is available
      */
 
+    // Connects to server proxy
     public static boolean isOnline() {
         try {
             int timeoutMs = 1500;
             Socket socket = new Socket();
-            SocketAddress sockaddr = new InetSocketAddress("8.8.8.8", 53);
+            SocketAddress sockaddr = new InetSocketAddress("8.8.8.8", 53); //Creates proxy info
 
+            // Connect to IP address
             socket.connect(sockaddr, timeoutMs);
             socket.close();
 
             return true;
-        } catch (IOException e) { return false; }
+        } catch (IOException e) { return false; } // Throws exception if cannot connect to server proxy
     }
 }

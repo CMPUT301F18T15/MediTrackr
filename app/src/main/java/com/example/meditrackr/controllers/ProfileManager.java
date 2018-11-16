@@ -32,6 +32,7 @@ import com.example.meditrackr.models.Profile;
  * @version 2.0 Nov 7, 2018
  */
 
+// Creates ProfileManager that handles some Profile methods
 public class ProfileManager {
     private static Profile profile;
 

@@ -7,6 +7,7 @@ android {
         applicationId "com.example.mdonline"
         minSdkVersion 15
         targetSdkVersion 27
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -35,4 +36,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.android.support:gridlayout-v7:27.1.1'
     implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation 'com.android.support:multidex:1.0.3'
+
 }

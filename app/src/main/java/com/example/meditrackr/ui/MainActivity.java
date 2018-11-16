@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 else if (v == map) {
                     if(isServicesOK()) {
                         Log.d("IsService", "why don't we get here");
-                        //image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
+                        image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
                         startActivity(intent);
                     }

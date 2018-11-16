@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.ui.patient;
 
+//imports
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -52,24 +53,29 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
  * @see AddProblemFragment
  */
 
+// Class creates Problems Fragment for patients
 public class ProblemsFragment extends Fragment {
-    //Patient patient = ProfileManager.getPatient();
+    // Initialize adapter and create new ProblemsFragment object
+    // Patient patient = ProfileManager.getPatient();
     private ProblemAdapter adapter;
-
     public static ProblemsFragment newInstance(){
         ProblemsFragment fragment = new ProblemsFragment();
         return fragment;
     }
 
+    // Create problems fragment view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_problems, container, false);
 
+        // Initialize add problem button and recycler view
         final FloatingActionButton addProblem = (FloatingActionButton) rootView.findViewById(R.id.add_problem_floating);
         final RecyclerView problems = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
 
+
+        // Initializes problem adapter, linear layout manager, and vertical space controller for recycler view
         problems.setHasFixedSize(false);
         adapter = new ProblemAdapter(getActivity());
         problems.setAdapter(adapter);
@@ -78,24 +84,25 @@ public class ProblemsFragment extends Fragment {
         manager = new LinearLayoutManager(getActivity());
         problems.setLayoutManager(manager);
 
+        // Add spacing between views
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         problems.addItemDecoration(decoration);
 
-        // floating button on click listener to go to add problem
+        // Floating button on click listener for adding problems
         addProblem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Prepares to switch fragments when button is clicked
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.addToBackStack(null);
-                AddProblemFragment fragment = AddProblemFragment.newInstance();
+                AddProblemFragment fragment = AddProblemFragment.newInstance(); // Switches to AddProblemFragment
                 transaction.replace(R.id.content, fragment);
-                transaction.commit();
+                transaction.commit(); // Commit any changes
             }
         });
 
         return rootView;
     }
-
 
 }

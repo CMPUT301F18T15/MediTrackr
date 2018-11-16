@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.models;
 
+//import
 import java.util.ArrayList;
 
 /**
@@ -30,10 +31,14 @@ import java.util.ArrayList;
  * @author  Orest Cokan
  * @version 1.0 Nov 7, 2018.
  */
+
+// Class creates a Profile List
 public class ProfileList {
+
+    // Create array of profiles
     private ArrayList<Profile> profiles = new ArrayList<>();
 
-
+    // Calls to Profile methods
     public void addProfile(Profile profile){
         profiles.add(profile);
     }

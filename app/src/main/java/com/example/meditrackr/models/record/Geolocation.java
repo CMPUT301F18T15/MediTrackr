@@ -18,9 +18,8 @@
  */
 package com.example.meditrackr.models.record;
 
+//imports
 import java.io.Serializable;
-
-
 
 /**
  * this class is a geolcoation point on a map. it will just keep the latitude and logitude of that geolocation
@@ -31,20 +30,22 @@ import java.io.Serializable;
  * @version 1.0 Nov 8, 2018.
  */
 
+// A Geolocation class that holds all information pertaining to Geolocation
 public class Geolocation implements Serializable {
-    // attributes
+
+    // Initialize class variables
     private double longitude;
     private double latitude;
     private String address;
 
-    // constructor
+    // Constructor
     public Geolocation(double latitude, double longitude, String address){
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
     }
 
-    // getter/setters
+    // Getter/Setters
     public double getLongitude() {
         return longitude;
     }

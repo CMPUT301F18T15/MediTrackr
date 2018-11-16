@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.controllers;
 
+//imports
 import android.content.Context;
 import android.util.Log;
 
@@ -57,6 +58,7 @@ import java.io.OutputStreamWriter;
  * @throw java.io.IOException
  */
 
+// A SaveLoadController class holding all information pertaining to SaveLoadController
 public class SaveLoadController {
 
     public static Profile loadProfile(Context context, String username){

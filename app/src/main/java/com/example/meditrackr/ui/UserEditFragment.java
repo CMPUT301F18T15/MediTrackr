@@ -44,7 +44,7 @@ import com.example.meditrackr.models.Profile;
  * @see UserFragment
  */
 
-// Class displays user edit fragment
+// Class creates user profile edit fragment
 public class UserEditFragment extends Fragment {
     // Set variables
     Profile profile = ProfileManager.getProfile();
@@ -75,7 +75,7 @@ public class UserEditFragment extends Fragment {
         email.setText(profile.getEmail());
         phone.setText(profile.getPhone());
 
-        // Clicking on button allows user to switch fragments to view their profile
+        // Onclick listener for create account button which allows user to switch fragments to view their profile
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +83,7 @@ public class UserEditFragment extends Fragment {
                 profile.setUsername(username.getText().toString());
                 profile.setEmail(email.getText().toString());
                 profile.setPhone(phone.getText().toString());
-                ElasticSearchController.updateUser(profile); // Updates user data in database
+                ElasticSearchController.updateUser(profile); // Saves profile in ES
 
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction(); // Allow editing on fragment

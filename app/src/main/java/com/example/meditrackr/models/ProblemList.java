@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.models;
 
+//imports
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +37,13 @@ import java.util.List;
  * @version 1.0 Nov 7, 2018.
  */
 
+// Class creates a Problem List
 public class ProblemList implements Serializable {
+
+    // Create array of problems
     private ArrayList<Problem> problems = new ArrayList<>();
 
-
+    // Calls to Problem methods
     public Problem getProblem(int index){
         return problems.get(index);
     }
@@ -59,8 +63,6 @@ public class ProblemList implements Serializable {
     public void removeProblem(int index){
         problems.remove(index);
     }
-
-
 
     public int getIndex(Problem problem){
         return problems.indexOf(problem);

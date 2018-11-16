@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.ui;
 
+//imports
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -31,19 +32,20 @@ import com.example.meditrackr.R;
  * @version 2.0 Nov 13, 2018.
  */
 
-
+// Class creates Login Activity
 public class LoginActivity extends AppCompatActivity {
 
+    // Creates login activity view by switching to login fragment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        FragmentManager manager = getSupportFragmentManager();
+        FragmentManager manager = getSupportFragmentManager(); // Prepares to switch fragments
         FragmentTransaction transaction = manager.beginTransaction();
-        LoginFragment fragment = LoginFragment.newInstance();
+        LoginFragment fragment = LoginFragment.newInstance(); // Switch to LoginFragment
         transaction.replace(R.id.content, fragment);
-        transaction.commit();
+        transaction.commit(); // Make permanent any changes
 
     }
 }

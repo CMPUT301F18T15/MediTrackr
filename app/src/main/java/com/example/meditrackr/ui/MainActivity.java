@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.ui;
 
+//imports
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -48,15 +49,16 @@ import com.example.meditrackr.ui.patient.ProblemsFragment;
  * @see UserFragment
  */
 
+// Class creates main activity fragment
 public class MainActivity extends AppCompatActivity {
 
-
+    // Creates main activity view
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // set ui attributes
+        // Set ui attributes
         final ImageView problems = (ImageView) findViewById(R.id.problems);
         final ImageView map = (ImageView) findViewById(R.id.map);
         final ImageView camera = (ImageView) findViewById(R.id.camera);
@@ -65,57 +67,61 @@ public class MainActivity extends AppCompatActivity {
         final Bundle bundle = getIntent().getExtras();
         final boolean isCareProvider = ProfileManager.getIsCareProvider();
 
-        // get userType
+        // Get userType
         setHomeView(isCareProvider);
 
+        // Set button icons on bottom bar
         problems.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
         map.setImageDrawable(getResources().getDrawable(R.drawable.map));
         camera.setImageDrawable(getResources().getDrawable(R.drawable.camera));
         search.setImageDrawable(getResources().getDrawable(R.drawable.search));
         profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
 
-
+        // Onclick listener for entire main activity
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Prepare to change fragment
                 ImageView image = (ImageView) v;
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.addToBackStack(null);
-                problems.setImageDrawable(getResources().getDrawable(R.drawable.cross));
-                map.setImageDrawable(getResources().getDrawable(R.drawable.map));
-                camera.setImageDrawable(getResources().getDrawable(R.drawable.camera));
-                search.setImageDrawable(getResources().getDrawable(R.drawable.search));
-                profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
-                if(v == problems){
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
-                    if(!isCareProvider) {
+                // Sets icons in bottom bar and problem add icon
+                problems.setImageDrawable(getResources().getDrawable(R.drawable.cross)); // Set Problem add icon
+                map.setImageDrawable(getResources().getDrawable(R.drawable.map)); // Set Geo-location icon
+                camera.setImageDrawable(getResources().getDrawable(R.drawable.camera)); // Set Camera icon
+                search.setImageDrawable(getResources().getDrawable(R.drawable.search)); // Set Search icon
+                profile.setImageDrawable(getResources().getDrawable(R.drawable.person)); // Set Profile icon
+                if(v == problems){ // If Problem add button icon is clicked
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.cross_full)); // Darken icon to indicate it is clicked
+                    if(!isCareProvider) { // If user is a patient show Add Problems Fragment
                         ProblemsFragment fragment = ProblemsFragment.newInstance();
                         transaction.replace(R.id.content, fragment);
                     }
-                    else{
+                    else{ // Else if user is a care provider show Add Patients Fragment
                         PatientsFragment fragment = PatientsFragment.newInstance();
                         transaction.replace(R.id.content, fragment);
                     }
-                    transaction.commit();
+                    transaction.commit(); // Make permanent all changes made in previous fragment
                 }
-                else if (v == map) {
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
+                else if (v == map) { // If Geo-location button icon is clicked
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.map_full)); // Darken map icon
                 }
-                else if (v == camera) {
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full));
+                else if (v == camera) { // If Camera button icon is clicked
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full)); // Darken camera icon
                 }
-                else if (v == search) {
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.search_full));
+                else if (v == search) { // If Search button icon is clicked
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.search_full)); // Darken Search icon
                 }
                 else{
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.person_full));
-                    UserFragment fragment = UserFragment.newInstance();
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.person_full)); // Darken Profile icon
+                    UserFragment fragment = UserFragment.newInstance(); // Switch to User Fragment
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
                 }
             }
         };
+        // Onclick listener for each icon in bottom bar
         problems.setOnClickListener(listener);
         map.setOnClickListener(listener);
         camera.setOnClickListener(listener);
@@ -125,14 +131,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // Sets the home view depending on the kind of user
     public void setHomeView(boolean isCareProvider){
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        if(isCareProvider){
+        if(isCareProvider){ // If user is a care provider set Patients Fragment as home view
             PatientsFragment fragment = PatientsFragment.newInstance();
             transaction.replace(R.id.content, fragment);
             transaction.commit();
-        }else{
+        }else{ // If user is a patient set Problems Fragment as home view
             ProblemsFragment fragment = ProblemsFragment.newInstance();
             transaction.replace(R.id.content, fragment);
             transaction.commit();

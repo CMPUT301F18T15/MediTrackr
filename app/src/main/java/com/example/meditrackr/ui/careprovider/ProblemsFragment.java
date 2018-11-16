@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.ui.careprovider;
 
+//imports
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,9 +44,12 @@ import com.example.meditrackr.controllers.ProfileManager;
  * @see RecordsFragment
  */
 
+// Class creates Problems Fragment for care providers
 public class ProblemsFragment extends Fragment  {
+    // Initialize object
     private ProblemAdapter adapter;
 
+    // Creates new instance fragment and saves it as bundle
     public static ProblemsFragment newInstance(int index){
         ProblemsFragment fragment = new ProblemsFragment();
         Bundle bundle = new Bundle();
@@ -54,19 +58,22 @@ public class ProblemsFragment extends Fragment  {
         return fragment;
     }
 
+    // Creates problems fragment view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_patient_problem, container, false);
 
+        // Initialize recycler view for problem list
         final RecyclerView patientList = (RecyclerView) rootView.findViewById(R.id.careprovider_view_patient);
 
+        // Set bundle number as problem index
         int index = getArguments().getInt("ProblemIndex");
-        String username = ProfileManager.getCareProvider().getPatient(index);
-        Patient patient = (Patient) ElasticSearchController.searchProfile(username);
+        String username = ProfileManager.getCareProvider().getPatient(index); // Gets the patient username
+        Patient patient = (Patient) ElasticSearchController.searchProfile(username); // Searches for the patient by username
 
-        // adapt items into recycler view
+        // Adapt items into recycler view
         patientList.setHasFixedSize(false);
         adapter = new ProblemAdapter(getActivity(), patient.getProblems());
         patientList.setAdapter(adapter);
@@ -75,7 +82,7 @@ public class ProblemsFragment extends Fragment  {
         manager = new LinearLayoutManager(getActivity());
         patientList.setLayoutManager(manager);
 
-        // add spacing between views
+        // Add spacing between views
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         patientList.addItemDecoration(decoration);
 

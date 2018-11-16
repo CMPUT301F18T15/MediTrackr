@@ -18,7 +18,7 @@
  */
 package com.example.meditrackr.models;
 
-
+//imports
 import java.io.Serializable;
 
 /**
@@ -36,7 +36,7 @@ import java.io.Serializable;
  * @version 1.0 Oct 24, 2018.
  */
 
-// CareProvider class
+// A CareProvider class that holds all information pertaining to CareProvider
 public class CareProvider extends Profile implements Serializable {
     private PatientList patients = new PatientList();
 
@@ -44,7 +44,6 @@ public class CareProvider extends Profile implements Serializable {
     public CareProvider(String username, String email, String phone, boolean isCareProvider){
         super(username, email, phone, true);
     }
-
 
     // Getters/Setters
     public PatientList getPatients() {

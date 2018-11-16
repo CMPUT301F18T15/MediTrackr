@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.models;
 
+//import
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -38,10 +39,12 @@ import java.util.ArrayList;
 
 // A Patient class holding all information pertaining to Patient
 public class Patient extends Profile implements Serializable{
+
+    // Initialize class variables
     private CareProviderList careProviders = new CareProviderList();
     private ProblemList problems = new ProblemList();
 
-    // Patient constructor
+    // Constructor
     public Patient(String username, String email, String phone, boolean isCareProvider) {
         super(username, email, phone, false);
     }

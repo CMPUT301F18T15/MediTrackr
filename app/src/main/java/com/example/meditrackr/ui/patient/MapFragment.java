@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.ui.patient;
 
+//imports
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -31,13 +32,15 @@ import com.example.meditrackr.R;
  * @version 1.0 Nov 12, 2018.
  */
 
+// Class creates Map Fragment for patients
 public class MapFragment extends Fragment {
-
+    // Create new MapFragment object
     public static MapFragment newInstance(){
         MapFragment fragment = new MapFragment();
         return fragment;
     }
 
+    // Creates map fragment view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

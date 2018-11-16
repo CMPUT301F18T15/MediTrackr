@@ -34,7 +34,31 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by Skryt on Nov 13, 2018
+ * this class is in charge of all the geolocation functionality
+ * this class can use locationController which can get the latitude and longitude of the location and
+ * give the name of that location based on the position. if there is no network connection then it
+ * will throw an exception (IOException)
+ *
+ * this class can use getGPS to get the users coordination using the gps location attached to the
+ * phone. if there is a network connection then it will set the lat and lon coordinates appropriately
+ * in not then it will provide an error saying that there is no network that it can find to check the
+ * gps location.
+ *
+ * this class can use getGpsCoordinate to update the users latitude and longitude values
+ *
+ * if the class ever needs just the latitude or just the longitude it can call getLatitude or getLongitude
+ * respectively
+ *
+ * this class can use getGpsAddressName to figure out where on a map the latitude and longitude coordinates
+ * are. once it knows where it is, it will return the address name associated with it. if there is no
+ * location it will tell the user no location is found. if the location is null it will tell the user
+ * that that it cant find the location name. if there is no network connection then it will throw
+ * an exception (IOException)
+ *
+ * @author Orest Cokan
+ * @version 1.0 Nov 13, 2018
+ * @throw IOException
+ * @throe SecurityException
  */
 
 public class LocationController {

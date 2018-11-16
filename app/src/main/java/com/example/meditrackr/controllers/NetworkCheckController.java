@@ -28,7 +28,13 @@ import java.net.Socket;
 import java.net.SocketAddress;
 
 /**
+ * this class can check to see if there is a network available and whether we are online or offline
+ * this class can use isNetWorkAvailable to see if there is a network that we can connect to.
+ * if there is a network then it will return true otherwise return false
  *
+ * this class can use isOnline to check to see if we are online or not.
+ * after it checks if we are online then it will return true if we are online or it will return
+ * false if we are offline
  * @author Orest Cokan
  * @version 2.0 Nov 14, 2018
  */

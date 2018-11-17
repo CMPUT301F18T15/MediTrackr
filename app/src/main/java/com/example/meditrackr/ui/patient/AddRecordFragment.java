@@ -28,8 +28,12 @@ import android.graphics.BitmapFactory;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -47,6 +51,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
+import com.example.meditrackr.adapters.PlaceAutocompleteAdapter;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.ProfileManager;
@@ -58,10 +63,17 @@ import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.DateUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -81,10 +93,16 @@ public class AddRecordFragment extends Fragment {
     private Patient patient = ProfileManager.getPatient();
 
     //indicator
-    private static int IMG_RESULT = 1;
+    private static final String TAG = "AddRecordFragment";
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final int IMAGE_REQUEST_CODE = 2;
-    private static final int GPS_REQUEST_CODE = 3;
     private static final int PLACE_PICKER_REQUEST = 4;
+
+    //vars
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private Boolean mLocationPermissionsGranted = false;
 
     //image
     private Bitmap bitmap;
@@ -99,6 +117,7 @@ public class AddRecordFragment extends Fragment {
     private String addressName;
     private Place place;
     private TextView addressView;
+    private Address address;
 
 
     public static AddRecordFragment newInstance(int index) {
@@ -114,6 +133,10 @@ public class AddRecordFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_record, container, false);
+        getLocationPermission();
+        if(mLocationPermissionsGranted){
+            getDeviceLocation();
+        }
 
         // index of problem we are adding record too
         final int index = getArguments().getInt("INDEX");
@@ -130,10 +153,11 @@ public class AddRecordFragment extends Fragment {
         // initialize address and set it
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
 
+
         // set date
         date = DateUtils.formatAppTime();
+
         // set location
-        setInitialLocation();
 
 
         // ui attributes for all the images LMAO, there has to be a better way to do this
@@ -212,6 +236,7 @@ public class AddRecordFragment extends Fragment {
                             String imageSave = ConvertImage.base64Encode(bitmap);
                             Log.d("TestImage", imageSave);
                             record.getImagesSave().addImage(imageSave);
+                            patient.getProblem(index).getImageAll().addImage(imageSave);
                         }
                     }
                     patient.getProblem(index).getRecords().addRecord(record);
@@ -327,46 +352,107 @@ public class AddRecordFragment extends Fragment {
     }
 
 
+    private void getLocationPermission(){
+        Log.d(TAG, "getLocationPermission: getting location permissions");
+        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION};
 
-    // set initial location (very hacky crap)
-    public void setInitialLocation() {
-        int flag = locationController.getGPS(getContext());
-        if (flag == 1) {
-            checkPermission(GPS_REQUEST_CODE);
-            addressName = locationController.getGpsAddressName(getContext());
-            longitude = locationController.getGpsLongitude();
-            latitude = locationController.getGpsLatitude();
-            addressName = addressName.replace(", null,", "").replace("null", "");
-            addressView.setText(addressName);
+        if(ContextCompat.checkSelfPermission(getContext(),
+                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            if(ContextCompat.checkSelfPermission(getContext(),
+                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                mLocationPermissionsGranted = true;
+                Log.d("LocationMeme", "do we get here");
+            }else{
+                ActivityCompat.requestPermissions(getActivity(),
+                        permissions,
+                        LOCATION_PERMISSION_REQUEST_CODE);
+            }
+        }else{
+            ActivityCompat.requestPermissions(getActivity(),
+                    permissions,
+                    LOCATION_PERMISSION_REQUEST_CODE);
+        }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Log.d(TAG, "onRequestPermissionsResult: called.");
+        mLocationPermissionsGranted = false;
+
+        switch(requestCode){
+            case LOCATION_PERMISSION_REQUEST_CODE:{
+                if(grantResults.length > 0){
+                    for(int i = 0; i < grantResults.length; i++){
+                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                            mLocationPermissionsGranted = false;
+                            Log.d(TAG, "onRequestPermissionsResult: permission failed");
+                            return;
+                        }
+                    }
+                    Log.d(TAG, "onRequestPermissionsResult: permission granted");
+                    mLocationPermissionsGranted = true;
+                    //initialize our map
+                    getDeviceLocation();
+                }
+            }
+        }
+    }
+
+    private void getDeviceLocation(){
+        Log.d(TAG, "getDeviceLocation: getting the devices current location");
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+        try{
+            if(mLocationPermissionsGranted){
+                final Task location = mFusedLocationProviderClient.getLastLocation();
+                location.addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if(task.isSuccessful()){
+                            Log.d(TAG, "onComplete: found location!");
+                            Location currentLocation = (Location) task.getResult();
+                            longitude = currentLocation.getLongitude();
+                            latitude = currentLocation.getLatitude();
+                            Log.d("Locations", longitude+""+"  "+latitude);
+                            geoLocate();
+                        }else{
+                            Log.d(TAG, "onComplete: current location is null");
+                            Toast.makeText(getContext(), "unable to get current location", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        }catch (SecurityException e){
+            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
         }
     }
 
 
 
-    // check persmissions, if they dont have persmission request it
-    private void checkPermission ( int requestType){
-        switch (requestType) {
-            // access to gps service
-            case GPS_REQUEST_CODE: {
-                final String permission = Manifest.permission.ACCESS_FINE_LOCATION;
-                // if no permission, ask for permission
-                if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
-
-                    } else {
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
-
-                    }
+    private void geoLocate(){
+        Log.d(TAG, "geoLocate: geolocating");
+        Geocoder geocoder = new Geocoder(getContext());
+        try {
+            List<Address> result = geocoder.getFromLocation(latitude, longitude, 1);
+            if (result == null) {
+                Toast.makeText(getContext(), "Cannot get location name.",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                if (result.isEmpty()) {
+                    Toast.makeText(getContext(), "No location is found.",
+                            Toast.LENGTH_LONG).show();
                 } else {
-                    // has permission, get gps and put location
-                    locationController.getGpsCoordinate(getContext());
+                    address = result.get(0);
+                    addressName = address.getAddressLine(0) + ", " + address.getAddressLine(1) + ", " + address.getAddressLine(2);
+                    addressName = addressName.replace(", null,", "").replace("null", "");
+                    addressView.setText(addressName);
                 }
-                return;
             }
-
+        } catch (IOException e) {
+            Toast.makeText(getContext(), "Network unavailable to get location name.",
+                    Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
-
     }
 }

@@ -29,6 +29,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
@@ -63,8 +64,11 @@ import org.w3c.dom.Text;
 // Class creates Problems Fragment for patients
 public class ProblemsFragment extends Fragment {
     // Initialize adapter and create new ProblemsFragment object
-    // Patient patient = ProfileManager.getPatient();
     private ProblemAdapter adapter;
+    private ImageView imageProblem;
+
+
+    // constructor
     public static ProblemsFragment newInstance(){
         ProblemsFragment fragment = new ProblemsFragment();
         return fragment;
@@ -80,7 +84,7 @@ public class ProblemsFragment extends Fragment {
         // Initialize add problem button and recycler view
         final FloatingActionButton addProblem = (FloatingActionButton) rootView.findViewById(R.id.add_problem_floating);
         final RecyclerView problems = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
-
+        imageProblem = (ImageView) rootView.findViewById(R.id.problem_image);
 
         // Initializes problem adapter, linear layout manager, and vertical space controller for recycler view
         problems.setHasFixedSize(false);
@@ -108,6 +112,7 @@ public class ProblemsFragment extends Fragment {
                 transaction.commit(); // Commit any changes
             }
         });
+
 
         return rootView;
     }

@@ -20,20 +20,26 @@ package com.example.meditrackr.adapters.careprovider;
 
 //imports
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.ProblemList;
+import com.example.meditrackr.models.record.ImageSave;
 import com.example.meditrackr.models.record.RecordList;
+import com.example.meditrackr.ui.FullScreenViewActivity;
 import com.example.meditrackr.ui.careprovider.RecordsFragment;
+import com.example.meditrackr.utils.ConvertImage;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
@@ -88,6 +94,13 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         holder.description.setText(problems.getProblem(position).getDescription());
         holder.totalRecords.setText("Number of records: " +
                 problems.getProblem(position).getRecords().getSize());
+        if(problems.getProblem(position).getImageAll().getSize() == 0){
+            holder.problemImage.setImageBitmap(null);
+            Log.d("ImageTest", "New profile this should be shown!");
+        }else {
+            holder.problemImage.setImageBitmap(ConvertImage.base64Decode(
+                    problems.getProblem(position).getImageAll().getImage(0)));
+        }
     }
 
     // get the number of problems in RecyclerView
@@ -100,6 +113,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
     // place each problem into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ProblemAdapter adapter;
+        public ImageView problemImage;
         public TextView title;
         public TextView date;
         public TextView description;
@@ -117,6 +131,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             totalRecords = itemView.findViewById(R.id.number_records_title);
             deleteProblem = itemView.findViewById(R.id.problem_delete_button);
             editProblem = itemView.findViewById(R.id.problem_edit_button);
+            problemImage = itemView.findViewById(R.id.problem_image);
             itemView.setOnClickListener(this);
             // hide stuff from doctor
             deleteProblem.setVisibility(View.INVISIBLE);
@@ -124,6 +139,26 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             editProblem.setVisibility(View.INVISIBLE);
             editProblem.setClickable(false);
             this.adapter = adapter;
+
+
+            // onclick listener for problem image
+            problemImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ImageSave images = adapter.problems.getProblem(getAdapterPosition()).getImageAll();
+                    if(images.getSize() == 0){
+                        problemImage.setClickable(false);
+                        problemImage.setVisibility(View.INVISIBLE);
+                        Log.d("ImageTest", "we should be getting here");
+                    }
+                    else {
+                        Intent intent = new Intent(adapter.activity, FullScreenViewActivity.class);
+                        intent.putExtra("IMAGES", images);
+                        adapter.activity.startActivity(intent);
+                    }
+                }
+            });
+
         }
 
         // set onClick listener for each problem, so the problem can be viewed

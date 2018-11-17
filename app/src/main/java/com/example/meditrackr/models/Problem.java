@@ -19,6 +19,7 @@
 package com.example.meditrackr.models;
 
 //imports
+import com.example.meditrackr.models.record.ImageSave;
 import com.example.meditrackr.models.record.RecordList;
 
 import java.io.Serializable;
@@ -40,6 +41,8 @@ public class Problem implements Serializable {
     private String description;
     private RecordList records = new RecordList();
     private CommentList comments = new CommentList();
+    private ImageSave imageAll = new ImageSave();
+
 
     // Constructor
     public Problem(String title, String date, String description){
@@ -80,4 +83,11 @@ public class Problem implements Serializable {
 
     public CommentList getComments() {return comments;}
 
+    public ImageSave getImageAll() {
+        return imageAll;
+    }
+
+    public void setImageAll(ImageSave imageAll) {
+        this.imageAll = imageAll;
+    }
 }

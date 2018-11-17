@@ -50,6 +50,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Skryt on Nov, 16 2018
  */
 
+// Class enables autocomplete functionality when filling out edit text box
 public class PlaceAutocompleteAdapter
         extends ArrayAdapter<AutocompletePrediction> implements Filterable {
 

@@ -32,10 +32,15 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Comment;
 import com.example.meditrackr.models.CommentList;
 
-
 /**
- * Created by Skryt on Nov 12, 2018
- */
+*This class displays all messages that the user has.
+*This class uses getItemViewType to tell the user whether the messages they see were sent by them or recived.
+*This class uses onBindViewHolder just turns the message we have as a model into an adapter for the user to see.
+*This class uses SentMessageHolder to take the model of messages that the user sent and display them as an adapter. The adapter makes it clear that these messages were sent by the user and not recived. It also shows the time it was sent along with the message.
+*This class uses ReceivedMessageHolder to take the model of messages that the user has gotten from others and display them as an adapter. The adapter makes it clear that these messages were received by the user and not sent. It also shows the time it was received along with the message.
+*@author Orest Cokan
+*@version 1.0 Nov 12, 2018
+*/
 
 // got this from https://github.com/smilefam/SendBird-Android
 

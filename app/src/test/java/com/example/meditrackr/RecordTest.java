@@ -27,8 +27,9 @@ public class RecordTest {
         final BodyLocation bodyLoc = new BodyLocation(tempCoords, "", "");
         final Geolocation geoLoc = new Geolocation(0.0, 0.0, "");
         record = new Record
-                ("", "", "", bodyLoc, geoLoc);
-    }
+                ("", "", "", bodyLoc);
+        record.setGeoLocation(geoLoc);
+        }
 
     // Test if the record can have its properties modified
     @Test

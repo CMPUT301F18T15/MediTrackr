@@ -20,8 +20,7 @@ public class RecordListTest {
     @Before
     public void initRecordList() {
         recordList = new RecordList();
-        record = new Record
-                ("", "", "", null, null);
+        record = new Record("", "", "", null);
     }
 
     // Test if a record could be added to the record list
@@ -60,7 +59,7 @@ public class RecordListTest {
     public void recordListSizeTest() {
         recordList.addRecord(record);
         final Record tempRecord = new Record
-                ("Second record", "", "", null, null);
+                ("Second record", "", "",  null);
         recordList.addRecord(tempRecord);
         assertEquals("Incorrect number of elements in Record List",
                 recordList.getSize(), 2);

@@ -55,13 +55,13 @@ import java.util.List;
  */
 
 // taken from coding with mitch youtube series
+// this class works and don't touch it
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener{
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
     @Override

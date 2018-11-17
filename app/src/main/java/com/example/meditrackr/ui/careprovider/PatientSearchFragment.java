@@ -92,7 +92,13 @@ public class PatientSearchFragment extends Fragment {
             public void onClick(View view) {
                 String username = searchPatient.getText().toString(); // Get patient username from input
                 profile = ElasticSearchController.searchProfile(username); // Search for patient
-                if(profile != null) { // If user profile is found
+                if(profile.getisCareProvider()){
+                    Toast.makeText(getContext(), "Cannot add other careproviders!!!!", Toast.LENGTH_LONG).show();
+                }
+                else if(profile == null){
+                    Toast.makeText(getContext(), "User not found!", Toast.LENGTH_LONG).show();
+                }
+                else{
                     // Set data according to user information
                     Patient patient = (Patient) profile;
                     patientUsername.setText(patient.getUsername());
@@ -100,10 +106,7 @@ public class PatientSearchFragment extends Fragment {
                     patientPhone.setText(patient.getPhone());
                     changeViewVisibility(0);
                 }
-                else { // Else if user profile is not found
-                    // Create toast message that indicates user is not found
-                    Toast.makeText(getContext(), "User not found!", Toast.LENGTH_LONG).show();
-                }
+
             }
         });
 
@@ -113,7 +116,8 @@ public class PatientSearchFragment extends Fragment {
             public void onClick(View v) {
                 careProvider = ProfileManager.getCareProvider();
                 Patient patient = (Patient) profile;
-                if(!careProvider.patientExists(patient.getUsername())) { // If patient does not exist under the care provider
+                // If patient does not exist under the care provider
+                if(!careProvider.patientExists(patient.getUsername()) && !patient.getisCareProvider()) {
                     careProvider.addPatient(patient.getUsername()); // Add patient
 
                     // Save both to ES and memory

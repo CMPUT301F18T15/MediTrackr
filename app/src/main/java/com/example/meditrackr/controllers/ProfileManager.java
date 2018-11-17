@@ -36,6 +36,7 @@ import com.example.meditrackr.models.Profile;
 public class ProfileManager {
     private static Profile profile;
     private static Patient carePatient;
+    private static int problemIndex;
 
     // Profile getter
     public static Profile getProfile() {
@@ -74,6 +75,15 @@ public class ProfileManager {
     public static void setCarePatient(Patient carePatient) {
         ProfileManager.carePatient = carePatient;
     }
+
+    public static int getProblemIndex() {
+        return problemIndex;
+    }
+
+    public static void setProblemIndex(int problemIndex) {
+        ProfileManager.problemIndex = problemIndex;
+    }
+
 
 }
 

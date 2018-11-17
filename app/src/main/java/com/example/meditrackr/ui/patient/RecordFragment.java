@@ -19,6 +19,7 @@
 package com.example.meditrackr.ui.patient;
 
 //imports
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -37,6 +38,7 @@ import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.models.record.RecordList;
+import com.example.meditrackr.utils.ConvertImage;
 
 /**
  * shows user a list of the records associated with that problem in a recycler view.
@@ -77,8 +79,9 @@ public class RecordFragment extends Fragment {
 
         // Sets text placeholders in record page
         final TextView title = rootView.findViewById(R.id.record_title);
-        final TextView description = rootView.findViewById(R.id.record_description);
         final TextView date = rootView.findViewById(R.id.record_date);
+        final TextView location = rootView.findViewById(R.id.record_location);
+        final TextView description = rootView.findViewById(R.id.record_description);
         record = (Record) getArguments().getSerializable(
                 "Record");
 
@@ -117,11 +120,13 @@ public class RecordFragment extends Fragment {
         title.setText(record.getTitle());
         description.setText(record.getDescription());
         date.setText(record.getDate());
+        location.setText(record.getGeoLocation().getAddress());
 
         // Populate with images
         try {
-            for (int i = 0; i < record.getImages().getSize(); i++) {
-                images[i].setImageBitmap(record.getImages().getImage(i));
+            for (int i = 0; i < record.getImagesSave().getSize(); i++) {
+                Bitmap bitmap = ConvertImage.base64Decode(record.getImageSave(i));
+                images[i].setImageBitmap(bitmap);
             }
         }catch (NullPointerException e){
             Log.d("Images", "size of array is zero, no images");

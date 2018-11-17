@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
+import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.careprovider.RecordsFragment;
@@ -130,6 +131,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             RecordList records = problems.getProblem(position).getRecords();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
+            ProfileManager.setProblemIndex(position);
             RecordsFragment fragment = RecordsFragment.newInstance(records, problems.getProblem(position).getComments());
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);

@@ -35,6 +35,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
+import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.DateUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -131,11 +133,13 @@ public class AddRecordFragment extends Fragment {
         final EditText recordDescrption = (EditText) rootView.findViewById(R.id.record_description_field);
         final Button addImage = (Button) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
+
+        // initialize address and set it
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
         setInitialLocation();
 
 
-        // ui attributes for all the images LMAO
+        // ui attributes for all the images LMAO, there has to be a better way to do this
         images[0] = (ImageView) rootView.findViewById(R.id.image_1);
         images[1] = (ImageView) rootView.findViewById(R.id.image_2);
         images[2] = (ImageView) rootView.findViewById(R.id.image_3);
@@ -146,6 +150,8 @@ public class AddRecordFragment extends Fragment {
         images[7] = (ImageView) rootView.findViewById(R.id.image_8);
         images[8] = (ImageView) rootView.findViewById(R.id.image_9);
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
+
+
 
         // reminder memes
         final Button[] days = new Button[]{
@@ -207,7 +213,11 @@ public class AddRecordFragment extends Fragment {
                     record.setReminder(selected);
                     record.setGeoLocation(geolocation);
                     for(Bitmap bitmap: bitmaps){
-                        record.getImages().addImage(bitmap);
+                        if(bitmap != null) {
+                            String imageSave = ConvertImage.base64Encode(bitmap);
+                            Log.d("TestImage", imageSave);
+                            record.getImagesSave().addImage(imageSave);
+                        }
                     }
                     patient.getProblem(index).getRecords().addRecord(record);
 
@@ -245,7 +255,7 @@ public class AddRecordFragment extends Fragment {
             }
         });
 
-        // pick a place
+        // initialize the map picker and select a place you want to go
         addressView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -262,16 +272,13 @@ public class AddRecordFragment extends Fragment {
             }
         });
 
-
         return rootView;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
-            Log.d("ImageTest", "do we get here");
             getActivity();
-            Log.d("ImageTest", "do we get here");
             Bitmap bmp = (Bitmap) data.getExtras().get("data");
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
@@ -282,7 +289,6 @@ public class AddRecordFragment extends Fragment {
             // convert byte array to Bitmap
             bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                     byteArray.length);
-            Log.d("ImageTest", "do we get here");
 
             // populate image
             for(int i = 0; i < bitmaps.length; i++){
@@ -307,9 +313,6 @@ public class AddRecordFragment extends Fragment {
             Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG).show();
         }
     }
-
-
-
 
 
     // check inputs

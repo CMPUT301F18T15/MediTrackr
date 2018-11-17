@@ -29,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Skryt on Nov, 16 2018
  */
+
 public class PlaceAutocompleteAdapter
         extends ArrayAdapter<AutocompletePrediction> implements Filterable {
 

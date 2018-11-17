@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.utils;
 
+//imports
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import java.util.TimeZone;
  */
 // got this from https://github.com/smilefam/SendBird-Android
 
+// Class
 public class DateUtils {
 
     // This class should not be initialized
@@ -41,14 +43,13 @@ public class DateUtils {
 
     }
 
-    /**
-     * Gets timestamp in millis and converts it to HH:mm (e.g. 16:44).
-     */
+    // Gets timestamp in millis and converts it to HH:mm (e.g. 16:44)
     public static String formatTime(long timeInMillis) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         return dateFormat.format(timeInMillis);
     }
 
+    // 
     public static String formatAppTime(){
         final SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy, hh:mm aaa");
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));

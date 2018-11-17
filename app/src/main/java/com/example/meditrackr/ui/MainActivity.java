@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         // initialize navigation bar
         initButtons();
+        problems.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
 
 
 
@@ -200,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Set button icons on bottom bar
     public void initButtons(){
-        problems.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
+        problems.setImageDrawable(getResources().getDrawable(R.drawable.cross));
         map.setImageDrawable(getResources().getDrawable(R.drawable.map));
         camera.setImageDrawable(getResources().getDrawable(R.drawable.camera));
         search.setImageDrawable(getResources().getDrawable(R.drawable.search));

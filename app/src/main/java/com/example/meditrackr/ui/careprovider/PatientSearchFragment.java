@@ -92,11 +92,11 @@ public class PatientSearchFragment extends Fragment {
             public void onClick(View view) {
                 String username = searchPatient.getText().toString(); // Get patient username from input
                 profile = ElasticSearchController.searchProfile(username); // Search for patient
-                if(profile.getisCareProvider()){
-                    Toast.makeText(getContext(), "Cannot add other careproviders!!!!", Toast.LENGTH_LONG).show();
+                if(profile == null){
+                    Toast.makeText(getContext(), "User not found", Toast.LENGTH_LONG).show();
                 }
-                else if(profile == null){
-                    Toast.makeText(getContext(), "User not found!", Toast.LENGTH_LONG).show();
+                else if(profile.getisCareProvider()){
+                    Toast.makeText(getContext(), "Cannot add other careproviders!", Toast.LENGTH_LONG).show();
                 }
                 else{
                     // Set data according to user information
@@ -117,7 +117,8 @@ public class PatientSearchFragment extends Fragment {
                 careProvider = ProfileManager.getCareProvider();
                 Patient patient = (Patient) profile;
                 // If patient does not exist under the care provider
-                if(!careProvider.patientExists(patient.getUsername()) && !patient.getisCareProvider()) {
+                if(!careProvider.patientExists(patient.getUsername()) &&
+                        !patient.getisCareProvider()) {
                     careProvider.addPatient(patient.getUsername()); // Add patient
 
                     // Save both to ES and memory

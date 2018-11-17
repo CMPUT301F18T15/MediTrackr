@@ -1,11 +1,7 @@
-
-package com.example.meditrackr.controllers;
-
-
 /*
- *Apache 2.0 License Notice
+ *    Apache 2.0 License Notice
  *
- *Copyright 2018 CMPUT301F18T15
+ *    Copyright 2018 CMPUT301F18T15
  *
  *Licensed under the Apache License, Version 2.0 (the "License");
  *you may not use this file except in compliance with the License.
@@ -20,7 +16,9 @@ package com.example.meditrackr.controllers;
  *limitations under the License.
  *
  */
+package com.example.meditrackr.controllers;
 
+//imports
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;

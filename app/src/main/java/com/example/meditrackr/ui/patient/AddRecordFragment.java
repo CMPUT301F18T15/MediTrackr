@@ -1,6 +1,24 @@
+/*
+ *Apache 2.0 License Notice
+ *
+ *Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.ui.patient;
 
-
+//imports
 import android.Manifest;
 import android.content.Intent;
 
@@ -46,9 +64,16 @@ import com.google.android.gms.maps.model.LatLng;
 import static android.app.Activity.RESULT_OK;
 
 /**
- * Created by Skryt on Nov 12, 2018
+ * Allows user to add a title to the record, change the date that was assigned and add a description.
+ * there is also a button that can add a daily reminder for any day(s) of the week
+ * also able to add photos which shows up in a grid view.
+ * to add all of this to the problem (as a record class) user will press the add button
+ *
+ * @author  Orest Cokan
+ * @version 1.0 Nov 12, 2018.
  */
 
+// Class creates Add Record Fragment for patients
 public class AddRecordFragment extends Fragment {
     private String date;
     private Patient patient = ProfileManager.getPatient();
@@ -58,15 +83,13 @@ public class AddRecordFragment extends Fragment {
     private static int IMG_RESULT = 1;
     private static final int IMAGE_REQUEST_CODE = 2;
     private static final int GPS_REQUEST_CODE = 3;
-    static final int PLACE_PICKER_REQUEST = 4;
+    private static final int PLACE_PICKER_REQUEST = 4;
 
-
+    // location indicators
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private boolean mLocationPersomissionsGranted = false;
-
-
 
     //image
     private Bitmap bitmap;
@@ -97,7 +120,10 @@ public class AddRecordFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_record, container, false);
 
+        // index of problem we are adding record too
         final int index = getArguments().getInt("INDEX");
+
+        // nifty location controller that helps with getting locations
         locationController = new LocationController(getContext());
 
         // general ui attributes
@@ -123,14 +149,16 @@ public class AddRecordFragment extends Fragment {
 
         // reminder memes
         final Button[] days = new Button[]{
-            rootView.findViewById(R.id.add_button_1D),
-            rootView.findViewById(R.id.add_button_2D),
-            rootView.findViewById(R.id.add_button_3D),
-            rootView.findViewById(R.id.add_button_5D),
-            rootView.findViewById(R.id.add_button_1W),
-            rootView.findViewById(R.id.add_button_2W),
-            rootView.findViewById(R.id.add_button_1M)
+                rootView.findViewById(R.id.add_button_1D),
+                rootView.findViewById(R.id.add_button_2D),
+                rootView.findViewById(R.id.add_button_3D),
+                rootView.findViewById(R.id.add_button_5D),
+                rootView.findViewById(R.id.add_button_1W),
+                rootView.findViewById(R.id.add_button_2W),
+                rootView.findViewById(R.id.add_button_1M)
         };
+
+        // 7 array for selected time to reminder
         final boolean[] selected = new boolean[7];
 
 
@@ -295,6 +323,7 @@ public class AddRecordFragment extends Fragment {
         }
     }
 
+    // set initial location (very hacky crap)
     public void setInitialLocation() {
         int flag = locationController.getGPS(getContext());
         if (flag == 1) {
@@ -308,31 +337,30 @@ public class AddRecordFragment extends Fragment {
         }
     }
 
+    // check persmissions, if they dont have persmission request it
+    private void checkPermission ( int requestType){
+        switch (requestType) {
+            // access to gps service
+            case GPS_REQUEST_CODE: {
+                final String permission = Manifest.permission.ACCESS_FINE_LOCATION;
+                // if no permission, ask for permission
+                if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
 
-        private void checkPermission ( int requestType){
-            switch (requestType) {
-                // access to gps service
-                case GPS_REQUEST_CODE: {
-                    final String permission = Manifest.permission.ACCESS_FINE_LOCATION;
-                    // if no permission, ask for permission
-                    if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
-                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
-
-                        } else {
-                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
-
-                        }
                     } else {
-                        // has permission, get gps
-                        locationController.getGpsCoordinate(getContext());
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
 
                     }
-                    return;
-                }
+                } else {
+                    // has permission, get gps
+                    locationController.getGpsCoordinate(getContext());
 
+                }
+                return;
             }
 
         }
-    }
 
+    }
+}

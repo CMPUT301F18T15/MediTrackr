@@ -32,20 +32,20 @@ import com.example.meditrackr.R;
  * @version 1.0 Nov 12, 2018.
  */
 
-// Class creates Camera Fragment for patients
-public class CameraFragment extends Fragment {
-    // Initialize new CameraFragment object
-    public static CameraFragment newInstance(){
-        CameraFragment fragment = new CameraFragment();
+// Class creates Map Fragment for patients
+public class MapFragment extends Fragment {
+    // Create new MapFragment object
+    public static MapFragment newInstance(){
+        MapFragment fragment = new MapFragment();
         return fragment;
     }
 
-    // Create camera fragment view
+    // Creates map fragment view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_camera, container, false);
+                R.layout.fragment_map, container, false);
 
         return rootView;
     }

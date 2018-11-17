@@ -1,6 +1,24 @@
+/*
+ *Apache 2.0 License Notice
+ *
+ *Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.ui;
 
-
+//imports
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -26,23 +44,47 @@ import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 
 /**
- * Created by Skryt on Nov 13, 2018
+ * this fragment lets a user create a profile
+ * the main parts to this fragment is a text box where user can input a username for their account
+ * if the username is already in use or invalid there will be a toast message letting the user try again
+ *
+ * there is a spot for the user to enter their phone number if phone number is invalid a toast message
+ * will prompt the user to try again
+ *
+ * there is a spot for the user to enter their email if the email is invalid a toast message
+ * will prompt the user to try again
+ *
+ * there are also two button for the user to indicate if they are a patient or care provider.
+ * if user doesn't choose one a toast message will appear to tell user to pick one
+ *
+ * lastly there is an login button which a user must press for all of the data they entered to
+ * be put into the database. if all entry's are good then user will be taken to the main page (MainActivity)
+ *
+ * there is also a already_member button which will take the user to the login page page (RegisterFragment)
+ *
+ * @author  Orest Cokan
+ * @version 2.0 Nov 13, 2018.
+ * @see MainActivity
+ * @see LoginFragment
  */
 
+// Class creates register fragment
 public class RegisterFragment extends Fragment {
     public boolean isCareProvider;
 
+    // Constructor creates new register fragment
     public static RegisterFragment newInstance(){
         RegisterFragment fragment = new RegisterFragment();
         return fragment;
     }
 
+    // Creates view for fragment
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_signup, container, false);
 
-        // ui definitions
+        // Set ui definitions
         final EditText username = (EditText) rootView.findViewById(R.id.patient_username);
         final EditText email = (EditText) rootView.findViewById(R.id.patient_phone);
         final EditText phoneNumber = (EditText) rootView.findViewById(R.id.phone_number);
@@ -54,52 +96,52 @@ public class RegisterFragment extends Fragment {
         final TextView alreadyMember = (TextView) rootView.findViewById(R.id.already_member);
 
 
-        // onclick listener for create account
+        // Onclick listener for create account button
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkInputs(username, email, phoneNumber, doctorImage, patientImage)){
+                if(checkInputs(username, email, phoneNumber, doctorImage, patientImage)){ // If all required information has been given
                     Bundle bundle = new Bundle();
                     boolean done;
                     boolean finish;
-                    if(doctorImage.isSelected()){
+                    if(doctorImage.isSelected()){ // If user registering is a care provider create care provider account
                         CareProvider careProvider = new CareProvider(
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
                                 isCareProvider
                         );
-                        done = ElasticSearchController.addProfile(careProvider);
-                        finish = SaveLoadController.addNewProfile(getContext(),careProvider);
+                        done = ElasticSearchController.addProfile(careProvider); // Add care provider info to memory
+                        finish = SaveLoadController.addNewProfile(getContext(),careProvider); // Add care provider info to ES
                         Log.d("Success", "elastic returned: " + done + " saveload returned " + finish);
                         if(finish || done){
-                            bundle.putSerializable("CareProvider", careProvider);
+                            bundle.putSerializable("CareProvider", careProvider); // Inserts a serializable care provider into the mapping of this bundle
                             Log.d("AddProfile", "Username: " + careProvider.getUsername() + " IsCareProvider: " + careProvider.getisCareProvider());
-                            ProfileManager.setProfile(careProvider);
+                            ProfileManager.setProfile(careProvider); // Set profile as a care provider
                         }
 
                     }
-                    else {
+                    else { // If user registering is a patient create patient account
                         Patient patient = new Patient(
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
                                 isCareProvider
                         );
-                        finish = SaveLoadController.addNewProfile(getContext(), patient);
-                        done = ElasticSearchController.addProfile(patient);
+                        finish = SaveLoadController.addNewProfile(getContext(), patient); // New patient profile has been saved
+                        done = ElasticSearchController.addProfile(patient); // Add patient info to database
                         Log.d("Success", "elastic returned: " + done + " saveload returned " + finish);
                         if(finish || done) {
-                            bundle.putSerializable("Patient", patient);
+                            bundle.putSerializable("Patient", patient); // Inserts a serializable patient into the mapping of this bundle
                             Log.d("Success", "Username: " + patient.getUsername() + " isCareProvider: " + patient.getisCareProvider());
-                            ProfileManager.setProfile(patient);
+                            ProfileManager.setProfile(patient); // Set profile as a patient
                         }
                     }
-                    if(!finish || !done)
-                        Toast.makeText(getContext(), "Duplicated UserName", Toast.LENGTH_SHORT).show();
-                    else{
-                        Toast.makeText(getContext(), "Success to Sign Up", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                    if(!finish || !done) // If an exception was caught when adding profile through ElasticSearchController
+                        Toast.makeText(getContext(), "Duplicated UserName", Toast.LENGTH_SHORT).show(); // Indicate duplicated username with toast message
+                    else{ // If no exceptions were caught
+                        Toast.makeText(getContext(), "Success to Sign Up", Toast.LENGTH_SHORT).show(); // Indicate registration was a success
+                        Intent intent = new Intent(getActivity(), MainActivity.class); // Go to main activity fragment
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
@@ -108,7 +150,7 @@ public class RegisterFragment extends Fragment {
         });
 
 
-        // onclick listener for login button
+        // Onclick listener for login button
         alreadyMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,7 +163,7 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        // onclick listener for doctor selected, does some UI stuff as well
+        // Onclick listener for doctor selected, does some UI stuff as well
         doctorImage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -134,7 +176,7 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        // onclick listener for patient select, does some UI stuff as well
+        // Onclick listener for patient select, does some UI stuff as well
         patientImage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -150,23 +192,22 @@ public class RegisterFragment extends Fragment {
         return rootView;
     }
 
-
-
+    // Checks if user inputs meet requirements
     public boolean checkInputs(EditText username, EditText email, EditText phoneNumber, ImageView doctorImage, ImageView patientImage) {
-        if(username.getText().toString().trim().length() < 8){
+        if(username.getText().toString().trim().length() < 8){ // Checks if username is longer than 8 characters
             Toast.makeText(getActivity(), "You messed up kiddo, change username", Toast.LENGTH_LONG).show();
             username.getText().clear();
             return false;
-        } else if (email.getText().toString().trim().isEmpty()) {
+        } else if (email.getText().toString().trim().isEmpty()) { // Checks if user email input text was left blank
             Toast.makeText(getActivity(), "You messed up kiddo, change email", Toast.LENGTH_LONG).show();
             email.getText().clear();
             return false;
-        } else if (phoneNumber.getText().toString().trim().isEmpty()) {
+        } else if (phoneNumber.getText().toString().trim().isEmpty()) { // Checks if user phone number input text was left blank
             Toast.makeText(getActivity(), "You messed up kiddo, change phone number", Toast.LENGTH_LONG).show();
             phoneNumber.getText().clear();
             return false;
-        } else if (!doctorImage.isSelected() && !patientImage.isSelected()){
-            Toast.makeText(getActivity(), "You messed up kiddo, choose either doctor patient", Toast.LENGTH_LONG).show();
+        } else if (!doctorImage.isSelected() && !patientImage.isSelected()){ // Checks if the user picked the kind of account they want to make
+            Toast.makeText(getActivity(), "You messed up kiddo, choose either doctor or patient", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

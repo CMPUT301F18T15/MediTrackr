@@ -1,5 +1,24 @@
+/*
+ *Apache 2.0 License Notice
+ *
+ *Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.ui.careprovider;
 
+//imports
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
@@ -23,33 +42,42 @@ import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
 
 /**
- * Created by Skryt on Nov 08, 2018
+ *shows all infoermation associated with the patient that showed up from the search
+ *if no patient was found then it returns "User not found"
+ *
+ * @author  Orest Cokan
+ * @version 1.0 Nov 10, 2018.
  */
 
+// Class creates PatientSearchFragment for care providers
 public class PatientSearchFragment extends Fragment {
+    // Initialize variables
     private Profile profile;
     private CareProvider careProvider;
     private ConstraintLayout searchLayout;
     private ConstraintLayout searchDisplayPatient;
 
+    // Creates new instance fragment
     public static PatientSearchFragment newInstance(){
         PatientSearchFragment fragment = new PatientSearchFragment();
         return fragment;
     }
 
+    // Creates patient search fragment view
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_patient, container, false);
 
+        // Set constraint layouts for fragment
         searchLayout = (ConstraintLayout) rootView.findViewById(R.id.search_constraint);
         searchDisplayPatient = (ConstraintLayout) rootView.findViewById(R.id.search_display_patient);
 
-        // ui attributes
+
+        // Initialize ui attributes
         final EditText searchPatient = (EditText) rootView.findViewById(R.id.search_patient);
         final Button searchPatientButton = (Button) rootView.findViewById(R.id.careprovider_search_for_patient_button);
-
         final ImageView patientProfileImage = (ImageView) rootView.findViewById(R.id.patient_image);
         final TextView patientUsername = (TextView) rootView.findViewById(R.id.patient_username);
         final TextView patientEmail = (TextView) rootView.findViewById(R.id.patient_phone);
@@ -57,51 +85,54 @@ public class PatientSearchFragment extends Fragment {
         final Button addPatientButton = (Button) rootView.findViewById(R.id.search_add_patient_button);
         changeViewVisibility(1);
 
-        // onclick listener search for patient
+
+        // Onclick listener search for patient
         searchPatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = searchPatient.getText().toString();
-                profile = ElasticSearchController.searchProfile(username);
-                if(profile != null) {
+                String username = searchPatient.getText().toString(); // Get patient username from input
+                profile = ElasticSearchController.searchProfile(username); // Search for patient
+                if(profile != null) { // If user profile is found
+                    // Set data according to user information
                     Patient patient = (Patient) profile;
                     patientUsername.setText(patient.getUsername());
                     patientEmail.setText(patient.getEmail());
                     patientPhone.setText(patient.getPhone());
                     changeViewVisibility(0);
                 }
-                else {
+                else { // Else if user profile is not found
+                    // Create toast message that indicates user is not found
                     Toast.makeText(getContext(), "User not found!", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-        // on click listener button to add a patient to your list
+        // On click listener button to add a patient to your list
         addPatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 careProvider = ProfileManager.getCareProvider();
                 Patient patient = (Patient) profile;
-                if(!careProvider.patientExists(patient.getUsername())) {
-                    careProvider.addPatient(patient.getUsername());
+                if(!careProvider.patientExists(patient.getUsername())) { // If patient does not exist under the care provider
+                    careProvider.addPatient(patient.getUsername()); // Add patient
 
-                    // save both to ES and memory
+                    // Save both to ES and memory
                     ElasticSearchController.updateUser(careProvider);
                     SaveLoadController.saveProfile(getContext(), careProvider);
 
-                    // transition back to patients page
+                    // Transition back to patients page
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.addToBackStack(null);
                     PatientsFragment fragment = PatientsFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
-                } else {
+
+                } else { // Else if patient already exists under the care provider
                     changeViewVisibility(1);
+                    // Create toast message that user cannot add the patient twice
                     Toast.makeText(getContext(), "Cannot add the same patient twice!", Toast.LENGTH_LONG).show();
                 }
-
-
             }
         });
 

@@ -1,5 +1,24 @@
+/*
+ *Apache 2.0 License Notice
+ *
+ *Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.adapters.careprovider;
 
+//imports
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -19,7 +38,23 @@ import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 
 /**
- * Created by Skryt on Nov 10, 2018
+ * this class will display all of the patients information in a recycler view that a careprovider is
+ * assigned to.
+ * there is also a onclick listener which when clicked will take the care provider to a page with
+ * more detailed information about that patient.(ProblemAdapter)
+ *
+ * it uses onCreateView to create the recycler view and uses onBindViewHolder to put the patients
+ * information into the recycler view.
+ *
+ * this class can use getItemCount to display the number of items (patients) in the recycler view
+ *
+ * this class uses viewHolder to put information to each patient into its own view so we wont display
+ * information from one patient as another. this function servers mainly as an organization purpose
+ *
+ * @author  Orest Cokan
+ * @version 1.0 Nov 10, 2018
+ * @see ProblemAdapter
+ *
  */
 
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder>{
@@ -32,6 +67,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         this.activity = activity;
     }
 
+
     // display the view
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -42,8 +78,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     }
 
 
-
-    // set the data into each viewHolder (ie. place place the patients info into the view)
+    // set the data into each viewHolder (ie. place the patient info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.patientUsername.setText(patients.getPatient(position));
@@ -52,19 +87,22 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         holder.patientPhone.setText(patient.getPhone());
     }
 
+
+    // get the number of problems in RecyclerView
     @Override
     public int getItemCount() {
         return patients.getSize();
     }
 
 
-    // place each problem into its corresponding view
+    // place each patient into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private PatientAdapter adapter;
         public TextView patientUsername;
         public TextView patientEmail;
         public TextView patientPhone;
 
+        //gets the corresponding data for each view
         public ViewHolder(View itemView, final PatientAdapter adapter){
             super(itemView);
             patientUsername = itemView.findViewById(R.id.patient_username);
@@ -72,7 +110,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             patientPhone = itemView.findViewById(R.id.patient_phone);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
-
         }
 
         // set onClick listener for each patient, so they can be viewed
@@ -89,6 +126,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();
+
         }
     }
 }

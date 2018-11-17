@@ -81,6 +81,7 @@ public class ElasticSearchController {
     private static String INDEX_NAME = "cmput301f18t15test";
     private static String PROFILE_TYPE = "profile";
     private static String IS_CAREPROVIDER = "isCareProvider";
+    private static String DATABASE = "http://cmput301.softwareprocess.es:8080/";
 
     // Gets client
     public static JestClient getClient() {
@@ -342,7 +343,7 @@ public class ElasticSearchController {
     public static void verifySettings() {
         if(client==null) {
             // Specify host
-            DroidClientConfig config = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080/").build();
+            DroidClientConfig config = new DroidClientConfig.Builder(DATABASE).build();
             JestClientFactory factory = new JestClientFactory();
             factory.setDroidClientConfig(config); // Sets JestClientFactory object to specified host
             client = factory.getObject();

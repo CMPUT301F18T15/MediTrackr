@@ -28,7 +28,9 @@ import com.example.meditrackr.models.Profile;
 
 public class MessageListFragment extends Fragment {
     private MessageListAdapter adapter;
-    private Profile profile = ProfileManager.getProfile();
+    private Profile profile;
+    private CommentList comments;
+    private Patient patient;
 
     public static MessageListFragment newInstance(CommentList comments){
         MessageListFragment fragment = new MessageListFragment();
@@ -44,10 +46,25 @@ public class MessageListFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_message_list, container, false);
 
-        final CommentList comments = (CommentList) getArguments().getSerializable("Messages");
         final Button sendbutton = (Button) rootView.findViewById(R.id.button_chatbox_send);
         final EditText chatBox = (EditText) rootView.findViewById(R.id.edittext_chatbox);
         final RecyclerView messageList = (RecyclerView) rootView.findViewById(R.id.reyclerview_message_list);
+
+        //comments = (CommentList) getArguments().getSerializable("Messages");
+        profile = ProfileManager.getProfile();
+        Log.d("WOOT", profile.getUsername());
+
+
+        // need to fix this in the future, this is way too fucking hacky 
+        if(profile.getisCareProvider()){
+            Log.d("WOOT", "do i get here?");
+            patient = ProfileManager.getCarePatient();
+            comments = patient.getProblem(ProfileManager.getProblemIndex()).getComments();
+        }else{
+            patient = ProfileManager.getPatient();
+            comments = patient.getProblem(ProfileManager.getProblemIndex()).getComments();
+        }
+
 
         // initialize the messageList adapter
         messageList.setHasFixedSize(false);
@@ -72,8 +89,8 @@ public class MessageListFragment extends Fragment {
                     comments.addComment(comment);
                     adapter.notifyDataSetChanged();
                     chatBox.setText(null);
-                    SaveLoadController.saveProfile(getContext(), profile);
-                    ElasticSearchController.updateUser(profile);
+                    //SaveLoadController.saveProfile(getContext(), profile);
+                    ElasticSearchController.updateUser(patient);
                     messageList.smoothScrollToPosition(comments.getSize());
                 }
                 else{

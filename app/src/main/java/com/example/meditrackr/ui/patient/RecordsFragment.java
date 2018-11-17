@@ -129,8 +129,6 @@ public class RecordsFragment extends Fragment {
         };
 
         messageClick.setOnClickListener(listener);
-        recordsClick.setOnClickListener(listener);
-
 
         // Floating button on click listener to go to add a problem page
         addRecord.setOnClickListener(new View.OnClickListener() {

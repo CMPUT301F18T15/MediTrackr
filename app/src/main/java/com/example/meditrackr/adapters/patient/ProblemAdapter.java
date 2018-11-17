@@ -183,6 +183,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
             Log.d("ProblemAdapter", "we are on index: " + position);
+            ProfileManager.setProblemIndex(position);
             RecordsFragment fragment = RecordsFragment.newInstance(position);
             transaction.addToBackStack(null); //allows user to bring back previous fragment when back button is pressed
             transaction.replace(R.id.content, fragment);

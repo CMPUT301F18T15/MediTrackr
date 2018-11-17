@@ -49,12 +49,13 @@
                 <TextView
                     android:id="@+id/record_title"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
+                    android:drawableLeft="@drawable/ic_accessibility"
                     android:background="@color/editTextBackground"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
@@ -66,32 +67,15 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/record_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginRight="40dp"
-                    android:background="@color/editTextBackground"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:textColor="@color/colorPrimaryBlack"
-                    android:textColorHint="@color/editTextHint"
-                    android:textSize="16sp" />
-
-
-                <TextView
                     android:id="@+id/record_date"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
+                    android:drawableLeft="@drawable/time"
                     android:background="@color/editTextBackground"
                     android:focusable="false"
                     android:gravity="center_vertical"
@@ -100,6 +84,45 @@
                     android:textColor="@color/colorPrimaryBlack"
                     android:textColorHint="@color/editTextHint"
                     android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/record_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@color/editTextBackground"
+                    android:drawableLeft="@drawable/ic_map"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/colorPrimaryBlack"
+                    android:textColorHint="@color/editTextHint"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/record_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@color/editTextBackground"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/colorPrimaryBlack"
+                    android:textColorHint="@color/editTextHint"
+                    android:textSize="16sp" />
+
+
+
             </LinearLayout>
 
 
@@ -134,7 +157,7 @@
             <TableLayout
                 android:id="@+id/tablepicturelayout"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
@@ -154,27 +177,24 @@
                         android:id="@+id/record_image_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp" />
 
                     <ImageView
                         android:id="@+id/record_image_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="13dp"
                         android:layout_marginBottom="10dp" />
 
                     <ImageView
                         android:id="@+id/record_image_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp" />
 
                 </TableRow>
@@ -187,28 +207,22 @@
                         android:id="@+id/record_image_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp" />
 
                     <ImageView
                         android:id="@+id/record_image_5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="13dp"
                         android:layout_marginBottom="10dp" />
 
                     <ImageView
                         android:id="@+id/record_image_6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_marginBottom="10dp"  />
                 </TableRow>
 
                 <TableRow
@@ -219,28 +233,22 @@
                         android:id="@+id/record_image_7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_marginBottom="10dp"  />
 
                     <ImageView
                         android:id="@+id/record_image_8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="13dp"
                         android:layout_marginBottom="10dp" />
 
                     <ImageView
                         android:id="@+id/record_image_9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_marginBottom="10dp"  />
                 </TableRow>
 
                 <TableRow

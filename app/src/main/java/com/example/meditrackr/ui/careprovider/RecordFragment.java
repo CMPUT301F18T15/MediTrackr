@@ -32,6 +32,9 @@ public class RecordFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_record, container, false);
 
+        final Record record = (Record) getArguments().getSerializable("Record");
+
+
         return rootView;
     }
 }

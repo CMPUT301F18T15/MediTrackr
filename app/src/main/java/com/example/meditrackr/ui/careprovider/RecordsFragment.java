@@ -89,19 +89,10 @@ public class RecordsFragment extends Fragment {
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
                 }
-                else if (recordsClick == v) {
-                    FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.addToBackStack(null);
-                    com.example.meditrackr.ui.patient.ProblemsFragment fragment = ProblemsFragment.newInstance();
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit();
-                }
             }
         };
 
         messageClick.setOnClickListener(listener);
-        recordsClick.setOnClickListener(listener);
 
         // hide the floating action button (lazy af)
         addRecord.setVisibility(View.INVISIBLE);

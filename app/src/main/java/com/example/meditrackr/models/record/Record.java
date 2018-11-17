@@ -38,6 +38,7 @@ public class Record implements Serializable {
 
     // Initialize class variables
     private ImageList images = new ImageList();
+    private ImageSave imagesSave = new ImageSave();
     private String date;
     private String description;
     private String title;
@@ -110,6 +111,19 @@ public class Record implements Serializable {
 
     public void setReminder(boolean[] reminder) {
         this.reminder = reminder;
+    }
+
+
+    public ImageSave getImagesSave() {
+        return imagesSave;
+    }
+
+    public String getImageSave(int index){
+        return imagesSave.getImage(index);
+    }
+
+    public void setImageSave(ImageSave imageSave) {
+        this.imagesSave = imageSave;
     }
 
 

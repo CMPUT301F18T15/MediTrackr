@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.patient.RecordFragment;
 

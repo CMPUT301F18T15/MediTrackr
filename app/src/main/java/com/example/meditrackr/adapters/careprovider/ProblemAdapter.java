@@ -39,10 +39,10 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
 
 /**
  * This class displays all of the problems of a patient selected from a previous page (using the
- * problem adapter) in a recycler view.
+ * patient adapter) in a recycler view.
  *
- * There is also an onclick listener which when a problem is clicked will take the user to a page
- * with more detailed information about that problem.
+ * There is also an onclick listener which when a problem is clicked will take the Care Provider to
+ * a page with more detailed information about that problem.
  *
  * It uses onCreateView to create the recycler view and uses onBindViewHolder to put each problem
  * into the recycler view.
@@ -86,7 +86,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         holder.title.setText(problems.getProblem(position).getTitle());
         holder.date.setText(problems.getProblem(position).getDate());
         holder.description.setText(problems.getProblem(position).getDescription());
-        holder.totalRecords.setText("Number of records: "+problems.getProblem(position).getRecords().getSize());
+        holder.totalRecords.setText("Number of records: " +
+                problems.getProblem(position).getRecords().getSize());
     }
 
     // get the number of problems in RecyclerView
@@ -133,7 +134,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
             ProfileManager.setProblemIndex(position);
-            RecordsFragment fragment = RecordsFragment.newInstance(records, problems.getProblem(position).getComments());
+            RecordsFragment fragment = RecordsFragment.newInstance(records,
+                    problems.getProblem(position).getComments());
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit(); //make permanent all changes performed in the transaction

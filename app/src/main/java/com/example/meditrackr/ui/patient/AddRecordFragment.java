@@ -35,7 +35,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,18 +79,11 @@ public class AddRecordFragment extends Fragment {
     private String date;
     private Patient patient = ProfileManager.getPatient();
 
-
     //indicator
     private static int IMG_RESULT = 1;
     private static final int IMAGE_REQUEST_CODE = 2;
     private static final int GPS_REQUEST_CODE = 3;
     private static final int PLACE_PICKER_REQUEST = 4;
-
-    // location indicators
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private boolean mLocationPersomissionsGranted = false;
 
     //image
     private Bitmap bitmap;
@@ -136,6 +128,10 @@ public class AddRecordFragment extends Fragment {
 
         // initialize address and set it
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
+
+        // set date
+        date = DateUtils.formatAppTime();
+        // set location
         setInitialLocation();
 
 
@@ -152,7 +148,6 @@ public class AddRecordFragment extends Fragment {
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
 
 
-
         // reminder memes
         final Button[] days = new Button[]{
                 rootView.findViewById(R.id.add_button_1D),
@@ -166,7 +161,6 @@ public class AddRecordFragment extends Fragment {
 
         // 7 array for selected time to reminder
         final boolean[] selected = new boolean[7];
-
 
 
         // onclick listener for reminder
@@ -190,13 +184,13 @@ public class AddRecordFragment extends Fragment {
             }
         };
 
+
+
         // set onclick listeners
         for(Button button: days){
             button.setOnClickListener(listener);
         }
 
-        // set date
-        date = DateUtils.formatAppTime();
 
 
         //on click listener for adding a record
@@ -255,6 +249,9 @@ public class AddRecordFragment extends Fragment {
             }
         });
 
+
+
+
         // initialize the map picker and select a place you want to go
         addressView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -267,13 +264,14 @@ public class AddRecordFragment extends Fragment {
                 catch (Exception e){
                     Log.d("Error","Place Picker Error");
                 }
-
-
             }
         });
 
         return rootView;
     }
+
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -315,6 +313,7 @@ public class AddRecordFragment extends Fragment {
     }
 
 
+
     // check inputs
     public boolean checkInputs(EditText title, EditText description){
         if(((title != null && !title.getText().toString().isEmpty()) &&
@@ -325,6 +324,8 @@ public class AddRecordFragment extends Fragment {
             return false;
         }
     }
+
+
 
     // set initial location (very hacky crap)
     public void setInitialLocation() {
@@ -339,6 +340,8 @@ public class AddRecordFragment extends Fragment {
 
         }
     }
+
+
 
     // check persmissions, if they dont have persmission request it
     private void checkPermission ( int requestType){
@@ -356,9 +359,8 @@ public class AddRecordFragment extends Fragment {
 
                     }
                 } else {
-                    // has permission, get gps
+                    // has permission, get gps and put location
                     locationController.getGpsCoordinate(getContext());
-
                 }
                 return;
             }

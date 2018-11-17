@@ -85,7 +85,7 @@ public class RecordsFragment extends Fragment {
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.addToBackStack(null);
-                    MessageListFragment fragment = MessageListFragment.newInstance(comments);
+                    MessageListFragment fragment = MessageListFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
                 }

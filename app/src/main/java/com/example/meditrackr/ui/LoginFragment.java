@@ -78,27 +78,27 @@ public class LoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                Log.d("SearchProfile", "We are searching for the username: " + username.getText().toString());
                 String userName = username.getText().toString();
                 //Profile profile = ElasticSearchController.searchProfile(userName);
                 Profile profile = SaveLoadController.loadProfile(getContext(), userName);
                 if(profile != null) { // If profile with userName exists
                         if (profile.getisCareProvider()) { // If user is a care provider
                             CareProvider careProvider = (CareProvider) profile;
+                            ElasticSearchController.updateUser(careProvider);
                             ProfileManager.setProfile(careProvider); // Set profile as care provider
-                            Log.d("SearchProfile", "we logged in as careprovider");
+                            ProfileManager.setCurrentUsername(careProvider.getUsername());
 
                         } else { // Else if user is a patient
                             Patient patient = (Patient) profile;
+                            ElasticSearchController.updateUser(patient);
                             ProfileManager.setProfile(patient); // Set profile as patient
-                            Log.d("SearchProfile", "we logged in as patient");
+                            ProfileManager.setCurrentUsername(patient.getUsername());
                         }
                         Intent intent = new Intent(getActivity(), MainActivity.class); // Display MainActivity depending on the kind of user
                         startActivity(intent);
                     }
-                    else { // Else if profile with given userName does not exist
-                        Log.d("SearchProfile", "We failed to return profile to LoginFragment");
+                    // Else if profile with given userName does not exist
+                    else {
                         // With a toast message indicate that given username does not exist
                         Toast.makeText(getContext(), "Username does not exist!", Toast.LENGTH_SHORT).show();
                     }

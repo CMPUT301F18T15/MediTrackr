@@ -83,6 +83,9 @@ public class RecordsFragment extends Fragment {
         // Enable recycler view and add record button
         final RecyclerView records = (RecyclerView) rootView.findViewById(R.id.records_recyclerview);
         final FloatingActionButton addRecord = (FloatingActionButton) rootView.findViewById(R.id.add_record_floating);
+        final TextView messageClick = (TextView) rootView.findViewById(R.id.message_click);
+        final TextView recordsClick = (TextView) rootView.findViewById(R.id.records_click);
+
 
         // Set bundle number as the problem index number
         final int index = getArguments().getInt("INDEX");
@@ -101,9 +104,6 @@ public class RecordsFragment extends Fragment {
         VerticalSpaceController decoration = new VerticalSpaceController(75); // Reinforces vertical layout of fragment
         records.addItemDecoration(decoration);
 
-        final TextView messageClick = (TextView) rootView.findViewById(R.id.message_click);
-        final TextView recordsClick = (TextView) rootView.findViewById(R.id.records_click);
-
 
         // onclick listener for messages
         View.OnClickListener listener = new View.OnClickListener() {
@@ -113,7 +113,7 @@ public class RecordsFragment extends Fragment {
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.addToBackStack(null);
-                    MessageListFragment fragment = MessageListFragment.newInstance(patient.getProblem(index).getComments());
+                    MessageListFragment fragment = MessageListFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
                 }

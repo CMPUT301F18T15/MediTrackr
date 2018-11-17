@@ -59,6 +59,15 @@ import com.google.android.gms.common.GoogleApiAvailability;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MapActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
+    final boolean isCareProvider = ProfileManager.getIsCareProvider();
+
+    // ui attributes
+    private ImageView problems;
+    private ImageView map;
+    private ImageView camera;
+    private ImageView search;
+    private ImageView profile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,25 +75,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Set ui attributes
-        final ImageView problems = (ImageView) findViewById(R.id.problems);
-        final ImageView map = (ImageView) findViewById(R.id.map);
-        final ImageView camera = (ImageView) findViewById(R.id.camera);
-        final ImageView search = (ImageView) findViewById(R.id.search);
-        final ImageView profile = (ImageView) findViewById(R.id.profile);
-        final Bundle bundle = getIntent().getExtras();
-        final boolean isCareProvider = ProfileManager.getIsCareProvider();
+        problems =  findViewById(R.id.problems);
+        map = (ImageView) findViewById(R.id.map);
+        camera = (ImageView) findViewById(R.id.camera);
+        search = (ImageView) findViewById(R.id.search);
+        profile = (ImageView) findViewById(R.id.profile);
 
         // Get userType
         setHomeView(isCareProvider);
 
-        // Set button icons on bottom bar
-        problems.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
-        map.setImageDrawable(getResources().getDrawable(R.drawable.map));
-        camera.setImageDrawable(getResources().getDrawable(R.drawable.camera));
-        search.setImageDrawable(getResources().getDrawable(R.drawable.search));
-        profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
+        // initialize navigation bar
+        initButtons();
 
-        // Onclick listener for entire main activity
+
+
+        // Onclick listener for entire main activity navigation bar
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,49 +98,61 @@ public class MainActivity extends AppCompatActivity {
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.addToBackStack(null);
-                // Sets icons in bottom bar and problem add icon
-                problems.setImageDrawable(getResources().getDrawable(R.drawable.cross)); // Set Problem add icon
-                map.setImageDrawable(getResources().getDrawable(R.drawable.map)); // Set Geo-location icon
-                camera.setImageDrawable(getResources().getDrawable(R.drawable.camera)); // Set Camera icon
-                search.setImageDrawable(getResources().getDrawable(R.drawable.search)); // Set Search icon
-                profile.setImageDrawable(getResources().getDrawable(R.drawable.person)); // Set Profile icon
-                if(v == problems){ // If Problem add button icon is clicked
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.cross_full)); // Darken icon to indicate it is clicked
-                    if(!isCareProvider) { // If user is a patient show Add Problems Fragment
+
+                // Sets icons in navigation bar
+                initButtons();
+
+
+                // If Problem add button icon is clicked
+                if(v == problems){
+                    // Darken icon to indicate it is clicked
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
+                    if(!isCareProvider) {
+                        // If user is a patient show Add Problems Fragment
                         ProblemsFragment fragment = ProblemsFragment.newInstance();
                         transaction.replace(R.id.content, fragment);
                     }
-                    else{ // Else if user is a care provider show Add Patients Fragment
+                    else{
+                        // Else if user is a care provider show Add Patients Fragment
                         PatientsFragment fragment = PatientsFragment.newInstance();
                         transaction.replace(R.id.content, fragment);
                     }
-                    transaction.commit(); // Make permanent all changes made in previous fragment
                 }
-
                 else if (v == map) {
+                    // check if we have persomission to use google maps, if so then go to that activity
                     if(isServicesOK()) {
-                        Log.d("IsService", "why don't we get here");
                         image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
                         startActivity(intent);
                     }
-                    transaction.commit();
 
                 }
-                else if (v == camera) { // If Camera button icon is clicked
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full)); // Darken camera icon
+                // If Camera button icon is clicked
+                else if (v == camera) {
+                    // Darken camera icon
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full));
                 }
-                else if (v == search) { // If Search button icon is clicked
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.search_full)); // Darken Search icon
+
+                // If Search button icon is clicked
+                else if (v == search) {
+                    // If Search button icon is clicked
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.search_full));
                 }
+                // clicked profile page
                 else{
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.person_full)); // Darken Profile icon
-                    UserFragment fragment = UserFragment.newInstance(); // Switch to User Fragment
+                    // Darken Profile icon
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.person_full));
+                    // Switch to User Fragment
+                    UserFragment fragment = UserFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
-                    transaction.commit();
                 }
+
+                // ensure we swap fragments
+                transaction.commit();
             }
         };
+
+
         // Onclick listener for each icon in bottom bar
         problems.setOnClickListener(listener);
         map.setOnClickListener(listener);
@@ -161,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // check for google services permission
     public boolean isServicesOK(){
         Log.d(TAG, "isServicesOK: checking google services version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
@@ -180,5 +198,13 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    // Set button icons on bottom bar
+    public void initButtons(){
+        problems.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
+        map.setImageDrawable(getResources().getDrawable(R.drawable.map));
+        camera.setImageDrawable(getResources().getDrawable(R.drawable.camera));
+        search.setImageDrawable(getResources().getDrawable(R.drawable.search));
+        profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
+    }
 
 }

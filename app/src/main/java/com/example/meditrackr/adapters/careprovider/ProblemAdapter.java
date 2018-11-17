@@ -31,7 +31,10 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.ProblemList;
-import com.example.meditrackr.ui.careprovider.ProblemsFragment;
+import com.example.meditrackr.models.record.RecordList;
+import com.example.meditrackr.ui.careprovider.RecordsFragment;
+
+import net.steamcrafted.materialiconlib.MaterialIconView;
 
 /**
  * this class will display all of the problems  in a recycler view for the patient that was clicked
@@ -56,7 +59,7 @@ import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder> {
     private FragmentActivity activity;
-    private ProblemList problems;
+    private static ProblemList problems;
 
     // constructor
     public ProblemAdapter(FragmentActivity activity, ProblemList problems) {
@@ -81,6 +84,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         holder.title.setText(problems.getProblem(position).getTitle());
         holder.date.setText(problems.getProblem(position).getDate());
         holder.description.setText(problems.getProblem(position).getDescription());
+        holder.totalRecords.setText("Number of records: "+problems.getProblem(position).getRecords().getSize());
     }
 
     // get the number of problems in RecyclerView
@@ -96,6 +100,10 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public TextView title;
         public TextView date;
         public TextView description;
+        public TextView totalRecords;
+        public MaterialIconView deleteProblem;
+        public MaterialIconView editProblem;
+
 
         //gets the corresponding data for each view
         public ViewHolder(View itemView, final ProblemAdapter adapter){
@@ -103,7 +111,15 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             title = itemView.findViewById(R.id.problem_title);
             date = itemView.findViewById(R.id.problem_date);
             description = itemView.findViewById(R.id.problem_description);
+            totalRecords = itemView.findViewById(R.id.number_records_title);
+            deleteProblem = itemView.findViewById(R.id.problem_delete_button);
+            editProblem = itemView.findViewById(R.id.problem_edit_button);
             itemView.setOnClickListener(this);
+            // hide stuff from doctor
+            deleteProblem.setVisibility(View.INVISIBLE);
+            deleteProblem.setClickable(false);
+            editProblem.setVisibility(View.INVISIBLE);
+            editProblem.setClickable(false);
             this.adapter = adapter;
         }
 
@@ -111,9 +127,10 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            FragmentManager manager = adapter.activity.getSupportFragmentManager(); //access Fragment class features
-            FragmentTransaction transaction =  manager.beginTransaction(); //allow editing on manager fragment
-            ProblemsFragment fragment = ProblemsFragment.newInstance(position); //instantiate new Fragment
+            RecordList records = problems.getProblem(position).getRecords();
+            FragmentManager manager = adapter.activity.getSupportFragmentManager();
+            FragmentTransaction transaction =  manager.beginTransaction();
+            RecordsFragment fragment = RecordsFragment.newInstance(records, problems.getProblem(position).getComments());
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit(); //make permanent all changes performed in the transaction

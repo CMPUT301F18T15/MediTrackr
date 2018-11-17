@@ -1,3 +1,7 @@
+
+package com.example.meditrackr.controllers;
+
+
 /*
  *Apache 2.0 License Notice
  *
@@ -16,9 +20,7 @@
  *limitations under the License.
  *
  */
-package com.example.meditrackr.controllers;
 
-//imports
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;

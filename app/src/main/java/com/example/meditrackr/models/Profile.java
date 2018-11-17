@@ -34,7 +34,6 @@ import io.searchbox.annotations.JestId;
 
 // A Profile class that holds all information pertaining to Profile
 public class Profile implements Serializable {
-    @JestId
 
     // Initialize class variables
     private String username;

@@ -116,12 +116,17 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            FragmentManager manager = adapter.activity.getSupportFragmentManager();  //access Fragment class features
-            FragmentTransaction transaction =  manager.beginTransaction();  //allow editing on manager fragment
-            ProblemsFragment fragment = ProblemsFragment.newInstance(position);  //instantiate new Fragment
-            transaction.addToBackStack(null); //allows user to bring back previous fragment when back button is pressed
-            transaction.replace(R.id.content, fragment); // Replace current fragment with new info
-            transaction.commit(); ////make permanent all changes performed in the transaction
+            CareProvider careProvider = ProfileManager.getCareProvider();
+            PatientList patients = careProvider.getPatients();
+            FragmentManager manager = adapter.activity.getSupportFragmentManager();
+            FragmentTransaction transaction =  manager.beginTransaction();
+            Patient patient = (Patient) ElasticSearchController.searchProfile(patients.getPatient(position));
+            ProfileManager.setCarePatient(patient);
+            ProblemsFragment fragment = ProblemsFragment.newInstance(position);
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.content, fragment);
+            transaction.commit();
+
         }
     }
 }

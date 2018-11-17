@@ -39,6 +39,7 @@ public class Problem implements Serializable {
     private String date;
     private String description;
     private RecordList records = new RecordList();
+    private CommentList comments = new CommentList();
 
     // Constructor
     public Problem(String title, String date, String description){
@@ -76,5 +77,7 @@ public class Problem implements Serializable {
     public RecordList getRecords() {
         return records;
     }
+
+    public CommentList getComments() {return comments;}
 
 }

@@ -52,7 +52,7 @@ public class ProblemTest {
     public void recordListTest() {
         final String recordName = "New record!";
         final Record record = new Record
-                (recordName, "", "", null, null);
+                (recordName, "", "", null);
 
         // Addition
         problem.getRecords().addRecord(record);

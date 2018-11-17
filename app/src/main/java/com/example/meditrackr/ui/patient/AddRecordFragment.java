@@ -28,7 +28,6 @@ import android.graphics.BitmapFactory;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -54,14 +53,13 @@ import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
+import com.example.meditrackr.utils.DateUtils;
 
 import java.io.ByteArrayOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.TimeZone;
+
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.model.LatLng;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -77,31 +75,37 @@ import static android.app.Activity.RESULT_OK;
 
 // Class creates Add Record Fragment for patients
 public class AddRecordFragment extends Fragment {
-    // Initialize variables
     private String date;
     private Patient patient = ProfileManager.getPatient();
 
 
-    // Initialize indicators
+    //indicator
     private static int IMG_RESULT = 1;
     private static final int IMAGE_REQUEST_CODE = 2;
     private static final int GPS_REQUEST_CODE = 3;
+    private static final int PLACE_PICKER_REQUEST = 4;
 
+    // location indicators
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private boolean mLocationPersomissionsGranted = false;
 
-    // Initialize images and bitmaps
+    //image
     private Bitmap bitmap;
     private ImageView[] images = new ImageView[10];
     private Bitmap[] bitmaps = new Bitmap[10];
 
 
-    // Initialize location variables
+    // location
     private LocationController locationController;
     private double latitude;
     private double longitude;
     private String addressName;
+    private Place place;
+    private TextView addressView;
 
 
-    // Creates new instance fragment and saves it as bundle
     public static AddRecordFragment newInstance(int index) {
         AddRecordFragment fragment = new AddRecordFragment();
         Bundle bundle = new Bundle();
@@ -110,26 +114,28 @@ public class AddRecordFragment extends Fragment {
         return fragment;
     }
 
-    // Creates add record fragment view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_record, container, false);
 
-        // Sets problem index number as the bundle number
+        // index of problem we are adding record too
         final int index = getArguments().getInt("INDEX");
+
+        // nifty location controller that helps with getting locations
         locationController = new LocationController(getContext());
 
-        // Initializes general ui attributes
+        // general ui attributes
         final EditText recordTitle = (EditText) rootView.findViewById(R.id.record_title_field);
         final EditText recordDescrption = (EditText) rootView.findViewById(R.id.record_description_field);
         final Button addImage = (Button) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
-        final TextView addressView = (TextView) rootView.findViewById(R.id.addresss_field);
+        addressView = (TextView) rootView.findViewById(R.id.addresss_field);
+        setInitialLocation();
 
 
-        // Ui attributes for all the images
+        // ui attributes for all the images LMAO
         images[0] = (ImageView) rootView.findViewById(R.id.image_1);
         images[1] = (ImageView) rootView.findViewById(R.id.image_2);
         images[2] = (ImageView) rootView.findViewById(R.id.image_3);
@@ -141,78 +147,76 @@ public class AddRecordFragment extends Fragment {
         images[8] = (ImageView) rootView.findViewById(R.id.image_9);
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
 
-
-        // Buttons for choosing reminder frequency
+        // reminder memes
         final Button[] days = new Button[]{
-            rootView.findViewById(R.id.add_button_1D),
-            rootView.findViewById(R.id.add_button_2D),
-            rootView.findViewById(R.id.add_button_3D),
-            rootView.findViewById(R.id.add_button_5D),
-            rootView.findViewById(R.id.add_button_1W),
-            rootView.findViewById(R.id.add_button_2W),
-            rootView.findViewById(R.id.add_button_1M)
+                rootView.findViewById(R.id.add_button_1D),
+                rootView.findViewById(R.id.add_button_2D),
+                rootView.findViewById(R.id.add_button_3D),
+                rootView.findViewById(R.id.add_button_5D),
+                rootView.findViewById(R.id.add_button_1W),
+                rootView.findViewById(R.id.add_button_2W),
+                rootView.findViewById(R.id.add_button_1M)
         };
-        final boolean[] selected = new boolean[7]; // Array of seven buttons
+
+        // 7 array for selected time to reminder
+        final boolean[] selected = new boolean[7];
 
 
-        // Set address
-        setAddress(addressView);
 
-        // Onclick listener for reminder
+        // onclick listener for reminder
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for(int i = 0; i < selected.length; i++) {
                     if(days[i].equals(v)) {
                         selected[i] = !selected[i];
-                        if(selected[i]){ // If reminder frequency is picked, button will change color
+                        if(selected[i]){
                             Drawable background = ContextCompat.getDrawable(getContext(), R.drawable.gradient);
                             days[i].setBackgroundDrawable(background);
                         }
-                        else { // If no buttons were picked, buttons stay white
+                        else {
                             days[i].setBackgroundColor(Color.parseColor("#ffffff"));
                         }
                         break;
                     }
+
                 }
             }
         };
 
-        // Set onclick listeners for reminder buttons
+        // set onclick listeners
         for(Button button: days){
             button.setOnClickListener(listener);
         }
 
-        // Set date as current time and date
-        final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d yyyy, hh:mm aaa");
-        final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
-        date = format.format(calendar.getTime());
+        // set date
+        date = DateUtils.formatAppTime();
 
 
-        // On click listener for adding a record
+        //on click listener for adding a record
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkInputs(recordTitle, recordDescrption)){ // If checkInputs is true
-                    Geolocation geolocation = new Geolocation(latitude, longitude, addressName); // Initialize geo-location
-                    Record record = new Record( // Set inputted data into record object
+                if(checkInputs(recordTitle, recordDescrption)){
+                    Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
+                    Record record = new Record(
                             recordTitle.getText().toString(),
                             recordDescrption.getText().toString(),
                             date,
-                            null,
-                            geolocation);
+                            null);
                     record.setReminder(selected);
+                    record.setGeoLocation(geolocation);
                     for(Bitmap bitmap: bitmaps){
                         record.getImages().addImage(bitmap);
                     }
                     patient.getProblem(index).getRecords().addRecord(record);
 
-                    // Save record data to ES and memory
+                    // save the shit
                     ElasticSearchController.updateUser(patient);
                     SaveLoadController.saveProfile(getContext(), patient);
                     Log.d("RecordAdd", "Profile: " + patient.getUsername() + " Records: " + patient.getProblem(index).getRecords());
 
-                    // Transition back to RecordsFragment after adding
+                    // transition back to all the records
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     RecordsFragment fragment = RecordsFragment.newInstance(index);
@@ -220,20 +224,19 @@ public class AddRecordFragment extends Fragment {
                     transaction.commit();
                 }
 
-                else { // If checkInputs is false
-                    // Display toast message indicating that user is missing required data
+                else {
                     Toast.makeText(getContext(), "Please enter a valid format for record", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
 
-        // Onclick listener for adding image
-        addImage.setOnClickListener(new View.OnClickListener() {
 
+        // add image
+        addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Enable camera functionality on click
+
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 Log.d("ImageTest", "do we get here");
                 startActivityForResult(intent,
@@ -241,96 +244,123 @@ public class AddRecordFragment extends Fragment {
                 Log.d("ImageTest", "do we get here2");
             }
         });
+
+        // pick a place
+        addressView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+                try{
+                    startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+                }
+                catch (Exception e){
+                    Log.d("Error","Place Picker Error");
+                }
+
+
+            }
+        });
+
+
         return rootView;
     }
 
-    // Formats captured image
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == IMAGE_REQUEST_CODE) { // Confirms with user wether the picture was okay
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             Log.d("ImageTest", "do we get here");
             getActivity();
-            if (resultCode == RESULT_OK) { // If user picks okay save image as bitmap
-                Log.d("ImageTest", "do we get here");
-                Bitmap bmp = (Bitmap) data.getExtras().get("data");
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            Log.d("ImageTest", "do we get here");
+            Bitmap bmp = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-                assert bmp != null; // Asset that photo was taken
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream); // Format image into PNG
-                byte[] byteArray = stream.toByteArray(); // Store image in byte array
+            assert bmp != null;
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
 
-                // Convert byte array to Bitmap
-                bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
-                        byteArray.length);
-                Log.d("ImageTest", "do we get here");
+            // convert byte array to Bitmap
+            bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
+                    byteArray.length);
+            Log.d("ImageTest", "do we get here");
 
-                // Populate image
-                for(int i = 0; i < bitmaps.length; i++){
-                    if(bitmaps[i] == null){
-                        Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 450, false);
-                        bitmaps[i] = newBitmap;
-                        images[i].setImageBitmap(newBitmap);
-                        break;
-                    }
+            // populate image
+            for(int i = 0; i < bitmaps.length; i++){
+                if(bitmaps[i] == null){
+                    Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 450, false);
+                    bitmaps[i] = newBitmap;
+                    images[i].setImageBitmap(newBitmap);
+                    break;
                 }
-                Log.d("ImageTest", bitmap.toString());
             }
+            Log.d("ImageTest", bitmap.toString());
+        }
+        // we are getting a place location
+        else if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
+            place = PlacePicker.getPlace(data, getContext());
+            String toastMsg = String.format("Place: %s", place.getName());
+            addressView.setText(place.getName().toString());
+            addressName = place.getName().toString();
+            LatLng latLng = place.getLatLng();
+            latitude = latLng.latitude;
+            longitude = latLng.longitude;
+            Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG).show();
         }
     }
 
 
-    // Check that new record at least includes a title and description
+
+
+
+    // check inputs
     public boolean checkInputs(EditText title, EditText description){
         if(((title != null && !title.getText().toString().isEmpty()) &&
                 (description != null && !description.getText().toString().isEmpty()))){
-            return true; // Return true if there is a title and description
+            return true;
         }
-        else { // New record is missing a requirement
-            return false; // Return false if one of requirements is missing
+        else {
+            return false;
         }
     }
 
-    // Method to set address
-    public void setAddress(TextView address) {
-        // Initializes gps functionality
+    // set initial location (very hacky crap)
+    public void setInitialLocation() {
         int flag = locationController.getGPS(getContext());
-        if (flag == 1) { // If gps is already enabled
-            checkPermission(GPS_REQUEST_CODE); // Get location
-            Log.d("Address", "do we get here");
-            String addressName = locationController.getGpsAddressName(getContext());
+        if (flag == 1) {
+            checkPermission(GPS_REQUEST_CODE);
+            addressName = locationController.getGpsAddressName(getContext());
             longitude = locationController.getGpsLongitude();
             latitude = locationController.getGpsLatitude();
-            address.setText(addressName); // Set location into address
-        } else { // If gps is not yet enabled
-            // Display a toast message or the user to turn on location in settings
-            Toast.makeText(getContext(), "please turn on GPS", Toast.LENGTH_LONG).show();
+            addressName = addressName.replace(", null,", "").replace("null", "");
+            addressView.setText(addressName);
+
         }
     }
 
-    // Gives permission to access location information
-    private void checkPermission(int requestType) {
+    // check persmissions, if they dont have persmission request it
+    private void checkPermission ( int requestType){
         switch (requestType) {
-            // Access to gps service
+            // access to gps service
             case GPS_REQUEST_CODE: {
                 final String permission = Manifest.permission.ACCESS_FINE_LOCATION;
-                // If no permission, ask for permission
+                // if no permission, ask for permission
                 if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
                         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
-                        Log.d("Address", "fails here");
 
-                    } else { // Else if no permission, ask for permission again
+                    } else {
                         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
-                        Log.d("Address", "fails here2");
 
                     }
-                } else { // If permission is already granted, get location
+                } else {
+                    // has permission, get gps
                     locationController.getGpsCoordinate(getContext());
-                    Log.d("Address", "success");
+
                 }
+                return;
             }
+
         }
+
     }
 }
-
-

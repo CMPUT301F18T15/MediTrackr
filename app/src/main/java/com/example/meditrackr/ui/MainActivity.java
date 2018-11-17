@@ -18,7 +18,8 @@
  */
 package com.example.meditrackr.ui;
 
-//imports
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -26,10 +27,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.ui.careprovider.PatientsFragment;
+import com.example.meditrackr.ui.patient.MapActivity;
 import com.example.meditrackr.ui.patient.ProblemsFragment;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 /**
  * for this activity it just shows a bar at the bottom with 5 buttons
@@ -51,8 +57,9 @@ import com.example.meditrackr.ui.patient.ProblemsFragment;
 
 // Class creates main activity fragment
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MapActivity";
+    private static final int ERROR_DIALOG_REQUEST = 9001;
 
-    // Creates main activity view
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,8 +111,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                     transaction.commit(); // Make permanent all changes made in previous fragment
                 }
-                else if (v == map) { // If Geo-location button icon is clicked
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.map_full)); // Darken map icon
+
+                else if (v == map) {
+                    if(isServicesOK()) {
+                        Log.d("IsService", "why don't we get here");
+                        image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                        startActivity(intent);
+                    }
+                    transaction.commit();
+
                 }
                 else if (v == camera) { // If Camera button icon is clicked
                     image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full)); // Darken camera icon
@@ -143,8 +158,27 @@ public class MainActivity extends AppCompatActivity {
             ProblemsFragment fragment = ProblemsFragment.newInstance();
             transaction.replace(R.id.content, fragment);
             transaction.commit();
-
         }
     }
+
+    public boolean isServicesOK(){
+        Log.d(TAG, "isServicesOK: checking google services version");
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
+        if(available == ConnectionResult.SUCCESS){
+            //everything is okay, user can make map requests
+            Log.d(TAG, "isServiceOK: Google play services is working");
+            return true;
+        }else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            // an error occured but we can resolve it
+            Log.d(TAG, "IsServicesOK: an error occured but we can fit it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }
+        else {
+            Toast.makeText(MainActivity.this, "You can't make map reqeuests", Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
 
 }

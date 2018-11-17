@@ -35,6 +35,7 @@ import com.example.meditrackr.models.Profile;
 // Creates ProfileManager that handles some Profile methods
 public class ProfileManager {
     private static Profile profile;
+    private static Patient carePatient;
 
     // Profile getter
     public static Profile getProfile() {
@@ -64,4 +65,15 @@ public class ProfileManager {
 
     // Boolean, 1 for careprovider and 0 for patient
     public static  boolean getIsCareProvider() {return profile.getisCareProvider();}
+
+
+    public static Patient getCarePatient() {
+        return carePatient;
+    }
+
+    public static void setCarePatient(Patient carePatient) {
+        ProfileManager.carePatient = carePatient;
+    }
+
 }
+

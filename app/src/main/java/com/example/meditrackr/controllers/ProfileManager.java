@@ -34,6 +34,7 @@ import com.example.meditrackr.models.Profile;
 
 // Creates ProfileManager that handles some Profile methods
 public class ProfileManager {
+    private static String currentUsername;
     private static Profile profile;
     private static Patient carePatient;
     private static int problemIndex;
@@ -82,6 +83,14 @@ public class ProfileManager {
 
     public static void setProblemIndex(int problemIndex) {
         ProfileManager.problemIndex = problemIndex;
+    }
+
+    public static String getCurrentUsername() {
+        return currentUsername;
+    }
+
+    public static void setCurrentUsername(String currentUsername) {
+        ProfileManager.currentUsername = currentUsername;
     }
 
 

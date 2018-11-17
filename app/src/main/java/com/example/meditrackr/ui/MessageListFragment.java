@@ -32,11 +32,8 @@ public class MessageListFragment extends Fragment {
     private CommentList comments;
     private Patient patient;
 
-    public static MessageListFragment newInstance(CommentList comments){
+    public static MessageListFragment newInstance(){
         MessageListFragment fragment = new MessageListFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Messages", comments);
-        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -50,18 +47,19 @@ public class MessageListFragment extends Fragment {
         final EditText chatBox = (EditText) rootView.findViewById(R.id.edittext_chatbox);
         final RecyclerView messageList = (RecyclerView) rootView.findViewById(R.id.reyclerview_message_list);
 
-        //comments = (CommentList) getArguments().getSerializable("Messages");
         profile = ProfileManager.getProfile();
         Log.d("WOOT", profile.getUsername());
 
 
-        // need to fix this in the future, this is way too fucking hacky 
+        // need to fix this in the future, this is way too fucking hacky
         if(profile.getisCareProvider()){
             Log.d("WOOT", "do i get here?");
             patient = ProfileManager.getCarePatient();
             comments = patient.getProblem(ProfileManager.getProblemIndex()).getComments();
         }else{
             patient = ProfileManager.getPatient();
+            Log.d("WOOT", "i should be logged in as patient: " + patient.getUsername());
+            Log.d("WOOT", ProfileManager.getProblemIndex()+"");
             comments = patient.getProblem(ProfileManager.getProblemIndex()).getComments();
         }
 
@@ -89,7 +87,7 @@ public class MessageListFragment extends Fragment {
                     comments.addComment(comment);
                     adapter.notifyDataSetChanged();
                     chatBox.setText(null);
-                    //SaveLoadController.saveProfile(getContext(), profile);
+                    SaveLoadController.saveProfile(getContext(), patient);
                     ElasticSearchController.updateUser(patient);
                     messageList.smoothScrollToPosition(comments.getSize());
                 }

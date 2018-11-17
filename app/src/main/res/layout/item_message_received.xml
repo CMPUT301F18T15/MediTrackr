@@ -40,7 +40,7 @@
         android:padding="8dp"
         android:text="hi man, how are you?"
         android:textColor="#ffffff"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintLeft_toRightOf="@+id/image_message_profile"
         app:layout_constraintTop_toBottomOf="@+id/text_message_name" />
 

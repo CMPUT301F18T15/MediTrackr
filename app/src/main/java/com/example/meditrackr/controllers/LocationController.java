@@ -18,7 +18,7 @@
  */
 package com.example.meditrackr.controllers;
 
-//import
+//imports
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;

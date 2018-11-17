@@ -18,7 +18,7 @@
  */
 package com.example.meditrackr.controllers;
 
-
+//import
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -61,13 +61,15 @@ import java.util.Locale;
  * @throe SecurityException
  */
 
+//
 public class LocationController {
+    // Initialize class objects, variables, and arrays
     private Geocoder geocoder;
     private int maxResults = 2;
     private List<Address> locationList = new ArrayList<>();
     private ArrayList<String> locationNameList = new ArrayList<>();
 
-    //location
+    //Location variables
     private LocationManager locationManager;
     private LocationListener locationListener;
     private Location location;
@@ -76,16 +78,18 @@ public class LocationController {
     private double latitude, longitude;
     private String addressName;
 
-    //GPS
+    //GPS variables
     private boolean isGPSenable;
     private float minDistanceChanged = 5;
     private long minTime = 1000 * 60 * 1;
     private double gpsLatitude, gpsLongitude;
 
+    // LocationController constructs a Geocoder whose responses will be localized in english
     public LocationController(Context context) {
         geocoder = new Geocoder(context, Locale.ENGLISH);
     }
 
+    // 
     public String setLocationName(int position) {
         addressIndex = position;
         adrress = locationList.get(addressIndex);

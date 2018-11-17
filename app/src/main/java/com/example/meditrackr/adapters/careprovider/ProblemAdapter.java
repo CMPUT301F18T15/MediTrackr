@@ -38,19 +38,20 @@ import com.example.meditrackr.ui.careprovider.RecordsFragment;
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
 /**
- * this class will display all of the problems  in a recycler view for the patient that was clicked
- * on from the previous page (PatientAdapter).
+ * This class displays all of the problems of a patient selected from a previous page (using the
+ * problem adapter) in a recycler view.
  *
- * there is also a onclick listener which when clicked will take the care provider to a page with
- * more detailed information about that problem.
+ * There is also an onclick listener which when a problem is clicked will take the user to a page
+ * with more detailed information about that problem.
  *
- * it uses onCreateView to create the recycler view and uses onBindViewHolder to put the problem
+ * It uses onCreateView to create the recycler view and uses onBindViewHolder to put each problem
  * into the recycler view.
  *
- * this class can use getItemCount to display the number of items (problems) in the recycler view
+ * This class can use getItemCount to display the number of items (problems) in the recycler view.
  *
- * this class uses viewHolder to put information to each problem into its own view so we wont display
- * information from one problem as another. this function servers mainly as an organization purpose
+ * This class uses viewHolder to put information about each problem into its own view so we won't
+ * display information from one problem as another. This function mainly serves an organizational
+ * purpose.
  *
  * @author  Orest Cokan
  * @version 1.0 Nov 10, 2018

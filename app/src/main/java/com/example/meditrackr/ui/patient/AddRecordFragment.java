@@ -211,6 +211,7 @@ public class AddRecordFragment extends Fragment {
                             String imageSave = ConvertImage.base64Encode(bitmap);
                             Log.d("TestImage", imageSave);
                             record.getImagesSave().addImage(imageSave);
+                            patient.getProblem(index).getImageAll().addImage(imageSave);
                         }
                     }
                     patient.getProblem(index).getRecords().addRecord(record);

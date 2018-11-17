@@ -52,7 +52,7 @@ import com.example.meditrackr.utils.ConvertImage;
  *
  * @author  Orest Cokan
  * @version 1.0 Nov 12, 2018.
- * @see AddRecordFragment
+ * @see RecordFragment
  */
 
 // Class creates a Record Fragment for patients
@@ -122,6 +122,7 @@ public class RecordFragment extends Fragment {
         date.setText(record.getDate());
         location.setText(record.getGeoLocation().getAddress());
 
+
         // Populate with images
         try {
             for (int i = 0; i < record.getImagesSave().getSize(); i++) {
@@ -134,4 +135,6 @@ public class RecordFragment extends Fragment {
 
         return rootView;
     }
+
+
 }

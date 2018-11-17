@@ -19,9 +19,12 @@
 package com.example.meditrackr.adapters.patient;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.media.Image;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -30,14 +33,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.meditrackr.R;
 
 import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
+import com.example.meditrackr.models.record.ImageSave;
+import com.example.meditrackr.ui.FullScreenViewActivity;
 import com.example.meditrackr.ui.patient.EditProblemFragment;
 import com.example.meditrackr.ui.patient.RecordsFragment;
+import com.example.meditrackr.utils.ConvertImage;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
@@ -90,6 +97,13 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         holder.date.setText(problems.getProblem(position).getDate());
         holder.description.setText(problems.getProblem(position).getDescription());
         holder.totalRecords.setText("Number of records: "+problems.getProblem(position).getRecords().getSize());
+        if(problems.getProblem(position).getImageAll().getSize() == 0){
+            holder.problemImage.setImageBitmap(null);
+            Log.d("ImageTest", "New profile this should be shown!");
+        }else {
+            holder.problemImage.setImageBitmap(ConvertImage.base64Decode(
+                    problems.getProblem(position).getImageAll().getImage(0)));
+        }
     }
 
 
@@ -103,6 +117,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
     // place each problem into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ProblemAdapter adapter;
+        public ImageView problemImage;
         public TextView title;
         public TextView date;
         public TextView description;
@@ -110,8 +125,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public MaterialIconView deleteProblem;
         public MaterialIconView editProblem;
 
-        //gets the corresponding data for each view
 
+        //gets the corresponding data for each view
         public ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
@@ -120,6 +135,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             totalRecords = itemView.findViewById(R.id.number_records_title);
             deleteProblem = itemView.findViewById(R.id.problem_delete_button);
             editProblem = itemView.findViewById(R.id.problem_edit_button);
+            problemImage = itemView.findViewById(R.id.problem_image);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
 
@@ -168,21 +184,43 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                     FragmentManager manager = adapter.activity.getSupportFragmentManager();
                     FragmentTransaction transaction =  manager.beginTransaction();
                     EditProblemFragment fragment = EditProblemFragment.newInstance(position);
+                    transaction.addToBackStack(null);
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
 
                 }
             });
+
+
+            // onclick listener for problem image
+            problemImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ImageSave images = adapter.problems.getProblem(getAdapterPosition()).getImageAll();
+                    if(images.getSize() == 0){
+                        problemImage.setClickable(false);
+                        problemImage.setVisibility(View.INVISIBLE);
+                        Log.d("ImageTest", "we should be getting here");
+                    }
+                    else {
+                        Intent intent = new Intent(adapter.activity, FullScreenViewActivity.class);
+                        intent.putExtra("IMAGES", images);
+                        adapter.activity.startActivity(intent);
+                    }
+                }
+            });
+
         }
 
 
-        // set onClick listener for each problem, so they can be edited
+
+
+        // set onClick listener for each problem to be viewed
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            Log.d("ProblemAdapter", "we are on index: " + position);
             ProfileManager.setProblemIndex(position);
             RecordsFragment fragment = RecordsFragment.newInstance(position);
             transaction.addToBackStack(null); //allows user to bring back previous fragment when back button is pressed

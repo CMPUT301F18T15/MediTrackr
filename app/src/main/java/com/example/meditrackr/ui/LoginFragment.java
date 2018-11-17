@@ -98,8 +98,7 @@ public class LoginFragment extends Fragment {
                         startActivity(intent);
                     }
                     // Else if profile with given userName does not exist
-                    else {
-                        // With a toast message indicate that given username does not exist
+                    else {// With a toast message indicate that given username does not exist
                         Toast.makeText(getContext(), "Username does not exist!", Toast.LENGTH_SHORT).show();
                     }
             }

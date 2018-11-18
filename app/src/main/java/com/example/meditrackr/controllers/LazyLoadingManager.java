@@ -42,65 +42,154 @@ public class LazyLoadingManager {
     private static int problemIndex;
     private static ImageSave images;
 
+    /**
+     * gets a profile
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     * @return profile the profile that it retrieved
+     * @see Profile
+     */
     // Profile getter
     public static Profile getProfile() {
         return profile;
     }
 
-    // Profile setter
+    /**
+     * sets the profile
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     */
     public static void setProfile(Profile profile) {
         LazyLoadingManager.profile = profile;
     }
 
+    /**
+     * gets a patient
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     * @return profile the profile for that patient that it retrieved
+     * @see Patient
+     */
     // Patient getter
     public static Patient getPatient(){
         return (Patient) profile;
     }
 
+    /**
+     * gets a care Provider
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     * @return profile the profile for that care Provider that it retrieved
+     * @see CareProvider
+     */
     // Care Provider getter
     public static CareProvider getCareProvider(){
         return (CareProvider) profile;
     }
 
+    /**
+     * gets a list of all patients assignd to the care provider
+     *
+     * @return  returns a list of patients the care provider has
+     * @see PatientList
+     */
     // Provides patient list for care providers
     public static PatientList getCareProviderPatients(){
         CareProvider careProvider = (CareProvider) profile;
         return careProvider.getPatients();
     }
 
+    /**
+     * finds out if the profile is a care provider or not
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     * @return either 1 for care provider or 0 for patient
+     */
     // Boolean, 1 for careprovider and 0 for patient
     public static  boolean getIsCareProvider() {return profile.getisCareProvider();}
 
-
+    /**
+     * gets the patient that a care provider has
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     * @return the patient the care provider has
+     * @see Patient
+     */
     public static Patient getCarePatient() {
         return carePatient;
     }
 
+    /**
+     * sets the carePatient
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     * @param carePatient this is the patient that a care provider has
+     */
     public static void setCarePatient(Patient carePatient) {
         LazyLoadingManager.carePatient = carePatient;
     }
 
+    /**
+     * gets a problems index
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     * @return problemIndex the index of that problem
+     */
     public static int getProblemIndex() {
         return problemIndex;
     }
-
+    /**
+     * sets the problem index
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     */
     public static void setProblemIndex(int problemIndex) {
         LazyLoadingManager.problemIndex = problemIndex;
     }
-
+    /**
+     * gets the username of user
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     * @return currentUsername the username of that user
+     */
     public static String getCurrentUsername() {
         return currentUsername;
     }
-
+    /**
+     * sets the username of that user
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     */
     public static void setCurrentUsername(String currentUsername) {
         LazyLoadingManager.currentUsername = currentUsername;
     }
 
-
+    /**
+     * gets images
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     * @return images the profile that it retrieved
+     */
     public static ImageSave getImages() {
         return images;
     }
-
+    /**
+     * sets the images
+     *
+     * @author Orest Cokan
+     * @version 2.0 Nov 7, 2018
+     */
     public static void setImages(ImageSave images) {
         LazyLoadingManager.images = images;
     }

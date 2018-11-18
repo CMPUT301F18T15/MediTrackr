@@ -136,23 +136,18 @@ public class RecordFragment extends Fragment {
             Log.d("Images", "size of array is zero, no images");
         }
 
-        // set click listeners for each image to display them in full screen
-//        for (int i = 0; i < 10; ++i) {
-//            final int index = i;
-//            images[i].setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    String record_image = record.getImageSave(index);
-//                    Intent intent = new Intent(getActivity(), FullScreenViewActivity.class);
-//                    ImageSave record_images = new ImageSave();
-//                    record_images.addImage(record_image);
-//                    intent.putExtra("IMAGES", record_images);
-//                    getActivity().startActivity(intent);
-//
-//                }
-//            });
-//
-//        }
+        // set a click listener for each photo to allow viewing or adding a body location
+        for (int i = 0; i < 10; ++i) {
+            final int index = i;
+            images[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                }
+            });
+
+        }
 
         return rootView;
     }

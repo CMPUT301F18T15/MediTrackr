@@ -37,9 +37,7 @@ public class ImageSave implements Serializable {
         imagesString.add(newImage);
     }
 
-    public void removeImage(int image){
-        imagesString.remove(image);
-    }
+    public void removeImage(int image){ imagesString.remove(image); }
 
     public Boolean imageExists(String image){
         return imagesString.contains(image);

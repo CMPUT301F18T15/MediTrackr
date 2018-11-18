@@ -138,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
                 else if (v == search) {
                     // If Search button icon is clicked
                     image.setImageDrawable(getResources().getDrawable(R.drawable.search_full));
+                    SearchFragment fragment = SearchFragment.newInstance();
+                    transaction.replace(R.id.content, fragment);
                 }
                 // clicked profile page
                 else{

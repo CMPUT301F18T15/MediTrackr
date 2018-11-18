@@ -3,8 +3,11 @@ package com.example.meditrackr.ui.patient;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -70,6 +73,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 
     @Override
@@ -88,7 +92,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
-            placeMarkers();
+
             init();
         }
     }
@@ -99,6 +103,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15f;
+    private static final int PLACE_PICKER_REQUEST = 1;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
             new LatLng(-40, -168), new LatLng(71, 136));
 
@@ -106,6 +111,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     //widgets
     private AutoCompleteTextView mSearchText;
     private ImageView mGps, mInfo, mPlacePicker;
+
 
     //vars
     private Boolean mLocationPermissionsGranted = false;
@@ -116,24 +122,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private PlaceInfo mPlace;
     private Marker mMarker;
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_map);
         mSearchText = (AutoCompleteTextView) findViewById(R.id.input_search);
         mGps = (ImageView) findViewById(R.id.ic_gps);
-        mGps = (ImageView) findViewById(R.id.ic_gps);
         mInfo = (ImageView) findViewById(R.id.place_info);
-
 
         getLocationPermission();
 
-
     }
 
-    private void init(){
+    private void init() {
         Log.d(TAG, "init: initializing");
 
         mGoogleApiClient = new GoogleApiClient
@@ -153,10 +154,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH
+                if (actionId == EditorInfo.IME_ACTION_SEARCH
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
-                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
+                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER) {
 
                     //execute our method for searching
                     geoLocate();
@@ -178,22 +179,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked place info");
-                try{
-                    if(mMarker.isInfoWindowShown()){
+                try {
+                    if (mMarker.isInfoWindowShown()) {
                         mMarker.hideInfoWindow();
-                    }else{
+                    } else {
                         Log.d(TAG, "onClick: place info: " + mPlace.toString());
                         mMarker.showInfoWindow();
                     }
-                }catch (NullPointerException e){
-                    Log.e(TAG, "onClick: NullPointerException: " + e.getMessage() );
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "onClick: NullPointerException: " + e.getMessage());
                 }
             }
         });
-
-        hideSoftKeyboard();
     }
-
 
 
     private void geoLocate(){
@@ -252,9 +250,47 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
+    private void moveCamera(LatLng latLng, float zoom, PlaceInfo placeInfo){
+        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+
+        mMap.clear();
+
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
+
+        if(placeInfo != null){
+            try{
+                String snippet = "Address: " + placeInfo.getAddress() + "\n" +
+                        "Phone Number: " + placeInfo.getPhoneNumber() + "\n" +
+                        "Website: " + placeInfo.getWebsiteUri() + "\n" +
+                        "Price Rating: " + placeInfo.getRating() + "\n";
+
+                MarkerOptions options = new MarkerOptions()
+                        .position(latLng)
+                        .title(placeInfo.getName())
+                        .snippet(snippet);
+                mMarker = mMap.addMarker(options);
+
+            }catch (NullPointerException e){
+                Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage() );
+            }
+        }else{
+            mMap.addMarker(new MarkerOptions().position(latLng));
+        }
+
+        hideSoftKeyboard();
+    }
+
     private void moveCamera(LatLng latLng, float zoom, String title){
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+
+        if(!title.equals("My Location")){
+            MarkerOptions options = new MarkerOptions()
+                    .position(latLng)
+                    .title(title);
+            mMap.addMarker(options);
+        }
 
         hideSoftKeyboard();
     }
@@ -351,6 +387,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Log.d(TAG, "onResult: name: " + place.getName());
                 mPlace.setAddress(place.getAddress().toString());
                 Log.d(TAG, "onResult: address: " + place.getAddress());
+//                mPlace.setAttributions(place.getAttributions().toString());
+//                Log.d(TAG, "onResult: attributions: " + place.getAttributions());
                 mPlace.setId(place.getId());
                 Log.d(TAG, "onResult: id:" + place.getId());
                 mPlace.setLatlng(place.getLatLng());
@@ -368,7 +406,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
 
             moveCamera(new LatLng(place.getViewport().getCenter().latitude,
-                    place.getViewport().getCenter().longitude), DEFAULT_ZOOM, mPlace.getName());
+                    place.getViewport().getCenter().longitude), DEFAULT_ZOOM, mPlace);
 
             places.release();
         }
@@ -405,17 +443,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 hideSoftKeyboard();
             }
         }
-    }
-
-
-
-    protected Marker createMarker(double latitude, double longitude, String title, String snippet){
-        return mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latitude, longitude))
-                .anchor(1.0f, 1.0f)
-                .title(title)
-                .snippet(snippet));
-                //.icon(BitmapDescriptorFactory.fromResource(iconResID)));
     }
 
 }

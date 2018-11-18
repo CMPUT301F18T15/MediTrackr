@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,25 +78,16 @@ public class LoginFragment extends Fragment {
         final Button login = (Button) rootView.findViewById(R.id.login_button);
         final TextView signup = (TextView) rootView.findViewById(R.id.not_member);
 
+
+
         // Onclick listener for login
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userName = username.getText().toString();
-                profile = LoginController.checkProfile(getContext(), userName);
-                if (profile.getisCareProvider()) {
-                    CareProvider careProvider = (CareProvider) profile;
-                    LoginController.login(careProvider);
-                } else {
-                    Patient patient = (Patient) profile;
-                    LoginController.login(patient);
-                }
-                Intent intent = new Intent(getActivity(), MainActivity.class); // Display MainActivity depending on the kind of user
-                startActivity(intent);
+                LoginController.checkProfile(getActivity(),getContext(), userName);
             }
         });
-
-
 
         // Onclick listener for signup
         signup.setOnClickListener(new View.OnClickListener() {

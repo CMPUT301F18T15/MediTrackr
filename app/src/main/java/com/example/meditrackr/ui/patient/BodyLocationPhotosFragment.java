@@ -34,29 +34,29 @@ public class BodyLocationPhotosFragment extends Fragment {
         return fragment;
     }
 
-    // Creates records fragments view
+    // Creates photos fragments view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_body_location_photos, container, false);
 
-        // Enable recycler view and add record button
+        // Enable recycler view and add photo button
         final RecyclerView photos = (RecyclerView) rootView.findViewById(R.id.bodylocationphoto_recyclerview);
         final FloatingActionButton addPhoto = (FloatingActionButton) rootView.findViewById(R.id.add_bodylocationphoto_floating);
 
         // Set bundle number as the problem index number
         final int index = getArguments().getInt("INDEX");
-        Log.d("RecordsFragments", "we on are on index: " + index);
-        BodyLocationPhotoList photoList = new BodyLocationPhotoList(); // Get records for a certain problem
+        Log.d("PhotosFragments", "we on are on index: " + index);
+        BodyLocationPhotoList photoList = new BodyLocationPhotoList(); // Get photos for a certain problem
 
         photos.setHasFixedSize(false);
-        adapter = new BodyLocationPhotosAdapter(getActivity(), photoList); // Creates RecordsAdapter for recyclerview
+        adapter = new BodyLocationPhotosAdapter(getActivity(), photoList); // Creates BodyLocationPhotosAdapter for recyclerview
         photos.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext()); // Creates LinearLayoutManager object for recyclerview
-        photos.setLayoutManager(manager); // Set records layout context
+        photos.setLayoutManager(manager); // Set photos layout context
         manager = new LinearLayoutManager(getActivity());
-        photos.setLayoutManager(manager); // Set records layout activity
+        photos.setLayoutManager(manager); // Set photos layout activity
 
         // Add spacing between views
         VerticalSpaceController decoration = new VerticalSpaceController(25); // Reinforces vertical layout of fragment
@@ -66,12 +66,12 @@ public class BodyLocationPhotosFragment extends Fragment {
         addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FragmentManager manager = getFragmentManager();
-//                FragmentTransaction transaction = manager.beginTransaction();
-//                transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
-//                AddRecordFragment fragment = AddRecordFragment.newInstance(index); // Switch to AddRecordFragment
-//                transaction.replace(R.id.content, fragment);
-//                transaction.commit();
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
+                AddBodyPhotoFragment fragment = AddBodyPhotoFragment.newInstance(index); // Switch to AddRecordFragment
+                transaction.replace(R.id.content, fragment);
+                transaction.commit();
             }
         });
         return rootView;

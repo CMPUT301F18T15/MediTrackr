@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:isScrollContainer="false"
@@ -57,7 +58,7 @@
         android:layout_marginRight="40dp"
         android:background="@color/editTextBackground"
         android:hint="Description"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textColor="@color/colorPrimaryBlack"
@@ -112,4 +113,5 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_problem_description_field" />
+
 </android.support.constraint.ConstraintLayout>

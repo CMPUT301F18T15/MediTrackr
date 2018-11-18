@@ -50,7 +50,7 @@ import java.io.OutputStreamWriter;
  * if something goes wrong it throws an error(java.io.IOException)
  *
  * to add a new profile the class will use addNewProfile this will take a profile with information
- * already in it and save it to the database. no errors are expected to come up so there are no exceptions
+ * already in it and save it to the database.
  *
  * @author Orest Cokan
  * @version 2.0 Nov 5, 2018
@@ -61,6 +61,18 @@ import java.io.OutputStreamWriter;
 // A SaveLoadController class holding all information pertaining to SaveLoadController
 public class SaveLoadController {
 
+    /**
+     * this function will search for the profile using a username
+     * and return either a careProvider profile or a patient profile.
+     * if no profile is found it will throw an exception
+     * @author Orest Cokan
+     * @version 2.0 Nov 5, 2018
+     * @param context the context of the controller
+     * @param username username of the profile to look for
+     * @return either a careprovider profile or a patient profile
+     * @throws java.io.IOException | java.lang.ClassNotFoundException
+     * @see Profile
+     */
     // Access memory when loading a profile
     public static Profile loadProfile(Context context, String username){
         try {
@@ -88,6 +100,14 @@ public class SaveLoadController {
         return null;
     }
 
+    /**
+     * this function it will take the username from the given profile and then overwrite the new
+     * profile data onto and the old profile date.
+     * if something goes wrong it throws an error
+     * @param context the context of the controller
+     * @param profile the profile with the newly edited info
+     * @throws java.io.IOException
+     */
     // Save Profile to disk when editing profile
     public static void saveProfile(Context context, Profile profile) {
         try {
@@ -105,6 +125,12 @@ public class SaveLoadController {
         }
     }
 
+    /**
+     * attempts to add a new profile to the database
+     * @param context context of the controller
+     * @param profile the profile data that the user created
+     * @return returns true if profile was created or false if it already exists
+     */
     // Save a profile for the first time
     public static boolean addNewProfile(Context context, Profile profile) {
         File file = new File(context.getApplicationContext().getFilesDir(), profile.getUsername() + ".sav");

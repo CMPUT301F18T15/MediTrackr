@@ -20,7 +20,6 @@
  */
 package com.example.meditrackr.adapters.careprovider;
 
-//imports
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -53,7 +52,7 @@ import com.example.meditrackr.ui.patient.RecordFragment;
  * purpose.
  *
  * @author  Orest Cokan
- * @version 1.0 Nov 15, 2018
+ * @version 1.0 Nov 10, 2018
  * @see ProblemAdapter
  *
  */
@@ -61,6 +60,14 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     private FragmentActivity activity;
     private static RecordList records;
 
+    /**
+     * creating variables activity and records for the other functions to use
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Nov 10, 2018
+     * @param activity this is the activity to pass the data
+     * @param records this is the records the problem has
+     */
     // constructor
     public RecordAdapter(FragmentActivity activity, RecordList records) {
         this.activity = activity;
@@ -89,7 +96,14 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         return records.getSize();
     }
 
-
+    /**
+     * This class uses viewHolder to put information about each record into its own view so we won't
+     * display information from one record as another. This function mainly serves an organizational
+     * purpose.
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Nov 10, 2018
+     */
     // place each record into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private RecordAdapter adapter;

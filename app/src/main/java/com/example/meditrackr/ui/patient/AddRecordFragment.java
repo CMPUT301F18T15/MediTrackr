@@ -51,10 +51,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.adapters.PlaceAutocompleteAdapter;
 import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.LocationController;
-import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.Geolocation;
@@ -64,7 +63,6 @@ import com.example.meditrackr.utils.DateUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -90,7 +88,7 @@ import static android.app.Activity.RESULT_OK;
 // Class creates Add Record Fragment for patients
 public class AddRecordFragment extends Fragment {
     private String date;
-    private Patient patient = ProfileManager.getPatient();
+    private Patient patient = LazyLoadingManager.getPatient();
 
     //indicator
     private static final String TAG = "AddRecordFragment";
@@ -266,12 +264,9 @@ public class AddRecordFragment extends Fragment {
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Log.d("ImageTest", "do we get here");
                 startActivityForResult(intent,
                         IMAGE_REQUEST_CODE);
-                Log.d("ImageTest", "do we get here2");
             }
         });
 
@@ -297,8 +292,6 @@ public class AddRecordFragment extends Fragment {
     }
 
 
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -317,7 +310,7 @@ public class AddRecordFragment extends Fragment {
             // populate image
             for(int i = 0; i < bitmaps.length; i++){
                 if(bitmaps[i] == null){
-                    Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 450, false);
+                    Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 500, false);
                     bitmaps[i] = newBitmap;
                     images[i].setImageBitmap(newBitmap);
                     break;

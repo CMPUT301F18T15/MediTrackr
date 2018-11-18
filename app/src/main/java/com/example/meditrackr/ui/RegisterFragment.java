@@ -36,9 +36,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.model.RegisterController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
@@ -101,24 +102,14 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(checkInputs(username, email, phoneNumber, doctorImage, patientImage)){ // If all required information has been given
-                    Bundle bundle = new Bundle();
-                    boolean done;
-                    boolean finish;
-                    if(doctorImage.isSelected()){ // If user registering is a care provider create care provider account
+                    if(doctorImage.isSelected()){
                         CareProvider careProvider = new CareProvider(
                                 username.getText().toString().trim(),
                                 email.getText().toString().trim(),
                                 phoneNumber.getText().toString().trim(),
                                 isCareProvider
                         );
-                        done = ElasticSearchController.addProfile(careProvider); // Add care provider info to memory
-                        finish = SaveLoadController.addNewProfile(getContext(),careProvider); // Add care provider info to ES
-                        Log.d("Success", "elastic returned: " + done + " saveload returned " + finish);
-                        if(finish || done){
-                            bundle.putSerializable("CareProvider", careProvider); // Inserts a serializable care provider into the mapping of this bundle
-                            Log.d("AddProfile", "Username: " + careProvider.getUsername() + " IsCareProvider: " + careProvider.getisCareProvider());
-                            ProfileManager.setProfile(careProvider); // Set profile as a care provider
-                        }
+                        RegisterController.RegisterAccount(getActivity(), getContext(), careProvider);
 
                     }
                     else { // If user registering is a patient create patient account
@@ -128,24 +119,10 @@ public class RegisterFragment extends Fragment {
                                 phoneNumber.getText().toString().trim(),
                                 isCareProvider
                         );
-                        finish = SaveLoadController.addNewProfile(getContext(), patient); // New patient profile has been saved
-                        done = ElasticSearchController.addProfile(patient); // Add patient info to database
-                        Log.d("Success", "elastic returned: " + done + " saveload returned " + finish);
-                        if(finish || done) {
-                            bundle.putSerializable("Patient", patient); // Inserts a serializable patient into the mapping of this bundle
-                            Log.d("Success", "Username: " + patient.getUsername() + " isCareProvider: " + patient.getisCareProvider());
-                            ProfileManager.setProfile(patient); // Set profile as a patient
-                        }
-                    }
-                    if(!finish || !done) // If an exception was caught when adding profile through ElasticSearchController
-                        Toast.makeText(getContext(), "Duplicated UserName", Toast.LENGTH_SHORT).show(); // Indicate duplicated username with toast message
-                    else{ // If no exceptions were caught
-                        Toast.makeText(getContext(), "Success to Sign Up", Toast.LENGTH_SHORT).show(); // Indicate registration was a success
-                        Intent intent = new Intent(getActivity(), MainActivity.class); // Go to main activity fragment
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                        RegisterController.RegisterAccount(getActivity(), getContext(), patient);
                     }
                 }
+
             }
         });
 

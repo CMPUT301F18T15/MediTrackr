@@ -33,7 +33,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.ImageSave;
 import com.example.meditrackr.models.record.RecordList;
@@ -153,7 +153,6 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                     }
                     else {
                         Intent intent = new Intent(adapter.activity, FullScreenViewActivity.class);
-                        intent.putExtra("IMAGES", images);
                         adapter.activity.startActivity(intent);
                     }
                 }
@@ -168,7 +167,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             RecordList records = problems.getProblem(position).getRecords();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            ProfileManager.setProblemIndex(position);
+            LazyLoadingManager.setProblemIndex(position);
             RecordsFragment fragment = RecordsFragment.newInstance(records,
                     problems.getProblem(position).getComments());
             transaction.addToBackStack(null);

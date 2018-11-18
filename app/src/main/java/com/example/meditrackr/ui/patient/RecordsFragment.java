@@ -34,7 +34,7 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.patient.RecordsAdapter;
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.RecordList;
@@ -61,7 +61,7 @@ import com.example.meditrackr.ui.MessageListFragment;
 public class RecordsFragment extends Fragment {
     // Set variables
     private RecordsAdapter adapter;
-    private Patient patient = ProfileManager.getPatient();
+    private Patient patient = LazyLoadingManager.getPatient();
 
     // Creates new instance fragment and saves it as a bundle
     public static RecordsFragment newInstance(int index){

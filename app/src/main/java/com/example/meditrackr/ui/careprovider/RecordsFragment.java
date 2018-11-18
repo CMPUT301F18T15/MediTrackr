@@ -25,24 +25,19 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.careprovider.RecordAdapter;
-import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 import com.example.meditrackr.models.CommentList;
 import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.MessageListFragment;
-import com.example.meditrackr.ui.patient.ProblemsFragment;
 
 /**
  * @author  Orest Cokan
@@ -51,7 +46,7 @@ import com.example.meditrackr.ui.patient.ProblemsFragment;
 
 public class RecordsFragment extends Fragment {
     private RecordAdapter adapter;
-    private Patient carePatient = ProfileManager.getCarePatient();
+    private Patient carePatient = LazyLoadingManager.getCarePatient();
 
     public static RecordsFragment newInstance(RecordList records, CommentList comments) {
         RecordsFragment fragment = new RecordsFragment();

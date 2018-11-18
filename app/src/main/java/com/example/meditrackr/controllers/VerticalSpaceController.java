@@ -38,6 +38,12 @@ public class VerticalSpaceController extends RecyclerView.ItemDecoration {
     //Initialize class variables/objects
     private final int verticalSpaceHeight;
 
+    /**
+     * sets the integer of space between items
+     * @author  Orest Cokan
+     * @version 1.0 Nov 10, 2018
+     * @param verticalSpaceHeight the integer to set the space to
+     */
     public VerticalSpaceController(int verticalSpaceHeight) {
         this.verticalSpaceHeight = verticalSpaceHeight;
     }

@@ -1,6 +1,7 @@
 package com.example.meditrackr.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.style.CharacterStyle;
 import android.text.style.StyleSpan;
@@ -105,6 +106,7 @@ public class PlaceAutocompleteAdapter
         TextView textView2 = (TextView) row.findViewById(android.R.id.text2);
         textView1.setText(item.getPrimaryText(STYLE_BOLD));
         textView2.setText(item.getSecondaryText(STYLE_BOLD));
+        textView2.setTextColor(Color.BLACK);
 
         return row;
     }

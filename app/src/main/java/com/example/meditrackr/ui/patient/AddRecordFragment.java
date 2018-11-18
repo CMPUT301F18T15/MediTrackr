@@ -45,6 +45,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -146,7 +147,7 @@ public class AddRecordFragment extends Fragment {
         // general ui attributes
         final EditText recordTitle = (EditText) rootView.findViewById(R.id.record_title_field);
         final EditText recordDescrption = (EditText) rootView.findViewById(R.id.record_description_field);
-        final Button addImage = (Button) rootView.findViewById(R.id.button_img);
+        final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
 
         // initialize address and set it

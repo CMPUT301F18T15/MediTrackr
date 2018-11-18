@@ -38,18 +38,19 @@ import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 
 /**
- * this class will display all of the patients information in a recycler view that a careprovider is
- * assigned to.
- * there is also a onclick listener which when clicked will take the care provider to a page with
- * more detailed information about that patient.(ProblemAdapter)
+ * This class displays information about all of the patients that a Care Provider is assigned
+ * to in a recycler view.
  *
- * it uses onCreateView to create the recycler view and uses onBindViewHolder to put the patients
+ * There is also an onclick listener, which when clicked will take the Care Provider to a page with
+ * more detailed information about a particular patient (this is the ProblemAdapter). It uses
+ * onCreateView to create the recycler view and uses onBindViewHolder to put the patient's
  * information into the recycler view.
  *
- * this class can use getItemCount to display the number of items (patients) in the recycler view
+ * This class can use getItemCount to display the number of items (patients) in the recycler view.
  *
- * this class uses viewHolder to put information to each patient into its own view so we wont display
- * information from one patient as another. this function servers mainly as an organization purpose
+ * This class uses viewHolder to put information about each patient into its own view so we won't
+ * display information from one patient as another. This function mainly serves an organizational
+ * purpose.
  *
  * @author  Orest Cokan
  * @version 1.0 Nov 10, 2018

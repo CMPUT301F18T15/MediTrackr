@@ -85,6 +85,11 @@ public class EditProblemFragment extends Fragment {
             dateSelector.setText(format.format(calendar.getTime()));
             Log.d("CurrentDate", format.format(calendar.getTime()));
 
+            // Set the problem title and date so they can be edited
+            Problem problem = patient.getProblem(index);
+            title.setText(problem.getTitle());
+            description.setText(problem.getDescription());
+
 
             // Date picker
             final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -143,7 +148,7 @@ public class EditProblemFragment extends Fragment {
                     }
                     else {
                         // Else if checkInputs return false indicate that problem cannot be added
-                        Toast.makeText(getContext(), "Unable to add Problem", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "The title and description cannot be empty", Toast.LENGTH_LONG).show();
                     }
                 }
             });

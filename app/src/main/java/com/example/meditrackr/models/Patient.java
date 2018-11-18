@@ -19,6 +19,9 @@
 package com.example.meditrackr.models;
 
 //import
+import com.example.meditrackr.models.record.BodyLocationPhoto;
+import com.example.meditrackr.models.record.BodyLocationPhotoList;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -43,6 +46,7 @@ public class Patient extends Profile implements Serializable{
     // Initialize class variables
     private CareProviderList careProviders = new CareProviderList();
     private ProblemList problems = new ProblemList();
+    private BodyLocationPhotoList bodyPhotos = new BodyLocationPhotoList();
 
     // Constructor
     public Patient(String username, String email, String phone, boolean isCareProvider) {
@@ -66,5 +70,8 @@ public class Patient extends Profile implements Serializable{
     public Problem getProblem(int index){
         return problems.getProblem(index);
     }
+
+    public BodyLocationPhotoList getBodyLocationPhotos() { return bodyPhotos; }
+    public void addBodyPhoto(BodyLocationPhoto image) { bodyPhotos.addImage(image); }
 }
 

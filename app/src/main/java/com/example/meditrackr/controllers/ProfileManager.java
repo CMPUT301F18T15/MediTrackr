@@ -23,6 +23,7 @@ import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
+import com.example.meditrackr.models.record.ImageSave;
 
 /**
  * ProfileManager.java provides profile getter and setter methods, care provider getter
@@ -38,6 +39,7 @@ public class ProfileManager {
     private static Profile profile;
     private static Patient carePatient;
     private static int problemIndex;
+    private static ImageSave images;
 
     // Profile getter
     public static Profile getProfile() {
@@ -94,5 +96,12 @@ public class ProfileManager {
     }
 
 
+    public static ImageSave getImages() {
+        return images;
+    }
+
+    public static void setImages(ImageSave images) {
+        ProfileManager.images = images;
+    }
 }
 

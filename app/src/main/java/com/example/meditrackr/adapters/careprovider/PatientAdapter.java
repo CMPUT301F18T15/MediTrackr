@@ -122,6 +122,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             FragmentTransaction transaction =  manager.beginTransaction();
             Patient patient = (Patient) ElasticSearchController.searchProfile(patients.getPatient(position));
             ProfileManager.setCarePatient(patient);
+            ProfileManager.setImages(patient.getProblem(position).getImageAll());
             ProblemsFragment fragment = ProblemsFragment.newInstance(position);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);

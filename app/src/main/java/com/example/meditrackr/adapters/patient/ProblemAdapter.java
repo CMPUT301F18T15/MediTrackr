@@ -196,7 +196,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             problemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ImageSave images = adapter.problems.getProblem(getAdapterPosition()).getImageAll();
+                    ImageSave images = ProfileManager.getImages();
                     if(images.getSize() == 0){
                         problemImage.setClickable(false);
                         problemImage.setVisibility(View.INVISIBLE);
@@ -222,6 +222,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
             ProfileManager.setProblemIndex(position);
+            ProfileManager.setImages(adapter.problems.getProblem(position).getImageAll());
             RecordsFragment fragment = RecordsFragment.newInstance(position);
             transaction.addToBackStack(null); //allows user to bring back previous fragment when back button is pressed
             transaction.replace(R.id.content, fragment);

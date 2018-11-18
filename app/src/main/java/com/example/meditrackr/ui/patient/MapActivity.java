@@ -394,6 +394,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
                             .title(patient.getProblem(i).getDescription())
                             .snippet(snippet);
+
                     mMarker = mMap.addMarker(options);
 
                 }catch (NullPointerException e){

@@ -70,6 +70,15 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
     private static ProblemList problems;
 
     // constructor
+
+    /**
+     * creating variables activity and problems for the other functions to use
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Nov 10, 2018
+     * @param activity this is the activity to pass the data
+     * @param problems this is the problems the patient has
+     */
     public ProblemAdapter(FragmentActivity activity, ProblemList problems) {
         this.activity = activity;
         this.problems = problems;
@@ -109,7 +118,11 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         return problems.getSize();
     }
 
-
+    /**
+     * This class puts information about each problem into its own view so we won't
+     * display information from one problem as another. This function mainly serves an organizational
+     * purpose.
+     */
     // place each problem into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ProblemAdapter adapter;

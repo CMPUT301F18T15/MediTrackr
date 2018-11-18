@@ -46,6 +46,7 @@ public class Patient extends Profile implements Serializable{
     // Initialize class variables
     private CareProviderList careProviders = new CareProviderList();
     private ProblemList problems = new ProblemList();
+    // a list of body location photos, each with a bitmap and unique id
     private BodyLocationPhotoList bodyPhotos = new BodyLocationPhotoList();
 
     // Constructor
@@ -71,6 +72,7 @@ public class Patient extends Profile implements Serializable{
         return problems.getProblem(index);
     }
 
+    // allows getting bodylocationphotos and adding new images
     public BodyLocationPhotoList getBodyLocationPhotos() { return bodyPhotos; }
     public void addBodyPhoto(BodyLocationPhoto image) { bodyPhotos.addImage(image); }
 }

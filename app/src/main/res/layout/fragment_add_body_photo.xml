@@ -172,17 +172,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/body_image" />
 
-            <!--<ImageView-->
-            <!--android:id="@+id/imageView2"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:layout_marginStart="40dp"-->
-            <!--android:layout_marginLeft="40dp"-->
-            <!--android:layout_marginEnd="40dp"-->
-            <!--android:layout_marginRight="40dp"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/add_record_button" />-->
 
         </android.support.constraint.ConstraintLayout>
 

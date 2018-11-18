@@ -39,6 +39,18 @@ public class BodyLocationPhotoList implements Serializable {
         return result;
     }
 
+    // checks to see if a name already exists in the list
+    // this is to ensure that body location photo names are unique
+    public boolean nameInList(String name) {
+        for (BodyLocationPhoto p : images) {
+            // if the name was found, return true
+            if (p.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public BodyLocationPhoto getImage(int index){
         return images.get(index);
     }

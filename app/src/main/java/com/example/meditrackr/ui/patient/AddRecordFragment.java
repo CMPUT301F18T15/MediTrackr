@@ -288,6 +288,24 @@ public class AddRecordFragment extends Fragment {
             }
         });
 
+        // set a click listener for each photo to allow viewing or adding a body location
+        for (int i = 0; i < 10; ++i) {
+            final int photo_index = i;
+            images[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
+                    BodyLocationPhotosFragment fragment = BodyLocationPhotosFragment.newInstance(photo_index);
+                    transaction.replace(R.id.content, fragment);
+                    transaction.commit();
+
+                }
+            });
+
+        }
+
         return rootView;
     }
 

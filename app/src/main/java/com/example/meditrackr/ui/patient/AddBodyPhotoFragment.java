@@ -36,8 +36,7 @@ public class AddBodyPhotoFragment extends Fragment {
     private Bitmap bitmap;
     private ImageView bodyPhoto;
 
-    //indicator
-    private static final String TAG = "AddBodyPhotoFragment";
+    // needed for getting new body location photo image
     private static final int IMAGE_REQUEST_CODE = 2;
 
     public static AddBodyPhotoFragment newInstance(int index) {
@@ -53,11 +52,7 @@ public class AddBodyPhotoFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_body_photo, container, false);
-        Log.d("Create View", "Starting add body location fragment");
         final int index = getArguments().getInt("INDEX");
-
-        Log.d("Arguments", "Got index from get arguments");
-
 
         // general ui attributes
         final EditText photoID = (EditText) rootView.findViewById(R.id.photo_name_field);
@@ -71,8 +66,10 @@ public class AddBodyPhotoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (checkInputs(photoID)) {
+                    // add the new body location photo to the patient
                     BodyLocationPhoto photo = new BodyLocationPhoto(photoID.getText().toString(), bitmap);
                     patient.addBodyPhoto(photo);
+                    // update both elasticsearch and local storage
                     ElasticSearchController.updateUser(patient); // Save problem to ES
                     SaveLoadController.saveProfile(getContext(), patient); // Save problem to memory
                     Log.d("BodyPhotoAdd", "Profile: " + patient.getUsername() + " Photos: " + patient.getBodyLocationPhotos());
@@ -85,7 +82,7 @@ public class AddBodyPhotoFragment extends Fragment {
                     transaction.replace(R.id.content, fragment);
                     transaction.commit();
                 } else {
-                    Toast.makeText(getContext(), "Please enter an id for the location photo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Please enter a unique name for the body photo", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -128,11 +125,17 @@ public class AddBodyPhotoFragment extends Fragment {
     }
 
 
-
     // check inputs
-    public boolean checkInputs (EditText name){
-        if (name != null && !name.getText().toString().isEmpty()) return true;
-        else return false;
+    public boolean checkInputs(EditText name){
+        // check if the edit text is filled in and is not the empty string
+        // also check that the ID is not already taken (IDs for body location photos must be unique
+        if (name != null && !name.getText().toString().isEmpty()
+                && !patient.getBodyLocationPhotos().nameInList(name.getText().toString())) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

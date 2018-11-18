@@ -18,8 +18,12 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
+import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Problem;
+import com.example.meditrackr.models.record.BodyLocationPhoto;
 
 import java.io.ByteArrayOutputStream;
 
@@ -63,7 +67,11 @@ public class AddBodyPhotoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (checkInputs(photoID)) {
-                    // TODO: Add body location photo to Patient class
+//                    BodyLocationPhoto photo = new BodyLocationPhoto(photoID.getText().toString(), bitmap);
+//                    patient.addBodyPhoto(photo);
+//                    ElasticSearchController.updateUser(patient); // Save problem to ES
+//                    SaveLoadController.saveProfile(getContext(), patient); // Save problem to memory
+//                    Log.d("BodyPhotoAdd", "Profile: " + patient.getUsername() + " Photos: " + patient.getBodyLocationPhotos());
 
 
                     // transition back to all the photos

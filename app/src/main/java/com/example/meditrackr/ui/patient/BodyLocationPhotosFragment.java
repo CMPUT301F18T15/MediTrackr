@@ -48,7 +48,9 @@ public class BodyLocationPhotosFragment extends Fragment {
         // Set bundle number as the problem index number
         final int index = getArguments().getInt("INDEX");
         Log.d("PhotosFragments", "we on are on index: " + index);
-        BodyLocationPhotoList photoList = new BodyLocationPhotoList(); // Get photos for a certain problem
+//        BodyLocationPhotoList photoList = patient.getBodyLocationPhotos(); // Get photos for a certain patient
+        BodyLocationPhotoList photoList = new BodyLocationPhotoList(); // dummy list for now
+
 
         photos.setHasFixedSize(false);
         adapter = new BodyLocationPhotosAdapter(getActivity(), photoList); // Creates BodyLocationPhotosAdapter for recyclerview

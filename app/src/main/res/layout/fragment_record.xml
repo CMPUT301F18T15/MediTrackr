@@ -309,116 +309,116 @@
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:weightSum="2">
 
                     <ImageView
                         android:id="@+id/record_image_1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:scaleType="centerCrop"
-                        android:layout_weight="1"/>
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
 
                     <ImageView
                         android:id="@+id/record_image_2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:scaleType="centerCrop"
-                        android:layout_weight="1"/>
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
 
                 </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:weightSum="2">
 
                     <ImageView
                         android:id="@+id/record_image_3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
 
                     <ImageView
                         android:id="@+id/record_image_4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_weight="1" />
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
 
                 </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:weightSum="2">
 
                     <ImageView
                         android:id="@+id/record_image_5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_weight="1"  />
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
 
                     <ImageView
                         android:id="@+id/record_image_6"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_weight="1"    />
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
 
                 </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:weightSum="2">
 
-                <ImageView
-                    android:id="@+id/record_image_7"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"    />
+                    <ImageView
+                        android:id="@+id/record_image_7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
 
-                <ImageView
-                    android:id="@+id/record_image_8"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"  />
+                    <ImageView
+                        android:id="@+id/record_image_8"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
 
 
-            </TableRow>
+                </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:weightSum="2">
 
 
@@ -426,21 +426,21 @@
                         android:id="@+id/record_image_9"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_weight="1"   />
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
 
                     <ImageView
                         android:id="@+id/record_image_10"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_weight="1"  />
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
 
 
                 </TableRow>

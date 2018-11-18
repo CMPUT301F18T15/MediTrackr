@@ -264,12 +264,9 @@ public class AddRecordFragment extends Fragment {
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Log.d("ImageTest", "do we get here");
                 startActivityForResult(intent,
                         IMAGE_REQUEST_CODE);
-                Log.d("ImageTest", "do we get here2");
             }
         });
 
@@ -295,8 +292,6 @@ public class AddRecordFragment extends Fragment {
     }
 
 
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -315,7 +310,7 @@ public class AddRecordFragment extends Fragment {
             // populate image
             for(int i = 0; i < bitmaps.length; i++){
                 if(bitmaps[i] == null){
-                    Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 450, false);
+                    Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 500, false);
                     bitmaps[i] = newBitmap;
                     images[i].setImageBitmap(newBitmap);
                     break;

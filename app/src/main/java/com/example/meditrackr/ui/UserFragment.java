@@ -58,8 +58,7 @@ public class UserFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_user, container, false);
 
-        // Get fragment bundle
-        final Bundle bundle = getArguments();
+
 
         // Set ui definitions
         ImageView user_image = rootView.findViewById(R.id.patient_image);

@@ -35,7 +35,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.meditrackr.R;
 
+import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
+import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.ImageSave;
@@ -68,12 +70,15 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
  */
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder>{
     private FragmentActivity activity;
+    private Context context;
     private Patient patient = LazyLoadingManager.getPatient();
     private ProblemList problems = patient.getProblems();
 
     // constructor
-    public ProblemAdapter(FragmentActivity activity) {
+    public ProblemAdapter(FragmentActivity activity, Context context) {
+
         this.activity = activity;
+        this.context = context;
     }
 
 
@@ -161,6 +166,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                                     adapter.notifyItemRangeChanged(position,
                                             adapter.problems.getSize());
                                     Log.d("DeleteProblem", "Position: " + position);
+                                    SaveLoadController.saveProfile(adapter.context, LazyLoadingManager.getPatient());
+                                    ElasticSearchController.updateUser(LazyLoadingManager.getPatient());
                                     dialog.cancel();
                                 }
                             });
@@ -221,9 +228,9 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public void onClick(View v) {
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
+            LazyLoadingManager.setImages(adapter.problems.getProblem(position).getImageAll());
             FragmentTransaction transaction =  manager.beginTransaction();
             LazyLoadingManager.setProblemIndex(position);
-            LazyLoadingManager.setImages(adapter.problems.getProblem(position).getImageAll());
             RecordsFragment fragment = RecordsFragment.newInstance(position);
             //allows user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);

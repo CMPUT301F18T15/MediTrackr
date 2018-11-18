@@ -20,7 +20,7 @@ import com.example.meditrackr.ui.MainActivity;
 
 public class LoginController {
 
-    public static void login(Activity activity, Profile profile) {
+    public static void login(Context context, Activity activity, Profile profile) {
         Profile checkProfile = ElasticSearchController.searchProfile(profile.getUsername());
         if (checkProfile == null) {
             ElasticSearchController.addProfile(profile);
@@ -29,6 +29,7 @@ public class LoginController {
         }
         LazyLoadingManager.setProfile(profile);
         LazyLoadingManager.setCurrentUsername(profile.getUsername());
+        SaveLoadController.saveProfile(context, profile);
         Intent intent = new Intent(activity, MainActivity.class); // Display MainActivity depending on the kind of user
         activity.startActivity(intent);
     }
@@ -38,10 +39,10 @@ public class LoginController {
         profile = SaveLoadController.loadProfile(context, username);
         if (profile != null && profile.getisCareProvider()) {
             CareProvider careProvider = (CareProvider) profile;
-            login(activity, careProvider);
+            login(context, activity, careProvider);
         } else if (profile != null && !profile.getisCareProvider()) {
             Patient patient = (Patient) profile;
-            login(activity, patient);
+            login(context, activity, patient);
         } else {
             checkProfileES(activity, context, username);
         }
@@ -53,10 +54,10 @@ public class LoginController {
 
         if (profile != null && profile.getisCareProvider()) {
             CareProvider careProvider = (CareProvider) profile;
-            login(activity, careProvider);
+            login(context, activity, careProvider);
         } else if (profile != null && !profile.getisCareProvider()) {
             Patient patient = (Patient) profile;
-            login(activity, patient);
+            login(context,activity, patient);
         } else {
             Toast.makeText(context, "Username does not exist!", Toast.LENGTH_SHORT).show();
         }

@@ -40,6 +40,7 @@ import java.util.ArrayList;
 // Class creates Record List
 public class RecordList implements Serializable {
 
+    
     // Create array of records
     private ArrayList<Record> records = new ArrayList<>();
 

@@ -47,6 +47,18 @@ public class Record implements Serializable {
     private boolean[] reminder;
 
     // Constructor
+
+    /**
+     * sets variables for the class to use
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param title         the title of the record
+     * @param description   short description of the record
+     * @param date          dates stamp when record was created
+     * @param bodylocation  the bodylocation class that holds all bodylocation info
+     * @see BodyLocation
+     */
     public Record(String title, String description, @NonNull String date, BodyLocation bodylocation) {
         this.title = title;
         this.description = description;
@@ -55,73 +67,200 @@ public class Record implements Serializable {
     }
 
     // Getters/Setters
+
+    /**
+     * gets images for the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return images images to add to the record
+     */
     public ImageList getImages() {
         return images;
     }
 
+    /**
+     * adds images to the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param images images to add to the record
+     * @see ImageList
+     */
     public void setImages(ImageList images) {
         this.images = images;
     }
 
+    /**
+     * gets the datestamp for the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return date      date to add to the record
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * adds date to the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param date      date to add to the record
+     */
     public void setDate(String date) {
         this.date = date;
     }
 
+    /**
+     * gets the description for the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return description      description to add to the record
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * adds description to the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param description      description to add to the record
+     */
     public void setDescription(String description) {
         this.description= description;
     }
 
+    /**
+     * gets the title for the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return title      title to add to the record
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * adds title to the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param title      title to add to the record
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * gets the bodylocation for the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return bodyLocation      body location to add to the record
+     */
     public BodyLocation getBodyLocation() {
         return bodyLocation;
     }
 
+    /**
+     * adds body location to the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param bodyLocation      body location to add to the record
+     */
     public void setBodyLocation(BodyLocation bodyLocation) {
         this.bodyLocation = bodyLocation;
     }
 
+    /**
+     * gets the geo location for the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return geoLocation      geo location to add to the record
+     */
     public Geolocation getGeoLocation() {
         return geoLocation;
     }
 
+    /**
+     * adds geo location to the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param geoLocation      geo location to add to the record
+     */
     public void setGeoLocation(Geolocation geoLocation) {
         this.geoLocation = geoLocation;
     }
 
+    /**
+     * gets the reminder list for the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return reminder      reminder list to add to the record
+     */
     public boolean[] getReminders() {
         return reminder;
     }
-
+    /**
+     * gets the reminder from the reminder list using an index
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param index     the index of the list each number corresponds to a day of the week
+     */
     public boolean getReminder(int index) { return reminder[index];}
 
+    /**
+     * sets the reminder
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param reminder     reminder to add to the record
+     */
     public void setReminder(boolean[] reminder) {
         this.reminder = reminder;
     }
 
-
+    /**
+     * gets the images for the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return imagesSaves     a list of images to add to the record
+     */
     public ImageSave getImagesSave() {
         return imagesSave;
     }
 
+    /**
+     * gets a specific image from the image list
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param index  the index where the image is
+     * @return      an image from the imagesSave list
+     */
     public String getImageSave(int index){
         return imagesSave.getImage(index);
     }
 
+    /**
+     * adds the image list to the record
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param imageSave      images to add to the record
+     */
     public void setImageSave(ImageSave imageSave) {
         this.imagesSave = imageSave;
     }

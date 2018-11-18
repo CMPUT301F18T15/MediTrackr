@@ -3,6 +3,7 @@ package com.example.meditrackr.ui.patient;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
@@ -30,14 +32,13 @@ import java.io.ByteArrayOutputStream;
 import static android.app.Activity.RESULT_OK;
 
 public class AddBodyPhotoFragment extends Fragment {
-    private String date;
     private Patient patient = LazyLoadingManager.getPatient();
     private Bitmap bitmap;
+    private ImageView bodyPhoto;
 
     //indicator
     private static final String TAG = "AddBodyPhotoFragment";
     private static final int IMAGE_REQUEST_CODE = 2;
-    private static final int PLACE_PICKER_REQUEST = 4;
 
     public static AddBodyPhotoFragment newInstance(int index) {
         AddBodyPhotoFragment fragment = new AddBodyPhotoFragment();
@@ -52,14 +53,17 @@ public class AddBodyPhotoFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_body_photo, container, false);
-
+        Log.d("Create View", "Starting add body location fragment");
         final int index = getArguments().getInt("INDEX");
+
+        Log.d("Arguments", "Got index from get arguments");
 
 
         // general ui attributes
         final EditText photoID = (EditText) rootView.findViewById(R.id.photo_name_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.photo_button_img);
         final Button addPhoto = (Button) rootView.findViewById(R.id.confirm_bodyphoto_button);
+        bodyPhoto = (ImageView) rootView.findViewById(R.id.body_image);
 
 
         //on click listener for adding a photo
@@ -67,11 +71,11 @@ public class AddBodyPhotoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (checkInputs(photoID)) {
-//                    BodyLocationPhoto photo = new BodyLocationPhoto(photoID.getText().toString(), bitmap);
-//                    patient.addBodyPhoto(photo);
-//                    ElasticSearchController.updateUser(patient); // Save problem to ES
-//                    SaveLoadController.saveProfile(getContext(), patient); // Save problem to memory
-//                    Log.d("BodyPhotoAdd", "Profile: " + patient.getUsername() + " Photos: " + patient.getBodyLocationPhotos());
+                    BodyLocationPhoto photo = new BodyLocationPhoto(photoID.getText().toString(), bitmap);
+                    patient.addBodyPhoto(photo);
+                    ElasticSearchController.updateUser(patient); // Save problem to ES
+                    SaveLoadController.saveProfile(getContext(), patient); // Save problem to memory
+                    Log.d("BodyPhotoAdd", "Profile: " + patient.getUsername() + " Photos: " + patient.getBodyLocationPhotos());
 
 
                     // transition back to all the photos
@@ -118,6 +122,7 @@ public class AddBodyPhotoFragment extends Fragment {
                     byteArray.length);
 
             bitmap = Bitmap.createScaledBitmap(bitmap, 350, 450, false);
+            bodyPhoto.setImageBitmap(bitmap);
             Log.d("ImageTest", bitmap.toString());
         }
     }

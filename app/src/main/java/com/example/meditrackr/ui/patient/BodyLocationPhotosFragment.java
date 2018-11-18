@@ -48,9 +48,8 @@ public class BodyLocationPhotosFragment extends Fragment {
         // Set bundle number as the problem index number
         final int index = getArguments().getInt("INDEX");
         Log.d("PhotosFragments", "we on are on index: " + index);
-//        BodyLocationPhotoList photoList = patient.getBodyLocationPhotos(); // Get photos for a certain patient
-        BodyLocationPhotoList photoList = new BodyLocationPhotoList(); // dummy list for now
-
+        BodyLocationPhotoList photoList = patient.getBodyLocationPhotos(); // Get photos for a certain patient
+//        BodyLocationPhotoList photoList = new BodyLocationPhotoList(); // dummy list for now
 
         photos.setHasFixedSize(false);
         adapter = new BodyLocationPhotosAdapter(getActivity(), photoList); // Creates BodyLocationPhotosAdapter for recyclerview
@@ -61,7 +60,7 @@ public class BodyLocationPhotosFragment extends Fragment {
         photos.setLayoutManager(manager); // Set photos layout activity
 
         // Add spacing between views
-        VerticalSpaceController decoration = new VerticalSpaceController(25); // Reinforces vertical layout of fragment
+        VerticalSpaceController decoration = new VerticalSpaceController(75); // Reinforces vertical layout of fragment
         photos.addItemDecoration(decoration);
 
         // Floating button on click listener to go to add a problem page
@@ -73,6 +72,7 @@ public class BodyLocationPhotosFragment extends Fragment {
                 transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
                 AddBodyPhotoFragment fragment = AddBodyPhotoFragment.newInstance(index); // Switch to AddRecordFragment
                 transaction.replace(R.id.content, fragment);
+                Log.d("Commit", index + "Moving to add body photo fragment");
                 transaction.commit();
             }
         });

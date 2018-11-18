@@ -41,7 +41,13 @@ public class BodyLocationPhotosAdapter extends RecyclerView.Adapter<BodyLocation
     @Override
     public void onBindViewHolder(BodyLocationPhotosAdapter.ViewHolder holder, int position) {
         holder.name.setText(photos.getImage(position).getName());
-        holder.photo.setImageBitmap(photos.getImage(position).getImage());
+        if(photos.getImage(position) == null){
+            holder.photo.setImageBitmap(null);
+            Log.d("ImageTest", "New profile this should be shown!");
+        }else {
+            holder.photo.setImageBitmap(photos.getImage(position).getImage());
+        }
+//        holder.photo.setImageBitmap(photos.getImage(position).getImage());
     }
 
 

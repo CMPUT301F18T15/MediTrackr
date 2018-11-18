@@ -1,8 +1,9 @@
 package com.example.meditrackr.models.record;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BodyLocationPhotoList {
+public class BodyLocationPhotoList implements Serializable {
 
     // Create array of bitmaps
     private transient ArrayList<BodyLocationPhoto> images = new ArrayList<>();

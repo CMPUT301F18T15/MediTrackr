@@ -2,7 +2,9 @@ package com.example.meditrackr.models.record;
 
 import android.graphics.Bitmap;
 
-public class BodyLocationPhoto {
+import java.io.Serializable;
+
+public class BodyLocationPhoto implements Serializable{
 
     private String name;
     private Bitmap image;

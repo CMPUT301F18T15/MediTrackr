@@ -45,24 +45,71 @@ public class Patient extends Profile implements Serializable{
     private ProblemList problems = new ProblemList();
 
     // Constructor
+    /**
+     * creates the patients account information
+     * @param username          patients username
+     * @param email             patients email
+     * @param phone             patients phone number
+     * @param isCareProvider    holds False because this is not a care provider
+     */
     public Patient(String username, String email, String phone, boolean isCareProvider) {
         super(username, email, phone, false);
     }
 
     // Getters/Setters
+    /** gets careproviders associated with patient
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return   list of careproviders
+     * @see CareProviderList
+     */
+
     public CareProviderList getCareProviders() {
         return careProviders;
     }
 
+    /** removes care provider from patients care Provider List
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param careProvider    care provider we will remove
+     * @see CareProvider
+     */
     public void deleteCareProvider(CareProvider careProvider) {
         careProviders.deleteCareProvider(careProvider);
     }
+
+    /** sees if care provider exists in patients care provider list
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param careProvider      the care provider we want to check
+     * @return                  list of careproviders
+     * @see CareProvider
+     */
     public Boolean careProviderExists(CareProvider careProvider){
         return careProviders.careProviderExists(careProvider.getUsername());
     }
 
+    /** gets all problems that user has stored in a list
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return         list of problems
+     * @see ProblemList
+     */
     public ProblemList getProblems() {return this.problems;}
 
+
+    /** gets a specific problem from from the problem list
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param index      the index at which the problem is located in the list
+     * @return           the problem
+     * @see Problem
+     */
     public Problem getProblem(int index){
         return problems.getProblem(index);
     }

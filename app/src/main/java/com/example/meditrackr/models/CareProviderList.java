@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * the class can use careProviderExists to check to see if a CP exists in the list.
  * the class can also use getSize to find out the number of CP's in the list.
  *
- * tostring??????
+ *
  * @author  Orest Cokan
  * @version 1.0 Nov 7, 2018.
  */

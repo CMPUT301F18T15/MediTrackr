@@ -25,32 +25,75 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by Skryt on Nov 14, 2018
+ * this class is able to update the image list
+ * @author Orest Cokan
+ * @version  Nov 14, 2018
  */
 
 // An Image class that holds all information pertaining to Image
 public class ImageSave implements Serializable {
     private ArrayList<String> imagesString = new ArrayList<>();
 
+    /**
+     * adds an image to the list
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 14, 2018
+     * @param newImage the image we want to add
+     */
     // Calls to ImageList methods
     public void addImage(String newImage) {
         imagesString.add(newImage);
     }
 
-    public void removeImage(int image){ imagesString.remove(image); }
+    /**
+     * removes an image to the list
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 14, 2018
+     * @param image the image we want to remove
+     */
+    public void removeImage(int image){
+        imagesString.remove(image);
+    }
 
+    /**
+     * checks to see if an image is in the list
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 14, 2018
+     * @param image the image we want to check
+     */
     public Boolean imageExists(String image){
         return imagesString.contains(image);
     }
-
+    /**
+     * gets the index of an image from the list
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param image the image we want to get the index of
+     */
     public int getIndex(String image){
         return imagesString.indexOf(image);
     }
-
+    /**
+     * gets the number of photos in the list
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     */
     public int getSize(){
         return imagesString.size();
     }
 
+    /**
+     * gets the image from a given index
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param index the index of image we want to find
+     */
     public String getImage(int index){
         return imagesString.get(index);
     }

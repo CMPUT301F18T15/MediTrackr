@@ -79,7 +79,7 @@ public class ProblemsFragment extends Fragment {
 
         // Initializes problem adapter, linear layout manager, and vertical space controller for recycler view
         problems.setHasFixedSize(false);
-        adapter = new ProblemAdapter(getActivity());
+        adapter = new ProblemAdapter(getActivity(), getContext());
         problems.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         problems.setLayoutManager(manager);

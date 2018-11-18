@@ -39,6 +39,14 @@ public class BodyLocation implements Serializable {
     private int y;
     private String bodyLocationPhotoName;
 
+    /**
+     * creates variables for the other functions to use
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param x  the x coordinate of a body location
+     * @param y  the y coordinate of a body location
+     * @param bodyLocationPhotoName   the name of the body location photo
+     */
     // Constructor
     public BodyLocation(int x, int y, String bodyLocationPhotoName){
         this.x = x;
@@ -46,8 +54,6 @@ public class BodyLocation implements Serializable {
         this.bodyLocationPhotoName = bodyLocationPhotoName;
     }
 
-
-    // Getters/Setters
     public int getXCoordinate() {
         return x;
     }

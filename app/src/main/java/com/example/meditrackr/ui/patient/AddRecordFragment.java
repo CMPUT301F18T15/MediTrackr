@@ -20,6 +20,7 @@ package com.example.meditrackr.ui.patient;
 
 //imports
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 
 import android.content.pm.PackageManager;
@@ -29,8 +30,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -86,7 +90,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 // Class creates Add Record Fragment for patients
-public class AddRecordFragment extends Fragment {
+public class AddRecordFragment extends Fragment implements LocationListener {
     private String date;
     private Patient patient = LazyLoadingManager.getPatient();
 
@@ -101,6 +105,10 @@ public class AddRecordFragment extends Fragment {
     //vars
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private Boolean mLocationPermissionsGranted = false;
+    public LocationManager locationManager;
+    public Criteria criteria;
+    public String bestProvider;
+
 
     //image
     private Bitmap bitmap;
@@ -109,7 +117,6 @@ public class AddRecordFragment extends Fragment {
 
 
     // location
-    private LocationController locationController;
     private double latitude;
     private double longitude;
     private String addressName;
@@ -140,7 +147,6 @@ public class AddRecordFragment extends Fragment {
         final int index = getArguments().getInt("INDEX");
 
         // nifty location controller that helps with getting locations
-        locationController = new LocationController(getContext());
 
         // general ui attributes
         final EditText recordTitle = (EditText) rootView.findViewById(R.id.record_title_field);
@@ -416,6 +422,9 @@ public class AddRecordFragment extends Fragment {
 
         try{
             if(mLocationPermissionsGranted){
+                locationManager = (LocationManager)  getActivity().getSystemService(Context.LOCATION_SERVICE);
+                criteria = new Criteria();
+                bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
                 final Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
@@ -423,10 +432,16 @@ public class AddRecordFragment extends Fragment {
                         if(task.isSuccessful()){
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
-                            longitude = currentLocation.getLongitude();
-                            latitude = currentLocation.getLatitude();
-                            Log.d("Locations", longitude+""+"  "+latitude);
-                            geoLocate();
+                            if(currentLocation != null) {
+                                longitude = currentLocation.getLongitude();
+                                latitude = currentLocation.getLatitude();
+                                Log.d("Locations", longitude + "" + "  " + latitude);
+                                geoLocate();
+                            }
+                            else{
+                                Log.d("LOCATIONS", "we go to else statement");
+                                locationManager.requestLocationUpdates(bestProvider, 1000, 0, AddRecordFragment.this);
+                            }
                         }else{
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(getContext(), "unable to get current location", Toast.LENGTH_SHORT).show();
@@ -439,6 +454,33 @@ public class AddRecordFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        //Hey, a non null location! Sweet!
+
+        //remove location callback:
+        locationManager.removeUpdates(this);
+
+        //open the map:
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
 
 
     private void geoLocate(){

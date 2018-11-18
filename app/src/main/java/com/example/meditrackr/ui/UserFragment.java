@@ -31,9 +31,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Profile;
-import com.example.meditrackr.ui.patient.AddRecordFragment;
 
 /**
  * this fragment shows the users username, phone number, email and an image of the patient if they added one
@@ -46,7 +45,7 @@ import com.example.meditrackr.ui.patient.AddRecordFragment;
 // Class displays user profile
 public class UserFragment extends Fragment {
     // Set variables
-    Profile profile = ProfileManager.getProfile();
+    Profile profile = LazyLoadingManager.getProfile();
     public static UserFragment newInstance(){
         UserFragment fragment = new UserFragment();
         return fragment;
@@ -59,8 +58,7 @@ public class UserFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_user, container, false);
 
-        // Get fragment bundle
-        final Bundle bundle = getArguments();
+
 
         // Set ui definitions
         ImageView user_image = rootView.findViewById(R.id.patient_image);

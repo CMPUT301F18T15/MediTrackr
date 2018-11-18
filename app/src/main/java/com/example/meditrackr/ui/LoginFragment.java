@@ -34,9 +34,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.model.LoginController;
 import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.Profile;
@@ -58,6 +59,9 @@ import com.example.meditrackr.models.Profile;
 
 // Class creates Login Fragment
 public class LoginFragment extends Fragment {
+    private Profile profile;
+
+
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         return fragment;
@@ -74,33 +78,14 @@ public class LoginFragment extends Fragment {
         final Button login = (Button) rootView.findViewById(R.id.login_button);
         final TextView signup = (TextView) rootView.findViewById(R.id.not_member);
 
+
+
         // Onclick listener for login
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userName = username.getText().toString();
-                //Profile profile = ElasticSearchController.searchProfile(userName);
-                Profile profile = SaveLoadController.loadProfile(getContext(), userName);
-                if(profile != null) { // If profile with userName exists
-                        if (profile.getisCareProvider()) { // If user is a care provider
-                            CareProvider careProvider = (CareProvider) profile;
-                            ElasticSearchController.updateUser(careProvider);
-                            ProfileManager.setProfile(careProvider); // Set profile as care provider
-                            ProfileManager.setCurrentUsername(careProvider.getUsername());
-
-                        } else { // Else if user is a patient
-                            Patient patient = (Patient) profile;
-                            ElasticSearchController.updateUser(patient);
-                            ProfileManager.setProfile(patient); // Set profile as patient
-                            ProfileManager.setCurrentUsername(patient.getUsername());
-                        }
-                        Intent intent = new Intent(getActivity(), MainActivity.class); // Display MainActivity depending on the kind of user
-                        startActivity(intent);
-                    }
-                    // Else if profile with given userName does not exist
-                    else {// With a toast message indicate that given username does not exist
-                        Toast.makeText(getContext(), "Username does not exist!", Toast.LENGTH_SHORT).show();
-                    }
+                LoginController.checkProfile(getActivity(),getContext(), userName);
             }
         });
 

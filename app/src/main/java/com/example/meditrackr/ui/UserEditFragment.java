@@ -32,7 +32,7 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Profile;
 
 /**
@@ -47,7 +47,7 @@ import com.example.meditrackr.models.Profile;
 // Class creates user profile edit fragment
 public class UserEditFragment extends Fragment {
     // Set variables
-    Profile profile = ProfileManager.getProfile();
+    Profile profile = LazyLoadingManager.getProfile();
     public static UserEditFragment newInstance(){
         UserEditFragment fragment = new UserEditFragment();
         return fragment;

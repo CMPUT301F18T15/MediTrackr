@@ -30,19 +30,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.patient.ProblemAdapter;
-import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
-import com.example.meditrackr.models.CommentList;
-import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.ui.MessageListFragment;
-
-import net.steamcrafted.materialiconlib.MaterialIconView;
-
-import org.w3c.dom.Text;
 
 /**
  * shows user a list of their created problems in a recycler view.

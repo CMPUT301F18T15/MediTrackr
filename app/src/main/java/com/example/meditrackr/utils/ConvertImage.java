@@ -22,6 +22,7 @@ public class ConvertImage {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        Log.d("BITMAP", encoded.getBytes().length + "");
         return encoded;
     }
 

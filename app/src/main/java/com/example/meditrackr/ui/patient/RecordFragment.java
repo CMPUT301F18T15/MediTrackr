@@ -19,11 +19,9 @@
 package com.example.meditrackr.ui.patient;
 
 //imports
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -37,12 +35,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ProfileManager;
-import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.models.record.ImageSave;
 import com.example.meditrackr.models.record.Record;
-import com.example.meditrackr.models.record.RecordList;
-import com.example.meditrackr.ui.FullScreenViewActivity;
 import com.example.meditrackr.utils.ConvertImage;
 
 /**

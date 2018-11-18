@@ -23,21 +23,24 @@ import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
+import com.example.meditrackr.models.record.ImageSave;
 
 /**
- * ProfileManager.java provides profile getter and setter methods, care provider getter
- * and patient getter method, and provides patient list for care providers
+ * LazyLoadingManager.java primary purpose is to assist in lazy loading information, rather than holding
+ * every single piece of information about a user at any given moment, each attribute below is
+ * initialized whenever it is necessary. F
  *
  * @author Orest Cokan
  * @version 2.0 Nov 7, 2018
  */
 
-// Creates ProfileManager that handles some Profile methods
-public class ProfileManager {
+// Creates LazyLoadingManager that handles some Profile methods
+public class LazyLoadingManager {
     private static String currentUsername;
     private static Profile profile;
     private static Patient carePatient;
     private static int problemIndex;
+    private static ImageSave images;
 
     // Profile getter
     public static Profile getProfile() {
@@ -46,7 +49,7 @@ public class ProfileManager {
 
     // Profile setter
     public static void setProfile(Profile profile) {
-        ProfileManager.profile = profile;
+        LazyLoadingManager.profile = profile;
     }
 
     // Patient getter
@@ -74,7 +77,7 @@ public class ProfileManager {
     }
 
     public static void setCarePatient(Patient carePatient) {
-        ProfileManager.carePatient = carePatient;
+        LazyLoadingManager.carePatient = carePatient;
     }
 
     public static int getProblemIndex() {
@@ -82,7 +85,7 @@ public class ProfileManager {
     }
 
     public static void setProblemIndex(int problemIndex) {
-        ProfileManager.problemIndex = problemIndex;
+        LazyLoadingManager.problemIndex = problemIndex;
     }
 
     public static String getCurrentUsername() {
@@ -90,9 +93,16 @@ public class ProfileManager {
     }
 
     public static void setCurrentUsername(String currentUsername) {
-        ProfileManager.currentUsername = currentUsername;
+        LazyLoadingManager.currentUsername = currentUsername;
     }
 
 
+    public static ImageSave getImages() {
+        return images;
+    }
+
+    public static void setImages(ImageSave images) {
+        LazyLoadingManager.images = images;
+    }
 }
 

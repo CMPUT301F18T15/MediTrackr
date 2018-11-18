@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.patient.BodyLocationPhotosAdapter;
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.BodyLocationPhotoList;
@@ -22,7 +22,7 @@ import com.example.meditrackr.models.record.BodyLocationPhotoList;
 public class BodyLocationPhotosFragment extends Fragment {
     // Set variables
     private BodyLocationPhotosAdapter adapter;
-    private Patient patient = ProfileManager.getPatient();
+    private Patient patient = LazyLoadingManager.getPatient();
 
     // Creates new instance fragment and saves it as a bundle
     public static BodyLocationPhotosFragment newInstance(int index){

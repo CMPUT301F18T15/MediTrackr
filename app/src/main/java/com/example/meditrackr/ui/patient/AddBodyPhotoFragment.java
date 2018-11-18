@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
@@ -31,7 +31,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class AddBodyPhotoFragment extends Fragment {
     private String date;
-    private Patient patient = ProfileManager.getPatient();
+    private Patient patient = LazyLoadingManager.getPatient();
     private Bitmap bitmap;
 
     //indicator

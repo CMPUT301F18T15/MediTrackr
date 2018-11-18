@@ -63,6 +63,14 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     private CareProvider careProvider = LazyLoadingManager.getCareProvider();
     private PatientList patients = careProvider.getPatients();
 
+
+    /**
+     * creating variables activity  functions to use
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Nov 10, 2018
+     * @param activity this is the activity to pass the data
+     */
     // constructor
     public PatientAdapter(FragmentActivity activity) {
         this.activity = activity;
@@ -95,7 +103,15 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         return patients.getSize();
     }
 
-
+    /**
+     *
+     * This class puts information about each patient into its own view so we won't
+     * display information from one patient as another. This function mainly serves an organizational
+     * purpose.
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Nov 10, 2018
+     */
     // place each patient into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private PatientAdapter adapter;

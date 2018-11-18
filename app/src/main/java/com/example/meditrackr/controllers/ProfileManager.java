@@ -26,8 +26,9 @@ import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.ImageSave;
 
 /**
- * ProfileManager.java provides profile getter and setter methods, care provider getter
- * and patient getter method, and provides patient list for care providers
+ * ProfileManager.java primary purpose is to assist in lazy loading information, rather than holding
+ * every single piece of information about a user at any given moment, each attribute below is
+ * initialized whenever it is necessary. F
  *
  * @author Orest Cokan
  * @version 2.0 Nov 7, 2018

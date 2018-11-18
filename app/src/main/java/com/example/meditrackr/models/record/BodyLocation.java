@@ -39,6 +39,14 @@ public class BodyLocation implements Serializable {
     private String bodyFace;
     private String bodyLocation;
 
+    /**
+     * creates variables for the other functions to use
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param bodyCoordinate the number that is mapped to a body location
+     * @param bodyFace       a tring name of a face location
+     * @param bodyLocation   the name of the body part
+     */
     // Constructor
     public BodyLocation(double[] bodyCoordinate, String bodyFace, String bodyLocation){
         this.bodyCoordinate = bodyCoordinate;
@@ -48,26 +56,61 @@ public class BodyLocation implements Serializable {
 
 
     // Getters/Setters
+
+    /**
+     * gets the body coordinate
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return bodyCorrdinate, the integer of the body location
+     */
     public double[] getBodyCoordinate() {
         return bodyCoordinate;
     }
 
+    /**
+     * takes the body coordinate and sets it as a variable
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param bodyCoordinate the integer of the body location
+     */
     public void setBodyCoordinate(double[] bodyCoordinate) {
         this.bodyCoordinate = bodyCoordinate;
     }
-
+    /**
+     * gets the name of the face coordinate
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return bodyFace, the name of a face location
+     */
     public String getBodyFace() {
         return bodyFace;
     }
 
+    /**
+     * takes the body face and sets it as a variable
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param bodyFace the name of a face location
+     */
     public void setBodyFace(String bodyFace) {
         this.bodyFace = bodyFace;
     }
-
+    /**
+     * gets the name of the body coordinate
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return bodyLocation, the name of a body location
+     */
     public String getBodyLocation() {
         return bodyLocation;
     }
 
+    /**
+     * takes the body location and sets it as a variable
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param bodyLocation the name of a body location
+     */
     public void setBodyLocation(String bodyLocation) {
         this.bodyLocation = bodyLocation;
     }

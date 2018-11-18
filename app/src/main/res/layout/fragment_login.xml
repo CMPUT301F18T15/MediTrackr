@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Not a member? Sign Up."
+        android:text="@string/not_a_member"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textColor="@color/subtitle"
         android:textSize="16sp"

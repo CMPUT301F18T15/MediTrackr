@@ -59,4 +59,7 @@
     <string name="profile_email">Email:</string>
     <string name="edit">EDIT</string>
     <string name="google_maps_api">AIzaSyBNKS2wCXodzBcGNKrob7XRwS783ueiCF0</string>
+    <string name="already_have_an_account">Already have an account? <font color='#0099CC'>Login</font></string>
+    <string name="not_a_member">Not a member? <font color='#0099CC'>Sign Up.</font></string>
+
 </resources>

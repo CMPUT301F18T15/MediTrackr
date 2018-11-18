@@ -16,10 +16,27 @@
  *limitations under the License.
  *
  */
+/*
+ *Apache 2.0 License Notice
+ *
+ *Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.adapters.patient;
 
-//imports
-import android.app.Activity;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -72,6 +89,13 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
     private Patient patient = LazyLoadingManager.getPatient();
     private ProblemList problems = patient.getProblems();
 
+    /**
+     * creating variables activity for the other functions to use
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Nov 10, 2018
+     * @param activity this is the activity to pass the data
+     */
     // constructor
     public ProblemAdapter(FragmentActivity activity) {
         this.activity = activity;
@@ -125,7 +149,14 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public MaterialIconView deleteProblem;
         public MaterialIconView editProblem;
 
-
+        /**
+         * This function puts information about each problem into its own view so we won't
+         * display information from one problem as another. This function mainly serves an organizational
+         * purpose but can also be used to delete or edit a problem using the corresponding buttons.
+         *
+         * @param itemView
+         * @param adapter
+         */
         //gets the corresponding data for each view
         public ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);

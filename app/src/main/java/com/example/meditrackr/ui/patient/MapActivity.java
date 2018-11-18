@@ -24,8 +24,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
+import com.example.meditrackr.adapters.CustomInfoWindowAdapter;
 import com.example.meditrackr.adapters.PlaceAutocompleteAdapter;
+import com.example.meditrackr.controllers.LazyLoadingManager;
+import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PlaceInfo;
+import com.example.meditrackr.models.Profile;
+import com.example.meditrackr.models.record.Geolocation;
+import com.example.meditrackr.models.record.Record;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -40,8 +46,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -80,7 +88,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
-
+            placeMarkers();
             init();
         }
     }
@@ -97,7 +105,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     //widgets
     private AutoCompleteTextView mSearchText;
-    private ImageView mGps;
+    private ImageView mGps, mInfo, mPlacePicker;
 
     //vars
     private Boolean mLocationPermissionsGranted = false;
@@ -106,6 +114,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
     private GoogleApiClient mGoogleApiClient;
     private PlaceInfo mPlace;
+    private Marker mMarker;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,8 +124,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.fragment_map);
         mSearchText = (AutoCompleteTextView) findViewById(R.id.input_search);
         mGps = (ImageView) findViewById(R.id.ic_gps);
+        mGps = (ImageView) findViewById(R.id.ic_gps);
+        mInfo = (ImageView) findViewById(R.id.place_info);
+
 
         getLocationPermission();
+
 
     }
 
@@ -159,8 +174,27 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
+        mInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked place info");
+                try{
+                    if(mMarker.isInfoWindowShown()){
+                        mMarker.hideInfoWindow();
+                    }else{
+                        Log.d(TAG, "onClick: place info: " + mPlace.toString());
+                        mMarker.showInfoWindow();
+                    }
+                }catch (NullPointerException e){
+                    Log.e(TAG, "onClick: NullPointerException: " + e.getMessage() );
+                }
+            }
+        });
+
         hideSoftKeyboard();
     }
+
+
 
     private void geoLocate(){
         Log.d(TAG, "geoLocate: geolocating");
@@ -221,13 +255,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void moveCamera(LatLng latLng, float zoom, String title){
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-
-        if(!title.equals("My Location")){
-            MarkerOptions options = new MarkerOptions()
-                    .position(latLng)
-                    .title(title);
-            mMap.addMarker(options);
-        }
 
         hideSoftKeyboard();
     }
@@ -346,4 +373,48 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             places.release();
         }
     };
+
+    public void placeMarkers(){
+        Patient patient = LazyLoadingManager.getPatient();
+        for(int i = 0; i <  patient.getProblems().getSize(); i++) {
+            Log.d("MAPMARKER", "problemlist size" + patient.getProblems().getSize());
+            for(int j = 0; j < patient.getProblem(i).getRecords().getSize(); j++){
+                Geolocation geolocation = patient.getProblem(i).getRecords().getRecord(j).getGeoLocation();
+                Record record = patient.getProblem(i).getRecords().getRecord(j);
+
+                mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
+
+                try{
+                    String snippet =
+                            "Record #: " + j + "\n" +
+                            "Date: " + record.getDate() + "\n" +
+                            "Description: " + record.getDescription() + "\n";
+
+                    MarkerOptions options = new MarkerOptions()
+                            .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
+                            .title(patient.getProblem(i).getDescription())
+                            .snippet(snippet);
+                    mMarker = mMap.addMarker(options);
+
+                }catch (NullPointerException e){
+                    Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage() );
+                }
+
+
+                hideSoftKeyboard();
+            }
+        }
+    }
+
+
+
+    protected Marker createMarker(double latitude, double longitude, String title, String snippet){
+        return mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(latitude, longitude))
+                .anchor(1.0f, 1.0f)
+                .title(title)
+                .snippet(snippet));
+                //.icon(BitmapDescriptorFactory.fromResource(iconResID)));
+    }
+
 }

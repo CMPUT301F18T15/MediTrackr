@@ -26,7 +26,7 @@ public class RegisterController {
 
         done = ElasticSearchController.addProfile(profile);
         finish = SaveLoadController.addNewProfile(context, profile);
-
+        Log.d("RegisterFragmentMeme", "done is " + done + " finish is " + finish);
         if (finish || done) {
             if (profile.getisCareProvider()) {
                 bundle.putSerializable("CareProvider", profile);
@@ -35,16 +35,17 @@ public class RegisterController {
                 bundle.putSerializable("Patient", profile);
                 LazyLoadingManager.setProfile(profile);
             }
-            if (!finish || !done) {
-                Toast.makeText(context, "Duplicated UserName", Toast.LENGTH_SHORT).show();
-            } else { // If no exceptions were caught
-                Toast.makeText(context, "Success to Sign Up", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(actvity, MainActivity.class);
-                intent.putExtras(bundle);
-                actvity.startActivity(intent);
-            }
+        }
+        if (!finish || !done) {
+            Log.d("RegisterFragmentMeme", "done is " + done + " finish is " + finish);
+            Toast.makeText(context, "Duplicate UserName", Toast.LENGTH_SHORT).show();
+        } else { // If no exceptions were caught
+            Toast.makeText(context, "Success to Sign Up", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(actvity, MainActivity.class);
+            intent.putExtras(bundle);
+            actvity.startActivity(intent);
+        }
 
 
         }
     }
-}

@@ -39,33 +39,80 @@ public class Geolocation implements Serializable {
     private String address;
 
     // Constructor
+
+    /**
+     * creates variables for the other functions to use
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Nov 8, 2018.
+     * @param latitude  latitude coordinate
+     * @param longitude longitude coordinate
+     * @param address   address name
+     */
     public Geolocation(double latitude, double longitude, String address){
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
     }
 
+
     // Getter/Setters
+    /**
+     * gets the longituede coordinate
+     * @author  Orest Cokan
+     * @version 1.0 Nov 8, 2018.
+     * @return longitude, the double integer of the longitude location
+     */
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * takes the longitude coordinate and sets it as a variable
+     * @author  Orest Cokan
+     * @version 1.0 Nov 8, 2018.
+     * @param longitude the integer of the longitude location
+     */
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
+    /**
+     * gets the latitude coordinate
+     * @author  Orest Cokan
+     * @version 1.0 Nov 8, 2018.
+     * @return latitude, the double integer of the latitude location
+     */
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * takes the latitude coordinate and sets it as a variable
+     * @author  Orest Cokan
+     * @version 1.0 Nov 8, 2018.
+     * @param latitude the integer of the latitude location
+     */
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
+    /**
+     * gets the address name
+     * @author  Orest Cokan
+     * @version 1.0 Nov 8, 2018.
+     * @return adress, the name of the address location
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * takes the adress location and sets it as a variable
+     * @author  Orest Cokan
+     * @version 1.0 Nov 8, 2018.
+     * @param address the name of the address location
+     */
     public void setAddress(String address) {
         this.address = address;
     }

@@ -35,9 +35,9 @@ import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
 
@@ -114,7 +114,7 @@ public class PatientSearchFragment extends Fragment {
         addPatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                careProvider = ProfileManager.getCareProvider();
+                careProvider = LazyLoadingManager.getCareProvider();
                 Patient patient = (Patient) profile;
                 // If patient does not exist under the care provider
                 if(!careProvider.patientExists(patient.getUsername()) &&

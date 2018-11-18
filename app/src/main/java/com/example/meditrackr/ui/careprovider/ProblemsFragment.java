@@ -30,9 +30,9 @@ import android.view.ViewGroup;
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.careprovider.ProblemAdapter;
 import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.controllers.ProfileManager;
 
 /**
  * shows all of the problems from patient in a list (recycler view)
@@ -70,7 +70,7 @@ public class ProblemsFragment extends Fragment  {
 
         // Set bundle number as problem index
         int index = getArguments().getInt("ProblemIndex");
-        String username = ProfileManager.getCareProvider().getPatient(index); // Gets the patient username
+        String username = LazyLoadingManager.getCareProvider().getPatient(index); // Gets the patient username
         Patient patient = (Patient) ElasticSearchController.searchProfile(username); // Searches for the patient by username
 
         // Adapt items into recycler view

@@ -35,7 +35,7 @@ import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
@@ -52,7 +52,7 @@ import java.util.TimeZone;
 // Class creates Edit Problem Fragment for patients
 public class EditProblemFragment extends Fragment {
     // Initialize variables
-    private Patient patient = ProfileManager.getPatient();
+    private Patient patient = LazyLoadingManager.getPatient();
 
     // Creates new instance fragment and saves it as a bundle
     public static EditProblemFragment newInstance(int index){

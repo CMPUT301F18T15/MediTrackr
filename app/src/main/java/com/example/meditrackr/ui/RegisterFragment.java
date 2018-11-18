@@ -36,7 +36,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.CareProvider;
@@ -117,7 +117,7 @@ public class RegisterFragment extends Fragment {
                         if(finish || done){
                             bundle.putSerializable("CareProvider", careProvider); // Inserts a serializable care provider into the mapping of this bundle
                             Log.d("AddProfile", "Username: " + careProvider.getUsername() + " IsCareProvider: " + careProvider.getisCareProvider());
-                            ProfileManager.setProfile(careProvider); // Set profile as a care provider
+                            LazyLoadingManager.setProfile(careProvider); // Set profile as a care provider
                         }
 
                     }
@@ -134,7 +134,7 @@ public class RegisterFragment extends Fragment {
                         if(finish || done) {
                             bundle.putSerializable("Patient", patient); // Inserts a serializable patient into the mapping of this bundle
                             Log.d("Success", "Username: " + patient.getUsername() + " isCareProvider: " + patient.getisCareProvider());
-                            ProfileManager.setProfile(patient); // Set profile as a patient
+                            LazyLoadingManager.setProfile(patient); // Set profile as a patient
                         }
                     }
                     if(!finish || !done) // If an exception was caught when adding profile through ElasticSearchController

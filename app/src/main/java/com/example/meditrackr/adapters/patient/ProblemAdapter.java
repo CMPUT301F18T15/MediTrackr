@@ -19,12 +19,10 @@
 package com.example.meditrackr.adapters.patient;
 
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -37,7 +35,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.meditrackr.R;
 
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.ImageSave;
@@ -70,7 +68,7 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
  */
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder>{
     private FragmentActivity activity;
-    private Patient patient = ProfileManager.getPatient();
+    private Patient patient = LazyLoadingManager.getPatient();
     private ProblemList problems = patient.getProblems();
 
     // constructor
@@ -202,7 +200,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             problemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ImageSave images = ProfileManager.getImages();
+                    ImageSave images = LazyLoadingManager.getImages();
                     if(images.getSize() == 0){
                         problemImage.setClickable(false);
                         problemImage.setVisibility(View.INVISIBLE);
@@ -224,8 +222,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            ProfileManager.setProblemIndex(position);
-            ProfileManager.setImages(adapter.problems.getProblem(position).getImageAll());
+            LazyLoadingManager.setProblemIndex(position);
+            LazyLoadingManager.setImages(adapter.problems.getProblem(position).getImageAll());
             RecordsFragment fragment = RecordsFragment.newInstance(position);
             //allows user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);

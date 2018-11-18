@@ -31,9 +31,9 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.controllers.ProfileManager;
 import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 
@@ -60,7 +60,7 @@ import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder>{
     private FragmentActivity activity;
-    private CareProvider careProvider = ProfileManager.getCareProvider();
+    private CareProvider careProvider = LazyLoadingManager.getCareProvider();
     private PatientList patients = careProvider.getPatients();
 
     // constructor
@@ -117,13 +117,13 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            CareProvider careProvider = ProfileManager.getCareProvider();
+            CareProvider careProvider = LazyLoadingManager.getCareProvider();
             PatientList patients = careProvider.getPatients();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
             Patient patient = (Patient) ElasticSearchController.searchProfile(patients.getPatient(position));
-            ProfileManager.setCarePatient(patient);
-            ProfileManager.setImages(patient.getProblem(position).getImageAll());
+            LazyLoadingManager.setCarePatient(patient);
+            LazyLoadingManager.setImages(patient.getProblem(position).getImageAll());
             ProblemsFragment fragment = ProblemsFragment.newInstance(position);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);

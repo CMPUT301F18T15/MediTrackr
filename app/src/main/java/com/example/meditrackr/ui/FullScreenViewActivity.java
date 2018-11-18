@@ -7,8 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.FullScreenImageAdapter;
-import com.example.meditrackr.controllers.ProfileManager;
-import com.example.meditrackr.models.record.ImageList;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.record.ImageSave;
 
 /**
@@ -30,7 +29,7 @@ public class FullScreenViewActivity extends AppCompatActivity{
 
         Intent i = getIntent();
         int position = i.getIntExtra("position", 0);
-        images = ProfileManager.getImages();
+        images = LazyLoadingManager.getImages();
 
 
         adapter = new FullScreenImageAdapter(FullScreenViewActivity.this,

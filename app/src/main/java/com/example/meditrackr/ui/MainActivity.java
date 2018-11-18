@@ -30,7 +30,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.ui.careprovider.PatientsFragment;
 import com.example.meditrackr.ui.patient.MapActivity;
 import com.example.meditrackr.ui.patient.ProblemsFragment;
@@ -59,7 +59,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MapActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
-    final boolean isCareProvider = ProfileManager.getIsCareProvider();
+    final boolean isCareProvider = LazyLoadingManager.getIsCareProvider();
 
     // ui attributes
     private ImageView problems;

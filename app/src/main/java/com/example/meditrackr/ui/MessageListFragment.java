@@ -10,12 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.MessageListAdapter;
 import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Comment;
 import com.example.meditrackr.models.CommentList;
@@ -47,20 +46,20 @@ public class MessageListFragment extends Fragment {
         final EditText chatBox = (EditText) rootView.findViewById(R.id.edittext_chatbox);
         final RecyclerView messageList = (RecyclerView) rootView.findViewById(R.id.reyclerview_message_list);
 
-        profile = ProfileManager.getProfile();
+        profile = LazyLoadingManager.getProfile();
         Log.d("WOOT", profile.getUsername());
 
 
         // need to fix this in the future, this is way too fucking hacky
         if(profile.getisCareProvider()){
             Log.d("WOOT", "do i get here?");
-            patient = ProfileManager.getCarePatient();
-            comments = patient.getProblem(ProfileManager.getProblemIndex()).getComments();
+            patient = LazyLoadingManager.getCarePatient();
+            comments = patient.getProblem(LazyLoadingManager.getProblemIndex()).getComments();
         }else{
-            patient = ProfileManager.getPatient();
+            patient = LazyLoadingManager.getPatient();
             Log.d("WOOT", "i should be logged in as patient: " + patient.getUsername());
-            Log.d("WOOT", ProfileManager.getProblemIndex()+"");
-            comments = patient.getProblem(ProfileManager.getProblemIndex()).getComments();
+            Log.d("WOOT", LazyLoadingManager.getProblemIndex()+"");
+            comments = patient.getProblem(LazyLoadingManager.getProblemIndex()).getComments();
         }
 
 

@@ -1,7 +1,6 @@
 package com.example.meditrackr.adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,10 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ProfileManager;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Comment;
 import com.example.meditrackr.models.CommentList;
-import com.example.meditrackr.utils.DateUtils;
 
 
 /**
@@ -44,9 +42,9 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         Comment comment = (Comment) comments.getComment(position);
 
-        if (comment.getUsername().equals(ProfileManager.getProfile().getUsername())){
+        if (comment.getUsername().equals(LazyLoadingManager.getProfile().getUsername())){
             // If the current user is the sender of the message
-            Log.d("Messaging", "We are the current user logged in : " + ProfileManager.getProfile().getUsername());
+            Log.d("Messaging", "We are the current user logged in : " + LazyLoadingManager.getProfile().getUsername());
             return VIEW_TYPE_MESSAGE_SENT;
         } else {
             // If some other user sent the message

@@ -26,7 +26,7 @@ import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.ImageSave;
 
 /**
- * ProfileManager.java primary purpose is to assist in lazy loading information, rather than holding
+ * LazyLoadingManager.java primary purpose is to assist in lazy loading information, rather than holding
  * every single piece of information about a user at any given moment, each attribute below is
  * initialized whenever it is necessary. F
  *
@@ -34,8 +34,8 @@ import com.example.meditrackr.models.record.ImageSave;
  * @version 2.0 Nov 7, 2018
  */
 
-// Creates ProfileManager that handles some Profile methods
-public class ProfileManager {
+// Creates LazyLoadingManager that handles some Profile methods
+public class LazyLoadingManager {
     private static String currentUsername;
     private static Profile profile;
     private static Patient carePatient;
@@ -49,7 +49,7 @@ public class ProfileManager {
 
     // Profile setter
     public static void setProfile(Profile profile) {
-        ProfileManager.profile = profile;
+        LazyLoadingManager.profile = profile;
     }
 
     // Patient getter
@@ -77,7 +77,7 @@ public class ProfileManager {
     }
 
     public static void setCarePatient(Patient carePatient) {
-        ProfileManager.carePatient = carePatient;
+        LazyLoadingManager.carePatient = carePatient;
     }
 
     public static int getProblemIndex() {
@@ -85,7 +85,7 @@ public class ProfileManager {
     }
 
     public static void setProblemIndex(int problemIndex) {
-        ProfileManager.problemIndex = problemIndex;
+        LazyLoadingManager.problemIndex = problemIndex;
     }
 
     public static String getCurrentUsername() {
@@ -93,7 +93,7 @@ public class ProfileManager {
     }
 
     public static void setCurrentUsername(String currentUsername) {
-        ProfileManager.currentUsername = currentUsername;
+        LazyLoadingManager.currentUsername = currentUsername;
     }
 
 
@@ -102,7 +102,7 @@ public class ProfileManager {
     }
 
     public static void setImages(ImageSave images) {
-        ProfileManager.images = images;
+        LazyLoadingManager.images = images;
     }
 }
 

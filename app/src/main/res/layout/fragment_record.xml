@@ -20,15 +20,15 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/background2">
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:orientation="vertical"
-                android:background="@color/background2">
+                android:background="@color/background2"
+                android:orientation="vertical">
 
 
                 <TextView
@@ -55,8 +55,8 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
-                    android:drawableLeft="@drawable/ic_accessibility"
                     android:background="@color/editTextBackground"
+                    android:drawableLeft="@drawable/ic_accessibility"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
@@ -75,8 +75,8 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
-                    android:drawableLeft="@drawable/time"
                     android:background="@color/editTextBackground"
+                    android:drawableLeft="@drawable/time"
                     android:focusable="false"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
@@ -120,7 +120,6 @@
                     android:textColor="@color/colorPrimaryBlack"
                     android:textColorHint="@color/editTextHint"
                     android:textSize="16sp" />
-
 
 
             </LinearLayout>
@@ -446,7 +445,6 @@
                 </TableRow>
 
             </TableLayout>
-
 
 
         </android.support.constraint.ConstraintLayout>

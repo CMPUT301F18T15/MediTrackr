@@ -49,26 +49,25 @@ import com.example.meditrackr.utils.ConvertImage;
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
 /**
- * this class will display all of the problems associated with the user (patient) in a recycler view
+ * This class displays all of the problems of a user (patient) in a recycler view.
  *
- * there is also a onclick listener which when clicked will take the patient to a page with
- * more detailed information about that problem so they can edit the problem.
+ * There is also an onclick listener which when a problem is clicked will take the patient to
+ * a page with more detailed information about that problem and allow them to edit that problem.
  *
- * it uses onCreateViewHolder to create the recycler view and uses onBindViewHolder to put the problems
+ * It uses onCreateView to create the recycler view and uses onBindViewHolder to put each problem
  * into the recycler view.
  *
- * this class can use getItemCount to display the number of items (problems) in the recycler view
+ * This class can use getItemCount to display the number of items (problems) in the recycler view.
  *
- * this class uses viewHolder to put information to each problem into its own view so we wont display
- * information from one problem as another. this function servers for an organization purpose.
- * but it can also delete or edit a problem with corresponding buttons
+ * This class uses viewHolder to put information about each problem into its own view so we won't
+ * display information from one problem as another. This function mainly serves an organizational
+ * purpose but can also be used to delete or edit a problem using the corresponding buttons.
  *
  * @author  Orest Cokan
  * @version 1.0 Nov 10, 2018
  * @see
  *
  */
-
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder>{
     private FragmentActivity activity;
     private Patient patient = ProfileManager.getPatient();
@@ -83,8 +82,9 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
     // display the view
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        //creates view objects based on layouts in XML
         LayoutInflater inflater = (LayoutInflater) activity
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE); //creates view objects based on layouts in XML
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View problemView = inflater.inflate(R.layout.problem_entry, parent, false);
         return new ViewHolder(problemView, this);
     }
@@ -96,7 +96,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         holder.title.setText(problems.getProblem(position).getTitle());
         holder.date.setText(problems.getProblem(position).getDate());
         holder.description.setText(problems.getProblem(position).getDescription());
-        holder.totalRecords.setText("Number of records: "+problems.getProblem(position).getRecords().getSize());
+        holder.totalRecords.setText("Number of records: " +
+                problems.getProblem(position).getRecords().getSize());
         if(problems.getProblem(position).getImageAll().getSize() == 0){
             holder.problemImage.setImageBitmap(null);
             Log.d("ImageTest", "New profile this should be shown!");
@@ -145,17 +146,22 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             deleteProblem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // print a confirmation message
+                    // to ensure that the user will not accidentally delete the problem
                     final int position = getAdapterPosition();
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(adapter.activity, R.style.AlertDialogStyle);
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(adapter.activity,
+                            R.style.AlertDialogStyle);
                     builder1.setMessage("Are you sure you want to delete the problem?");
                     builder1.setCancelable(true);
                     builder1.setPositiveButton(
                             "Yes",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
+                                    // only delete the problem if the answer was yes
                                     adapter.problems.removeProblem(position);
                                     adapter.notifyItemRemoved(position);
-                                    adapter.notifyItemRangeChanged(position,adapter.problems.getSize());
+                                    adapter.notifyItemRangeChanged(position,
+                                            adapter.problems.getSize());
                                     Log.d("DeleteProblem", "Position: " + position);
                                     dialog.cancel();
                                 }
@@ -223,7 +229,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             FragmentTransaction transaction =  manager.beginTransaction();
             ProfileManager.setProblemIndex(position);
             RecordsFragment fragment = RecordsFragment.newInstance(position);
-            transaction.addToBackStack(null); //allows user to bring back previous fragment when back button is pressed
+            //allows user to bring back previous fragment when back button is pressed
+            transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();
         }

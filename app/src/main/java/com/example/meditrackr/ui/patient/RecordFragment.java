@@ -25,6 +25,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -142,7 +144,12 @@ public class RecordFragment extends Fragment {
             images[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
+                    BodyLocationPhotosFragment fragment = BodyLocationPhotosFragment.newInstance(index);
+                    transaction.replace(R.id.content, fragment);
+                    transaction.commit();
 
                 }
             });

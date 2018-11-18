@@ -48,7 +48,7 @@ public class BodyLocationPhotosFragment extends Fragment {
         // Set bundle number as the problem index number
         final int index = getArguments().getInt("INDEX");
         Log.d("RecordsFragments", "we on are on index: " + index);
-        BodyLocationPhotoList photoList = patient.getBodyLocationPhotos(); // Get records for a certain problem
+        BodyLocationPhotoList photoList = new BodyLocationPhotoList(); // Get records for a certain problem
 
         photos.setHasFixedSize(false);
         adapter = new BodyLocationPhotosAdapter(getActivity(), photoList); // Creates RecordsAdapter for recyclerview
@@ -66,12 +66,12 @@ public class BodyLocationPhotosFragment extends Fragment {
         addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
-                AddRecordFragment fragment = AddRecordFragment.newInstance(index); // Switch to AddRecordFragment
-                transaction.replace(R.id.content, fragment);
-                transaction.commit();
+//                FragmentManager manager = getFragmentManager();
+//                FragmentTransaction transaction = manager.beginTransaction();
+//                transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
+//                AddRecordFragment fragment = AddRecordFragment.newInstance(index); // Switch to AddRecordFragment
+//                transaction.replace(R.id.content, fragment);
+//                transaction.commit();
             }
         });
         return rootView;

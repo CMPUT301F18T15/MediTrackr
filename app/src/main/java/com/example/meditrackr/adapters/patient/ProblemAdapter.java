@@ -204,15 +204,12 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                     }
                     else {
                         Intent intent = new Intent(adapter.activity, FullScreenViewActivity.class);
-                        intent.putExtra("IMAGES", images);
                         adapter.activity.startActivity(intent);
                     }
                 }
             });
 
         }
-
-
 
 
         // set onClick listener for each problem to be viewed

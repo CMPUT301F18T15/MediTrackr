@@ -221,9 +221,9 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public void onClick(View v) {
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
+            LazyLoadingManager.setImages(adapter.problems.getProblem(position).getImageAll());
             FragmentTransaction transaction =  manager.beginTransaction();
             LazyLoadingManager.setProblemIndex(position);
-            LazyLoadingManager.setImages(adapter.problems.getProblem(position).getImageAll());
             RecordsFragment fragment = RecordsFragment.newInstance(position);
             //allows user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);

@@ -21,10 +21,9 @@ public class RecordTest {
     // Initialize a new base record
     @Before
     public void initRecord() {
-        final double[] tempCoords = new double[2];
-        tempCoords[0] = 0.0;
-        tempCoords[1] = 0.0;
-        final BodyLocation bodyLoc = new BodyLocation(tempCoords, "", "");
+        final int x = 0;
+        final int y = 0;
+        final BodyLocation bodyLoc = new BodyLocation(x, y, "");
         final Geolocation geoLoc = new Geolocation(0.0, 0.0, "");
         record = new Record
                 ("", "", "", bodyLoc);
@@ -51,14 +50,12 @@ public class RecordTest {
     // Test if a body location can be set in the record
     @Test
     public void setBodyLocationTest() {
-        final double[] tempCoords = new double[2];
-        tempCoords[0] = 1.0;
-        tempCoords[1] = 2.0;
+        final int x = 0;
+        final int y = 0;
 
         final String face = "Body Face";
-        final String loc = "Body Location";
         final BodyLocation newBodyLoc = new BodyLocation
-                (tempCoords, face, loc);
+                (x, y, face);
 
         record.setBodyLocation(newBodyLoc);
 

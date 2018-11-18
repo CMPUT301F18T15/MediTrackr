@@ -18,40 +18,31 @@ public class BodyLocationTest {
     @Before
     public void initJUnitTest() {
         final double[] location = {0, 0};
-        final String bodyFace = "initial back";
-        final String bodyLocation = "initial arm";
-        body = new BodyLocation(location, bodyFace, bodyLocation);
-    }
-
-    // test to see if bodyFace changed
-    @Test
-    public void addBodyFace() {
-        final String directionBody = "front";
-        body.setBodyFace(directionBody);
-        assertEquals("Testing if it set correctly", body.getBodyFace(), directionBody);
+        final String bodyLocation = "front";
+        body = new BodyLocation(0, 0, bodyLocation);
     }
 
     // test to see if bodyLocation changed
     @Test
     public void addBodyLocation(){
-        final String bodyPlace = "arm";
-        body.setBodyLocation(bodyPlace);
-        assertEquals("testing to see if it set correctly", body.getBodyLocation(), bodyPlace);
+        final String bodyPlace = "back";
+        body.setBodyLocationPhotoName(bodyPlace);
+        assertEquals("testing to see if it set correctly", body.getBodyLocationPhotoName(), bodyPlace);
     }
 
     // test to see if location got set
     @Test
-    public void addCoordinate(){
-        final double[] location = {1.0, 2.0};
-        body.setBodyCoordinate(location);
-        assertEquals("check to see if it set correctly", body.getBodyCoordinate(), location);
+    public void addXCoordinate(){
+        final int x = 5;
+        body.setXCoordinate(x);
+        assertEquals("check to see if it set correctly", body.getXCoordinate(), x);
     }
 
-    // test to see if its a null cordinate
     @Test
-    public void nullCoorinate(){
-        body.setBodyCoordinate(null);
-        assertEquals("testing to see if its empty", body.getBodyCoordinate(), null);
+    public void addYCoordinate(){
+        final int y = 10;
+        body.setYCoordinate(y);
+        assertEquals("check to see if it set correctly", body.getYCoordinate(), y);
     }
     
 }

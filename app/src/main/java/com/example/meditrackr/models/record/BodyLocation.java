@@ -35,41 +35,37 @@ import java.io.Serializable;
 public class BodyLocation implements Serializable {
 
     // Initialize class variables
-    private double[] bodyCoordinate;
-    private String bodyFace;
-    private String bodyLocation;
+    private int x;
+    private int y;
+    private String bodyLocationPhotoName;
 
     // Constructor
-    public BodyLocation(double[] bodyCoordinate, String bodyFace, String bodyLocation){
-        this.bodyCoordinate = bodyCoordinate;
-        this.bodyFace = bodyFace;
-        this.bodyLocation = bodyLocation;
+    public BodyLocation(int x, int y, String bodyLocationPhotoName){
+        this.x = x;
+        this.y = y;
+        this.bodyLocationPhotoName = bodyLocationPhotoName;
     }
 
 
     // Getters/Setters
-    public double[] getBodyCoordinate() {
-        return bodyCoordinate;
+    public int getXCoordinate() {
+        return x;
     }
 
-    public void setBodyCoordinate(double[] bodyCoordinate) {
-        this.bodyCoordinate = bodyCoordinate;
+    public void setXCoordinate(int x) { this.x = x; }
+
+    public int getYCoordinate() {
+        return y;
     }
 
-    public String getBodyFace() {
-        return bodyFace;
+    public void setYCoordinate(int y) { this.y = y; }
+
+    public String getBodyLocationPhotoName() {
+        return bodyLocationPhotoName;
     }
 
-    public void setBodyFace(String bodyFace) {
-        this.bodyFace = bodyFace;
-    }
-
-    public String getBodyLocation() {
-        return bodyLocation;
-    }
-
-    public void setBodyLocation(String bodyLocation) {
-        this.bodyLocation = bodyLocation;
+    public void setBodyLocationPhotoName(String bodyLocationPhotoName) {
+        this.bodyLocationPhotoName = bodyLocationPhotoName;
     }
 
 }

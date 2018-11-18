@@ -23,6 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/MainThemeNoActionBar"
         tools:ignore="GoogleAppIndexingWarning"
+        android:windowSoftInputMode="adjustNothing"
+
         >
 
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
@@ -39,8 +41,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.meditrackr.ui.MainActivity" android:theme="@style/MainThemeNoActionBar">
-
+        <activity android:name="com.example.meditrackr.ui.MainActivity" android:theme="@style/MainThemeNoActionBar"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity android:name="com.example.meditrackr.ui.patient.MapActivity" android:theme="@style/MainThemeNoActionBar">
@@ -50,6 +52,14 @@
         <activity android:name="com.example.meditrackr.ui.FullScreenViewActivity" android:theme="@style/MainThemeNoActionBar">
 
         </activity>
+
+
+        <provider
+            android:name="br.com.mauker.materialsearchview.db.HistoryProvider"
+            android:authorities="br.com.mauker.materialsearchview.searchhistorydatabase"
+            android:exported="false"
+            android:protectionLevel="signature"
+            android:syncable="true"/>
 
 
     </application>

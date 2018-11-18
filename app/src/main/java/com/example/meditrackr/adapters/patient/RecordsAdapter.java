@@ -58,6 +58,14 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
     private FragmentActivity activity;
     private RecordList records;
 
+    /**
+     * creating variables activity and records for the other functions to use
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Nov 10, 2018
+     * @param activity this is the activity to pass the data
+     * @param records this is the records the problem has
+     */
     // constructor
     public RecordsAdapter(FragmentActivity activity, RecordList records) {
         this.activity = activity;
@@ -89,7 +97,13 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
         return records.getSize();
     }
 
-
+    /**
+     * this class uses viewHolder to put information to each problem into its own view so we wont display
+     * information from one problem as another. this function servers mainly as an organization purpose
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Nov 10, 2018
+     */
     // place each record into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private RecordsAdapter adapter;

@@ -155,6 +155,8 @@ public class ProblemTest extends ActivityTestRule<MainActivity> {
         } catch (NoMatchingViewException e) {
             fail("Problem was not edited");
         }
+        onView(withId(R.id.problem_delete_button)).perform(click());
+        onView(withText("YES")).perform(click());
 
     }
 

@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 
 import com.example.meditrackr.R;
@@ -40,6 +41,10 @@ public class SearchFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_search, container, false);
         mSearch = (SearchView) rootView.findViewById(R.id.mSearch);
+        ImageView icon = mSearch.findViewById(android.support.v7.appcompat.R.id.search_button);
+        icon.setColorFilter(Color.BLACK);
+        mSearch.setIconified(false);
+        mSearch.setClickable(true);
         RecyclerView rv = rootView.findViewById(R.id.myRecycler);
 
         //SET ITS PROPETRIES

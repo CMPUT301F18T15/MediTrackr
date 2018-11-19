@@ -20,13 +20,25 @@ import com.example.meditrackr.ui.MainActivity;
 
 public class LoginController {
 
-    public static void login(Context context, Activity activity, Profile profile) {
-        Profile checkProfile = ElasticSearchController.searchProfile(profile.getUsername());
-        if (checkProfile == null) {
-            ElasticSearchController.addProfile(profile);
-        } else {
-            ElasticSearchController.updateUser(profile);
-        }
+    public static void login(Context context, Activity activity, final Profile profile) {
+
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("HELLOWORLD", "AMIHERE");
+                Profile checkProfile = ElasticSearchController.searchProfile(profile.getUsername());
+                if (checkProfile == null) {
+                    ElasticSearchController.addProfile(profile);
+                } else {
+                    ElasticSearchController.updateUser(profile);
+                }
+
+            }
+        });
+
+        thread.start();
+
         LazyLoadingManager.setProfile(profile);
         LazyLoadingManager.setCurrentUsername(profile.getUsername());
         SaveLoadController.saveProfile(context, profile);

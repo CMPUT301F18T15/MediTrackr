@@ -207,13 +207,15 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             problemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ImageSave images = LazyLoadingManager.getImages();
+                    int position = getAdapterPosition();
+                    ImageSave images = adapter.problems.getProblem(position).getImageAll();
                     if(images.getSize() == 0){
                         problemImage.setClickable(false);
                         problemImage.setVisibility(View.INVISIBLE);
                         Log.d("ImageTest", "we should be getting here");
                     }
                     else {
+                        LazyLoadingManager.setImages(images);
                         Intent intent = new Intent(adapter.activity, FullScreenViewActivity.class);
                         adapter.activity.startActivity(intent);
                     }

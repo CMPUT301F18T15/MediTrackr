@@ -11,6 +11,7 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.ui.MainActivity;
 
@@ -26,7 +27,6 @@ public class LoginController {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("HELLOWORLD", "AMIHERE");
                 Profile checkProfile = ElasticSearchController.searchProfile(profile.getUsername());
                 if (checkProfile == null) {
                     ElasticSearchController.addProfile(profile);
@@ -75,4 +75,3 @@ public class LoginController {
         }
     }
 }
-

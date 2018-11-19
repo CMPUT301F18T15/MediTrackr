@@ -173,61 +173,13 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         images[8] = (ImageView) rootView.findViewById(R.id.image_9);
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
 
-        // reminder memes
-        final Button[] days = new Button[]{
-                rootView.findViewById(R.id.add_button_1D),
-                rootView.findViewById(R.id.add_button_2D),
-                rootView.findViewById(R.id.add_button_3D),
-                rootView.findViewById(R.id.add_button_5D),
-                rootView.findViewById(R.id.add_button_1W),
-                rootView.findViewById(R.id.add_button_2W),
-                rootView.findViewById(R.id.add_button_1M)
-        };
-
-
-        /*******************************************************************
-         * SET REMINDER SCHEDULE
-         *******************************************************************/
-
-        // 7 array for selected time to reminder
-        final boolean[] selected = new boolean[7];
-
-
-        // onclick listener for reminder
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for(int i = 0; i < selected.length; i++) {
-                    if(days[i].equals(v)) {
-                        selected[i] = !selected[i];
-                        if(selected[i]){
-                            Drawable background = ContextCompat.getDrawable(getContext(), R.drawable.gradient);
-                            days[i].setBackgroundDrawable(background);
-                        }
-                        else {
-                            days[i].setBackgroundColor(Color.parseColor("#ffffff"));
-                        }
-                        break;
-                    }
-
-                }
-            }
-        };
-
-
-        // set onclick listeners for reminders
-        for(Button button: days){
-            button.setOnClickListener(listener);
-        }
-
-
         //on click listener for adding a record
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(checkInputs(recordTitle, recordDescription)){
                     // create the new record
-                    Record record = createRecord(recordTitle, recordDescription, selected);
+                    Record record = createRecord(recordTitle, recordDescription);
 
                     // pass the record to the record controller so it can be added to the
                     // patient's profile and saved both locally and to ElasticSearch
@@ -286,14 +238,13 @@ public class AddRecordFragment extends Fragment implements LocationListener {
      * CREATE NEW RECORD
      ************************************************************************/
     // creates and returns a new record object using the required information from the view
-    private Record createRecord(EditText title, EditText description, boolean[] selected) {
+    private Record createRecord(EditText title, EditText description) {
         Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
         Record record = new Record(
                 title.getText().toString(),
                 description.getText().toString(),
                 date,
                 null);
-        record.setReminder(selected);
         record.setGeoLocation(geolocation);
         for(Bitmap bitmap: bitmaps){
             if(bitmap != null) {

@@ -120,7 +120,7 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="@+id/tablepicturelayout"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                 <TextView
                     android:id="@+id/photos_title"
@@ -321,139 +321,6 @@
                 </TableRow>
 
             </TableLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/background2"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                <TextView
-                    android:id="@+id/reminder_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginRight="40dp"
-                    android:text="Photo Reminder"
-                    android:textColor="@color/colorPrimaryBlack"
-                    android:textSize="18sp"
-                    tools:layout_editor_absoluteX="40dp"
-                    tools:layout_editor_absoluteY="416dp" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="34dp"
-                    android:layout_marginLeft="34dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginRight="40dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/reminder_title">
-
-                    <Button
-                        android:id="@+id/add_button_1D"
-                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:text="1D"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:id="@+id/add_button_2D"
-                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:text="2D"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:id="@+id/add_button_3D"
-                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:text="3D"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:id="@+id/add_button_5D"
-                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:text="5D"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:id="@+id/add_button_1W"
-                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:text="1W"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:id="@+id/add_button_2W"
-                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:text="2W"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:id="@+id/add_button_1M"
-                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:text="1M"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </LinearLayout>
 
             <Button
                 android:id="@+id/add_record_button"

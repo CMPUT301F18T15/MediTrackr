@@ -18,6 +18,8 @@ import static org.junit.Assert.*;
 public class RecordTest {
     private Record record;
 
+    public RecordTest() {}
+
     // Initialize a new base record
     @Before
     public void initRecord() {

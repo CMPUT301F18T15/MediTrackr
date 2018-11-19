@@ -16,6 +16,8 @@ public class RecordListTest {
     private RecordList recordList;
     private Record record;
 
+    public RecordListTest() {}
+
     // Initialize a base record and an empty record list
     @Before
     public void initRecordList() {

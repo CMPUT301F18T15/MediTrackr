@@ -17,6 +17,8 @@ import static org.junit.Assert.*;
 public class ProblemTest {
     private Problem problem;
 
+    public ProblemTest() {}
+
     // Initialize a simple problem to be used in the tests
     @Before
     public void initProblemTest() {

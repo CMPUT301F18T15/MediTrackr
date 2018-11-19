@@ -14,6 +14,8 @@ import static org.junit.Assert.*;
 public class GeoLocationTest {
     private Geolocation geolocation;
 
+    public GeoLocationTest() {}
+
     // Test if new geolocation properties are being set
     @Test
     public void setGeoLocationTest() {

@@ -18,6 +18,8 @@ public class ImageListTest {
     private ImageList imageList;
     private Bitmap image;
 
+    public ImageListTest() {}
+
     // Set an initial null bitmap and an empty ImageList
     @Before
     public void initImageList() {

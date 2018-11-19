@@ -10,7 +10,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
 /**
- * Crated by Skryt on Nov 18, 2018
+ * this class creates a custome sized window so that the UI fits the users phone
+ *
+ * @author Orest Cokan
+ * @version 1.0 Nov 18, 2018
  */
 
 public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
@@ -18,11 +21,26 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private final View mWindow;
     private Context mContext;
 
+    /**
+     * this function creates the variables for the class to use
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 18, 2018
+     * @param context       the context for the adapter
+     */
     public CustomInfoWindowAdapter(Context context) {
         mContext = context;
         mWindow = LayoutInflater.from(context).inflate(R.layout.custom_info_window, null);
     }
 
+    /**
+     * this function adjust the texts for the new sizing so it fits the new window
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 18, 2018
+     * @param marker       marker for the text position
+     * @param view         the view to resize
+     */
     private void rendowWindowText(Marker marker, View view){
 
         String title = marker.getTitle();

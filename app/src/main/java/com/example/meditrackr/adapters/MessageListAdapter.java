@@ -51,6 +51,13 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private CommentList comments;
 
+    /**
+     * creates variables for the class to use
+     * @author Orest Cokan
+     * @version 1.0 Nov 12, 2018
+     * @param context           the context for the adapter
+     * @param messageList       a list of messages
+     */
     public MessageListAdapter(Context context, CommentList messageList) {
         mContext = context;
         comments = messageList;

@@ -78,7 +78,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
     // set the data into each viewHolder (ie. place what each record has into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.date.setText(records.getRecord(position).getDate());
+        holder.title.setText(records.getRecord(position).getTitle());
         holder.description.setText(records.getRecord(position).getDescription());
     }
 
@@ -93,13 +93,13 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
     // place each record into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private RecordsAdapter adapter;
-        public TextView date;
+        public TextView title;
         public TextView description;
 
         //gets the corresponding data for each view
         public ViewHolder(View itemView, final RecordsAdapter adapter){
             super(itemView);
-            date = itemView.findViewById(R.id.record_date);
+            title = itemView.findViewById(R.id.record_title);
             description = itemView.findViewById(R.id.record_description);
             itemView.setOnClickListener(this);
             this.adapter = adapter;

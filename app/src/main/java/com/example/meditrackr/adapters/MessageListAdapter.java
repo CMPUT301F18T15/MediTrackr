@@ -44,6 +44,7 @@ import com.example.meditrackr.models.CommentList;
 
 // got this from https://github.com/smilefam/SendBird-Android
 
+// Class shows a patient's and care provider's messages in a recycler view
 public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;

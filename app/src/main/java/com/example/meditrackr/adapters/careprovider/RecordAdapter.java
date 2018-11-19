@@ -20,6 +20,7 @@
  */
 package com.example.meditrackr.adapters.careprovider;
 
+//imports
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -33,7 +34,6 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.patient.RecordFragment;
-
 
 /**
  * This class displays all of the records of a problem selected from a previous page (using the
@@ -56,7 +56,10 @@ import com.example.meditrackr.ui.patient.RecordFragment;
  * @see ProblemAdapter
  *
  */
+
+// Class shows records list and info for care providers in a recycler view
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder> {
+    // Class objects
     private FragmentActivity activity;
     private static RecordList records;
 
@@ -68,33 +71,37 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
      * @param activity this is the activity to pass the data
      * @param records this is the records the problem has
      */
-    // constructor
+
+    // Constructor
     public RecordAdapter(FragmentActivity activity, RecordList records) {
         this.activity = activity;
         this.records = records;
     }
 
-    // display the view
+    // Display the view
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Instantiates layout XML into its proper view object
         LayoutInflater inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View recordView = inflater.inflate(R.layout.record_entry, parent, false);
         return new ViewHolder(recordView, this);
     }
 
-    // set the data into each viewHolder (ie. place place the record's info into the view)
+    // Set the data into each viewHolder (ie. place place the record info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        // Display each record's date and description in each viewHolder
         holder.date.setText(records.getRecord(position).getDate());
         holder.description.setText(records.getRecord(position).getDescription());
     }
 
+    // Return the number of records currently in RecyclerView
     @Override
-    // can return the number of records currently in the view
     public int getItemCount() {
         return records.getSize();
     }
+
 
     /**
      * This class uses viewHolder to put information about each record into its own view so we won't
@@ -104,31 +111,36 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
      * @author  Orest Cokan
      * @version 1.0 Nov 10, 2018
      */
-    // place each record into its corresponding view
+
+    // Class places each record into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        // Class objects
         private RecordAdapter adapter;
         public TextView date;
         public TextView description;
 
+        // Constructor and gets the corresponding data for each view
         public ViewHolder(View itemView, final RecordAdapter adapter){
             super(itemView);
             date = itemView.findViewById(R.id.record_date);
             description = itemView.findViewById(R.id.record_description);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
-
         }
 
-        // set onClick listener for each record, so the record can be viewed
+        // Set onClick listener for each record, so the record can be viewed
         @Override
         public void onClick(View v) {
-            int position = getAdapterPosition();
+            int position = getAdapterPosition(); // Return the position of the click in the recycler view
+            // Prepare for fragment transaction
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
+            // Transition to RecordFragment page
             RecordFragment fragment = RecordFragment.newInstance(records.getRecord(position));
+            // Allow user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
-            transaction.commit();
+            transaction.commit(); // Make permanent all changes performed in the transaction
         }
     }
 }

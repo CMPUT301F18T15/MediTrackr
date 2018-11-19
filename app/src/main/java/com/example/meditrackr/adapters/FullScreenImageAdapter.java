@@ -44,50 +44,61 @@ import com.example.meditrackr.models.record.ImageSave;
 import com.example.meditrackr.utils.ConvertImage;
 
 public class FullScreenImageAdapter extends PagerAdapter {
-
+    // Class objects
     private Activity activity;
     private ImageSave images;
     private LayoutInflater inflater;
 
-    // constructor
-    public FullScreenImageAdapter(Activity activity,
-                                  ImageSave images) {
+    // Constructor
+    public FullScreenImageAdapter(Activity activity, ImageSave images) {
         this.activity = activity;
         this.images = images;
     }
 
+    // Returns the number of images
     @Override
     public int getCount() {
         return this.images.getSize();
     }
 
+    // Returns true if view has the same relative layout
+    // For an object
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == ((RelativeLayout) object);
     }
 
+    // Instantiate each image as view object
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        // A view will display an image and have a close button
         ImageView imgDisplay;
         Button btnClose;
 
+        // Creates view objects based on layouts in XML
         inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewLayout = inflater.inflate(R.layout.layout_fullscreen_image, container,
                 false);
 
+        // Get view to display an image view based on image in XML
         imgDisplay = (ImageView) viewLayout.findViewById(R.id.imgDisplay);
 
+        // Set image configurations
         BitmapFactory.Options options = new BitmapFactory.Options();
+        // Each pixel in a bitmap image will be stored on 4 bytes
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        // Get byte array of the image
         String image = images.getImage(position);
+        // Convert a Base64 String into an image
         imgDisplay.setImageBitmap(ConvertImage.base64Decode(image));
 
         ((ViewPager) container).addView(viewLayout);
 
-        return viewLayout;
+        return viewLayout; // Return image
     }
 
+    // Handle the close button for image view?
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         ((ViewPager) container).removeView((RelativeLayout) object);

@@ -32,39 +32,46 @@ import com.google.android.gms.maps.model.Marker;
  * Crated by Skryt on Nov 18, 2018
  */
 
+// Class that provides the customized rendering of the mini Google Map view
 public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
-
+    // Class objects
     private final View mWindow;
     private Context mContext;
 
     public CustomInfoWindowAdapter(Context context) {
+        // Creates view objects based on layouts in XML
         mContext = context;
         mWindow = LayoutInflater.from(context).inflate(R.layout.custom_info_window, null);
     }
 
+    // Renders window text
     private void rendowWindowText(Marker marker, View view){
 
+        // Gets problem title
         String title = marker.getTitle();
         TextView tvTitle = (TextView) view.findViewById(R.id.title);
 
-        if(!title.equals("")){
+        if(!title.equals("")){ // If title is not empty then set problem title
             tvTitle.setText(title);
         }
 
+        // Gets the number of records, date, and description of problem
         String snippet = marker.getSnippet();
         TextView tvSnippet = (TextView) view.findViewById(R.id.snippet);
 
-        if(!snippet.equals("")){
+        if(!snippet.equals("")){ // If info is not null then set the info
             tvSnippet.setText(snippet);
         }
     }
 
+    // Returns the view for the window text
     @Override
     public View getInfoWindow(Marker marker) {
         rendowWindowText(marker, mWindow);
         return mWindow;
     }
 
+    // Returns the view for the window text
     @Override
     public View getInfoContents(Marker marker) {
         rendowWindowText(marker, mWindow);

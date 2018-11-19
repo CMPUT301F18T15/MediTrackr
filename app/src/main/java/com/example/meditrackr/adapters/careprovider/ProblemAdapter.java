@@ -1,7 +1,7 @@
 /*
- *Apache 2.0 License Notice
+ *   Apache 2.0 License Notice
  *
- *Copyright 2018 CMPUT301F18T15
+ *   Copyright 2018 CMPUT301F18T15
  *
  *Licensed under the Apache License, Version 2.0 (the "License");
  *you may not use this file except in compliance with the License.
@@ -65,11 +65,11 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
  *
  */
 
+// Class shows a patient's problem list and info for care providers in a recycler view
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder> {
+    // Class objects
     private FragmentActivity activity;
     private static ProblemList problems;
-
-    // constructor
 
     /**
      * creating variables activity and problems for the other functions to use
@@ -79,15 +79,18 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
      * @param activity this is the activity to pass the data
      * @param problems this is the problems the patient has
      */
+
+    // Constructor
     public ProblemAdapter(FragmentActivity activity, ProblemList problems) {
         this.activity = activity;
         this.problems = problems;
     }
 
 
-    // display the view
+    // Display the view
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Instantiates layout XML into its proper view object
         LayoutInflater inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View problemView = inflater.inflate(R.layout.problem_entry, parent, false);
@@ -95,36 +98,40 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
     }
 
 
-    // set the data into each viewHolder (ie. place the problem info into the view)
+    // Set the data into each viewHolder (ie. place the problem info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        // Display each problem's title, date, description, number of records, and image in each viewHolder
         holder.title.setText(problems.getProblem(position).getTitle());
         holder.date.setText(problems.getProblem(position).getDate());
         holder.description.setText(problems.getProblem(position).getDescription());
         holder.totalRecords.setText("Number of records: " +
                 problems.getProblem(position).getRecords().getSize());
         if(problems.getProblem(position).getImageAll().getSize() == 0){
-            holder.problemImage.setImageBitmap(null);
+            holder.problemImage.setImageBitmap(null); // If the problem does not have any images set image to null
             Log.d("ImageTest", "New profile this should be shown!");
-        }else {
+        }else { // Else show image pertaining to the problem
             holder.problemImage.setImageBitmap(ConvertImage.base64Decode(
                     problems.getProblem(position).getImageAll().getImage(0)));
         }
     }
 
-    // get the number of problems in RecyclerView
+    // Return the number of problems currently in RecyclerView
     @Override
     public int getItemCount() {
         return problems.getSize();
     }
+
 
     /**
      * This class puts information about each problem into its own view so we won't
      * display information from one problem as another. This function mainly serves an organizational
      * purpose.
      */
-    // place each problem into its corresponding view
+
+    // Class places each problem into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        // Class objects
         private ProblemAdapter adapter;
         public ImageView problemImage;
         public TextView title;
@@ -135,7 +142,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public MaterialIconView editProblem;
 
 
-        //gets the corresponding data for each view
+        // Constructor and gets the corresponding data for each view
         public ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
@@ -146,7 +153,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             editProblem = itemView.findViewById(R.id.problem_edit_button);
             problemImage = itemView.findViewById(R.id.problem_image);
             itemView.setOnClickListener(this);
-            // hide stuff from doctor
+            // Hides certain functionalities from care provider
+            // Care provider cannot delete or edit a patient's problem
             deleteProblem.setVisibility(View.INVISIBLE);
             deleteProblem.setClickable(false);
             editProblem.setVisibility(View.INVISIBLE);
@@ -154,17 +162,17 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             this.adapter = adapter;
 
 
-            // onclick listener for problem image
+            // Onclick listener for problem image
             problemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ImageSave images = adapter.problems.getProblem(getAdapterPosition()).getImageAll();
-                    if(images.getSize() == 0){
+                    if(images.getSize() == 0){ // Make not clickable if there is no image for the problem
                         problemImage.setClickable(false);
                         problemImage.setVisibility(View.INVISIBLE);
                         Log.d("ImageTest", "we should be getting here");
                     }
-                    else {
+                    else { // Make clickable and switch to FullScreenViewActivity on click
                         Intent intent = new Intent(adapter.activity, FullScreenViewActivity.class);
                         adapter.activity.startActivity(intent);
                     }
@@ -173,19 +181,22 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
 
         }
 
-        // set onClick listener for each problem, so the problem can be viewed
+        // Set onClick listener for each problem, so the problem can be viewed
         @Override
         public void onClick(View v) {
-            int position = getAdapterPosition();
+            int position = getAdapterPosition(); // Return position of click in the recycler view
+            // Get the records of the problem clicked
             RecordList records = problems.getProblem(position).getRecords();
+            // Prepare for fragment transaction
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            LazyLoadingManager.setProblemIndex(position);
+            LazyLoadingManager.setProblemIndex(position); // Load the problem clicked
             RecordsFragment fragment = RecordsFragment.newInstance(records,
-                    problems.getProblem(position).getComments());
+                    problems.getProblem(position).getComments()); // Transition to RecordsFragment
+            // Allows user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
-            transaction.commit(); //make permanent all changes performed in the transaction
+            transaction.commit(); // Make permanent all changes performed in the transaction
         }
     }
 }

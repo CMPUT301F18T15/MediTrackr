@@ -18,6 +18,8 @@ public class CareProviderTest {
 
     private CareProvider careProvider;
 
+    public CareProviderTest() {}
+
     // Initialize a new care provider
     @Before
     public void newCareProvider() {

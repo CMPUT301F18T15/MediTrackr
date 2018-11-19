@@ -18,6 +18,8 @@ public class ProfileListTest {
     private ProfileList profileList;
     private Profile profile;
 
+    public ProfileListTest() {}
+
     // Set a new base profile and an empty profile list
     @Before
     public void newProfileList() {

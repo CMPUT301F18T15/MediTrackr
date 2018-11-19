@@ -93,25 +93,6 @@ public class RecordFragment extends Fragment {
         images[8] = rootView.findViewById(R.id.record_image_9);
         images[9] = rootView.findViewById(R.id.record_image_10);
 
-        // Buttons for choosing reminder frequency
-        final Button[] days = new Button[]{
-                rootView.findViewById(R.id.button_1D),
-                rootView.findViewById(R.id.button_2D),
-                rootView.findViewById(R.id.button_3D),
-                rootView.findViewById(R.id.button_5D),
-                rootView.findViewById(R.id.button_1W),
-                rootView.findViewById(R.id.button_2W),
-                rootView.findViewById(R.id.button_1M)
-        };
-
-        // Sets reminder in record page
-        for(int i = 0; i < days.length; i++){
-            if(record.getReminder(i)){
-                Drawable background = ContextCompat.getDrawable(getContext(), R.drawable.gradient);
-                days[i].setBackgroundDrawable(background);
-            }
-        }
-
         // Populate a record with data
         title.setText(record.getTitle());
         description.setText(record.getDescription());

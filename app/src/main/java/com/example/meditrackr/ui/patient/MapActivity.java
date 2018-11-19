@@ -394,36 +394,42 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     };
 
     public void placeMarkers() {
-        Patient patient = LazyLoadingManager.getPatient();
-        for (int i = 0; i < patient.getProblems().getSize(); i++) {
-            Log.d("MAPMARKER", "problemlist size" + patient.getProblems().getSize());
-            for (int j = 0; j < patient.getProblem(i).getRecords().getSize(); j++) {
-                Geolocation geolocation = patient.getProblem(i).getRecords().getRecord(j).getGeoLocation();
-                Record record = patient.getProblem(i).getRecords().getRecord(j);
+        Profile profile = LazyLoadingManager.getProfile();
+        if(!profile.getisCareProvider()) {
+            Patient patient = LazyLoadingManager.getPatient();
+            for (int i = 0; i < patient.getProblems().getSize(); i++) {
+                Log.d("MAPMARKER", "problemlist size" + patient.getProblems().getSize());
+                for (int j = 0; j < patient.getProblem(i).getRecords().getSize(); j++) {
+                    Geolocation geolocation = patient.getProblem(i).getRecords().getRecord(j).getGeoLocation();
+                    Record record = patient.getProblem(i).getRecords().getRecord(j);
 
-                mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
+                    mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
 
-                try {
-                    String snippet =
-                            "Record #: " + j + "\n" +
-                                    "Date: " + record.getDate() + "\n" +
-                                    "Description: " + record.getDescription() + "\n";
+                    try {
+                        String snippet =
+                                "Record #: " + j + "\n" +
+                                        "Date: " + record.getDate() + "\n" +
+                                        "Description: " + record.getDescription() + "\n";
 
-                    MarkerOptions options = new MarkerOptions()
-                            .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
-                            .title(patient.getProblem(i).getDescription())
-                            .snippet(snippet);
+                        MarkerOptions options = new MarkerOptions()
+                                .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
+                                .title(patient.getProblem(i).getDescription())
+                                .snippet(snippet);
 
-                    mMarker = mMap.addMarker(options);
+                        mMarker = mMap.addMarker(options);
 
-                } catch (NullPointerException e) {
-                    Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage());
+                    } catch (NullPointerException e) {
+                        Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage());
+                    }
+
+
+                    hideSoftKeyboard();
                 }
-
-
-                hideSoftKeyboard();
             }
+        }else {
+            Log.d("Adding no materkers", "adding no markers");
         }
+
     }
 }
 

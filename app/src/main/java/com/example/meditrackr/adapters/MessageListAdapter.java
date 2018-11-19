@@ -46,9 +46,10 @@ import com.example.meditrackr.models.CommentList;
 
 // Class shows a patient's and care provider's messages in a recycler view
 public class MessageListAdapter extends RecyclerView.Adapter {
+    // Enumeration values for 2 states of message
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
-
+    // Class objects
     private Context mContext;
     private CommentList comments;
 
@@ -59,11 +60,14 @@ public class MessageListAdapter extends RecyclerView.Adapter {
      * @param context           the context for the adapter
      * @param messageList       a list of messages
      */
+
+    // Constructor
     public MessageListAdapter(Context context, CommentList messageList) {
         mContext = context;
         comments = messageList;
     }
 
+    // Returns the number of messages currently in RecyclerView
     @Override
     public int getItemCount() {
         return comments.getSize();
@@ -72,16 +76,19 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     // Determines the appropriate ViewType according to the sender of the message.
     @Override
     public int getItemViewType(int position) {
+        // Get message
         Comment comment = (Comment) comments.getComment(position);
 
         if (comment.getUsername().equals(LazyLoadingManager.getProfile().getUsername())){
-            // If the current user is the sender of the message
-            Log.d("Messaging", "We are the current user logged in : " + LazyLoadingManager.getProfile().getUsername());
-            return VIEW_TYPE_MESSAGE_SENT;
+            // If the sender of the message is the current user
+            Log.d("Messaging", "We are the current user logged in : "
+                    + LazyLoadingManager.getProfile().getUsername());
+            return VIEW_TYPE_MESSAGE_SENT; // Return 1 stating that message was sent
         } else {
             // If some other user sent the message
-            Log.d("Messaging", "We are not the current user logged in : " +comment.getUsername());
-            return VIEW_TYPE_MESSAGE_RECEIVED;
+            Log.d("Messaging", "We are not the current user logged in : "
+                    +comment.getUsername());
+            return VIEW_TYPE_MESSAGE_RECEIVED; // Return 2 stating that the message was received
         }
     }
 
@@ -93,19 +100,19 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         if (viewType == VIEW_TYPE_MESSAGE_SENT) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_message_sent, parent, false);
-            return new SentMessageHolder(view);
+            return new SentMessageHolder(view); // Returns a view for the message sender
         } else if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_message_received, parent, false);
-            return new ReceivedMessageHolder(view);
+            return new ReceivedMessageHolder(view); // Returns a view for message receiver
         }
-
         return null;
     }
 
     // Passes the message object to a ViewHolder so that the contents can be bound to UI.
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        // Get message
         Comment comment = (Comment) comments.getComment(position);
 
         switch (holder.getItemViewType()) {
@@ -117,16 +124,19 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         }
     }
 
+    // UI for message sender
     private class SentMessageHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText;
 
-        SentMessageHolder(View itemView) {
+        SentMessageHolder(View itemView) { // Message sender view
             super(itemView);
 
+            // Each message sent will contain a text message and time stamp
             messageText = (TextView) itemView.findViewById(R.id.text_message_body);
             timeText = (TextView) itemView.findViewById(R.id.text_message_time);
         }
 
+        // Set message and time stamp
         void bind(Comment comment) {
             messageText.setText(comment.getComment());
 
@@ -135,19 +145,22 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         }
     }
 
+    // UI for message receiver
     private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText, nameText;
         ImageView profileImage;
 
-        ReceivedMessageHolder(View itemView) {
+        ReceivedMessageHolder(View itemView) { // Message receiver view
             super(itemView);
 
+            // Each message received will contain a text messages, time stamp, name, and profile image
             messageText = (TextView) itemView.findViewById(R.id.text_message_body);
             timeText = (TextView) itemView.findViewById(R.id.text_message_time);
             nameText = (TextView) itemView.findViewById(R.id.text_message_name);
             profileImage = (ImageView) itemView.findViewById(R.id.image_message_profile);
         }
 
+        // Set the text message, time stamp, name, and profile image
         void bind(Comment comment) {
             messageText.setText(comment.getComment());
 

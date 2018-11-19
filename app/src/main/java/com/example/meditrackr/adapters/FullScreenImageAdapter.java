@@ -51,7 +51,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
     private Activity activity;
     private ImageSave images;
     private LayoutInflater inflater;
-    
+
     // Constructor
     public FullScreenImageAdapter(Activity activity, ImageSave images) {
 

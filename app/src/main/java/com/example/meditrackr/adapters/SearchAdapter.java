@@ -37,21 +37,24 @@ import com.example.meditrackr.models.Patient;
  * Crated by Skryt on Nov 18, 2018
  */
 
-
+// Class shows a result list in a recycler view
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
+        // Class objects
         private FragmentActivity activity;
         private Context context;
         private Patient patient;
 
-        // constructor
+        // Constructor
         public SearchAdapter(FragmentActivity activity, Context context, Patient patient) {
             this.activity = activity;
             this.context = context;
             this.patient = patient;
     }
 
+        // Display the view
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            // Instantiates layout XML into its proper view object
             LayoutInflater inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View searchView = inflater.inflate(R.layout.search_entry, parent, false);
@@ -59,9 +62,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
 
 
-
+    // Class places each record into its corresponding view
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+         // Class objects   
         //BIND DATA
         holder.posTxt.setText("Position");
         holder.nameTxt.setText("Name");
@@ -69,6 +73,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
     //GET TOTAL NUM OF PLAYERS
+    // Return the number of records currently in RecyclerView
     @Override
     public int getItemCount() {
         return 10;
@@ -81,7 +86,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         private TextView nameTxt, posTxt;
 
 
-
+        // Constructor and gets the corresponding data for each view
         public ViewHolder(View itemView, final SearchAdapter adapter) {
             super(itemView);
             this.img = (ImageView) itemView.findViewById(R.id.playerImage);
@@ -94,7 +99,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
 
 
-        // set onClick listener for each problem to be viewed
+        // Set onClick listener for each problem to be viewed
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();

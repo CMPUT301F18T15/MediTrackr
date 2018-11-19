@@ -1,16 +1,33 @@
+/*
+ *    Apache 2.0 License Notice
+ *
+ *    Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.models;
 
 /**
- * Created by Skryt on Nov, 16 2018
+ * @author Orest Cokan
+ * @version 1.0 Nov, 16 2018
  */
 
+//imports
 import android.net.Uri;
 
 import com.google.android.gms.maps.model.LatLng;
 
-/**
- * Created by User on 10/2/2017.
- */
 
 public class PlaceInfo {
 
@@ -23,6 +40,19 @@ public class PlaceInfo {
     private float rating;
     private String attributions;
 
+    /**
+     * creates variables for class to use
+     * @author Orest Cokan
+     * @version 1.0 Nov, 16 2018
+     * @param name              name of the user
+     * @param address           address of location
+     * @param phoneNumber       phone number of user
+     * @param id                id of the problem
+     * @param websiteUri        websites url
+     * @param latlng            lat and longitude values
+     * @param rating            a rating of the problem
+     * @param attributions
+     */
     public PlaceInfo(String name, String address, String phoneNumber, String id, Uri websiteUri,
                      LatLng latlng, float rating, String attributions) {
         this.name = name;
@@ -38,6 +68,13 @@ public class PlaceInfo {
     public PlaceInfo() {
 
     }
+    /**
+     * gets the name
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov, 16 2018
+     * @return      the name
+     */
 
     public String getName() {
         return name;

@@ -34,6 +34,7 @@ import java.io.Serializable;
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
+ * @see Profile
  */
 
 // A CareProvider class that holds all information pertaining to CareProvider
@@ -41,32 +42,78 @@ public class CareProvider extends Profile implements Serializable {
     private PatientList patients = new PatientList();
 
     // Constructor
+
+    /**
+     * creates the careproviders account information
+     * @param username          care providers username
+     * @param email             care providers email
+     * @param phone             care providers phone number
+     * @param isCareProvider    holds true because this is a care provider
+     */
     public CareProvider(String username, String email, String phone, boolean isCareProvider){
         super(username, email, phone, true);
     }
 
     // Getters/Setters
+
+    /**
+     * gets the patients that the care provider has
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return the patients associated with the care provider
+     * @see PatientList
+     */
     public PatientList getPatients() {
         return this.patients;
     }
 
+    /**
+     * gets a specific patient from the care providers patient list
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param index  the index that the patient is at
+     * @return the patient associated with that index
+     */
     public String getPatient(int index){
         return this.patients.getPatient(index);
     }
 
+    /**
+     * adds a patient to the care providers patient list if user is not already added
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param username  the username of the patient we want to add to the list
+     */
     public void addPatient(String username){
         if(!patients.patientExists(username)){
             patients.addPatient(username);
         }
     }
-
+    /**
+     * removes a patient from the care providers patient list
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param username  the username of the patient we want to remove to the list
+     */
     public void deletePatient(String username) {
         patients.deletePatient(username);
     }
 
+    /**
+     * checks to see if a patient is in the care providers patient list
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param username  the username of the patient we want to check
+     */
     public Boolean patientExists(String username){
         return patients.patientExists(username);
     }
 
+    //just a test will remove later
     public String toString() { return this.getUsername(); }
 }

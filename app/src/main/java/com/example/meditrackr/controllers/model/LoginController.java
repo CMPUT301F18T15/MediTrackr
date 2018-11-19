@@ -16,7 +16,11 @@ import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.ui.MainActivity;
 
 /**
- * Crated by Skryt on Nov 17, 2018
+ * a controller that when a user tries to log in it looks to make sure that ther is a valid entry
+ * and checks if the entry is in the database
+ *
+ * @author Orest Cokan
+ * @version 1.0 Nov 17, 2018
  */
 
 public class LoginController {

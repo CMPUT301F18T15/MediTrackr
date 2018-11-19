@@ -1,5 +1,24 @@
+/*
+ *    Apache 2.0 License Notice
+ *
+ *    Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.utils;
 
+//imports
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -16,6 +35,7 @@ import java.util.TimeZone;
  */
 // got this from https://github.com/smilefam/SendBird-Android
 
+// Class
 public class DateUtils {
 
     // This class should not be initialized
@@ -23,14 +43,13 @@ public class DateUtils {
 
     }
 
-    /**
-     * Gets timestamp in millis and converts it to HH:mm (e.g. 16:44).
-     */
+    // Gets timestamp in millis and converts it to HH:mm (e.g. 16:44)
     public static String formatTime(long timeInMillis) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         return dateFormat.format(timeInMillis);
     }
 
+    // 
     public static String formatAppTime(){
         final SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy, hh:mm aaa");
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));

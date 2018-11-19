@@ -18,7 +18,7 @@
  */
 package com.example.meditrackr.controllers;
 
-
+//imports
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -82,10 +82,27 @@ public class LocationController {
     private long minTime = 1000 * 60 * 1;
     private double gpsLatitude, gpsLongitude;
 
+    /**
+     * this function can get the latitude and longitude of the location and
+     * give the name of that location based on the position. if there is no network connection then it
+     * will throw an exception
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param context the context of the controller
+     * @throw IOException
+     *
+     */
     public LocationController(Context context) {
         geocoder = new Geocoder(context, Locale.ENGLISH);
     }
 
+    /**
+     * sets the location name from the position user is at
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param position an intiger which can be used in a location list to find an adress
+     * @return adressName a string which contains the adress
+     */
     public String setLocationName(int position) {
         addressIndex = position;
         adrress = locationList.get(addressIndex);
@@ -94,16 +111,37 @@ public class LocationController {
         return addressName;
     }
 
+    /**
+     * gets users latitude
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @return latitude a double type integer
+     */
     public double getLatitude() {
         latitude = locationList.get(addressIndex).getLatitude();
         return latitude;
     }
-
+    /**
+     * gets users longitude
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @return longitude a double type integer
+     */
     public double getLongitude() {
         longitude = locationList.get(addressIndex).getLongitude();
         return longitude;
     }
 
+    /**
+     * this class gets a list of all the locations names
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param context             the context of the controller
+     * @param locationName        the name of the location
+     * @return locationNameList   a list that contains all of the locations names
+     */
     public ArrayList getLocationList(Context context, String locationName) {
 
         locationNameList.clear();
@@ -141,6 +179,16 @@ public class LocationController {
         return locationNameList;
     }
 
+    /**
+     * this class can get the users coordination using the gps location attached to the
+     * phone. if there is a network connection then it will set the lat and lon coordinates appropriately
+     * in not then it will provide an error saying that there is no network that it can find to check the
+     * gps location.
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param context context of the controller
+     * @return 1 if gps is available 0 if not
+     */
     public int getGPS(final Context context) {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         isGPSenable = locationManager.isProviderEnabled("gps");
@@ -175,6 +223,13 @@ public class LocationController {
         return 0;
     }
 
+    /**
+     * this function can use getGpsCoordinate to update the users latitude and longitude values
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param context context of the controller
+     * @throws SecurityException
+     */
     public void getGpsCoordinate(Context context) {
         try {
             locationManager.requestLocationUpdates("gps", minTime, minDistanceChanged, locationListener);
@@ -185,10 +240,21 @@ public class LocationController {
         }
     }
 
+    /**
+     * gets gps Latitude only
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @return gpsLatitude  a double integer of the latitude given by the gps
+     */
     public double getGpsLatitude() {
         return gpsLatitude;
     }
-
+    /**
+     * gets gps longitude only
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @return gpsLongitude  a double integer of the longitude given by the gps
+     */
     public double getGpsLongitude() {
         return gpsLongitude;
     }
@@ -196,6 +262,12 @@ public class LocationController {
     /**
      * get gps service and check permission
      * if location is gotten, get the name of the location
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param context the context of the controller
+     * @return addressName string which contains the name of the address
+     * @throws IOException
      */
     public String getGpsAddressName(Context context) {
         // call to check permission to access gps

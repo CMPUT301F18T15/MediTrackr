@@ -92,6 +92,12 @@ public class ElasticSearchController {
 
 
     // Sign up and add a profile
+
+    /**
+     *
+     * @param profile       the profile to add to the class
+     * @return              identifies that the add was sucsesfull
+     */
     public static Boolean addProfile(Profile profile){
         Boolean done = false;
         try {

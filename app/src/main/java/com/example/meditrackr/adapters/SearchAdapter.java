@@ -1,6 +1,24 @@
+/*
+ *    Apache 2.0 License Notice
+ *
+ *    Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.adapters;
 
-
+//imports
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,24 +34,40 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.models.Patient;
 
 /**
- * Crated by Skryt on Nov 18, 2018
+ * creates a s search adapter for a user to use. allows user to search for items throughout the app
+ * ie look for problem, look for care provider, etc
+ *
+ * @author Orest Cokan
+ * @version 1.0 Nov 18, 2018
  */
 
-
+// Class shows a result list in a recycler view
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
+        // Class objects
         private FragmentActivity activity;
         private Context context;
         private Patient patient;
 
-        // constructor
+        // Constructor
+        /**
+         * creates variables for the class to use
+         *
+         * @author Orest Cokan
+         * @version 1.0 Nov 18, 2018
+         * @param activity      the activety that the user is searching from
+         * @param context       the context for the adapter
+         * @param patient       the patient making the search
+         */
         public SearchAdapter(FragmentActivity activity, Context context, Patient patient) {
             this.activity = activity;
             this.context = context;
             this.patient = patient;
     }
 
+        // Display the view
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            // Instantiates layout XML into its proper view object
             LayoutInflater inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View searchView = inflater.inflate(R.layout.search_entry, parent, false);
@@ -41,9 +75,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
 
 
-
+    // Class places each record into its corresponding view
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+         // Class objects
         //BIND DATA
         holder.posTxt.setText("Position");
         holder.nameTxt.setText("Name");
@@ -51,6 +86,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
     //GET TOTAL NUM OF PLAYERS
+    // Return the number of records currently in RecyclerView
     @Override
     public int getItemCount() {
         return 10;
@@ -63,7 +99,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         private TextView nameTxt, posTxt;
 
 
-
+        // Constructor and gets the corresponding data for each view
         public ViewHolder(View itemView, final SearchAdapter adapter) {
             super(itemView);
             this.img = (ImageView) itemView.findViewById(R.id.playerImage);
@@ -76,7 +112,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
 
 
-        // set onClick listener for each problem to be viewed
+        // Set onClick listener for each problem to be viewed
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();

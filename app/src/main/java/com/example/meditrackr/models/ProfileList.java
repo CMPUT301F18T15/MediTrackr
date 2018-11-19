@@ -39,18 +39,46 @@ public class ProfileList {
     private ArrayList<Profile> profiles = new ArrayList<>();
 
     // Calls to Profile methods
+
+    /**
+     * adds a profile in the profile list
+     * @author  Orest Cokan
+     * @version 1.0 Nov 7, 2018
+     * @param profile       the profile to add to the list
+     * @see Profile
+     */
     public void addProfile(Profile profile){
         profiles.add(profile);
     }
 
+    /**
+     * removes a profile from the profile list
+     * @author  Orest Cokan
+     * @version 1.0 Nov 7, 2018
+     * @param profile       the profile to remove from the list
+     * @see Profile
+     */
     public void removeProfile(Profile profile){
         profiles.remove(profile);
     }
 
+    /**
+     * see if a profile is in the list
+     * @author  Orest Cokan
+     * @version 1.0 Nov 7, 2018
+     * @param profile       the profile to check
+     * @see Profile
+     */
     public boolean containsProfile(Profile profile){
         return profiles.contains(profile);
     }
 
+    /**
+     * sees how many profiles are in the list
+     * @author  Orest Cokan
+     * @version 1.0 Nov 7, 2018
+     * @return        the number of profiles
+     */
     public int size(){
         return profiles.size();
     }

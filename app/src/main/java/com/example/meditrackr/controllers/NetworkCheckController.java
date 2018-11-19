@@ -1,7 +1,3 @@
-
-package com.example.meditrackr.controllers;
-
-
 /*
  *Apache 2.0 License Notice
  *
@@ -20,7 +16,9 @@ package com.example.meditrackr.controllers;
  *limitations under the License.
  *
  */
+package com.example.meditrackr.controllers;
 
+//imports
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -53,6 +51,8 @@ public class NetworkCheckController {
 
     /**
      * Checks if internet access is available. Do not call from main thread.
+     * @author Orest Cokan
+     * @version 2.0 Nov 14, 2018
      * @return whether internet access is available
      */
 

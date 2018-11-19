@@ -19,7 +19,10 @@
 package com.example.meditrackr.adapters;
 
 /**
- * Crated by Skryt on Nov 17, 2018
+ * takes and image and puts it in a full screen view
+ *
+ * @author Orest Cokan
+ * @version 1.0  Nov 17, 2018
  */
 
 //imports
@@ -48,8 +51,19 @@ public class FullScreenImageAdapter extends PagerAdapter {
     private Activity activity;
     private ImageSave images;
     private LayoutInflater inflater;
-
+    
     // Constructor
+    public FullScreenImageAdapter(Activity activity, ImageSave images) {
+
+    /**
+     * creates variables for the class to use
+     *
+     * @author Orest Cokan
+     * @version 1.0  Nov 17, 2018
+     * @param activity      the activity that it is using
+     * @param images        the images that the class will display
+     */
+
     public FullScreenImageAdapter(Activity activity, ImageSave images) {
         this.activity = activity;
         this.images = images;

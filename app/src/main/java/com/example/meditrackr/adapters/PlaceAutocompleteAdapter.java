@@ -47,7 +47,12 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Skryt on Nov, 16 2018
+ * This class gives the users autofill options for when they are editing items. This is so that data they enter matches the format that the app uses throughout the project.
+ * The class itself comes up with the predictive autofill but then uses placeAutocompleteAdapter to display to the user what auto complete results came up.
+ *This class can use getView to
+
+ *@author Orest Cokan
+ *@version 1.0 Nov 16, 2018
  */
 
 // Class enables autocomplete functionality when filling out edit text box

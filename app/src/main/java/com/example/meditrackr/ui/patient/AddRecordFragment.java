@@ -55,11 +55,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.LocationController;
-import com.example.meditrackr.controllers.SaveLoadController;
-import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.controllers.model.RecordController;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.utils.ConvertImage;
@@ -92,9 +88,8 @@ import static android.app.Activity.RESULT_OK;
 // Class creates Add Record Fragment for patients
 public class AddRecordFragment extends Fragment implements LocationListener {
     private String date;
-    private Patient patient = LazyLoadingManager.getPatient();
 
-    //indicator
+    //indicators and request codes
     private static final String TAG = "AddRecordFragment";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -138,31 +133,33 @@ public class AddRecordFragment extends Fragment implements LocationListener {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_record, container, false);
+
+        /************************************************************************
+         * GET LOCATION PERMISSIONS
+         ************************************************************************/
         getLocationPermission();
         if(mLocationPermissionsGranted){
             getDeviceLocation();
         }
 
-        // index of problem we are adding record too
+        // index of problem we are adding record to
         final int index = getArguments().getInt("INDEX");
 
         // nifty location controller that helps with getting locations
 
-        // general ui attributes
+        /************************************************************************
+         * INITIALIZE UI COMPONENTS
+         ************************************************************************/
         final EditText recordTitle = (EditText) rootView.findViewById(R.id.record_title_field);
-        final EditText recordDescrption = (EditText) rootView.findViewById(R.id.record_description_field);
+        final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
 
         // initialize address and set it
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
 
-
         // set date
         date = DateUtils.formatAppTime();
-
-        // set location
-
 
         // ui attributes for all the images LMAO, there has to be a better way to do this
         images[0] = (ImageView) rootView.findViewById(R.id.image_1);
@@ -176,7 +173,6 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         images[8] = (ImageView) rootView.findViewById(R.id.image_9);
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
 
-
         // reminder memes
         final Button[] days = new Button[]{
                 rootView.findViewById(R.id.add_button_1D),
@@ -187,6 +183,11 @@ public class AddRecordFragment extends Fragment implements LocationListener {
                 rootView.findViewById(R.id.add_button_2W),
                 rootView.findViewById(R.id.add_button_1M)
         };
+
+
+        /*******************************************************************
+         * SET REMINDER SCHEDULE
+         *******************************************************************/
 
         // 7 array for selected time to reminder
         final boolean[] selected = new boolean[7];
@@ -214,41 +215,23 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         };
 
 
-
-        // set onclick listeners
+        // set onclick listeners for reminders
         for(Button button: days){
             button.setOnClickListener(listener);
         }
-
 
 
         //on click listener for adding a record
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkInputs(recordTitle, recordDescrption)){
-                    Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
-                    Record record = new Record(
-                            recordTitle.getText().toString(),
-                            recordDescrption.getText().toString(),
-                            date,
-                            null);
-                    record.setReminder(selected);
-                    record.setGeoLocation(geolocation);
-                    for(Bitmap bitmap: bitmaps){
-                        if(bitmap != null) {
-                            String imageSave = ConvertImage.base64Encode(bitmap);
-                            Log.d("TestImage", imageSave);
-                            record.getImagesSave().addImage(imageSave);
-                            patient.getProblem(index).getImageAll().addImage(imageSave);
-                        }
-                    }
-                    patient.getProblem(index).getRecords().addRecord(record);
+                if(checkInputs(recordTitle, recordDescription)){
+                    // create the new record
+                    Record record = createRecord(recordTitle, recordDescription, selected);
 
-                    // save the shit
-                    ElasticSearchController.updateUser(patient);
-                    SaveLoadController.saveProfile(getContext(), patient);
-                    Log.d("RecordAdd", "Profile: " + patient.getUsername() + " Records: " + patient.getProblem(index).getRecords());
+                    // pass the record to the record controller so it can be added to the
+                    // patient's profile and saved both locally and to ElasticSearch
+                    RecordController.addRecord(getContext(), record, index);
 
                     // transition back to all the records
                     FragmentManager manager = getFragmentManager();
@@ -265,8 +248,9 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         });
 
 
-
-        // add image
+        /***************************************************************************
+         * ADD NEW IMAGES TO RECORD
+         ***************************************************************************/
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -277,8 +261,9 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         });
 
 
-
-
+        /***************************************************************************
+         * SET GEO-LOCATION
+         ***************************************************************************/
         // initialize the map picker and select a place you want to go
         addressView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -297,8 +282,47 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         return rootView;
     }
 
+    /************************************************************************
+     * CREATE NEW RECORD
+     ************************************************************************/
+    // creates and returns a new record object using the required information from the view
+    private Record createRecord(EditText title, EditText description, boolean[] selected) {
+        Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
+        Record record = new Record(
+                title.getText().toString(),
+                description.getText().toString(),
+                date,
+                null);
+        record.setReminder(selected);
+        record.setGeoLocation(geolocation);
+        for(Bitmap bitmap: bitmaps){
+            if(bitmap != null) {
+                String imageSave = ConvertImage.base64Encode(bitmap);
+                Log.d("TestImage", imageSave);
+                record.getImagesSave().addImage(imageSave);
+            }
+        }
 
+        return record;
+    }
+
+    // checks that the title and description are not empty
+    public boolean checkInputs(EditText title, EditText description){
+        if(((title != null && !title.getText().toString().isEmpty()) &&
+                (description != null && !description.getText().toString().isEmpty()))){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /************************************************************************
+     * EXTRACT LOCATION, IMAGE DATA FROM ACTIVITIES
+     ************************************************************************/
     @Override
+    // for extracting the image taken by the phone's camera and adding it to the bitmap array
+    // or for getting geolocation information depending on the request code
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             getActivity();
@@ -337,20 +361,11 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         }
     }
 
+    /**************************************************************************
+     * GEO-LOCATION PERMISSIONS
+     **************************************************************************/
 
-
-    // check inputs
-    public boolean checkInputs(EditText title, EditText description){
-        if(((title != null && !title.getText().toString().isEmpty()) &&
-                (description != null && !description.getText().toString().isEmpty()))){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-
+    // Ask the user for permission to use the location services
     private void getLocationPermission(){
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,

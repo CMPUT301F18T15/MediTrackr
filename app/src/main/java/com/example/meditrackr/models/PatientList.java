@@ -41,30 +41,69 @@ public class PatientList implements Serializable {
     private ArrayList<String> patients = new ArrayList<>();
 
     // Calls to Patient methods
+
+    /**
+     * this function will get a patient as a specific index
+     * @author  Orest Cokan
+     * @version 1.0 Nov 7, 2018.
+     * @param index     the index where patient is located in the list
+     * @return          the patient that was at that index
+     */
     public String getPatient(int index){
         return patients.get(index);
     }
-
+    /**
+     * this function will set a patient as a specific index
+     * @author  Orest Cokan
+     * @version 1.0 Nov 7, 2018.
+     * @param index     the index where patient is going to be in the list
+     * @param username  the username to put in the patient list
+     */
     public void setPatient(int index, String username){
         patients.set(index, username);
     }
 
+    /**
+     * this function will get the amount of patients in the list
+     * @author  Orest Cokan
+     * @version 1.0 Nov 7, 2018.
+     * @return          the number of patients in the list
+     */
     public int getSize(){
         return patients.size();
     }
 
+    /**
+     * this function will add a patient to the list
+     * @author  Orest Cokan
+     * @version 1.0 Nov 7, 2018.
+     * @param username  the username of the patient that is getting added to the list
+     */
     public void addPatient(String username){
         patients.add(username);
     }
 
+    /**
+     * this function will remove a patient from the list
+     * @author  Orest Cokan
+     * @version 1.0 Nov 7, 2018.
+     * @param username  the username of the patient that is getting removed from the list
+     */
     public void deletePatient(String username){
         patients.remove(username);
     }
 
+    /**
+     * this function will check to see if a patient is in the list
+     * @author  Orest Cokan
+     * @version 1.0 Nov 7, 2018.
+     * @param username  the username of the patient that is getting checked in the list
+     * @return          True if patient is in list   False if not
+     */
     public Boolean patientExists(String username){
         return patients.contains(username);
     }
-
+    // will remove later
     public String toString(){
         return patients.toString();
     }

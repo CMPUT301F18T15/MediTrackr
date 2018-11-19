@@ -19,16 +19,14 @@
 package com.example.meditrackr.models;
 
 /**
- * Created by Skryt on Nov, 16 2018
+ * @author Orest Cokan
+ * @version 1.0 Nov, 16 2018
  */
 
 import android.net.Uri;
 
 import com.google.android.gms.maps.model.LatLng;
 
-/**
- * Created by User on 10/2/2017.
- */
 
 public class PlaceInfo {
 
@@ -41,6 +39,19 @@ public class PlaceInfo {
     private float rating;
     private String attributions;
 
+    /**
+     * creates variables for class to use
+     * @author Orest Cokan
+     * @version 1.0 Nov, 16 2018
+     * @param name              name of the user
+     * @param address           address of location
+     * @param phoneNumber       phone number of user
+     * @param id                id of the problem
+     * @param websiteUri        websites url
+     * @param latlng            lat and longitude values
+     * @param rating            a rating of the problem
+     * @param attributions
+     */
     public PlaceInfo(String name, String address, String phoneNumber, String id, Uri websiteUri,
                      LatLng latlng, float rating, String attributions) {
         this.name = name;
@@ -56,6 +67,13 @@ public class PlaceInfo {
     public PlaceInfo() {
 
     }
+    /**
+     * gets the name
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov, 16 2018
+     * @return      the name
+     */
 
     public String getName() {
         return name;

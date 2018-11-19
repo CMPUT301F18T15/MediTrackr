@@ -34,10 +34,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
-import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.controllers.model.ProblemController;
 import com.example.meditrackr.models.Problem;
 
 import java.text.SimpleDateFormat;
@@ -55,8 +52,10 @@ import java.util.TimeZone;
 
 // Class creates Add Problem Fragment for patients
 public class AddProblemFragment extends Fragment {
-    // Initialize variable and create new AddProblemFragment object
-    private Patient patient = LazyLoadingManager.getPatient();
+
+    /************************************************************************
+     * CREATE ADD PROBLEM FRAGMENT OBJECT
+     ************************************************************************/
     public static AddProblemFragment newInstance(){
         AddProblemFragment fragment = new AddProblemFragment();
         return fragment;
@@ -69,7 +68,9 @@ public class AddProblemFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_problem, container, false);
 
-        // Initialize ui attributes
+        /************************************************************************
+         * INITIALIZE UI ATTRIBUTES
+         ************************************************************************/
         final EditText title = (EditText) rootView.findViewById(R.id.problem_title_field);
         final EditText dateSelector = (EditText) rootView.findViewById(R.id.problem_date_selector);
         final EditText description = (EditText) rootView.findViewById(R.id.problem_description_field);
@@ -78,6 +79,9 @@ public class AddProblemFragment extends Fragment {
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
 
 
+        /************************************************************************
+         * SET PROBLEM START DATE
+         ************************************************************************/
         // Automatically set the problem start date to the current date
         dateSelector.setText(format.format(calendar.getTime()));
         Log.d("CurrentDate", format.format(calendar.getTime()));
@@ -87,7 +91,6 @@ public class AddProblemFragment extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, monthOfYear);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -113,18 +116,20 @@ public class AddProblemFragment extends Fragment {
         });
 
 
-        // Onclick listener for adding a problem
+        /************************************************************************
+         * ADD PROBLEM TO PATIENT
+         ************************************************************************/
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(checkInputs(title, description)){ // If checkInputs is true
                     // Set user inputs as data
-                    Problem problem = new Problem(title.getText().toString(), dateSelector.getText().toString(), description.getText().toString());
-                    patient.getProblems().addProblem(problem);
-                    ElasticSearchController.updateUser(patient); // Save problem to ES
-                    SaveLoadController.saveProfile(getContext(), patient); // Save problem to memory
-                    Log.d("ProblemAdd", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
+                    Problem problem = new Problem(title.getText().toString(),
+                            dateSelector.getText().toString(), description.getText().toString());
 
+                    // ask the problem controller to add the problem to the patient
+                    // and then save it locally and to ElasticSearch
+                    ProblemController.addProblem(getContext(), problem);
 
                     // Transition back to ProblemsFragment after adding
                     FragmentManager manager = getFragmentManager();
@@ -142,7 +147,9 @@ public class AddProblemFragment extends Fragment {
         return rootView;
     }
 
-    // Check that new problem at least includes a title and description
+    /************************************************************************
+     * CHECK INPUTS FILLED: TITLE AND DESCRIPTION
+     ************************************************************************/
     public boolean checkInputs(EditText title, EditText description){
         if(((title != null && !title.getText().toString().isEmpty())
                 && (description != null && !description.getText().toString().isEmpty()))){

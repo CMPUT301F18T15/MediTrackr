@@ -65,7 +65,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     // Class places each record into its corresponding view
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-         // Class objects   
+         // Class objects
         //BIND DATA
         holder.posTxt.setText("Position");
         holder.nameTxt.setText("Name");

@@ -44,38 +44,104 @@ public class ProblemList implements Serializable {
     private ArrayList<Problem> problems = new ArrayList<>();
 
     // Calls to Problem methods
+    /**
+     * gets a problem to add to the list
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov, 7 2018
+     * @param index       the index of a problem
+     * @return            the problem that it got
+     * @see Problem
+     */
     public Problem getProblem(int index){
         return problems.get(index);
     }
+
+    /**
+     * puts a problem to in to the list
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov, 7 2018
+     * @param index       the index where to put the problem in the list
+     * @param problem     the problem that will go into the list
+     * @see Problem
+     */
 
     public void setProblem(int index, Problem problem){
         problems.set(index, problem);
     }
 
+    /**
+     * adds a problem to the list
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov, 7 2018
+     * @param problem     the problem to add
+     * @see Problem
+     */
     public void addProblem(Problem problem){
         problems.add(problem);
     }
 
+    /**
+     * removes a problem from the list using that problem
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov, 7 2018
+     * @param problem     the problem to remove
+     * @see Problem
+     */
     public void removeProblem(Problem problem){
         problems.remove(problem);
     }
 
+    /**
+     * removes a problem from the list using an index
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov, 7 2018
+     * @param index     the index where the problem is
+     */
     public void removeProblem(int index){
         problems.remove(index);
     }
 
+    /**
+     * gets the index of a problem
+     * @author Orest Cokan
+     * @version 1.0 Nov, 7 2018
+     * @param problem     the problem to find the index for
+     * @return            the index of the problem
+     * @see Problem
+     */
     public int getIndex(Problem problem){
         return problems.indexOf(problem);
     }
-
+    /**
+     * checks to see if a problem exists in the list
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov, 7 2018
+     * @param problem     the problem to look for
+     * @return            True if it exists or false if not
+     * @see Problem
+     */
     public Boolean problemExists(Problem problem){
         return problems.contains(problem);
     }
 
+    /**
+     * gets the number of problems in the list
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov, 7 2018
+     * @return      the number of problems in the list
+     */
     public int getSize(){
         return problems.size();
     }
 
+    //tester function to remove later
     public String toString(){
         return problems.toString();
     }

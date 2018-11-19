@@ -12,6 +12,14 @@ import java.io.ByteArrayOutputStream;
  * Crated by Skryt on Nov 16, 2018
  */
 
+/**
+ * this class converts bitmap to a string
+ * a string to a bitmap
+ * a bitmap to a byte array
+ *
+ * @author Orest Cokan
+ * @version 1.0 Nov16, 2018.
+ */
 
 // Taken from https://stackoverflow.com/questions/9224056/android-bitmap-to-base64-string
 
@@ -19,6 +27,14 @@ import java.io.ByteArrayOutputStream;
 public class ConvertImage {
 
     // Take bitmap image and encode it to a base64 string
+
+    /**
+     * take bitmap image and encode it to a base64 string
+     *
+     * @param bitmap        the bitmap that will get converted
+     * @return              the resulting string
+     * @see Bitmap
+     */
     public static String base64Encode(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);  // Compress image to PNG format
@@ -30,12 +46,27 @@ public class ConvertImage {
 
 
     // Take in a base64 string and make it into an image
+
+    /**
+     * take in a base64 string and make it into an image
+     *
+     * @param blob  the string that will get converted
+     * @return      the resulting image
+     * @see Bitmap
+     */
     public static Bitmap base64Decode(String blob) {
         byte[] res = Base64.decode(blob, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(res, 0, res.length);
     }
 
     // Take a bitmap image and turn it into a byte array
+
+    /**
+     * take a bitmap image and turn it into a byte array
+     *
+     * @param bitmap        the bitmap we want to convert
+     * @return              the resulting byte array
+     */
     public static byte[] convertBitmapToBytes(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);

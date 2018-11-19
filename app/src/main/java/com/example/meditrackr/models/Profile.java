@@ -42,6 +42,17 @@ public class Profile implements Serializable {
     private boolean isCareProvider;
 
     // Constructor
+
+    /**
+     * creating variables for the class to use
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param username          the users username
+     * @param email             the users email
+     * @param phone             the users phone number
+     * @param isCareProvider    a booblean value that tells us if user is a care provider or not
+     */
     public Profile(String username, String email, String phone, boolean isCareProvider){
         // Initialize class objects
         this.username = username;
@@ -51,34 +62,91 @@ public class Profile implements Serializable {
     }
 
     // Getters/Setters
+    /**
+     * gets username
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return      the users username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * sets the username
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param username      the users username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+
+    /**
+     * gets user's email
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return      the users email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * sets the users email
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param email      the users email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * gets user's phone number
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return      the users phone number
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * sets the users phone number
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param phone      the users phone number
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     * gets if a user is a care provider or not
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @return      true if a user is a care provider false if not
+     */
     public boolean getisCareProvider() {
         return isCareProvider;
     }
 
+    /**
+     * sets the users care provider status
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Oct 24, 2018.
+     * @param isCareProvider      True if user is a careprovider
+     */
     public void setisCareProvider(boolean isCareProvider) {
         this.isCareProvider = isCareProvider;
     }

@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Set ui attributes
-        problems =  findViewById(R.id.problems);
+        problems =  (ImageView) findViewById(R.id.problems);
         map = (ImageView) findViewById(R.id.map);
         camera = (ImageView) findViewById(R.id.camera);
         search = (ImageView) findViewById(R.id.search);

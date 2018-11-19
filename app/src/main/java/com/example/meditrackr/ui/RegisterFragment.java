@@ -97,6 +97,9 @@ public class RegisterFragment extends Fragment {
         final TextView alreadyMember = (TextView) rootView.findViewById(R.id.already_member);
 
 
+        ElasticSearchController.deleteUser("scalingisoff");
+
+
         // Onclick listener for create account button
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override

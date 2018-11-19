@@ -148,9 +148,8 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             // Search for the profile of the patient clicked on
             Patient patient = (Patient) ElasticSearchController.searchProfile(patients.getPatient(position));
             LazyLoadingManager.setCarePatient(patient); // Loads patient data
-            // Loads the images for the patient's problems
-            LazyLoadingManager.setImages(patient.getProblem(position).getImageAll());
             // Transition to ProblemsFragment
+            LazyLoadingManager.setImages(patient.getProblem(0).getImageAll());
             ProblemsFragment fragment = ProblemsFragment.newInstance(position);
             // Allow user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);
@@ -160,3 +159,4 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         }
     }
 }
+

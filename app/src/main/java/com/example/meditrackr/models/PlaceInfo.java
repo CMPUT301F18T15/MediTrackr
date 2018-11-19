@@ -23,6 +23,7 @@ package com.example.meditrackr.models;
  * @version 1.0 Nov, 16 2018
  */
 
+//imports
 import android.net.Uri;
 
 import com.google.android.gms.maps.model.LatLng;

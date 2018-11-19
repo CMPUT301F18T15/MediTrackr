@@ -18,7 +18,7 @@
  */
 package com.example.meditrackr.controllers;
 
-
+//imports
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 

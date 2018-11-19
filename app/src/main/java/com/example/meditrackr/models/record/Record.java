@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.models.record;
 
+//imports
 import android.support.annotation.NonNull;
 import java.io.Serializable;
 

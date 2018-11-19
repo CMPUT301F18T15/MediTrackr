@@ -291,7 +291,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
             // populate image
             for(int i = 0; i < bitmaps.length; i++){
                 if(bitmaps[i] == null){
-                    Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 500, false);
+                    Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 425, false);
                     bitmaps[i] = newBitmap;
                     images[i].setImageBitmap(newBitmap);
                     break;

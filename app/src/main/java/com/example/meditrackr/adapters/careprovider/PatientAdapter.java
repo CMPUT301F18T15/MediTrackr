@@ -123,7 +123,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             FragmentTransaction transaction =  manager.beginTransaction();
             Patient patient = (Patient) ElasticSearchController.searchProfile(patients.getPatient(position));
             LazyLoadingManager.setCarePatient(patient);
-            LazyLoadingManager.setImages(patient.getProblem(position).getImageAll());
+            LazyLoadingManager.setImages(patient.getProblem(0).getImageAll());
             ProblemsFragment fragment = ProblemsFragment.newInstance(position);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);

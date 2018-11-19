@@ -12,11 +12,21 @@ import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 
 /**
- * Created by veronicasalm on Nov 18, 2018
+ * a problem controller that adds a problem to the database
+ * @author  Veronica Salm
+ * @varsion 1.0 Nov 18, 2018
  */
+
 
 public class RecordController {
 
+    /**
+     * adds problem to database and locally
+     *
+     * @param context   the context the controller will user
+     * @param record   the record we will add to the database
+     * @param position  the position of the problem
+     */
     public static void addRecord(Context context, Record record, int position) {
         // first, get the patient's profile
         Patient patient = LazyLoadingManager.getPatient();

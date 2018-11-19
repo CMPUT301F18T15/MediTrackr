@@ -11,22 +11,38 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.ui.MainActivity;
 
 /**
- * Crated by Skryt on Nov 17, 2018
+ * a controller that when a user tries to log in it looks to make sure that ther is a valid entry
+ * and checks if the entry is in the database
+ *
+ * @author Orest Cokan
+ * @version 1.0 Nov 17, 2018
  */
 
 public class LoginController {
 
-    public static void login(Context context, Activity activity, Profile profile) {
-        Profile checkProfile = ElasticSearchController.searchProfile(profile.getUsername());
-        if (checkProfile == null) {
-            ElasticSearchController.addProfile(profile);
-        } else {
-            ElasticSearchController.updateUser(profile);
-        }
+    public static void login(Context context, Activity activity, final Profile profile) {
+
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Profile checkProfile = ElasticSearchController.searchProfile(profile.getUsername());
+                if (checkProfile == null) {
+                    ElasticSearchController.addProfile(profile);
+                } else {
+                    ElasticSearchController.updateUser(profile);
+                }
+
+            }
+        });
+
+        thread.start();
+
         LazyLoadingManager.setProfile(profile);
         LazyLoadingManager.setCurrentUsername(profile.getUsername());
         SaveLoadController.saveProfile(context, profile);
@@ -63,4 +79,3 @@ public class LoginController {
         }
     }
 }
-

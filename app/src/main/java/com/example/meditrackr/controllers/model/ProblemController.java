@@ -12,12 +12,19 @@ import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 
 /**
- * Created by veronicasalm on Nov 18, 2018
+ * a problem controller that adds a problem to the database
+ * @author  Veronica Salm
+ * @varsion 1.0 Nov 18, 2018
  */
 
 
 public class ProblemController {
-
+    /**
+     * adds problem to database
+     *
+     * @param context   the context the controller will user
+     * @param problem   the problem we will add to the database
+     */
     public static void addProblem(Context context, Problem problem) {
         Patient patient = LazyLoadingManager.getPatient();
         patient.getProblems().addProblem(problem);

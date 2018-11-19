@@ -34,7 +34,11 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.models.Patient;
 
 /**
- * Crated by Skryt on Nov 18, 2018
+ * creates a s search adapter for a user to use. allows user to search for items throughout the app
+ * ie look for problem, look for care provider, etc
+ *
+ * @author Orest Cokan
+ * @version 1.0 Nov 18, 2018
  */
 
 // Class shows a result list in a recycler view
@@ -45,6 +49,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         private Patient patient;
 
         // Constructor
+        /**
+         * creates variables for the class to use
+         *
+         * @author Orest Cokan
+         * @version 1.0 Nov 18, 2018
+         * @param activity      the activety that the user is searching from
+         * @param context       the context for the adapter
+         * @param patient       the patient making the search
+         */
         public SearchAdapter(FragmentActivity activity, Context context, Patient patient) {
             this.activity = activity;
             this.context = context;

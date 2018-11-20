@@ -41,6 +41,8 @@ import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  *shows all infoermation associated with the patient that showed up from the search
  *if no patient was found then it returns "User not found"
@@ -93,10 +95,10 @@ public class PatientSearchFragment extends Fragment {
                 String username = searchPatient.getText().toString(); // Get patient username from input
                 profile = ElasticSearchController.searchProfile(username); // Search for patient
                 if(profile == null){
-                    Toast.makeText(getContext(), "User not found", Toast.LENGTH_LONG).show();
+                    Toasty.warning(getContext(), "User not found", Toast.LENGTH_LONG).show();
                 }
                 else if(profile.getisCareProvider()){
-                    Toast.makeText(getContext(), "Cannot add other careproviders!", Toast.LENGTH_LONG).show();
+                    Toasty.warning(getContext(), "Cannot add other careproviders!", Toast.LENGTH_LONG).show();
                 }
                 else{
                     // Set data according to user information
@@ -136,7 +138,7 @@ public class PatientSearchFragment extends Fragment {
                 } else { // Else if patient already exists under the care provider
                     changeViewVisibility(1);
                     // Create toast message that user cannot add the patient twice
-                    Toast.makeText(getContext(), "Cannot add the same patient twice!", Toast.LENGTH_LONG).show();
+                    Toasty.error(getContext(), "Cannot add the same patient twice!", Toast.LENGTH_LONG).show();
                 }
             }
         });

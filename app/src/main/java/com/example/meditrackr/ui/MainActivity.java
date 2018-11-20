@@ -38,6 +38,8 @@ import com.example.meditrackr.ui.patient.ProblemsFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * for this activity it just shows a bar at the bottom with 5 buttons
  * button 1 is a problems button which will take the user to the problems fragment
@@ -193,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
         }
         else {
-            Toast.makeText(MainActivity.this, "You can't make map reqeuests", Toast.LENGTH_LONG).show();
+            Toasty.error(MainActivity.this, "You can't make map requests", Toast.LENGTH_LONG).show();
         }
         return false;
     }

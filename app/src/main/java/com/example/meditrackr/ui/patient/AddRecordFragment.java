@@ -73,6 +73,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import es.dmoral.toasty.Toasty;
+
 import static android.app.Activity.RESULT_OK;
 
 /**
@@ -194,7 +196,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
                 }
 
                 else {
-                    Toast.makeText(getContext(), "Please enter a valid format for record", Toast.LENGTH_LONG).show();
+                    Toasty.error(getContext(), "Please enter a valid format for record", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -308,7 +310,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
             LatLng latLng = place.getLatLng();
             latitude = latLng.latitude;
             longitude = latLng.longitude;
-            Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG).show();
+            Toasty.info(getContext(), toastMsg, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -392,7 +394,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
                             }
                         }else{
                             Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(getContext(), "unable to get current location", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getContext(), "Unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -437,11 +439,11 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         try {
             List<Address> result = geocoder.getFromLocation(latitude, longitude, 1);
             if (result == null) {
-                Toast.makeText(getContext(), "Cannot get location name.",
+                Toasty.error(getContext(), "Cannot get location name",
                         Toast.LENGTH_LONG).show();
             } else {
                 if (result.isEmpty()) {
-                    Toast.makeText(getContext(), "No location is found.",
+                    Toasty.error(getContext(), "No location is found",
                             Toast.LENGTH_LONG).show();
                 } else {
                     address = result.get(0);
@@ -451,7 +453,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
                 }
             }
         } catch (IOException e) {
-            Toast.makeText(getContext(), "Network unavailable to get location name.",
+            Toasty.error(getContext(), "Network unavailable to get location name.",
                     Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }

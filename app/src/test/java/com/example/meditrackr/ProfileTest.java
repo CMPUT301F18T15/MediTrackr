@@ -37,6 +37,19 @@ import static org.junit.Assert.*;
 public class ProfileTest {
 
     public ProfileTest() {}
+    
+    // test if profile is constructed with its attributes
+    @Test
+    public void constructorTest() {
+        String name = "name";
+        String email = "Profile@profile.con";
+        String phone = "3214569870";
+        Profile profile = new Profile(name, email, phone, false);
+        assertEquals(name, profile.getUsername());
+        assertEquals(email, profile.getEmail());
+        assertEquals(phone, profile.getPhone());
+        assertFalse(profile.getisCareProvider());
+    }
 
     // Test if the generic Profile is parent to its subclasses
     @Test

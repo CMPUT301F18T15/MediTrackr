@@ -46,6 +46,21 @@ public class CareProviderTest {
         careProvider = new CareProvider
                 ("", "", "", true);
     }
+    
+    // test if careProvider is constructed with its attributes
+    @Test
+    public void constructorTest() {
+        String name = "Name";
+        String email = "doctor@doctors.com";
+        String phone = "1234567890";
+        CareProvider doctor =
+                new CareProvider(name, email, phone, true);
+        assertEquals(name, doctor.getUsername());
+        assertEquals(email, doctor.getEmail());
+        assertEquals(email, doctor.getEmail());
+        assertTrue(doctor.getisCareProvider());
+
+    }
 
     // Test that careProvider derives from its generic
     @Test

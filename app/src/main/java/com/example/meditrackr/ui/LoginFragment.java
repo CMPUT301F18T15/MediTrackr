@@ -62,21 +62,21 @@ import org.w3c.dom.Text;
 
 // Class creates Login Fragment
 public class LoginFragment extends Fragment {
+    // Initialize class objects and create new instance of login fragment
     private Profile profile;
-
 
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         return fragment;
     }
 
-    // Creates login fragment view
+    // Creates login view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_login, container, false);
 
-        // Set ui definitions
+        // Initialize ui attributes
         final EditText username = rootView.findViewById(R.id.patient_username);
         final Button login = (Button) rootView.findViewById(R.id.login_button);
         final TextView signup = (TextView) rootView.findViewById(R.id.not_member);
@@ -96,10 +96,12 @@ public class LoginFragment extends Fragment {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager manager = getFragmentManager(); // Prepare to change fragments
+                // Prepare to change fragments
+                FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.addToBackStack(null);
-                RegisterFragment fragment = RegisterFragment.newInstance(); // Switch to RegisterFragment
+                // Switch to RegisterFragment
+                RegisterFragment fragment = RegisterFragment.newInstance();
                 transaction.replace(R.id.content, fragment);
                 transaction.commit();
             }

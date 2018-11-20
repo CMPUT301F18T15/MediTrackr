@@ -33,12 +33,15 @@ import com.example.meditrackr.models.record.ImageSave;
  * Crated by Skryt on Nov 17, 2018
  */
 
+// Class handles full screen viewing for images
 public class FullScreenViewActivity extends AppCompatActivity{
+    // Initialize class objects
     private FullScreenImageAdapter adapter;
     private ViewPager viewPager;
     private ImageSave images;
 
 
+    // Creates image as view object
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +51,16 @@ public class FullScreenViewActivity extends AppCompatActivity{
 
         Intent i = getIntent();
         int position = i.getIntExtra("position", 0);
+        // Load image
         images = LazyLoadingManager.getImages();
 
-
+        // Adapt images to fullscreen
         adapter = new FullScreenImageAdapter(FullScreenViewActivity.this,
                 images);
 
         viewPager.setAdapter(adapter);
 
-        // displaying selected image first
+        // Displaying selected image first
         viewPager.setCurrentItem(position);
     }
 }

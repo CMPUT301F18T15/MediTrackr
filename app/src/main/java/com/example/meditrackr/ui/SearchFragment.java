@@ -43,22 +43,27 @@ import br.com.mauker.materialsearchview.MaterialSearchView;
 /**
  * Crated by Skryt on Nov 18, 2018
  */
+
+// Class creates search fragment
 public class SearchFragment extends Fragment {
+    // Initialize class objects
     private Patient patient;
     private SearchView mSearch;
 
-
+    // Create new frgament instance
     public static SearchFragment newInstance() {
         SearchFragment fragment = new SearchFragment();
         return fragment;
     }
 
-    // Creates view for fragment
+    // Creates search fragment view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_search, container, false);
+
+        // Initialize ui attributes
         mSearch = (SearchView) rootView.findViewById(R.id.mSearch);
         ImageView icon = mSearch.findViewById(android.support.v7.appcompat.R.id.search_button);
         icon.setColorFilter(Color.BLACK);
@@ -66,15 +71,16 @@ public class SearchFragment extends Fragment {
         mSearch.setClickable(true);
         RecyclerView rv = rootView.findViewById(R.id.myRecycler);
 
-        //SET ITS PROPETRIES
+        // Set view properties
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setItemAnimator(new DefaultItemAnimator());
 
-        //ADAPTER
+
+        // Adapt search items into recycler view
         final SearchAdapter adapter = new SearchAdapter(getActivity(),getContext(), patient);
         rv.setAdapter(adapter);
 
-        //SEARCH
+        // Sets a listener for user text input
         mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

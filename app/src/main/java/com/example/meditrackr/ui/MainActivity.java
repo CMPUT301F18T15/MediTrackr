@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int ERROR_DIALOG_REQUEST = 9001;
     final boolean isCareProvider = LazyLoadingManager.getIsCareProvider();
 
-    // ui attributes
+    // Initialize ui attributes
     private ImageView problems;
     private ImageView map;
     private ImageView camera;
@@ -70,12 +70,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageView profile;
 
 
+    // Creates main activity view objects based on layouts in XML
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Set ui attributes
+
+        // Initialize ui attributes
         problems =  (ImageView) findViewById(R.id.problems);
         map = (ImageView) findViewById(R.id.map);
         camera = (ImageView) findViewById(R.id.camera);
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         // Get userType
         setHomeView(isCareProvider);
 
-        // initialize navigation bar
+        // Initialize navigation bar
         initButtons();
         problems.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
 
@@ -99,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 ImageView image = (ImageView) v;
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
+                // Allow user to bring back previous fragment when back button is pressed
                 transaction.addToBackStack(null);
-
                 // Sets icons in navigation bar
                 initButtons();
 
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 else if (v == map) {
-                    // check if we have persomission to use google maps, if so then go to that activity
+                    // Check if we have persomission to use google maps, if so then go to that activity
                     if(isServicesOK()) {
                         image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
@@ -142,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     SearchFragment fragment = SearchFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
                 }
-                // clicked profile page
+                // Clicked profile page
                 else{
                     // Darken Profile icon
                     image.setImageDrawable(getResources().getDrawable(R.drawable.person_full));
@@ -151,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                     transaction.replace(R.id.content, fragment);
                 }
 
-                // ensure we swap fragments
+                // Ensure we swap fragments
                 transaction.commit();
             }
         };
@@ -182,27 +184,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // check for google services permission
+    // Check for google services permission
     public boolean isServicesOK(){
         Log.d(TAG, "isServicesOK: checking google services version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
         if(available == ConnectionResult.SUCCESS){
-            //everything is okay, user can make map requests
+            // Everything is okay, user can make map requests
             Log.d(TAG, "isServiceOK: Google play services is working");
             return true;
         }else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
-            // an error occured but we can resolve it
+            // An error occured but we can resolve it
             Log.d(TAG, "IsServicesOK: an error occured but we can fit it");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
         }
-        else {
+        else { // Cannot connect to google services
             Toast.makeText(MainActivity.this, "You can't make map reqeuests", Toast.LENGTH_LONG).show();
         }
         return false;
     }
 
-    // Set button icons on bottom bar
+    // Initialize button icons on bottom bar
     public void initButtons(){
         problems.setImageDrawable(getResources().getDrawable(R.drawable.cross));
         map.setImageDrawable(getResources().getDrawable(R.drawable.map));

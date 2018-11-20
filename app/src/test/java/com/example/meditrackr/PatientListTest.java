@@ -42,6 +42,12 @@ public class PatientListTest {
     public void newPatientList() {
         patientList = new PatientList();
     }
+    
+    @Test
+    public void constructorTest() {
+        PatientList list = new PatientList();
+        assertTrue(list.getSize() == 0);
+    }
 
     // Test if patients can be added to the list
     @Test

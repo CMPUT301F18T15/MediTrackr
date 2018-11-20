@@ -55,6 +55,14 @@ public class CareProviderListTest {
         assertTrue("CareProvider not added to CareProviderList",
                 careProviderList.getSize() != 0);
     }
+    
+    // test if careProviderList is empty first
+    @Test
+    public void constructorTest() {
+        CareProviderList list = new CareProviderList();
+        assertTrue(list.getSize() == 0); // is the list constructed empty?
+
+    }
 
     // Test if care providers can be deleted
     @Test

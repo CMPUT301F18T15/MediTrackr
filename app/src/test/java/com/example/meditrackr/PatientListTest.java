@@ -42,6 +42,13 @@ public class PatientListTest {
     public void newPatientList() {
         patientList = new PatientList();
     }
+    
+    // test if PatientList first constructed as an empty list
+    @Test
+    public void constructorTest() {
+        PatientList list = new PatientList();
+        assertTrue(list.getSize() == 0);
+    }
 
     // Test if patients can be added to the list
     @Test

@@ -44,6 +44,12 @@ public class RecordListTest {
         recordList = new RecordList();
         record = new Record("", "", "", null);
     }
+    
+    @Test
+    public void constructorTest() {
+        RecordList list = new RecordList();
+        assertTrue(list.getSize() == 0);
+    }
 
     // Test if a record could be added to the record list
     @Test

@@ -46,8 +46,15 @@ public class ProblemListTest {
         problem = new Problem
                 ("Sample problem", "Today", "This is problematic");
     }
+    
+    // Test if problemList is first constructed empty
+    @Test
+    public void constructorTest() {
+        ProblemList list = new ProblemList();
+        assertTrue(list.getSize() == 0); // is the list first empty
+    }
 
-
+    // Can a problem be added to ProblemList
     @Test
     public void addProblemTest() {
         problemList.addProblem(problem);
@@ -55,6 +62,7 @@ public class ProblemListTest {
                 problemList.getSize() != 0);
     }
 
+    // Can a problem be deleted from ProblemList by indexing
     @Test
     public void deleteProblemIndexTest() {
         problemList.addProblem(problem);
@@ -65,6 +73,7 @@ public class ProblemListTest {
                 problemList.getSize() == 0);
     }
 
+    // Can a problem be deleted from ProblemList by lookup
     @Test
     public void deleteProblemObjTest() {
         problemList.addProblem(problem);
@@ -75,6 +84,7 @@ public class ProblemListTest {
                 problemList.getSize() == 0);
     }
 
+    // Can problem be searched in ProblemList
     @Test
     public void hasProblemTest() {
         problemList.addProblem(problem);
@@ -82,6 +92,7 @@ public class ProblemListTest {
                 problemList.problemExists(problem));
     }
 
+    // Can a problem in problemList be overwritten
     @Test
     public void setProblemTest() {
         final Problem problemOne = new Problem("One", "", "");
@@ -97,6 +108,7 @@ public class ProblemListTest {
         assertTrue(problemList.getSize() == 1);
     }
 
+    // Are problems indexed correct
     @Test
     public void getIndexTest() {
         final Problem problemOne = new Problem("One", "", "");

@@ -28,9 +28,8 @@ import java.io.Serializable;
 import io.searchbox.annotations.JestId;
 
 /**
- * this class creates a profile which gets and stores all the profiles info:
- * id, username, email, phonenumber, isCareprovider
- * this class uses getters and setters to get and set all of the variables associated with this class
+ * Profile: Stores all information associated with a profile object, including
+ * a username, email, phone and a boolean user type identifies
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
@@ -54,6 +53,7 @@ public class Profile implements Serializable {
      * @param phone             the users phone number
      * @param isCareProvider    a booblean value that tells us if user is a care provider or not
      */
+
     // Constructor
     public Profile(String username, String email, String phone, boolean isCareProvider){
         // Initialize class objects
@@ -68,7 +68,7 @@ public class Profile implements Serializable {
      * gets username
      *
      * @author  Orest Cokan
-     * @return      the users username
+     * @return  the users username
      */
     public String getUsername() {
         return username;
@@ -79,7 +79,7 @@ public class Profile implements Serializable {
      * sets the username
      *
      * @author  Orest Cokan
-     * @param username      the users username
+     * @param username  the users username
      */
     public void setUsername(String username) {
         this.username = username;
@@ -90,7 +90,7 @@ public class Profile implements Serializable {
      * gets user's email
      *
      * @author  Orest Cokan
-     * @return      the users email
+     * @return  the users email
      */
     public String getEmail() {
         return email;
@@ -112,7 +112,7 @@ public class Profile implements Serializable {
      * gets user's phone number
      *
      * @author  Orest Cokan
-     * @return      the users phone number
+     * @return  the users phone number
      */
     public String getPhone() {
         return phone;
@@ -123,7 +123,7 @@ public class Profile implements Serializable {
      * sets the users phone number
      *
      * @author  Orest Cokan
-     * @param phone      the users phone number
+     * @param phone the users phone number
      */
     public void setPhone(String phone) {
         this.phone = phone;
@@ -134,7 +134,7 @@ public class Profile implements Serializable {
      * gets if a user is a care provider or not
      *
      * @author  Orest Cokan
-     * @return      true if a user is a care provider false if not
+     * @return  true if a user is a care provider false if not
      */
     public boolean getisCareProvider() {
         return isCareProvider;
@@ -145,7 +145,7 @@ public class Profile implements Serializable {
      * sets the users care provider status
      *
      * @author  Orest Cokan
-     * @param isCareProvider      True if user is a careprovider
+     * @param isCareProvider True if user is a careprovider
      */
     public void setisCareProvider(boolean isCareProvider) {
         this.isCareProvider = isCareProvider;

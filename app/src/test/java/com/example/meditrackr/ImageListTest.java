@@ -47,6 +47,12 @@ public class ImageListTest {
         final byte[] colours = {10, 10, 10};
         image = null;
     }
+    
+    @Test
+    public void constructorTest() {
+        RecordPhotoList list = new RecordPhotoList();
+        assertTrue(list.getSize() == 0); // is the list first empty
+    }
 
     // Test if images are being added to the list
     @Test

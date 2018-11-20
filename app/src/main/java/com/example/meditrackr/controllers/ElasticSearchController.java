@@ -86,12 +86,6 @@ public class ElasticSearchController {
     private static String DATABASE = "http://cmput301.softwareprocess.es:8080/";
 
 
-    /**
-     *
-     * @param profile       the profile to add to the class
-     * @return              identifies that the add was sucsesfull
-     */
-
     // Sign up and add a profile
     public static Boolean addProfile(Profile profile){
         Boolean done = false;

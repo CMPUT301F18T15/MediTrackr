@@ -105,6 +105,7 @@ public class SaveLoadController {
      * this function it will take the username from the given profile and then overwrite the new
      * profile data onto and the old profile date.
      * if something goes wrong it throws an error
+     *
      * @param context the context of the controller
      * @param profile the profile with the newly edited info
      * @throws java.io.IOException
@@ -129,6 +130,7 @@ public class SaveLoadController {
 
     /**
      * attempts to add a new profile to the database
+     *
      * @param context context of the controller
      * @param profile the profile data that the user created
      * @return returns true if profile was created or false if it already exists

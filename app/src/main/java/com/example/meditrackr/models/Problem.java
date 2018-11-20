@@ -30,12 +30,20 @@ import com.example.meditrackr.models.record.RecordList;
 import java.io.Serializable;
 
 /**
- * this class creates a Problem which gets and stores all the problems title, date, description and records.
- * this class uses getters and setter to get and set all the variables associated with that variable
+ * Problem: Stores all information associated with a problem object, including
+ * a title, date and description
+ *
+ * Records have a RecordList, an ImageSave (list of string photo names
+ * for storage) and a CommentList
+ *
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
+ * @see RecordList
+ * @see ImageSave
+ * @see CommentList
  */
+
 
 // A Problem class that holds all methods pertaining to Problem
 public class Problem implements Serializable {
@@ -64,11 +72,16 @@ public class Problem implements Serializable {
     }
 
 
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
     /**
      * gets the title of the problem
      *
      * @author Orest Cokan
-     * @return title      the title of the problem
+     * @return title    the title of the problem
      */
     public String getTitle() {
         return title;
@@ -79,7 +92,7 @@ public class Problem implements Serializable {
      * sets the title of the problem
      *
      * @author Orest Cokan
-     * @param title       the title of the problem
+     * @param title     the title of the problem
      */
     public void setTitle(String title) {
         this.title = title;
@@ -90,7 +103,7 @@ public class Problem implements Serializable {
      * gets the date of the problem
      *
      * @author Orest Cokan
-     * @return date      the date of the problem
+     * @return date     the date of the problem
      */
     public String getDate() {
         return date;

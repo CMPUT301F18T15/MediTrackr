@@ -44,6 +44,7 @@ public class ImageController {
      * pass the file path to decode it into bitmap
      * then resize and compress it to desired file size
      * then set it to image view to show it
+     *
      * @author Orest Cokan
      * @param filePath the file path of image in this phone
      * @return selectImage the edited image

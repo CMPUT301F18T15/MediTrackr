@@ -29,17 +29,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * this class creates a ProblemList which stores all problems for a patient in one place.
- * it uses getters and setters to store the problems.
- * this class uses getProblem to return the index of a specific problem
- * this class can use addProblem to add a problem to the ProblemList
- * this class can use removeProblem to remove a problem from the problemList
- * this class can use getIndex to return the index of a specific problem
- * this class can use problemExists to check to see if a problem exists
- * this class can use getSizet the number of problems in the list
+ * RecordList: A list of records.
+ *
+ * Allows adding and removing elements (by both index and record),
+ * checking if a problem object exists in the array and retrieving the
+ * size of the list.
  *
  * @author  Orest Cokan
- * @version 1.0 Nov 7, 2018.
+ * @version 1.0 Oct 24, 2018.
  */
 
 // A ProblemList class that holds all methods pertaining to ProblemList

@@ -65,39 +65,6 @@ public class ProblemTest extends ActivityTestRule<MainActivity> {
 
 
     @Test
-    public void addProblemTest() {
-
-        // Valid name with empty description
-        onView(withId(R.id.add_problem_floating)).perform(click());
-        onView(withId(R.id.problem_title_field)).perform(click(), typeText(problemName), pressBack());
-        onView(withId(R.id.problem_add_button)).perform(click());
-
-        try {
-            onView(withId(R.id.problem_add_button)).check(matches(isDisplayed()));
-        } catch (NoMatchingViewException e) {
-            fail("Problem was added without a description");
-        }
-
-        // Empty name with valid description
-        Espresso.pressBack();
-        onView(withId(R.id.add_problem_floating)).perform(click());
-
-        // Close keyboard due to overlap
-        onView(withId(R.id.problem_description_field)).perform
-                (click(), closeSoftKeyboard(), typeText(problemDesc), pressBack());
-        onView(withId(R.id.problem_add_button)).perform(click());
-
-        try {
-            onView(withId(R.id.problem_add_button)).check(matches(isDisplayed()));
-        } catch (NoMatchingViewException e) {
-            fail("Problem was added without a title");
-        }
-
-        // Return to Main
-        Espresso.pressBack();
-    }
-
-    @Test
     public void longProblemTest() {
 
         final String longTitle = "This problem has a very long name (over 30 characters)";

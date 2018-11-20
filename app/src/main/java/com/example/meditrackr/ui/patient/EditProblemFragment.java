@@ -45,6 +45,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * Created by Skryt on Nov 14, 2018
  */
@@ -148,7 +150,7 @@ public class EditProblemFragment extends Fragment {
                     }
                     else {
                         // Else if checkInputs return false indicate that problem cannot be added
-                        Toast.makeText(getContext(), "The title and description cannot be empty", Toast.LENGTH_LONG).show();
+                        Toasty.error(getContext(), "The title and description cannot be empty", Toast.LENGTH_LONG).show();
                     }
                 }
             });

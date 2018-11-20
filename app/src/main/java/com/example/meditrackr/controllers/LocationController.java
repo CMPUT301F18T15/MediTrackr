@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * this class is in charge of all the geolocation functionality
  * this class can use locationController which can get the latitude and longitude of the location and
@@ -147,7 +149,7 @@ public class LocationController {
         locationNameList.clear();
         // user did not input anything
         if (locationName.trim().length() == 0) {
-            Toast.makeText(context, "Please enter location.", Toast.LENGTH_LONG).show();
+            Toasty.warning(context, "Please enter location", Toast.LENGTH_LONG).show();
         } else {
             try {
                 // user inputed location name
@@ -156,10 +158,10 @@ public class LocationController {
                 locationList = geocoder.getFromLocationName(locationName, maxResults);
 
                 if (locationList == null) {
-                    Toast.makeText(context, "Cannot get location", Toast.LENGTH_LONG).show();
+                    Toasty.error(context, "Cannot get location", Toast.LENGTH_LONG).show();
                 } else {
                     if (locationList.isEmpty()) {
-                        Toast.makeText(context, "No location is found", Toast.LENGTH_LONG).show();
+                        Toasty.error(context, "No location is found", Toast.LENGTH_LONG).show();
                     } else {
                         for (Address i : locationList) {
                             String addressline = i.getFeatureName() + '\n'
@@ -171,7 +173,7 @@ public class LocationController {
 
 
             } catch (IOException e) {
-                Toast.makeText(context, "Network unavailable or any issues occurred.",
+                Toasty.error(context, "Network unavailable or other issues occurred",
                         Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
@@ -199,7 +201,7 @@ public class LocationController {
                     gpsLongitude = location.getLongitude();
                     gpsLatitude = location.getLatitude();
                 } else {
-                    Toast.makeText(context, "Cannot get current location so location set to 0, 0.", Toast.LENGTH_LONG).show();
+                    Toasty.warning(context, "Cannot get current location, default set to (0, 0)", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -236,7 +238,7 @@ public class LocationController {
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             locationListener.onLocationChanged(location);
         } catch (SecurityException s) {
-            Toast.makeText(context, "Permission needed to access GPS services.", Toast.LENGTH_LONG).show();
+            Toasty.info(context, "Permission needed to access GPS services.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -275,11 +277,11 @@ public class LocationController {
         try {
             List<Address> result = geocoder.getFromLocation(gpsLatitude, gpsLongitude, maxResults);
             if (result == null) {
-                Toast.makeText(context, "Cannot get location name.",
+                Toasty.error(context, "Cannot get location name",
                         Toast.LENGTH_LONG).show();
             } else {
                 if (result.isEmpty()) {
-                    Toast.makeText(context, "No location is found.",
+                    Toasty.error(context, "No location is found",
                             Toast.LENGTH_LONG).show();
                 } else {
                     adrress = result.get(0);
@@ -287,7 +289,7 @@ public class LocationController {
                 }
             }
         } catch (IOException e) {
-            Toast.makeText(context, "Network unavailable to get location name.",
+            Toasty.error(context, "Network unavailable to get location name",
                     Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }

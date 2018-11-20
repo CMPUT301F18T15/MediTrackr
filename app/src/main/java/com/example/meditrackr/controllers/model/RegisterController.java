@@ -13,6 +13,8 @@ import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.ui.MainActivity;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * Crated by Skryt on Nov 17, 2018
  */
@@ -38,14 +40,12 @@ public class RegisterController {
         }
         if (!finish || !done) {
             Log.d("RegisterFragmentMeme", "done is " + done + " finish is " + finish);
-            Toast.makeText(context, "Duplicate UserName", Toast.LENGTH_SHORT).show();
+            Toasty.error(context, "Username taken", Toast.LENGTH_SHORT).show();
         } else { // If no exceptions were caught
-            Toast.makeText(context, "Success to Sign Up", Toast.LENGTH_SHORT).show();
+            Toasty.success(context, "Registration successful", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(actvity, MainActivity.class);
             intent.putExtras(bundle);
             actvity.startActivity(intent);
         }
-
-
-        }
     }
+}

@@ -47,6 +47,7 @@ public class ProfileListTest {
         profile = new Profile("", "", "", false);
     }
     
+    // test if profileList is first empty when constructed
     @Test
     public void constructorTest() {
         ProfileList list = new ProfileList();

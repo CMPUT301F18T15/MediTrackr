@@ -44,8 +44,6 @@ import java.io.ByteArrayOutputStream;
 // A ConvertImage class that holds all information pertaining to image conversion
 public class ConvertImage {
 
-    // Take bitmap image and encode it to a base64 string
-
     /**
      * take bitmap image and encode it to a base64 string
      *
@@ -53,6 +51,7 @@ public class ConvertImage {
      * @return              the resulting string
      * @see Bitmap
      */
+    // Take bitmap image and encode it to a base64 string
     public static String base64Encode(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);  // Compress image to PNG format
@@ -63,8 +62,6 @@ public class ConvertImage {
     }
 
 
-    // Take in a base64 string and make it into an image
-
     /**
      * take in a base64 string and make it into an image
      *
@@ -72,12 +69,12 @@ public class ConvertImage {
      * @return      the resulting image
      * @see Bitmap
      */
+    // Take in a base64 string and make it into an image
     public static Bitmap base64Decode(String blob) {
         byte[] res = Base64.decode(blob, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(res, 0, res.length);
     }
 
-    // Take a bitmap image and turn it into a byte array
 
     /**
      * take a bitmap image and turn it into a byte array
@@ -85,6 +82,7 @@ public class ConvertImage {
      * @param bitmap        the bitmap we want to convert
      * @return              the resulting byte array
      */
+    // Take a bitmap image and convert it into a byte array
     public static byte[] convertBitmapToBytes(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);

@@ -31,8 +31,9 @@ import java.io.ByteArrayOutputStream;
  * @version 1.0 Nov 13, 2018
  */
 
+// Controller class for images
 public class ImageController {
-    //image
+    // Image
     private Bitmap selectImage;
 
     public ImageController (){
@@ -48,11 +49,12 @@ public class ImageController {
      * @param filePath the file path of image in this phone
      * @return selectImage the edited image
      */
+
+    // Set max image file size
     public Bitmap decodeFile(String filePath) {
-        //set max image file size
         int maxSize = 65536;
 
-        // get the original image size
+        // Get the original image size
         BitmapFactory.Options option = new BitmapFactory.Options();
         option.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(filePath, option);
@@ -70,21 +72,21 @@ public class ImageController {
             scale *= 2;
         }
 
-        // get image with desired size
+        // Get image with desired size
         BitmapFactory.Options optionSet = new BitmapFactory.Options();
         optionSet.inSampleSize = scale;
         selectImage = BitmapFactory.decodeFile(filePath, optionSet);
 
-        // compress the image to desired file size
+        // Compress the image to desired file size
         int compressQuality = 100;
         int streamLength = maxSize;
 
-        while (streamLength >= maxSize) {
+        while (streamLength >= maxSize) { // While image length is larger than desired length
             compressQuality -= 1;
             ByteArrayOutputStream bmpStream = new ByteArrayOutputStream();
             selectImage.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream);
 
-            byte[] bmpPicByteArray = bmpStream.toByteArray();
+            byte[] bmpPicByteArray = bmpStream.toByteArray(); // Transfer bytes into bytearray
             streamLength = bmpPicByteArray.length;
         }
 

@@ -58,12 +58,14 @@ public class AddProblemFragment extends Fragment {
     /************************************************************************
      * CREATE ADD PROBLEM FRAGMENT OBJECT
      ************************************************************************/
+    // Constructor
     public static AddProblemFragment newInstance(){
+        // Initialize fragment object
         AddProblemFragment fragment = new AddProblemFragment();
         return fragment;
     }
 
-    // Create add problem fragment view
+    // Creates view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class AddProblemFragment extends Fragment {
         /************************************************************************
          * INITIALIZE UI ATTRIBUTES
          ************************************************************************/
+        // Initialize ui attributes
         final EditText title = (EditText) rootView.findViewById(R.id.problem_title_field);
         final EditText dateSelector = (EditText) rootView.findViewById(R.id.problem_date_selector);
         final EditText description = (EditText) rootView.findViewById(R.id.problem_description_field);
@@ -121,6 +124,7 @@ public class AddProblemFragment extends Fragment {
         /************************************************************************
          * ADD PROBLEM TO PATIENT
          ************************************************************************/
+        // Handles button for adding patient
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,8 +133,8 @@ public class AddProblemFragment extends Fragment {
                     Problem problem = new Problem(title.getText().toString(),
                             dateSelector.getText().toString(), description.getText().toString());
 
-                    // ask the problem controller to add the problem to the patient
-                    // and then save it locally and to ElasticSearch
+                    // Ask the problem controller to add the problem to the patient
+                    // And then save it locally and to ElasticSearch
                     ProblemController.addProblem(getContext(), problem);
 
                     // Transition back to ProblemsFragment after adding
@@ -138,7 +142,7 @@ public class AddProblemFragment extends Fragment {
                     FragmentTransaction transaction = manager.beginTransaction();
                     ProblemsFragment fragment = ProblemsFragment.newInstance(); // Switch to ProblemsFragment
                     transaction.replace(R.id.content, fragment);
-                    transaction.commit();
+                    transaction.commit(); // Make permanent any changes made in fragment
                 }
                 else { // If checkInputs is false
                     // Create toast message indicating that problem could not be added
@@ -152,6 +156,7 @@ public class AddProblemFragment extends Fragment {
     /************************************************************************
      * CHECK INPUTS FILLED: TITLE AND DESCRIPTION
      ************************************************************************/
+    // Checks if user input fulfills title and description requirement
     public boolean checkInputs(EditText title, EditText description){
         if(((title != null && !title.getText().toString().isEmpty())
                 && (description != null && !description.getText().toString().isEmpty()))){

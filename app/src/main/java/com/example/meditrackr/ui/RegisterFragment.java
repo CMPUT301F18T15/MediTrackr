@@ -77,13 +77,14 @@ public class RegisterFragment extends Fragment {
         return fragment;
     }
 
-    // Creates view for fragment
+    // Creates register fragment view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_signup, container, false);
 
-        // Set ui definitions
+
+        // Initialize ui attributes
         final EditText username = (EditText) rootView.findViewById(R.id.patient_username);
         final EditText email = (EditText) rootView.findViewById(R.id.patient_email);
         final EditText phoneNumber = (EditText) rootView.findViewById(R.id.phone_number);
@@ -102,7 +103,8 @@ public class RegisterFragment extends Fragment {
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkInputs(username, email, phoneNumber, doctorImage, patientImage)){ // If all required information has been given
+                // If all required information has been provided
+                if(checkInputs(username, email, phoneNumber, doctorImage, patientImage)){
                     if(doctorImage.isSelected()){
                         CareProvider careProvider = new CareProvider(
                                 username.getText().toString().trim(),

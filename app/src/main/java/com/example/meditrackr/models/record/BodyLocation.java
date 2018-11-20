@@ -31,7 +31,7 @@ import java.io.Serializable;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A BodyLocation class that holds all information pertaining to BodyLocation
+// A BodyLocation class that holds all methods pertaining to BodyLocation
 public class BodyLocation implements Serializable {
 
     // Initialize class variables
@@ -54,9 +54,7 @@ public class BodyLocation implements Serializable {
         this.bodyLocation = bodyLocation;
     }
 
-
-    // Getters/Setters
-
+    // Getters/ Setters
     /**
      * gets the body coordinate
      * @author  Orest Cokan
@@ -67,6 +65,7 @@ public class BodyLocation implements Serializable {
         return bodyCoordinate;
     }
 
+
     /**
      * takes the body coordinate and sets it as a variable
      * @author  Orest Cokan
@@ -76,6 +75,8 @@ public class BodyLocation implements Serializable {
     public void setBodyCoordinate(double[] bodyCoordinate) {
         this.bodyCoordinate = bodyCoordinate;
     }
+
+
     /**
      * gets the name of the face coordinate
      * @author  Orest Cokan
@@ -95,6 +96,8 @@ public class BodyLocation implements Serializable {
     public void setBodyFace(String bodyFace) {
         this.bodyFace = bodyFace;
     }
+
+
     /**
      * gets the name of the body coordinate
      * @author  Orest Cokan
@@ -104,6 +107,7 @@ public class BodyLocation implements Serializable {
     public String getBodyLocation() {
         return bodyLocation;
     }
+
 
     /**
      * takes the body location and sets it as a variable

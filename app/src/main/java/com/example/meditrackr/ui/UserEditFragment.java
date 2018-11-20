@@ -46,34 +46,36 @@ import com.example.meditrackr.models.Profile;
 
 // Class creates user profile edit fragment
 public class UserEditFragment extends Fragment {
-    // Set variables
+    // Initialize class objects and create new fragment instance
     Profile profile = LazyLoadingManager.getProfile();
+
     public static UserEditFragment newInstance(){
         UserEditFragment fragment = new UserEditFragment();
         return fragment;
     }
 
-    // Creates view for fragment
+
+    // Creates edit fragment view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_user_edit, container, false);
-
-        // Get fragment bundle
         final Bundle bundle = getArguments();
 
-        // Set ui definitions
+        // Initialize ui attributes
         ImageView user_image = rootView.findViewById(R.id.patient_image);
         final TextView username = rootView.findViewById(R.id.patient_username);
         final TextView email = rootView.findViewById(R.id.patient_email);
         final TextView phone = rootView.findViewById(R.id.patient_phone);
         Button editButton = rootView.findViewById(R.id.save_edits_button);
 
+
         // Set users info in the page
         username.setText(profile.getUsername());
         email.setText(profile.getEmail());
         phone.setText(profile.getPhone());
+
 
         // Onclick listener for create account button which allows user to switch fragments to view their profile
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -86,11 +88,16 @@ public class UserEditFragment extends Fragment {
                 ElasticSearchController.updateUser(profile); // Saves profile in ES
 
                 FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction(); // Allow editing on fragment
-                transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
-                UserFragment fragment = UserFragment.newInstance().newInstance(); // Creates new instance of user edit fragment
-                transaction.replace(R.id.content, fragment); // Replace current fragment with new info
-                transaction.commit(); // Make permanent all changes made in the transaction
+                // Allow editing on fragment
+                FragmentTransaction transaction = manager.beginTransaction();
+                // Allows user to bring back previous fragment when back button is pressed
+                transaction.addToBackStack(null);
+                // Switches to UserFragment
+                UserFragment fragment = UserFragment.newInstance().newInstance();
+                // Replace current fragment with new info
+                transaction.replace(R.id.content, fragment);
+                // Make permanent all changes made in the transaction
+                transaction.commit();
             }
         });
 

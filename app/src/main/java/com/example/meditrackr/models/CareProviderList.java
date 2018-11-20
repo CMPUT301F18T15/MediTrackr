@@ -34,14 +34,13 @@ import java.util.ArrayList;
  * @version 1.0 Nov 7, 2018.
  */
 
-// Class creates Care Provider List
+// A CareProviderList class that holds all methods pertaining to CareProviderList
 public class CareProviderList implements Serializable {
 
     // Create array of care providers
     private ArrayList<CareProvider> careProviders = new ArrayList<>();
 
     // Calls to CareProviderList methods
-
     /**
      * gets the number of care providers in the list
      * @author  Orest Cokan
@@ -51,6 +50,7 @@ public class CareProviderList implements Serializable {
     public int getSize(){
         return careProviders.size();
     }
+
 
     /**
      * adds a given careprovider to the list
@@ -63,6 +63,7 @@ public class CareProviderList implements Serializable {
         careProviders.add(careProvider);
     }
 
+
     /**
      * deletes a care provider from the list
      * @author  Orest Cokan
@@ -72,6 +73,8 @@ public class CareProviderList implements Serializable {
     public void deleteCareProvider(CareProvider careProvider){
         careProviders.remove(careProvider);
     }
+
+
     /**
      * checks to see if care provider exists
      * @author  Orest Cokan
@@ -87,6 +90,8 @@ public class CareProviderList implements Serializable {
         }
         return false;
     }
+
+
     //tester function will remove later
     public String toString(){
         return careProviders.toString();

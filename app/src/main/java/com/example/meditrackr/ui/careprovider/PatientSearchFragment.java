@@ -53,7 +53,7 @@ import es.dmoral.toasty.Toasty;
 
 // Class creates PatientSearchFragment for care providers
 public class PatientSearchFragment extends Fragment {
-    // Initialize variables
+    // Initialize class objects
     private Profile profile;
     private CareProvider careProvider;
     private ConstraintLayout searchLayout;
@@ -65,7 +65,7 @@ public class PatientSearchFragment extends Fragment {
         return fragment;
     }
 
-    // Creates patient search fragment view
+    // Creates view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,7 +94,8 @@ public class PatientSearchFragment extends Fragment {
             public void onClick(View view) {
                 String username = searchPatient.getText().toString(); // Get patient username from input
                 profile = ElasticSearchController.searchProfile(username); // Search for patient
-                if(profile == null){
+
+                if(profile == null){ // If user not found indicate so
                     Toasty.warning(getContext(), "User not found", Toast.LENGTH_LONG).show();
                 }
                 else if(profile.getisCareProvider()){

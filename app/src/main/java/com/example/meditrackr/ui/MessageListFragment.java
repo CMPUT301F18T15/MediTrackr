@@ -44,32 +44,38 @@ import com.example.meditrackr.models.Profile;
  * Created by Skryt on Nov 15, 2018
  */
 
+// Class creates MessageListFragment
 public class MessageListFragment extends Fragment {
+    // Initialize class objects
     private MessageListAdapter adapter;
     private Profile profile;
     private CommentList comments;
     private Patient patient;
 
+    // Create new fragment instance
     public static MessageListFragment newInstance(){
         MessageListFragment fragment = new MessageListFragment();
         return fragment;
     }
 
 
+    // Creates message list view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_message_list, container, false);
 
+        // Initialize ui attributes
         final Button sendbutton = (Button) rootView.findViewById(R.id.button_chatbox_send);
         final EditText chatBox = (EditText) rootView.findViewById(R.id.edittext_chatbox);
         final RecyclerView messageList = (RecyclerView) rootView.findViewById(R.id.reyclerview_message_list);
 
+        // Load user profile
         profile = LazyLoadingManager.getProfile();
         Log.d("WOOT", profile.getUsername());
 
 
-        // need to fix this in the future, this is way too fucking hacky
+        // Need to fix this in the future, this is way too hacky
         if(profile.getisCareProvider()){
             Log.d("WOOT", "do i get here?");
             patient = LazyLoadingManager.getCarePatient();
@@ -82,7 +88,7 @@ public class MessageListFragment extends Fragment {
         }
 
 
-        // initialize the messageList adapter
+        // Initialize the messageList adapter
         messageList.setHasFixedSize(false);
         adapter = new MessageListAdapter(getContext(), comments);
         messageList.setAdapter(adapter);
@@ -92,16 +98,18 @@ public class MessageListFragment extends Fragment {
         messageList.smoothScrollToPosition(comments.getSize());
 
 
-        // on click listener for send button
+        // On click listener for send button
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // If chat is not empty send new message
                 if(!chatBox.getText().toString().trim().isEmpty()) {
                     Comment comment = new Comment(
                             chatBox.getText().toString(),
                             profile.getUsername()
 
                     );
+                    // Update view to show sent message
                     comments.addComment(comment);
                     adapter.notifyDataSetChanged();
                     chatBox.setText(null);

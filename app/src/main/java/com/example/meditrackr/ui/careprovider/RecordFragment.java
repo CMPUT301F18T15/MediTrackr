@@ -33,7 +33,9 @@ import com.example.meditrackr.models.record.Record;
  * Created by Skryt on Nov 15, 2018
  */
 
+// Class creates Record Fragment for care providers
 public class RecordFragment extends Fragment {
+    // Initialize class objects
     private Record record;
     private ImageView[] images = new ImageView[10];
 
@@ -45,6 +47,7 @@ public class RecordFragment extends Fragment {
         return fragment;
     }
 
+    // Creates view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

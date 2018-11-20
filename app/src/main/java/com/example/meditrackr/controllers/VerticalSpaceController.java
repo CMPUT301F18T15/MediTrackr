@@ -35,7 +35,7 @@ import android.view.View;
 // Class creates VerticalSpaceController for RecyclerView
 public class VerticalSpaceController extends RecyclerView.ItemDecoration {
 
-    //Initialize class variables/objects
+    //Initialize class objects
     private final int verticalSpaceHeight;
 
     /**
@@ -44,11 +44,12 @@ public class VerticalSpaceController extends RecyclerView.ItemDecoration {
      * @version 1.0 Nov 10, 2018
      * @param verticalSpaceHeight the integer to set the space to
      */
+    // Sets the height of padding
     public VerticalSpaceController(int verticalSpaceHeight) {
         this.verticalSpaceHeight = verticalSpaceHeight;
     }
 
-    // Add spacing between views
+    // Adds padding between views
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
                                RecyclerView.State state) {

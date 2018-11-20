@@ -46,6 +46,12 @@ public class ProfileListTest {
         profileList = new ProfileList();
         profile = new Profile("", "", "", false);
     }
+    
+    @Test
+    public void constructorTest() {
+        ProfileList list = new ProfileList();
+        assertTrue(list.size() == 0); // is the list first empty
+    }
 
     // Test if the profile can be added to the list
     @Test

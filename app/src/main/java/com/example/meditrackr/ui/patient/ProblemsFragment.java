@@ -75,7 +75,6 @@ public class ProblemsFragment extends Fragment {
         // Initialize add problem button and recycler view
         final FloatingActionButton addProblem = (FloatingActionButton) rootView.findViewById(R.id.add_problem_floating);
         final RecyclerView problems = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
-        imageProblem = (ImageView) rootView.findViewById(R.id.problem_image);
 
         // Initializes problem adapter, linear layout manager, and vertical space controller for recycler view
         problems.setHasFixedSize(false);

@@ -2,7 +2,7 @@ package com.example.meditrackr;
 
 import android.graphics.Bitmap;
 
-import com.example.meditrackr.models.record.ImageList;
+import com.example.meditrackr.models.record.RecordPhotoList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,19 +11,19 @@ import static org.junit.Assert.*;
 
 
 /**
- * ImageList Unit Tests
+ * RecordPhotoList Unit Tests
  */
 
 public class ImageListTest {
-    private ImageList imageList;
+    private RecordPhotoList imageList;
     private Bitmap image;
 
     public ImageListTest() {}
 
-    // Set an initial null bitmap and an empty ImageList
+    // Set an initial null bitmap and an empty RecordPhotoList
     @Before
     public void initImageList() {
-        imageList = new ImageList();
+        imageList = new RecordPhotoList();
         final byte[] colours = {10, 10, 10};
         image = null;
     }

@@ -2,7 +2,7 @@ package com.example.meditrackr;
 
 import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.models.record.Geolocation;
-import com.example.meditrackr.models.record.ImageList;
+import com.example.meditrackr.models.record.RecordPhotoList;
 import com.example.meditrackr.models.record.Record;
 
 import org.junit.Before;
@@ -105,7 +105,7 @@ public class RecordTest {
     // Test if images can be added to the record
     @Test
     public void setImageTest() {
-        final ImageList imgList = new ImageList();
+        final RecordPhotoList imgList = new RecordPhotoList();
 
         record.setImages(imgList);
 

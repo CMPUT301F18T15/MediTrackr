@@ -58,7 +58,6 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 // Class creates main activity fragment
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MapActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
     final boolean isCareProvider = LazyLoadingManager.getIsCareProvider();
 
@@ -184,15 +183,12 @@ public class MainActivity extends AppCompatActivity {
 
     // check for google services permission
     public boolean isServicesOK(){
-        Log.d(TAG, "isServicesOK: checking google services version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
         if(available == ConnectionResult.SUCCESS){
             //everything is okay, user can make map requests
-            Log.d(TAG, "isServiceOK: Google play services is working");
             return true;
         }else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
             // an error occured but we can resolve it
-            Log.d(TAG, "IsServicesOK: an error occured but we can fit it");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
         }

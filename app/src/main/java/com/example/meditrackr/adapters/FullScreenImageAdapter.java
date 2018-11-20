@@ -27,8 +27,6 @@ package com.example.meditrackr.adapters;
      */
 
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -43,7 +41,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.models.record.ImageList;
 import com.example.meditrackr.models.record.ImageSave;
 import com.example.meditrackr.utils.ConvertImage;
 

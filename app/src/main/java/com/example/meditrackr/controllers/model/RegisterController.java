@@ -19,7 +19,7 @@ import com.example.meditrackr.ui.MainActivity;
 
 public class RegisterController {
 
-    public static void RegisterAccount(Activity actvity, Context context, Profile profile) {
+    public static void RegisterAccount(Activity activity, Context context, Profile profile) {
         Bundle bundle = new Bundle();
         boolean done;
         boolean finish;
@@ -41,11 +41,10 @@ public class RegisterController {
             Toast.makeText(context, "Duplicate UserName", Toast.LENGTH_SHORT).show();
         } else { // If no exceptions were caught
             Toast.makeText(context, "Success to Sign Up", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(actvity, MainActivity.class);
+            Intent intent = new Intent(activity, MainActivity.class);
             intent.putExtras(bundle);
-            actvity.startActivity(intent);
+            activity.startActivity(intent);
         }
 
-
-        }
     }
+}

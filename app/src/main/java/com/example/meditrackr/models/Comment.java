@@ -29,21 +29,23 @@ import com.example.meditrackr.utils.DateUtils;
 import java.io.Serializable;
 
 /**
- * creates a comment class that stare the comment the username and date
+ * Comment: Stores information about a comment (message) left by a patient
+ * or care provider, including the date (timestamp), the text of the message,
+ * and the username of the user who left the comment.
+ *
  * @author Orest Cokan
  * @version 1.0 Nov 15, 2018
  */
-
-// A Comment class that holds all methods pertaining to Comment
 public class Comment implements Serializable {
-    // Attributes
+    // A comment has a date, string text (comment), and
     private String date = DateUtils.formatAppTime();
     private String comment;
     private String username;
 
 
     /**
-     * creates variables for the class to use
+     * Creates a new Comment object.
+     *
      * @author Orest Cokan
      * @param comment   the comment that the user made
      * @param username  the username of the person who made the comment
@@ -59,10 +61,10 @@ public class Comment implements Serializable {
      *------------------------------------------------------------------------*/
 
     /**
-     * gets the date of when the comment was made
+     * Gets the date (timestamp) when the comment was sent.
      *
      * @author Orest Cokan
-     * @return getDate   the date when the comment was made
+     * @return          the timestamp when the comment was sent
      */
     public String getDate() {
         return date;
@@ -70,10 +72,10 @@ public class Comment implements Serializable {
 
 
     /**
-     * sets the date of when the comment was made
+     * Sets the date to a new date representation (in string format).
      *
      * @author Orest Cokan
-     * @param date a string date representation
+     * @param date      a string date representation
      */
     public void setDate(String date) {
         this.date = date;
@@ -81,10 +83,10 @@ public class Comment implements Serializable {
 
 
     /**
-     * sets the comment user made
+     * Sets the text of the comment.
      *
      * @author Orest Cokan
-     * @param comment the comment the user made
+     * @param comment   the text of the comment made by a user
      */
     public void setComment(String comment) {
         this.comment = comment;
@@ -95,7 +97,7 @@ public class Comment implements Serializable {
      * gets the comment user made
      *
      * @author Orest Cokan
-     * @return the comment that was made by user
+     * @return          the comment that was made by user
      */
     public String getComment(){
         return comment;
@@ -103,16 +105,16 @@ public class Comment implements Serializable {
 
 
     /**
-     * sets the username of who made the comment
+     * Sets the username text to represent the user who wrote the comment.
      *
      * @author Orest Cokan
-     * @param username the username of the individual who made the comment
+     * @param username the username of the individual who wrote the comment
      */
     public void setUsername(String username){this.username = username;}
 
 
     /**
-     * gets the username of who made the comment
+     * Gets the username of the user who wrote the comment.
      *
      * @author Orest Cokan
      * @return username   the username of the individual who made the comment

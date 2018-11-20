@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87349fa7-f812-4cda-a64e-4e77f442a2d5" name="Default" comment="" />
+    <list default="true" id="87349fa7-f812-4cda-a64e-4e77f442a2d5" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Comment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Comment.java" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,13 +18,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CareProvider.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CareProvider.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/CareProvider.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="e#0#3843#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Comment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Comment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1746">
+              <caret line="107" column="61" lean-forward="false" selection-start-line="107" selection-start-column="61" selection-end-line="107" selection-end-column="61" />
+              <folding>
+                <element signature="e#0#3253#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2163,6 +2177,13 @@
       </map>
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Comment.java" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds" extendedState="4">
     <option name="x" value="586" />
     <option name="y" value="24" />
@@ -2211,6 +2232,14 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="meditrackr" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="meditrackr" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="record" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -2499,6 +2528,16 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#3843#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Comment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1746">
+          <caret line="107" column="61" lean-forward="false" selection-start-line="107" selection-start-column="61" selection-end-line="107" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#3253#0" expanded="true" />
           </folding>
         </state>
       </provider>

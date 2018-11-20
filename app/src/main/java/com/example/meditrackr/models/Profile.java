@@ -63,7 +63,12 @@ public class Profile implements Serializable {
         this.isCareProvider = isCareProvider;
     }
 
-    // Getters/Setters
+
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
     /**
      * gets username
      *

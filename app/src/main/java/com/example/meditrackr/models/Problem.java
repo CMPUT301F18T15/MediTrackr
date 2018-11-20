@@ -72,6 +72,11 @@ public class Problem implements Serializable {
     }
 
 
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
     /**
      * gets the title of the problem
      *

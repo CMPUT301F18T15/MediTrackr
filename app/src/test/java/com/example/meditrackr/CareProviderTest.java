@@ -47,6 +47,7 @@ public class CareProviderTest {
                 ("", "", "", true);
     }
     
+    // test if careProvider is constructed with its attributes
     @Test
     public void constructorTest() {
         String name = "Name";

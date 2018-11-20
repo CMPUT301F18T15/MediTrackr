@@ -63,7 +63,6 @@ public class Record implements Serializable {
      * @param bodylocation  the bodylocation class that holds all bodylocation info
      * @see BodyLocation
      */
-    // Constructor
     public Record(String title, String description, @NonNull String date, BodyLocation bodylocation) {
         this.title = title;
         this.description = description;
@@ -78,10 +77,10 @@ public class Record implements Serializable {
 
 
     /**
-     * gets images for the record
+     * Gets images for the record.
      *
      * @author  Orest Cokan
-     * @return images images to add to the record
+     * @return  images to add to the record
      */
     public RecordPhotoList getImages() {
         return images;
@@ -89,7 +88,7 @@ public class Record implements Serializable {
 
 
     /**
-     * adds images to the record
+     * Adds images to the record.
      *
      * @author  Orest Cokan
      * @param images images to add to the record
@@ -101,10 +100,10 @@ public class Record implements Serializable {
 
 
     /**
-     * gets the datestamp for the record
+     * Gets the date (timestamp) for the record.
      *
      * @author  Orest Cokan
-     * @return date      date to add to the record
+     * @return  date to add to the record
      */
     public String getDate() {
         return date;
@@ -112,10 +111,10 @@ public class Record implements Serializable {
 
 
     /**
-     * adds date to the record
+     * Sets the record's date to a new timestamp.
      *
      * @author  Orest Cokan
-     * @param date      date to add to the record
+     * @param date date to add to the record
      */
     public void setDate(String date) {
         this.date = date;
@@ -123,27 +122,27 @@ public class Record implements Serializable {
 
 
     /**
-     * gets the description for the record
+     * Retrieves the string description (comment) of the record.
      *
      * @author  Orest Cokan
-     * @return description      description to add to the record
+     * @return  description to add to the record
      */
     public String getDescription() { return description; }
 
 
     /**
-     * adds description to the record
+     * Adds string description (comment) to the record.
      *
      * @author  Orest Cokan
-     * @param description      description to add to the record
+     * @param description      string description (comment)to add to the record
      */
     public void setDescription(String description) {
-        this.description= description;
+        this.description = description;
     }
 
 
     /**
-     * gets the title for the record
+     * Gets the title for the record.
      *
      * @author  Orest Cokan
      * @return title      title to add to the record
@@ -152,7 +151,7 @@ public class Record implements Serializable {
 
 
     /**
-     * adds title to the record
+     * Sets a new string title to the record.
      *
      * @author  Orest Cokan
      * @param title      title to add to the record
@@ -163,10 +162,10 @@ public class Record implements Serializable {
 
 
     /**
-     * gets the bodylocation for the record
+     * Gets the body location object associated with the record.
      *
      * @author  Orest Cokan
-     * @return bodyLocation      body location to add to the record
+     * @return bodyLocation      BodyLocation object belonging to the record
      */
     public BodyLocation getBodyLocation() {
         return bodyLocation;
@@ -174,10 +173,10 @@ public class Record implements Serializable {
 
 
     /**
-     * adds body location to the record
+     * Sets a new body location object for the record.
      *
      * @author  Orest Cokan
-     * @param bodyLocation      body location to add to the record
+     * @param bodyLocation      BodyLocation object to add to the record
      */
     public void setBodyLocation(BodyLocation bodyLocation) {
         this.bodyLocation = bodyLocation;
@@ -185,10 +184,10 @@ public class Record implements Serializable {
 
 
     /**
-     * gets the geo location for the record
+     * Gets the Geolocation for the record.
      *
      * @author  Orest Cokan
-     * @return geoLocation      geo location to add to the record
+     * @return geoLocation      Geolocation object belonging to the record
      */
     public Geolocation getGeoLocation() {
         return geoLocation;
@@ -196,10 +195,10 @@ public class Record implements Serializable {
 
 
     /**
-     * adds geo location to the record
+     * Set geo location of the record
      *
      * @author  Orest Cokan
-     * @param geoLocation      geo location to add to the record
+     * @param geoLocation      Geolocation object to add to the record
      */
     public void setGeoLocation(Geolocation geoLocation) {
         this.geoLocation = geoLocation;
@@ -207,7 +206,10 @@ public class Record implements Serializable {
 
 
     /**
-     * gets the reminder list for the record
+     * Gets the reminder list for the record.
+     *
+     * NOTE: This will be removed in part 5 (we had the wrong idea about
+     * reminders).
      *
      * @author  Orest Cokan
      * @return reminder      reminder list to add to the record
@@ -218,7 +220,10 @@ public class Record implements Serializable {
 
 
     /**
-     * gets the reminder from the reminder list using an index
+     * Gets the reminder from the reminder list using an index.
+     *
+     * NOTE: This will be removed in part 5 (we had the wrong idea about
+     * reminders).
      *
      * @author  Orest Cokan
      * @param index     the index of the list each number corresponds to a day of the week
@@ -227,9 +232,12 @@ public class Record implements Serializable {
 
 
     /**
-     * sets the reminder
+     * Sets the reminder.
      *
-     * @author  Orest Cokan
+     * NOTE: This will be removed in part 5 (we had the wrong idea about
+     * reminders).
+     *
+     * @author Orest Cokan
      * @param reminder     reminder to add to the record
      */
     public void setReminder(boolean[] reminder) {
@@ -238,10 +246,11 @@ public class Record implements Serializable {
 
 
     /**
-     * gets the images for the record
+     * Gets the list of images (string representations) belonging to
+     * the record.
      *
-     * @author  Orest Cokan
-     * @return imagesSaves     a list of images to add to the record
+     * @author Orest Cokan
+     * @return imagesSave     a list of images belonging to the record
      */
     public ImageSave getImagesSave() {
         return imagesSave;
@@ -249,11 +258,11 @@ public class Record implements Serializable {
 
 
     /**
-     * gets a specific image from the image list
+     * Retrieves an image from the ImageSave list by index.
      *
-     * @author  Orest Cokan
-     * @param index  the index where the image is
-     * @return      an image from the imagesSave list
+     * @author Orest Cokan
+     * @param index  the index of the desired image
+     * @return       an image from the imagesSave list
      */
     public String getImageSave(int index){
         return imagesSave.getImage(index);
@@ -261,10 +270,10 @@ public class Record implements Serializable {
 
 
     /**
-     * adds the image list to the record
+     * Adds a new image list to the record.
      *
      * @author  Orest Cokan
-     * @param imageSave      images to add to the record
+     * @param imageSave      a list of string images to add to the record
      */
     public void setImageSave(ImageSave imageSave) {
         this.imagesSave = imageSave;

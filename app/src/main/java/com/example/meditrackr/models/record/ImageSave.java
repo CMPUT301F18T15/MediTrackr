@@ -23,24 +23,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * this class is able to update the image list
+ * ImageSave: Maintains a list of images for saving to ElasticSearch
+ * in string format.
+ *
  * @author Orest Cokan
- * @version  Nov 14, 2018
+ * @version 1.0 Nov 14, 2018
  */
-
-// An ImageSave class that holds all methods pertaining to ImageSave
 public class ImageSave implements Serializable {
     private ArrayList<String> imagesString = new ArrayList<>();
 
-
-    /*--------------------------------------------------------------------------
-     * GETTERS AND SETTERS
-     *------------------------------------------------------------------------*/
-
-
-    // Calls to ImageSave methods
     /**
-     * adds an image to the list
+     * Adds an image to the list.
      *
      * @author Orest Cokan
      * @param newImage the image we want to add
@@ -51,10 +44,10 @@ public class ImageSave implements Serializable {
 
 
     /**
-     * removes an image to the list
+     * Removes an image from the list by index.
      *
      * @author Orest Cokan
-     * @param image the image we want to remove
+     * @param image the index of the image we want to remove
      */
 
     public void removeImage(int image){
@@ -62,11 +55,16 @@ public class ImageSave implements Serializable {
     }
 
 
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
     /**
-     * checks to see if an image is in the list
+     * Checks to see if an image string is in the list.
      *
      * @author Orest Cokan
-     * @param image the image we want to check
+     * @param image the index of the image we want to check
      */
     public Boolean imageExists(String image){
         return imagesString.contains(image);
@@ -74,7 +72,7 @@ public class ImageSave implements Serializable {
 
 
     /**
-     * gets the index of an image from the list
+     * Gets the index of an image in the list.
      *
      * @author Orest Cokan
      * @param image the image we want to get the index of
@@ -85,7 +83,7 @@ public class ImageSave implements Serializable {
 
 
     /**
-     * gets the number of photos in the list
+     * Gets the number of photo strings in the list.
      *
      * @author Orest Cokan
      */
@@ -95,7 +93,7 @@ public class ImageSave implements Serializable {
 
 
     /**
-     * gets the image from a given index
+     * Gets the image from a given index.
      *
      * @author Orest Cokan
      * @param index the index of image we want to find

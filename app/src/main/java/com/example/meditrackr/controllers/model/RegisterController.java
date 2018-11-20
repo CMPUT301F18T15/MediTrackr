@@ -35,13 +35,25 @@ import com.example.meditrackr.ui.MainActivity;
 import es.dmoral.toasty.Toasty;
 
 /**
- * Crated by Skryt on Nov 17, 2018
+ * a controller that will register a user into the database and local memory
+ *
+ * @author Orest Cokan
+ * @version 1.0 Nov 17, 2018
  */
 
 // Controller class for registering a new account
 public class RegisterController {
 
-
+    /**
+     * a function that will register a user into the database and local memory
+     *
+     * @param activity      the activity that is being used
+     * @param context       the context that the controller will use
+     * @param profile       the profile to save
+     * @author Orest Cokan
+     * @version 1.0 Nov 17, 2018
+     * @see Profile
+     */
     // Registers account into memory and ES
     public static void RegisterAccount(Activity activity, Context context, Profile profile) {
 

@@ -47,7 +47,16 @@ import es.dmoral.toasty.Toasty;
 
 // Controller class for user login
 public class LoginController {
-
+    
+    /**
+     * Runs when the user presses login button
+     * @author Orest Cokan
+     * @version 1.0 Nov 17, 2018
+     * @param activity      the activity that the app was using
+     * @param context       the context the adapter will use
+     * @param profile       the profile that will try to login
+     * @see Profile
+     */
     // Runs when the user presses login button
     public static void login(Context context, Activity activity, final Profile profile) {
 
@@ -76,7 +85,15 @@ public class LoginController {
         Intent intent = new Intent(activity, MainActivity.class);
         activity.startActivity(intent);
     }
-
+    
+    /**
+     * Checks if profile already exists in memory and logs in
+     * @author Orest Cokan
+     * @version 1.0 Nov 17, 2018
+     * @param activity      the activity that the app was using
+     * @param context       the context the adapter will use
+     * @param username      the username to check the database with
+     */
     // Checks if profile already exists in memory and logs in
     public static void checkProfile(Activity activity, Context context, String username) {
         // Gets profile from memory
@@ -96,7 +113,15 @@ public class LoginController {
         }
     }
 
-
+    /**
+     * checks to see if patient is Database if so log in
+     *
+     * @author Orest Cokan
+     * @version 1.0 Nov 17, 2018
+     * @param activity      the activity that the app was using
+     * @param context       the context the adapter will use
+     * @param username      the username to check the database with
+     */
     // Check if profile already exists in ES and logs in
     public static void checkProfileES(Activity activity, Context context, String username) {
         // Gets profile from ES

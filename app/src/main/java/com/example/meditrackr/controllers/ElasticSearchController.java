@@ -76,6 +76,7 @@ import io.searchbox.core.SearchResult;
  * @throws IOException
  */
 
+// Controller class for Elastic Search search engine
 public class ElasticSearchController {
     private static JestClient client = null;
     private static String INDEX_NAME = "cmput301f18t15test";
@@ -91,13 +92,13 @@ public class ElasticSearchController {
     }
 
 
-    // Sign up and add a profile
-
     /**
      *
      * @param profile       the profile to add to the class
      * @return              identifies that the add was sucsesfull
      */
+
+    // Sign up and add a profile
     public static Boolean addProfile(Profile profile){
         Boolean done = false;
         try {

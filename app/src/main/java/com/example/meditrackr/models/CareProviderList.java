@@ -40,11 +40,15 @@ public class CareProviderList implements Serializable {
     // Create array of care providers
     private ArrayList<CareProvider> careProviders = new ArrayList<>();
 
-    // Calls to CareProviderList methods
+
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
     /**
      * gets the number of care providers in the list
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018.
      * @return    number of care providers
      */
     public int getSize(){
@@ -55,7 +59,6 @@ public class CareProviderList implements Serializable {
     /**
      * adds a given careprovider to the list
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018.
      * @param careProvider a care provider to add to the list
      * @see CareProvider
      */
@@ -67,7 +70,6 @@ public class CareProviderList implements Serializable {
     /**
      * deletes a care provider from the list
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018.
      * @param careProvider   the care provider we will delete
      */
     public void deleteCareProvider(CareProvider careProvider){
@@ -78,7 +80,6 @@ public class CareProviderList implements Serializable {
     /**
      * checks to see if care provider exists
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018.
      * @param username  username of the care provider
      * @return          true if exists false if not
      */

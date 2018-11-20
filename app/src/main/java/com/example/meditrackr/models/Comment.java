@@ -25,7 +25,7 @@ import java.io.Serializable;
 
 /**
  * creates a comment class that stare the comment the username and date
- * @authon Orest Cokan
+ * @author Orest Cokan
  * @version 1.0 Nov 15, 2018
  */
 
@@ -39,25 +39,25 @@ public class Comment implements Serializable {
 
     /**
      * creates variables for the class to use
-     * @authon Orest Cokan
-     * @version 1.0 Nov 15, 2018
+     * @author Orest Cokan
      * @param comment   the comment that the user made
      * @param username  the username of the person who made the comment
      */
-    // Constructor
     public Comment(String comment, String username) {
         this.comment = comment;
         this.username = username;
     }
 
 
-    // Getters/Setters
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
     /**
      * gets the date of when the comment was made
      *
-     * @authon Orest Cokan
-     * @version 1.0 Nov 15, 2018
-     * @reurn getDate   the date when the comment was made
+     * @author Orest Cokan
+     * @return getDate   the date when the comment was made
      */
     public String getDate() {
         return date;
@@ -67,8 +67,8 @@ public class Comment implements Serializable {
     /**
      * sets the date of when the comment was made
      *
-     * @authon Orest Cokan
-     * @version 1.0 Nov 15, 2018
+     * @author Orest Cokan
+     * @param date a string date representation
      */
     public void setDate(String date) {
         this.date = date;
@@ -78,8 +78,7 @@ public class Comment implements Serializable {
     /**
      * sets the comment user made
      *
-     * @authon Orest Cokan
-     * @version 1.0 Nov 15, 2018
+     * @author Orest Cokan
      * @param comment the comment the user made
      */
     public void setComment(String comment) {
@@ -90,9 +89,8 @@ public class Comment implements Serializable {
     /**
      * gets the comment user made
      *
-     * @authon Orest Cokan
-     * @version 1.0 Nov 15, 2018
-     * @reurn comment   the comment that was made by user
+     * @author Orest Cokan
+     * @return the comment that was made by user
      */
     public String getComment(){
         return comment;
@@ -102,8 +100,7 @@ public class Comment implements Serializable {
     /**
      * sets the username of who made the comment
      *
-     * @authon Orest Cokan
-     * @version 1.0 Nov 15, 2018
+     * @author Orest Cokan
      * @param username the username of the individual who made the comment
      */
     public void setUsername(String username){this.username = username;}
@@ -112,9 +109,8 @@ public class Comment implements Serializable {
     /**
      * gets the username of who made the comment
      *
-     * @authon Orest Cokan
-     * @version 1.0 Nov 15, 2018
-     * @reurn username   the username of the individual who made the comment
+     * @author Orest Cokan
+     * @return username   the username of the individual who made the comment
      */
     public String getUsername(){return username;}
 

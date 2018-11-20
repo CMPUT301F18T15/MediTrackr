@@ -34,15 +34,19 @@ import java.util.ArrayList;
 public class ImageSave implements Serializable {
     private ArrayList<String> imagesString = new ArrayList<>();
 
+
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
     // Calls to ImageSave methods
     /**
      * adds an image to the list
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 14, 2018
      * @param newImage the image we want to add
      */
-    // Calls to RecordPhotoList methods
     public void addImage(String newImage) {
         imagesString.add(newImage);
     }
@@ -52,7 +56,6 @@ public class ImageSave implements Serializable {
      * removes an image to the list
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 14, 2018
      * @param image the image we want to remove
      */
 
@@ -65,7 +68,6 @@ public class ImageSave implements Serializable {
      * checks to see if an image is in the list
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 14, 2018
      * @param image the image we want to check
      */
     public Boolean imageExists(String image){
@@ -77,7 +79,6 @@ public class ImageSave implements Serializable {
      * gets the index of an image from the list
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param image the image we want to get the index of
      */
     public int getIndex(String image){
@@ -89,7 +90,6 @@ public class ImageSave implements Serializable {
      * gets the number of photos in the list
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      */
     public int getSize(){
         return imagesString.size();
@@ -100,7 +100,6 @@ public class ImageSave implements Serializable {
      * gets the image from a given index
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param index the index of image we want to find
      */
     public String getImage(int index){

@@ -43,11 +43,10 @@ public class RecordList implements Serializable {
     // Create array of records
     private ArrayList<Record> records = new ArrayList<>();
 
-    // Calls to RecordList methods
+
     /**
      * adds  a record to the to the records list
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param newRecord a new record to add to the list
      * @see Record
      */
@@ -59,7 +58,6 @@ public class RecordList implements Serializable {
     /**
      * removes  a record to the to the records list
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param record    the record to remove from the list
      */
     public void removeRecord(Record record){
@@ -70,7 +68,6 @@ public class RecordList implements Serializable {
     /**
      * checks too see if a record is in the records list
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param record     the record to check for
      * @return           1 if it exists or 0 if not
      * @see Record
@@ -80,10 +77,14 @@ public class RecordList implements Serializable {
     }
 
 
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
     /**
      * gets index of a specific record
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param record    the record we are looking for the inxex
      * @see Record
      */
@@ -95,7 +96,6 @@ public class RecordList implements Serializable {
     /**
      * gets the number of the records in the list
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      */
     public int getSize(){
         return records.size();
@@ -103,14 +103,12 @@ public class RecordList implements Serializable {
 
 
     //just a test function to remove later
-    public String toString() {
-        return records.toString();
-    }
+    public String toString() { return records.toString(); }
+
 
     /**
      * gets a record from a given index
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param index     the index of the record
      * @return          the record that it got
      * @see Record

@@ -37,14 +37,19 @@ import java.util.ArrayList;
 // A PatientList class that holds all methods pertaining to PatientList
 public class PatientList implements Serializable {
 
+
     // Create array of patients
     private ArrayList<String> patients = new ArrayList<>();
 
-    // Getters/Setters
+
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
     /**
      * this function will get a patient as a specific index
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018.
      * @param index     the index where patient is located in the list
      * @return          the patient that was at that index
      */
@@ -56,7 +61,6 @@ public class PatientList implements Serializable {
     /**
      * this function will set a patient as a specific index
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018.
      * @param index     the index where patient is going to be in the list
      * @param username  the username to put in the patient list
      */
@@ -68,7 +72,6 @@ public class PatientList implements Serializable {
     /**
      * this function will get the amount of patients in the list
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018.
      * @return          the number of patients in the list
      */
     public int getSize(){
@@ -79,7 +82,6 @@ public class PatientList implements Serializable {
     /**
      * this function will add a patient to the list
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018.
      * @param username  the username of the patient that is getting added to the list
      */
     public void addPatient(String username){
@@ -90,7 +92,6 @@ public class PatientList implements Serializable {
     /**
      * this function will remove a patient from the list
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018.
      * @param username  the username of the patient that is getting removed from the list
      */
     public void deletePatient(String username){
@@ -101,7 +102,6 @@ public class PatientList implements Serializable {
     /**
      * this function will check to see if a patient is in the list
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018.
      * @param username  the username of the patient that is getting checked in the list
      * @return          True if patient is in list   False if not
      */

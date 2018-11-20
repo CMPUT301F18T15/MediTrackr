@@ -42,7 +42,6 @@ public class ProfileList {
     /**
      * adds a profile in the profile list
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018
      * @param profile       the profile to add to the list
      * @see Profile
      */
@@ -54,7 +53,6 @@ public class ProfileList {
     /**
      * removes a profile from the profile list
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018
      * @param profile       the profile to remove from the list
      * @see Profile
      */
@@ -65,7 +63,6 @@ public class ProfileList {
     /**
      * see if a profile is in the list
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018
      * @param profile       the profile to check
      * @see Profile
      */
@@ -77,7 +74,6 @@ public class ProfileList {
     /**
      * sees how many profiles are in the list
      * @author  Orest Cokan
-     * @version 1.0 Nov 7, 2018
      * @return        the number of profiles
      */
     public int size(){

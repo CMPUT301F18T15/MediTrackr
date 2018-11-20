@@ -71,7 +71,7 @@ public class RecordTest extends ActivityTestRule<MainActivity> {
             Intent start = new Intent();
             loginIntent.launchActivity(start);
             onView(withId(R.id.patient_username)).perform
-                    (click(), typeText("InstrumentationTestPatient"), pressBack());
+                    (click(), typeText(testPatientName), pressBack());
             onView(withId(R.id.login_button)).perform(click());
         }
     }

@@ -46,11 +46,10 @@ public class Problem implements Serializable {
 
     /**
      * creates variables that the class will use
+     * @author Orest Cokan
      * @param date              the date of the problem
      * @param description       the description of the problem
      * @param title             the title of the problem
-     * @author Orest Cokan
-     * @version 1.0 Nov, 16 2018
      */
     // Constructor
     public Problem(String title, String date, String description){
@@ -60,7 +59,7 @@ public class Problem implements Serializable {
         this.description = description;
     }
 
-    // Getters/Setters
+
     /**
      * gets the title of the problem
      *

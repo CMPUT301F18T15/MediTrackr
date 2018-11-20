@@ -49,7 +49,7 @@ public class CareProvider extends Profile implements Serializable {
         super(username, email, phone, true);
     }
 
-    
+
     /**
      * Adds a patient to the care providers patient list, but only
      * if the user has not already been added.

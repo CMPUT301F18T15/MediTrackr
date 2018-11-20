@@ -40,7 +40,6 @@ import java.util.ArrayList;
 // A Patient class holding all methods pertaining to Patient
 public class Patient extends Profile implements Serializable{
     // Initialize class variables
-    private CareProviderList careProviders = new CareProviderList();
     private ProblemList problems = new ProblemList();
 
     /**
@@ -59,40 +58,6 @@ public class Patient extends Profile implements Serializable{
     /*--------------------------------------------------------------------------
      * GETTERS AND SETTERS
      *------------------------------------------------------------------------*/
-
-
-    /** gets careproviders associated with patient
-     *
-     * @author  Orest Cokan
-     * @return   list of careproviders
-     * @see CareProviderList
-     */
-    public CareProviderList getCareProviders() {
-        return careProviders;
-    }
-
-
-    /** removes care provider from patients care Provider List
-     *
-     * @author  Orest Cokan
-     * @param careProvider    care provider we will remove
-     * @see CareProvider
-     */
-    public void deleteCareProvider(CareProvider careProvider) {
-        careProviders.deleteCareProvider(careProvider);
-    }
-
-
-    /** sees if care provider exists in patients care provider list
-     *
-     * @author  Orest Cokan
-     * @param careProvider      the care provider we want to check
-     * @return                  list of careproviders
-     * @see CareProvider
-     */
-    public Boolean careProviderExists(CareProvider careProvider){
-        return careProviders.careProviderExists(careProvider.getUsername());
-    }
 
 
     /** gets all problems that user has stored in a list

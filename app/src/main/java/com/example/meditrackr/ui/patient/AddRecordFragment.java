@@ -139,10 +139,10 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_record, container, false);
 
-        /************************************************************************
+        /*---------------------------------------------------------------------------
          * GET LOCATION PERMISSIONS
-         ************************************************************************/
-        // Get device location if location permission is granted
+         *--------------------------------------------------------------------------*/
+
         getLocationPermission();
         if(mLocationPermissionsGranted){
             getDeviceLocation();
@@ -153,10 +153,10 @@ public class AddRecordFragment extends Fragment implements LocationListener {
 
         // nifty location controller that helps with getting locations
 
-        /************************************************************************
+        /*---------------------------------------------------------------------------
          * INITIALIZE UI COMPONENTS
-         ************************************************************************/
-        // Initialize ui attributes
+         *--------------------------------------------------------------------------*/
+
         final EditText recordTitle = (EditText) rootView.findViewById(R.id.record_title_field);
         final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
@@ -204,9 +204,9 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         );
 
 
-        /***************************************************************************
+        /*---------------------------------------------------------------------------
          * ADD NEW IMAGES TO RECORD
-         ***************************************************************************/
+         *--------------------------------------------------------------------------*/
         // OnClickListener handles camera button
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,9 +223,9 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         });
 
 
-        /***************************************************************************
+        /*---------------------------------------------------------------------------
          * SET GEO-LOCATION
-         ***************************************************************************/
+         *--------------------------------------------------------------------------*/
         // Initialize the map picker and select a place you want to go
         addressView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -244,18 +244,20 @@ public class AddRecordFragment extends Fragment implements LocationListener {
     }
 
 
-    /************************************************************************
+    /*---------------------------------------------------------------------------
      * CREATE NEW RECORD
-     ************************************************************************/
+     *--------------------------------------------------------------------------*/
     // Creates and returns a new record object using the required information from the view
     private Record createRecord(EditText title, EditText description) {
         Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
         // In new record include user input title and description
+
         Record record = new Record(
                 title.getText().toString(),
                 description.getText().toString(),
                 date,
                 null);
+
         record.setGeoLocation(geolocation);
         for(Bitmap bitmap: bitmaps){ // For each image
             if(bitmap != null) { // If image is not null convert image into base64 string

@@ -22,18 +22,15 @@ package com.example.meditrackr.models.record;
 import java.io.Serializable;
 
 /**
- * This class will create a body coordinate on our model and then
- * associate it with with the photos of a particular record.
+ * This class will create a body coordinate on a mannequin/body location photo
+ * and then associate it with with the photos of a particular record.
  *
  * Note that this functionality is not yet implemented in our app
  * and will be added for part 5.
  *
- *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  */
-
-// A BodyLocation class that holds all methods pertaining to BodyLocation
 public class BodyLocation implements Serializable {
 
     // Initialize class variables
@@ -45,10 +42,9 @@ public class BodyLocation implements Serializable {
      * Creates a new BodyLocation object.
      * @author  Orest Cokan
      * @param bodyCoordinate the number that is mapped to a body location
-     * @param bodyFace       a tring name of a face location
+     * @param bodyFace       a string name of a face location
      * @param bodyLocation   the name of the body part
      */
-    // Constructor
     public BodyLocation(double[] bodyCoordinate, String bodyFace, String bodyLocation){
         this.bodyCoordinate = bodyCoordinate;
         this.bodyFace = bodyFace;
@@ -63,7 +59,7 @@ public class BodyLocation implements Serializable {
     /**
      * Gets the body coordinate array.
      * @author  Orest Cokan
-     * @return bodyCorrdinate, the integer of the body location
+     * @return the array of body coordinates
      */
     public double[] getBodyCoordinate() {
         return bodyCoordinate;
@@ -73,7 +69,7 @@ public class BodyLocation implements Serializable {
     /**
      * Sets the body coordinate array.
      * @author  Orest Cokan
-     * @param bodyCoordinate the integer of the body location
+     * @param bodyCoordinate an array representing a body location
      */
     public void setBodyCoordinate(double[] bodyCoordinate) {
         this.bodyCoordinate = bodyCoordinate;

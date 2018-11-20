@@ -51,7 +51,6 @@ public class Problem implements Serializable {
      * @param description       the description of the problem
      * @param title             the title of the problem
      */
-    // Constructor
     public Problem(String title, String date, String description){
         // Initialize class objects
         this.title = title;
@@ -64,7 +63,6 @@ public class Problem implements Serializable {
      * gets the title of the problem
      *
      * @author Orest Cokan
-     * @version 1.0 Nov, 16 2018
      * @return title      the title of the problem
      */
     public String getTitle() {
@@ -76,7 +74,6 @@ public class Problem implements Serializable {
      * sets the title of the problem
      *
      * @author Orest Cokan
-     * @version 1.0 Nov, 16 2018
      * @param title       the title of the problem
      */
     public void setTitle(String title) {
@@ -88,7 +85,6 @@ public class Problem implements Serializable {
      * gets the date of the problem
      *
      * @author Orest Cokan
-     * @version 1.0 Nov, 16 2018
      * @return date      the date of the problem
      */
     public String getDate() {
@@ -100,7 +96,6 @@ public class Problem implements Serializable {
      * sets the date of the problem
      *
      * @author Orest Cokan
-     * @version 1.0 Nov, 16 2018
      * @param date the date of the problem
      */
     public void setDate(String date) {
@@ -112,7 +107,6 @@ public class Problem implements Serializable {
      * gets the description of the problem
      *
      * @author Orest Cokan
-     * @version 1.0 Nov, 16 2018
      * @return description      the description of the problem
      */
     public String getDescription() {
@@ -124,7 +118,6 @@ public class Problem implements Serializable {
      * sets the description of the problem
      *
      * @author Orest Cokan
-     * @version 1.0 Nov, 16 2018
      * @param description       the description of the problem
      */
     public void setDescription(String description) {
@@ -136,7 +129,6 @@ public class Problem implements Serializable {
      * gets the records of the problem
      *
      * @author Orest Cokan
-     * @version 1.0 Nov, 16 2018
      * @return records      the records of the problem
      * @see RecordList
      */
@@ -149,7 +141,6 @@ public class Problem implements Serializable {
      * gets all comments on the problem
      *
      * @author Orest Cokan
-     * @version 1.0 Nov, 16 2018
      * @return comments      all comments on the problem
      * @see CommentList
      */
@@ -160,7 +151,6 @@ public class Problem implements Serializable {
      * gets all the images on the problem
      *
      * @author Orest Cokan
-     * @version 1.0 Nov, 16 2018
      * @return imageAll      the images on the problem
      * @see ImageSave
      */

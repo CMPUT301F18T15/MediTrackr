@@ -154,10 +154,6 @@ public class EditProblemFragment extends Fragment {
                         // Commit changes to fragment
                         transaction.commit();
                     }
-                    else {
-                        // Else if checkInputs return false indicate that problem cannot be added
-                        Toasty.error(getContext(), "The title and description cannot be empty", Toast.LENGTH_LONG).show();
-                    }
                 }
             });
 
@@ -166,13 +162,18 @@ public class EditProblemFragment extends Fragment {
 
     // Check that the user has inputted at least a title and description to their problem
     public boolean checkInputs(EditText title, EditText description){
-        if(((title != null && !title.getText().toString().isEmpty())
-                && (description != null && !description.getText().toString().isEmpty()))){
-            return true;
-        }
-        else {
+
+        if (title != null && title.getText().toString().length() > 30) {
+            Toasty.error(getContext(), "Title cannot exceed 30 characters", Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        if (description != null && description.getText().toString().length() > 300) {
+            Toasty.error(getContext(), "Description cannot exceed 300 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
 }

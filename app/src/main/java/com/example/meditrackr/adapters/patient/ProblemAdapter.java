@@ -83,7 +83,6 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
  *
  * @author  Orest Cokan
  * @version 1.0 Nov 10, 2018
- * @see
  *
  */
 
@@ -99,7 +98,6 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
      * creating variables activity for the other functions to use
      *
      * @author  Orest Cokan
-     * @version 1.0 Nov 10, 2018
      * @param activity this is the activity to pass the data
      */
 

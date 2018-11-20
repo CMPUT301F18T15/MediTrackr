@@ -37,14 +37,12 @@ import java.util.ArrayList;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A Patient class holding all information pertaining to Patient
+// A Patient class holding all methods pertaining to Patient
 public class Patient extends Profile implements Serializable{
-
     // Initialize class variables
     private CareProviderList careProviders = new CareProviderList();
     private ProblemList problems = new ProblemList();
 
-    // Constructor
     /**
      * creates the patients account information
      * @param username          patients username
@@ -52,9 +50,11 @@ public class Patient extends Profile implements Serializable{
      * @param phone             patients phone number
      * @param isCareProvider    holds False because this is not a care provider
      */
+    // Constructor
     public Patient(String username, String email, String phone, boolean isCareProvider) {
         super(username, email, phone, false);
     }
+
 
     // Getters/Setters
     /** gets careproviders associated with patient
@@ -64,10 +64,10 @@ public class Patient extends Profile implements Serializable{
      * @return   list of careproviders
      * @see CareProviderList
      */
-
     public CareProviderList getCareProviders() {
         return careProviders;
     }
+
 
     /** removes care provider from patients care Provider List
      *
@@ -80,6 +80,7 @@ public class Patient extends Profile implements Serializable{
         careProviders.deleteCareProvider(careProvider);
     }
 
+
     /** sees if care provider exists in patients care provider list
      *
      * @author  Orest Cokan
@@ -91,6 +92,7 @@ public class Patient extends Profile implements Serializable{
     public Boolean careProviderExists(CareProvider careProvider){
         return careProviders.careProviderExists(careProvider.getUsername());
     }
+
 
     /** gets all problems that user has stored in a list
      *

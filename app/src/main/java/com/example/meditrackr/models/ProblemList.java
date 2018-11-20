@@ -37,13 +37,13 @@ import java.util.List;
  * @version 1.0 Nov 7, 2018.
  */
 
-// Class creates a Problem List
+// A ProblemList class that holds all methods pertaining to ProblemList
 public class ProblemList implements Serializable {
 
     // Create array of problems
     private ArrayList<Problem> problems = new ArrayList<>();
 
-    // Calls to Problem methods
+    // Getters/Setters
     /**
      * gets a problem to add to the list
      *
@@ -57,6 +57,7 @@ public class ProblemList implements Serializable {
         return problems.get(index);
     }
 
+
     /**
      * puts a problem to in to the list
      *
@@ -66,10 +67,10 @@ public class ProblemList implements Serializable {
      * @param problem     the problem that will go into the list
      * @see Problem
      */
-
     public void setProblem(int index, Problem problem){
         problems.set(index, problem);
     }
+
 
     /**
      * adds a problem to the list
@@ -83,6 +84,7 @@ public class ProblemList implements Serializable {
         problems.add(problem);
     }
 
+
     /**
      * removes a problem from the list using that problem
      *
@@ -95,6 +97,7 @@ public class ProblemList implements Serializable {
         problems.remove(problem);
     }
 
+
     /**
      * removes a problem from the list using an index
      *
@@ -105,6 +108,7 @@ public class ProblemList implements Serializable {
     public void removeProblem(int index){
         problems.remove(index);
     }
+
 
     /**
      * gets the index of a problem
@@ -117,6 +121,8 @@ public class ProblemList implements Serializable {
     public int getIndex(Problem problem){
         return problems.indexOf(problem);
     }
+
+
     /**
      * checks to see if a problem exists in the list
      *
@@ -130,6 +136,7 @@ public class ProblemList implements Serializable {
         return problems.contains(problem);
     }
 
+
     /**
      * gets the number of problems in the list
      *
@@ -140,6 +147,7 @@ public class ProblemList implements Serializable {
     public int getSize(){
         return problems.size();
     }
+
 
     //tester function to remove later
     public String toString(){

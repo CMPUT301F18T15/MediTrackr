@@ -28,9 +28,9 @@ import android.net.Uri;
 
 import com.google.android.gms.maps.model.LatLng;
 
-
+// A PlaceInfo class that holds all methods pertaining to PlaceInfo
 public class PlaceInfo {
-
+    // Attributes
     private String name;
     private String address;
     private String phoneNumber;
@@ -53,6 +53,7 @@ public class PlaceInfo {
      * @param rating            a rating of the problem
      * @param attributions
      */
+    // Constructor
     public PlaceInfo(String name, String address, String phoneNumber, String id, Uri websiteUri,
                      LatLng latlng, float rating, String attributions) {
         this.name = name;
@@ -68,6 +69,8 @@ public class PlaceInfo {
     public PlaceInfo() {
 
     }
+
+    // Calls to PlaceInfo methods
     /**
      * gets the name
      *
@@ -75,7 +78,6 @@ public class PlaceInfo {
      * @version 1.0 Nov, 16 2018
      * @return      the name
      */
-
     public String getName() {
         return name;
     }

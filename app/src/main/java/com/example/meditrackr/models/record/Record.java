@@ -34,7 +34,7 @@ import java.io.Serializable;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A Record class that holds all information pertaining to Record
+// A Record class that holds all methods pertaining to Record
 public class Record implements Serializable {
 
     // Initialize class variables
@@ -47,8 +47,6 @@ public class Record implements Serializable {
     private Geolocation geoLocation;
     private boolean[] reminder;
 
-    // Constructor
-
     /**
      * sets variables for the class to use
      *
@@ -60,6 +58,7 @@ public class Record implements Serializable {
      * @param bodylocation  the bodylocation class that holds all bodylocation info
      * @see BodyLocation
      */
+    // Constructor
     public Record(String title, String description, @NonNull String date, BodyLocation bodylocation) {
         this.title = title;
         this.description = description;
@@ -68,7 +67,6 @@ public class Record implements Serializable {
     }
 
     // Getters/Setters
-
     /**
      * gets images for the record
      *
@@ -79,6 +77,7 @@ public class Record implements Serializable {
     public ImageList getImages() {
         return images;
     }
+
 
     /**
      * adds images to the record
@@ -92,6 +91,7 @@ public class Record implements Serializable {
         this.images = images;
     }
 
+
     /**
      * gets the datestamp for the record
      *
@@ -102,6 +102,7 @@ public class Record implements Serializable {
     public String getDate() {
         return date;
     }
+
 
     /**
      * adds date to the record
@@ -114,6 +115,7 @@ public class Record implements Serializable {
         this.date = date;
     }
 
+
     /**
      * gets the description for the record
      *
@@ -124,6 +126,7 @@ public class Record implements Serializable {
     public String getDescription() {
         return description;
     }
+
 
     /**
      * adds description to the record
@@ -136,6 +139,7 @@ public class Record implements Serializable {
         this.description= description;
     }
 
+
     /**
      * gets the title for the record
      *
@@ -146,6 +150,7 @@ public class Record implements Serializable {
     public String getTitle() {
         return title;
     }
+
 
     /**
      * adds title to the record
@@ -158,6 +163,7 @@ public class Record implements Serializable {
         this.title = title;
     }
 
+
     /**
      * gets the bodylocation for the record
      *
@@ -168,6 +174,7 @@ public class Record implements Serializable {
     public BodyLocation getBodyLocation() {
         return bodyLocation;
     }
+
 
     /**
      * adds body location to the record
@@ -180,6 +187,7 @@ public class Record implements Serializable {
         this.bodyLocation = bodyLocation;
     }
 
+
     /**
      * gets the geo location for the record
      *
@@ -190,6 +198,7 @@ public class Record implements Serializable {
     public Geolocation getGeoLocation() {
         return geoLocation;
     }
+
 
     /**
      * adds geo location to the record
@@ -202,6 +211,7 @@ public class Record implements Serializable {
         this.geoLocation = geoLocation;
     }
 
+
     /**
      * gets the reminder list for the record
      *
@@ -212,6 +222,8 @@ public class Record implements Serializable {
     public boolean[] getReminders() {
         return reminder;
     }
+
+
     /**
      * gets the reminder from the reminder list using an index
      *
@@ -220,6 +232,7 @@ public class Record implements Serializable {
      * @param index     the index of the list each number corresponds to a day of the week
      */
     public boolean getReminder(int index) { return reminder[index];}
+
 
     /**
      * sets the reminder
@@ -232,6 +245,7 @@ public class Record implements Serializable {
         this.reminder = reminder;
     }
 
+
     /**
      * gets the images for the record
      *
@@ -242,6 +256,7 @@ public class Record implements Serializable {
     public ImageSave getImagesSave() {
         return imagesSave;
     }
+
 
     /**
      * gets a specific image from the image list
@@ -255,6 +270,7 @@ public class Record implements Serializable {
         return imagesSave.getImage(index);
     }
 
+
     /**
      * adds the image list to the record
      *
@@ -265,7 +281,6 @@ public class Record implements Serializable {
     public void setImageSave(ImageSave imageSave) {
         this.imagesSave = imageSave;
     }
-
 
 
 }

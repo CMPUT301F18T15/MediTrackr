@@ -30,17 +30,18 @@ import java.util.ArrayList;
  * @version 1.0 Nov 13, 2018
  */
 
-// Class creates Image List
+// An ImageList class that holds all methods pertaining to ImageList
 public class ImageList implements Serializable {
 
-    // Create array of bitmaps
     /**
      * creates a list to store the images in
      * @author Orest Cokan
      * @version 1.0 Nov 13, 2018
      */
+    // Create array of bitmaps
     private transient ArrayList<Bitmap> images = new ArrayList<>();
 
+    // Calls to ImageList methods
     /**
      * adds an image to the list
      *
@@ -49,10 +50,11 @@ public class ImageList implements Serializable {
      * @param newImage the image we want to add
      * @see Bitmap
      */
-    // Calls to ImageList methods
     public void addImage(Bitmap newImage) {
         images.add(newImage);
     }
+
+
     /**
      * removes an image to the list
      *
@@ -76,6 +78,7 @@ public class ImageList implements Serializable {
         return images.contains(image);
     }
 
+
     /**
      * gets the index of an image from the list
      *
@@ -87,6 +90,8 @@ public class ImageList implements Serializable {
     public int getIndex(Bitmap image){
         return images.indexOf(image);
     }
+
+
     /**
      * gets the number of photos in the list
      *
@@ -96,6 +101,8 @@ public class ImageList implements Serializable {
     public int getSize(){
         return images.size();
     }
+
+
     /**
      * converts the images to strngs
      *
@@ -105,6 +112,7 @@ public class ImageList implements Serializable {
     public String toString() {
         return images.toString();
     }
+
 
     /**
      * gets the image from a given index

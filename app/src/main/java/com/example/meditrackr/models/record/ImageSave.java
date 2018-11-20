@@ -30,10 +30,11 @@ import java.util.ArrayList;
  * @version  Nov 14, 2018
  */
 
-// An Image class that holds all information pertaining to Image
+// An ImageSave class that holds all methods pertaining to ImageSave
 public class ImageSave implements Serializable {
     private ArrayList<String> imagesString = new ArrayList<>();
 
+    // Calls to ImageSave methods
     /**
      * adds an image to the list
      *
@@ -41,10 +42,11 @@ public class ImageSave implements Serializable {
      * @version 1.0 Nov 14, 2018
      * @param newImage the image we want to add
      */
-    // Calls to ImageList methods
     public void addImage(String newImage) {
         imagesString.add(newImage);
     }
+
+
     /**
      * removes an image to the list
      *
@@ -56,6 +58,7 @@ public class ImageSave implements Serializable {
         imagesString.remove(image);
     }
 
+
     /**
      * checks to see if an image is in the list
      *
@@ -66,6 +69,8 @@ public class ImageSave implements Serializable {
     public Boolean imageExists(String image){
         return imagesString.contains(image);
     }
+
+
     /**
      * gets the index of an image from the list
      *
@@ -76,6 +81,8 @@ public class ImageSave implements Serializable {
     public int getIndex(String image){
         return imagesString.indexOf(image);
     }
+
+
     /**
      * gets the number of photos in the list
      *
@@ -85,6 +92,7 @@ public class ImageSave implements Serializable {
     public int getSize(){
         return imagesString.size();
     }
+
 
     /**
      * gets the image from a given index

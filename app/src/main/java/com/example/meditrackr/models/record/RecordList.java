@@ -37,14 +37,13 @@ import java.util.ArrayList;
  * @version 1.0 Oct 24, 2018.
  */
 
-// Class creates Record List
+// A RecordList class that holds all methods pertaining to RecordList
 public class RecordList implements Serializable {
 
     // Create array of records
     private ArrayList<Record> records = new ArrayList<>();
 
     // Calls to RecordList methods
-
     /**
      * adds  a record to the to the records list
      * @author  Orest Cokan
@@ -56,6 +55,7 @@ public class RecordList implements Serializable {
         records.add(newRecord);
     }
 
+
     /**
      * removes  a record to the to the records list
      * @author  Orest Cokan
@@ -65,6 +65,7 @@ public class RecordList implements Serializable {
     public void removeRecord(int record){
         records.remove(record);
     }
+
 
     /**
      * checks too see if a record is in the records list
@@ -78,6 +79,7 @@ public class RecordList implements Serializable {
         return records.contains(record);
     }
 
+
     /**
      * gets index of a specific record
      * @author  Orest Cokan
@@ -89,6 +91,7 @@ public class RecordList implements Serializable {
         return records.indexOf(record);
     }
 
+
     /**
      * gets the number of the records in the list
      * @author  Orest Cokan
@@ -97,6 +100,7 @@ public class RecordList implements Serializable {
     public int getSize(){
         return records.size();
     }
+
 
     //just a test function to remove later
     public String toString() {

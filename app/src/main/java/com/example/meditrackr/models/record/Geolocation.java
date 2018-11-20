@@ -30,7 +30,7 @@ import java.io.Serializable;
  * @version 1.0 Nov 8, 2018.
  */
 
-// A Geolocation class that holds all information pertaining to Geolocation
+// A Geolocation class that holds all methods pertaining to Geolocation
 public class Geolocation implements Serializable {
 
     // Initialize class variables
@@ -38,7 +38,6 @@ public class Geolocation implements Serializable {
     private double latitude;
     private String address;
 
-    // Constructor
 
     /**
      * creates variables for the other functions to use
@@ -49,6 +48,7 @@ public class Geolocation implements Serializable {
      * @param longitude longitude coordinate
      * @param address   address name
      */
+    // Constructor
     public Geolocation(double latitude, double longitude, String address){
         this.latitude = latitude;
         this.longitude = longitude;

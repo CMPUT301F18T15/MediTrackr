@@ -32,7 +32,7 @@ import java.io.Serializable;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A Problem class that holds all information pertaining to Problem
+// A Problem class that holds all methods pertaining to Problem
 public class Problem implements Serializable {
 
     // Initialize class variables
@@ -44,7 +44,6 @@ public class Problem implements Serializable {
     private ImageSave imageAll = new ImageSave();
 
 
-    // Constructor
     /**
      * creates variables that the class will use
      * @param date              the date of the problem
@@ -53,6 +52,7 @@ public class Problem implements Serializable {
      * @author Orest Cokan
      * @version 1.0 Nov, 16 2018
      */
+    // Constructor
     public Problem(String title, String date, String description){
         // Initialize class objects
         this.title = title;
@@ -72,6 +72,7 @@ public class Problem implements Serializable {
         return title;
     }
 
+
     /**
      * sets the title of the problem
      *
@@ -82,6 +83,7 @@ public class Problem implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
 
     /**
      * gets the date of the problem
@@ -94,6 +96,7 @@ public class Problem implements Serializable {
         return date;
     }
 
+
     /**
      * sets the date of the problem
      *
@@ -104,6 +107,7 @@ public class Problem implements Serializable {
     public void setDate(String date) {
         this.date = date;
     }
+
 
     /**
      * gets the description of the problem
@@ -116,6 +120,7 @@ public class Problem implements Serializable {
         return description;
     }
 
+
     /**
      * sets the description of the problem
      *
@@ -126,6 +131,7 @@ public class Problem implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
 
     /**
      * gets the records of the problem
@@ -139,6 +145,7 @@ public class Problem implements Serializable {
         return records;
     }
 
+
     /**
      * gets all comments on the problem
      *
@@ -148,6 +155,7 @@ public class Problem implements Serializable {
      * @see CommentList
      */
     public CommentList getComments() {return comments;}
+
 
     /**
      * gets all the images on the problem
@@ -160,6 +168,7 @@ public class Problem implements Serializable {
     public ImageSave getImageAll() {
         return imageAll;
     }
+
 
     public void setImageAll(ImageSave imageAll) {
         this.imageAll = imageAll;

@@ -37,11 +37,9 @@ import java.io.Serializable;
  * @see Profile
  */
 
-// A CareProvider class that holds all information pertaining to CareProvider
+// A CareProvider class that holds all methods pertaining to CareProvider
 public class CareProvider extends Profile implements Serializable {
     private PatientList patients = new PatientList();
-
-    // Constructor
 
     /**
      * creates the careproviders account information
@@ -50,12 +48,12 @@ public class CareProvider extends Profile implements Serializable {
      * @param phone             care providers phone number
      * @param isCareProvider    holds true because this is a care provider
      */
+    // Constructor
     public CareProvider(String username, String email, String phone, boolean isCareProvider){
         super(username, email, phone, true);
     }
 
     // Getters/Setters
-
     /**
      * gets the patients that the care provider has
      *
@@ -67,6 +65,7 @@ public class CareProvider extends Profile implements Serializable {
     public PatientList getPatients() {
         return this.patients;
     }
+
 
     /**
      * gets a specific patient from the care providers patient list
@@ -80,6 +79,7 @@ public class CareProvider extends Profile implements Serializable {
         return this.patients.getPatient(index);
     }
 
+
     /**
      * adds a patient to the care providers patient list if user is not already added
      *
@@ -92,6 +92,8 @@ public class CareProvider extends Profile implements Serializable {
             patients.addPatient(username);
         }
     }
+
+
     /**
      * removes a patient from the care providers patient list
      *
@@ -103,6 +105,7 @@ public class CareProvider extends Profile implements Serializable {
         patients.deletePatient(username);
     }
 
+
     /**
      * checks to see if a patient is in the care providers patient list
      *
@@ -113,6 +116,7 @@ public class CareProvider extends Profile implements Serializable {
     public Boolean patientExists(String username){
         return patients.patientExists(username);
     }
+
 
     //just a test will remove later
     public String toString() { return this.getUsername(); }

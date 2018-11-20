@@ -30,9 +30,11 @@ import java.util.ArrayList;
  * @version 1.0 Nov 15, 2018
  */
 
+// A CommentList class that holds all methods pertaining to CommentList
 public class CommentList implements Serializable {
     private ArrayList<Comment> comments = new ArrayList<>();
 
+    // Calls to CommentList methods
     /**
      * can add a comment to the list
      * @authon Orest Cokan
@@ -43,6 +45,7 @@ public class CommentList implements Serializable {
         comments.add(comment);
     }
 
+
     /**
      * can remove a comment from the list
      * @authon Orest Cokan
@@ -52,6 +55,7 @@ public class CommentList implements Serializable {
     public void removeComment(int comment){
         comments.remove(comment);
     }
+
 
     /**
      * can add a find a comment from the list using an index
@@ -65,6 +69,7 @@ public class CommentList implements Serializable {
         return comments.get(index);
     }
 
+
     /**
      * can check to see if image is in the list
      * @authon Orest Cokan
@@ -77,6 +82,7 @@ public class CommentList implements Serializable {
         return comments.contains(comment);
     }
 
+
     /**
      * can get the index of a comment
      * @authon Orest Cokan
@@ -88,6 +94,7 @@ public class CommentList implements Serializable {
     public int getIndex(Comment comment){
         return comments.indexOf(comment);
     }
+
 
     /**
      * can get the number of comments in the list
@@ -103,6 +110,7 @@ public class CommentList implements Serializable {
     public String toString() {
         return comments.toString();
     }
+
 
     /**
      * can get the images from the list from a given index

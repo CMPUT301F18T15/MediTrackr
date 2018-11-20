@@ -55,7 +55,7 @@ public class PatientsFragment extends Fragment {
         return fragment;
     }
 
-    // Creates patients fragment view
+    // Creates view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

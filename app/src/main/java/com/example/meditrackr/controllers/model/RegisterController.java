@@ -18,7 +18,6 @@
  */
 package com.example.meditrackr.controllers.model;
 
-//imports
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -35,13 +34,26 @@ import com.example.meditrackr.ui.MainActivity;
 import es.dmoral.toasty.Toasty;
 
 /**
- * Crated by Skryt on Nov 17, 2018
+ * RegisterController
+ *
+ * Allows for the registering of an account
+ * and performs checks to ensure that the
+ * account does not exist already.
+ *
+ * @author  Orest Cokan
+ * @version 1.0 Nov 17, 2018.
  */
 
 // Controller class for registering a new account
 public class RegisterController {
 
-
+    /**
+     * adds problem to database and locally
+     *
+     * @param activity   the activity RegisterFragment is a child of
+     * @param context    the context of RegisterFragment
+     * @param profile    the profile to be registered
+     */
     // Registers account into memory and ES
     public static void RegisterAccount(Activity activity, Context context, Profile profile) {
 
@@ -52,6 +64,7 @@ public class RegisterController {
         // Save account into ES and memory
         done = ElasticSearchController.addProfile(profile);
         finish = SaveLoadController.addNewProfile(context, profile);
+
         // Indicate with a toast that account has been added
         Log.d("RegisterFragmentMeme", "done is " + done + " finish is " + finish);
         if (finish || done) { // If both saves to memory and ES worked
@@ -65,11 +78,15 @@ public class RegisterController {
                 LazyLoadingManager.setProfile(profile); // Set profile in LazyLoadingManager
             }
         }
-        if (!finish || !done) { // If both saves to memory and ES did not work
+
+        // If both saves to memory and ES did not work
+        if (!finish || !done) {
             // Indicate that new profile uses an existing username
             Log.d("RegisterFragmentMeme", "done is " + done + " finish is " + finish);
             Toasty.error(context, "Username taken", Toast.LENGTH_SHORT).show();
-        } else { // If no exceptions were caught
+
+        // If no exceptions were caught
+        } else {
             Toasty.success(context, "Registration successful", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(activity, MainActivity.class);
             intent.putExtras(bundle);

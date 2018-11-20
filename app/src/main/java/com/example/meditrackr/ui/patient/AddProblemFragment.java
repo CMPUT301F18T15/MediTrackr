@@ -153,17 +153,21 @@ public class AddProblemFragment extends Fragment {
         return rootView;
     }
 
+
+
     /************************************************************************
      * CHECK INPUTS FILLED: TITLE AND DESCRIPTION
      ************************************************************************/
     // Checks if user input fulfills title and description requirement
     public boolean checkInputs(EditText title, EditText description){
-        if(((title != null && !title.getText().toString().isEmpty())
-                && (description != null && !description.getText().toString().isEmpty()))){
-            return true; // Return true if there is a title and description
+        if(((title != null && !title.getText().toString().isEmpty()
+                && title.getText().toString().length() < 30)
+                && (description != null && !description.getText().toString().isEmpty()
+                && description.getText().toString().length() < 300))){
+            return true;
         }
-        else { // New problem is missing a requirement
-            return false; // Return false if one of requirements is missing
+        else {
+            return false;
         }
     }
 

@@ -40,6 +40,7 @@
             android:layout_marginBottom="7dp"
             android:contentDescription="TODO"
             android:scaleType="centerCrop"
+            android:background="@drawable/gradient"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/search"
             app:layout_constraintHorizontal_bias="0.5"

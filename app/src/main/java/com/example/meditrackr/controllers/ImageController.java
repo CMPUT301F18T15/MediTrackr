@@ -18,7 +18,6 @@
  */
 package com.example.meditrackr.controllers;
 
-//imports
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -27,6 +26,7 @@ import java.io.ByteArrayOutputStream;
 /**
  * this class takes a file and and ends up resizing it if needed to the set maximum size set by
  * the customer. once it is under the maximum size it will be displayed for the user to see
+ *
  * @author Orest Cokan
  * @version 1.0 Nov 13, 2018
  */
@@ -45,11 +45,9 @@ public class ImageController {
      * then resize and compress it to desired file size
      * then set it to image view to show it
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param filePath the file path of image in this phone
      * @return selectImage the edited image
      */
-
     // Set max image file size
     public Bitmap decodeFile(String filePath) {
         int maxSize = 65536;

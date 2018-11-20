@@ -34,23 +34,26 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import es.dmoral.toasty.Toasty;
 
 /**
- * a problem controller that adds a problem to the database
+ * RecordController:
+ *
+ * Allows for the adding and saving of
+ * a record into both Elastic Search and
+ * Memory
+ *
  * @author  Veronica Salm
- * @varsion 1.0 Nov 18, 2018
+ * @version 1.0 Nov 10, 2018.
  */
 
 // Controller class for record objects
 public class RecordController {
 
     /**
-     * adds problem to database and locally
+     * adds problem to elastic search and locally
      *
      * @param context   the context the controller will user
-     * @param record   the record we will add to the database
+     * @param record    the record we will add to the database
      * @param position  the position of the problem
      */
-
-    // Add record to record list
     public static void addRecord(Context context, Record record, int position) {
         // First, get the patient's profile
         Patient patient = LazyLoadingManager.getPatient();

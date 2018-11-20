@@ -56,6 +56,7 @@ public class CareProviderListTest {
                 careProviderList.getSize() != 0);
     }
     
+    // test if careProviderList is empty first
     @Test
     public void constructorTest() {
         CareProviderList list = new CareProviderList();

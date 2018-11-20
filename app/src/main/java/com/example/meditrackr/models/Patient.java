@@ -1,26 +1,29 @@
 /*
- *Apache 2.0 License Notice
+ * Patient
  *
- *Copyright 2018 CMPUT301F18T15
+ * Version 1.0
+ * Oct 24, 2018.
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Apache 2.0 License Notice
+ *
+ * Copyright 2018 CMPUT301F18T15
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 package com.example.meditrackr.models;
 
-//import
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * this class creates a patient which stores all information associated with the patient.
@@ -40,7 +43,6 @@ import java.util.ArrayList;
 // A Patient class holding all methods pertaining to Patient
 public class Patient extends Profile implements Serializable{
     // Initialize class variables
-    private CareProviderList careProviders = new CareProviderList();
     private ProblemList problems = new ProblemList();
 
     /**
@@ -59,40 +61,6 @@ public class Patient extends Profile implements Serializable{
     /*--------------------------------------------------------------------------
      * GETTERS AND SETTERS
      *------------------------------------------------------------------------*/
-
-
-    /** gets careproviders associated with patient
-     *
-     * @author  Orest Cokan
-     * @return   list of careproviders
-     * @see CareProviderList
-     */
-    public CareProviderList getCareProviders() {
-        return careProviders;
-    }
-
-
-    /** removes care provider from patients care Provider List
-     *
-     * @author  Orest Cokan
-     * @param careProvider    care provider we will remove
-     * @see CareProvider
-     */
-    public void deleteCareProvider(CareProvider careProvider) {
-        careProviders.deleteCareProvider(careProvider);
-    }
-
-
-    /** sees if care provider exists in patients care provider list
-     *
-     * @author  Orest Cokan
-     * @param careProvider      the care provider we want to check
-     * @return                  list of careproviders
-     * @see CareProvider
-     */
-    public Boolean careProviderExists(CareProvider careProvider){
-        return careProviders.careProviderExists(careProvider.getUsername());
-    }
 
 
     /** gets all problems that user has stored in a list

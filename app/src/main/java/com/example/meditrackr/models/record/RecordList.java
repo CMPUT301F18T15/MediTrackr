@@ -25,13 +25,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * this class creates a recordlist which stores all records.
- * this class uses addRecord to add a record to the list
- * the class uses removeRecord to remove a record from the list
- * the class uses recordExist to check to see if a record exists in the list
- * the class can use getIndex to find the index of a specific item
- * the class can use getSize find out the number of records in the list
- * lastly the class can use getRecord to find a specific record given an index
+ * RecordList: A list of records.
+ *
+ * Allows adding and removing elements (by both index and record),
+ * checking if a record object exists in the array and retrieving the
+ * size of the list.
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
@@ -45,9 +43,10 @@ public class RecordList implements Serializable {
 
 
     /**
-     * adds  a record to the to the records list
+     * Appends a new record to the end of the RecordList.
+     *
      * @author  Orest Cokan
-     * @param newRecord a new record to add to the list
+     * @param newRecord a new Record object to add to the list
      * @see Record
      */
     public void addRecord(Record newRecord) {
@@ -56,9 +55,10 @@ public class RecordList implements Serializable {
 
 
     /**
-     * removes  a record to the to the records list
+     * Removes a Record object from the RecordList.
+     *
      * @author  Orest Cokan
-     * @param record    the record to remove from the list
+     * @param record    the Record object to remove from the list
      */
     public void removeRecord(Record record){
         records.remove(record);
@@ -66,10 +66,12 @@ public class RecordList implements Serializable {
 
 
     /**
-     * checks too see if a record is in the records list
+     * Checks if a record is in the RecordList and returns
+     * true or false accordingly.
+     *
      * @author  Orest Cokan
-     * @param record     the record to check for
-     * @return           1 if it exists or 0 if not
+     * @param record     the Record object to check for
+     * @return           true if the record is in the list, false otherwise
      * @see Record
      */
     public Boolean recordExists(Record record){
@@ -83,9 +85,10 @@ public class RecordList implements Serializable {
 
 
     /**
-     * gets index of a specific record
+     * Retrieve the index of a specific item.
+     *
      * @author  Orest Cokan
-     * @param record    the record we are looking for the inxex
+     * @param record    the record whose index we want to find
      * @see Record
      */
     public int getIndex(Record record){
@@ -94,7 +97,8 @@ public class RecordList implements Serializable {
 
 
     /**
-     * gets the number of the records in the list
+     * Gets the number of the records in the RecordList.
+     *
      * @author  Orest Cokan
      */
     public int getSize(){
@@ -102,12 +106,18 @@ public class RecordList implements Serializable {
     }
 
 
-    //just a test function to remove later
+    /**
+     * Converts the object to a string representation.
+     *
+     * @author  Orest Cokan
+     * @return  returns a string representation of the object
+     */
     public String toString() { return records.toString(); }
 
 
     /**
-     * gets a record from a given index
+     * Gets a record from a given index.
+     *
      * @author  Orest Cokan
      * @param index     the index of the record
      * @return          the record that it got

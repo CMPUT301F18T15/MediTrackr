@@ -51,14 +51,12 @@ import es.dmoral.toasty.Toasty;
  * @author  Orest Cokan
  * @version 1.0 Nov 8, 2018.
  */
-
-// Class creates Add Problem Fragment for patients
 public class AddProblemFragment extends Fragment {
 
-    /************************************************************************
+    /*-----------------------------------------------------------------------
      * CREATE ADD PROBLEM FRAGMENT OBJECT
-     ************************************************************************/
-    // Constructor
+     *-----------------------------------------------------------------------*/
+
     public static AddProblemFragment newInstance(){
         // Initialize fragment object
         AddProblemFragment fragment = new AddProblemFragment();
@@ -72,9 +70,9 @@ public class AddProblemFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_problem, container, false);
 
-        /************************************************************************
+        /*-----------------------------------------------------------------------
          * INITIALIZE UI ATTRIBUTES
-         ************************************************************************/
+         *-----------------------------------------------------------------------*/
         // Initialize ui attributes
         final EditText title = (EditText) rootView.findViewById(R.id.problem_title_field);
         final EditText dateSelector = (EditText) rootView.findViewById(R.id.problem_date_selector);
@@ -84,9 +82,9 @@ public class AddProblemFragment extends Fragment {
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
 
 
-        /************************************************************************
+        /*-----------------------------------------------------------------------
          * SET PROBLEM START DATE
-         ************************************************************************/
+         *-----------------------------------------------------------------------*/
         // Automatically set the problem start date to the current date
         dateSelector.setText(format.format(calendar.getTime()));
         Log.d("CurrentDate", format.format(calendar.getTime()));
@@ -121,9 +119,9 @@ public class AddProblemFragment extends Fragment {
         });
 
 
-        /************************************************************************
+        /*-----------------------------------------------------------------------
          * ADD PROBLEM TO PATIENT
-         ************************************************************************/
+         *----------------------------------------------------------------------*/
         // Handles button for adding patient
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,10 +142,6 @@ public class AddProblemFragment extends Fragment {
                     transaction.replace(R.id.content, fragment);
                     transaction.commit(); // Make permanent any changes made in fragment
                 }
-                else { // If checkInputs is false
-                    // Create toast message indicating that problem could not be added
-                    Toasty.warning(getContext(), "Unable to add problem", Toast.LENGTH_LONG).show();
-                }
             }
         });
         return rootView;
@@ -155,20 +149,22 @@ public class AddProblemFragment extends Fragment {
 
 
 
-    /************************************************************************
+    /*-----------------------------------------------------------------------
      * CHECK INPUTS FILLED: TITLE AND DESCRIPTION
-     ************************************************************************/
+     *----------------------------------------------------------------------*/
     // Checks if user input fulfills title and description requirement
     public boolean checkInputs(EditText title, EditText description){
-        if(((title != null && !title.getText().toString().isEmpty()
-                && title.getText().toString().length() < 30)
-                && (description != null && !description.getText().toString().isEmpty()
-                && description.getText().toString().length() < 300))){
-            return true;
-        }
-        else {
+        if (title != null && title.getText().toString().length() > 30) {
+            Toasty.error(getContext(), "Title cannot exceed 30 characters", Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        if (description != null && description.getText().toString().length() > 300) {
+            Toasty.error(getContext(), "Description cannot exceed 300 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
 }

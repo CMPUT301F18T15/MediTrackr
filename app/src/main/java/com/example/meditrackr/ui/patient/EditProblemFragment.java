@@ -54,7 +54,7 @@ public class EditProblemFragment extends Fragment {
     // Initialize variables
     private Patient patient = LazyLoadingManager.getPatient();
 
-    // Creates new instance fragment and saves it as a bundle
+    // Creates new instance fragment and maps index as an argument in bundle
     public static EditProblemFragment newInstance(int index){
             EditProblemFragment fragment = new EditProblemFragment();
             Bundle bundle = new Bundle();
@@ -63,7 +63,7 @@ public class EditProblemFragment extends Fragment {
             return fragment;
         }
 
-        // Creates edit problem fragment view
+        // Creates view objects based on layouts in XML
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -71,14 +71,16 @@ public class EditProblemFragment extends Fragment {
                     R.layout.fragment_edit_problem, container, false);
 
 
-            // Initializes text placeholders for user input and buttons for saving or cancelling
+            // Initializes ui attributes
             final EditText title = (EditText) rootView.findViewById(R.id.edit_problem_title_field);
             final EditText dateSelector = (EditText) rootView.findViewById(R.id.edit_problem_date_selector);
             final EditText description = (EditText) rootView.findViewById(R.id.edit_problem_description_field);
             final Button saveButton = (Button) rootView.findViewById(R.id.edit_problem_save_button);
-            final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.CANADA); // Defines date format
+            // Defines date format
+            final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.CANADA);
             final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
-            final int index = getArguments().getInt("INDEX"); // Sets bundle number as the problem's index number
+            // Gets index as an argument from bundle
+            final int index = getArguments().getInt("INDEX");
 
 
             // Set the problem start date to the current date
@@ -136,14 +138,18 @@ public class EditProblemFragment extends Fragment {
                         // Save problem into ES and memory
                         ElasticSearchController.updateUser(patient);
                         SaveLoadController.saveProfile(getContext(), patient);
-                        Log.d("EditProblem", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
+                        Log.d("EditProblem", "Profile: " + patient.getUsername() + " Problems: "
+                                + patient.getProblems());
 
                         // Transition back to problems fragment view
                         FragmentManager manager = getFragmentManager();
                         FragmentTransaction transaction = manager.beginTransaction();
-                        ProblemsFragment fragment = ProblemsFragment.newInstance(); // Switch to ProblemsFragment
-                        transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
+                        // Switch to ProblemsFragment
+                        ProblemsFragment fragment = ProblemsFragment.newInstance();
+                        // Allow user to bring back previous fragment when back button is pressed
+                        transaction.addToBackStack(null);
                         transaction.replace(R.id.content, fragment);
+                        // Commit changes to fragment
                         transaction.commit();
                     }
                     else {

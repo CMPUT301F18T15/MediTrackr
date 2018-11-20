@@ -38,6 +38,7 @@ public class ProfileTest {
 
     public ProfileTest() {}
     
+    // test if profile is constructed with its attributes
     @Test
     public void constructorTest() {
         String name = "name";

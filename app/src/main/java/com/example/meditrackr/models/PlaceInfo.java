@@ -23,17 +23,20 @@
  */
 package com.example.meditrackr.models;
 
-/**
- * @author Orest Cokan
- * @version 1.0 Nov, 16 2018
- */
 
-//imports
+
 import android.net.Uri;
 
 import com.google.android.gms.maps.model.LatLng;
 
-// A PlaceInfo class that holds all methods pertaining to PlaceInfo
+/**
+ *
+ * PlaceInfo: Used for geolocation map activity. Tracks various information
+ * about a specific location on a world map.
+ *
+ * @author Orest Cokan
+ * @version 1.0 Nov, 16 2018
+ */
 public class PlaceInfo {
     // Attributes
     private String name;

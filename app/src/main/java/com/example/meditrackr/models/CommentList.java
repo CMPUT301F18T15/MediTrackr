@@ -27,20 +27,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * creates a comment list that stores all the comments
- * can add, delete, get a comment and check to see if it exists
- * it can also get the index size and get the image
+ * CommentList: A list of comments.
+ *
+ * Allows adding and removing elements (by both index and comment),
+ * checking if a comment object exists in the array and retrieving the
+ * size of the list.
+ *
  * @author Orest Cokan
  * @version 1.0 Nov 15, 2018
  */
-
-// A CommentList class that holds all methods pertaining to CommentList
 public class CommentList implements Serializable {
+    // initialize an empty list of comments
     private ArrayList<Comment> comments = new ArrayList<>();
 
 
     /**
-     * can add a comment to the list
+     * Add a comment to the list.
+     *
      * @author Orest Cokan
      * @param comment   the comment will will add to the list
      */
@@ -50,7 +53,8 @@ public class CommentList implements Serializable {
 
 
     /**
-     * can remove a comment from the list
+     * Remove a comment from the list.
+     *
      * @author Orest Cokan
      * @param comment   the comment that will be removed from the list
      */
@@ -60,10 +64,11 @@ public class CommentList implements Serializable {
 
 
     /**
-     * can check to see if image is in the list
+     * Check to see if a comment is in the list.
+     *
      * @author Orest Cokan
      * @param comment   the comment we are looking for in the list
-     * @return          true or false if image is there
+     * @return          true or false if comment is there
      * @see Comment
      */
     public Boolean commentExists(Comment comment){
@@ -77,10 +82,11 @@ public class CommentList implements Serializable {
 
 
     /**
-     * can add a find a comment from the list using an index
+     * Retrieve a comment from the list using an index.
+     *
      * @author Orest Cokan
-     * @param index   the index that will be used to get the comment
-     * @return          the comment that was at that index
+     * @param index     the index used to get the comment
+     * @return          the comment at the given index
      * @see Comment
      */
     public Comment getComment(int index){
@@ -89,7 +95,8 @@ public class CommentList implements Serializable {
 
 
     /**
-     * can get the index of a comment
+     * Get the index of a comment.
+     *
      * @author Orest Cokan
      * @param comment   the comment that will be used to search through the list
      * @return          the index of the comment
@@ -101,9 +108,10 @@ public class CommentList implements Serializable {
 
 
     /**
-     * can get the number of comments in the list
+     * Get the number of comments in the list.
+     *
      * @author Orest Cokan
-     * @return    the number of comments in the list
+     * @return          the number of comments in the list
      */
     public int getSize(){
         return comments.size();
@@ -114,7 +122,7 @@ public class CommentList implements Serializable {
      * Converts the object to a string representation.
      *
      * @author  Orest Cokan
-     * @return  returns a string representation of the object
+     * @return          a string representation of the object
      */
     public String toString() {
         return comments.toString();

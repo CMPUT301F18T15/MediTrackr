@@ -27,12 +27,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * this class creates a PatientList which stores all Patients in one place.
- * it uses getPatient to get the patient and setPatient to store the patients username.
- * this class can use getSize to find out the number of patients in the list
- * this class can use addPatient to add a patient to the PatientList
- * this class can use deletePatient to remove a patient from the PatientList
- * this class can use patientExists to check to see if a patient exists in the PatientList
+ * PatientList: A list of patients.
+ *
+ * Allows adding and removing elements (by both index and patient),
+ * checking if a patient object exists in the array and retrieving the
+ * size of the list.
+ *
  *
  * @author  Orest Cokan
  * @version 1.0 Nov 7, 2018.

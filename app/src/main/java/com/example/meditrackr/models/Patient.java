@@ -26,15 +26,12 @@ package com.example.meditrackr.models;
 import java.io.Serializable;
 
 /**
- * this class creates a patient which stores all information associated with the patient.
- * the stored information is as follows: (id, username, email, phone, isCareProvider)
- * NOTE: isCareProvider should be false
+ * Patient: A Patient has a list of problems which can be retrieved. Problem objects
+ * can be added or deleted from the list, and the list can be checked to see if a particular
+ * problem exists in the list.
  *
- * this class can use getCareProviders to show the patient all care providers that this patient has
- * this class can use deleteCareProvider to delete a care provider from their list
- * this class can use careProviderExists to show if that care provider is in their list of assigned care providers
- * this class can use  getProblems to see all problems associated with the patient
- * this class can also use getProblem which will give the details about a specific problem from a given index
+ * A Patient also has all the information associated with the Profile class, including
+ * username, email, and phone.
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
@@ -46,11 +43,11 @@ public class Patient extends Profile implements Serializable{
     private ProblemList problems = new ProblemList();
 
     /**
-     * creates the patients account information
-     * @param username          patients username
-     * @param email             patients email
-     * @param phone             patients phone number
-     * @param isCareProvider    holds False because this is not a care provider
+     * Creates a new Patient object.
+     * @param username          patient's username
+     * @param email             patient's email
+     * @param phone             patient's phone number
+     * @param isCareProvider    defaults to false because this is a patient
      */
     // Constructor
     public Patient(String username, String email, String phone, boolean isCareProvider) {
@@ -63,7 +60,7 @@ public class Patient extends Profile implements Serializable{
      *------------------------------------------------------------------------*/
 
 
-    /** gets all problems that user has stored in a list
+    /** Retrieves the list all problems that the patient has logged.
      *
      * @author  Orest Cokan
      * @return         list of problems
@@ -72,11 +69,11 @@ public class Patient extends Profile implements Serializable{
     public ProblemList getProblems() {return this.problems;}
 
 
-    /** gets a specific problem from from the problem list
+    /** Retrieves a specific problem from from the problem list.
      *
      * @author  Orest Cokan
      * @param index      the index at which the problem is located in the list
-     * @return           the problem
+     * @return           a Problem object
      * @see Problem
      */
     public Problem getProblem(int index){

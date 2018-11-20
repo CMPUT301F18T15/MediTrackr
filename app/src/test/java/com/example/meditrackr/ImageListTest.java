@@ -48,6 +48,7 @@ public class ImageListTest {
         image = null;
     }
     
+    // test if recordPhotoList is first set to empty
     @Test
     public void constructorTest() {
         RecordPhotoList list = new RecordPhotoList();

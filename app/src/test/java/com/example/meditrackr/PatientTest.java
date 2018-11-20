@@ -49,6 +49,19 @@ public class PatientTest {
         patient = new Patient
                 ("", "", "", false);
     }
+    
+    @Test
+    public void constructorTest() {
+        String name = "name";
+        String email = "patient@patients.com";
+        String phone = "0987654321";
+        Patient pat =
+                new Patient(name, email, phone, false);
+        assertEquals(name, pat.getUsername());
+        assertEquals(email, pat.getEmail());
+        assertEquals(phone, pat.getPhone());
+        assertFalse(pat.getisCareProvider());
+    }
 
     // Test that patient derives from its generic (Profile)
     @Test

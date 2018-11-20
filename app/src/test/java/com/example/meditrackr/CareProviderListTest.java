@@ -55,6 +55,16 @@ public class CareProviderListTest {
         assertTrue("CareProvider not added to CareProviderList",
                 careProviderList.getSize() != 0);
     }
+    
+    @Test
+    public void constructorTest() {
+        string name = "Name";
+        string email = "1234567890";
+        boolean phone = true;
+        CareProvider doctor =
+                new CareProvider("Name", "1234567890", true);
+
+    }
 
     // Test if care providers can be deleted
     @Test

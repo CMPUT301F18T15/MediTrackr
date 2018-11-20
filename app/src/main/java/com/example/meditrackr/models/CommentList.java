@@ -106,7 +106,12 @@ public class CommentList implements Serializable {
     }
 
 
-    // test function will remove later
+    /**
+     * Converts the object to a string representation.
+     *
+     * @author  Orest Cokan
+     * @return  returns a string representation of the object
+     */
     public String toString() {
         return comments.toString();
     }

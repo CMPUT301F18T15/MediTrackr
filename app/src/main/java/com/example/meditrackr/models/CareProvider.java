@@ -18,74 +18,41 @@
  */
 package com.example.meditrackr.models;
 
-//imports
 import java.io.Serializable;
 
 /**
- * this is the careProvider class. this allows a care provider to view their patients
- * this class can use getPatients to show the care provider the patients assigned to them
- * this class can use getPatient to show the care provider information about a specific patient from a given index
- * the class can use addPatient which will add a patient to the PatientList
- * the class can use deletePatient which will delete a patient from the PatientList
- * the class can also use patientExists to see if a patient exists in the Patientlist given the patients username.
  *
- * it also hold all the care providers information id, username, email phone, and isCareProvider (which will be true)
+ * CareProvider: A CareProvider has a list of patients which can be retrieved. Patient objects
+ * can be added or deleted from the list, and the list can be checked to see if a particular
+ * patient exists in the list.
  *
+ * A CareProvider also has all the information associated with the User class, including
+ * username, email, and phone.
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  * @see Profile
+ * @see PatientList
  */
-
-// A CareProvider class that holds all methods pertaining to CareProvider
 public class CareProvider extends Profile implements Serializable {
     private PatientList patients = new PatientList();
 
 
     /**
-     * creates the careproviders account information
-     * @param username          care providers username
-     * @param email             care providers email
-     * @param phone             care providers phone number
-     * @param isCareProvider    holds true because this is a care provider
+     * Uses the contact information to create a new CareProvider object.
+     * @param username          a CareProvider's username (String)
+     * @param email             an email address (String)
+     * @param phone             a string representing a phone number
+     * @param isCareProvider    true by default because this is a CareProvider
      */
-    // Constructor
     public CareProvider(String username, String email, String phone, boolean isCareProvider){
         super(username, email, phone, true);
     }
 
-
-    /*--------------------------------------------------------------------------
-     * GETTERS AND SETTERS
-     *------------------------------------------------------------------------*/
-
-
+    
     /**
-     * gets the patients that the care provider has
-     *
-     * @author  Orest Cokan
-     * @return the patients associated with the care provider
-     * @see PatientList
-     */
-    public PatientList getPatients() {
-        return this.patients;
-    }
-
-
-    /**
-     * gets a specific patient from the care providers patient list
-     *
-     * @author  Orest Cokan
-     * @param index  the index that the patient is at
-     * @return the patient associated with that index
-     */
-    public String getPatient(int index){
-        return this.patients.getPatient(index);
-    }
-
-
-    /**
-     * adds a patient to the care providers patient list if user is not already added
+     * Adds a patient to the care providers patient list, but only
+     * if the user has not already been added.
      *
      * @author  Orest Cokan
      * @param username  the username of the patient we want to add to the list
@@ -98,7 +65,7 @@ public class CareProvider extends Profile implements Serializable {
 
 
     /**
-     * removes a patient from the care providers patient list
+     * Removes a patient from the care provider's patient list.
      *
      * @author  Orest Cokan
      * @param username  the username of the patient we want to remove to the list
@@ -109,7 +76,7 @@ public class CareProvider extends Profile implements Serializable {
 
 
     /**
-     * checks to see if a patient is in the care providers patient list
+     * Checks to see if a patient exists in the care provider's patient list.
      *
      * @author  Orest Cokan
      * @param username  the username of the patient we want to check
@@ -119,6 +86,41 @@ public class CareProvider extends Profile implements Serializable {
     }
 
 
-    //just a test will remove later
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
+    /**
+     * Retrieves the CareProvider's patients.
+     *
+     * @author  Orest Cokan
+     * @return the patients associated with this care provider
+     * @see PatientList
+     */
+    public PatientList getPatients() {
+        return this.patients;
+    }
+
+
+    /**
+     * Gets a specific patient from the care provider's PatientList.
+     *
+     * @author  Orest Cokan
+     * @param index  the index that the patient is at
+     * @return the patient associated with that index
+     */
+    public String getPatient(int index){
+        return this.patients.getPatient(index);
+    }
+
+
+
+    /**
+     * Converts the object to a string representation.
+     *
+     * @author  Orest Cokan
+     * @return  returns a string representation of the object
+     */
     public String toString() { return this.getUsername(); }
 }

@@ -22,7 +22,7 @@ package com.example.meditrackr.models.record;
 import java.io.Serializable;
 
 /**
- * This class will create a body coordinate on a mannequin/body location photo
+ * BodyLocation: create a body coordinate on a mannequin/body location photo
  * and then associate it with with the photos of a particular record.
  *
  * Note that this functionality is not yet implemented in our app

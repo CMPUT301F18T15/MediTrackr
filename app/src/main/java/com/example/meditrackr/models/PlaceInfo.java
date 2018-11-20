@@ -87,18 +87,8 @@ public class PlaceInfo {
     }
 
 
-    public String getAddress() {
-        return address;
-    }
-
-
     public void setAddress(String address) {
         this.address = address;
-    }
-
-
-    public String getPhoneNumber() {
-        return phoneNumber;
     }
 
 
@@ -116,19 +106,8 @@ public class PlaceInfo {
         this.id = id;
     }
 
-
-    public Uri getWebsiteUri() {
-        return websiteUri;
-    }
-
-
     public void setWebsiteUri(Uri websiteUri) {
         this.websiteUri = websiteUri;
-    }
-
-
-    public LatLng getLatlng() {
-        return latlng;
     }
 
 
@@ -137,26 +116,17 @@ public class PlaceInfo {
     }
 
 
-    public float getRating() {
-        return rating;
-    }
-
-
     public void setRating(float rating) {
         this.rating = rating;
     }
 
 
-    public String getAttributions() {
-        return attributions;
-    }
-
-
-    public void setAttributions(String attributions) {
-        this.attributions = attributions;
-    }
-
-
+    /**
+     * Converts the object to a string representation.
+     *
+     * @author  Orest Cokan
+     * @return  returns a string representation of the object
+     */
     @Override
     public String toString() {
         return "PlaceInfo{" +

@@ -25,25 +25,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * uses getters and setters to set variavles for all the thingd the image list class needs
+ * RecordPhotoList: A list of photos (Bitmap objects) for a record.
+ *
+ * Allows adding and removing elements (by both index and bitmap),
+ * checking if a Bitmap object exists in the array and retrieving the
+ * size of the list.
+ *
  * @author Orest Cokan
  * @version 1.0 Nov 13, 2018
  */
-
-// Class creates Image List
 public class RecordPhotoList implements Serializable {
-    /**
-     * creates a list to store the images in
-     * @author Orest Cokan
-     */
+
+    // creates an array of Bitmap images
     private transient ArrayList<Bitmap> images = new ArrayList<>();
 
 
     /**
-     * adds an image to the list
+     * Adds an image to the RecordPhotoList.
      *
      * @author Orest Cokan
-     * @param newImage the image we want to add
+     * @param newImage  the image to be added
      * @see Bitmap
      */
     public void addImage(Bitmap newImage) {
@@ -52,20 +53,20 @@ public class RecordPhotoList implements Serializable {
 
 
     /**
-     * removes an image to the list
+     * Removes an image from the RecordPhotoList.
      *
      * @author Orest Cokan
-     * @param image the image we want to remove
+     * @param image     the image we want to remove
      */
     public void removeImage(Bitmap image){
         images.remove(image);
     }
 
     /**
-     * checks to see if an image is in the list
+     * Checks to see if an Bitmap image object is in the list.
      *
      * @author Orest Cokan
-     * @param image the image we want to check
+     * @param image     the image to check for
      * @see Bitmap
      */
     public Boolean imageExists(Bitmap image){
@@ -79,10 +80,10 @@ public class RecordPhotoList implements Serializable {
 
 
     /**
-     * gets the index of an image from the list
+     * Gets the index of an Bitmap image object from the RecordPhotoList.
      *
      * @author Orest Cokan
-     * @param image the image we want to get the index of
+     * @param image     the image whose index we want to retrieve
      * @see Bitmap
      */
     public int getIndex(Bitmap image){
@@ -91,9 +92,10 @@ public class RecordPhotoList implements Serializable {
 
 
     /**
-     * gets the number of photos in the list
+     * Gets the number of photos in the RecordPhotoList.
      *
      * @author Orest Cokan
+     * @return      the size of the list of images
      */
     public int getSize(){
         return images.size();
@@ -101,9 +103,10 @@ public class RecordPhotoList implements Serializable {
 
 
     /**
-     * converts the images to strngs
+     * Converts the object to a string representation.
      *
-     * @author Orest Cokan
+     * @author  Orest Cokan
+     * @return  returns a string representation of the object
      */
     public String toString() {
         return images.toString();
@@ -111,7 +114,7 @@ public class RecordPhotoList implements Serializable {
 
 
     /**
-     * gets the image from a given index
+     * Gets the image at a given index of the array.
      *
      * @author Orest Cokan
      * @param index the index of image we want to find

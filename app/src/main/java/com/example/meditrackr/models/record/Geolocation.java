@@ -22,7 +22,7 @@ package com.example.meditrackr.models.record;
 import java.io.Serializable;
 
 /**
- * Geolocation: represents a geolcoation point on a map by tracking latitude,
+ * Geolocation: represents a geolocation point on a map by tracking latitude,
  * longitude, and a string address name of the geolocation for a particular record.
  *
  * Getters and setters can be used to retrieve or modify any of the geolocation

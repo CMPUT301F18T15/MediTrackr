@@ -87,27 +87,36 @@ import java.util.List;
 // taken from coding with mitch youtube series
 // this class works and don't touch it
 
+
+// Class handles map activity
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener {
+    // OnConnectionFailedListener provides callbacks for events that result in a
+    // failed attempt to connect the client to service
 
+    // When connection to client failed
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
     }
 
+    // When map GoogleMaps is available for viewing
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: map is ready");
         mMap = googleMap;
 
+        // If location permission is granted get device location
         if (mLocationPermissionsGranted) {
             getDeviceLocation();
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // End execution if precise and approximate location permission is denied
                 return;
             }
+            // Enable my-location layer and disable the my-location button
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
             placeMarkers();
@@ -115,6 +124,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
+    // Indicators and request codes
     private static final String TAG = "MapActivity";
 
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -125,11 +135,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             new LatLng(-40, -168), new LatLng(71, 136));
 
 
-    //widgets
+    // Initialize widgets
     private AutoCompleteTextView mSearchText;
     private ImageView mGps, mInfo, mPlacePicker;
 
-    //vars
+    // Initialize variables
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -139,6 +149,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private Marker mMarker;
 
 
+    // Creates map activity view objects based on layouts in XML
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,15 +159,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mGps = (ImageView) findViewById(R.id.ic_gps);
         mInfo = (ImageView) findViewById(R.id.place_info);
 
-
+        // Get location permissions
         getLocationPermission();
 
 
     }
 
+    // Initialize map activity
     private void init() {
         Log.d(TAG, "init: initializing");
 
+        // Create new GoogleApiClient to configure google play services integration
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
                 .addApi(Places.GEO_DATA_API)
@@ -166,20 +179,23 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mSearchText.setOnItemClickListener(mAutocompleteClickListener);
 
+        // Adapter that handles autocomplete requests from Google geo data client
         mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient,
                 LAT_LNG_BOUNDS, null);
 
         mSearchText.setAdapter(mPlaceAutocompleteAdapter);
 
+        // Interface definition for a callback to be invokedwhen an action is performed on the editor
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                // Define what to do for certain actionIds or key events
                 if (actionId == EditorInfo.IME_ACTION_SEARCH
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
                         || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER) {
 
-                    //execute our method for searching
+                    // Execute our method for searching
                     geoLocate();
                 }
 
@@ -187,6 +203,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
+        // OnClickListener for gps icon
         mGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -195,18 +212,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
+        // OnClickListener for place info
         mInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked place info");
-                try {
+                try { // If click when info window is shown close window
                     if (mMarker.isInfoWindowShown()) {
                         mMarker.hideInfoWindow();
-                    } else {
+                    } else { // If click when window is closed, open window
                         Log.d(TAG, "onClick: place info: " + mPlace.toString());
                         mMarker.showInfoWindow();
                     }
-                } catch (NullPointerException e) {
+                } catch (NullPointerException e) { // Throw exception when null was clicked
                     Log.e(TAG, "onClick: NullPointerException: " + e.getMessage());
                 }
             }
@@ -216,123 +234,151 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
+    // Method for searching location
     private void geoLocate() {
         Log.d(TAG, "geoLocate: geolocating");
 
         String searchString = mSearchText.getText().toString();
 
+        // Geocoder handles location search
         Geocoder geocoder = new Geocoder(MapActivity.this);
         List<Address> list = new ArrayList<>();
-        try {
+        try { // Set geocoder address as an array list
             list = geocoder.getFromLocationName(searchString, 1);
-        } catch (IOException e) {
+        } catch (IOException e) { // Throw exception when input output error caught
             Log.e(TAG, "geoLocate: IOException: " + e.getMessage());
         }
 
+        // If list is not empty and a location was found
         if (list.size() > 0) {
             Address address = list.get(0);
 
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
             //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
 
+            // Move view to display location on map
             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM,
                     address.getAddressLine(0));
         }
     }
 
+    // Method gets device location
     private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
 
+        // Create a new instance of FusedLocationProviderClient for use in a non-activity context
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         try {
+            // If location permission was granted
             if (mLocationPermissionsGranted) {
 
+                // Get lastest location
                 final Task location = mFusedLocationProviderClient.getLastLocation();
+                // Listener is called when following task is completed
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
-                        if (task.isSuccessful()) {
+                        if (task.isSuccessful()) { // If location successfully found
                             Log.d(TAG, "onComplete: found location!");
+                            // Set location
                             Location currentLocation = (Location) task.getResult();
 
+                            // Move map to display current location
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                     DEFAULT_ZOOM,
                                     "My Location");
 
-                        } else {
+                        } else { // Location does not exist or could not be found indicate so
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(MapActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
-        } catch (SecurityException e) {
+        } catch (SecurityException e) { // Throw exception when security manager catches a security violation
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage());
         }
     }
 
+    // Method moves map to display current location
     private void moveCamera(LatLng latLng, float zoom, String title) {
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude);
+        // Modify map's camera to current location
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
+        // Hide keyboard
         hideSoftKeyboard();
     }
 
+    // Method initialize google maps
     private void initMap() {
         Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-
+        // Acquires google maps
         mapFragment.getMapAsync(MapActivity.this);
     }
 
+    // Method gets location permission
     private void getLocationPermission() {
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
+        // If permission is granted to access precise location
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            // If permission is granted to access approximate location
             if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                     COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                // If both above hold true then location permission is granted
                 mLocationPermissionsGranted = true;
+                // Initialize google maps
                 initMap();
             } else {
+                // Else if approximate location permission is denied, request for permission again
                 ActivityCompat.requestPermissions(this,
                         permissions,
                         LOCATION_PERMISSION_REQUEST_CODE);
             }
-        } else {
+        } else { // Else if precise location permission is denied, request for permission again
             ActivityCompat.requestPermissions(this,
                     permissions,
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
 
+    // Returns the result of request permissions
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Log.d(TAG, "onRequestPermissionsResult: called.");
+        // Always set permission granted to false before getting permission
+        // or else permission would always seem to be granted even when its not
         mLocationPermissionsGranted = false;
 
         switch (requestCode) {
+            // Check if permission is granted or denied
             case LOCATION_PERMISSION_REQUEST_CODE: {
                 if (grantResults.length > 0) {
                     for (int i = 0; i < grantResults.length; i++) {
+                        // If grantResults do not match up with permission granted code then permission is denied
                         if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionsGranted = false;
                             Log.d(TAG, "onRequestPermissionsResult: permission failed");
                             return;
                         }
                     }
+                    // If grantResults match with permission granted code then permission is granted
                     Log.d(TAG, "onRequestPermissionsResult: permission granted");
                     mLocationPermissionsGranted = true;
-                    //initialize our map
+                    // Initialize our map
                     initMap();
                 }
             }
         }
     }
 
+    // Hides keyboard
     private void hideSoftKeyboard() {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
@@ -341,6 +387,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         --------------------------- google places API autocomplete suggestions -----------------
      */
 
+    // Autocompletes location search using keyword prediction from google's api
     private AdapterView.OnItemClickListener mAutocompleteClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -355,6 +402,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     };
 
+    // Gets location info from location found
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback = new ResultCallback<PlaceBuffer>() {
         @Override
         public void onResult(@NonNull PlaceBuffer places) {
@@ -387,6 +435,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Log.e(TAG, "onResult: NullPointerException: " + e.getMessage());
             }
 
+            // Move camera to show location on map
             moveCamera(new LatLng(place.getViewport().getCenter().latitude,
                     place.getViewport().getCenter().longitude), DEFAULT_ZOOM, mPlace.getName());
 
@@ -394,40 +443,44 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     };
 
+    // Place markers on map according to user info
     public void placeMarkers() {
         Profile profile = LazyLoadingManager.getProfile();
-        if(!profile.getisCareProvider()) {
+        if(!profile.getisCareProvider()) { // If account belongs to a patient
             Patient patient = LazyLoadingManager.getPatient();
-            for (int i = 0; i < patient.getProblems().getSize(); i++) {
+            for (int i = 0; i < patient.getProblems().getSize(); i++) { // Set a marker on map for each problem
                 Log.d("MAPMARKER", "problemlist size" + patient.getProblems().getSize());
                 for (int j = 0; j < patient.getProblem(i).getRecords().getSize(); j++) {
                     Geolocation geolocation = patient.getProblem(i).getRecords().getRecord(j).getGeoLocation();
                     Record record = patient.getProblem(i).getRecords().getRecord(j);
 
+                    // Initialize custom window for google maps
                     mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
 
-                    try {
+                    try { // Include date and description in a snippet
                         String snippet =
                                 "Record #: " + j + "\n" +
                                         "Date: " + record.getDate() + "\n" +
                                         "Description: " + record.getDescription() + "\n";
 
+                        // For each marker set location, set the location title, and snippet
                         MarkerOptions options = new MarkerOptions()
                                 .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
                                 .title(patient.getProblem(i).getDescription())
                                 .snippet(snippet);
 
+                        // Add patient problem markers on map
                         mMarker = mMap.addMarker(options);
 
-                    } catch (NullPointerException e) {
+                    } catch (NullPointerException e) { // Throw exception if map has nothing to show
                         Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage());
                     }
 
-
+                    // Hide keyboard
                     hideSoftKeyboard();
                 }
             }
-        }else {
+        }else { // Else if there are no marker do not add markers
             Log.d("Adding no materkers", "adding no markers");
         }
 

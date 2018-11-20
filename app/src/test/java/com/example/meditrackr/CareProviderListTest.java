@@ -58,11 +58,15 @@ public class CareProviderListTest {
     
     @Test
     public void constructorTest() {
-        string name = "Name";
-        string email = "1234567890";
-        boolean phone = true;
+        String name = "Name";
+        String email = "doctor@doctors.com";
+        String phone = "1234567890";
         CareProvider doctor =
-                new CareProvider("Name", "1234567890", true);
+                new CareProvider(name, email, phone, true);
+        assertEquals(name, doctor.getUsername());
+        assertEquals(email, doctor.getEmail());
+        assertEquals(email, doctor.getEmail());
+        assertTrue(doctor.getisCareProvider());
 
     }
 

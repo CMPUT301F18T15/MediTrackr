@@ -49,7 +49,7 @@ public class CommentList implements Serializable {
      * @version 1.0 Nov 15, 2018
      * @param comment   the comment that will be removed from the list
      */
-    public void removeComment(int comment){
+    public void removeComment(Comment comment){
         comments.remove(comment);
     }
 
@@ -73,7 +73,7 @@ public class CommentList implements Serializable {
      * @return          true or false if image is there
      * @see Comment
      */
-    public Boolean imageExists(Comment comment){
+    public Boolean commentExists(Comment comment){
         return comments.contains(comment);
     }
 
@@ -102,18 +102,6 @@ public class CommentList implements Serializable {
     // test fucntion will remove later
     public String toString() {
         return comments.toString();
-    }
-
-    /**
-     * can get the images from the list from a given index
-     * @authon Orest Cokan
-     * @version 1.0 Nov 15, 2018
-     * @param index   the index that the images are located at
-     * @return        the images at that index
-     * @see Comment
-     */
-    public Comment getImage(int index){
-        return comments.get(index);
     }
 
 }

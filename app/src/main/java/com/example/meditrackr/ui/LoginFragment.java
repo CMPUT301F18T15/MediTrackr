@@ -62,8 +62,6 @@ import org.w3c.dom.Text;
 
 // Class creates Login Fragment
 public class LoginFragment extends Fragment {
-    private Profile profile;
-
 
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();

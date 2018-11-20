@@ -99,7 +99,7 @@ public class Problem implements Serializable {
      *
      * @author Orest Cokan
      * @version 1.0 Nov, 16 2018
-     * @param date       the date of the problem
+     * @param date the date of the problem
      */
     public void setDate(String date) {
         this.date = date;

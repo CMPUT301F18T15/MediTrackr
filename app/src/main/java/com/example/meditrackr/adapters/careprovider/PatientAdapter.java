@@ -129,7 +129,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             super(itemView);
             patientUsername = itemView.findViewById(R.id.patient_username);
             patientEmail = itemView.findViewById(R.id.patient_email);
-            patientPhone = itemView.findViewById(R.id.patient_phone);
+            patientPhone = itemView.findViewById(R.id.patient_email);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
         }

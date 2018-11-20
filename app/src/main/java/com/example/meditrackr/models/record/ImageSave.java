@@ -41,7 +41,9 @@ public class ImageSave implements Serializable {
      * @version 1.0 Nov 14, 2018
      * @param newImage the image we want to add
      */
-    // Calls to ImageList methods
+
+
+    // Calls to RecordPhotoList methods
     public void addImage(String newImage) {
         imagesString.add(newImage);
     }
@@ -52,6 +54,7 @@ public class ImageSave implements Serializable {
      * @version 1.0 Nov 14, 2018
      * @param image the image we want to remove
      */
+
     public void removeImage(int image){
         imagesString.remove(image);
     }

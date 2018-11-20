@@ -31,7 +31,7 @@ import java.util.ArrayList;
  */
 
 // Class creates Image List
-public class ImageList implements Serializable {
+public class RecordPhotoList implements Serializable {
 
     // Create array of bitmaps
     /**
@@ -49,7 +49,7 @@ public class ImageList implements Serializable {
      * @param newImage the image we want to add
      * @see Bitmap
      */
-    // Calls to ImageList methods
+    // Calls to RecordPhotoList methods
     public void addImage(Bitmap newImage) {
         images.add(newImage);
     }
@@ -60,7 +60,7 @@ public class ImageList implements Serializable {
      * @version 1.0 Nov 13, 2018
      * @param image the image we want to remove
      */
-    public void removeImage(int image){
+    public void removeImage(Bitmap image){
         images.remove(image);
     }
 

@@ -62,7 +62,7 @@ public class ProblemTest {
                 problem.getRecords().recordExists(record));
 
         // Deletion
-        problem.getRecords().removeRecord(0);
+        problem.getRecords().removeRecord(record);
         assertFalse(problem.getRecords().recordExists(record));
     }
 

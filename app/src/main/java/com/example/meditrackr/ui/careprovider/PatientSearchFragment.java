@@ -82,7 +82,7 @@ public class PatientSearchFragment extends Fragment {
         final Button searchPatientButton = (Button) rootView.findViewById(R.id.careprovider_search_for_patient_button);
         final ImageView patientProfileImage = (ImageView) rootView.findViewById(R.id.patient_image);
         final TextView patientUsername = (TextView) rootView.findViewById(R.id.patient_username);
-        final TextView patientEmail = (TextView) rootView.findViewById(R.id.patient_phone);
+        final TextView patientEmail = (TextView) rootView.findViewById(R.id.patient_email);
         final TextView patientPhone = (TextView) rootView.findViewById(R.id.search_phone);
         final Button addPatientButton = (Button) rootView.findViewById(R.id.search_add_patient_button);
         changeViewVisibility(1);

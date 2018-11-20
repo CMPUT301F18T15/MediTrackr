@@ -21,7 +21,7 @@ import es.dmoral.toasty.Toasty;
 
 public class RegisterController {
 
-    public static void RegisterAccount(Activity actvity, Context context, Profile profile) {
+    public static void RegisterAccount(Activity activity, Context context, Profile profile) {
         Bundle bundle = new Bundle();
         boolean done;
         boolean finish;
@@ -42,10 +42,10 @@ public class RegisterController {
             Log.d("RegisterFragmentMeme", "done is " + done + " finish is " + finish);
             Toasty.error(context, "Username taken", Toast.LENGTH_SHORT).show();
         } else { // If no exceptions were caught
+
             Toasty.success(context, "Registration successful", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(actvity, MainActivity.class);
             intent.putExtras(bundle);
-            actvity.startActivity(intent);
+            activity.startActivity(intent);
         }
     }
 }

@@ -40,7 +40,7 @@ public class RecordListTest {
         assertTrue("Record not added to Record List",
                 recordList.getSize() == 1);
 
-        recordList.removeRecord(0);
+        recordList.removeRecord(record);
         assertTrue("Record not removed from Record List",
                 recordList.getSize() == 0);
     }
@@ -67,7 +67,7 @@ public class RecordListTest {
                 recordList.getSize(), 2);
 
         // Remove a record and test the new size
-        recordList.removeRecord(1);
+        recordList.removeRecord(record);
         assertEquals("Incorrect number of elements in Record List",
                 recordList.getSize(), 1);
     }

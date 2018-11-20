@@ -29,6 +29,7 @@ public class RecordController {
      * @param record   the record we will add to the database
      * @param position  the position of the problem
      */
+
     public static void addRecord(Context context, Record record, int position) {
         // first, get the patient's profile
         Patient patient = LazyLoadingManager.getPatient();

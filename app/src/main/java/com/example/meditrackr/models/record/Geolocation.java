@@ -45,7 +45,6 @@ public class Geolocation implements Serializable {
      * Constructs a new Geolocation object with latitude, longitude, and address.
      *
      * @author  Orest Cokan
-     * @version 1.0 Nov 8, 2018.
      * @param latitude  latitude coordinate
      * @param longitude longitude coordinate
      * @param address   address name
@@ -65,7 +64,6 @@ public class Geolocation implements Serializable {
     /**
      * Gets the longituede coordinate.
      * @author  Orest Cokan
-     * @version 1.0 Nov 8, 2018.
      * @return longitude, the double integer of the longitude location
      */
     public double getLongitude() {

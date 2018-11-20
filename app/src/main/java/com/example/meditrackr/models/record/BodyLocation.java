@@ -42,9 +42,8 @@ public class BodyLocation implements Serializable {
     private String bodyLocation;
 
     /**
-     * creates variables for the other functions to use
+     * Creates a new BodyLocation object.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param bodyCoordinate the number that is mapped to a body location
      * @param bodyFace       a tring name of a face location
      * @param bodyLocation   the name of the body part
@@ -57,14 +56,13 @@ public class BodyLocation implements Serializable {
     }
 
 
-    /***************************************************************************
+    /*--------------------------------------------------------------------------
      * GETTERS AND SETTERS
-     ***************************************************************************/
+     *--------------------------------------------------------------------------/
 
     /**
      * Gets the body coordinate array.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return bodyCorrdinate, the integer of the body location
      */
     public double[] getBodyCoordinate() {
@@ -75,7 +73,6 @@ public class BodyLocation implements Serializable {
     /**
      * Sets the body coordinate array.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param bodyCoordinate the integer of the body location
      */
     public void setBodyCoordinate(double[] bodyCoordinate) {
@@ -87,7 +84,6 @@ public class BodyLocation implements Serializable {
      * Gets the string name (id) of the type of body location photo or mannequin (eg,
      * front or back).
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return bodyFace, the name of a body location photo
      */
     public String getBodyFace() {
@@ -98,7 +94,6 @@ public class BodyLocation implements Serializable {
      * Sets the string name (id) of the type of body location photo or mannequin (eg,
      * front or back) used for this body location.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param bodyFace the name of a body location direction (face)
      */
     public void setBodyFace(String bodyFace) {
@@ -109,7 +104,6 @@ public class BodyLocation implements Serializable {
     /**
      * Gets the string name (id) of the body location photo or mannequin.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return bodyLocation, the name of a body location direction (face)
      */
     public String getBodyLocation() {
@@ -121,7 +115,6 @@ public class BodyLocation implements Serializable {
      * Sets the string name (id) of the body location photo or
      * mannequin used for this body location.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param bodyLocation the name of a body location photo
      */
     public void setBodyLocation(String bodyLocation) {

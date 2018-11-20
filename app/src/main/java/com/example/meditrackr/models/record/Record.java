@@ -39,7 +39,6 @@ import java.io.Serializable;
  * @see Geolocation
  */
 
-// A Record class that holds all methods pertaining to Record
 public class Record implements Serializable {
 
     // Initialize class variables

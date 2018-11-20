@@ -40,6 +40,7 @@ public class VerticalSpaceController extends RecyclerView.ItemDecoration {
 
     /**
      * sets the integer of space between items
+     *
      * @author  Orest Cokan
      * @param verticalSpaceHeight the integer to set the space to
      */
@@ -51,6 +52,7 @@ public class VerticalSpaceController extends RecyclerView.ItemDecoration {
 
     /**
      * sets the integer of space between items
+     *
      * @author  Orest Cokan
      * @param outRect  the shape we want to change
      * @param view     the view it is a part of

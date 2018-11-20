@@ -53,6 +53,7 @@ public class RecordTest {
         record.setGeoLocation(geoLoc);
     }
     
+    // test if a Record is constructed with its attributes
     @Test
     public void constructorTest() {
         String title = "Record";

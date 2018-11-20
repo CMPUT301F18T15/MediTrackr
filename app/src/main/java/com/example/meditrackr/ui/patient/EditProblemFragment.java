@@ -166,13 +166,18 @@ public class EditProblemFragment extends Fragment {
 
     // Check that the user has inputted at least a title and description to their problem
     public boolean checkInputs(EditText title, EditText description){
-        if(((title != null && !title.getText().toString().isEmpty())
-                && (description != null && !description.getText().toString().isEmpty()))){
-            return true;
-        }
-        else {
+
+        if (title != null && title.getText().toString().length() > 30) {
+            Toasty.error(getContext(), "Title cannot exceed 30 characters", Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        if (description != null && description.getText().toString().length() > 300) {
+            Toasty.error(getContext(), "Description cannot exceed 300 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
 }

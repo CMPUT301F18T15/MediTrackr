@@ -23,15 +23,20 @@ import android.support.annotation.NonNull;
 import java.io.Serializable;
 
 /**
- * This class will create a Record.
- * a record will store the following: an image, a Date, a description, a title, and a body location.
+ * Record: Stores all information associated with a record object, including
+ * 0 to 10 images, a timestamp (date), a description, a title, a geolocation
+ * and a body location.
  *
- * to store all of those it uses a getter function for that data type
- * and then use a setter function related to that data type as well which will set the variable as
- * that value that the getter function retrieved
+ * Records have a RecordPhotoList, an ImageSave (list of string photo names
+ * for storage), a BodyLocation and a Geolocation.
+ *
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
+ * @see RecordPhotoList
+ * @see ImageSave
+ * @see BodyLocation
+ * @see Geolocation
  */
 
 // A Record class that holds all methods pertaining to Record
@@ -48,7 +53,8 @@ public class Record implements Serializable {
     private boolean[] reminder;
 
     /**
-     * sets variables for the class to use
+     * Constructs a new record object using title, description, date,
+     * bodyLocation.
      *
      * @author  Orest Cokan
      * @param title         the title of the record
@@ -122,9 +128,7 @@ public class Record implements Serializable {
      * @author  Orest Cokan
      * @return description      description to add to the record
      */
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() { return description; }
 
 
     /**
@@ -144,9 +148,7 @@ public class Record implements Serializable {
      * @author  Orest Cokan
      * @return title      title to add to the record
      */
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
 
     /**

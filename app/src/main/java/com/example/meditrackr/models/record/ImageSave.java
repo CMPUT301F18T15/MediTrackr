@@ -19,8 +19,6 @@
 package com.example.meditrackr.models.record;
 
 //imports
-import android.graphics.Bitmap;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

@@ -46,6 +46,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * This class gives the users autofill options for when they are editing items. This is so that data they enter matches the format that the app uses throughout the project.
  * The class itself comes up with the predictive autofill but then uses placeAutocompleteAdapter to display to the user what auto complete results came up.
@@ -226,7 +228,7 @@ public class PlaceAutocompleteAdapter
             // Confirm that the query completed successfully, otherwise return null
             final Status status = autocompletePredictions.getStatus();
             if (!status.isSuccess()) {
-                Toast.makeText(getContext(), "Error contacting API: " + status.toString(),
+                Toasty.error(getContext(), "Error contacting API: " + status.toString(),
                         Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "Error getting autocomplete prediction API call: " + status.toString());
                 autocompletePredictions.release();

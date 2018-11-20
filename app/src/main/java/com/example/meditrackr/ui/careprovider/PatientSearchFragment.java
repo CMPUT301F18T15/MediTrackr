@@ -41,6 +41,8 @@ import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  *shows all infoermation associated with the patient that showed up from the search
  *if no patient was found then it returns "User not found"
@@ -80,7 +82,7 @@ public class PatientSearchFragment extends Fragment {
         final Button searchPatientButton = (Button) rootView.findViewById(R.id.careprovider_search_for_patient_button);
         final ImageView patientProfileImage = (ImageView) rootView.findViewById(R.id.patient_image);
         final TextView patientUsername = (TextView) rootView.findViewById(R.id.patient_username);
-        final TextView patientEmail = (TextView) rootView.findViewById(R.id.patient_phone);
+        final TextView patientEmail = (TextView) rootView.findViewById(R.id.patient_email);
         final TextView patientPhone = (TextView) rootView.findViewById(R.id.search_phone);
         final Button addPatientButton = (Button) rootView.findViewById(R.id.search_add_patient_button);
         changeViewVisibility(1);
@@ -92,11 +94,12 @@ public class PatientSearchFragment extends Fragment {
             public void onClick(View view) {
                 String username = searchPatient.getText().toString(); // Get patient username from input
                 profile = ElasticSearchController.searchProfile(username); // Search for patient
+
                 if(profile == null){ // If user not found indicate so
-                    Toast.makeText(getContext(), "User not found", Toast.LENGTH_LONG).show();
+                    Toasty.warning(getContext(), "User not found", Toast.LENGTH_LONG).show();
                 }
                 else if(profile.getisCareProvider()){
-                    Toast.makeText(getContext(), "Cannot add other careproviders!", Toast.LENGTH_LONG).show();
+                    Toasty.warning(getContext(), "Cannot add other careproviders!", Toast.LENGTH_LONG).show();
                 }
                 else{
                     // Set data according to user information
@@ -136,7 +139,7 @@ public class PatientSearchFragment extends Fragment {
                 } else { // Else if patient already exists under the care provider
                     changeViewVisibility(1);
                     // Create toast message that user cannot add the patient twice
-                    Toast.makeText(getContext(), "Cannot add the same patient twice!", Toast.LENGTH_LONG).show();
+                    Toasty.error(getContext(), "Cannot add the same patient twice!", Toast.LENGTH_LONG).show();
                 }
             }
         });

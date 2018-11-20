@@ -34,6 +34,8 @@ import static org.junit.Assert.assertEquals;
 public class BodyLocationTest {
     private BodyLocation body;
 
+    public BodyLocationTest() {}
+
     // Initialize a simple problem to be used in the tests
     @Before
     public void initJUnitTest() {

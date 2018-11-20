@@ -35,6 +35,8 @@ import static org.junit.Assert.*;
 public class PatientListTest {
     private PatientList patientList;
 
+    public PatientListTest() {}
+
     // Initialize an empty patient list
     @Before
     public void newPatientList() {

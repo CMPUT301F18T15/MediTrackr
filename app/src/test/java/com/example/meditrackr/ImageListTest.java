@@ -22,7 +22,7 @@ package com.example.meditrackr;
 //imports
 import android.graphics.Bitmap;
 
-import com.example.meditrackr.models.record.ImageList;
+import com.example.meditrackr.models.record.RecordPhotoList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,17 +31,19 @@ import static org.junit.Assert.*;
 
 
 /**
- * ImageList Unit Tests
+ * RecordPhotoList Unit Tests
  */
 
 public class ImageListTest {
-    private ImageList imageList;
+    private RecordPhotoList imageList;
     private Bitmap image;
 
-    // Set an initial null bitmap and an empty ImageList
+    public ImageListTest() {}
+
+    // Set an initial null bitmap and an empty RecordPhotoList
     @Before
     public void initImageList() {
-        imageList = new ImageList();
+        imageList = new RecordPhotoList();
         final byte[] colours = {10, 10, 10};
         image = null;
     }
@@ -61,7 +63,7 @@ public class ImageListTest {
         assertTrue("Image not added to Image List",
                 imageList.getSize() == 1);
 
-        imageList.removeImage(0);
+        imageList.removeImage(image);
         assertTrue("Image not removed from Image List",
                 imageList.getSize() == 0);
     }
@@ -87,7 +89,7 @@ public class ImageListTest {
 
         assertEquals("Incorrect number of elements in Image List",
                 imageList.getSize(), 2);
-        imageList.removeImage(1);
+        imageList.removeImage(image);
         assertEquals("Incorrect number of elements in Image List",
                 imageList.getSize(), 1);
     }

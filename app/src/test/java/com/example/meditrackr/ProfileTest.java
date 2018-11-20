@@ -36,6 +36,8 @@ import static org.junit.Assert.*;
 
 public class ProfileTest {
 
+    public ProfileTest() {}
+
     // Test if the generic Profile is parent to its subclasses
     @Test
     public void substituteTest() {

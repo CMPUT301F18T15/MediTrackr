@@ -84,13 +84,6 @@ public class ElasticSearchController {
     private static String IS_CAREPROVIDER = "isCareProvider";
     private static String DATABASE = "http://cmput301.softwareprocess.es:8080/";
 
-    // Gets client
-    public static JestClient getClient() {
-        if(client==null)
-            verifySettings(); // Sets client if its null
-        return client;
-    }
-
 
     /**
      *

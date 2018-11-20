@@ -38,6 +38,8 @@ public class CareProviderListTest {
     private CareProvider careProvider;
     private CareProviderList careProviderList;
 
+    public CareProviderListTest() {}
+
     // Set an initial care provider and an empty CareProviderList
     @Before
     public void newCareProviderList() {

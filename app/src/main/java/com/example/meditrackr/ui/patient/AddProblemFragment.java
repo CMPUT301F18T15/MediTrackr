@@ -42,6 +42,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * Allows user to add a title to the problem, change the date that was assigned and add a description.
  * to create this problem user will press the add button
@@ -144,7 +146,7 @@ public class AddProblemFragment extends Fragment {
                 }
                 else { // If checkInputs is false
                     // Create toast message indicating that problem could not be added
-                    Toast.makeText(getContext(), "Unable to add Problem", Toast.LENGTH_LONG).show();
+                    Toasty.warning(getContext(), "Unable to add problem", Toast.LENGTH_LONG).show();
                 }
             }
         });

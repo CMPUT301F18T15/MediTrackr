@@ -38,7 +38,7 @@ import java.io.Serializable;
 public class Record implements Serializable {
 
     // Initialize class variables
-    private ImageList images = new ImageList();
+    private RecordPhotoList images = new RecordPhotoList();
     private ImageSave imagesSave = new ImageSave();
     private String date;
     private String description;
@@ -74,7 +74,7 @@ public class Record implements Serializable {
      * @version 1.0 Oct 24, 2018.
      * @return images images to add to the record
      */
-    public ImageList getImages() {
+    public RecordPhotoList getImages() {
         return images;
     }
 
@@ -85,9 +85,9 @@ public class Record implements Serializable {
      * @author  Orest Cokan
      * @version 1.0 Oct 24, 2018.
      * @param images images to add to the record
-     * @see ImageList
+     * @see RecordPhotoList
      */
-    public void setImages(ImageList images) {
+    public void setImages(RecordPhotoList images) {
         this.images = images;
     }
 

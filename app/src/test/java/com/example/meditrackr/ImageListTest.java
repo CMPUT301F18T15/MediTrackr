@@ -43,7 +43,7 @@ public class ImageListTest {
         assertTrue("Image not added to Image List",
                 imageList.getSize() == 1);
 
-        imageList.removeImage(0);
+        imageList.removeImage(image);
         assertTrue("Image not removed from Image List",
                 imageList.getSize() == 0);
     }
@@ -69,7 +69,7 @@ public class ImageListTest {
 
         assertEquals("Incorrect number of elements in Image List",
                 imageList.getSize(), 2);
-        imageList.removeImage(1);
+        imageList.removeImage(image);
         assertEquals("Incorrect number of elements in Image List",
                 imageList.getSize(), 1);
     }

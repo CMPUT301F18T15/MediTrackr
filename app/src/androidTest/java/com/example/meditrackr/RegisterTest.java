@@ -57,7 +57,7 @@ public class RegisterTest extends ActivityTestRule<LoginActivity> {
         onView(withId(R.id.not_member)).perform(click());
         onView(withId(R.id.patient_username)).perform(click(), typeText(shortPatientName), pressBack());
         onView(withId(R.id.phone_number)).perform(click(), typeText(patientPhone), pressBack());
-        onView(withId(R.id.patient_phone)).perform(click(), typeText(patientEmail), pressBack());
+        onView(withId(R.id.patient_email)).perform(click(), typeText(patientEmail), pressBack());
         onView(withId(R.id.Patient)).perform(click());
         onView(withId(R.id.signup_button)).perform(click());
 
@@ -70,7 +70,7 @@ public class RegisterTest extends ActivityTestRule<LoginActivity> {
         final String emptyPhone = "";
         onView(withId(R.id.not_member)).perform(click());
         onView(withId(R.id.patient_username)).perform(click(), typeText("Long enough name"), pressBack());
-        onView(withId(R.id.patient_phone)).perform(click(), typeText(patientEmail), pressBack());
+        onView(withId(R.id.patient_email)).perform(click(), typeText(patientEmail), pressBack());
         onView(withId(R.id.signup_button)).perform(click());
 
         assertNull("Passed with empty phone",

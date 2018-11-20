@@ -19,14 +19,12 @@
 package com.example.meditrackr.ui;
 
 //imports
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +34,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.controllers.model.RegisterController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
@@ -87,7 +83,7 @@ public class RegisterFragment extends Fragment {
 
         // Set ui definitions
         final EditText username = (EditText) rootView.findViewById(R.id.patient_username);
-        final EditText email = (EditText) rootView.findViewById(R.id.patient_phone);
+        final EditText email = (EditText) rootView.findViewById(R.id.patient_email);
         final EditText phoneNumber = (EditText) rootView.findViewById(R.id.phone_number);
         final TextView careProviderTitle = (TextView) rootView.findViewById(R.id.display_careprovider);
         final TextView patientTitle = (TextView) rootView.findViewById(R.id.display_patient);

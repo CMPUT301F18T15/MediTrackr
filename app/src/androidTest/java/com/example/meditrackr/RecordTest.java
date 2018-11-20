@@ -1,24 +1,17 @@
 package com.example.meditrackr;
 
-import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
-import android.support.v4.widget.TextViewCompat;
-import android.util.Log;
 
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.ui.LoginActivity;
 import com.example.meditrackr.ui.MainActivity;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -163,7 +156,7 @@ public class RecordTest extends ActivityTestRule<MainActivity> {
         onView(withId(R.id.not_member)).perform(click());
         onView(withId(R.id.patient_username)).perform(click(), typeText(testPatientName), pressBack());
         onView(withId(R.id.phone_number)).perform(click(), typeText("18002263001"), pressBack());
-        onView(withId(R.id.patient_phone)).perform(click(), typeText("testPatient@test.com"), pressBack());
+        onView(withId(R.id.patient_email)).perform(click(), typeText("testPatient@test.com"), pressBack());
         onView(withId(R.id.Patient)).perform(click());
         onView(withId(R.id.signup_button)).perform(click());
     }

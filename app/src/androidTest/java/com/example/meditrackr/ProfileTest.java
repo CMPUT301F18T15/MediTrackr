@@ -91,7 +91,7 @@ public class ProfileTest extends ActivityTestRule<MainActivity>  {
         onView(withId(R.id.not_member)).perform(click());
         onView(withId(R.id.patient_username)).perform(click(), typeText(testDoctorName), pressBack());
         onView(withId(R.id.phone_number)).perform(click(), typeText("7808471293"), pressBack());
-        onView(withId(R.id.patient_phone)).perform(click(), typeText("testDoctor@test.com"), pressBack());
+        onView(withId(R.id.patient_email)).perform(click(), typeText("testDoctor@test.com"), pressBack());
         onView(withId(R.id.CareProvider)).perform(click());
         onView(withId(R.id.signup_button)).perform(click());
     }

@@ -168,7 +168,7 @@ public class ProblemTest extends ActivityTestRule<MainActivity> {
         onView(withId(R.id.not_member)).perform(click());
         onView(withId(R.id.patient_username)).perform(click(), typeText(testPatientName), pressBack());
         onView(withId(R.id.phone_number)).perform(click(), typeText("18002263001"), pressBack());
-        onView(withId(R.id.patient_phone)).perform(click(), typeText("testPatient@test.com"), pressBack());
+        onView(withId(R.id.patient_email)).perform(click(), typeText("testPatient@test.com"), pressBack());
         onView(withId(R.id.Patient)).perform(click());
         onView(withId(R.id.signup_button)).perform(click());
     }

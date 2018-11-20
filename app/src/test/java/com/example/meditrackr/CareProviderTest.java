@@ -46,6 +46,11 @@ public class CareProviderTest {
         careProvider = new CareProvider
                 ("", "", "", true);
     }
+    
+    @Test
+    public void constructorTest() {
+        
+    }
 
     // Test that careProvider derives from its generic
     @Test

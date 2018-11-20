@@ -46,7 +46,12 @@ public class ProblemListTest {
         problem = new Problem
                 ("Sample problem", "Today", "This is problematic");
     }
-
+    
+    @Test
+    public void constructorTest() {
+        ProblemList list = new ProblemList();
+        assertTrue(list.getSize() == 0); // is the list first empty
+    }
 
     @Test
     public void addProblemTest() {

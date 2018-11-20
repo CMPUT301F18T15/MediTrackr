@@ -51,7 +51,6 @@ public class Record implements Serializable {
      * sets variables for the class to use
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param title         the title of the record
      * @param description   short description of the record
      * @param date          dates stamp when record was created
@@ -66,12 +65,14 @@ public class Record implements Serializable {
         this.bodyLocation = bodylocation;
     }
 
-    // Getters/Setters
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
     /**
      * gets images for the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return images images to add to the record
      */
     public RecordPhotoList getImages() {
@@ -83,7 +84,6 @@ public class Record implements Serializable {
      * adds images to the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param images images to add to the record
      * @see RecordPhotoList
      */
@@ -96,7 +96,6 @@ public class Record implements Serializable {
      * gets the datestamp for the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return date      date to add to the record
      */
     public String getDate() {
@@ -108,7 +107,6 @@ public class Record implements Serializable {
      * adds date to the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param date      date to add to the record
      */
     public void setDate(String date) {
@@ -120,7 +118,6 @@ public class Record implements Serializable {
      * gets the description for the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return description      description to add to the record
      */
     public String getDescription() {
@@ -132,7 +129,6 @@ public class Record implements Serializable {
      * adds description to the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param description      description to add to the record
      */
     public void setDescription(String description) {
@@ -144,7 +140,6 @@ public class Record implements Serializable {
      * gets the title for the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return title      title to add to the record
      */
     public String getTitle() {
@@ -156,7 +151,6 @@ public class Record implements Serializable {
      * adds title to the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param title      title to add to the record
      */
     public void setTitle(String title) {
@@ -168,7 +162,6 @@ public class Record implements Serializable {
      * gets the bodylocation for the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return bodyLocation      body location to add to the record
      */
     public BodyLocation getBodyLocation() {
@@ -180,7 +173,6 @@ public class Record implements Serializable {
      * adds body location to the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param bodyLocation      body location to add to the record
      */
     public void setBodyLocation(BodyLocation bodyLocation) {
@@ -192,7 +184,6 @@ public class Record implements Serializable {
      * gets the geo location for the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return geoLocation      geo location to add to the record
      */
     public Geolocation getGeoLocation() {
@@ -204,7 +195,6 @@ public class Record implements Serializable {
      * adds geo location to the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param geoLocation      geo location to add to the record
      */
     public void setGeoLocation(Geolocation geoLocation) {
@@ -216,7 +206,6 @@ public class Record implements Serializable {
      * gets the reminder list for the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return reminder      reminder list to add to the record
      */
     public boolean[] getReminders() {
@@ -228,7 +217,6 @@ public class Record implements Serializable {
      * gets the reminder from the reminder list using an index
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param index     the index of the list each number corresponds to a day of the week
      */
     public boolean getReminder(int index) { return reminder[index];}
@@ -238,7 +226,6 @@ public class Record implements Serializable {
      * sets the reminder
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param reminder     reminder to add to the record
      */
     public void setReminder(boolean[] reminder) {
@@ -250,7 +237,6 @@ public class Record implements Serializable {
      * gets the images for the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return imagesSaves     a list of images to add to the record
      */
     public ImageSave getImagesSave() {
@@ -262,7 +248,6 @@ public class Record implements Serializable {
      * gets a specific image from the image list
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param index  the index where the image is
      * @return      an image from the imagesSave list
      */
@@ -275,7 +260,6 @@ public class Record implements Serializable {
      * adds the image list to the record
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param imageSave      images to add to the record
      */
     public void setImageSave(ImageSave imageSave) {

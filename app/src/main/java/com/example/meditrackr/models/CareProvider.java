@@ -41,6 +41,7 @@ import java.io.Serializable;
 public class CareProvider extends Profile implements Serializable {
     private PatientList patients = new PatientList();
 
+
     /**
      * creates the careproviders account information
      * @param username          care providers username
@@ -53,12 +54,14 @@ public class CareProvider extends Profile implements Serializable {
         super(username, email, phone, true);
     }
 
-    // Getters/Setters
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
     /**
      * gets the patients that the care provider has
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return the patients associated with the care provider
      * @see PatientList
      */
@@ -71,7 +74,6 @@ public class CareProvider extends Profile implements Serializable {
      * gets a specific patient from the care providers patient list
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param index  the index that the patient is at
      * @return the patient associated with that index
      */
@@ -84,7 +86,6 @@ public class CareProvider extends Profile implements Serializable {
      * adds a patient to the care providers patient list if user is not already added
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param username  the username of the patient we want to add to the list
      */
     public void addPatient(String username){
@@ -98,7 +99,6 @@ public class CareProvider extends Profile implements Serializable {
      * removes a patient from the care providers patient list
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param username  the username of the patient we want to remove to the list
      */
     public void deletePatient(String username) {
@@ -110,7 +110,6 @@ public class CareProvider extends Profile implements Serializable {
      * checks to see if a patient is in the care providers patient list
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param username  the username of the patient we want to check
      */
     public Boolean patientExists(String username){

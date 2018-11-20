@@ -35,22 +35,17 @@ public class RecordPhotoList implements Serializable {
     /**
      * creates a list to store the images in
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      */
-    // Create array of bitmaps
     private transient ArrayList<Bitmap> images = new ArrayList<>();
 
-    // Calls to ImageList methods
+
     /**
      * adds an image to the list
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param newImage the image we want to add
      * @see Bitmap
      */
-
-    // Calls to RecordPhotoList methods
     public void addImage(Bitmap newImage) {
         images.add(newImage);
     }
@@ -60,7 +55,6 @@ public class RecordPhotoList implements Serializable {
      * removes an image to the list
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param image the image we want to remove
      */
     public void removeImage(Bitmap image){
@@ -71,7 +65,6 @@ public class RecordPhotoList implements Serializable {
      * checks to see if an image is in the list
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param image the image we want to check
      * @see Bitmap
      */
@@ -79,12 +72,14 @@ public class RecordPhotoList implements Serializable {
         return images.contains(image);
     }
 
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
 
     /**
      * gets the index of an image from the list
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param image the image we want to get the index of
      * @see Bitmap
      */
@@ -97,7 +92,6 @@ public class RecordPhotoList implements Serializable {
      * gets the number of photos in the list
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      */
     public int getSize(){
         return images.size();
@@ -108,7 +102,6 @@ public class RecordPhotoList implements Serializable {
      * converts the images to strngs
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      */
     public String toString() {
         return images.toString();
@@ -119,7 +112,6 @@ public class RecordPhotoList implements Serializable {
      * gets the image from a given index
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param index the index of image we want to find
      * @see Bitmap
      */

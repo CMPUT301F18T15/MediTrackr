@@ -39,7 +39,7 @@ import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 
 /**
  * This class displays information about all of the patients that a Care Provider is assigned
- * to in a recycler view.
+ * to in a recycler view (a type of list view).
  *
  * There is also an onclick listener, which when clicked will take the Care Provider to a page with
  * more detailed information about a particular patient (this is the ProblemAdapter). It uses
@@ -57,8 +57,6 @@ import com.example.meditrackr.ui.careprovider.ProblemsFragment;
  * @see ProblemAdapter
  *
  */
-
-// Class shows patient list and info for care providers in a recycler view
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder>{
     // Class objects
     private FragmentActivity activity;
@@ -66,22 +64,26 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     private PatientList patients = careProvider.getPatients();
 
     /**
-     * creating variables activity  functions to use
+     * Constructor: Initialize the PatientAdapter class by setting the activity
+     * to the appropriate fragment.
      *
      * @author  Orest Cokan
-     * @version 1.0 Nov 10, 2018
-     * @param activity this is the activity to pass the data
+     * @param activity the fragment we are currently on
      */
-
-    // Constructor
     public PatientAdapter(FragmentActivity activity) {
         this.activity = activity;
     }
 
-    // Display the view
+    /**
+     * Construct the view and create the ViewHolder.
+     *
+     * @author  Orest Cokan
+     * @param parent the parent ViewGroup
+     * @param viewType an integer representing the view's type
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Instantiates layout XML into its proper view object
+        // Instantiates layout XML (patient_entry) into its proper view object
         LayoutInflater inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View patientView = inflater.inflate(R.layout.patient_entry, parent, false);
@@ -99,7 +101,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         holder.patientPhone.setText(patient.getPhone());
     }
 
-    // Return the number of patients currently in RecyclerView
+    // Return the number of patients currently in RecyclerView (assigned to this care provider)
     @Override
     public int getItemCount() {
         return patients.getSize();
@@ -115,7 +117,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
      * @author  Orest Cokan
      * @version 1.0 Nov 10, 2018
      */
-
     // Class places each patient into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // Class objects

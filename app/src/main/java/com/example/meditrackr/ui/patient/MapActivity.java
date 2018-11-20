@@ -357,6 +357,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     };
 
+
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback = new ResultCallback<PlaceBuffer>() {
         @Override
         public void onResult(@NonNull PlaceBuffer places) {
@@ -430,7 +431,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
         }else {
-            Log.d("Adding no materkers", "adding no markers");
+            Log.d("Adding no markers", "adding no markers");
         }
 
     }

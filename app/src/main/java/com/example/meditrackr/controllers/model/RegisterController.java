@@ -44,6 +44,7 @@ public class RegisterController {
         } else { // If no exceptions were caught
 
             Toasty.success(context, "Registration successful", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(activity, MainActivity.class);
             intent.putExtras(bundle);
             activity.startActivity(intent);
         }

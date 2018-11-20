@@ -47,6 +47,18 @@ public class ProblemTest {
         final String initDesc = "";
         problem = new Problem(initTitle, initDate, initDesc);
     }
+    
+    @Test
+    public void constructorTest() {
+        final String title = "";
+        final String date = "";
+        final String desc = "";
+        Problem prob =
+                new Problem(title, date, desc);
+        assertEquals(title, prob.getTitle());
+        assertEquals(date, prob.getDate());
+        assertEquals(desc, prob.getDescription());
+    }
 
     // Test the setting of a new problem
     @Test

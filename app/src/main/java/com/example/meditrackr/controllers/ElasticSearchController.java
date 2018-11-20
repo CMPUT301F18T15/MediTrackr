@@ -86,11 +86,15 @@ public class ElasticSearchController {
 
 
     /**
-     *
+     * Sign up and add a profile
+     * @author Orest Cokan
+     * @version 1.0 Oct 24, 2018
      * @param profile       the profile to add to the class
-     * @return              identifies that the add was sucsesfull
+     * @return              identifies that the add was successful
+     * @exception   InterruptedException
+     * @exception   ExecutionException
+     * @see Profile
      */
-
     // Sign up and add a profile
     public static Boolean addProfile(Profile profile){
         Boolean done = false;
@@ -104,7 +108,15 @@ public class ElasticSearchController {
         return done;
     }
 
-
+    /**
+     * search for a user in the database
+     * @author Orest Cokan
+     * @version 1.0 Oct 24, 2018
+     * @param userName       the username to search the Database with
+     * @return              identifies that the add was successful or null if not
+     * @exception   InterruptedException
+     * @exception   ExecutionException
+     */
     // Search user
     public static Profile searchProfile(String userName){
         try {
@@ -134,13 +146,26 @@ public class ElasticSearchController {
         return null;
     }
 
-
+    /**
+     * deletes profile from the database
+     *
+     * @author Orest Cokan
+     * @version 1.0 Oct 24, 2018
+     * @param userName   the username of profile that will be deleted
+     */
     // Delete profile
     public static void deleteUser(String userName){
         new ElasticSearchController.DeleteUserTask().execute(userName);
     }
 
-
+    /**
+     * updates a profile from the database
+     *
+     * @author Orest Cokan
+     * @version 1.0 Oct 24, 2018
+     * @param profile   the username of profile that will be updated
+     * @see Profile
+     */
     // Update profile
     public static void updateUser(Profile profile){
         new ElasticSearchController.UpdateProfileTask().execute(profile);

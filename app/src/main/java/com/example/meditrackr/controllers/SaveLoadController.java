@@ -18,7 +18,7 @@
  */
 package com.example.meditrackr.controllers;
 
-//imports
+
 import android.content.Context;
 import android.util.Log;
 
@@ -61,12 +61,12 @@ import java.io.OutputStreamWriter;
 // A SaveLoadController class holding all information pertaining to SaveLoadController
 public class SaveLoadController {
 
+
     /**
      * this function will search for the profile using a username
      * and return either a careProvider profile or a patient profile.
      * if no profile is found it will throw an exception
      * @author Orest Cokan
-     * @version 2.0 Nov 5, 2018
      * @param context the context of the controller
      * @param username username of the profile to look for
      * @return either a careprovider profile or a patient profile
@@ -100,6 +100,7 @@ public class SaveLoadController {
         return null;
     }
 
+
     /**
      * this function it will take the username from the given profile and then overwrite the new
      * profile data onto and the old profile date.
@@ -125,6 +126,7 @@ public class SaveLoadController {
         }
     }
 
+
     /**
      * attempts to add a new profile to the database
      * @param context context of the controller
@@ -133,10 +135,15 @@ public class SaveLoadController {
      */
     // Save a profile for the first time
     public static boolean addNewProfile(Context context, Profile profile) {
-        File file = new File(context.getApplicationContext().getFilesDir(), profile.getUsername() + ".sav");
-        if (file.exists()) { // If profile already exists in memory do not save
+        File file = new File(context.getApplicationContext().getFilesDir(),
+                profile.getUsername() + ".sav");
+
+        // If profile already exists in memory do not save
+        if (file.exists()) {
                 return false;
-        } else { // Else save new profile
+        }
+        // Else save new profile
+        else {
             saveProfile(context, profile);
             Log.d("AddProfile", "Added a new profile by the name of " + profile.getUsername());
             return true;

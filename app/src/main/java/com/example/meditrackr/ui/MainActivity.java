@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 // If Camera button icon is clicked
                 else if (v == camera) {
                     // Darken camera icon
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full));
+                    //image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full));
                 }
 
                 // If Search button icon is clicked
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
     public void initButtons(){
         problems.setImageDrawable(getResources().getDrawable(R.drawable.cross));
         map.setImageDrawable(getResources().getDrawable(R.drawable.map));
-        camera.setImageDrawable(getResources().getDrawable(R.drawable.camera));
+        camera.setImageDrawable(getResources().getDrawable(R.drawable.new_camera_icon));
         search.setImageDrawable(getResources().getDrawable(R.drawable.search));
         profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
     }

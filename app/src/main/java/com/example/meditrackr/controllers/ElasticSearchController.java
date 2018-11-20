@@ -69,6 +69,7 @@ import io.searchbox.core.SearchResult;
  *
  * this class can use updateProfileTask which will attempt to update the profile if it does no succeed
  * it will thro an error (IOException)
+ *
  * @author Orest Cokan
  * @version 1.0 Oct 24, 2018
  * @throws InterruptedException Throw exception if signup activity is interrupted
@@ -311,7 +312,7 @@ public class ElasticSearchController {
         }
     }
 
-
+    // Executes the updating of a profile to elastic search
     private static class UpdateProfileTask extends AsyncTask<Profile, Void, Void>
     {
         @Override

@@ -19,7 +19,6 @@
 
 package com.example.meditrackr.controllers.model;
 
-//imports
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -38,8 +37,10 @@ import com.example.meditrackr.ui.MainActivity;
 import es.dmoral.toasty.Toasty;
 
 /**
- * a controller that when a user tries to log in it looks to make sure that ther is a valid entry
- * and checks if the entry is in the database
+ * LoginController
+ *
+ * Contains 3 methods that check
+ * for a user logging into the app
  *
  * @author Orest Cokan
  * @version 1.0 Nov 17, 2018
@@ -48,7 +49,16 @@ import es.dmoral.toasty.Toasty;
 // Controller class for user login
 public class LoginController {
 
-    // Runs when the user presses login button
+    /**
+     * Logins in the profile as well as
+     * updates the profile to ElasticSearch
+     * through a second thread and begins
+     * the main activity
+     *
+     * @param context   the context the controller will user
+     * @param activity  the LoginFragments activity
+     * @param profile   the profile to be logged in
+     */
     public static void login(Context context, Activity activity, final Profile profile) {
 
         // Create new thread execution
@@ -72,24 +82,37 @@ public class LoginController {
         LazyLoadingManager.setProfile(profile);
         LazyLoadingManager.setCurrentUsername(profile.getUsername());
         SaveLoadController.saveProfile(context, profile);
+
         // Display MainActivity depending on the kind of user
         Intent intent = new Intent(activity, MainActivity.class);
         activity.startActivity(intent);
     }
 
-    // Checks if profile already exists in memory and logs in
+    /**
+     * checks the username first in
+     * local memory, if its successful
+     * it will call login, else
+     * it will check call checkProfileES
+     *
+     * @param context   the context the controller will user
+     * @param activity  the LoginFragments activity
+     * @param username  the username to be checked
+     */
     public static void checkProfile(Activity activity, Context context, String username) {
         // Gets profile from memory
         Profile profile;
         profile = SaveLoadController.loadProfile(context, username);
+
         // If profile exists and belongs to a care provider set as so and log in
         if (profile != null && profile.getisCareProvider()) {
             CareProvider careProvider = (CareProvider) profile;
             login(context, activity, careProvider);
+
         // Else if profile exists and belongs to a patient set as so and log in
         } else if (profile != null && !profile.getisCareProvider()) {
             Patient patient = (Patient) profile;
             login(context, activity, patient);
+
         // Look for profile in ES
         } else {
             checkProfileES(activity, context, username);
@@ -97,7 +120,15 @@ public class LoginController {
     }
 
 
-    // Check if profile already exists in ES and logs in
+    /**
+     * checks the username in ElasticSearch
+     * if it returns a user, go to login,
+     * else it will display a toast message
+     *
+     * @param context   the context the controller will user
+     * @param activity  the LoginFragments activity
+     * @param username  the username to be checked
+     */
     public static void checkProfileES(Activity activity, Context context, String username) {
         // Gets profile from ES
         Profile profile = ElasticSearchController.searchProfile(username);

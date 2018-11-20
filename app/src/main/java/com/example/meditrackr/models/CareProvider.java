@@ -54,9 +54,11 @@ public class CareProvider extends Profile implements Serializable {
         super(username, email, phone, true);
     }
 
+
     /*--------------------------------------------------------------------------
      * GETTERS AND SETTERS
      *------------------------------------------------------------------------*/
+
 
     /**
      * gets the patients that the care provider has

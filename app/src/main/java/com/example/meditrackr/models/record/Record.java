@@ -65,9 +65,11 @@ public class Record implements Serializable {
         this.bodyLocation = bodylocation;
     }
 
+
     /*--------------------------------------------------------------------------
      * GETTERS AND SETTERS
      *------------------------------------------------------------------------*/
+
 
     /**
      * gets images for the record

@@ -76,9 +76,11 @@ public class RecordList implements Serializable {
         return records.contains(record);
     }
 
+
     /*--------------------------------------------------------------------------
      * GETTERS AND SETTERS
      *------------------------------------------------------------------------*/
+
 
     /**
      * gets index of a specific record

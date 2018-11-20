@@ -56,11 +56,14 @@ public class Patient extends Profile implements Serializable{
     }
 
 
-    // Getters/Setters
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
     /** gets careproviders associated with patient
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return   list of careproviders
      * @see CareProviderList
      */
@@ -72,7 +75,6 @@ public class Patient extends Profile implements Serializable{
     /** removes care provider from patients care Provider List
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param careProvider    care provider we will remove
      * @see CareProvider
      */
@@ -84,7 +86,6 @@ public class Patient extends Profile implements Serializable{
     /** sees if care provider exists in patients care provider list
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param careProvider      the care provider we want to check
      * @return                  list of careproviders
      * @see CareProvider
@@ -97,7 +98,6 @@ public class Patient extends Profile implements Serializable{
     /** gets all problems that user has stored in a list
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return         list of problems
      * @see ProblemList
      */
@@ -107,7 +107,6 @@ public class Patient extends Profile implements Serializable{
     /** gets a specific problem from from the problem list
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param index      the index at which the problem is located in the list
      * @return           the problem
      * @see Problem

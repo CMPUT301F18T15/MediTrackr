@@ -43,7 +43,6 @@ public class PlaceInfo {
     /**
      * creates variables for class to use
      * @author Orest Cokan
-     * @version 1.0 Nov, 16 2018
      * @param name              name of the user
      * @param address           address of location
      * @param phoneNumber       phone number of user

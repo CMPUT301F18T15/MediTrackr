@@ -72,9 +72,11 @@ public class RecordPhotoList implements Serializable {
         return images.contains(image);
     }
 
+
     /*--------------------------------------------------------------------------
      * GETTERS AND SETTERS
      *------------------------------------------------------------------------*/
+
 
     /**
      * gets the index of an image from the list

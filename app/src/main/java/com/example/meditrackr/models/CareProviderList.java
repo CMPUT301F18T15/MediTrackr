@@ -40,9 +40,11 @@ public class CareProviderList implements Serializable {
     // Create array of care providers
     private ArrayList<CareProvider> careProviders = new ArrayList<>();
 
+
     /*--------------------------------------------------------------------------
      * GETTERS AND SETTERS
      *------------------------------------------------------------------------*/
+
 
     /**
      * gets the number of care providers in the list

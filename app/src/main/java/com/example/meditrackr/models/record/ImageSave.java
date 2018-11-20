@@ -34,9 +34,11 @@ import java.util.ArrayList;
 public class ImageSave implements Serializable {
     private ArrayList<String> imagesString = new ArrayList<>();
 
+
     /*--------------------------------------------------------------------------
      * GETTERS AND SETTERS
      *------------------------------------------------------------------------*/
+
 
     // Calls to ImageSave methods
     /**

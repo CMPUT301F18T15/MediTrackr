@@ -61,6 +61,7 @@ public class Geolocation implements Serializable {
      * GETTERS AND SETTERS
      *------------------------------------------------------------------------*/
 
+
     /**
      * Gets the longituede coordinate.
      * @author  Orest Cokan

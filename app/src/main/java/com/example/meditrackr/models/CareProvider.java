@@ -32,7 +32,7 @@ import java.io.Serializable;
  * can be added or deleted from the list, and the list can be checked to see if a particular
  * patient exists in the list.
  *
- * A CareProvider also has all the information associated with the User class, including
+ * A CareProvider also has all the information associated with the Profile class, including
  * username, email, and phone.
  *
  * @author  Orest Cokan

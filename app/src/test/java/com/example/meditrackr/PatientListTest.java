@@ -43,6 +43,7 @@ public class PatientListTest {
         patientList = new PatientList();
     }
     
+    // test if PatientList first constructed as an empty list
     @Test
     public void constructorTest() {
         PatientList list = new PatientList();

@@ -97,6 +97,47 @@ public class ProblemTest extends ActivityTestRule<MainActivity> {
         Espresso.pressBack();
     }
 
+    @Test
+    public void longProblemTest() {
+
+        final String longTitle = "This problem has a very long name (over 30 characters)";
+        final String shortDesc = "But a short description";
+
+        final String shortTtile = "Short problem";
+        final String longDesc = "A very long description: over 300 characters. GJDFIGUGEHJW9EF0J90FJFIDNVIUNQ9 RQDU9SFHDUIFHUDFH 2UJ3JD9IJFDSFSFOJWIDJ9023JOSJFOIDSHFIOGJ4 98JJFIDFJOGIJ40 JEIFJEIFJDIFJ9WFJ4 UDSFJ9UJ4FI9 JEWIFJEFJ92IFJIFEJFIJFIW9J9EWJFI9WFI9FJI9FJW9FJEI9 FJE9WFJE 8FJE9FJ9FJ9IFJE39J FE9JF9J3F93JF93F9E9FJ9EJF9J3F93J9E8jkDNADASSIFUSF";
+
+        // Long title, short description
+        onView(withId(R.id.add_problem_floating)).perform(click());
+        onView(withId(R.id.problem_title_field)).perform(click(), typeText(longTitle), pressBack());
+        onView(withId(R.id.problem_description_field)).perform
+                (click(), closeSoftKeyboard(), typeText(shortDesc), pressBack());
+        onView(withId(R.id.problem_add_button)).perform(click());
+
+        try {
+            onView(withId(R.id.problem_add_button)).check(matches(isDisplayed()));
+        } catch (NoMatchingViewException e) {
+            fail("Problem was added with a long title");
+        }
+
+        // Short title, long description
+        onView(withId(R.id.problem_title_field)).perform(click(), replaceText(shortTtile), pressBack());
+        onView(withId(R.id.problem_description_field)).perform
+                (click(), replaceText(longDesc), pressBack());
+        final long startTime = System.currentTimeMillis();
+        final long end = startTime + 3000;
+        while (System.currentTimeMillis() < end);
+        onView(withId(R.id.problem_add_button)).perform(click());
+
+        try {
+            onView(withId(R.id.problem_add_button)).check(matches(isDisplayed()));
+        } catch (NoMatchingViewException e) {
+            fail("Problem was added without a title");
+        }
+
+        // Return to Main
+        Espresso.pressBack();
+    }
+
 
     @Test
     public void deleteProblemTest() {

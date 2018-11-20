@@ -49,7 +49,16 @@ public class CareProviderTest {
     
     @Test
     public void constructorTest() {
-        
+        String name = "Name";
+        String email = "doctor@doctors.com";
+        String phone = "1234567890";
+        CareProvider doctor =
+                new CareProvider(name, email, phone, true);
+        assertEquals(name, doctor.getUsername());
+        assertEquals(email, doctor.getEmail());
+        assertEquals(email, doctor.getEmail());
+        assertTrue(doctor.getisCareProvider());
+
     }
 
     // Test that careProvider derives from its generic

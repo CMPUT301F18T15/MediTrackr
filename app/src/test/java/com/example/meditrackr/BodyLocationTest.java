@@ -45,6 +45,7 @@ public class BodyLocationTest {
         body = new BodyLocation(location, bodyFace, bodyLocation);
     }
     
+    // test if body location is constructed with its attributes
     @Test
     public void constructorTest() {
         double[] coords = {1.0, 1.0};

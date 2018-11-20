@@ -28,14 +28,14 @@ import java.io.Serializable;
  * @authon Orest Cokan
  * @version 1.0 Nov 15, 2018
  */
+
+// A Comment class that holds all methods pertaining to Comment
 public class Comment implements Serializable {
-    // attributes
+    // Attributes
     private String date = DateUtils.formatAppTime();
     private String comment;
     private String username;
 
-
-    // constructor
 
     /**
      * creates variables for the class to use
@@ -44,12 +44,14 @@ public class Comment implements Serializable {
      * @param comment   the comment that the user made
      * @param username  the username of the person who made the comment
      */
+    // Constructor
     public Comment(String comment, String username) {
         this.comment = comment;
         this.username = username;
     }
 
-    // getters/setters
+
+    // Getters/Setters
     /**
      * gets the date of when the comment was made
      *
@@ -61,6 +63,7 @@ public class Comment implements Serializable {
         return date;
     }
 
+
     /**
      * sets the date of when the comment was made
      *
@@ -70,6 +73,7 @@ public class Comment implements Serializable {
     public void setDate(String date) {
         this.date = date;
     }
+
 
     /**
      * sets the comment user made
@@ -82,6 +86,7 @@ public class Comment implements Serializable {
         this.comment = comment;
     }
 
+
     /**
      * gets the comment user made
      *
@@ -93,6 +98,7 @@ public class Comment implements Serializable {
         return comment;
     }
 
+
     /**
      * sets the username of who made the comment
      *
@@ -101,6 +107,7 @@ public class Comment implements Serializable {
      * @param username the username of the individual who made the comment
      */
     public void setUsername(String username){this.username = username;}
+
 
     /**
      * gets the username of who made the comment

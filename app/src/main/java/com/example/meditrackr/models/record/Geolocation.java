@@ -22,15 +22,17 @@ package com.example.meditrackr.models.record;
 import java.io.Serializable;
 
 /**
- * this class is a geolcoation point on a map. it will just keep the latitude and logitude of that geolocation
- * uses a getter function to return a decimal of the geolocations longitude
- * uses a getter function to return a decimal of the geolocations longitude
+ * Geolocation: represents a geolcoation point on a map by tracking latitude,
+ * longitude, and a string address name of the geolocation for a particular record.
+ *
+ * Getters and setters can be used to retrieve or modify any of the geolocation
+ * attributes.
  *
  * @author  Orest Cokan
  * @version 1.0 Nov 8, 2018.
  */
 
-// A Geolocation class that holds all information pertaining to Geolocation
+// A Geolocation class that holds all methods pertaining to Geolocation
 public class Geolocation implements Serializable {
 
     // Initialize class variables
@@ -38,17 +40,16 @@ public class Geolocation implements Serializable {
     private double latitude;
     private String address;
 
-    // Constructor
 
     /**
-     * creates variables for the other functions to use
+     * Constructs a new Geolocation object with latitude, longitude, and address.
      *
      * @author  Orest Cokan
-     * @version 1.0 Nov 8, 2018.
      * @param latitude  latitude coordinate
      * @param longitude longitude coordinate
      * @param address   address name
      */
+    // Constructor
     public Geolocation(double latitude, double longitude, String address){
         this.latitude = latitude;
         this.longitude = longitude;
@@ -56,11 +57,13 @@ public class Geolocation implements Serializable {
     }
 
 
-    // Getter/Setters
+    /***************************************************************************
+     * GETTERS AND SETTERS
+     ***************************************************************************/
+
     /**
-     * gets the longituede coordinate
+     * Gets the longituede coordinate.
      * @author  Orest Cokan
-     * @version 1.0 Nov 8, 2018.
      * @return longitude, the double integer of the longitude location
      */
     public double getLongitude() {
@@ -68,9 +71,8 @@ public class Geolocation implements Serializable {
     }
 
     /**
-     * takes the longitude coordinate and sets it as a variable
+     * Takes a new double value and sets the longitude coordinate.
      * @author  Orest Cokan
-     * @version 1.0 Nov 8, 2018.
      * @param longitude the integer of the longitude location
      */
     public void setLongitude(double longitude) {
@@ -78,9 +80,8 @@ public class Geolocation implements Serializable {
     }
 
     /**
-     * gets the latitude coordinate
+     * Gets the latitude coordinate.
      * @author  Orest Cokan
-     * @version 1.0 Nov 8, 2018.
      * @return latitude, the double integer of the latitude location
      */
     public double getLatitude() {
@@ -88,9 +89,8 @@ public class Geolocation implements Serializable {
     }
 
     /**
-     * takes the latitude coordinate and sets it as a variable
+     * Takes a new double value and sets the latitude coordinate.
      * @author  Orest Cokan
-     * @version 1.0 Nov 8, 2018.
      * @param latitude the integer of the latitude location
      */
     public void setLatitude(double latitude) {
@@ -98,9 +98,8 @@ public class Geolocation implements Serializable {
     }
 
     /**
-     * gets the address name
+     * Gets the address name.
      * @author  Orest Cokan
-     * @version 1.0 Nov 8, 2018.
      * @return adress, the name of the address location
      */
     public String getAddress() {
@@ -108,9 +107,8 @@ public class Geolocation implements Serializable {
     }
 
     /**
-     * takes the adress location and sets it as a variable
+     * Takes a new string value and sets the address.
      * @author  Orest Cokan
-     * @version 1.0 Nov 8, 2018.
      * @param address the name of the address location
      */
     public void setAddress(String address) {

@@ -32,14 +32,13 @@ import java.util.ArrayList;
  * @version 1.0 Nov 7, 2018.
  */
 
-// Class creates a Profile List
+// A ProfileList class that holds all methods pertaining to ProfileList
 public class ProfileList {
 
     // Create array of profiles
     private ArrayList<Profile> profiles = new ArrayList<>();
 
     // Calls to Profile methods
-
     /**
      * adds a profile in the profile list
      * @author  Orest Cokan
@@ -50,6 +49,7 @@ public class ProfileList {
     public void addProfile(Profile profile){
         profiles.add(profile);
     }
+
 
     /**
      * removes a profile from the profile list
@@ -73,6 +73,7 @@ public class ProfileList {
         return profiles.contains(profile);
     }
 
+
     /**
      * sees how many profiles are in the list
      * @author  Orest Cokan
@@ -82,4 +83,5 @@ public class ProfileList {
     public int size(){
         return profiles.size();
     }
+
 }

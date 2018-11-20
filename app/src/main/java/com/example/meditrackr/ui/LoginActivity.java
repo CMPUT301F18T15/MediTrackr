@@ -35,17 +35,19 @@ import com.example.meditrackr.R;
 // Class creates Login Activity
 public class LoginActivity extends AppCompatActivity {
 
-    // Creates login activity view by switching to login fragment
+    // Creates login view objects based on layouts in XML
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        FragmentManager manager = getSupportFragmentManager(); // Prepares to switch fragments
+        // Prepares to switch fragments
+        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        LoginFragment fragment = LoginFragment.newInstance(); // Switch to LoginFragment
+        // Switch to LoginFragment
+        LoginFragment fragment = LoginFragment.newInstance();
         transaction.replace(R.id.content, fragment);
-        transaction.commit(); // Make permanent any changes
-
+        // Make permanent any changes
+        transaction.commit();
     }
 }

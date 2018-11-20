@@ -53,33 +53,35 @@ import com.example.meditrackr.utils.ConvertImage;
 
 // Class creates a Record Fragment for patients
 public class RecordFragment extends Fragment {
-    // Set variables
+    // Initialize class object record and image view array
     private Record record;
     private ImageView[] images = new ImageView[10];
 
-    // Creates new instance fragment and saves it as bundle
+    // Creates new instance fragment and maps record as a serializable value in bundle
     public static RecordFragment newInstance(Record record) {
         RecordFragment fragment = new RecordFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("Record", record); // Inserts a serializable record into the mapping of this bundle
+        bundle.putSerializable("Record", record);
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    // Creates record fragment view
+    // Creates record fragment view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_record, container, false);
 
-        // Sets text placeholders in record page
+
+        // Initialize ui attributes
         final TextView title = rootView.findViewById(R.id.record_title);
         final TextView date = rootView.findViewById(R.id.record_date);
         final TextView location = rootView.findViewById(R.id.record_location);
         final TextView description = rootView.findViewById(R.id.record_description);
         record = (Record) getArguments().getSerializable(
                 "Record");
+
 
         // Allows 10 images for each record
         images[0] = rootView.findViewById(R.id.record_image_1);
@@ -92,6 +94,7 @@ public class RecordFragment extends Fragment {
         images[7] = rootView.findViewById(R.id.record_image_8);
         images[8] = rootView.findViewById(R.id.record_image_9);
         images[9] = rootView.findViewById(R.id.record_image_10);
+
 
         // Populate a record with data
         title.setText(record.getTitle());

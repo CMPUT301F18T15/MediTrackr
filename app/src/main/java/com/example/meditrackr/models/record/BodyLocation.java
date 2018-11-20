@@ -22,16 +22,18 @@ package com.example.meditrackr.models.record;
 import java.io.Serializable;
 
 /**
- * This class will create a Body coordinate on our model and then associate it with with a body location
- * it uses getters and setters to get the body coordinate
- * it also uses getters and setters to get the bodyFace
+ * This class will create a body coordinate on our model and then
+ * associate it with with the photos of a particular record.
+ *
+ * Note that this functionality is not yet implemented in our app
+ * and will be added for part 5.
  *
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  */
 
-// A BodyLocation class that holds all information pertaining to BodyLocation
+// A BodyLocation class that holds all methods pertaining to BodyLocation
 public class BodyLocation implements Serializable {
 
     // Initialize class variables
@@ -40,9 +42,8 @@ public class BodyLocation implements Serializable {
     private String bodyLocation;
 
     /**
-     * creates variables for the other functions to use
+     * Creates a new BodyLocation object.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param bodyCoordinate the number that is mapped to a body location
      * @param bodyFace       a tring name of a face location
      * @param bodyLocation   the name of the body part
@@ -55,61 +56,66 @@ public class BodyLocation implements Serializable {
     }
 
 
-    // Getters/Setters
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *--------------------------------------------------------------------------/
 
     /**
-     * gets the body coordinate
+     * Gets the body coordinate array.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @return bodyCorrdinate, the integer of the body location
      */
     public double[] getBodyCoordinate() {
         return bodyCoordinate;
     }
 
+
     /**
-     * takes the body coordinate and sets it as a variable
+     * Sets the body coordinate array.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param bodyCoordinate the integer of the body location
      */
     public void setBodyCoordinate(double[] bodyCoordinate) {
         this.bodyCoordinate = bodyCoordinate;
     }
+
+
     /**
-     * gets the name of the face coordinate
+     * Gets the string name (id) of the type of body location photo or mannequin (eg,
+     * front or back).
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
-     * @return bodyFace, the name of a face location
+     * @return bodyFace, the name of a body location photo
      */
     public String getBodyFace() {
         return bodyFace;
     }
 
     /**
-     * takes the body face and sets it as a variable
+     * Sets the string name (id) of the type of body location photo or mannequin (eg,
+     * front or back) used for this body location.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
-     * @param bodyFace the name of a face location
+     * @param bodyFace the name of a body location direction (face)
      */
     public void setBodyFace(String bodyFace) {
         this.bodyFace = bodyFace;
     }
+
+
     /**
-     * gets the name of the body coordinate
+     * Gets the string name (id) of the body location photo or mannequin.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
-     * @return bodyLocation, the name of a body location
+     * @return bodyLocation, the name of a body location direction (face)
      */
     public String getBodyLocation() {
         return bodyLocation;
     }
 
+
     /**
-     * takes the body location and sets it as a variable
+     * Sets the string name (id) of the body location photo or
+     * mannequin used for this body location.
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
-     * @param bodyLocation the name of a body location
+     * @param bodyLocation the name of a body location photo
      */
     public void setBodyLocation(String bodyLocation) {
         this.bodyLocation = bodyLocation;

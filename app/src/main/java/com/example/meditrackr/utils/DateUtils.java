@@ -35,7 +35,7 @@ import java.util.TimeZone;
  */
 // got this from https://github.com/smilefam/SendBird-Android
 
-// Class
+// Class contains information pertaining to date utilities
 public class DateUtils {
 
     // This class should not be initialized
@@ -49,12 +49,14 @@ public class DateUtils {
         return dateFormat.format(timeInMillis);
     }
 
-    // 
+
+    // Set a format for date and time and establish time zone
     public static String formatAppTime(){
         final SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy, hh:mm aaa");
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
         return format.format(calendar.getTime());
     }
+
 
     public static String formatTimeWithMarker(long timeInMillis) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm a", Locale.getDefault());
@@ -86,8 +88,9 @@ public class DateUtils {
     }
 
     /**
-     * Formats timestamp to 'date month' format (e.g. 'February 3').
+     * Formats timestamp to 'month date' format (e.g. 'February 3').
      */
+    // Formats timestamp to MM dd format
     public static String formatDate(long timeInMillis) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd", Locale.getDefault());
         return dateFormat.format(timeInMillis);
@@ -96,6 +99,7 @@ public class DateUtils {
     /**
      * Returns whether the given date is today, based on the user's current locale.
      */
+    // Checks whether the given day is current day
     public static boolean isToday(long timeInMillis) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         String date = dateFormat.format(timeInMillis);
@@ -108,6 +112,7 @@ public class DateUtils {
      * @param millisSecond  The time in milliseconds of the second date.
      * @return  Whether {@param millisFirst} and {@param millisSecond} are off the same day.
      */
+    // Checks if two dates have the same day
     public static boolean hasSameDate(long millisFirst, long millisSecond) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         return dateFormat.format(millisFirst).equals(dateFormat.format(millisSecond));

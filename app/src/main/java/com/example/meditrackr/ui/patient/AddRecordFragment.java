@@ -91,7 +91,7 @@ import static android.app.Activity.RESULT_OK;
 public class AddRecordFragment extends Fragment implements LocationListener {
     private String date;
 
-    //indicators and request codes
+    // Indicators and request codes
     private static final String TAG = "AddRecordFragment";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -99,7 +99,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
     private static final int IMAGE_REQUEST_CODE = 2;
     private static final int PLACE_PICKER_REQUEST = 4;
 
-    //vars
+    // Initialize variables
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private Boolean mLocationPermissionsGranted = false;
     public LocationManager locationManager;
@@ -107,13 +107,13 @@ public class AddRecordFragment extends Fragment implements LocationListener {
     public String bestProvider;
 
 
-    //image
+    // Image variables
     private Bitmap bitmap;
     private ImageView[] images = new ImageView[10];
     private Bitmap[] bitmaps = new Bitmap[10];
 
 
-    // location
+    // Location variables
     private double latitude;
     private double longitude;
     private String addressName;
@@ -122,6 +122,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
     private Address address;
 
 
+    // Maps index arguements into bundle
     public static AddRecordFragment newInstance(int index) {
         AddRecordFragment fragment = new AddRecordFragment();
         Bundle bundle = new Bundle();
@@ -130,6 +131,8 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         return fragment;
     }
 
+
+    // Creates view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -139,12 +142,13 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         /************************************************************************
          * GET LOCATION PERMISSIONS
          ************************************************************************/
+        // Get device location if location permission is granted
         getLocationPermission();
         if(mLocationPermissionsGranted){
             getDeviceLocation();
         }
 
-        // index of problem we are adding record to
+        // Index of problem we are adding record to
         final int index = getArguments().getInt("INDEX");
 
         // nifty location controller that helps with getting locations
@@ -152,18 +156,19 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         /************************************************************************
          * INITIALIZE UI COMPONENTS
          ************************************************************************/
+        // Initialize ui attributes
         final EditText recordTitle = (EditText) rootView.findViewById(R.id.record_title_field);
         final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
 
-        // initialize address and set it
+        // Initialize address and set it
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
 
-        // set date
+        // Set date
         date = DateUtils.formatAppTime();
 
-        // ui attributes for all the images LMAO, there has to be a better way to do this
+        // Initialize ui attributes for each button of notification frequency
         images[0] = (ImageView) rootView.findViewById(R.id.image_1);
         images[1] = (ImageView) rootView.findViewById(R.id.image_2);
         images[2] = (ImageView) rootView.findViewById(R.id.image_3);
@@ -175,28 +180,30 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         images[8] = (ImageView) rootView.findViewById(R.id.image_9);
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
 
-        //on click listener for adding a record
+        //On click listener for adding a record
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkInputs(recordTitle, recordDescription)){
-                    // create the new record
+                if(checkInputs(recordTitle, recordDescription)){ // If checkInputs is True
+                    // Create the new record
                     Record record = createRecord(recordTitle, recordDescription);
 
-                    // pass the record to the record controller so it can be added to the
+                    // Pass the record to the record controller so it can be added to the
                     // patient's profile and saved both locally and to ElasticSearch
                     RecordController.addRecord(getContext(), record, index);
 
-                    // transition back to all the records
+                    // Transition back to all the records
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     RecordsFragment fragment = RecordsFragment.newInstance(index);
                     transaction.replace(R.id.content, fragment);
-                    transaction.commit();
+                    transaction.commit(); // Make permanent all changes made in fragment
                 }
+
 
                 else {
                     Toasty.error(getContext(), "Please enter a valid format for record", Toast.LENGTH_LONG).show();
+
                 }
             }
         });
@@ -205,6 +212,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         /***************************************************************************
          * ADD NEW IMAGES TO RECORD
          ***************************************************************************/
+        // OnClickListener handles camera button
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,12 +226,11 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         /***************************************************************************
          * SET GEO-LOCATION
          ***************************************************************************/
-        // initialize the map picker and select a place you want to go
+        // Initialize the map picker and select a place you want to go
         addressView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-
                 try{
                     startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
                 }
@@ -239,34 +246,35 @@ public class AddRecordFragment extends Fragment implements LocationListener {
     /************************************************************************
      * CREATE NEW RECORD
      ************************************************************************/
-    // creates and returns a new record object using the required information from the view
+    // Creates and returns a new record object using the required information from the view
     private Record createRecord(EditText title, EditText description) {
         Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
+        // In new record include user input title and description
         Record record = new Record(
                 title.getText().toString(),
                 description.getText().toString(),
                 date,
                 null);
         record.setGeoLocation(geolocation);
-        for(Bitmap bitmap: bitmaps){
-            if(bitmap != null) {
+        for(Bitmap bitmap: bitmaps){ // For each image
+            if(bitmap != null) { // If image is not null convert image into base64 string
                 String imageSave = ConvertImage.base64Encode(bitmap);
                 Log.d("TestImage", imageSave);
-                record.getImagesSave().addImage(imageSave);
+                record.getImagesSave().addImage(imageSave); // Save each image to record
             }
         }
 
         return record;
     }
 
-    // checks that the title and description are not empty
+    // Checks that the title and description are not empty
     public boolean checkInputs(EditText title, EditText description){
         if(((title != null && !title.getText().toString().isEmpty()) &&
                 (description != null && !description.getText().toString().isEmpty()))){
-            return true;
+            return true; // If not empty return true
         }
         else {
-            return false;
+            return false; // If empty return false
         }
     }
 
@@ -274,23 +282,26 @@ public class AddRecordFragment extends Fragment implements LocationListener {
      * EXTRACT LOCATION, IMAGE DATA FROM ACTIVITIES
      ************************************************************************/
     @Override
-    // for extracting the image taken by the phone's camera and adding it to the bitmap array
+    // For extracting the image taken by the phone's camera and adding it to the bitmap array
     // or for getting geolocation information depending on the request code
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Allows intent to extract image taken by phone's camera
             getActivity();
             Bitmap bmp = (Bitmap) data.getExtras().get("data");
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
+            // Makes sure that bitmap is not null before compressing the bitmap into PNG format
             assert bmp != null;
             bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            // Put compress format array into byte array
             byte[] byteArray = stream.toByteArray();
 
-            // convert byte array to Bitmap
+            // Convert byte array to Bitmap
             bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                     byteArray.length);
 
-            // populate image
+            // Populate image
             for(int i = 0; i < bitmaps.length; i++){
                 if(bitmaps[i] == null){
                     Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 425, false);
@@ -301,12 +312,15 @@ public class AddRecordFragment extends Fragment implements LocationListener {
             }
             Log.d("ImageTest", bitmap.toString());
         }
-        // we are getting a place location
+        // Allows intent to pick a place location
         else if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
             place = PlacePicker.getPlace(data, getContext());
+            // Indicate location with toast
             String toastMsg = String.format("Place: %s", place.getName());
+            // Set picked location name on map and set it to addressName
             addressView.setText(place.getName().toString());
             addressName = place.getName().toString();
+            // Get latitude and longitude of location
             LatLng latLng = place.getLatLng();
             latitude = latLng.latitude;
             longitude = latLng.longitude;
@@ -323,95 +337,109 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
-
+        // If app has permission to access a precise location
         if(ContextCompat.checkSelfPermission(getContext(),
                 FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            // If app has permission to access an approximate location
             if(ContextCompat.checkSelfPermission(getContext(),
                     COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                // Then all location permissions are considered granted
                 mLocationPermissionsGranted = true;
                 Log.d("LocationMeme", "do we get here");
-            }else{
+            }else{ // Else request for approximate location permission
                 ActivityCompat.requestPermissions(getActivity(),
                         permissions,
                         LOCATION_PERMISSION_REQUEST_CODE);
             }
-        }else{
+        }else{ // Else request for precise location permission
             ActivityCompat.requestPermissions(getActivity(),
                     permissions,
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
 
+    // Returns the result of permission request
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Log.d(TAG, "onRequestPermissionsResult: called.");
+        // In order check whether permission is granted always set permission granted to false beforehand
         mLocationPermissionsGranted = false;
 
         switch(requestCode){
+            // Check if permission is granted or denied
             case LOCATION_PERMISSION_REQUEST_CODE:{
                 if(grantResults.length > 0){
                     for(int i = 0; i < grantResults.length; i++){
+                        // If grantResults do not match up with permission granted code then permission is denied
                         if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
                             mLocationPermissionsGranted = false;
                             Log.d(TAG, "onRequestPermissionsResult: permission failed");
                             return;
                         }
                     }
+                    // If grantResults match with permission granted code then permission is granted
                     Log.d(TAG, "onRequestPermissionsResult: permission granted");
                     mLocationPermissionsGranted = true;
-                    //initialize our map
+                    // Initialize our map
                     getDeviceLocation();
                 }
             }
         }
     }
 
+    // Gets device's location
     private void getDeviceLocation(){
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
         try{
+            // If mLocationPermissionGranted previously was found to be True
             if(mLocationPermissionsGranted){
+                // Access device's location services
                 locationManager = (LocationManager)  getActivity().getSystemService(Context.LOCATION_SERVICE);
                 criteria = new Criteria();
+                // Get best provider then location
                 bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
                 final Task location = mFusedLocationProviderClient.getLastLocation();
+                // Once location is derived call addOnCompleteListener
                 location.addOnCompleteListener(new OnCompleteListener() {
+
                     @Override
-                    public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
+                    public void onComplete(@NonNull Task task) { // Ensure that location was properly found
+                        if(task.isSuccessful()){ // If proper location was found set it as currentLocation
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
-                            if(currentLocation != null) {
+                            if(currentLocation != null) { // Get longitude and latitude
                                 longitude = currentLocation.getLongitude();
                                 latitude = currentLocation.getLatitude();
                                 Log.d("Locations", longitude + "" + "  " + latitude);
                                 geoLocate();
                             }
-                            else{
+                            else{ // Update if location changed
                                 Log.d("LOCATIONS", "we go to else statement");
                                 locationManager.requestLocationUpdates(bestProvider, 1000, 0, AddRecordFragment.this);
                             }
-                        }else{
+                        }else{ // If location was not properly derived indicate so
                             Log.d(TAG, "onComplete: current location is null");
                             Toasty.error(getContext(), "Unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
-        }catch (SecurityException e){
+        }catch (SecurityException e){ // Throw exception if security violation caught
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
         }
     }
 
+    // If location changed, update it
     @Override
     public void onLocationChanged(Location location) {
         //Hey, a non null location! Sweet!
 
-        //remove location callback:
+        // Remove location callback:
         locationManager.removeUpdates(this);
 
-        //open the map:
+        // Open the map:
         latitude = location.getLatitude();
         longitude = location.getLongitude();
 
@@ -432,27 +460,30 @@ public class AddRecordFragment extends Fragment implements LocationListener {
 
     }
 
-
+    // Gets location name
     private void geoLocate(){
         Log.d(TAG, "geoLocate: geolocating");
         Geocoder geocoder = new Geocoder(getContext());
-        try {
+        try { // Gets location with Geocoder as an address list
             List<Address> result = geocoder.getFromLocation(latitude, longitude, 1);
+
             if (result == null) {
                 Toasty.error(getContext(), "Cannot get location name",
+
                         Toast.LENGTH_LONG).show();
-            } else {
+            } else { // Else if location is not found indicate so
                 if (result.isEmpty()) {
                     Toasty.error(getContext(), "No location is found",
                             Toast.LENGTH_LONG).show();
-                } else {
+                } else { // If location is found format list to get address name
                     address = result.get(0);
-                    addressName = address.getAddressLine(0) + ", " + address.getAddressLine(1) + ", " + address.getAddressLine(2);
+                    addressName = address.getAddressLine(0) + ", " + address.getAddressLine(1)
+                            + ", " + address.getAddressLine(2);
                     addressName = addressName.replace(", null,", "").replace("null", "");
                     addressView.setText(addressName);
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException e) { // Throw exception if there are issues with input or output
             Toasty.error(getContext(), "Network unavailable to get location name.",
                     Toast.LENGTH_LONG).show();
             e.printStackTrace();

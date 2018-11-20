@@ -45,10 +45,13 @@ import com.example.meditrackr.ui.MessageListFragment;
  * @version 1.0 Nov 10, 2018.
  */
 
+// Class creates Records Fragment for care providers
 public class RecordsFragment extends Fragment {
+    // Initialize class objects
     private RecordAdapter adapter;
     private Patient carePatient = LazyLoadingManager.getCarePatient();
 
+    // Maps serializable records and comments into bundles
     public static RecordsFragment newInstance(RecordList records, CommentList comments) {
         RecordsFragment fragment = new RecordsFragment();
         Bundle bundle = new Bundle();
@@ -58,31 +61,37 @@ public class RecordsFragment extends Fragment {
         return fragment;
     }
 
+    // Creates view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_records, container, false);
 
-        // ui attributes
+        // Initialize ui attributes
         final RecyclerView recordsList = (RecyclerView) rootView.findViewById(R.id.records_recyclerview);
         final FloatingActionButton addRecord = (FloatingActionButton) rootView.findViewById(R.id.add_record_floating);
         final TextView messageClick = (TextView) rootView.findViewById(R.id.message_click);
         final TextView recordsClick = (TextView) rootView.findViewById(R.id.records_click);
 
+        // Gets records and comments from bundle
         RecordList records = (RecordList)getArguments().getSerializable("Records");
         final CommentList comments = (CommentList) getArguments().getSerializable("Comments");
 
-        // onclick listener for messages
+        // Onclick listener for messages
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(messageClick == v){
+                    // Prepare for fragment transaction
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
+                    // Bring back previous fragment when back button is pressed
                     transaction.addToBackStack(null);
+                    // Transition to MessageListFragment
                     MessageListFragment fragment = MessageListFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
+                    // Make permanent any changes made in fragment
                     transaction.commit();
                 }
             }
@@ -90,11 +99,12 @@ public class RecordsFragment extends Fragment {
 
         messageClick.setOnClickListener(listener);
 
-        // hide the floating action button (lazy af)
+        // Hide the floating action button
+        // Care providers cannot add records for patients
         addRecord.setVisibility(View.INVISIBLE);
         addRecord.setClickable(false);
 
-        // initialize adapter to put the records in the recyclerview
+        // Initialize adapter to put the records in the recyclerview
         recordsList.setHasFixedSize(false);
         adapter = new RecordAdapter(getActivity(), records);
         recordsList.setAdapter(adapter);
@@ -103,7 +113,7 @@ public class RecordsFragment extends Fragment {
         manager = new LinearLayoutManager(getActivity());
         recordsList.setLayoutManager(manager);
 
-        // add deocorations
+        // Add vertical padding between records on view
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         recordsList.addItemDecoration(decoration);
         return rootView;

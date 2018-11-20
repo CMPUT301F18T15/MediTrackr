@@ -63,13 +63,15 @@ import es.dmoral.toasty.Toasty;
  * @throe SecurityException
  */
 
+// Controller class for location
 public class LocationController {
+    // Class objects and arrays
     private Geocoder geocoder;
     private int maxResults = 2;
     private List<Address> locationList = new ArrayList<>();
     private ArrayList<String> locationNameList = new ArrayList<>();
 
-    //location
+    // Location attributes
     private LocationManager locationManager;
     private LocationListener locationListener;
     private Location location;
@@ -78,11 +80,12 @@ public class LocationController {
     private double latitude, longitude;
     private String addressName;
 
-    //GPS
+    // GPS attributes
     private boolean isGPSenable;
     private float minDistanceChanged = 5;
     private long minTime = 1000 * 60 * 1;
     private double gpsLatitude, gpsLongitude;
+
 
     /**
      * this function can get the latitude and longitude of the location and
@@ -94,9 +97,11 @@ public class LocationController {
      * @throw IOException
      *
      */
+    // Constructor
     public LocationController(Context context) {
         geocoder = new Geocoder(context, Locale.ENGLISH);
     }
+
 
     /**
      * sets the location name from the position user is at
@@ -105,13 +110,17 @@ public class LocationController {
      * @param position an intiger which can be used in a location list to find an adress
      * @return adressName a string which contains the adress
      */
+    // Sets location name
     public String setLocationName(int position) {
+        // Uses passed parameters and constructs a string indicationg location
         addressIndex = position;
         adrress = locationList.get(addressIndex);
-        addressName = adrress.getAddressLine(0) + ", " + adrress.getAddressLine(1) + ", " + adrress.getAddressLine(2);
+        addressName = adrress.getAddressLine(0) + ", " + adrress.getAddressLine(1) + ", "
+                + adrress.getAddressLine(2);
 
-        return addressName;
+        return addressName; // Return location string
     }
+
 
     /**
      * gets users latitude
@@ -120,7 +129,9 @@ public class LocationController {
      * @version 1.0 Nov 13, 2018
      * @return latitude a double type integer
      */
+    // Gets location latitude
     public double getLatitude() {
+        // Class objects
         latitude = locationList.get(addressIndex).getLatitude();
         return latitude;
     }
@@ -131,6 +142,7 @@ public class LocationController {
      * @version 1.0 Nov 13, 2018
      * @return longitude a double type integer
      */
+    // Gets location longitutde
     public double getLongitude() {
         longitude = locationList.get(addressIndex).getLongitude();
         return longitude;
@@ -144,6 +156,7 @@ public class LocationController {
      * @param locationName        the name of the location
      * @return locationNameList   a list that contains all of the locations names
      */
+    // Gets a location's list
     public ArrayList getLocationList(Context context, String locationName) {
 
         locationNameList.clear();
@@ -152,9 +165,7 @@ public class LocationController {
             Toasty.warning(context, "Please enter location", Toast.LENGTH_LONG).show();
         } else {
             try {
-                // user inputed location name
-                // use geocoder to search
-
+                // Use geocoder to search
                 locationList = geocoder.getFromLocationName(locationName, maxResults);
 
                 if (locationList == null) {
@@ -164,15 +175,16 @@ public class LocationController {
                         Toasty.error(context, "No location is found", Toast.LENGTH_LONG).show();
                     } else {
                         for (Address i : locationList) {
+                            // For each address in location list add address line to locationNameList
                             String addressline = i.getFeatureName() + '\n'
-                                    + i.getAddressLine(0) + ", " + i.getAddressLine(1) + ", " + i.getAddressLine(2);
+                                    + i.getAddressLine(0) + ", " + i.getAddressLine(1)
+                                    + ", " + i.getAddressLine(2);
                             locationNameList.add(addressline);
                         }
                     }
                 }
 
-
-            } catch (IOException e) {
+            } catch (IOException e) { // Throw exception if issues with getting address or GPS service disabled
                 Toasty.error(context, "Network unavailable or other issues occurred",
                         Toast.LENGTH_LONG).show();
                 e.printStackTrace();
@@ -191,15 +203,19 @@ public class LocationController {
      * @param context context of the controller
      * @return 1 if gps is available 0 if not
      */
+
+    // Gets user GPS location
     public int getGPS(final Context context) {
+        // Enable GPS service
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         isGPSenable = locationManager.isProviderEnabled("gps");
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                if (location != null) {
+                if (location != null) { // If location is attainable by GPS get longitude and latitude
                     gpsLongitude = location.getLongitude();
                     gpsLatitude = location.getLatitude();
+
                 } else {
                     Toasty.warning(context, "Cannot get current location, default set to (0, 0)", Toast.LENGTH_LONG).show();
                 }
@@ -218,7 +234,7 @@ public class LocationController {
             public void onProviderDisabled(String s) {
             }
         };
-        // check if the gps provider is available
+        // Check if the gps provider is available
         if (isGPSenable) {
             return 1;
         }
@@ -232,6 +248,8 @@ public class LocationController {
      * @param context context of the controller
      * @throws SecurityException
      */
+
+    // Updates the user's latitude and longitutde
     public void getGpsCoordinate(Context context) {
         try {
             locationManager.requestLocationUpdates("gps", minTime, minDistanceChanged, locationListener);
@@ -248,6 +266,8 @@ public class LocationController {
      * @version 1.0 Nov 13, 2018
      * @return gpsLatitude  a double integer of the latitude given by the gps
      */
+
+    // Gets GPS latitude
     public double getGpsLatitude() {
         return gpsLatitude;
     }
@@ -257,6 +277,8 @@ public class LocationController {
      * @version 1.0 Nov 13, 2018
      * @return gpsLongitude  a double integer of the longitude given by the gps
      */
+
+    // Gets GPS longitude
     public double getGpsLongitude() {
         return gpsLongitude;
     }
@@ -271,10 +293,12 @@ public class LocationController {
      * @return addressName string which contains the name of the address
      * @throws IOException
      */
+
+    // Gets GPS address or location name
     public String getGpsAddressName(Context context) {
-        // call to check permission to access gps
-        // try to get location name
+        // Call to check permission to access gps
         try {
+            // Use geocoder to find location name from gps latitude and longitude
             List<Address> result = geocoder.getFromLocation(gpsLatitude, gpsLongitude, maxResults);
             if (result == null) {
                 Toasty.error(context, "Cannot get location name",
@@ -283,7 +307,7 @@ public class LocationController {
                 if (result.isEmpty()) {
                     Toasty.error(context, "No location is found",
                             Toast.LENGTH_LONG).show();
-                } else {
+                } else { // If a location is found by geocoder indicate so
                     adrress = result.get(0);
                     addressName = adrress.getAddressLine(0) + ", " + adrress.getAddressLine(1) + ", " + adrress.getAddressLine(2);
                 }

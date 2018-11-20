@@ -32,7 +32,7 @@ import io.searchbox.annotations.JestId;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A Profile class that holds all information pertaining to Profile
+// A Profile class that holds all methods pertaining to Profile
 public class Profile implements Serializable {
 
     // Initialize class variables
@@ -40,8 +40,6 @@ public class Profile implements Serializable {
     private String email;
     private String phone;
     private boolean isCareProvider;
-
-    // Constructor
 
     /**
      * creating variables for the class to use
@@ -53,6 +51,7 @@ public class Profile implements Serializable {
      * @param phone             the users phone number
      * @param isCareProvider    a booblean value that tells us if user is a care provider or not
      */
+    // Constructor
     public Profile(String username, String email, String phone, boolean isCareProvider){
         // Initialize class objects
         this.username = username;
@@ -72,6 +71,7 @@ public class Profile implements Serializable {
     public String getUsername() {
         return username;
     }
+
 
     /**
      * sets the username
@@ -96,6 +96,7 @@ public class Profile implements Serializable {
         return email;
     }
 
+
     /**
      * sets the users email
      *
@@ -106,6 +107,7 @@ public class Profile implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     /**
      * gets user's phone number
@@ -118,6 +120,7 @@ public class Profile implements Serializable {
         return phone;
     }
 
+
     /**
      * sets the users phone number
      *
@@ -129,6 +132,7 @@ public class Profile implements Serializable {
         this.phone = phone;
     }
 
+
     /**
      * gets if a user is a care provider or not
      *
@@ -139,6 +143,7 @@ public class Profile implements Serializable {
     public boolean getisCareProvider() {
         return isCareProvider;
     }
+
 
     /**
      * sets the users care provider status

@@ -34,14 +34,13 @@ import java.util.ArrayList;
  * @version 1.0 Nov 7, 2018.
  */
 
-// Class creates a Patient List
+// A PatientList class that holds all methods pertaining to PatientList
 public class PatientList implements Serializable {
 
     // Create array of patients
     private ArrayList<String> patients = new ArrayList<>();
 
-    // Calls to Patient methods
-
+    // Getters/Setters
     /**
      * this function will get a patient as a specific index
      * @author  Orest Cokan
@@ -52,6 +51,8 @@ public class PatientList implements Serializable {
     public String getPatient(int index){
         return patients.get(index);
     }
+
+
     /**
      * this function will set a patient as a specific index
      * @author  Orest Cokan
@@ -63,6 +64,7 @@ public class PatientList implements Serializable {
         patients.set(index, username);
     }
 
+
     /**
      * this function will get the amount of patients in the list
      * @author  Orest Cokan
@@ -72,6 +74,7 @@ public class PatientList implements Serializable {
     public int getSize(){
         return patients.size();
     }
+
 
     /**
      * this function will add a patient to the list
@@ -83,6 +86,7 @@ public class PatientList implements Serializable {
         patients.add(username);
     }
 
+
     /**
      * this function will remove a patient from the list
      * @author  Orest Cokan
@@ -92,6 +96,7 @@ public class PatientList implements Serializable {
     public void deletePatient(String username){
         patients.remove(username);
     }
+
 
     /**
      * this function will check to see if a patient is in the list
@@ -103,6 +108,8 @@ public class PatientList implements Serializable {
     public Boolean patientExists(String username){
         return patients.contains(username);
     }
+
+
     // will remove later
     public String toString(){
         return patients.toString();

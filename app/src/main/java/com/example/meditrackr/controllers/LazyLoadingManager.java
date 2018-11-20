@@ -36,11 +36,13 @@ import com.example.meditrackr.models.record.ImageSave;
 
 // Creates LazyLoadingManager that handles some Profile methods
 public class LazyLoadingManager {
+    // Class objects
     private static String currentUsername;
     private static Profile profile;
     private static Patient carePatient;
     private static int problemIndex;
     private static ImageSave images;
+
 
     /**
      * gets a profile
@@ -55,15 +57,18 @@ public class LazyLoadingManager {
         return profile;
     }
 
+
     /**
      * sets the profile
      *
      * @author Orest Cokan
      * @version 2.0 Nov 7, 2018
      */
+    // Profile setter
     public static void setProfile(Profile profile) {
         LazyLoadingManager.profile = profile;
     }
+
 
     /**
      * gets a patient
@@ -78,6 +83,7 @@ public class LazyLoadingManager {
         return (Patient) profile;
     }
 
+
     /**
      * gets a care Provider
      *
@@ -91,6 +97,7 @@ public class LazyLoadingManager {
         return (CareProvider) profile;
     }
 
+
     /**
      * gets a list of all patients assignd to the care provider
      *
@@ -103,6 +110,7 @@ public class LazyLoadingManager {
         return careProvider.getPatients();
     }
 
+
     /**
      * finds out if the profile is a care provider or not
      *
@@ -113,6 +121,7 @@ public class LazyLoadingManager {
     // Boolean, 1 for careprovider and 0 for patient
     public static  boolean getIsCareProvider() {return profile.getisCareProvider();}
 
+
     /**
      * gets the patient that a care provider has
      *
@@ -121,9 +130,11 @@ public class LazyLoadingManager {
      * @return the patient the care provider has
      * @see Patient
      */
+    // Gets a care provider's patient
     public static Patient getCarePatient() {
         return carePatient;
     }
+
 
     /**
      * sets the carePatient
@@ -131,9 +142,11 @@ public class LazyLoadingManager {
      * @version 2.0 Nov 7, 2018
      * @param carePatient this is the patient that a care provider has
      */
+    // Sets the patient for a care provider
     public static void setCarePatient(Patient carePatient) {
         LazyLoadingManager.carePatient = carePatient;
     }
+
 
     /**
      * gets a problems index
@@ -142,18 +155,24 @@ public class LazyLoadingManager {
      * @version 2.0 Nov 7, 2018
      * @return problemIndex the index of that problem
      */
+    // Gets the problem's index
     public static int getProblemIndex() {
         return problemIndex;
     }
+
+
     /**
      * sets the problem index
      *
      * @author Orest Cokan
      * @version 2.0 Nov 7, 2018
      */
+    // Sets the problem's index
     public static void setProblemIndex(int problemIndex) {
         LazyLoadingManager.problemIndex = problemIndex;
     }
+
+
     /**
      * gets the username of user
      *
@@ -161,18 +180,23 @@ public class LazyLoadingManager {
      * @version 2.0 Nov 7, 2018
      * @return currentUsername the username of that user
      */
+    // Get the user's username
     public static String getCurrentUsername() {
         return currentUsername;
     }
+
+
     /**
      * sets the username of that user
      *
      * @author Orest Cokan
      * @version 2.0 Nov 7, 2018
      */
+    // Set the user's username
     public static void setCurrentUsername(String currentUsername) {
         LazyLoadingManager.currentUsername = currentUsername;
     }
+
 
     /**
      * gets images
@@ -181,15 +205,19 @@ public class LazyLoadingManager {
      * @version 2.0 Nov 7, 2018
      * @return images the profile that it retrieved
      */
+    // Gets the profile's images
     public static ImageSave getImages() {
         return images;
     }
+
+
     /**
      * sets the images
      *
      * @author Orest Cokan
      * @version 2.0 Nov 7, 2018
      */
+    // Sets the profile's images
     public static void setImages(ImageSave images) {
         LazyLoadingManager.images = images;
     }

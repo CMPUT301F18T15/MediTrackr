@@ -11,6 +11,8 @@ import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * a problem controller that adds a problem to the database
  * @author  Veronica Salm
@@ -33,6 +35,6 @@ public class ProblemController {
         Log.d("ProblemAdd", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
 
         // let the user know everything was successful
-        Toast.makeText(context, "Problem Successfully Added", Toast.LENGTH_SHORT).show();
+        Toasty.success(context, "Problem successfully added", Toast.LENGTH_SHORT).show();
     }
 }

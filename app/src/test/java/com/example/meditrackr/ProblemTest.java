@@ -48,6 +48,7 @@ public class ProblemTest {
         problem = new Problem(initTitle, initDate, initDesc);
     }
     
+    // test if Problem is constructed with its attributes (title, date, desc)
     @Test
     public void constructorTest() {
         final String title = "";

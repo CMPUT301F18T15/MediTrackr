@@ -32,6 +32,8 @@ import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.ui.MainActivity;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * Crated by Skryt on Nov 17, 2018
  */
@@ -39,8 +41,10 @@ import com.example.meditrackr.ui.MainActivity;
 // Controller class for registering a new account
 public class RegisterController {
 
+
     // Registers account into memory and ES
-    public static void RegisterAccount(Activity actvity, Context context, Profile profile) {
+    public static void RegisterAccount(Activity activity, Context context, Profile profile) {
+
         Bundle bundle = new Bundle();
         boolean done;
         boolean finish;
@@ -64,15 +68,12 @@ public class RegisterController {
         if (!finish || !done) { // If both saves to memory and ES did not work
             // Indicate that new profile uses an existing username
             Log.d("RegisterFragmentMeme", "done is " + done + " finish is " + finish);
-            Toast.makeText(context, "Duplicate UserName", Toast.LENGTH_SHORT).show();
+            Toasty.error(context, "Username taken", Toast.LENGTH_SHORT).show();
         } else { // If no exceptions were caught
-            Toast.makeText(context, "Success to Sign Up", Toast.LENGTH_SHORT).show();
-            // Switch to MainActivity or log in
-            Intent intent = new Intent(actvity, MainActivity.class);
+            Toasty.success(context, "Registration successful", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(activity, MainActivity.class);
             intent.putExtras(bundle);
-            actvity.startActivity(intent);
-        }
-
-
+            activity.startActivity(intent);
         }
     }
+}

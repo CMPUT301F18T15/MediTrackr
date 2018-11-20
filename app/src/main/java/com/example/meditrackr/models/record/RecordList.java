@@ -62,7 +62,7 @@ public class RecordList implements Serializable {
      * @version 1.0 Oct 24, 2018.
      * @param record    the record to remove from the list
      */
-    public void removeRecord(int record){
+    public void removeRecord(Record record){
         records.remove(record);
     }
 

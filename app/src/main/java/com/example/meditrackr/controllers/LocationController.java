@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * this class is in charge of all the geolocation functionality
  * this class can use locationController which can get the latitude and longitude of the location and
@@ -158,20 +160,20 @@ public class LocationController {
     public ArrayList getLocationList(Context context, String locationName) {
 
         locationNameList.clear();
-        if (locationName.trim().length() == 0) { // If user did not input anything
-            // Encourage user to enter a location
-            Toast.makeText(context, "Please enter location.", Toast.LENGTH_LONG).show();
-        } else { // Else get location list
+        // user did not input anything
+        if (locationName.trim().length() == 0) {
+            Toasty.warning(context, "Please enter location", Toast.LENGTH_LONG).show();
+        } else {
             try {
                 // Use geocoder to search
                 locationList = geocoder.getFromLocationName(locationName, maxResults);
 
-                if (locationList == null) { // If location cannot be found
-                    Toast.makeText(context, "Cannot get location", Toast.LENGTH_LONG).show();
-                } else { // Else if there is input in location list
-                    if (locationList.isEmpty()) { // If location list is empty
-                        Toast.makeText(context, "No location is found", Toast.LENGTH_LONG).show();
-                    } else { // Else if location list has valid input
+                if (locationList == null) {
+                    Toasty.error(context, "Cannot get location", Toast.LENGTH_LONG).show();
+                } else {
+                    if (locationList.isEmpty()) {
+                        Toasty.error(context, "No location is found", Toast.LENGTH_LONG).show();
+                    } else {
                         for (Address i : locationList) {
                             // For each address in location list add address line to locationNameList
                             String addressline = i.getFeatureName() + '\n'
@@ -182,9 +184,8 @@ public class LocationController {
                     }
                 }
 
-
             } catch (IOException e) { // Throw exception if issues with getting address or GPS service disabled
-                Toast.makeText(context, "Network unavailable or any issues occurred.",
+                Toasty.error(context, "Network unavailable or other issues occurred",
                         Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
@@ -214,8 +215,9 @@ public class LocationController {
                 if (location != null) { // If location is attainable by GPS get longitude and latitude
                     gpsLongitude = location.getLongitude();
                     gpsLatitude = location.getLatitude();
-                } else { // Else indicate if current location is not attainable by GPS
-                    Toast.makeText(context, "Cannot get current location so location set to 0, 0.", Toast.LENGTH_LONG).show();
+
+                } else {
+                    Toasty.warning(context, "Cannot get current location, default set to (0, 0)", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -253,8 +255,8 @@ public class LocationController {
             locationManager.requestLocationUpdates("gps", minTime, minDistanceChanged, locationListener);
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             locationListener.onLocationChanged(location);
-        } catch (SecurityException s) { // Throw exception if GPS service is currently disabled
-            Toast.makeText(context, "Permission needed to access GPS services.", Toast.LENGTH_LONG).show();
+        } catch (SecurityException s) {
+            Toasty.info(context, "Permission needed to access GPS services.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -298,20 +300,20 @@ public class LocationController {
         try {
             // Use geocoder to find location name from gps latitude and longitude
             List<Address> result = geocoder.getFromLocation(gpsLatitude, gpsLongitude, maxResults);
-            if (result == null) { // If geocoder returns an invalid/null output
-                Toast.makeText(context, "Cannot get location name.",
+            if (result == null) {
+                Toasty.error(context, "Cannot get location name",
                         Toast.LENGTH_LONG).show();
-            } else { // Else if geocoder returns a valid output
-                if (result.isEmpty()) { // If there is no location found by geocoder indicate so
-                    Toast.makeText(context, "No location is found.",
+            } else {
+                if (result.isEmpty()) {
+                    Toasty.error(context, "No location is found",
                             Toast.LENGTH_LONG).show();
                 } else { // If a location is found by geocoder indicate so
                     adrress = result.get(0);
                     addressName = adrress.getAddressLine(0) + ", " + adrress.getAddressLine(1) + ", " + adrress.getAddressLine(2);
                 }
             }
-        } catch (IOException e) { // Throw exception if issues with getting location or GPS service disabled
-            Toast.makeText(context, "Network unavailable to get location name.",
+        } catch (IOException e) {
+            Toasty.error(context, "Network unavailable to get location name",
                     Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }

@@ -30,9 +30,8 @@ import java.util.ArrayList;
  * @version 1.0 Nov 13, 2018
  */
 
-// An ImageList class that holds all methods pertaining to ImageList
-public class ImageList implements Serializable {
-
+// Class creates Image List
+public class RecordPhotoList implements Serializable {
     /**
      * creates a list to store the images in
      * @author Orest Cokan
@@ -50,6 +49,8 @@ public class ImageList implements Serializable {
      * @param newImage the image we want to add
      * @see Bitmap
      */
+
+    // Calls to RecordPhotoList methods
     public void addImage(Bitmap newImage) {
         images.add(newImage);
     }
@@ -62,7 +63,7 @@ public class ImageList implements Serializable {
      * @version 1.0 Nov 13, 2018
      * @param image the image we want to remove
      */
-    public void removeImage(int image){
+    public void removeImage(Bitmap image){
         images.remove(image);
     }
 

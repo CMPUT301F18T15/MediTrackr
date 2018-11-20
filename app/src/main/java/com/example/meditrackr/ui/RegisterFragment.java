@@ -19,14 +19,12 @@
 package com.example.meditrackr.ui;
 
 //imports
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,13 +34,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.controllers.model.RegisterController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * this fragment lets a user create a profile
@@ -88,7 +86,7 @@ public class RegisterFragment extends Fragment {
 
         // Initialize ui attributes
         final EditText username = (EditText) rootView.findViewById(R.id.patient_username);
-        final EditText email = (EditText) rootView.findViewById(R.id.patient_phone);
+        final EditText email = (EditText) rootView.findViewById(R.id.patient_email);
         final EditText phoneNumber = (EditText) rootView.findViewById(R.id.phone_number);
         final TextView careProviderTitle = (TextView) rootView.findViewById(R.id.display_careprovider);
         final TextView patientTitle = (TextView) rootView.findViewById(R.id.display_patient);
@@ -177,19 +175,19 @@ public class RegisterFragment extends Fragment {
     // Checks if user inputs meet requirements
     public boolean checkInputs(EditText username, EditText email, EditText phoneNumber, ImageView doctorImage, ImageView patientImage) {
         if(username.getText().toString().trim().length() < 8){ // Checks if username is longer than 8 characters
-            Toast.makeText(getActivity(), "You messed up kiddo, change username", Toast.LENGTH_LONG).show();
+            Toasty.error(getActivity(), "Username must be at least 8 characters", Toast.LENGTH_LONG).show();
             username.getText().clear();
             return false;
         } else if (email.getText().toString().trim().isEmpty()) { // Checks if user email input text was left blank
-            Toast.makeText(getActivity(), "You messed up kiddo, change email", Toast.LENGTH_LONG).show();
+            Toasty.error(getActivity(), "Email can't be empty", Toast.LENGTH_LONG).show();
             email.getText().clear();
             return false;
         } else if (phoneNumber.getText().toString().trim().isEmpty()) { // Checks if user phone number input text was left blank
-            Toast.makeText(getActivity(), "You messed up kiddo, change phone number", Toast.LENGTH_LONG).show();
+            Toasty.error(getActivity(), "Phone number can't be empty", Toast.LENGTH_LONG).show();
             phoneNumber.getText().clear();
             return false;
         } else if (!doctorImage.isSelected() && !patientImage.isSelected()){ // Checks if the user picked the kind of account they want to make
-            Toast.makeText(getActivity(), "You messed up kiddo, choose either doctor or patient", Toast.LENGTH_LONG).show();
+            Toasty.error(getActivity(), "Select either care provider or patient", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

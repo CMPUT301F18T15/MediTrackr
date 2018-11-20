@@ -35,6 +35,8 @@ import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.ui.MainActivity;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * a controller that when a user tries to log in it looks to make sure that ther is a valid entry
  * and checks if the entry is in the database
@@ -110,7 +112,7 @@ public class LoginController {
             login(context,activity, patient);
         // If profile does not exist in memory and ES indicate as so with a toast message
         } else {
-            Toast.makeText(context, "Username does not exist!", Toast.LENGTH_SHORT).show();
+            Toasty.warning(context, "Username does not exist", Toast.LENGTH_SHORT).show();
         }
     }
 }

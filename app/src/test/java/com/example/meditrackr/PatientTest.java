@@ -40,6 +40,8 @@ public class PatientTest {
 
     private Patient patient;
 
+    public PatientTest() {}
+
     // Create a fresh patient every test -- Let Patient attributes
     // after tests be garbage collected
     @Before

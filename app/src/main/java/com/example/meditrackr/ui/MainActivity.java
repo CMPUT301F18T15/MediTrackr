@@ -38,6 +38,8 @@ import com.example.meditrackr.ui.patient.ProblemsFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * for this activity it just shows a bar at the bottom with 5 buttons
  * button 1 is a problems button which will take the user to the problems fragment
@@ -58,7 +60,6 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 // Class creates main activity fragment
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MapActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
     final boolean isCareProvider = LazyLoadingManager.getIsCareProvider();
 
@@ -186,20 +187,17 @@ public class MainActivity extends AppCompatActivity {
 
     // Check for google services permission
     public boolean isServicesOK(){
-        Log.d(TAG, "isServicesOK: checking google services version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
         if(available == ConnectionResult.SUCCESS){
-            // Everything is okay, user can make map requests
-            Log.d(TAG, "isServiceOK: Google play services is working");
+            //everything is okay, user can make map requests
             return true;
         }else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
-            // An error occured but we can resolve it
-            Log.d(TAG, "IsServicesOK: an error occured but we can fit it");
+            // an error occured but we can resolve it
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
         }
-        else { // Cannot connect to google services
-            Toast.makeText(MainActivity.this, "You can't make map reqeuests", Toast.LENGTH_LONG).show();
+        else {
+            Toasty.error(MainActivity.this, "You can't make map requests", Toast.LENGTH_LONG).show();
         }
         return false;
     }

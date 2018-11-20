@@ -38,6 +38,8 @@ public class ProblemListTest {
     private ProblemList problemList;
     private Problem problem;
 
+    public ProblemListTest() {}
+
     @Before
     public void newProblemList() {
         problemList = new ProblemList();

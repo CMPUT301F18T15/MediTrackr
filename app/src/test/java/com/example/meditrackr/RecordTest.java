@@ -22,7 +22,7 @@ package com.example.meditrackr;
 //imports
 import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.models.record.Geolocation;
-import com.example.meditrackr.models.record.ImageList;
+import com.example.meditrackr.models.record.RecordPhotoList;
 import com.example.meditrackr.models.record.Record;
 
 import org.junit.Before;
@@ -37,6 +37,8 @@ import static org.junit.Assert.*;
 
 public class RecordTest {
     private Record record;
+
+    public RecordTest() {}
 
     // Initialize a new base record
     @Before
@@ -123,7 +125,7 @@ public class RecordTest {
     // Test if images can be added to the record
     @Test
     public void setImageTest() {
-        final ImageList imgList = new ImageList();
+        final RecordPhotoList imgList = new RecordPhotoList();
 
         record.setImages(imgList);
 

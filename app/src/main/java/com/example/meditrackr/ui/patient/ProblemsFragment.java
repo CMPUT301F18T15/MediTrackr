@@ -75,7 +75,6 @@ public class ProblemsFragment extends Fragment {
         // Initialize ui attributes
         final FloatingActionButton addProblem = (FloatingActionButton) rootView.findViewById(R.id.add_problem_floating);
         final RecyclerView problems = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
-        imageProblem = (ImageView) rootView.findViewById(R.id.problem_image);
 
 
         // Adapt items into recycler view

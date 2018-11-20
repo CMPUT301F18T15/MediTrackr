@@ -154,10 +154,6 @@ public class EditProblemFragment extends Fragment {
                         // Commit changes to fragment
                         transaction.commit();
                     }
-                    else {
-                        // Else if checkInputs return false indicate that problem cannot be added
-                        Toasty.error(getContext(), "The title and description cannot be empty", Toast.LENGTH_LONG).show();
-                    }
                 }
             });
 

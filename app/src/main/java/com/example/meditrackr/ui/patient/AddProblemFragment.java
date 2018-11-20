@@ -144,10 +144,6 @@ public class AddProblemFragment extends Fragment {
                     transaction.replace(R.id.content, fragment);
                     transaction.commit(); // Make permanent any changes made in fragment
                 }
-                else { // If checkInputs is false
-                    // Create toast message indicating that problem could not be added
-                    Toasty.warning(getContext(), "Unable to add problem", Toast.LENGTH_LONG).show();
-                }
             }
         });
         return rootView;

@@ -84,6 +84,7 @@ public class ProblemListTest {
                 problemList.getSize() == 0);
     }
 
+    // Can problem be searched in ProblemList
     @Test
     public void hasProblemTest() {
         problemList.addProblem(problem);
@@ -91,6 +92,7 @@ public class ProblemListTest {
                 problemList.problemExists(problem));
     }
 
+    // Can a problem in problemList be overwritten
     @Test
     public void setProblemTest() {
         final Problem problemOne = new Problem("One", "", "");
@@ -106,6 +108,7 @@ public class ProblemListTest {
         assertTrue(problemList.getSize() == 1);
     }
 
+    // Are problems indexed correct
     @Test
     public void getIndexTest() {
         final Problem problemOne = new Problem("One", "", "");

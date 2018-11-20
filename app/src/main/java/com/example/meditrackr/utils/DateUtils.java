@@ -31,7 +31,9 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * Created by Skryt on Nov 13, 2018
+ * creates a date in the proper format
+ * @author Orest Cokan
+ * @version 1.0 Nov 13, 2018
  */
 // got this from https://github.com/smilefam/SendBird-Android
 
@@ -43,6 +45,14 @@ public class DateUtils {
 
     }
 
+    /**
+     * creates a time stamp in HH:mm
+     *
+     * @param timeInMillis      the time stame to convert
+     * @return                  the new formatted time
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     */
     // Gets timestamp in millis and converts it to HH:mm (e.g. 16:44)
     public static String formatTime(long timeInMillis) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
@@ -51,6 +61,13 @@ public class DateUtils {
 
 
     // Set a format for date and time and establish time zone
+
+    /**
+     * Set a format for date and time and establish time zone
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @return   the format to use
+     */
     public static String formatAppTime(){
         final SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy, hh:mm aaa");
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
@@ -63,11 +80,25 @@ public class DateUtils {
         return dateFormat.format(timeInMillis);
     }
 
+    /**
+     * gets the hours from time stamp
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param timeInMillis  The time to get hours from
+     * @return              the hours
+     */
     public static int getHourOfDay(long timeInMillis) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("H", Locale.getDefault());
         return Integer.valueOf(dateFormat.format(timeInMillis));
     }
 
+    /**
+     * gets the minutes
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param timeInMillis  The time to get minutes from
+     * @return              the minutes
+     */
     public static int getMinute(long timeInMillis) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("m", Locale.getDefault());
         return Integer.valueOf(dateFormat.format(timeInMillis));
@@ -76,6 +107,8 @@ public class DateUtils {
     /**
      * If the given time is of a different date, display the date.
      * If it is of the same date, display the time.
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
      * @param timeInMillis  The time to convert, in milliseconds.
      * @return  The time or date.
      */
@@ -89,6 +122,10 @@ public class DateUtils {
 
     /**
      * Formats timestamp to 'month date' format (e.g. 'February 3').
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param timeInMillis          the time to format the date
+     * @return                      the formatted time
      */
     // Formats timestamp to MM dd format
     public static String formatDate(long timeInMillis) {
@@ -97,7 +134,11 @@ public class DateUtils {
     }
 
     /**
-     * Returns whether the given date is today, based on the user's current locale.
+     * checks whether the given day is current day
+     * @author Orest Cokan
+     * @version 1.0 Nov 13, 2018
+     * @param timeInMillis  the time to check
+     * @returns             whether the given date is today, based on the user's current locale.
      */
     // Checks whether the given day is current day
     public static boolean isToday(long timeInMillis) {

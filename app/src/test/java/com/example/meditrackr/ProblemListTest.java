@@ -47,6 +47,7 @@ public class ProblemListTest {
                 ("Sample problem", "Today", "This is problematic");
     }
     
+    // Test if problemList is first constructed empty
     @Test
     public void constructorTest() {
         ProblemList list = new ProblemList();

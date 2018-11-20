@@ -50,6 +50,7 @@ public class PatientTest {
                 ("", "", "", false);
     }
     
+    // test if patient is constructed with its attributes
     @Test
     public void constructorTest() {
         String name = "name";

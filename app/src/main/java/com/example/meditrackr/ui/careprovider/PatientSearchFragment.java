@@ -172,7 +172,7 @@ public class PatientSearchFragment extends Fragment{
                 Toast.makeText(getContext(), result.getContents(), Toast.LENGTH_LONG).show();
 
                 String username = result.getContents(); // Get patient username from input
-                Patient patient = PatientController.searchPatient(getContext(), username);
+                patient = PatientController.searchPatient(getContext(), username);
                 if(patient != null){
                     updateTextFields(patient);
                     changeViewVisibility(0);

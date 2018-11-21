@@ -27,12 +27,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Profile;
+import com.example.meditrackr.ui.patient.PatientQR;
 
 /**
  * this fragment shows the users username, phone number, email and an image of the patient if they added one
@@ -61,12 +63,15 @@ public class UserFragment extends Fragment {
 
 
 
+
         // Initialize ui attributes
-        ImageView user_image = rootView.findViewById(R.id.patient_image);
-        TextView username = rootView.findViewById(R.id.patient_username);
-        TextView email = rootView.findViewById(R.id.patient_email);
-        TextView phone = rootView.findViewById(R.id.patient_phone);
-        Button editButton = rootView.findViewById(R.id.edit_button);
+        final ImageView user_image = rootView.findViewById(R.id.patient_image);
+        final TextView username = rootView.findViewById(R.id.patient_username);
+        final TextView email = rootView.findViewById(R.id.patient_email);
+        final TextView phone = rootView.findViewById(R.id.patient_phone);
+        final Button editButton = rootView.findViewById(R.id.edit_button);
+        final ImageButton qrButton = rootView.findViewById(R.id.qr_code_button);
+
 
 
         // Set users info in the page
@@ -89,6 +94,20 @@ public class UserFragment extends Fragment {
                 // Replace current fragment with new info
                 transaction.replace(R.id.content, fragment);
                 // Make permanent all changes made in the transaction
+                transaction.commit();
+            }
+        });
+
+
+        // Onclick listener to go to QR code
+        qrButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.addToBackStack(null);
+                PatientQR fragment = PatientQR.newInstance(profile.getUsername());
+                transaction.replace(R.id.content, fragment);
                 transaction.commit();
             }
         });

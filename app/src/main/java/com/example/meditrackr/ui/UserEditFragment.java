@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Profile;
+import com.example.meditrackr.ui.patient.PatientQR;
 
 /**
  * this fragment allows the user to change thier username, phone number and email
@@ -99,6 +101,7 @@ public class UserEditFragment extends Fragment {
                 transaction.commit();
             }
         });
+
 
         return rootView;
     }

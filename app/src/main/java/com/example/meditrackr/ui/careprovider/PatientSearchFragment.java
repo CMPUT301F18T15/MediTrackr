@@ -154,7 +154,7 @@ public class PatientSearchFragment extends Fragment{
                 integrator.setCameraId(0);
                 integrator.setBeepEnabled(true);
                 integrator.setBarcodeImageEnabled(true);
-                integrator.initiateScan();
+                integrator.forSupportFragment(PatientSearchFragment.this).initiateScan();
             }
         });
 

@@ -33,6 +33,7 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
+import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Profile;
 
 /**
@@ -77,7 +78,7 @@ public class UserEditFragment extends Fragment {
         phone.setText(profile.getPhone());
 
 
-        // Onclick listener for create account button which allows user to switch fragments to view their profile
+        // Onclick listener for save account button which allows user to switch fragments to view their profile
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,17 +87,15 @@ public class UserEditFragment extends Fragment {
                 profile.setEmail(email.getText().toString());
                 profile.setPhone(phone.getText().toString());
                 ElasticSearchController.updateUser(profile); // Saves profile in ES
+                SaveLoadController.saveProfile(getContext(),profile);
 
+
+                // Swap back to the user fragment and display the fragment_user view
                 FragmentManager manager = getFragmentManager();
-                // Allow editing on fragment
                 FragmentTransaction transaction = manager.beginTransaction();
-                // Allows user to bring back previous fragment when back button is pressed
                 transaction.addToBackStack(null);
-                // Switches to UserFragment
                 UserFragment fragment = UserFragment.newInstance().newInstance();
-                // Replace current fragment with new info
                 transaction.replace(R.id.content, fragment);
-                // Make permanent all changes made in the transaction
                 transaction.commit();
             }
         });

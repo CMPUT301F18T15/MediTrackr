@@ -24,6 +24,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,8 @@ import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.ui.careprovider.ProblemsFragment;
+
+import java.util.ArrayList;
 
 /**
  * This class displays information about all of the patients that a Care Provider is assigned
@@ -60,8 +63,7 @@ import com.example.meditrackr.ui.careprovider.ProblemsFragment;
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder>{
     // Class objects
     private FragmentActivity activity;
-    private CareProvider careProvider = LazyLoadingManager.getCareProvider();
-    private PatientList patients = careProvider.getPatients();
+    private ArrayList<Patient> patients = LazyLoadingManager.getPatients();
 
     /**
      * Constructor: Initialize the PatientAdapter class by setting the activity
@@ -94,17 +96,16 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // Display each patient's username, email, and phone number in each viewHolder
-        holder.patientUsername.setText(patients.getPatient(position));
+        holder.patientUsername.setText(patients.get(position).getUsername());
         // Search for the proper patient to put into each viewHolder
-        Patient patient = (Patient) ElasticSearchController.searchProfile(patients.getPatient(position));
-        holder.patientEmail.setText(patient.getEmail());
-        holder.patientPhone.setText(patient.getPhone());
+        holder.patientEmail.setText(patients.get(position).getEmail());
+        holder.patientPhone.setText(patients.get(position).getPhone());
     }
 
     // Return the number of patients currently in RecyclerView (assigned to this care provider)
     @Override
     public int getItemCount() {
-        return patients.getSize();
+        return patients.size();
     }
 
 
@@ -121,12 +122,12 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // Class objects
         private PatientAdapter adapter;
-        public TextView patientUsername;
-        public TextView patientEmail;
-        public TextView patientPhone;
+        private TextView patientUsername;
+        private TextView patientEmail;
+        private TextView patientPhone;
 
         // Constructor and gets the corresponding data for each view
-        public ViewHolder(View itemView, final PatientAdapter adapter){
+        private ViewHolder(View itemView, final PatientAdapter adapter){
             super(itemView);
             patientUsername = itemView.findViewById(R.id.patient_username);
             patientEmail = itemView.findViewById(R.id.patient_email);
@@ -139,23 +140,15 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            // Load care provider
-            CareProvider careProvider = LazyLoadingManager.getCareProvider();
-            // Get the patient list for each care provider
-            PatientList patients = careProvider.getPatients(); // Gets the patient list for each care provider
-            // Prepare fragment transaction
+
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            // Search for the profile of the patient clicked on
-            Patient patient = (Patient) ElasticSearchController.searchProfile(patients.getPatient(position));
-            LazyLoadingManager.setCarePatient(patient); // Loads patient data
-            // Transition to ProblemsFragment
-            LazyLoadingManager.setImages(patient.getProblem(0).getImageAll());
+            Patient patient = adapter.patients.get(position);
+            LazyLoadingManager.setCarePatient(patient);
             ProblemsFragment fragment = ProblemsFragment.newInstance(position);
-            // Allow user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
-            transaction.commit(); // Make permanent all changes made in transaction
+            transaction.commit();
 
         }
     }

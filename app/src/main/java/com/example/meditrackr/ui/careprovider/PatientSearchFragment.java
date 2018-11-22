@@ -128,11 +128,8 @@ public class PatientSearchFragment extends Fragment{
                 if(finish){
                     // Transition back to patients page
                     FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.addToBackStack(null);
-                    PatientsFragment fragment = PatientsFragment.newInstance();
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit();
+                    int count = manager.getBackStackEntryCount();
+                    manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
                 } else {
                     // change view back to searching for patient

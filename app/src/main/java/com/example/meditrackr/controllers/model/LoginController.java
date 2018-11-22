@@ -34,6 +34,8 @@ import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.ui.MainActivity;
 
+import java.util.ArrayList;
+
 import es.dmoral.toasty.Toasty;
 
 /**
@@ -59,7 +61,8 @@ public class LoginController {
      * @param activity  the LoginFragments activity
      * @param profile   the profile to be logged in
      */
-    public static void login(Context context, Activity activity, final Profile profile) {
+    public static void login(final Context context, Activity activity, final Profile profile) {
+
 
         // Create new thread execution
         Thread thread = new Thread(new Runnable() {
@@ -77,6 +80,32 @@ public class LoginController {
         });
 
         thread.start(); // Begin thread execution
+
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // hacks
+                Patient patient;
+                if(profile.getisCareProvider()){
+                    CareProvider careProvider = (CareProvider) profile;
+                    PatientList patientList = careProvider.getPatients();
+                    ArrayList<Patient> patients = LazyLoadingManager.getPatients();
+                    for(int i = 0; i < patientList.getSize(); i++){
+                        Profile profileCheck = SaveLoadController.loadProfile(context, patientList.getPatient(i));
+                        if(profileCheck != null){
+                            patient = (Patient) profileCheck;
+                        } else {
+                            patient = (Patient) ElasticSearchController.searchProfile(patientList.getPatient(i));
+                        }
+                        patients.add(patient);
+
+                    }
+                    LazyLoadingManager.setPatients(patients);
+                }
+            }
+        });
+
+        thread.start();
 
         // Set profile with LazyLoadingManager and save profile in memory
         LazyLoadingManager.setProfile(profile);

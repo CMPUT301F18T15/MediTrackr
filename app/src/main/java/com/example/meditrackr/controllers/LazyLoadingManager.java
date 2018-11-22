@@ -25,6 +25,8 @@ import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.ImageSave;
 
+import java.util.ArrayList;
+
 /**
  * LazyLoadingManager.java primary purpose is to assist in lazy loading information, rather than holding
  * every single piece of information about a user at any given moment, each attribute below is
@@ -42,6 +44,7 @@ public class LazyLoadingManager {
     private static Patient carePatient;
     private static int problemIndex;
     private static ImageSave images;
+    private static ArrayList<Patient> patients;
 
 
     /**
@@ -209,5 +212,20 @@ public class LazyLoadingManager {
     public static void setImages(ImageSave images) {
         LazyLoadingManager.images = images;
     }
+
+
+    public static ArrayList<Patient> getPatients() {
+        if (patients != null) {
+            return patients;
+        } else {
+            patients = new ArrayList<>();
+            return patients;
+        }
+    }
+
+    public static void setPatients(ArrayList<Patient> patients) {
+        LazyLoadingManager.patients = patients;
+    }
+
 }
 

@@ -14,6 +14,8 @@ import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
 
+import java.util.ArrayList;
+
 import es.dmoral.toasty.Toasty;
 
 /**
@@ -24,11 +26,14 @@ public class PatientController {
     public static boolean addPatient(Context context, Patient patient){
 
         CareProvider careProvider = LazyLoadingManager.getCareProvider();
+        ArrayList<Patient> patients = LazyLoadingManager.getPatients();
         // If patient does not exist under the care provider
         Log.d("PATIENTIS", "2: "+patient.getUsername());
         if(!careProvider.patientExists(patient.getUsername()) &&
                 !patient.getisCareProvider()) {
             careProvider.addPatient(patient.getUsername()); // Add patient
+            patients.add(patient);
+
 
             // Save both to ES and memory
             ElasticSearchController.updateUser(careProvider);
@@ -44,8 +49,11 @@ public class PatientController {
     }
 
     public static Patient searchPatient(Context context, String username){
-
-        Profile profile = ElasticSearchController.searchProfile(username); // Search for patient
+        Profile profile;
+        profile = SaveLoadController.loadProfile(context, username);
+        if(profile == null) {
+            profile = ElasticSearchController.searchProfile(username); // Search for patient
+        }
 
         if(profile == null){ // If user not found indicate so
             Toasty.warning(context, "User not found", Toast.LENGTH_LONG).show();

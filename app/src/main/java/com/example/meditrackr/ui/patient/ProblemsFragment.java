@@ -34,6 +34,7 @@ import android.widget.ImageView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.patient.ProblemAdapter;
 import com.example.meditrackr.controllers.VerticalSpaceController;
+import com.example.meditrackr.ui.careprovider.PatientsFragment;
 
 /**
  * shows user a list of their created problems in a recycler view.
@@ -98,8 +99,11 @@ public class ProblemsFragment extends Fragment {
             public void onClick(View v) {
                 // Prepares to switch fragments when button is clicked
                 FragmentManager manager = getFragmentManager();
-                int count = manager.getBackStackEntryCount();
-                manager.popBackStack(count - 3, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                FragmentTransaction transaction = manager.beginTransaction();
+                AddProblemFragment fragment = AddProblemFragment.newInstance();
+                transaction.addToBackStack("PROBLEM");
+                transaction.replace(R.id.content, fragment);
+                transaction.commit();
             }
         });
 

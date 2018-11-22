@@ -32,6 +32,9 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.utils.CustomFilter;
+
+import java.util.ArrayList;
 
 /**
  * creates a s search adapter for a user to use. allows user to search for items throughout the app
@@ -46,7 +49,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         // Class objects
         private FragmentActivity activity;
         private Context context;
-        private Patient patient;
+        private ArrayList<CustomFilter> results;
 
         // Constructor
         /**
@@ -54,14 +57,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
          *
          * @author Orest Cokan
          * @version 1.0 Nov 18, 2018
-         * @param activity      the activety that the user is searching from
+         * @param activity      the activity that the user is searching from
          * @param context       the context for the adapter
-         * @param patient       the patient making the search
+         * @param results       the results to show on the screen
          */
-        public SearchAdapter(FragmentActivity activity, Context context, Patient patient) {
+        public SearchAdapter(FragmentActivity activity, Context context, ArrayList<CustomFilter> results) {
             this.activity = activity;
             this.context = context;
-            this.patient = patient;
+            this.results = results;
     }
 
         // Display the view
@@ -75,36 +78,42 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
 
 
-    // Class places each record into its corresponding view
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-         // Class objects
-        //BIND DATA
-        holder.posTxt.setText("Position");
-        holder.nameTxt.setText("Name");
+        // Class places each record into its corresponding view
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            holder.titleTxt.setText(results.get(position).getTitle());
+            holder.descriptionTxt.setText(results.get(position).getDescription());
 
-    }
+            if(results.get(position).isRecord()){
+                holder.typeTxt.setText("Record");
+            }else
+            {
+                holder.typeTxt.setText("Problem");
+            }
+        }
 
-    //GET TOTAL NUM OF PLAYERS
-    // Return the number of records currently in RecyclerView
-    @Override
-    public int getItemCount() {
-        return 10;
-    }
+
+        // Return the number of records currently in RecyclerView
+        @Override
+        public int getItemCount() {
+            return results.size();
+        }
+
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private SearchAdapter adapter;
         private ImageView img;
-        private TextView nameTxt, posTxt;
+        private TextView titleTxt, typeTxt, descriptionTxt;
 
 
         // Constructor and gets the corresponding data for each view
         public ViewHolder(View itemView, final SearchAdapter adapter) {
             super(itemView);
             this.img = (ImageView) itemView.findViewById(R.id.playerImage);
-            this.nameTxt = (TextView) itemView.findViewById(R.id.nameTxt);
-            this.posTxt = (TextView) itemView.findViewById(R.id.posTxt);
+            this.titleTxt = (TextView) itemView.findViewById(R.id.titleText);
+            this.typeTxt = (TextView) itemView.findViewById(R.id.typeText);
+            this.descriptionTxt = (TextView)itemView.findViewById(R.id.descriptionText);
 
             itemView.setOnClickListener(this);
             this.adapter = adapter;

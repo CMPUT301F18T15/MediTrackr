@@ -60,6 +60,62 @@ public class CustomFilter {
 
 
 
+    public boolean isProblem() {
+        return isProblem;
+    }
+
+    public void setProblem(boolean problem) {
+        isProblem = problem;
+    }
+
+    public boolean isRecord() {
+        return isRecord;
+    }
+
+    public void setRecord(boolean record) {
+        isRecord = record;
+    }
+
+    public int getProblemIndex() {
+        return problemIndex;
+    }
+
+    public void setProblemIndex(int problemIndex) {
+        this.problemIndex = problemIndex;
+    }
+
+    public int getRexordIndex() {
+        return rexordIndex;
+    }
+
+    public void setRexordIndex(int rexordIndex) {
+        this.rexordIndex = rexordIndex;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
 
 
 

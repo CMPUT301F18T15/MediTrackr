@@ -97,7 +97,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         // Display each patient's username, email, and phone number in each viewHolder
         holder.patientUsername.setText(patients.get(position).getUsername());
-        // Search for the proper patient to put into each viewHolder
         holder.patientEmail.setText(patients.get(position).getEmail());
         holder.patientPhone.setText(patients.get(position).getPhone());
     }

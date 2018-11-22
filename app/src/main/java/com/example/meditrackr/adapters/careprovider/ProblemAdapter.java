@@ -183,18 +183,15 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition(); // Return position of click in the recycler view
-            // Get the records of the problem clicked
             RecordList records = problems.getProblem(position).getRecords();
-            // Prepare for fragment transaction
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
             LazyLoadingManager.setProblemIndex(position); // Load the problem clicked
             RecordsFragment fragment = RecordsFragment.newInstance(records,
                     problems.getProblem(position).getComments()); // Transition to RecordsFragment
-            // Allows user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
-            transaction.commit(); // Make permanent all changes performed in the transaction
+            transaction.commit();
         }
     }
 }

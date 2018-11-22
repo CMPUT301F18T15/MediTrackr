@@ -37,8 +37,7 @@ import com.example.meditrackr.models.record.ImageSave;
 public class FullScreenViewActivity extends AppCompatActivity{
     // Initialize class objects
     private FullScreenImageAdapter adapter;
-    private ViewPager viewPager;
-    private ImageSave images;
+    protected ImageSave images;
 
 
     // Creates image as view object
@@ -47,7 +46,7 @@ public class FullScreenViewActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fullscreen);
 
-        viewPager = (ViewPager) findViewById(R.id.pager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
         Intent i = getIntent();
         int position = i.getIntExtra("position", 0);

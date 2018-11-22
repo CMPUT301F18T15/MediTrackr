@@ -23,6 +23,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -112,24 +113,6 @@ public class RecordFragment extends Fragment {
         }catch (NullPointerException e){
             Log.d("Images", "size of array is zero, no images");
         }
-
-        // set click listeners for each image to display them in full screen
-//        for (int i = 0; i < 10; ++i) {
-//            final int index = i;
-//            images[i].setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    String record_image = record.getImageSave(index);
-//                    Intent intent = new Intent(getActivity(), FullScreenViewActivity.class);
-//                    ImageSave record_images = new ImageSave();
-//                    record_images.addImage(record_image);
-//                    intent.putExtra("IMAGES", record_images);
-//                    getActivity().startActivity(intent);
-//
-//                }
-//            });
-//
-//        }
 
         return rootView;
     }

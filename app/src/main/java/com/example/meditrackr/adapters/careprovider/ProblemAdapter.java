@@ -162,7 +162,9 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             problemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ImageSave images = adapter.problems.getProblem(getAdapterPosition()).getImageAll();
+                    ImageSave images = problems.getProblem(getAdapterPosition()).getImageAll();
+                    LazyLoadingManager.setImages(images);
+
                     if(images.getSize() == 0){ // Make not clickable if there is no image for the problem
                         problemImage.setClickable(false);
                         problemImage.setVisibility(View.INVISIBLE);

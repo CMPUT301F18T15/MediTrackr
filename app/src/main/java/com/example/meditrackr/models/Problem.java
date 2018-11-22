@@ -25,6 +25,7 @@ package com.example.meditrackr.models;
 
 //imports
 import com.example.meditrackr.models.record.ImageSave;
+import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.models.record.RecordList;
 
 import java.io.Serializable;
@@ -140,6 +141,18 @@ public class Problem implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    /**
+     * gets a record at a specified index
+     *
+     * @author Orest Cokan
+     * @return records      the records of the problem
+     * @see RecordList
+     */
+    public Record getRecord(int index) {
+        return records.getRecord(index);
     }
 
 

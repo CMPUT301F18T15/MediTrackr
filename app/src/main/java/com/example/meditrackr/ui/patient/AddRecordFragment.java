@@ -195,11 +195,10 @@ public class AddRecordFragment extends Fragment implements LocationListener {
 
                     // Transition back to all the records
                     FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    RecordsFragment fragment = RecordsFragment.newInstance(index);
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit(); // Make permanent all changes made in fragment
-                }
+                    int count = manager.getBackStackEntryCount();
+                    manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+            }
             }
         );
 

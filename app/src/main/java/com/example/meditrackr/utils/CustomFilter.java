@@ -28,3 +28,39 @@ import android.widget.Filter;
 /**
  * Crated by Skryt on Nov 18, 2018
  */
+
+public class CustomFilter {
+    private boolean isProblem;
+    private boolean isRecord;
+    private int problemIndex;
+    private int rexordIndex;
+    private String title;
+    private String description;
+    private String date;
+
+
+
+    public CustomFilter(boolean isRecord, String title, String description, String date, int problemIndex){
+        this.isRecord = isRecord;
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.problemIndex = problemIndex;
+        this.rexordIndex = -1;
+    }
+
+    public CustomFilter(boolean isRecord, String title, String description, String date, int problemIndex, int rexordIndex){
+        this.isRecord = isRecord;
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.problemIndex = problemIndex;
+        this.rexordIndex = rexordIndex;
+    }
+
+
+
+
+
+
+}

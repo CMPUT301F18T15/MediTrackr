@@ -98,12 +98,8 @@ public class ProblemsFragment extends Fragment {
             public void onClick(View v) {
                 // Prepares to switch fragments when button is clicked
                 FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.addToBackStack(null);
-                // Switches to AddProblemFragment
-                AddProblemFragment fragment = AddProblemFragment.newInstance();
-                transaction.replace(R.id.content, fragment);
-                transaction.commit(); // Commit any changes
+                int count = manager.getBackStackEntryCount();
+                manager.popBackStack(count - 3, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
 

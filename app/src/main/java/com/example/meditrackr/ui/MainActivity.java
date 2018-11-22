@@ -22,6 +22,7 @@ package com.example.meditrackr.ui;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -170,6 +171,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        FragmentManager manager = getSupportFragmentManager();
+        if(manager.getBackStackEntryCount() > 0){
+            super.onBackPressed();
+        }
+    }
+
     // Sets the home view depending on the kind of user
     public void setHomeView(boolean isCareProvider){
         FragmentManager manager = getSupportFragmentManager();
@@ -210,5 +219,7 @@ public class MainActivity extends AppCompatActivity {
         search.setImageDrawable(getResources().getDrawable(R.drawable.search));
         profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
     }
+
+
 
 }

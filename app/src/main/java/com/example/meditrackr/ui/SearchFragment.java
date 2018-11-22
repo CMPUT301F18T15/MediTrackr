@@ -35,7 +35,14 @@ import android.widget.ImageView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.SearchAdapter;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Problem;
+import com.example.meditrackr.models.record.Record;
+import com.example.meditrackr.utils.CustomFilter;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import br.com.mauker.materialsearchview.MaterialSearchView;
 
@@ -47,8 +54,9 @@ import br.com.mauker.materialsearchview.MaterialSearchView;
 // Class creates search fragment
 public class SearchFragment extends Fragment {
     // Initialize class objects
-    private Patient patient;
+    private Patient patient = LazyLoadingManager.getPatient();
     private SearchView mSearch;
+    private ArrayList<CustomFilter> customFilter = new ArrayList<CustomFilter>();
 
     // Create new frgament instance
     public static SearchFragment newInstance() {
@@ -77,13 +85,43 @@ public class SearchFragment extends Fragment {
 
 
         // Adapt search items into recycler view
-        final SearchAdapter adapter = new SearchAdapter(getActivity(),getContext(), patient);
+        final SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), patient);
         rv.setAdapter(adapter);
 
         // Sets a listener for user text input
         mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                String[] keywords = query.split(" ");
+                for (String keyword : keywords) {
+                    for (int i = 0; i < patient.getProblems().getSize(); i++) {
+                        Problem problem = patient.getProblem(i);
+                        if (problem.getDescription().contains(keyword)
+                                || problem.getTitle().contains(keyword)) {
+                            CustomFilter filter = new CustomFilter(false,
+                                    problem.getTitle(),
+                                    problem.getDescription(),
+                                    problem.getDate(),
+                                    i);
+                            customFilter.add(filter);
+                        }
+                        for (int j = 0; j < problem.getRecords().getSize(); j++) {
+                            Record record = problem.getRecord(j);
+                            if (record.getDescription().contains(keyword)
+                                    || record.getTitle().contains(keyword)) {
+                                CustomFilter filter = new CustomFilter(true,
+                                        record.getTitle(),
+                                        record.getDescription(),
+                                        record.getDate(),
+                                        j);
+                                customFilter.add(filter);
+
+                            }
+                        }
+
+                    }
+                }
+
                 return false;
             }
 
@@ -96,4 +134,7 @@ public class SearchFragment extends Fragment {
         return rootView;
     }
 }
+
+
+
 

@@ -196,7 +196,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
                     // Transition back to all the records
                     FragmentManager manager = getFragmentManager();
                     int count = manager.getBackStackEntryCount();
-                    manager.popBackStack(count - 3, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
             }
             }

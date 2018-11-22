@@ -101,7 +101,7 @@ public class ProblemsFragment extends Fragment {
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 AddProblemFragment fragment = AddProblemFragment.newInstance();
-                transaction.addToBackStack("PROBLEM");
+                transaction.addToBackStack(null);
                 transaction.replace(R.id.content, fragment);
                 transaction.commit();
             }

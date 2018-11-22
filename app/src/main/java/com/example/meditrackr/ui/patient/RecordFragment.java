@@ -23,6 +23,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -112,7 +113,6 @@ public class RecordFragment extends Fragment {
         }catch (NullPointerException e){
             Log.d("Images", "size of array is zero, no images");
         }
-
 
         return rootView;
     }

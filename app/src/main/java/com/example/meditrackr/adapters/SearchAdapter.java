@@ -24,6 +24,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Profile;
+import com.example.meditrackr.models.record.Record;
+import com.example.meditrackr.ui.patient.ProblemsFragment;
+import com.example.meditrackr.ui.patient.RecordFragment;
+import com.example.meditrackr.ui.patient.RecordsFragment;
 import com.example.meditrackr.utils.CustomFilter;
 
 import java.util.ArrayList;
@@ -121,16 +128,37 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
 
 
-        // Set onClick listener for each problem to be viewed
+        // onclick listener for each problem to be viewed
+        // this onclick listener is gods work
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
-            //RecordsFragment fragment = RecordsFragment.newInstance();
-            //transaction.addToBackStack(null);
-            //transaction.replace(R.id.content, fragment);
-            //transaction.commit();
+            Profile profile = LazyLoadingManager.getProfile();
+            if(!profile.getisCareProvider()){
+                Patient patient = (Patient) profile;
+                CustomFilter filter = adapter.results.get(position);
+
+                // going in as a PATIENT
+                if(adapter.results.get(position).isRecord()){
+                    Record record = patient.getProblem(filter.getProblemIndex())
+                            .getRecord(filter.getRexordIndex());
+                    RecordFragment fragment = RecordFragment.newInstance(record);
+                    transaction.addToBackStack(null);
+                    transaction.replace(R.id.content, fragment);
+                    transaction.commit();
+                } else {
+                    RecordsFragment fragment = RecordsFragment.newInstance(filter.getProblemIndex());
+                    transaction.addToBackStack(null);
+                    transaction.replace(R.id.content, fragment);
+                    transaction.commit();
+
+
+                }
+            } else { // going in as a doctor
+
+            }
         }
     }
 }

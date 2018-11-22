@@ -78,7 +78,7 @@ public class AddProblemFragment extends Fragment {
         final EditText dateSelector = (EditText) rootView.findViewById(R.id.problem_date_selector);
         final EditText description = (EditText) rootView.findViewById(R.id.problem_description_field);
         final Button addButton = (Button) rootView.findViewById(R.id.problem_add_button);
-        final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d yyyy", Locale.CANADA);
+        final SimpleDateFormat format = new SimpleDateFormat("EEE MMM d yyyy", Locale.CANADA);
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
 
 
@@ -137,10 +137,8 @@ public class AddProblemFragment extends Fragment {
 
                     // Transition back to ProblemsFragment after adding
                     FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    ProblemsFragment fragment = ProblemsFragment.newInstance(); // Switch to ProblemsFragment
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit(); // Make permanent any changes made in fragment
+                    int count = manager.getBackStackEntryCount();
+                    manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 }
             }
         });

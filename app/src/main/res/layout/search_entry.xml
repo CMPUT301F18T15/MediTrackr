@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:layout_margin="5dp"
@@ -42,16 +43,16 @@
             android:text="Position"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/black"
-            card_view:layout_constraintBottom_toBottomOf="@+id/playerImage"
-            card_view:layout_constraintRight_toRightOf="parent" />
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/descriptionText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="53dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
-            card_view:layout_constraintEnd_toEndOf="@+id/titleText"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/titleText" />
 

@@ -99,6 +99,9 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                customFilter = parseText(newText);
+                SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter);
+                rv.setAdapter(adapter);
                 return false;
             }
         });
@@ -130,6 +133,7 @@ public class SearchFragment extends Fragment {
                                 record.getTitle(),
                                 record.getDescription(),
                                 record.getDate(),
+                                i,
                                 j);
                         customFilter.add(filter);
 

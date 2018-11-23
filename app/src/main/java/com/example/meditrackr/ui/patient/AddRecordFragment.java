@@ -95,6 +95,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
     private static final String TAG = "AddRecordFragment";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final String CAMERA = Manifest.permission.CAMERA;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final int IMAGE_REQUEST_CODE = 2;
     private static final int PLACE_PICKER_REQUEST = 4;
@@ -102,13 +103,13 @@ public class AddRecordFragment extends Fragment implements LocationListener {
     // Initialize variables
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private Boolean mLocationPermissionsGranted = false;
+    private Boolean cameraPermission = false;
     public LocationManager locationManager;
     public Criteria criteria;
     public String bestProvider;
 
 
     // Image variables
-    private Bitmap bitmap;
     private ImageView[] images = new ImageView[10];
     private Bitmap[] bitmaps = new Bitmap[10];
 
@@ -143,7 +144,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
          * GET LOCATION PERMISSIONS
          *--------------------------------------------------------------------------*/
 
-        getLocationPermission();
+        getPermissions();
         if(mLocationPermissionsGranted){
             getDeviceLocation();
         }
@@ -210,13 +211,16 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (bitmaps[9] == null){
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,
-                        IMAGE_REQUEST_CODE);
-            } else {
-                Toasty.error(getContext(), "Unable to add more than 10 photos!"
-                        , Toast.LENGTH_SHORT).show();
+                getPermissions();
+                if (cameraPermission) {
+                    if (bitmaps[9] == null) {
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(intent,
+                                IMAGE_REQUEST_CODE);
+                    } else {
+                        Toasty.error(getContext(), "Unable to add more than 10 photos!"
+                                , Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -260,9 +264,8 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         record.setGeoLocation(geolocation);
         for(Bitmap bitmap: bitmaps){ // For each image
             if(bitmap != null) { // If image is not null convert image into base64 string
-                String imageSave = ConvertImage.base64Encode(bitmap);
-                Log.d("TestImage", imageSave);
-                record.getImagesSave().addImage(imageSave); // Save each image to record
+                byte[] byteArray = ConvertImage.convertBitmapToBytes(bitmap);
+                record.getImagesSave().addImage(byteArray); // Save each image to record
             }
         }
 
@@ -281,33 +284,22 @@ public class AddRecordFragment extends Fragment implements LocationListener {
             // Allows intent to extract image taken by phone's camera
             getActivity();
             Bitmap bmp = (Bitmap) data.getExtras().get("data");
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-            // Makes sure that bitmap is not null before compressing the bitmap into PNG format
             assert bmp != null;
-            bmp.compress(Bitmap.CompressFormat.PNG, 40, stream);
-            // Put compress format array into byte array
-            byte[] byteArray = stream.toByteArray();
 
-            // Convert byte array to Bitmap
-            bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
-                    byteArray.length);
-            String encoded = ConvertImage.base64Encode(bitmap);
-
-
-            //TODO PART 5, IMPLEMENT COMPRESSION OF PHOTOS
+            byte[] byteArray = ConvertImage.convertBitmapToBytes(bmp);
 
             // Populate image
             for(int i = 0; i < bitmaps.length; i++){
                 if(bitmaps[i] == null){
-                    Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 425, false);
-                    bitmaps[i] = newBitmap;
-                    images[i].setImageBitmap(newBitmap);
+                    bitmaps[i] = bmp;
+                    images[i].setImageBitmap(bmp);
                     break;
                 }
             }
-            Log.d("ImageTest", bitmap.toString());
         }
+
+
+
         // Allows intent to pick a place location
         else if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
             place = PlacePicker.getPlace(data, getContext());
@@ -325,63 +317,70 @@ public class AddRecordFragment extends Fragment implements LocationListener {
     }
 
     /**************************************************************************
-     * GEO-LOCATION PERMISSIONS
+     * GEO-LOCATION/CAMERA PERMISSIONS
      **************************************************************************/
 
     // Ask the user for permission to use the location services
-    private void getLocationPermission(){
+    private void getPermissions() {
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION};
+                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA};
         // If app has permission to access a precise location
-        if(ContextCompat.checkSelfPermission(getContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(getContext(),
+                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // If app has permission to access an approximate location
-            if(ContextCompat.checkSelfPermission(getContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            if (ContextCompat.checkSelfPermission(getContext(),
+                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 // Then all location permissions are considered granted
                 mLocationPermissionsGranted = true;
                 Log.d("LocationMeme", "do we get here");
-            }else{ // Else request for approximate location permission
+                if (ContextCompat.checkSelfPermission(getContext(), CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    cameraPermission = true;
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(), permissions, IMAGE_REQUEST_CODE);
+                }
+            } else { // Else request for approximate location permission
                 ActivityCompat.requestPermissions(getActivity(),
                         permissions,
                         LOCATION_PERMISSION_REQUEST_CODE);
             }
-        }else{ // Else request for precise location permission
+        } else { // Else request for precise location permission
             ActivityCompat.requestPermissions(getActivity(),
                     permissions,
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
 
-    // Returns the result of permission request
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.d(TAG, "onRequestPermissionsResult: called.");
-        // In order check whether permission is granted always set permission granted to false beforehand
-        mLocationPermissionsGranted = false;
+        // Returns the result of permission request
+        @Override
+        public void onRequestPermissionsResult ( int requestCode, @NonNull String[] permissions,
+        @NonNull int[] grantResults){
+            Log.d(TAG, "onRequestPermissionsResult: called.");
+            // In order check whether permission is granted always set permission granted to false beforehand
+            mLocationPermissionsGranted = false;
 
-        switch(requestCode){
-            // Check if permission is granted or denied
-            case LOCATION_PERMISSION_REQUEST_CODE:{
-                if(grantResults.length > 0){
-                    for(int i = 0; i < grantResults.length; i++){
-                        // If grantResults do not match up with permission granted code then permission is denied
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
-                            mLocationPermissionsGranted = false;
-                            Log.d(TAG, "onRequestPermissionsResult: permission failed");
-                            return;
+            switch (requestCode) {
+                // Check if permission is granted or denied
+                case LOCATION_PERMISSION_REQUEST_CODE: {
+                    if (grantResults.length > 0) {
+                        for (int i = 0; i < grantResults.length; i++) {
+                            // If grantResults do not match up with permission granted code then permission is denied
+                            if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                                mLocationPermissionsGranted = false;
+                                Log.d(TAG, "onRequestPermissionsResult: permission failed");
+                                return;
+                            }
                         }
+                        // If grantResults match with permission granted code then permission is granted
+                        Log.d(TAG, "onRequestPermissionsResult: permission granted");
+                        mLocationPermissionsGranted = true;
+                        // Initialize our map
+                        getDeviceLocation();
                     }
-                    // If grantResults match with permission granted code then permission is granted
-                    Log.d(TAG, "onRequestPermissionsResult: permission granted");
-                    mLocationPermissionsGranted = true;
-                    // Initialize our map
-                    getDeviceLocation();
                 }
             }
         }
-    }
+
 
     // Gets device's location
     private void getDeviceLocation(){

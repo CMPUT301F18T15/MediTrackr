@@ -61,7 +61,7 @@ public class RecordController {
         // Make sure all the images are properly added
         // to the patient's list for saving and restoring
         for (int i = 0; i < record.getImagesSave().getSize(); ++i) {
-            String imageSave = record.getImagesSave().getImage(i);
+            byte[] imageSave = record.getImagesSave().getImage(i);
             patient.getProblem(position).getImageAll().addImage(imageSave);
         }
 

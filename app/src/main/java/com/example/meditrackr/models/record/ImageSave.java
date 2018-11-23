@@ -36,7 +36,7 @@ import java.util.ArrayList;
  * @version 1.0 Nov 14, 2018
  */
 public class ImageSave implements Serializable {
-    private ArrayList<String> imagesString = new ArrayList<>();
+    private ArrayList<byte[]> imagesString = new ArrayList<>();
 
     /**
      * Adds an image to the list.
@@ -44,7 +44,7 @@ public class ImageSave implements Serializable {
      * @author Orest Cokan
      * @param newImage the image we want to add
      */
-    public void addImage(String newImage) {
+    public void addImage(byte[] newImage) {
         imagesString.add(newImage);
     }
 
@@ -72,7 +72,7 @@ public class ImageSave implements Serializable {
      * @author Orest Cokan
      * @param image the index of the image we want to check
      */
-    public Boolean imageExists(String image){
+    public Boolean imageExists(byte[] image){
         return imagesString.contains(image);
     }
 
@@ -83,7 +83,7 @@ public class ImageSave implements Serializable {
      * @author Orest Cokan
      * @param image the image we want to get the index of
      */
-    public int getIndex(String image){
+    public int getIndex(byte[] image){
         return imagesString.indexOf(image);
     }
 
@@ -104,7 +104,7 @@ public class ImageSave implements Serializable {
      * @author Orest Cokan
      * @param index the index of image we want to find
      */
-    public String getImage(int index){
+    public byte[] getImage(int index){
         return imagesString.get(index);
     }
 

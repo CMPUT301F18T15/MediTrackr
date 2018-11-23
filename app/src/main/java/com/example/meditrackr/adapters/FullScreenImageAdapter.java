@@ -93,9 +93,9 @@ import com.example.meditrackr.utils.ConvertImage;
             // Each pixel in a bitmap image will be stored on 4 bytes
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             // Get byte array of the image
-            String image = images.getImage(position);
+            byte[] image = images.getImage(position);
             // Convert a Base64 String into an image
-            imgDisplay.setImageBitmap(ConvertImage.base64Decode(image));
+            imgDisplay.setImageBitmap(ConvertImage.convertByteToBitmap(image));
 
             ((ViewPager) container).addView(viewLayout);
 

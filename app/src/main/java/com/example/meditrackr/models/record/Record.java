@@ -268,7 +268,7 @@ public class Record implements Serializable {
      * @param index  the index of the desired image
      * @return       an image from the imagesSave list
      */
-    public String getImageSave(int index){
+    public byte[] getImageSave(int index){
         return imagesSave.getImage(index);
     }
 

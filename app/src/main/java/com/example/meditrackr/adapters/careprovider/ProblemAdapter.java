@@ -106,7 +106,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             holder.problemImage.setImageBitmap(null); // If the problem does not have any images set image to null
             Log.d("ImageTest", "New profile this should be shown!");
         }else { // Else show image pertaining to the problem
-            holder.problemImage.setImageBitmap(ConvertImage.base64Decode(
+            holder.problemImage.setImageBitmap(ConvertImage.convertByteToBitmap(
                     problems.getProblem(position).getImageAll().getImage(0)));
         }
     }

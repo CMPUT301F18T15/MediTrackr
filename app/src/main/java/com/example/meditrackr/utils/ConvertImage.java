@@ -57,7 +57,7 @@ public class ConvertImage {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);  // Compress image to PNG format
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        Log.d("BITMAP", encoded.getBytes().length + "");
+        Log.d("BITMAPSAVE", encoded.getBytes().length + "");
         return encoded;
     }
 
@@ -84,11 +84,28 @@ public class ConvertImage {
      */
     // Take a bitmap image and convert it into a byte array
     public static byte[] convertBitmapToBytes(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        return byteArray;
+        int maxSize = 65536;
+        int compressQuality = 100;
+        int streamLength = maxSize;
+        byte[] bmpPicByteArray = new byte[10];
 
+        while (streamLength >= maxSize) { // While image length is larger than desired length
+            compressQuality -= 1;
+            ByteArrayOutputStream bmpStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream);
+            Log.d("COMPRESSION", ""+compressQuality);
+            bmpPicByteArray = bmpStream.toByteArray(); // Transfer bytes into bytearray
+            streamLength = bmpPicByteArray.length;
+            Log.d("COMPRESSION", ""+bmpPicByteArray.length);
+
+        }
+        return bmpPicByteArray;
     }
 
+
+    public static Bitmap convertByteToBitmap(byte[] bytes){
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        return bitmap;
+
+    }
 }

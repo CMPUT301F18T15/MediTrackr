@@ -106,8 +106,8 @@ public class RecordFragment extends Fragment {
 
         // Populate with images
         try {
-            for (int i = 0; i < record.getImagesSave().getSize(); i++) {
-                Bitmap bitmap = ConvertImage.convertByteToBitmap(record.getImageSave(i));
+            for (int i = 0; i < record.getImages().getSize(); i++) {
+                Bitmap bitmap = ConvertImage.convertByteToBitmap(record.getImages().getImage(i));
                 images[i].setImageBitmap(bitmap);
             }
         }catch (NullPointerException e){

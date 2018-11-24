@@ -123,7 +123,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
     private Address address;
 
 
-    // Maps index arguements into bundle
+    // Maps index arguments into bundle
     public static AddRecordFragment newInstance(int index) {
         AddRecordFragment fragment = new AddRecordFragment();
         Bundle bundle = new Bundle();
@@ -265,7 +265,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         for(Bitmap bitmap: bitmaps){ // For each image
             if(bitmap != null) { // If image is not null convert image into base64 string
                 byte[] byteArray = ConvertImage.convertBitmapToBytes(bitmap);
-                record.getImagesSave().addImage(byteArray); // Save each image to record
+                record.getImages().addImage(byteArray); // Save each image to record
             }
         }
 
@@ -285,14 +285,14 @@ public class AddRecordFragment extends Fragment implements LocationListener {
             getActivity();
             Bitmap bmp = (Bitmap) data.getExtras().get("data");
             assert bmp != null;
-
-            byte[] byteArray = ConvertImage.convertBitmapToBytes(bmp);
+            Log.d("BMP", bmp.getHeight()+"   " +bmp.getWidth()+"");
 
             // Populate image
             for(int i = 0; i < bitmaps.length; i++){
                 if(bitmaps[i] == null){
-                    bitmaps[i] = bmp;
-                    images[i].setImageBitmap(bmp);
+                    Bitmap newBitmap = Bitmap.createScaledBitmap(bmp,350, 425, false);
+                    bitmaps[i] = newBitmap;
+                    images[i].setImageBitmap(newBitmap);
                     break;
                 }
             }

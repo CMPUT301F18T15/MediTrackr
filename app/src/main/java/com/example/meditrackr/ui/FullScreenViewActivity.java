@@ -27,7 +27,10 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.FullScreenImageAdapter;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.models.record.ImageSave;
+import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.Profile;
+import com.example.meditrackr.models.record.PhotoList;
+import com.example.meditrackr.models.record.RecordList;
 
 /**
  * Crated by Skryt on Nov 17, 2018
@@ -37,7 +40,9 @@ import com.example.meditrackr.models.record.ImageSave;
 public class FullScreenViewActivity extends AppCompatActivity{
     // Initialize class objects
     private FullScreenImageAdapter adapter;
-    protected ImageSave images;
+    protected PhotoList images;
+    private Profile profile;
+    private Patient patient;
 
 
     // Creates image as view object
@@ -48,10 +53,17 @@ public class FullScreenViewActivity extends AppCompatActivity{
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
-        Intent i = getIntent();
-        int position = i.getIntExtra("position", 0);
-        // Load image
-        images = LazyLoadingManager.getImages();
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("position", 0);
+
+        profile = LazyLoadingManager.getProfile();
+        if(profile.getisCareProvider()){
+            //
+        }else{
+            patient = (Patient) profile;
+        }
+
+        images = patient.getProblem(position).getImageAll();
 
         // Adapt images to fullscreen
         adapter = new FullScreenImageAdapter(FullScreenViewActivity.this,

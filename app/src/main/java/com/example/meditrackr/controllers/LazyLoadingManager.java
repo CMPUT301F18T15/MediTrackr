@@ -23,7 +23,7 @@ import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
-import com.example.meditrackr.models.record.ImageSave;
+import com.example.meditrackr.models.record.PhotoList;
 
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public class LazyLoadingManager {
     private static Profile profile;
     private static Patient carePatient;
     private static int problemIndex;
-    private static ImageSave images;
+    private static PhotoList images;
     private static ArrayList<Patient> patients;
 
 
@@ -198,7 +198,7 @@ public class LazyLoadingManager {
      * @return images the profile that it retrieved
      */
     // Gets the profile's images
-    public static ImageSave getImages() {
+    public static PhotoList getImages() {
         return images;
     }
 
@@ -209,7 +209,7 @@ public class LazyLoadingManager {
      * @author Orest Cokan
      */
     // Sets the profile's images
-    public static void setImages(ImageSave images) {
+    public static void setImages(PhotoList images) {
         LazyLoadingManager.images = images;
     }
 

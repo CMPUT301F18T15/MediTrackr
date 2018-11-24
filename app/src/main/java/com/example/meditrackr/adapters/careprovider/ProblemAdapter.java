@@ -35,7 +35,7 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.ProblemList;
-import com.example.meditrackr.models.record.ImageSave;
+import com.example.meditrackr.models.record.PhotoList;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.FullScreenViewActivity;
 import com.example.meditrackr.ui.careprovider.RecordsFragment;
@@ -162,7 +162,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             problemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ImageSave images = problems.getProblem(getAdapterPosition()).getImageAll();
+                    PhotoList images = problems.getProblem(getAdapterPosition()).getImageAll();
                     LazyLoadingManager.setImages(images);
 
                     if(images.getSize() == 0){ // Make not clickable if there is no image for the problem

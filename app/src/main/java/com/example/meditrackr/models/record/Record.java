@@ -32,14 +32,13 @@ import java.io.Serializable;
  * 0 to 10 images, a timestamp (date), a description, a title, a geolocation
  * and a body location.
  *
- * Records have a RecordPhotoList, an ImageSave (list of string photo names
+ * Records have a PhotoList, an ImageSave (list of string photo names
  * for storage), a BodyLocation and a Geolocation.
  *
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
- * @see RecordPhotoList
- * @see ImageSave
+ * @see PhotoList
  * @see BodyLocation
  * @see Geolocation
  */
@@ -47,8 +46,7 @@ import java.io.Serializable;
 public class Record implements Serializable {
 
     // Initialize class variables
-    private RecordPhotoList images = new RecordPhotoList();
-    private ImageSave imagesSave = new ImageSave();
+    private PhotoList images = new PhotoList();
     private String date;
     private String description;
     private String title;
@@ -86,9 +84,11 @@ public class Record implements Serializable {
      * @author  Orest Cokan
      * @return  images to add to the record
      */
-    public RecordPhotoList getImages() {
+    public PhotoList getImages() {
         return images;
     }
+
+
 
 
     /**
@@ -96,9 +96,9 @@ public class Record implements Serializable {
      *
      * @author  Orest Cokan
      * @param images images to add to the record
-     * @see RecordPhotoList
+     * @see PhotoList
      */
-    public void setImages(RecordPhotoList images) {
+    public void setImages(PhotoList images) {
         this.images = images;
     }
 
@@ -249,39 +249,6 @@ public class Record implements Serializable {
     }
 
 
-    /**
-     * Gets the list of images (string representations) belonging to
-     * the record.
-     *
-     * @author Orest Cokan
-     * @return imagesSave     a list of images belonging to the record
-     */
-    public ImageSave getImagesSave() {
-        return imagesSave;
-    }
-
-
-    /**
-     * Retrieves an image from the ImageSave list by index.
-     *
-     * @author Orest Cokan
-     * @param index  the index of the desired image
-     * @return       an image from the imagesSave list
-     */
-    public byte[] getImageSave(int index){
-        return imagesSave.getImage(index);
-    }
-
-
-    /**
-     * Adds a new image list to the record.
-     *
-     * @author  Orest Cokan
-     * @param imageSave      a list of string images to add to the record
-     */
-    public void setImageSave(ImageSave imageSave) {
-        this.imagesSave = imageSave;
-    }
 
 
 }

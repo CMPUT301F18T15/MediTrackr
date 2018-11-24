@@ -30,7 +30,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * RecordPhotoList: A list of photos (Bitmap objects) for a record.
+ * PhotoList: A list of photos (Bitmap objects) for a record.
  *
  * Allows adding and removing elements (by both index and bitmap),
  * checking if a Bitmap object exists in the array and retrieving the
@@ -39,14 +39,14 @@ import java.util.ArrayList;
  * @author Orest Cokan
  * @version 1.0 Nov 13, 2018
  */
-public class RecordPhotoList implements Serializable {
+public class PhotoList implements Serializable {
 
     // creates an array of Bitmap images
     private  ArrayList<byte[]> images = new ArrayList<>();
 
 
     /**
-     * Adds an image to the RecordPhotoList.
+     * Adds an image to the PhotoList.
      *
      * @author Orest Cokan
      * @param newImage  the image to be added
@@ -58,7 +58,7 @@ public class RecordPhotoList implements Serializable {
 
 
     /**
-     * Removes an image from the RecordPhotoList.
+     * Removes an image from the PhotoList.
      *
      * @author Orest Cokan
      * @param image     the image we want to remove
@@ -85,7 +85,7 @@ public class RecordPhotoList implements Serializable {
 
 
     /**
-     * Gets the index of an Bitmap image object from the RecordPhotoList.
+     * Gets the index of an Bitmap image object from the PhotoList.
      *
      * @author Orest Cokan
      * @param image     the image whose index we want to retrieve
@@ -97,7 +97,7 @@ public class RecordPhotoList implements Serializable {
 
 
     /**
-     * Gets the number of photos in the RecordPhotoList.
+     * Gets the number of photos in the PhotoList.
      *
      * @author Orest Cokan
      * @return      the size of the list of images

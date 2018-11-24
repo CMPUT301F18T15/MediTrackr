@@ -22,7 +22,7 @@ package com.example.meditrackr;
 //imports
 import android.graphics.Bitmap;
 
-import com.example.meditrackr.models.record.RecordPhotoList;
+import com.example.meditrackr.models.record.PhotoList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,19 +31,19 @@ import static org.junit.Assert.*;
 
 
 /**
- * RecordPhotoList Unit Tests
+ * PhotoList Unit Tests
  */
 
 public class ImageListTest {
-    private RecordPhotoList imageList;
+    private PhotoList imageList;
     private Bitmap image;
 
     public ImageListTest() {}
 
-    // Set an initial null bitmap and an empty RecordPhotoList
+    // Set an initial null bitmap and an empty PhotoList
     @Before
     public void initImageList() {
-        imageList = new RecordPhotoList();
+        imageList = new PhotoList();
         final byte[] colours = {10, 10, 10};
         image = null;
     }
@@ -51,7 +51,7 @@ public class ImageListTest {
     // test if recordPhotoList is first set to empty
     @Test
     public void constructorTest() {
-        RecordPhotoList list = new RecordPhotoList();
+        PhotoList list = new PhotoList();
         assertTrue(list.getSize() == 0); // is the list first empty
     }
 

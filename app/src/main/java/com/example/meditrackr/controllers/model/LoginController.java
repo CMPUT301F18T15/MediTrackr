@@ -89,7 +89,7 @@ public class LoginController {
                 if(profile.getisCareProvider()){
                     CareProvider careProvider = (CareProvider) profile;
                     PatientList patientList = careProvider.getPatients();
-                    ArrayList<Patient> patients = LazyLoadingManager.getPatients();
+                    ArrayList<Patient> patients = new ArrayList<>();
                     for(int i = 0; i < patientList.getSize(); i++){
                         Profile profileCheck = SaveLoadController.loadProfile(context, patientList.getPatient(i));
                         if(profileCheck != null){

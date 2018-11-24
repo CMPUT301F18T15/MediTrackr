@@ -19,6 +19,8 @@
 package com.example.meditrackr.ui;
 
 //imports
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -49,5 +51,17 @@ public class LoginActivity extends AppCompatActivity {
         transaction.replace(R.id.content, fragment);
         // Make permanent any changes
         transaction.commit();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onBackPressed() {
+        FragmentManager manager = getSupportFragmentManager();
+        if(manager.getBackStackEntryCount() == 0) {
+            finishAffinity();
+        }else{
+            super.onBackPressed();
+        }
+
     }
 }

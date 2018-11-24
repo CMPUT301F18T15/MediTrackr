@@ -134,12 +134,16 @@ public class AddRecordFragment extends Fragment{
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
         boolean done = controller.canGetLocation();
         final int index = getArguments().getInt("INDEX");
+
+
         if(done){
-            longitude = controller.getLongitude();
-            latitude = controller.getLatitude();
-            addressName = controller.geoLocate();
-            addressView.setText(addressName);
-            Log.d("debugMAPS", "long: " + longitude + " lat: " + latitude + "name: " + addressName);
+            for(int i = 0; i < 10; i++) {
+                longitude = controller.getLongitude();
+                latitude = controller.getLatitude();
+                addressName = controller.geoLocate();
+                addressView.setText(addressName);
+                Log.d("debugMAPS", "long: " + longitude + " lat: " + latitude + "name: " + addressName);
+            }
         }
 
 

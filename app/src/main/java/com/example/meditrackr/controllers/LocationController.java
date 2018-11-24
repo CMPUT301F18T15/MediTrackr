@@ -257,7 +257,7 @@ public class LocationController extends Service implements LocationListener {
                     Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-        return "failed";
+        return "";
     }
 
     /**

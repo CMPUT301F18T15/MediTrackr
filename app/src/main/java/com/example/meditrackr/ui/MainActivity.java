@@ -175,7 +175,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         FragmentManager manager = getSupportFragmentManager();
-        if(manager.getBackStackEntryCount() > 0){
+        if(manager.getBackStackEntryCount() == 0) {
+            finishAffinity();
+            System.exit(0);
+        }else{
             super.onBackPressed();
         }
     }

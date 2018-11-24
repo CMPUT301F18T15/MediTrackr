@@ -36,8 +36,7 @@ import static org.junit.Assert.*;
 
 public class ImageListTest {
     private PhotoList imageList;
-    private Bitmap image;
-
+    private byte[] image = {12,12,12};
     public ImageListTest() {}
 
     // Set an initial null bitmap and an empty PhotoList
@@ -91,7 +90,7 @@ public class ImageListTest {
     public void imageListSizeTest() {
         imageList.addImage(image);
 
-        final Bitmap tempImage = null;
+        final byte[] tempImage = null;
         imageList.addImage(tempImage);
 
         assertEquals("Incorrect number of elements in Image List",

@@ -91,10 +91,14 @@ public class LoginController {
                     PatientList patientList = careProvider.getPatients();
                     ArrayList<Patient> patients = new ArrayList<>();
                     for(int i = 0; i < patientList.getSize(); i++){
+                        Log.d("THREADMEMESS", patientList.getPatient(i)+"");
                         Profile profileCheck = SaveLoadController.loadProfile(context, patientList.getPatient(i));
                         if(profileCheck != null){
                             patient = (Patient) profileCheck;
+                            Log.d("THREADMEMESS", "mem");
+
                         } else {
+                            Log.d("THREADMEMESS", "es");
                             patient = (Patient) ElasticSearchController.searchProfile(patientList.getPatient(i));
                         }
                         patients.add(patient);

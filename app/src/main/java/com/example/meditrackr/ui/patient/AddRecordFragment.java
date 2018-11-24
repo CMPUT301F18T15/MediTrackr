@@ -55,6 +55,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
+import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.model.RecordController;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
@@ -88,26 +89,12 @@ import static android.app.Activity.RESULT_OK;
  */
 
 // Class creates Add Record Fragment for patients
-public class AddRecordFragment extends Fragment implements LocationListener {
+public class AddRecordFragment extends Fragment{
     private String date;
 
     // Indicators and request codes
-    private static final String TAG = "AddRecordFragment";
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final String CAMERA = Manifest.permission.CAMERA;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final int IMAGE_REQUEST_CODE = 2;
     private static final int PLACE_PICKER_REQUEST = 4;
-
-    // Initialize variables
-    private FusedLocationProviderClient mFusedLocationProviderClient;
-    private Boolean mLocationPermissionsGranted = false;
-    private Boolean cameraPermission = false;
-    public LocationManager locationManager;
-    public Criteria criteria;
-    public String bestProvider;
-
 
     // Image variables
     private ImageView[] images = new ImageView[10];
@@ -120,7 +107,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
     private String addressName;
     private Place place;
     private TextView addressView;
-    private Address address;
+
 
 
     // Maps index arguments into bundle
@@ -140,19 +127,21 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_record, container, false);
 
-        /*---------------------------------------------------------------------------
-         * GET LOCATION PERMISSIONS
-         *--------------------------------------------------------------------------*/
 
-        getPermissions();
-        if(mLocationPermissionsGranted){
-            getDeviceLocation();
+        LocationController controller = new LocationController(getContext());
+
+        // Initialize address and set it
+        addressView = (TextView) rootView.findViewById(R.id.addresss_field);
+        boolean done = controller.canGetLocation();
+        final int index = getArguments().getInt("INDEX");
+        if(done){
+            longitude = controller.getLongitude();
+            latitude = controller.getLatitude();
+            addressName = controller.geoLocate();
+            addressView.setText(addressName);
+            Log.d("debugMAPS", "long: " + longitude + " lat: " + latitude + "name: " + addressName);
         }
 
-        // Index of problem we are adding record to
-        final int index = getArguments().getInt("INDEX");
-
-        // nifty location controller that helps with getting locations
 
         /*---------------------------------------------------------------------------
          * INITIALIZE UI COMPONENTS
@@ -165,6 +154,7 @@ public class AddRecordFragment extends Fragment implements LocationListener {
 
         // Initialize address and set it
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
+
 
         // Set date
         date = DateUtils.formatAppTime();
@@ -189,9 +179,6 @@ public class AddRecordFragment extends Fragment implements LocationListener {
             public void onClick(View v) {
                     // Create the new record
                     Record record = createRecord(recordTitle, recordDescription);
-
-                    // Pass the record to the record controller so it can be added to the
-                    // patient's profile and saved both locally and to ElasticSearch
                     RecordController.addRecord(getContext(), record, index);
 
                     // Transition back to all the records
@@ -211,19 +198,17 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getPermissions();
-                if (cameraPermission) {
-                    if (bitmaps[9] == null) {
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent,
-                                IMAGE_REQUEST_CODE);
-                    } else {
-                        Toasty.error(getContext(), "Unable to add more than 10 photos!"
-                                , Toast.LENGTH_SHORT).show();
-                    }
+                if (bitmaps[9] == null) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent,
+                            IMAGE_REQUEST_CODE);
+                } else {
+                    Toasty.error(getContext(), "Unable to add more than 10 photos!"
+                            , Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
 
 
         /*---------------------------------------------------------------------------
@@ -298,8 +283,6 @@ public class AddRecordFragment extends Fragment implements LocationListener {
             }
         }
 
-
-
         // Allows intent to pick a place location
         else if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
             place = PlacePicker.getPlace(data, getContext());
@@ -312,176 +295,9 @@ public class AddRecordFragment extends Fragment implements LocationListener {
             LatLng latLng = place.getLatLng();
             latitude = latLng.latitude;
             longitude = latLng.longitude;
+            Log.d("debugMAPS", "long: " + longitude + " lat: " + latitude + "name: " + addressName);
             Toasty.info(getContext(), toastMsg, Toast.LENGTH_LONG).show();
         }
     }
 
-    /**************************************************************************
-     * GEO-LOCATION/CAMERA PERMISSIONS
-     **************************************************************************/
-
-    // Ask the user for permission to use the location services
-    private void getPermissions() {
-        Log.d(TAG, "getLocationPermission: getting location permissions");
-        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA};
-        // If app has permission to access a precise location
-        if (ContextCompat.checkSelfPermission(getContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // If app has permission to access an approximate location
-            if (ContextCompat.checkSelfPermission(getContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                // Then all location permissions are considered granted
-                mLocationPermissionsGranted = true;
-                Log.d("LocationMeme", "do we get here");
-                if (ContextCompat.checkSelfPermission(getContext(), CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                    cameraPermission = true;
-                } else {
-                    ActivityCompat.requestPermissions(getActivity(), permissions, IMAGE_REQUEST_CODE);
-                }
-            } else { // Else request for approximate location permission
-                ActivityCompat.requestPermissions(getActivity(),
-                        permissions,
-                        LOCATION_PERMISSION_REQUEST_CODE);
-            }
-        } else { // Else request for precise location permission
-            ActivityCompat.requestPermissions(getActivity(),
-                    permissions,
-                    LOCATION_PERMISSION_REQUEST_CODE);
-        }
-    }
-
-        // Returns the result of permission request
-        @Override
-        public void onRequestPermissionsResult ( int requestCode, @NonNull String[] permissions,
-        @NonNull int[] grantResults){
-            Log.d(TAG, "onRequestPermissionsResult: called.");
-            // In order check whether permission is granted always set permission granted to false beforehand
-            mLocationPermissionsGranted = false;
-
-            switch (requestCode) {
-                // Check if permission is granted or denied
-                case LOCATION_PERMISSION_REQUEST_CODE: {
-                    if (grantResults.length > 0) {
-                        for (int i = 0; i < grantResults.length; i++) {
-                            // If grantResults do not match up with permission granted code then permission is denied
-                            if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                                mLocationPermissionsGranted = false;
-                                Log.d(TAG, "onRequestPermissionsResult: permission failed");
-                                return;
-                            }
-                        }
-                        // If grantResults match with permission granted code then permission is granted
-                        Log.d(TAG, "onRequestPermissionsResult: permission granted");
-                        mLocationPermissionsGranted = true;
-                        // Initialize our map
-                        getDeviceLocation();
-                    }
-                }
-            }
-        }
-
-
-    // Gets device's location
-    private void getDeviceLocation(){
-        Log.d(TAG, "getDeviceLocation: getting the devices current location");
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
-
-        try{
-            // If mLocationPermissionGranted previously was found to be True
-            if(mLocationPermissionsGranted){
-                // Access device's location services
-                locationManager = (LocationManager)  getActivity().getSystemService(Context.LOCATION_SERVICE);
-                criteria = new Criteria();
-                // Get best provider then location
-                bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
-                final Task location = mFusedLocationProviderClient.getLastLocation();
-                // Once location is derived call addOnCompleteListener
-                location.addOnCompleteListener(new OnCompleteListener() {
-
-                    @Override
-                    public void onComplete(@NonNull Task task) { // Ensure that location was properly found
-                        if(task.isSuccessful()){ // If proper location was found set it as currentLocation
-                            Log.d(TAG, "onComplete: found location!");
-                            Location currentLocation = (Location) task.getResult();
-                            if(currentLocation != null) { // Get longitude and latitude
-                                longitude = currentLocation.getLongitude();
-                                latitude = currentLocation.getLatitude();
-                                Log.d("Locations", longitude + "" + "  " + latitude);
-                                geoLocate();
-                            }
-                            else{ // Update if location changed
-                                Log.d("LOCATIONS", "we go to else statement");
-                                locationManager.requestLocationUpdates(bestProvider, 1000, 0, AddRecordFragment.this);
-                            }
-                        }else{ // If location was not properly derived indicate so
-                            Log.d(TAG, "onComplete: current location is null");
-                            Toasty.error(getContext(), "Unable to get current location", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        }catch (SecurityException e){ // Throw exception if security violation caught
-            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
-        }
-    }
-
-    // If location changed, update it
-    @Override
-    public void onLocationChanged(Location location) {
-        //Hey, a non null location! Sweet!
-
-        // Remove location callback:
-        locationManager.removeUpdates(this);
-
-        // Open the map:
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
-
-    }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-
-    }
-
-    // Gets location name
-    private void geoLocate(){
-        Log.d(TAG, "geoLocate: geolocating");
-        Geocoder geocoder = new Geocoder(getContext());
-        try { // Gets location with Geocoder as an address list
-            List<Address> result = geocoder.getFromLocation(latitude, longitude, 1);
-
-            if (result == null) {
-                Toasty.error(getContext(), "Cannot get location name",
-
-                        Toast.LENGTH_LONG).show();
-            } else { // Else if location is not found indicate so
-                if (result.isEmpty()) {
-                    Toasty.error(getContext(), "No location is found",
-                            Toast.LENGTH_LONG).show();
-                } else { // If location is found format list to get address name
-                    address = result.get(0);
-                    addressName = address.getAddressLine(0) + ", " + address.getAddressLine(1)
-                            + ", " + address.getAddressLine(2);
-                    addressName = addressName.replace(", null,", "").replace("null", "");
-                    addressView.setText(addressName);
-                }
-            }
-        } catch (IOException e) { // Throw exception if there are issues with input or output
-            Toasty.error(getContext(), "Network unavailable to get location name.",
-                    Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-    }
 }

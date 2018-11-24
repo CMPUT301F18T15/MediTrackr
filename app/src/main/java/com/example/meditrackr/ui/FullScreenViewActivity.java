@@ -41,8 +41,7 @@ public class FullScreenViewActivity extends AppCompatActivity{
     // Initialize class objects
     private FullScreenImageAdapter adapter;
     protected PhotoList images;
-    private Profile profile;
-    private Patient patient;
+    protected Patient patient;
 
 
     // Creates image as view object
@@ -56,14 +55,13 @@ public class FullScreenViewActivity extends AppCompatActivity{
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
 
-        profile = LazyLoadingManager.getProfile();
+        Profile profile = LazyLoadingManager.getProfile();
         if(profile.getisCareProvider()){
-            //
+            images = LazyLoadingManager.getImages();
         }else{
             patient = (Patient) profile;
+            images = patient.getProblem(position).getImageAll();
         }
-
-        images = patient.getProblem(position).getImageAll();
 
         // Adapt images to fullscreen
         adapter = new FullScreenImageAdapter(FullScreenViewActivity.this,

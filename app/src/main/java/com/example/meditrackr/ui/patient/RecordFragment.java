@@ -19,6 +19,7 @@
 package com.example.meditrackr.ui.patient;
 
 //imports
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.record.Record;
+import com.example.meditrackr.ui.MainActivity;
 import com.example.meditrackr.utils.ConvertImage;
 
 /**
@@ -78,7 +80,7 @@ public class RecordFragment extends Fragment {
         // Initialize ui attributes
         final TextView title = rootView.findViewById(R.id.record_title);
         final TextView date = rootView.findViewById(R.id.record_date);
-        final TextView location = rootView.findViewById(R.id.record_location);
+        final TextView locationTxt = rootView.findViewById(R.id.record_location);
         final TextView description = rootView.findViewById(R.id.record_description);
         record = (Record) getArguments().getSerializable(
                 "Record");
@@ -101,7 +103,7 @@ public class RecordFragment extends Fragment {
         title.setText(record.getTitle());
         description.setText(record.getDescription());
         date.setText(record.getDate());
-        location.setText(record.getGeoLocation().getAddress());
+        locationTxt.setText(record.getGeoLocation().getAddress());
 
 
         // Populate with images
@@ -113,6 +115,8 @@ public class RecordFragment extends Fragment {
         }catch (NullPointerException e){
             Log.d("Images", "size of array is zero, no images");
         }
+
+
 
         return rootView;
     }

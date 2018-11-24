@@ -93,8 +93,8 @@ public class AddRecordFragment extends Fragment{
     private String date;
 
     // Indicators and request codes
-    private static final int IMAGE_REQUEST_CODE = 2;
-    private static final int PLACE_PICKER_REQUEST = 4;
+    private static final int IMAGE_REQUEST_CODE = 1;
+    private static final int PLACE_PICKER_REQUEST = 2;
 
     // Image variables
     private ImageView[] images = new ImageView[10];

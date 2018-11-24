@@ -20,6 +20,7 @@ package com.example.meditrackr.ui.patient;
 
 //imports
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -54,6 +55,7 @@ import com.example.meditrackr.models.PlaceInfo;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
+import com.example.meditrackr.models.record.RecordList;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -91,6 +93,7 @@ import es.dmoral.toasty.Toasty;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener {
+    Profile profile = LazyLoadingManager.getProfile();
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -118,7 +121,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private static final String TAG = "MapActivity";
-
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
@@ -129,16 +131,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     //widgets
     private AutoCompleteTextView mSearchText;
-    private ImageView mGps, mInfo, mPlacePicker;
+    private ImageView mGps, mInfo;
 
     //vars
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
     private GoogleApiClient mGoogleApiClient;
     private PlaceInfo mPlace;
     private Marker mMarker;
+    private Patient patientRecords;
 
 
     @Override
@@ -151,7 +153,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mInfo = (ImageView) findViewById(R.id.place_info);
 
 
+        checkUser();
         getLocationPermission();
+
 
 
     }
@@ -245,7 +249,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
 
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         try {
             if (mLocationPermissionsGranted) {
@@ -371,21 +375,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             try {
                 mPlace = new PlaceInfo();
                 mPlace.setName(place.getName().toString());
-                Log.d(TAG, "onResult: name: " + place.getName());
                 mPlace.setAddress(place.getAddress().toString());
-                Log.d(TAG, "onResult: address: " + place.getAddress());
                 mPlace.setId(place.getId());
-                Log.d(TAG, "onResult: id:" + place.getId());
                 mPlace.setLatlng(place.getLatLng());
-                Log.d(TAG, "onResult: latlng: " + place.getLatLng());
                 mPlace.setRating(place.getRating());
-                Log.d(TAG, "onResult: rating: " + place.getRating());
-                mPlace.setPhoneNumber(place.getPhoneNumber().toString());
-                Log.d(TAG, "onResult: phone number: " + place.getPhoneNumber());
-                mPlace.setWebsiteUri(place.getWebsiteUri());
-                Log.d(TAG, "onResult: website uri: " + place.getWebsiteUri());
 
-                Log.d(TAG, "onResult: place: " + mPlace.toString());
             } catch (NullPointerException e) {
                 Log.e(TAG, "onResult: NullPointerException: " + e.getMessage());
             }
@@ -399,7 +393,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     public void placeMarkers() {
         Profile profile = LazyLoadingManager.getProfile();
-        if(!profile.getisCareProvider()) {
+        if (!profile.getisCareProvider()) {
             Patient patient = LazyLoadingManager.getPatient();
             for (int i = 0; i < patient.getProblems().getSize(); i++) {
                 Log.d("MAPMARKER", "problemlist size" + patient.getProblems().getSize());
@@ -430,10 +424,51 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     hideSoftKeyboard();
                 }
             }
-        }else {
-            Log.d("Adding no markers", "adding no markers");
-        }
+        } else {
+            try {
+                for (int i = 0; i < patientRecords.getProblems().getSize(); i++) {
+                    Log.d("MAPMARKER", "problemlist size" + patientRecords.getProblems().getSize());
+                    for (int j = 0; j < patientRecords.getProblem(i).getRecords().getSize(); j++) {
+                        Geolocation geolocation = patientRecords.getProblem(i).getRecords().getRecord(j).getGeoLocation();
+                        Record record = patientRecords.getProblem(i).getRecords().getRecord(j);
 
+                        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
+
+                        try {
+                            String snippet =
+                                    "Record #: " + j + "\n" +
+                                            "Date: " + record.getDate() + "\n" +
+                                            "Description: " + record.getDescription() + "\n";
+
+                            MarkerOptions options = new MarkerOptions()
+                                    .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
+                                    .title(patientRecords.getProblem(i).getDescription())
+                                    .snippet(snippet);
+
+                            mMarker = mMap.addMarker(options);
+
+                        } catch (NullPointerException e) {
+                            Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage());
+                        }
+
+
+                        hideSoftKeyboard();
+                        Log.d("Adding no markers", "adding no markers");
+                    }
+
+                }
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void checkUser(){
+        if (profile.getisCareProvider()) {
+            Intent intent = getIntent();
+            patientRecords = (Patient) intent.getExtras().getSerializable("Patient");
+        }
     }
 }
 

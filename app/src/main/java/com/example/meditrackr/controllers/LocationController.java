@@ -77,18 +77,15 @@ import es.dmoral.toasty.Toasty;
 public class LocationController extends Service implements LocationListener {
     private final Context context;
 
-    // flag for GPS status
+    // flags
     boolean isGPSEnabled = false;
-
-    // flag for network status
     boolean isNetworkEnabled = false;
-
-    // flag for GPS status
     boolean canGetLocation = false;
 
-    Location location; // location
-    double latitude; // latitude
-    double longitude; // longitude
+    // location vars
+    Location location;
+    double latitude;
+    double longitude;
 
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters

@@ -133,27 +133,16 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         private ImageButton gps;
 
         // Constructor and gets the corresponding data for each view
-        private ViewHolder(View itemView, final PatientAdapter adapter){
+        private ViewHolder(View itemView, final PatientAdapter adapter) {
             super(itemView);
             patientUsername = itemView.findViewById(R.id.patient_username);
             patientEmail = itemView.findViewById(R.id.patient_email);
             patientPhone = itemView.findViewById(R.id.patient_phone);
-            gps = itemView.findViewById(R.id.view_gps);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
-
-
-            gps.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(adapter.activity, MapActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("Patient", adapter.patients.get(getAdapterPosition()));
-                    intent.putExtras(bundle);
-                    adapter.activity.startActivity(intent);
-                }
-            });
         }
+
+
 
 
 

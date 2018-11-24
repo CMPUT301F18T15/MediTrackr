@@ -87,7 +87,14 @@ public class LoginController {
                 // hacks
                 Patient patient;
                 if(profile.getisCareProvider()){
-                    CareProvider careProvider = (CareProvider) profile;
+                    CareProvider careProviderMem = (CareProvider) profile;
+                    CareProvider careProvider = (CareProvider) ElasticSearchController.searchProfile(profile.getUsername());
+                    if(careProvider.getPatients().getSize() > careProviderMem.getPatients().getSize()){
+                        //nothing
+                    }
+                    else{
+                        careProvider = careProviderMem;
+                    }
                     PatientList patientList = careProvider.getPatients();
                     ArrayList<Patient> patients = new ArrayList<>();
                     for(int i = 0; i < patientList.getSize(); i++){

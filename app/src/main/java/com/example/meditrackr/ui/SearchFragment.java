@@ -62,6 +62,7 @@ public class SearchFragment extends Fragment {
     private SearchView mSearch;
     private ArrayList<CustomFilter> customFilter;
     private Patient patient;
+    private RecyclerView rv;
 
     // Create new fragment instance
     public static SearchFragment newInstance() {
@@ -82,7 +83,7 @@ public class SearchFragment extends Fragment {
         icon.setColorFilter(Color.BLACK);
         mSearch.setIconified(false);
         mSearch.setClickable(true);
-        final RecyclerView rv = rootView.findViewById(R.id.myRecycler);
+        rv = rootView.findViewById(R.id.myRecycler);
 
         // Set view properties
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -92,6 +93,8 @@ public class SearchFragment extends Fragment {
         if(!profile.getisCareProvider()){
             patient = (Patient) profile;
         }
+
+        onCreate();
 
 
         // Sets a listener for user text input
@@ -171,6 +174,20 @@ public class SearchFragment extends Fragment {
                 }
             }
         }
+    }
+
+    public void onCreate(){
+        customFilter = new ArrayList<>();
+        if(!profile.getisCareProvider()) {
+            parseText("", patient);
+        }else {
+            ArrayList<Patient> patients = LazyLoadingManager.getPatients();
+            for(int i = 0; i < patients.size(); i++){
+                parseText("", patients.get(i));
+            }
+        }
+        SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter);
+        rv.setAdapter(adapter);
     }
 }
 

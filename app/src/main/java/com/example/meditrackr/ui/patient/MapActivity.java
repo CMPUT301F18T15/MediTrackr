@@ -395,71 +395,52 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         Profile profile = LazyLoadingManager.getProfile();
         if (!profile.getisCareProvider()) {
             Patient patient = LazyLoadingManager.getPatient();
-            for (int i = 0; i < patient.getProblems().getSize(); i++) {
-                Log.d("MAPMARKER", "problemlist size" + patient.getProblems().getSize());
-                for (int j = 0; j < patient.getProblem(i).getRecords().getSize(); j++) {
-                    Geolocation geolocation = patient.getProblem(i).getRecords().getRecord(j).getGeoLocation();
-                    Record record = patient.getProblem(i).getRecords().getRecord(j);
-
-                    mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
-
-                    try {
-                        String snippet =
-                                "Record #: " + j + "\n" +
-                                        "Date: " + record.getDate() + "\n" +
-                                        "Description: " + record.getDescription() + "\n";
-
-                        MarkerOptions options = new MarkerOptions()
-                                .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
-                                .title(patient.getProblem(i).getDescription())
-                                .snippet(snippet);
-
-                        mMarker = mMap.addMarker(options);
-
-                    } catch (NullPointerException e) {
-                        Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage());
-                    }
-
-
-                    hideSoftKeyboard();
-                }
+            extractInformation(patient);
+        }
+        else if(patientRecords != null) {
+            extractInformation(patientRecords);
+        }
+        else{
+            ArrayList<Patient> patients = LazyLoadingManager.getPatients();
+            for(Patient patient: patients){
+                extractInformation(patient);
             }
-        } else {
-            try {
-                for (int i = 0; i < patientRecords.getProblems().getSize(); i++) {
-                    Log.d("MAPMARKER", "problemlist size" + patientRecords.getProblems().getSize());
-                    for (int j = 0; j < patientRecords.getProblem(i).getRecords().getSize(); j++) {
-                        Geolocation geolocation = patientRecords.getProblem(i).getRecords().getRecord(j).getGeoLocation();
-                        Record record = patientRecords.getProblem(i).getRecords().getRecord(j);
-
-                        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
-
-                        try {
-                            String snippet =
-                                    "Record #: " + j + "\n" +
-                                            "Date: " + record.getDate() + "\n" +
-                                            "Description: " + record.getDescription() + "\n";
-
-                            MarkerOptions options = new MarkerOptions()
-                                    .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
-                                    .title(patientRecords.getProblem(i).getDescription())
-                                    .snippet(snippet);
-
-                            mMarker = mMap.addMarker(options);
-
-                        } catch (NullPointerException e) {
-                            Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage());
-                        }
+        }
+    }
 
 
-                        hideSoftKeyboard();
-                        Log.d("Adding no markers", "adding no markers");
-                    }
+    public void extractInformation(Patient patient){
+        for (int i = 0; i < patient.getProblems().getSize(); i++) {
+            Log.d("MAPMARKER", "problemlist size" + patient.getProblems().getSize());
+            for (int j = 0; j < patient.getProblem(i).getRecords().getSize(); j++) {
+                Geolocation geolocation = patient.getProblem(i).getRecords().getRecord(j).getGeoLocation();
+                Record record = patient.getProblem(i).getRecords().getRecord(j);
 
+                mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
+
+                try {
+                    String snippet =
+                            "Record #: " + j + "\n" +
+                                    "Username: " + patient.getUsername() + "\n"+
+                                    "Date: " + record.getDate() + "\n" +
+                                    "Description: " + record.getDescription() + "\n";
+
+                    MarkerOptions options = new MarkerOptions()
+                            .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
+                            .title(patient.getProblem(i).getDescription())
+                            .snippet(snippet);
+
+                    mMarker = mMap.addMarker(options);
+
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage());
                 }
-            } catch (NullPointerException e) {
-                e.printStackTrace();
+
+
+                hideSoftKeyboard();
+                Log.d("Adding no markers", "adding no markers");
             }
+
         }
     }
 
@@ -467,7 +448,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void checkUser(){
         if (profile.getisCareProvider()) {
             Intent intent = getIntent();
-            patientRecords = (Patient) intent.getExtras().getSerializable("Patient");
+            try {
+                patientRecords = (Patient) intent.getExtras().getSerializable("Patient");
+            }
+            catch(NullPointerException e){
+                e.printStackTrace();
+            }
         }
     }
 }

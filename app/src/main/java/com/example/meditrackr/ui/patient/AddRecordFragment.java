@@ -19,30 +19,17 @@
 package com.example.meditrackr.ui.patient;
 
 //imports
-import android.Manifest;
-import android.content.Context;
+
 import android.content.Intent;
 
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,17 +49,10 @@ import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.DateUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.List;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+
 
 import es.dmoral.toasty.Toasty;
 
@@ -126,7 +106,6 @@ public class AddRecordFragment extends Fragment{
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_record, container, false);
-
 
         LocationController controller = new LocationController(getContext());
 
@@ -202,10 +181,12 @@ public class AddRecordFragment extends Fragment{
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (bitmaps[9] == null) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent,
-                            IMAGE_REQUEST_CODE);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivityForResult(intent, IMAGE_REQUEST_CODE);                    }
+
                 } else {
                     Toasty.error(getContext(), "Unable to add more than 10 photos!"
                             , Toast.LENGTH_SHORT).show();

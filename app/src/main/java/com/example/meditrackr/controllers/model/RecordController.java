@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.controllers.LazyLoadingManager;
@@ -69,8 +70,9 @@ public class RecordController {
         patient.getProblem(position).getRecords().addRecord(record);
 
         // Save in ElasticSearch and memory
-        ElasticSearchController.updateUser(patient);
-        SaveLoadController.saveProfile(context, patient);
+        ThreadSaveController.save(context, patient);
+        //ElasticSearchController.updateUser(patient);
+        //SaveLoadController.saveProfile(context, patient);
         Log.d("RecordAdd", "Profile: " + patient.getUsername()
                 + " Records: " + patient.getProblem(position).getRecords());
 

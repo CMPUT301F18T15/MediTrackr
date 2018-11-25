@@ -35,6 +35,7 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.ui.patient.PatientQR;
 
@@ -88,8 +89,9 @@ public class UserEditFragment extends Fragment {
                 profile.setUsername(username.getText().toString());
                 profile.setEmail(email.getText().toString());
                 profile.setPhone(phone.getText().toString());
-                ElasticSearchController.updateUser(profile); // Saves profile in ES
-                SaveLoadController.saveProfile(getContext(),profile);
+                ThreadSaveController.save(getContext(), profile);
+                //ElasticSearchController.updateUser(profile); // Saves profile in ES
+                //SaveLoadController.saveProfile(getContext(),profile);
 
 
                 // Swap back to the user fragment and display the fragment_user view

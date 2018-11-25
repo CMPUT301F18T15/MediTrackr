@@ -19,6 +19,7 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.PhotoList;
@@ -166,8 +167,9 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                                             adapter.problems.getSize());
                                     Log.d("DeleteProblem", "Position: " + position);
                                     // Save changes to memory and ES
-                                    SaveLoadController.saveProfile(adapter.context, LazyLoadingManager.getPatient());
-                                    ElasticSearchController.updateUser(LazyLoadingManager.getPatient());
+                                    ThreadSaveController.save(adapter.context, LazyLoadingManager.getPatient());
+                                    //SaveLoadController.saveProfile(adapter.context, LazyLoadingManager.getPatient());
+                                    //ElasticSearchController.updateUser(LazyLoadingManager.getPatient());
                                     dialog.cancel(); // Close alert dialog box
                                 }
                             });

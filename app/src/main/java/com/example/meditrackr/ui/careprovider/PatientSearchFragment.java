@@ -88,6 +88,7 @@ public class PatientSearchFragment extends Fragment{
         // Set constraint layouts for fragment
         searchLayout = (ConstraintLayout) rootView.findViewById(R.id.search_constraint);
         searchDisplayPatient = (ConstraintLayout) rootView.findViewById(R.id.search_display_patient);
+        getCameraPermission();
 
 
         // Initialize ui attributes
@@ -188,6 +189,18 @@ public class PatientSearchFragment extends Fragment{
         else {
             searchLayout.setVisibility(View.INVISIBLE);
             searchDisplayPatient.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void getCameraPermission() {
+        String[] permissions = {Manifest.permission.CAMERA};
+
+        if (ContextCompat.checkSelfPermission(getContext(),
+                CAMERA) == PackageManager.PERMISSION_GRANTED) {
+
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),
+                    permissions, 1234);
         }
     }
 

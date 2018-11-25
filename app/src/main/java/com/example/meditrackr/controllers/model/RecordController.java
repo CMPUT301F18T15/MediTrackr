@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.controllers.LazyLoadingManager;
@@ -60,8 +61,8 @@ public class RecordController {
 
         // Make sure all the images are properly added
         // to the patient's list for saving and restoring
-        for (int i = 0; i < record.getImagesSave().getSize(); ++i) {
-            String imageSave = record.getImagesSave().getImage(i);
+        for (int i = 0; i < record.getImages().getSize(); ++i) {
+            byte[] imageSave = record.getImages().getImage(i);
             patient.getProblem(position).getImageAll().addImage(imageSave);
         }
 
@@ -69,8 +70,9 @@ public class RecordController {
         patient.getProblem(position).getRecords().addRecord(record);
 
         // Save in ElasticSearch and memory
-        ElasticSearchController.updateUser(patient);
-        SaveLoadController.saveProfile(context, patient);
+        ThreadSaveController.save(context, patient);
+        //ElasticSearchController.updateUser(patient);
+        //SaveLoadController.saveProfile(context, patient);
         Log.d("RecordAdd", "Profile: " + patient.getUsername()
                 + " Records: " + patient.getProblem(position).getRecords());
 

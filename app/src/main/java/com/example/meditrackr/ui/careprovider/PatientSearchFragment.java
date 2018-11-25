@@ -50,7 +50,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 
 /**
- *shows all infoermation associated with the patient that showed up from the search
+ *shows all information associated with the patient that showed up from the search
  *if no patient was found then it returns "User not found"
  *
  * @author  Orest Cokan

@@ -87,14 +87,25 @@ public class LoginController {
                 // hacks
                 Patient patient;
                 if(profile.getisCareProvider()){
-                    CareProvider careProvider = (CareProvider) profile;
+                    CareProvider careProviderMem = (CareProvider) profile;
+                    CareProvider careProvider = (CareProvider) ElasticSearchController.searchProfile(profile.getUsername());
+                    if(careProvider.getPatients().getSize() > careProviderMem.getPatients().getSize()){
+                        //nothing
+                    }
+                    else{
+                        careProvider = careProviderMem;
+                    }
                     PatientList patientList = careProvider.getPatients();
-                    ArrayList<Patient> patients = LazyLoadingManager.getPatients();
+                    ArrayList<Patient> patients = new ArrayList<>();
                     for(int i = 0; i < patientList.getSize(); i++){
+                        Log.d("THREADMEMESS", patientList.getPatient(i)+"");
                         Profile profileCheck = SaveLoadController.loadProfile(context, patientList.getPatient(i));
                         if(profileCheck != null){
                             patient = (Patient) profileCheck;
+                            Log.d("THREADMEMESS", "mem");
+
                         } else {
+                            Log.d("THREADMEMESS", "es");
                             patient = (Patient) ElasticSearchController.searchProfile(patientList.getPatient(i));
                         }
                         patients.add(patient);

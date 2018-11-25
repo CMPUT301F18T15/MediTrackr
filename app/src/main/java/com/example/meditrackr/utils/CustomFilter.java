@@ -33,29 +33,34 @@ public class CustomFilter {
     private boolean isProblem;
     private boolean isRecord;
     private int problemIndex;
-    private int rexordIndex;
+    private int recordIndex;
     private String title;
     private String description;
     private String date;
+    private String username;
 
 
 
-    public CustomFilter(boolean isRecord, String title, String description, String date, int problemIndex){
+    public CustomFilter(String username, boolean isRecord, String title, String description, String date, int problemIndex){
+
+        this.username = username;
         this.isRecord = isRecord;
         this.title = title;
         this.description = description;
         this.date = date;
         this.problemIndex = problemIndex;
-        this.rexordIndex = -1;
+        this.recordIndex = -1;
     }
 
-    public CustomFilter(boolean isRecord, String title, String description, String date, int problemIndex, int rexordIndex){
+    public CustomFilter(String username, boolean isRecord, String title, String description, String date, int problemIndex, int recordIndex){
+        this.username = username;
         this.isRecord = isRecord;
         this.title = title;
         this.description = description;
         this.date = date;
         this.problemIndex = problemIndex;
-        this.rexordIndex = rexordIndex;
+        this.recordIndex = recordIndex;
+
     }
 
 
@@ -84,12 +89,12 @@ public class CustomFilter {
         this.problemIndex = problemIndex;
     }
 
-    public int getRexordIndex() {
-        return rexordIndex;
+    public int getRecordIndex() {
+        return recordIndex;
     }
 
     public void setRexordIndex(int rexordIndex) {
-        this.rexordIndex = rexordIndex;
+        this.recordIndex = rexordIndex;
     }
 
     public String getTitle() {
@@ -114,6 +119,15 @@ public class CustomFilter {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
 

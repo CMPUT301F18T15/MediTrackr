@@ -123,16 +123,13 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         // Set onClick listener for each record, so the record can be viewed
         @Override
         public void onClick(View v) {
-            int position = getAdapterPosition(); // Return the position of the click in the recycler view
-            // Prepare for fragment transaction
+            int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            // Transition to RecordFragment page
             RecordFragment fragment = RecordFragment.newInstance(records.getRecord(position));
-            // Allow user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
-            transaction.commit(); // Make permanent all changes performed in the transaction
+            transaction.commit();
         }
     }
 }

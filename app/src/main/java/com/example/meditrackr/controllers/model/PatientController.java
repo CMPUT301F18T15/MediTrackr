@@ -10,6 +10,7 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
@@ -36,8 +37,9 @@ public class PatientController {
 
 
             // Save both to ES and memory
-            ElasticSearchController.updateUser(careProvider);
-            SaveLoadController.saveProfile(context, careProvider);
+            ThreadSaveController.save(context, careProvider);
+            //ElasticSearchController.updateUser(careProvider);
+            //SaveLoadController.saveProfile(context, careProvider);
             return true;
 
         } else {

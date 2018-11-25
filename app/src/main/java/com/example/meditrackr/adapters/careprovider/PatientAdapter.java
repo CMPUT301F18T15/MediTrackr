@@ -20,6 +20,8 @@ package com.example.meditrackr.adapters.careprovider;
 
 //imports
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -28,6 +30,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
@@ -36,7 +39,10 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PatientList;
+import com.example.meditrackr.ui.MainActivity;
+import com.example.meditrackr.ui.careprovider.PatientsFragment;
 import com.example.meditrackr.ui.careprovider.ProblemsFragment;
+import com.example.meditrackr.ui.patient.MapActivity;
 
 import java.util.ArrayList;
 
@@ -97,7 +103,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         // Display each patient's username, email, and phone number in each viewHolder
         holder.patientUsername.setText(patients.get(position).getUsername());
-        // Search for the proper patient to put into each viewHolder
         holder.patientEmail.setText(patients.get(position).getEmail());
         holder.patientPhone.setText(patients.get(position).getPhone());
     }
@@ -125,9 +130,10 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         private TextView patientUsername;
         private TextView patientEmail;
         private TextView patientPhone;
+        private ImageButton gps;
 
         // Constructor and gets the corresponding data for each view
-        private ViewHolder(View itemView, final PatientAdapter adapter){
+        private ViewHolder(View itemView, final PatientAdapter adapter) {
             super(itemView);
             patientUsername = itemView.findViewById(R.id.patient_username);
             patientEmail = itemView.findViewById(R.id.patient_email);
@@ -135,6 +141,10 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             itemView.setOnClickListener(this);
             this.adapter = adapter;
         }
+
+
+
+
 
         // Set onClick listener for each patient, so they can be viewed
         @Override
@@ -151,6 +161,8 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             transaction.commit();
 
         }
+
     }
+
 }
 

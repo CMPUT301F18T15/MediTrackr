@@ -35,7 +35,7 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.ProblemList;
-import com.example.meditrackr.models.record.ImageSave;
+import com.example.meditrackr.models.record.PhotoList;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.FullScreenViewActivity;
 import com.example.meditrackr.ui.careprovider.RecordsFragment;
@@ -106,7 +106,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             holder.problemImage.setImageBitmap(null); // If the problem does not have any images set image to null
             Log.d("ImageTest", "New profile this should be shown!");
         }else { // Else show image pertaining to the problem
-            holder.problemImage.setImageBitmap(ConvertImage.base64Decode(
+            holder.problemImage.setImageBitmap(ConvertImage.convertByteToBitmap(
                     problems.getProblem(position).getImageAll().getImage(0)));
         }
     }
@@ -162,7 +162,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             problemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ImageSave images = problems.getProblem(getAdapterPosition()).getImageAll();
+                    PhotoList images = problems.getProblem(getAdapterPosition()).getImageAll();
                     LazyLoadingManager.setImages(images);
 
                     if(images.getSize() == 0){ // Make not clickable if there is no image for the problem
@@ -183,18 +183,15 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition(); // Return position of click in the recycler view
-            // Get the records of the problem clicked
             RecordList records = problems.getProblem(position).getRecords();
-            // Prepare for fragment transaction
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
             LazyLoadingManager.setProblemIndex(position); // Load the problem clicked
             RecordsFragment fragment = RecordsFragment.newInstance(records,
                     problems.getProblem(position).getComments()); // Transition to RecordsFragment
-            // Allows user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
-            transaction.commit(); // Make permanent all changes performed in the transaction
+            transaction.commit();
         }
     }
 }

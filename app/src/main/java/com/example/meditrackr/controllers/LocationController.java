@@ -131,10 +131,6 @@ public class LocationController extends Service implements LocationListener {
                     new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, 8);
         }
 
-        if(ContextCompat.checkSelfPermission((Activity) context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            Log.i("debugMaps", "Requesting camera permission");
-            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.CAMERA},8);
-        }
 
         try {
             locationManager = (LocationManager) context
@@ -238,12 +234,8 @@ public class LocationController extends Service implements LocationListener {
             List<Address> result = geocoder.getFromLocation(getLatitude(), getLongitude(), 1);
 
             if (result == null) {
-                Toasty.error(context, "Cannot get location name",
-                        Toast.LENGTH_LONG).show();
             } else { // Else if location is not found indicate so
                 if (result.isEmpty()) {
-                    Toasty.error(context, "No location is found",
-                            Toast.LENGTH_LONG).show();
                 } else { // If location is found format list to get address name
                     Address address = result.get(0);
                     String addressName = address.getAddressLine(0) + ", " + address.getAddressLine(1)

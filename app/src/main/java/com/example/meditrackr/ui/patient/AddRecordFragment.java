@@ -304,4 +304,5 @@ public class AddRecordFragment extends Fragment{
         }
     }
 
+
 }

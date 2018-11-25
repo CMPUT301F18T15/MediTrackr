@@ -44,6 +44,19 @@ public class BodyLocationTest {
         final String bodyLocation = "initial arm";
         body = new BodyLocation(location, bodyFace, bodyLocation);
     }
+    
+    // test if body location is constructed with its attributes
+    @Test
+    public void constructorTest() {
+        double[] coords = {1.0, 1.0};
+        String face = "BodyFace";
+        String location = "BodyLocation";
+        BodyLocation bodyLocation =
+                new BodyLocation(coords, face, location);
+        assertEquals(coords, bodyLocation.getBodyCoordinate());
+        assertEquals(face, bodyLocation.getBodyFace());
+        assertEquals(location, bodyLocation.getBodyLocation());
+    }
 
     // test to see if bodyFace changed
     @Test

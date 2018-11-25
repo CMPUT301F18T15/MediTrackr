@@ -19,7 +19,6 @@
 
 package com.example.meditrackr.controllers.model;
 
-//imports
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -34,9 +33,15 @@ import com.example.meditrackr.models.Problem;
 import es.dmoral.toasty.Toasty;
 
 /**
- * a problem controller that adds a problem to the database
+ * ProblemController
+ *
+ * Controls the adding of
+ * a problem, if successful it
+ * will save the problem both locally
+ * and on ElasticSearch
+ *
  * @author  Veronica Salm
- * @varsion 1.0 Nov 18, 2018
+ * @version 1.0 Nov 18, 2018
  */
 
 // Controller class for problem objects
@@ -48,14 +53,15 @@ public class ProblemController {
      * @param context   the context the controller will user
      * @param problem   the problem we will add to the database
      */
-
     // Add problem to problem list
     public static void addProblem(Context context, Problem problem) {
         // Get patient profile and problem
         Patient patient = LazyLoadingManager.getPatient();
         patient.getProblems().addProblem(problem);
-        ElasticSearchController.updateUser(patient); // Save problem to ES
-        SaveLoadController.saveProfile(context, patient); // Save problem to memory
+
+        // Save the problem both locally and elastic search
+        ElasticSearchController.updateUser(patient);
+        SaveLoadController.saveProfile(context, patient);
         Log.d("ProblemAdd", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
 
         // let the user know everything was successful

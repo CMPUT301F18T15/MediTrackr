@@ -92,7 +92,6 @@ public class LocationController {
      * give the name of that location based on the position. if there is no network connection then it
      * will throw an exception
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param context the context of the controller
      * @throw IOException
      *
@@ -106,9 +105,8 @@ public class LocationController {
     /**
      * sets the location name from the position user is at
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
-     * @param position an intiger which can be used in a location list to find an adress
-     * @return adressName a string which contains the adress
+     * @param position an integer which can be used in a location list to find an adress
+     * @return addressName a string which contains the adress
      */
     // Sets location name
     public String setLocationName(int position) {
@@ -126,7 +124,6 @@ public class LocationController {
      * gets users latitude
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @return latitude a double type integer
      */
     // Gets location latitude
@@ -135,11 +132,12 @@ public class LocationController {
         latitude = locationList.get(addressIndex).getLatitude();
         return latitude;
     }
+
+
     /**
      * gets users longitude
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @return longitude a double type integer
      */
     // Gets location longitutde
@@ -148,10 +146,11 @@ public class LocationController {
         return longitude;
     }
 
+
     /**
      * this class gets a list of all the locations names
+     *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param context             the context of the controller
      * @param locationName        the name of the location
      * @return locationNameList   a list that contains all of the locations names
@@ -193,17 +192,17 @@ public class LocationController {
         return locationNameList;
     }
 
+
     /**
-     * this class can get the users coordination using the gps location attached to the
-     * phone. if there is a network connection then it will set the lat and lon coordinates appropriately
+     * this method can get the users coordination using the gps location attached to the
+     * phone. If there is a network connection, then it will set the lat and lon coordinates appropriately
      * in not then it will provide an error saying that there is no network that it can find to check the
      * gps location.
+     *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param context context of the controller
      * @return 1 if gps is available 0 if not
      */
-
     // Gets user GPS location
     public int getGPS(final Context context) {
         // Enable GPS service
@@ -241,14 +240,14 @@ public class LocationController {
         return 0;
     }
 
+
     /**
      * this function can use getGpsCoordinate to update the users latitude and longitude values
+     *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param context context of the controller
      * @throws SecurityException
      */
-
     // Updates the user's latitude and longitutde
     public void getGpsCoordinate(Context context) {
         try {
@@ -260,21 +259,23 @@ public class LocationController {
         }
     }
 
+
     /**
      * gets gps Latitude only
+     *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @return gpsLatitude  a double integer of the latitude given by the gps
      */
-
     // Gets GPS latitude
     public double getGpsLatitude() {
         return gpsLatitude;
     }
+
+
     /**
      * gets gps longitude only
+     *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @return gpsLongitude  a double integer of the longitude given by the gps
      */
 
@@ -283,17 +284,16 @@ public class LocationController {
         return gpsLongitude;
     }
 
+
     /**
      * get gps service and check permission
      * if location is gotten, get the name of the location
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param context the context of the controller
      * @return addressName string which contains the name of the address
      * @throws IOException
      */
-
     // Gets GPS address or location name
     public String getGpsAddressName(Context context) {
         // Call to check permission to access gps

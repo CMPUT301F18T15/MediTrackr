@@ -1,78 +1,77 @@
 /*
- *Apache 2.0 License Notice
+ * RecordList
  *
- *Copyright 2018 CMPUT301F18T15
+ * Version 1.0
+ * Nov 13, 2018.
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Apache 2.0 License Notice
+ *
+ * Copyright 2018 CMPUT301F18T15
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
+
 package com.example.meditrackr.models.record;
 
-//imports
 import android.graphics.Bitmap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * uses getters and setters to set variavles for all the thingd the image list class needs
+ * RecordPhotoList: A list of photos (Bitmap objects) for a record.
+ *
+ * Allows adding and removing elements (by both index and bitmap),
+ * checking if a Bitmap object exists in the array and retrieving the
+ * size of the list.
+ *
  * @author Orest Cokan
  * @version 1.0 Nov 13, 2018
  */
-
-// Class creates Image List
 public class RecordPhotoList implements Serializable {
-    /**
-     * creates a list to store the images in
-     * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
-     */
-    // Create array of bitmaps
+
+    // creates an array of Bitmap images
     private transient ArrayList<Bitmap> images = new ArrayList<>();
 
-    // Calls to ImageList methods
+
     /**
-     * adds an image to the list
+     * Adds an image to the RecordPhotoList.
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
-     * @param newImage the image we want to add
+     * @param newImage  the image to be added
      * @see Bitmap
      */
-
-    // Calls to RecordPhotoList methods
     public void addImage(Bitmap newImage) {
         images.add(newImage);
     }
 
 
     /**
-     * removes an image to the list
+     * Removes an image from the RecordPhotoList.
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
-     * @param image the image we want to remove
+     * @param image     the image we want to remove
      */
     public void removeImage(Bitmap image){
         images.remove(image);
     }
 
     /**
-     * checks to see if an image is in the list
+     * Checks to see if an Bitmap image object is in the list.
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
-     * @param image the image we want to check
+     * @param image     the image to check for
      * @see Bitmap
      */
     public Boolean imageExists(Bitmap image){
@@ -80,12 +79,16 @@ public class RecordPhotoList implements Serializable {
     }
 
 
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
     /**
-     * gets the index of an image from the list
+     * Gets the index of an Bitmap image object from the RecordPhotoList.
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
-     * @param image the image we want to get the index of
+     * @param image     the image whose index we want to retrieve
      * @see Bitmap
      */
     public int getIndex(Bitmap image){
@@ -94,10 +97,10 @@ public class RecordPhotoList implements Serializable {
 
 
     /**
-     * gets the number of photos in the list
+     * Gets the number of photos in the RecordPhotoList.
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
+     * @return      the size of the list of images
      */
     public int getSize(){
         return images.size();
@@ -105,10 +108,10 @@ public class RecordPhotoList implements Serializable {
 
 
     /**
-     * converts the images to strngs
+     * Converts the object to a string representation.
      *
-     * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
+     * @author  Orest Cokan
+     * @return  returns a string representation of the object
      */
     public String toString() {
         return images.toString();
@@ -116,10 +119,9 @@ public class RecordPhotoList implements Serializable {
 
 
     /**
-     * gets the image from a given index
+     * Gets the image at a given index of the array.
      *
      * @author Orest Cokan
-     * @version 1.0 Nov 13, 2018
      * @param index the index of image we want to find
      * @see Bitmap
      */

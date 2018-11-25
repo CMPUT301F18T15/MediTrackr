@@ -1,32 +1,35 @@
 /*
- *Apache 2.0 License Notice
+ * Profile
  *
- *Copyright 2018 CMPUT301F18T15
+ * Version 1.0
+ * Oct 24, 2018.
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Apache 2.0 License Notice
+ *
+ * Copyright 2018 CMPUT301F18T15
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 package com.example.meditrackr.models;
 
-//imports
 import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
 
 /**
- * this class creates a profile which gets and stores all the profiles info:
- * id, username, email, phonenumber, isCareprovider
- * this class uses getters and setters to get and set all of the variables associated with this class
+ * Profile: Stores all information associated with a profile object, including
+ * a username, email, phone and a boolean user type identifies
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
@@ -45,12 +48,12 @@ public class Profile implements Serializable {
      * creating variables for the class to use
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param username          the users username
      * @param email             the users email
      * @param phone             the users phone number
      * @param isCareProvider    a booblean value that tells us if user is a care provider or not
      */
+
     // Constructor
     public Profile(String username, String email, String phone, boolean isCareProvider){
         // Initialize class objects
@@ -60,13 +63,17 @@ public class Profile implements Serializable {
         this.isCareProvider = isCareProvider;
     }
 
-    // Getters/Setters
+
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+
     /**
      * gets username
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
-     * @return      the users username
+     * @return  the users username
      */
     public String getUsername() {
         return username;
@@ -77,8 +84,7 @@ public class Profile implements Serializable {
      * sets the username
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
-     * @param username      the users username
+     * @param username  the users username
      */
     public void setUsername(String username) {
         this.username = username;
@@ -89,8 +95,7 @@ public class Profile implements Serializable {
      * gets user's email
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
-     * @return      the users email
+     * @return  the users email
      */
     public String getEmail() {
         return email;
@@ -101,7 +106,6 @@ public class Profile implements Serializable {
      * sets the users email
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
      * @param email      the users email
      */
     public void setEmail(String email) {
@@ -113,8 +117,7 @@ public class Profile implements Serializable {
      * gets user's phone number
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
-     * @return      the users phone number
+     * @return  the users phone number
      */
     public String getPhone() {
         return phone;
@@ -125,8 +128,7 @@ public class Profile implements Serializable {
      * sets the users phone number
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
-     * @param phone      the users phone number
+     * @param phone the users phone number
      */
     public void setPhone(String phone) {
         this.phone = phone;
@@ -137,8 +139,7 @@ public class Profile implements Serializable {
      * gets if a user is a care provider or not
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
-     * @return      true if a user is a care provider false if not
+     * @return  true if a user is a care provider false if not
      */
     public boolean getisCareProvider() {
         return isCareProvider;
@@ -149,8 +150,7 @@ public class Profile implements Serializable {
      * sets the users care provider status
      *
      * @author  Orest Cokan
-     * @version 1.0 Oct 24, 2018.
-     * @param isCareProvider      True if user is a careprovider
+     * @param isCareProvider True if user is a careprovider
      */
     public void setisCareProvider(boolean isCareProvider) {
         this.isCareProvider = isCareProvider;

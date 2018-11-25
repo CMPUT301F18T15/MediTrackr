@@ -54,10 +54,7 @@ import com.example.meditrackr.ui.patient.RecordFragment;
  * @author  Orest Cokan
  * @version 1.0 Nov 10, 2018
  * @see ProblemAdapter
- *
  */
-
-// Class shows records list and info for care providers in a recycler view
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder> {
     // Class objects
     private FragmentActivity activity;
@@ -67,15 +64,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
      * creating variables activity and records for the other functions to use
      *
      * @author  Orest Cokan
-     * @version 1.0 Nov 10, 2018
      * @param activity this is the activity to pass the data
-     * @param records this is the records the problem has
+     * @param recordList this is the records the problem has
      */
-
-    // Constructor
-    public RecordAdapter(FragmentActivity activity, RecordList records) {
+    public RecordAdapter(FragmentActivity activity, RecordList recordList) {
         this.activity = activity;
-        this.records = records;
+        records = recordList;
     }
 
     // Display the view
@@ -111,8 +105,6 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
      * @author  Orest Cokan
      * @version 1.0 Nov 10, 2018
      */
-
-    // Class places each record into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // Class objects
         private RecordAdapter adapter;

@@ -51,7 +51,25 @@ public class RecordTest {
         record = new Record
                 ("", "", "", bodyLoc);
         record.setGeoLocation(geoLoc);
-        }
+    }
+    
+    // test if a Record is constructed with its attributes
+    @Test
+    public void constructorTest() {
+        String title = "Record";
+        String desc = "Description";
+        String date = "Date";
+        double[] coords = {25, 12};
+        String face = "bodyface";
+        String location = "bodylocation";
+        BodyLocation bodylocation = new BodyLocation(coords, face, location);
+        Record testrecord =
+                new Record(title, desc, date, bodylocation);
+        assertEquals(title, testrecord.getTitle());
+        assertEquals(desc, testrecord.getDescription());
+        assertEquals(date, testrecord.getDate());
+        assertEquals(bodylocation, testrecord.getBodyLocation());
+    }
 
     // Test if the record can have its properties modified
     @Test

@@ -22,6 +22,7 @@ package com.example.meditrackr.ui;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 // If Camera button icon is clicked
                 else if (v == camera) {
                     // Darken camera icon
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full));
+                    //image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full));
                 }
 
                 // If Search button icon is clicked
@@ -169,6 +170,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager manager = getSupportFragmentManager();
+        if(manager.getBackStackEntryCount() > 0){
+            super.onBackPressed();
+        }
+    }
 
     // Sets the home view depending on the kind of user
     public void setHomeView(boolean isCareProvider){
@@ -206,9 +215,11 @@ public class MainActivity extends AppCompatActivity {
     public void initButtons(){
         problems.setImageDrawable(getResources().getDrawable(R.drawable.cross));
         map.setImageDrawable(getResources().getDrawable(R.drawable.map));
-        camera.setImageDrawable(getResources().getDrawable(R.drawable.camera));
+        camera.setImageDrawable(getResources().getDrawable(R.drawable.new_camera_icon));
         search.setImageDrawable(getResources().getDrawable(R.drawable.search));
         profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
     }
+
+
 
 }

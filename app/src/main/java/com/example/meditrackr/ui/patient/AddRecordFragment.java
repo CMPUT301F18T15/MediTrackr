@@ -139,10 +139,10 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_record, container, false);
 
-        /************************************************************************
+        /*---------------------------------------------------------------------------
          * GET LOCATION PERMISSIONS
-         ************************************************************************/
-        // Get device location if location permission is granted
+         *--------------------------------------------------------------------------*/
+
         getLocationPermission();
         if(mLocationPermissionsGranted){
             getDeviceLocation();
@@ -153,10 +153,10 @@ public class AddRecordFragment extends Fragment implements LocationListener {
 
         // nifty location controller that helps with getting locations
 
-        /************************************************************************
+        /*---------------------------------------------------------------------------
          * INITIALIZE UI COMPONENTS
-         ************************************************************************/
-        // Initialize ui attributes
+         *--------------------------------------------------------------------------*/
+
         final EditText recordTitle = (EditText) rootView.findViewById(R.id.record_title_field);
         final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
@@ -180,11 +180,12 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         images[8] = (ImageView) rootView.findViewById(R.id.image_9);
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
 
+
+
         //On click listener for adding a record
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkInputs(recordTitle, recordDescription)){ // If checkInputs is True
                     // Create the new record
                     Record record = createRecord(recordTitle, recordDescription);
 
@@ -194,38 +195,36 @@ public class AddRecordFragment extends Fragment implements LocationListener {
 
                     // Transition back to all the records
                     FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    RecordsFragment fragment = RecordsFragment.newInstance(index);
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit(); // Make permanent all changes made in fragment
-                }
+                    int count = manager.getBackStackEntryCount();
+                    manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-
-                else {
-                    Toasty.error(getContext(), "Please enter a valid format for record", Toast.LENGTH_LONG).show();
-
-                }
             }
-        });
+            }
+        );
 
 
-        /***************************************************************************
+        /*---------------------------------------------------------------------------
          * ADD NEW IMAGES TO RECORD
-         ***************************************************************************/
+         *--------------------------------------------------------------------------*/
         // OnClickListener handles camera button
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (bitmaps[9] == null){
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent,
                         IMAGE_REQUEST_CODE);
+            } else {
+                Toasty.error(getContext(), "Unable to add more than 10 photos!"
+                        , Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
 
-        /***************************************************************************
+        /*---------------------------------------------------------------------------
          * SET GEO-LOCATION
-         ***************************************************************************/
+         *--------------------------------------------------------------------------*/
         // Initialize the map picker and select a place you want to go
         addressView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -243,18 +242,21 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         return rootView;
     }
 
-    /************************************************************************
+
+    /*---------------------------------------------------------------------------
      * CREATE NEW RECORD
-     ************************************************************************/
+     *--------------------------------------------------------------------------*/
     // Creates and returns a new record object using the required information from the view
     private Record createRecord(EditText title, EditText description) {
         Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
         // In new record include user input title and description
+
         Record record = new Record(
                 title.getText().toString(),
                 description.getText().toString(),
                 date,
                 null);
+
         record.setGeoLocation(geolocation);
         for(Bitmap bitmap: bitmaps){ // For each image
             if(bitmap != null) { // If image is not null convert image into base64 string
@@ -267,16 +269,6 @@ public class AddRecordFragment extends Fragment implements LocationListener {
         return record;
     }
 
-    // Checks that the title and description are not empty
-    public boolean checkInputs(EditText title, EditText description){
-        if(((title != null && !title.getText().toString().isEmpty()) &&
-                (description != null && !description.getText().toString().isEmpty()))){
-            return true; // If not empty return true
-        }
-        else {
-            return false; // If empty return false
-        }
-    }
 
     /************************************************************************
      * EXTRACT LOCATION, IMAGE DATA FROM ACTIVITIES
@@ -293,13 +285,17 @@ public class AddRecordFragment extends Fragment implements LocationListener {
 
             // Makes sure that bitmap is not null before compressing the bitmap into PNG format
             assert bmp != null;
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            bmp.compress(Bitmap.CompressFormat.PNG, 40, stream);
             // Put compress format array into byte array
             byte[] byteArray = stream.toByteArray();
 
             // Convert byte array to Bitmap
             bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                     byteArray.length);
+            String encoded = ConvertImage.base64Encode(bitmap);
+
+
+            //TODO PART 5, IMPLEMENT COMPRESSION OF PHOTOS
 
             // Populate image
             for(int i = 0; i < bitmaps.length; i++){

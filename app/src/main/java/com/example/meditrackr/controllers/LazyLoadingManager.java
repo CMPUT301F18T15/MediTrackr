@@ -25,6 +25,8 @@ import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.ImageSave;
 
+import java.util.ArrayList;
+
 /**
  * LazyLoadingManager.java primary purpose is to assist in lazy loading information, rather than holding
  * every single piece of information about a user at any given moment, each attribute below is
@@ -42,13 +44,13 @@ public class LazyLoadingManager {
     private static Patient carePatient;
     private static int problemIndex;
     private static ImageSave images;
+    private static ArrayList<Patient> patients;
 
 
     /**
      * gets a profile
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      * @return profile the profile that it retrieved
      * @see Profile
      */
@@ -62,7 +64,6 @@ public class LazyLoadingManager {
      * sets the profile
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      */
     // Profile setter
     public static void setProfile(Profile profile) {
@@ -74,7 +75,6 @@ public class LazyLoadingManager {
      * gets a patient
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      * @return profile the profile for that patient that it retrieved
      * @see Patient
      */
@@ -88,7 +88,6 @@ public class LazyLoadingManager {
      * gets a care Provider
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      * @return profile the profile for that care Provider that it retrieved
      * @see CareProvider
      */
@@ -115,7 +114,6 @@ public class LazyLoadingManager {
      * finds out if the profile is a care provider or not
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      * @return either 1 for care provider or 0 for patient
      */
     // Boolean, 1 for careprovider and 0 for patient
@@ -126,7 +124,6 @@ public class LazyLoadingManager {
      * gets the patient that a care provider has
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      * @return the patient the care provider has
      * @see Patient
      */
@@ -138,8 +135,8 @@ public class LazyLoadingManager {
 
     /**
      * sets the carePatient
+     *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      * @param carePatient this is the patient that a care provider has
      */
     // Sets the patient for a care provider
@@ -152,7 +149,6 @@ public class LazyLoadingManager {
      * gets a problems index
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      * @return problemIndex the index of that problem
      */
     // Gets the problem's index
@@ -165,7 +161,6 @@ public class LazyLoadingManager {
      * sets the problem index
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      */
     // Sets the problem's index
     public static void setProblemIndex(int problemIndex) {
@@ -177,7 +172,6 @@ public class LazyLoadingManager {
      * gets the username of user
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      * @return currentUsername the username of that user
      */
     // Get the user's username
@@ -190,7 +184,6 @@ public class LazyLoadingManager {
      * sets the username of that user
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      */
     // Set the user's username
     public static void setCurrentUsername(String currentUsername) {
@@ -202,7 +195,6 @@ public class LazyLoadingManager {
      * gets images
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      * @return images the profile that it retrieved
      */
     // Gets the profile's images
@@ -215,11 +207,25 @@ public class LazyLoadingManager {
      * sets the images
      *
      * @author Orest Cokan
-     * @version 2.0 Nov 7, 2018
      */
     // Sets the profile's images
     public static void setImages(ImageSave images) {
         LazyLoadingManager.images = images;
     }
+
+
+    public static ArrayList<Patient> getPatients() {
+        if (patients != null) {
+            return patients;
+        } else {
+            patients = new ArrayList<>();
+            return patients;
+        }
+    }
+
+    public static void setPatients(ArrayList<Patient> patients) {
+        LazyLoadingManager.patients = patients;
+    }
+
 }
 

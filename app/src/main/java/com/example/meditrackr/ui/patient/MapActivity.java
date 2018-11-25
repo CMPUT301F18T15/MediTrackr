@@ -404,7 +404,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     };
 
+<<<<<<< HEAD
     // Gets location info from location found
+=======
+
+>>>>>>> master
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback = new ResultCallback<PlaceBuffer>() {
         @Override
         public void onResult(@NonNull PlaceBuffer places) {
@@ -482,8 +486,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     hideSoftKeyboard();
                 }
             }
+<<<<<<< HEAD
         }else { // Else if there are no marker do not add markers
             Log.d("Adding no materkers", "adding no markers");
+=======
+        }else {
+            Log.d("Adding no markers", "adding no markers");
+>>>>>>> master
         }
 
     }

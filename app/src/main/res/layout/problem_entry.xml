@@ -52,7 +52,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ellipsize="marquee"
-        android:singleLine="true"
+        android:singleLine="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorPrimaryBlack"
         android:textSize="16sp"

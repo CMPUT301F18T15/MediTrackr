@@ -34,6 +34,8 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 import com.example.meditrackr.models.Patient;
 
+import java.util.ArrayList;
+
 /**
  * shows all of the problems from patient in a list (recycler view)
  * if care provider clicks on one of these problems it will take them to see the records associated
@@ -48,12 +50,13 @@ import com.example.meditrackr.models.Patient;
 public class ProblemsFragment extends Fragment  {
     // Initialize object
     private ProblemAdapter adapter;
+    private ArrayList<Patient> patients = LazyLoadingManager.getPatients();
 
     // Creates new instance fragment and saves it as bundle
     public static ProblemsFragment newInstance(int index){
         ProblemsFragment fragment = new ProblemsFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("ProblemIndex", index);
+        bundle.putInt("PatientIndex", index);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -69,13 +72,12 @@ public class ProblemsFragment extends Fragment  {
         final RecyclerView patientList = (RecyclerView) rootView.findViewById(R.id.careprovider_view_patient);
 
         // Set bundle number as problem index
-        int index = getArguments().getInt("ProblemIndex");
-        String username = LazyLoadingManager.getCareProvider().getPatient(index); // Gets the patient username
-        Patient patient = (Patient) ElasticSearchController.searchProfile(username); // Searches for the patient by username
+        int index = getArguments().getInt("PatientIndex");
+
 
         // Adapt items into recycler view
         patientList.setHasFixedSize(false);
-        adapter = new ProblemAdapter(getActivity(), patient.getProblems());
+        adapter = new ProblemAdapter(getActivity(), patients.get(index).getProblems());
         patientList.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         patientList.setLayoutManager(manager);

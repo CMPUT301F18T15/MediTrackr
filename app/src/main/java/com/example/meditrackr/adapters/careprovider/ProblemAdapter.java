@@ -45,7 +45,7 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
 
 /**
  * This class displays all of the problems of a patient selected from a previous page (using the
- * patient adapter) in a recycler view.
+ * PatientAdapter) in a recycler view.
  *
  * There is also an onclick listener which when a problem is clicked will take the Care Provider to
  * a page with more detailed information about that problem.
@@ -62,28 +62,23 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
  * @author  Orest Cokan
  * @version 1.0 Nov 10, 2018
  * @see PatientAdapter
- *
  */
-
-// Class shows a patient's problem list and info for care providers in a recycler view
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder> {
     // Class objects
     private FragmentActivity activity;
     private static ProblemList problems;
 
     /**
-     * creating variables activity and problems for the other functions to use
+     * Constructor: Initialize the ProblemAdapter class by setting the activity
+     * to the appropriate fragment and setting the list of problems.
      *
      * @author  Orest Cokan
-     * @version 1.0 Nov 10, 2018
-     * @param activity this is the activity to pass the data
-     * @param problems this is the problems the patient has
+     * @param activity the fragment we are currently on (activity to get data from)
+     * @param problemList a list of the problems of a given patient
      */
-
-    // Constructor
-    public ProblemAdapter(FragmentActivity activity, ProblemList problems) {
+    public ProblemAdapter(FragmentActivity activity, ProblemList problemList) {
         this.activity = activity;
-        this.problems = problems;
+        problems = problemList;
     }
 
 
@@ -127,9 +122,10 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
      * This class puts information about each problem into its own view so we won't
      * display information from one problem as another. This function mainly serves an organizational
      * purpose.
+     *
+     * @author  Orest Cokan
+     * @version 1.0 Nov 10, 2018
      */
-
-    // Class places each problem into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // Class objects
         private ProblemAdapter adapter;
@@ -166,7 +162,9 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             problemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ImageSave images = adapter.problems.getProblem(getAdapterPosition()).getImageAll();
+                    ImageSave images = problems.getProblem(getAdapterPosition()).getImageAll();
+                    LazyLoadingManager.setImages(images);
+
                     if(images.getSize() == 0){ // Make not clickable if there is no image for the problem
                         problemImage.setClickable(false);
                         problemImage.setVisibility(View.INVISIBLE);

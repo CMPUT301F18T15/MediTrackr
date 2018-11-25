@@ -28,3 +28,95 @@ import android.widget.Filter;
 /**
  * Crated by Skryt on Nov 18, 2018
  */
+
+public class CustomFilter {
+    private boolean isProblem;
+    private boolean isRecord;
+    private int problemIndex;
+    private int rexordIndex;
+    private String title;
+    private String description;
+    private String date;
+
+
+
+    public CustomFilter(boolean isRecord, String title, String description, String date, int problemIndex){
+        this.isRecord = isRecord;
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.problemIndex = problemIndex;
+        this.rexordIndex = -1;
+    }
+
+    public CustomFilter(boolean isRecord, String title, String description, String date, int problemIndex, int rexordIndex){
+        this.isRecord = isRecord;
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.problemIndex = problemIndex;
+        this.rexordIndex = rexordIndex;
+    }
+
+
+
+    public boolean isProblem() {
+        return isProblem;
+    }
+
+    public void setProblem(boolean problem) {
+        isProblem = problem;
+    }
+
+    public boolean isRecord() {
+        return isRecord;
+    }
+
+    public void setRecord(boolean record) {
+        isRecord = record;
+    }
+
+    public int getProblemIndex() {
+        return problemIndex;
+    }
+
+    public void setProblemIndex(int problemIndex) {
+        this.problemIndex = problemIndex;
+    }
+
+    public int getRexordIndex() {
+        return rexordIndex;
+    }
+
+    public void setRexordIndex(int rexordIndex) {
+        this.rexordIndex = rexordIndex;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+
+
+
+}

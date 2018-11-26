@@ -96,13 +96,26 @@ public class LocationController extends Service implements LocationListener {
     // Declaring a Location Manager
     protected LocationManager locationManager;
 
+    int PERMISSION_ALL = 1;
+    String[] PERMISSIONS = {
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+    };
+
+
     /**
      * get the current location based on GPS
      * @param context the context activity
      */
     public LocationController(Context context) {
         this.context = context;
+
+        if(!hasPermissions((Activity)context, PERMISSIONS)){
+            ActivityCompat.requestPermissions((Activity)context, PERMISSIONS, PERMISSION_ALL);
+        }
         getLocation();
+
     }
 
     /**
@@ -129,6 +142,16 @@ public class LocationController extends Service implements LocationListener {
             // Dummy request code 8 used.
             ActivityCompat.requestPermissions((Activity) context,
                     new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, 8);
+        }
+        // Check if we have proper permissions to get the fine lastKnownLocation.
+        if (ContextCompat.checkSelfPermission((Activity) context, Manifest.permission.
+                CAMERA ) != PackageManager.PERMISSION_GRANTED ) {
+
+            Log.i("debugMaps","Requesting fine permission");
+            // Request the permission.
+            // Dummy request code 8 used.
+            ActivityCompat.requestPermissions((Activity) context,
+                    new String[] {Manifest.permission.CAMERA}, 8);
         }
 
 
@@ -280,6 +303,19 @@ public class LocationController extends Service implements LocationListener {
     @Override
     public IBinder onBind(Intent arg0) {
         return null;
+    }
+
+
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

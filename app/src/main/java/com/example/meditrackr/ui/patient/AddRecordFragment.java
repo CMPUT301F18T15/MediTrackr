@@ -57,10 +57,9 @@ import com.microsoft.projectoxford.vision.contract.AnalysisResult;
 import com.microsoft.projectoxford.vision.contract.Caption;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
-import java.io.InputStream;
+
 
 import es.dmoral.toasty.Toasty;
 
@@ -115,7 +114,6 @@ public class AddRecordFragment extends Fragment{
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_record, container, false);
-
 
         LocationController controller = new LocationController(getContext());
 
@@ -191,10 +189,12 @@ public class AddRecordFragment extends Fragment{
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (bitmaps[9] == null) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent,
-                            IMAGE_REQUEST_CODE);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivityForResult(intent, IMAGE_REQUEST_CODE);                    }
+
                 } else {
                     Toasty.error(getContext(), "Unable to add more than 10 photos!"
                             , Toast.LENGTH_SHORT).show();

@@ -20,6 +20,9 @@ package com.example.meditrackr.ui.patient;
 
 //imports
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -69,6 +72,9 @@ public class AddProblemFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_problem, container, false);
+
+
+        hasPermissionInManifest(getContext(), "CAMERA");
 
         /*-----------------------------------------------------------------------
          * INITIALIZE UI ATTRIBUTES
@@ -145,7 +151,24 @@ public class AddProblemFragment extends Fragment {
         return rootView;
     }
 
+    public boolean hasPermissionInManifest(Context context, String permissionName) {
+        final String packageName = context.getPackageName();
+        try {
+            final PackageInfo packageInfo = context.getPackageManager()
+                    .getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
+            final String[] declaredPermisisons = packageInfo.requestedPermissions;
+            if (declaredPermisisons != null && declaredPermisisons.length > 0) {
+                for (String p : declaredPermisisons) {
+                    if (p.equals(permissionName)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
 
+        }
+        return false;
+    }
 
     /*-----------------------------------------------------------------------
      * CHECK INPUTS FILLED: TITLE AND DESCRIPTION

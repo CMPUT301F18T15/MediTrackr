@@ -19,30 +19,16 @@
 package com.example.meditrackr.ui.patient;
 
 //imports
-import android.Manifest;
-import android.content.Context;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
-
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,18 +47,20 @@ import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.DateUtils;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.List;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.gson.Gson;
+import com.microsoft.projectoxford.vision.VisionServiceClient;
+import com.microsoft.projectoxford.vision.VisionServiceRestClient;
+import com.microsoft.projectoxford.vision.contract.AnalysisResult;
+import com.microsoft.projectoxford.vision.contract.Caption;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import java.io.InputStream;
 
 import es.dmoral.toasty.Toasty;
 
@@ -91,6 +79,7 @@ import static android.app.Activity.RESULT_OK;
 // Class creates Add Record Fragment for patients
 public class AddRecordFragment extends Fragment{
     private String date;
+    public VisionServiceClient visionServiceClient = new VisionServiceRestClient("ac585835001b490a941d07984f938e77");
 
     // Indicators and request codes
     private static final int IMAGE_REQUEST_CODE = 1;
@@ -275,6 +264,55 @@ public class AddRecordFragment extends Fragment{
             Bitmap bmp = (Bitmap) data.getExtras().get("data");
             assert bmp != null;
             Log.d("BMP", bmp.getHeight()+"   " +bmp.getWidth()+"");
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+            final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+
+            @SuppressLint("StaticFieldLeak") final AsyncTask<InputStream,String,String> visionTask = new AsyncTask<InputStream, String, String>() {
+                ProgressDialog mDialog = new ProgressDialog((Activity)getContext());
+                @Override
+                protected String doInBackground(InputStream... params) {
+                    try{
+                        publishProgress("Recognizing....");
+                        String[] features = {"Description"};
+                        String[] details = {};
+
+                        AnalysisResult result = visionServiceClient.analyzeImage(params[0],features,details);
+
+                        String strResult = new Gson().toJson(result);
+                        return strResult;
+
+                    } catch (Exception e) {
+                        return null;
+                    }
+                }
+
+                @Override
+                protected void onPreExecute() {
+                    mDialog.show();
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    mDialog.dismiss();
+
+                    AnalysisResult result = new Gson().fromJson(s,AnalysisResult.class);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for(Caption caption:result.description.captions)
+                    {
+                        stringBuilder.append(caption.text);
+                    }
+                    Toasty.success(getContext(), "You took an image of:" + stringBuilder, Toast.LENGTH_LONG).show();
+
+                }
+
+                @Override
+                protected void onProgressUpdate(String... values) {
+                    mDialog.setMessage(values[0]);
+                }
+            };
+
+            visionTask.execute(inputStream);
 
             // Populate image
             for(int i = 0; i < bitmaps.length; i++){
@@ -303,6 +341,9 @@ public class AddRecordFragment extends Fragment{
             Toasty.info(getContext(), toastMsg, Toast.LENGTH_LONG).show();
         }
     }
+
+
+
 
 
 }

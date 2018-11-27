@@ -55,6 +55,7 @@ import com.microsoft.projectoxford.vision.VisionServiceClient;
 import com.microsoft.projectoxford.vision.VisionServiceRestClient;
 import com.microsoft.projectoxford.vision.contract.AnalysisResult;
 import com.microsoft.projectoxford.vision.contract.Caption;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -78,7 +79,7 @@ import static android.app.Activity.RESULT_OK;
 // Class creates Add Record Fragment for patients
 public class AddRecordFragment extends Fragment{
     private String date;
-    public VisionServiceClient visionServiceClient = new VisionServiceRestClient("ac585835001b490a941d07984f938e77");
+    public VisionServiceClient visionServiceClient = new VisionServiceRestClient("###########", "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0");
 
     // Indicators and request codes
     private static final int IMAGE_REQUEST_CODE = 1;
@@ -286,6 +287,7 @@ public class AddRecordFragment extends Fragment{
                         return null;
                     }
                 }
+
 
                 @Override
                 protected void onPreExecute() {

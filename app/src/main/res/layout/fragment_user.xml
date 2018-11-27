@@ -128,5 +128,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/qr_code_button" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="154dp"
+        android:layout_height="87dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="108dp"
+        tools:layout_editor_absoluteY="590dp" />
+
 
 </android.support.constraint.ConstraintLayout>

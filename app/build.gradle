@@ -50,3 +50,7 @@ dependencies {
 
 
 }
+
+configurations {
+    all*.exclude group: 'com.google.code.gson'
+}

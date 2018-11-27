@@ -18,7 +18,7 @@
  */
 package com.example.meditrackr.controllers;
 
-//
+//imports
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;

@@ -16,7 +16,6 @@
  *limitations under the License.
  *
  */
-
 package com.example.meditrackr.controllers.model;
 
 import android.app.Activity;
@@ -50,20 +49,6 @@ import es.dmoral.toasty.Toasty;
 
 // Controller class for user login
 public class LoginController {
-<<<<<<< HEAD
-    
-    /**
-     * Runs when the user presses login button
-     * @author Orest Cokan
-     * @version 1.0 Nov 17, 2018
-     * @param activity      the activity that the app was using
-     * @param context       the context the adapter will use
-     * @param profile       the profile that will try to login
-     * @see Profile
-     */
-    // Runs when the user presses login button
-    public static void login(Context context, Activity activity, final Profile profile) {
-=======
 
     /**
      * Logins in the profile as well as
@@ -77,7 +62,6 @@ public class LoginController {
      */
     public static void login(final Context context, Activity activity, final Profile profile) {
 
->>>>>>> master
 
         // Create new thread execution
         Thread thread = new Thread(new Runnable() {
@@ -142,18 +126,6 @@ public class LoginController {
         Intent intent = new Intent(activity, MainActivity.class);
         activity.startActivity(intent);
     }
-<<<<<<< HEAD
-    
-    /**
-     * Checks if profile already exists in memory and logs in
-     * @author Orest Cokan
-     * @version 1.0 Nov 17, 2018
-     * @param activity      the activity that the app was using
-     * @param context       the context the adapter will use
-     * @param username      the username to check the database with
-     */
-    // Checks if profile already exists in memory and logs in
-=======
 
     /**
      * checks the username first in
@@ -165,7 +137,7 @@ public class LoginController {
      * @param activity  the LoginFragments activity
      * @param username  the username to be checked
      */
->>>>>>> master
+
     public static void checkProfile(Activity activity, Context context, String username) {
         // Gets profile from memory
         Profile profile;
@@ -187,19 +159,6 @@ public class LoginController {
         }
     }
 
-<<<<<<< HEAD
-    /**
-     * checks to see if patient is Database if so log in
-     *
-     * @author Orest Cokan
-     * @version 1.0 Nov 17, 2018
-     * @param activity      the activity that the app was using
-     * @param context       the context the adapter will use
-     * @param username      the username to check the database with
-     */
-    // Check if profile already exists in ES and logs in
-=======
-
     /**
      * checks the username in ElasticSearch
      * if it returns a user, go to login,
@@ -209,7 +168,6 @@ public class LoginController {
      * @param activity  the LoginFragments activity
      * @param username  the username to be checked
      */
->>>>>>> master
     public static void checkProfileES(Activity activity, Context context, String username) {
         // Gets profile from ES
         Profile profile = ElasticSearchController.searchProfile(username);

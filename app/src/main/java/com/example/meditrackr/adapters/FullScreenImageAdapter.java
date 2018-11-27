@@ -16,7 +16,6 @@
  *limitations under the License.
  *
  */
-
 package com.example.meditrackr.adapters;
 
     /**
@@ -99,7 +98,7 @@ import com.example.meditrackr.utils.ConvertImage;
 
             return viewLayout; // return image
         }
-        // Handle the close button for image view?
+        // Handle the close button for image view
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             ((ViewPager) container).removeView((RelativeLayout) object);

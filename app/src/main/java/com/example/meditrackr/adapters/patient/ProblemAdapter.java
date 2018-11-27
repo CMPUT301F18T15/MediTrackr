@@ -1,6 +1,5 @@
 package com.example.meditrackr.adapters.patient;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,9 +19,10 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
-import com.example.meditrackr.models.record.ImageSave;
+import com.example.meditrackr.models.record.PhotoList;
 import com.example.meditrackr.ui.FullScreenViewActivity;
 import com.example.meditrackr.ui.patient.EditProblemFragment;
 import com.example.meditrackr.ui.patient.RecordsFragment;
@@ -96,7 +96,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             holder.problemImage.setImageBitmap(null); // If the problem does not have any images set image to null
             Log.d("ImageTest", "New profile this should be shown!");
         }else { // Else show image pertaining to the problem
-            holder.problemImage.setImageBitmap(ConvertImage.base64Decode(
+            holder.problemImage.setImageBitmap(ConvertImage.convertByteToBitmap(
                     problems.getProblem(position).getImageAll().getImage(0)));
         }
     }
@@ -167,8 +167,9 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                                             adapter.problems.getSize());
                                     Log.d("DeleteProblem", "Position: " + position);
                                     // Save changes to memory and ES
-                                    SaveLoadController.saveProfile(adapter.context, LazyLoadingManager.getPatient());
-                                    ElasticSearchController.updateUser(LazyLoadingManager.getPatient());
+                                    ThreadSaveController.save(adapter.context, LazyLoadingManager.getPatient());
+                                    //SaveLoadController.saveProfile(adapter.context, LazyLoadingManager.getPatient());
+                                    //ElasticSearchController.updateUser(LazyLoadingManager.getPatient());
                                     dialog.cancel(); // Close alert dialog box
                                 }
                             });
@@ -214,7 +215,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    ImageSave images = adapter.problems.getProblem(position).getImageAll();
+                    PhotoList images = adapter.problems.getProblem(position).getImageAll();
                     if(images.getSize() == 0){
                         problemImage.setClickable(false);
                         problemImage.setVisibility(View.INVISIBLE);

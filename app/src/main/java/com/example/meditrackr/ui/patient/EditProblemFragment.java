@@ -37,6 +37,7 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 
@@ -138,8 +139,9 @@ public class EditProblemFragment extends Fragment {
                         problem.setDescription(description.getText().toString());
 
                         // Save problem into ES and memory
-                        ElasticSearchController.updateUser(patient);
-                        SaveLoadController.saveProfile(getContext(), patient);
+                        ThreadSaveController.save(getContext(), patient);
+                        //ElasticSearchController.updateUser(patient);
+                        //SaveLoadController.saveProfile(getContext(), patient);
                         Log.d("EditProblem", "Profile: " + patient.getUsername() + " Problems: "
                                 + patient.getProblems());
 

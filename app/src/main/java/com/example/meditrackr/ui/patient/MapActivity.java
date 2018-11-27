@@ -20,6 +20,7 @@ package com.example.meditrackr.ui.patient;
 
 //imports
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -54,6 +55,7 @@ import com.example.meditrackr.models.PlaceInfo;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
+import com.example.meditrackr.models.record.RecordList;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -93,8 +95,7 @@ import es.dmoral.toasty.Toasty;
 // Class handles map activity
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener {
-    // OnConnectionFailedListener provides callbacks for events that result in a
-    // failed attempt to connect the client to service
+    Profile profile = LazyLoadingManager.getProfile();
 
     // When connection to client failed
     @Override
@@ -128,7 +129,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     // Indicators and request codes
     private static final String TAG = "MapActivity";
-
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
@@ -139,16 +139,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     // Initialize widgets
     private AutoCompleteTextView mSearchText;
-    private ImageView mGps, mInfo, mPlacePicker;
+    private ImageView mGps, mInfo;
 
     // Initialize variables
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
     private GoogleApiClient mGoogleApiClient;
     private PlaceInfo mPlace;
     private Marker mMarker;
+    private Patient patientRecords;
 
 
     // Creates map activity view objects based on layouts in XML
@@ -161,8 +161,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mGps = (ImageView) findViewById(R.id.ic_gps);
         mInfo = (ImageView) findViewById(R.id.place_info);
 
+<<<<<<< HEAD
         // Get location permissions
+=======
+
+        checkUser();
+>>>>>>> master
         getLocationPermission();
+
 
 
     }
@@ -268,8 +274,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
 
+<<<<<<< HEAD
         // Create a new instance of FusedLocationProviderClient for use in a non-activity context
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+=======
+        FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+>>>>>>> master
 
         try {
             // If location permission was granted
@@ -285,11 +295,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             Log.d(TAG, "onComplete: found location!");
                             // Set location
                             Location currentLocation = (Location) task.getResult();
+<<<<<<< HEAD
 
                             // Move map to display current location
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                     DEFAULT_ZOOM,
                                     "My Location");
+=======
+                            try {
+                                moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
+                                        DEFAULT_ZOOM,
+                                        "My Location");
+                            } catch(NullPointerException e){
+                                e.printStackTrace();
+                            }
+>>>>>>> master
 
                         } else { // Location does not exist or could not be found indicate so
                             Log.d(TAG, "onComplete: current location is null");
@@ -419,21 +439,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             try {
                 mPlace = new PlaceInfo();
                 mPlace.setName(place.getName().toString());
-                Log.d(TAG, "onResult: name: " + place.getName());
                 mPlace.setAddress(place.getAddress().toString());
-                Log.d(TAG, "onResult: address: " + place.getAddress());
                 mPlace.setId(place.getId());
-                Log.d(TAG, "onResult: id:" + place.getId());
                 mPlace.setLatlng(place.getLatLng());
-                Log.d(TAG, "onResult: latlng: " + place.getLatLng());
                 mPlace.setRating(place.getRating());
-                Log.d(TAG, "onResult: rating: " + place.getRating());
-                mPlace.setPhoneNumber(place.getPhoneNumber().toString());
-                Log.d(TAG, "onResult: phone number: " + place.getPhoneNumber());
-                mPlace.setWebsiteUri(place.getWebsiteUri());
-                Log.d(TAG, "onResult: website uri: " + place.getWebsiteUri());
 
-                Log.d(TAG, "onResult: place: " + mPlace.toString());
             } catch (NullPointerException e) {
                 Log.e(TAG, "onResult: NullPointerException: " + e.getMessage());
             }
@@ -449,6 +459,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     // Place markers on map according to user info
     public void placeMarkers() {
         Profile profile = LazyLoadingManager.getProfile();
+<<<<<<< HEAD
         if(!profile.getisCareProvider()) { // If account belongs to a patient
             Patient patient = LazyLoadingManager.getPatient();
             for (int i = 0; i < patient.getProblems().getSize(); i++) { // Set a marker on map for each problem
@@ -481,14 +492,77 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                     // Hide keyboard
                     hideSoftKeyboard();
-                }
+=======
+        if (!profile.getisCareProvider()) {
+            Patient patient = LazyLoadingManager.getPatient();
+            extractInformation(patient);
+        }
+        else if(patientRecords != null) {
+            extractInformation(patientRecords);
+        }
+        else{
+            ArrayList<Patient> patients = LazyLoadingManager.getPatients();
+            for(Patient patient: patients){
+                extractInformation(patient);
             }
+        }
+    }
+
+
+    public void extractInformation(Patient patient){
+        for (int i = 0; i < patient.getProblems().getSize(); i++) {
+            Log.d("MAPMARKER", "problemlist size" + patient.getProblems().getSize());
+            for (int j = 0; j < patient.getProblem(i).getRecords().getSize(); j++) {
+                Geolocation geolocation = patient.getProblem(i).getRecords().getRecord(j).getGeoLocation();
+                Record record = patient.getProblem(i).getRecords().getRecord(j);
+
+                mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
+
+                try {
+                    String snippet =
+                            "Record #: " + j + "\n" +
+                                    "Username: " + patient.getUsername() + "\n"+
+                                    "Date: " + record.getDate() + "\n" +
+                                    "Description: " + record.getDescription() + "\n";
+
+                    MarkerOptions options = new MarkerOptions()
+                            .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
+                            .title(patient.getProblem(i).getDescription())
+                            .snippet(snippet);
+
+                    mMarker = mMap.addMarker(options);
+
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage());
+>>>>>>> master
+                }
+
+
+                hideSoftKeyboard();
+                Log.d("Adding no markers", "adding no markers");
+            }
+<<<<<<< HEAD
         }else { // Else if there are no marker do not add markers
             Log.d("Adding no materkers", "adding no markers");
         }else {
             Log.d("Adding no markers", "adding no markers");
-        }
+=======
 
+>>>>>>> master
+        }
+    }
+
+
+    public void checkUser(){
+        if (profile.getisCareProvider()) {
+            Intent intent = getIntent();
+            try {
+                patientRecords = (Patient) intent.getExtras().getSerializable("Patient");
+            }
+            catch(NullPointerException e){
+                e.printStackTrace();
+            }
+        }
     }
 }
 

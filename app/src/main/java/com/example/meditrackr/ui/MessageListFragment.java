@@ -35,6 +35,7 @@ import com.example.meditrackr.adapters.MessageListAdapter;
 import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Comment;
 import com.example.meditrackr.models.CommentList;
 import com.example.meditrackr.models.Patient;
@@ -113,8 +114,9 @@ public class MessageListFragment extends Fragment {
                     comments.addComment(comment);
                     adapter.notifyDataSetChanged();
                     chatBox.setText(null);
-                    SaveLoadController.saveProfile(getContext(), patient);
-                    ElasticSearchController.updateUser(patient);
+                    ThreadSaveController.save(getContext(), patient);
+                    //SaveLoadController.saveProfile(getContext(), patient);
+                    //ElasticSearchController.updateUser(patient);
                     messageList.smoothScrollToPosition(comments.getSize());
                 }
                 else{

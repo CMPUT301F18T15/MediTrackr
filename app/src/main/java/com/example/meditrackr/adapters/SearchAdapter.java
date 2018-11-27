@@ -57,6 +57,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         private FragmentActivity activity;
         private Context context;
         private ArrayList<CustomFilter> results;
+        private Profile profile = LazyLoadingManager.getProfile();
 
         // Constructor
         /**
@@ -85,7 +86,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
 
 
-        // Class places each record into its corresponding view
+        // Class places each search item into its corresponding view
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.titleTxt.setText(results.get(position).getTitle());
@@ -93,9 +94,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
             if(results.get(position).isRecord()){
                 holder.typeTxt.setText("Record");
-            }else
-            {
+            }else {
                 holder.typeTxt.setText("Problem");
+            }
+
+            if(profile.getisCareProvider()){
+                holder.usernameTxt.setText(results.get(position).getUsername());
             }
         }
 
@@ -111,7 +115,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private SearchAdapter adapter;
         private ImageView img;
-        private TextView titleTxt, typeTxt, descriptionTxt;
+        private TextView titleTxt, typeTxt, descriptionTxt, usernameTxt;
 
 
         // Constructor and gets the corresponding data for each view
@@ -121,6 +125,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             this.titleTxt = (TextView) itemView.findViewById(R.id.titleText);
             this.typeTxt = (TextView) itemView.findViewById(R.id.typeText);
             this.descriptionTxt = (TextView)itemView.findViewById(R.id.descriptionText);
+            this.usernameTxt = (TextView) itemView.findViewById(R.id.usernameText);
 
             itemView.setOnClickListener(this);
             this.adapter = adapter;
@@ -129,35 +134,56 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
 
         // onclick listener for each problem to be viewed
-        // this onclick listener is gods work
+        // this onclick listener is Gods work
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
             Profile profile = LazyLoadingManager.getProfile();
+            CustomFilter filter = adapter.results.get(position);
+
             if(!profile.getisCareProvider()){
                 Patient patient = (Patient) profile;
-                CustomFilter filter = adapter.results.get(position);
-
                 // going in as a PATIENT
                 if(adapter.results.get(position).isRecord()){
                     Record record = patient.getProblem(filter.getProblemIndex())
-                            .getRecord(filter.getRexordIndex());
+                            .getRecord(filter.getRecordIndex());
                     RecordFragment fragment = RecordFragment.newInstance(record);
                     transaction.addToBackStack(null);
                     transaction.replace(R.id.content, fragment);
-                    transaction.commit();
-                } else {
+                }
+                else {
                     RecordsFragment fragment = RecordsFragment.newInstance(filter.getProblemIndex());
                     transaction.addToBackStack(null);
                     transaction.replace(R.id.content, fragment);
-                    transaction.commit();
-
-
                 }
+                transaction.commit();
             } else { // going in as a doctor
-
+                String username = adapter.results.get(position).getUsername();
+                ArrayList<Patient> patients = LazyLoadingManager.getPatients();
+                if(adapter.results.get(position).isRecord()){
+                    for(Patient patient: patients){
+                        if(patient.getUsername() == username){
+                            Record record = patient.getProblem(filter.getProblemIndex()).getRecord(filter.getRecordIndex());
+                            RecordFragment fragment = RecordFragment.newInstance(record);
+                            transaction.addToBackStack(null);
+                            transaction.replace(R.id.content, fragment);
+                        }
+                    }
+                }else{
+                    for(Patient patient: patients){
+                        if(patient.getUsername() == username){
+                            com.example.meditrackr.ui.careprovider.RecordsFragment fragment =
+                                    com.example.meditrackr.ui.careprovider.RecordsFragment.
+                                            newInstance(patient.getProblem(filter.getProblemIndex()).
+                                                    getRecords(), patient.getProblem(filter.getProblemIndex()).getComments());
+                            transaction.addToBackStack(null);
+                            transaction.replace(R.id.content, fragment);
+                        }
+                    }
+                }
+                transaction.commit();
             }
         }
     }

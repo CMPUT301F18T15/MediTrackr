@@ -36,18 +36,17 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.models.record.ImageSave;
+import com.example.meditrackr.models.record.PhotoList;
 import com.example.meditrackr.utils.ConvertImage;
 
     public class FullScreenImageAdapter extends PagerAdapter {
 
         private Activity activity;
-        private ImageSave images;
+        private PhotoList images;
         private LayoutInflater inflater;
 
         /**
@@ -60,7 +59,7 @@ import com.example.meditrackr.utils.ConvertImage;
          */
         // constructor
         public FullScreenImageAdapter(Activity activity,
-                                      ImageSave images) {
+                                      PhotoList images) {
             this.activity = activity;
             this.images = images;
         }
@@ -78,10 +77,9 @@ import com.example.meditrackr.utils.ConvertImage;
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView imgDisplay;
-            Button btnClose;
             // Creates view objects based on layouts in XML
-            inflater = (LayoutInflater) activity
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
             View viewLayout = inflater.inflate(R.layout.layout_fullscreen_image, container,
                     false);
 
@@ -93,9 +91,9 @@ import com.example.meditrackr.utils.ConvertImage;
             // Each pixel in a bitmap image will be stored on 4 bytes
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             // Get byte array of the image
-            String image = images.getImage(position);
+            byte[] image = images.getImage(position);
             // Convert a Base64 String into an image
-            imgDisplay.setImageBitmap(ConvertImage.base64Decode(image));
+            imgDisplay.setImageBitmap(ConvertImage.convertByteToBitmap(image));
 
             ((ViewPager) container).addView(viewLayout);
 

@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
+import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.ui.careprovider.PatientsFragment;
 import com.example.meditrackr.ui.patient.MapActivity;
 import com.example.meditrackr.ui.patient.ProblemsFragment;
@@ -174,7 +175,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         FragmentManager manager = getSupportFragmentManager();
-        if(manager.getBackStackEntryCount() > 0){
+        if(manager.getBackStackEntryCount() == 0) {
+            finishAffinity();
+            System.exit(0);
+        }else{
             super.onBackPressed();
         }
     }

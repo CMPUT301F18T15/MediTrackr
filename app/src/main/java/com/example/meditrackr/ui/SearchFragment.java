@@ -27,6 +27,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,9 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.SearchAdapter;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Problem;
+import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.utils.CustomFilter;
 
@@ -55,11 +58,13 @@ import br.com.mauker.materialsearchview.MaterialSearchView;
 public class SearchFragment extends Fragment {
 
     // Initialize class objects
-    private Patient patient = LazyLoadingManager.getPatient();
+    private Profile profile = LazyLoadingManager.getProfile();
     private SearchView mSearch;
     private ArrayList<CustomFilter> customFilter;
+    private Patient patient;
+    private RecyclerView rv;
 
-    // Create new frgament instance
+    // Create new fragment instance
     public static SearchFragment newInstance() {
         SearchFragment fragment = new SearchFragment();
         return fragment;
@@ -78,18 +83,33 @@ public class SearchFragment extends Fragment {
         icon.setColorFilter(Color.BLACK);
         mSearch.setIconified(false);
         mSearch.setClickable(true);
-        final RecyclerView rv = rootView.findViewById(R.id.myRecycler);
+        rv = rootView.findViewById(R.id.myRecycler);
 
         // Set view properties
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setItemAnimator(new DefaultItemAnimator());
 
 
+        if(!profile.getisCareProvider()){
+            patient = (Patient) profile;
+        }
+
+        onCreate();
+
+
         // Sets a listener for user text input
         mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                customFilter = parseText(query);
+                customFilter = new ArrayList<>();
+                if(!profile.getisCareProvider()) {
+                    parseText(query, patient);
+                }else {
+                    ArrayList<Patient> patients = LazyLoadingManager.getPatients();
+                    for(int i = 0; i < patients.size(); i++){
+                        parseText(query, patients.get(i));
+                    }
+                }
                 SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter);
                 rv.setAdapter(adapter);
 
@@ -99,9 +119,18 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                customFilter = parseText(newText);
+                customFilter = new ArrayList<>();
+                if(!profile.getisCareProvider()) {
+                    parseText(newText, patient);
+                }else {
+                    ArrayList<Patient> patients = LazyLoadingManager.getPatients();
+                    for(int i = 0; i < patients.size(); i++){
+                        parseText(newText, patients.get(i));
+                    }
+                }
                 SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter);
                 rv.setAdapter(adapter);
+
                 return false;
             }
         });
@@ -110,15 +139,17 @@ public class SearchFragment extends Fragment {
     }
 
 
-    public ArrayList<CustomFilter> parseText(String query){
-        ArrayList<CustomFilter> customFilter = new ArrayList<>();
+    public void parseText(String query, Patient patient){
         String[] keywords = query.split(" ");
+
         for (String keyword : keywords) {
             for (int i = 0; i < patient.getProblems().getSize(); i++) {
                 Problem problem = patient.getProblem(i);
                 if (problem.getDescription().contains(keyword)
                         || problem.getTitle().contains(keyword)) {
-                    CustomFilter filter = new CustomFilter(false,
+                    CustomFilter filter = new CustomFilter(
+                            patient.getUsername(),
+                            false,
                             problem.getTitle(),
                             problem.getDescription(),
                             problem.getDate(),
@@ -129,7 +160,9 @@ public class SearchFragment extends Fragment {
                     Record record = problem.getRecord(j);
                     if (record.getDescription().contains(keyword)
                             || record.getTitle().contains(keyword)) {
-                        CustomFilter filter = new CustomFilter(true,
+                        CustomFilter filter = new CustomFilter(
+                                patient.getUsername(),
+                                true,
                                 record.getTitle(),
                                 record.getDescription(),
                                 record.getDate(),
@@ -141,7 +174,20 @@ public class SearchFragment extends Fragment {
                 }
             }
         }
-        return customFilter;
+    }
+
+    public void onCreate(){
+        customFilter = new ArrayList<>();
+        if(!profile.getisCareProvider()) {
+            parseText("", patient);
+        }else {
+            ArrayList<Patient> patients = LazyLoadingManager.getPatients();
+            for(int i = 0; i < patients.size(); i++){
+                parseText("", patients.get(i));
+            }
+        }
+        SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter);
+        rv.setAdapter(adapter);
     }
 }
 

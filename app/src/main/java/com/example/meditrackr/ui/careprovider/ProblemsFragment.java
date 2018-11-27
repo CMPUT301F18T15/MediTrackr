@@ -19,6 +19,7 @@
 package com.example.meditrackr.ui.careprovider;
 
 //imports
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +27,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.careprovider.ProblemAdapter;
@@ -33,6 +35,7 @@ import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.ui.patient.MapActivity;
 
 import java.util.ArrayList;
 
@@ -70,9 +73,10 @@ public class ProblemsFragment extends Fragment  {
 
         // Initialize recycler view for problem list
         final RecyclerView patientList = (RecyclerView) rootView.findViewById(R.id.careprovider_view_patient);
+        final ImageButton gps = (ImageButton) rootView.findViewById(R.id.view_gps);
 
         // Set bundle number as problem index
-        int index = getArguments().getInt("PatientIndex");
+        final int index = getArguments().getInt("PatientIndex");
 
 
         // Adapt items into recycler view
@@ -87,6 +91,19 @@ public class ProblemsFragment extends Fragment  {
         // Add spacing between views
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         patientList.addItemDecoration(decoration);
+
+        gps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MapActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Patient", patients.get(index));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
 
         return rootView;
     }

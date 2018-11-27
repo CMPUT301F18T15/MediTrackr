@@ -19,19 +19,29 @@
 package com.example.meditrackr.controllers;
 
 //imports
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Service;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
 
@@ -64,259 +74,249 @@ import es.dmoral.toasty.Toasty;
  */
 
 // Controller class for location
-public class LocationController {
-    // Class objects and arrays
-    private Geocoder geocoder;
-    private int maxResults = 2;
-    private List<Address> locationList = new ArrayList<>();
-    private ArrayList<String> locationNameList = new ArrayList<>();
+public class LocationController extends Service implements LocationListener {
+    private final Context context;
 
-    // Location attributes
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-    private Location location;
-    private Address adrress;
-    private int addressIndex;
-    private double latitude, longitude;
-    private String addressName;
+    // flags
+    boolean isGPSEnabled = false;
+    boolean isNetworkEnabled = false;
+    boolean canGetLocation = false;
 
-    // GPS attributes
-    private boolean isGPSenable;
-    private float minDistanceChanged = 5;
-    private long minTime = 1000 * 60 * 1;
-    private double gpsLatitude, gpsLongitude;
+    // location vars
+    Location location;
+    double latitude;
+    double longitude;
+
+    // The minimum distance to change Updates in meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+
+    // The minimum time between updates in milliseconds
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+
+    // Declaring a Location Manager
+    protected LocationManager locationManager;
+
+    int PERMISSION_ALL = 1;
+    String[] PERMISSIONS = {
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+    };
 
 
     /**
-     * this function can get the latitude and longitude of the location and
-     * give the name of that location based on the position. if there is no network connection then it
-     * will throw an exception
-     * @author Orest Cokan
-     * @param context the context of the controller
-     * @throw IOException
-     *
+     * get the current location based on GPS
+     * @param context the context activity
      */
-    // Constructor
     public LocationController(Context context) {
-        geocoder = new Geocoder(context, Locale.ENGLISH);
+        this.context = context;
+
+        if(!hasPermissions((Activity)context, PERMISSIONS)){
+            ActivityCompat.requestPermissions((Activity)context, PERMISSIONS, PERMISSION_ALL);
+        }
+        getLocation();
+
     }
 
-
     /**
-     * sets the location name from the position user is at
-     * @author Orest Cokan
-     * @param position an integer which can be used in a location list to find an adress
-     * @return addressName a string which contains the adress
+     * get the actual location
+     * @return current location
      */
-    // Sets location name
-    public String setLocationName(int position) {
-        // Uses passed parameters and constructs a string indicationg location
-        addressIndex = position;
-        adrress = locationList.get(addressIndex);
-        addressName = adrress.getAddressLine(0) + ", " + adrress.getAddressLine(1) + ", "
-                + adrress.getAddressLine(2);
+    public Location getLocation() {
+        if (ContextCompat.checkSelfPermission((Activity)context, android.Manifest.permission.
+                ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-        return addressName; // Return location string
-    }
+            Log.i("GPS", "Requesting coarse permission.");
+            // Request the permission.
+            // Dummy request code 8 used.
+            ActivityCompat.requestPermissions((Activity) context,
+                    new String[] {android.Manifest.permission.ACCESS_COARSE_LOCATION}, 8);
+        }
 
+        // Check if we have proper permissions to get the fine lastKnownLocation.
+        if (ContextCompat.checkSelfPermission((Activity) context, android.Manifest.permission.
+                ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
 
-    /**
-     * gets users latitude
-     *
-     * @author Orest Cokan
-     * @return latitude a double type integer
-     */
-    // Gets location latitude
-    public double getLatitude() {
-        // Class objects
-        latitude = locationList.get(addressIndex).getLatitude();
-        return latitude;
-    }
+            Log.i("debugMaps","Requesting fine permission");
+            // Request the permission.
+            // Dummy request code 8 used.
+            ActivityCompat.requestPermissions((Activity) context,
+                    new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, 8);
+        }
+        // Check if we have proper permissions to get the fine lastKnownLocation.
+        if (ContextCompat.checkSelfPermission((Activity) context, Manifest.permission.
+                CAMERA ) != PackageManager.PERMISSION_GRANTED ) {
 
-
-    /**
-     * gets users longitude
-     *
-     * @author Orest Cokan
-     * @return longitude a double type integer
-     */
-    // Gets location longitutde
-    public double getLongitude() {
-        longitude = locationList.get(addressIndex).getLongitude();
-        return longitude;
-    }
+            Log.i("debugMaps","Requesting fine permission");
+            // Request the permission.
+            // Dummy request code 8 used.
+            ActivityCompat.requestPermissions((Activity) context,
+                    new String[] {Manifest.permission.CAMERA}, 8);
+        }
 
 
-    /**
-     * this class gets a list of all the locations names
-     *
-     * @author Orest Cokan
-     * @param context             the context of the controller
-     * @param locationName        the name of the location
-     * @return locationNameList   a list that contains all of the locations names
-     */
-    // Gets a location's list
-    public ArrayList getLocationList(Context context, String locationName) {
+        try {
+            locationManager = (LocationManager) context
+                    .getSystemService(LOCATION_SERVICE);
 
-        locationNameList.clear();
-        // user did not input anything
-        if (locationName.trim().length() == 0) {
-            Toasty.warning(context, "Please enter location", Toast.LENGTH_LONG).show();
-        } else {
-            try {
-                // Use geocoder to search
-                locationList = geocoder.getFromLocationName(locationName, maxResults);
+            // getting GPS status
+            isGPSEnabled = locationManager
+                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-                if (locationList == null) {
-                    Toasty.error(context, "Cannot get location", Toast.LENGTH_LONG).show();
-                } else {
-                    if (locationList.isEmpty()) {
-                        Toasty.error(context, "No location is found", Toast.LENGTH_LONG).show();
-                    } else {
-                        for (Address i : locationList) {
-                            // For each address in location list add address line to locationNameList
-                            String addressline = i.getFeatureName() + '\n'
-                                    + i.getAddressLine(0) + ", " + i.getAddressLine(1)
-                                    + ", " + i.getAddressLine(2);
-                            locationNameList.add(addressline);
+            // getting network status
+            isNetworkEnabled = locationManager
+                    .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            if (!isGPSEnabled && !isNetworkEnabled) {
+                // no network provider is enabled
+            } else {
+                this.canGetLocation = true;
+                // First get location from Network Provider
+                if (isNetworkEnabled) {
+                    locationManager.requestLocationUpdates(
+                            LocationManager.NETWORK_PROVIDER,
+                            MIN_TIME_BW_UPDATES,
+                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    Log.d("Network", "Network");
+                    if (locationManager != null) {
+                        location = locationManager
+                                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        if (location != null) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
                         }
                     }
                 }
-
-            } catch (IOException e) { // Throw exception if issues with getting address or GPS service disabled
-                Toasty.error(context, "Network unavailable or other issues occurred",
-                        Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-        }
-        return locationNameList;
-    }
-
-
-    /**
-     * this method can get the users coordination using the gps location attached to the
-     * phone. If there is a network connection, then it will set the lat and lon coordinates appropriately
-     * in not then it will provide an error saying that there is no network that it can find to check the
-     * gps location.
-     *
-     * @author Orest Cokan
-     * @param context context of the controller
-     * @return 1 if gps is available 0 if not
-     */
-    // Gets user GPS location
-    public int getGPS(final Context context) {
-        // Enable GPS service
-        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        isGPSenable = locationManager.isProviderEnabled("gps");
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                if (location != null) { // If location is attainable by GPS get longitude and latitude
-                    gpsLongitude = location.getLongitude();
-                    gpsLatitude = location.getLatitude();
-
-                } else {
-                    Toasty.warning(context, "Cannot get current location, default set to (0, 0)", Toast.LENGTH_LONG).show();
+                // if GPS Enabled get lat/long using GPS Services
+                if (isGPSEnabled) {
+                    if (location == null) {
+                        locationManager.requestLocationUpdates(
+                                LocationManager.GPS_PROVIDER,
+                                MIN_TIME_BW_UPDATES,
+                                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                        Log.d("GPS Enabled", "GPS Enabled");
+                        if (locationManager != null) {
+                            location = locationManager
+                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            if (location != null) {
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
+                            }
+                        }
+                    }
                 }
-
             }
 
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-            }
-        };
-        // Check if the gps provider is available
-        if (isGPSenable) {
-            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return 0;
+
+        return location;
     }
 
-
     /**
-     * this function can use getGpsCoordinate to update the users latitude and longitude values
-     *
-     * @author Orest Cokan
-     * @param context context of the controller
-     * @throws SecurityException
-     */
-    // Updates the user's latitude and longitutde
-    public void getGpsCoordinate(Context context) {
-        try {
-            locationManager.requestLocationUpdates("gps", minTime, minDistanceChanged, locationListener);
-            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            locationListener.onLocationChanged(location);
-        } catch (SecurityException s) {
-            Toasty.info(context, "Permission needed to access GPS services.", Toast.LENGTH_LONG).show();
+     * Stop using GPS listener
+     * Calling this function will stop using GPS in your app
+     * */
+    public void stopUsingGPS(){
+        if(locationManager != null){
+            locationManager.removeUpdates(LocationController.this);
         }
     }
 
-
     /**
-     * gets gps Latitude only
-     *
-     * @author Orest Cokan
-     * @return gpsLatitude  a double integer of the latitude given by the gps
-     */
-    // Gets GPS latitude
-    public double getGpsLatitude() {
-        return gpsLatitude;
+     * Function to get latitude
+     * */
+    public double getLatitude(){
+        if(location != null){
+            latitude = location.getLatitude();
+        }
+
+        // return latitude
+        return latitude;
     }
 
-
     /**
-     * gets gps longitude only
-     *
-     * @author Orest Cokan
-     * @return gpsLongitude  a double integer of the longitude given by the gps
-     */
+     * Function to get longitude
+     * */
+    public double getLongitude(){
+        if(location != null){
+            longitude = location.getLongitude();
+        }
 
-    // Gets GPS longitude
-    public double getGpsLongitude() {
-        return gpsLongitude;
+        // return longitude
+        return longitude;
     }
 
+    // Gets location name
+    public String geoLocate(){
+        Log.d("debugMaps", "geoLocate: geolocating");
+        Geocoder geocoder = new Geocoder(context);
 
-    /**
-     * get gps service and check permission
-     * if location is gotten, get the name of the location
-     *
-     * @author Orest Cokan
-     * @param context the context of the controller
-     * @return addressName string which contains the name of the address
-     * @throws IOException
-     */
-    // Gets GPS address or location name
-    public String getGpsAddressName(Context context) {
-        // Call to check permission to access gps
-        try {
-            // Use geocoder to find location name from gps latitude and longitude
-            List<Address> result = geocoder.getFromLocation(gpsLatitude, gpsLongitude, maxResults);
+        try { // Gets location with Geocoder as an address list
+            List<Address> result = geocoder.getFromLocation(getLatitude(), getLongitude(), 1);
+
             if (result == null) {
-                Toasty.error(context, "Cannot get location name",
-                        Toast.LENGTH_LONG).show();
-            } else {
+            } else { // Else if location is not found indicate so
                 if (result.isEmpty()) {
-                    Toasty.error(context, "No location is found",
-                            Toast.LENGTH_LONG).show();
-                } else { // If a location is found by geocoder indicate so
-                    adrress = result.get(0);
-                    addressName = adrress.getAddressLine(0) + ", " + adrress.getAddressLine(1) + ", " + adrress.getAddressLine(2);
+                } else { // If location is found format list to get address name
+                    Address address = result.get(0);
+                    String addressName = address.getAddressLine(0) + ", " + address.getAddressLine(1)
+                            + ", " + address.getAddressLine(2);
+                    addressName = addressName.replace(", null,", "").replace("null", "");
+                    return addressName;
                 }
             }
-        } catch (IOException e) {
-            Toasty.error(context, "Network unavailable to get location name",
+        } catch (IOException e) { // Throw exception if there are issues with input or output
+            Toasty.error(context, "Network unavailable to get location name.",
                     Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-        return addressName;
+        return "";
     }
+
+    /**
+     * Function to check GPS/wifi enabled
+     * @return boolean
+     * */
+    public boolean canGetLocation() {
+        return this.canGetLocation;
+    }
+
+
+    @Override
+    public void onLocationChanged(Location location) {
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    @Override
+    public IBinder onBind(Intent arg0) {
+        return null;
+    }
+
+
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
+

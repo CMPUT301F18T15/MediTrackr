@@ -24,7 +24,8 @@
 package com.example.meditrackr.models;
 
 //imports
-import com.example.meditrackr.models.record.ImageSave;
+import com.example.meditrackr.interfaces.Photo;
+import com.example.meditrackr.models.record.PhotoList;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.models.record.RecordList;
 
@@ -41,7 +42,7 @@ import java.io.Serializable;
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  * @see RecordList
- * @see ImageSave
+ * @see PhotoList
  * @see CommentList
  */
 
@@ -55,7 +56,7 @@ public class Problem implements Serializable {
     private String description;
     private RecordList records = new RecordList();
     private CommentList comments = new CommentList();
-    private ImageSave imageAll = new ImageSave();
+    private PhotoList imageAll = new PhotoList();
 
 
     /**
@@ -183,14 +184,14 @@ public class Problem implements Serializable {
      *
      * @author Orest Cokan
      * @return imageAll      the images on the problem
-     * @see ImageSave
+     * @see PhotoList
      */
-    public ImageSave getImageAll() {
+    public PhotoList getImageAll() {
         return imageAll;
     }
 
 
-    public void setImageAll(ImageSave imageAll) {
+    public void setImageAll(PhotoList imageAll) {
         this.imageAll = imageAll;
     }
 }

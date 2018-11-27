@@ -16,7 +16,7 @@
  *limitations under the License.
  *
  */
-package com.example.meditrackr.controllers;
+package com.example.meditrackr.utils;
 
 
 import android.content.Context;
@@ -58,8 +58,8 @@ import java.io.OutputStreamWriter;
  * @throw java.io.IOException
  */
 
-// A SaveLoadController class holding all information pertaining to SaveLoadController
-public class SaveLoadController {
+// A SaveLoad class holding all information pertaining to SaveLoad
+public class SaveLoad {
 
 
     /**

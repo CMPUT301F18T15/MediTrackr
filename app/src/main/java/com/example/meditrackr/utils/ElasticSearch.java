@@ -16,7 +16,7 @@
  *limitations under the License.
  *
  */
-package com.example.meditrackr.controllers;
+package com.example.meditrackr.utils;
 
 //imports
 import android.os.AsyncTask;
@@ -43,7 +43,7 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
- * ElasticSearchController.java enables the elasticsearch search engine
+ * ElasticSearch.java enables the elasticsearch search engine
  * this class can user addProfile to add a new user to the database if all entrys are valid if
  * not it will throw an exception (InterruptedException or ExecutionException
  *
@@ -78,7 +78,7 @@ import io.searchbox.core.SearchResult;
  */
 
 // Controller class for Elastic Search search engine
-public class ElasticSearchController {
+public class ElasticSearch {
     private static JestClient client = null;
     private static String INDEX_NAME = "cmput301f18t15test";
     private static String PROFILE_TYPE = "profile";
@@ -103,7 +103,7 @@ public class ElasticSearchController {
     // Search user
     public static Profile searchProfile(String userName){
         try {
-            Profile profile = new ElasticSearchController.SearchProfileTask().execute(userName).get();
+            Profile profile = new ElasticSearch.SearchProfileTask().execute(userName).get();
             // Checks whether profile type to search is null
             if(profile==null){
                 Log.d("SearchProfile", "Our profile is null");
@@ -132,13 +132,13 @@ public class ElasticSearchController {
 
     // Delete profile
     public static void deleteUser(String userName){
-        new ElasticSearchController.DeleteUserTask().execute(userName);
+        new ElasticSearch.DeleteUserTask().execute(userName);
     }
 
 
     // Update profile
     public static void updateUser(Profile profile){
-        new ElasticSearchController.UpdateProfileTask().execute(profile);
+        new ElasticSearch.UpdateProfileTask().execute(profile);
     }
 
 

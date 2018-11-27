@@ -34,7 +34,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.controllers.model.RegisterController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
@@ -96,7 +96,7 @@ public class RegisterFragment extends Fragment {
         final TextView alreadyMember = (TextView) rootView.findViewById(R.id.already_member);
 
 
-        ElasticSearchController.deleteUser("scalingisoff");
+        ElasticSearch.deleteUser("scalingisoff");
 
 
         // Onclick listener for create account button

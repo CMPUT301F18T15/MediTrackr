@@ -19,31 +19,19 @@
 package com.example.meditrackr.ui;
 
 //imports
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.controllers.model.LoginController;
-import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
-import com.example.meditrackr.models.Profile;
-
-import org.w3c.dom.Text;
 
 /**
  * the main parts to this fragment is a text box where user can input their username which will send

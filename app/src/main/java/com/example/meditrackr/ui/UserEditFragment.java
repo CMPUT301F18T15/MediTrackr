@@ -27,17 +27,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Profile;
-import com.example.meditrackr.ui.patient.PatientQR;
 
 /**
  * this fragment allows the user to change thier username, phone number and email
@@ -90,8 +86,8 @@ public class UserEditFragment extends Fragment {
                 profile.setEmail(email.getText().toString());
                 profile.setPhone(phone.getText().toString());
                 ThreadSaveController.save(getContext(), profile);
-                //ElasticSearchController.updateUser(profile); // Saves profile in ES
-                //SaveLoadController.saveProfile(getContext(),profile);
+                //ElasticSearch.updateUser(profile); // Saves profile in ES
+                //SaveLoad.saveProfile(getContext(),profile);
 
 
                 // Swap back to the user fragment and display the fragment_user view

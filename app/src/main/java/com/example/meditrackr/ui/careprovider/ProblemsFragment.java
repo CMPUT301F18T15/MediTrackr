@@ -31,7 +31,6 @@ import android.widget.ImageButton;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.careprovider.ProblemAdapter;
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 import com.example.meditrackr.models.Patient;

@@ -47,6 +47,7 @@ import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.DateUtils;
+import com.example.meditrackr.utils.ImageRecognition;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
@@ -79,7 +80,6 @@ import static android.app.Activity.RESULT_OK;
 // Class creates Add Record Fragment for patients
 public class AddRecordFragment extends Fragment{
     private String date;
-    public VisionServiceClient visionServiceClient = new VisionServiceRestClient("###########", "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0");
 
     // Indicators and request codes
     private static final int IMAGE_REQUEST_CODE = 1;
@@ -117,22 +117,7 @@ public class AddRecordFragment extends Fragment{
                 R.layout.fragment_add_record, container, false);
 
         LocationController controller = new LocationController(getContext());
-
-        // Initialize address and set it
-        addressView = (TextView) rootView.findViewById(R.id.addresss_field);
-        boolean done = controller.canGetLocation();
         final int index = getArguments().getInt("INDEX");
-
-
-        if(done){
-            for(int i = 0; i < 10; i++) {
-                longitude = controller.getLongitude();
-                latitude = controller.getLatitude();
-                addressName = controller.geoLocate();
-                addressView.setText(addressName);
-                Log.d("debugMAPS", "long: " + longitude + " lat: " + latitude + "name: " + addressName);
-            }
-        }
 
 
         /*---------------------------------------------------------------------------
@@ -143,13 +128,7 @@ public class AddRecordFragment extends Fragment{
         final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
-
-        // Initialize address and set it
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
-
-
-        // Set date
-        date = DateUtils.formatAppTime();
 
         // Initialize ui attributes for each button of notification frequency
         images[0] = (ImageView) rootView.findViewById(R.id.image_1);
@@ -164,20 +143,41 @@ public class AddRecordFragment extends Fragment{
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
 
 
+        // Set the location
+        boolean done = controller.canGetLocation();
+        if(done){
+            longitude = controller.getLongitude();
+            latitude = controller.getLatitude();
+            addressName = controller.geoLocate();
+            addressView.setText(addressName);
+            Log.d("debugMAPS", "long: " + longitude + " lat: " + latitude + "name: " + addressName);
+        }
+
+
+        // Set date
+        date = DateUtils.formatAppTime();
+
+
 
         //On click listener for adding a record
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                     // Create the new record
-                    Record record = createRecord(recordTitle, recordDescription);
+                    Record record = RecordController.createRecord(recordTitle,
+                            recordDescription,
+                            latitude,
+                            longitude,
+                            addressName,
+                            date,
+                            bitmaps);
+                    // Add the record
                     RecordController.addRecord(getContext(), record, index);
 
                     // Transition back to all the records
                     FragmentManager manager = getFragmentManager();
                     int count = manager.getBackStackEntryCount();
                     manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
             }
             }
         );
@@ -226,32 +226,6 @@ public class AddRecordFragment extends Fragment{
     }
 
 
-    /*---------------------------------------------------------------------------
-     * CREATE NEW RECORD
-     *--------------------------------------------------------------------------*/
-    // Creates and returns a new record object using the required information from the view
-    private Record createRecord(EditText title, EditText description) {
-        Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
-        // In new record include user input title and description
-
-        Record record = new Record(
-                title.getText().toString(),
-                description.getText().toString(),
-                date,
-                null);
-
-        record.setGeoLocation(geolocation);
-        for(Bitmap bitmap: bitmaps){ // For each image
-            if(bitmap != null) { // If image is not null convert image into base64 string
-                byte[] byteArray = ConvertImage.convertBitmapToBytes(bitmap);
-                record.getImages().addImage(byteArray); // Save each image to record
-            }
-        }
-
-        return record;
-    }
-
-
     /************************************************************************
      * EXTRACT LOCATION, IMAGE DATA FROM ACTIVITIES
      ************************************************************************/
@@ -264,57 +238,13 @@ public class AddRecordFragment extends Fragment{
             getActivity();
             Bitmap bmp = (Bitmap) data.getExtras().get("data");
             assert bmp != null;
-            Log.d("BMP", bmp.getHeight()+"   " +bmp.getWidth()+"");
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
             final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
-            @SuppressLint("StaticFieldLeak") final AsyncTask<InputStream,String,String> visionTask = new AsyncTask<InputStream, String, String>() {
-                ProgressDialog mDialog = new ProgressDialog((Activity)getContext());
-                @Override
-                protected String doInBackground(InputStream... params) {
-                    try{
-                        publishProgress("Recognizing....");
-                        String[] features = {"Description"};
-                        String[] details = {};
-
-                        AnalysisResult result = visionServiceClient.analyzeImage(params[0],features,details);
-
-                        String strResult = new Gson().toJson(result);
-                        return strResult;
-
-                    } catch (Exception e) {
-                        return null;
-                    }
-                }
-
-
-                @Override
-                protected void onPreExecute() {
-                    mDialog.show();
-                }
-
-                @Override
-                protected void onPostExecute(String s) {
-                    mDialog.dismiss();
-
-                    AnalysisResult result = new Gson().fromJson(s,AnalysisResult.class);
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for(Caption caption:result.description.captions)
-                    {
-                        stringBuilder.append(caption.text);
-                    }
-                    Toasty.success(getContext(), "You took an image of:" + stringBuilder, Toast.LENGTH_LONG).show();
-
-                }
-
-                @Override
-                protected void onProgressUpdate(String... values) {
-                    mDialog.setMessage(values[0]);
-                }
-            };
-
-            visionTask.execute(inputStream);
+            // Image recognition
+            ImageRecognition.mContext = getContext();
+            ImageRecognition.recognizeImage(inputStream);
 
             // Populate image
             for(int i = 0; i < bitmaps.length; i++){
@@ -332,14 +262,13 @@ public class AddRecordFragment extends Fragment{
             place = PlacePicker.getPlace(data, getContext());
             // Indicate location with toast
             String toastMsg = String.format("Place: %s", place.getName());
-            // Set picked location name on map and set it to addressName
             addressView.setText(place.getName().toString());
             addressName = place.getName().toString();
+
             // Get latitude and longitude of location
             LatLng latLng = place.getLatLng();
             latitude = latLng.latitude;
             longitude = latLng.longitude;
-            Log.d("debugMAPS", "long: " + longitude + " lat: " + latitude + "name: " + addressName);
             Toasty.info(getContext(), toastMsg, Toast.LENGTH_LONG).show();
         }
     }

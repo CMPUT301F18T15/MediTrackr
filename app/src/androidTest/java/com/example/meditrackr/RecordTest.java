@@ -4,11 +4,10 @@ import android.app.Instrumentation;
 import android.content.Intent;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.NoMatchingViewException;
-import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.ui.LoginActivity;
 import com.example.meditrackr.ui.MainActivity;
 
@@ -28,8 +27,6 @@ import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
-import static android.support.test.espresso.intent.Intents.intending;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -55,7 +52,7 @@ public class RecordTest extends ActivityTestRule<MainActivity> {
 
     @Before
     public void login() {
-        if (ElasticSearchController.searchProfile(testPatientName) == null) {
+        if (ElasticSearch.searchProfile(testPatientName) == null) {
             createTestPatient();
         } else {
             // Login to testPatient

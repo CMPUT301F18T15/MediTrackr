@@ -1,15 +1,12 @@
 package com.example.meditrackr.controllers.model;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.utils.SaveLoad;
+import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
@@ -38,8 +35,8 @@ public class PatientController {
 
             // Save both to ES and memory
             ThreadSaveController.save(context, careProvider);
-            //ElasticSearchController.updateUser(careProvider);
-            //SaveLoadController.saveProfile(context, careProvider);
+            //ElasticSearch.updateUser(careProvider);
+            //SaveLoad.saveProfile(context, careProvider);
             return true;
 
         } else {
@@ -52,9 +49,9 @@ public class PatientController {
 
     public static Patient searchPatient(Context context, String username){
         Profile profile;
-        profile = SaveLoadController.loadProfile(context, username);
+        profile = SaveLoad.loadProfile(context, username);
         if(profile == null) {
-            profile = ElasticSearchController.searchProfile(username); // Search for patient
+            profile = ElasticSearch.searchProfile(username); // Search for patient
         }
 
         if(profile == null){ // If user not found indicate so

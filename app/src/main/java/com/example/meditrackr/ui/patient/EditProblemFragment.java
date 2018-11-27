@@ -34,9 +34,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
@@ -140,8 +138,8 @@ public class EditProblemFragment extends Fragment {
 
                         // Save problem into ES and memory
                         ThreadSaveController.save(getContext(), patient);
-                        //ElasticSearchController.updateUser(patient);
-                        //SaveLoadController.saveProfile(getContext(), patient);
+                        //ElasticSearch.updateUser(patient);
+                        //SaveLoad.saveProfile(getContext(), patient);
                         Log.d("EditProblem", "Profile: " + patient.getUsername() + " Problems: "
                                 + patient.getProblems());
 

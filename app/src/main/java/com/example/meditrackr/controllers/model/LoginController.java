@@ -98,14 +98,10 @@ public class LoginController {
                     PatientList patientList = careProvider.getPatients();
                     ArrayList<Patient> patients = new ArrayList<>();
                     for(int i = 0; i < patientList.getSize(); i++){
-                        Log.d("THREADMEMESS", patientList.getPatient(i)+"");
                         Profile profileCheck = SaveLoad.loadProfile(context, patientList.getPatient(i));
                         if(profileCheck != null){
                             patient = (Patient) profileCheck;
-                            Log.d("THREADMEMESS", "mem");
-
                         } else {
-                            Log.d("THREADMEMESS", "es");
                             patient = (Patient) ElasticSearch.searchProfile(patientList.getPatient(i));
                         }
                         patients.add(patient);
@@ -169,7 +165,7 @@ public class LoginController {
      * @param activity  the LoginFragments activity
      * @param username  the username to be checked
      */
-    public static void checkProfileES(Activity activity, Context context, String username) {
+    private static void checkProfileES(Activity activity, Context context, String username) {
         // Gets profile from ES
         Profile profile = ElasticSearch.searchProfile(username);
 

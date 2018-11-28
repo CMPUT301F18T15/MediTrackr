@@ -143,6 +143,7 @@ public class RegisterFragment extends Fragment {
             }
         });
 
+
         // Onclick listener for doctor selected, does some UI stuff as well
         doctorImage.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -155,6 +156,7 @@ public class RegisterFragment extends Fragment {
 
             }
         });
+
 
         // Onclick listener for patient select, does some UI stuff as well
         patientImage.setOnClickListener(new View.OnClickListener(){

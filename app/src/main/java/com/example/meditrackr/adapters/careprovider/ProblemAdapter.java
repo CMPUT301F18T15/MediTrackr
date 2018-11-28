@@ -111,6 +111,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         }
     }
 
+
     // Return the number of problems currently in RecyclerView
     @Override
     public int getItemCount() {
@@ -149,6 +150,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             editProblem = itemView.findViewById(R.id.problem_edit_button);
             problemImage = itemView.findViewById(R.id.problem_image);
             itemView.setOnClickListener(this);
+
             // Hides certain functionalities from care provider
             // Care provider cannot delete or edit a patient's problem
             deleteProblem.setVisibility(View.INVISIBLE);
@@ -177,6 +179,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             });
 
         }
+
 
         // Set onClick listener for each problem, so the problem can be viewed
         @Override

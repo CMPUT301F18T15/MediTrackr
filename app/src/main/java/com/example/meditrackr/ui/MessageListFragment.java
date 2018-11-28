@@ -112,9 +112,8 @@ public class MessageListFragment extends Fragment {
                     comments.addComment(comment);
                     adapter.notifyDataSetChanged();
                     chatBox.setText(null);
+
                     ThreadSaveController.save(getContext(), patient);
-                    //SaveLoad.saveProfile(getContext(), patient);
-                    //ElasticSearch.updateUser(patient);
                     messageList.smoothScrollToPosition(comments.getSize());
                 }
                 else{

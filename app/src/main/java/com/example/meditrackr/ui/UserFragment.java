@@ -54,6 +54,7 @@ public class UserFragment extends Fragment {
         return fragment;
     }
 
+
     // Creates user profile view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +72,6 @@ public class UserFragment extends Fragment {
         final TextView phone = rootView.findViewById(R.id.patient_phone);
         final Button editButton = rootView.findViewById(R.id.edit_button);
         final ImageButton qrButton = rootView.findViewById(R.id.qr_code_button);
-
 
 
         // Set users info in the page

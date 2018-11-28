@@ -88,6 +88,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
+
         // Onclick listener for signup
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +121,7 @@ public class LoginFragment extends Fragment {
 
         return rootView;
     }
+
 
     // Get the information from the QR code
     @Override

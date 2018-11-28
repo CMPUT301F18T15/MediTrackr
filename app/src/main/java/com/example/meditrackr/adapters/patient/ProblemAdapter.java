@@ -235,19 +235,15 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public void onClick(View v) {
             // Return the position of the click in the recycler view
             int position = getAdapterPosition();
-            // Prepare for fragment transaction
+
+            // Transition to the problem page of the patient
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
-            // Load all the problems images
             LazyLoadingManager.setImages(adapter.problems.getProblem(position).getImageAll());
             FragmentTransaction transaction =  manager.beginTransaction();
-            // Load the problem index on the position that was cliclked
             LazyLoadingManager.setProblemIndex(position);
-            // Transitions to RecordsFragment page
             RecordsFragment fragment = RecordsFragment.newInstance(position);
-            // Allow user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
-            // Make permanent all changes made in transaction
             transaction.commit();
         }
     }

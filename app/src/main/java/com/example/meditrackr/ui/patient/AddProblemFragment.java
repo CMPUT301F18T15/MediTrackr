@@ -172,6 +172,7 @@ public class AddProblemFragment extends Fragment {
         return false;
     }
 
+
     /*-----------------------------------------------------------------------
      * CHECK INPUTS FILLED: TITLE AND DESCRIPTION
      *----------------------------------------------------------------------*/

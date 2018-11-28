@@ -100,13 +100,11 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Prepare to change fragment
+                // Prepare to change fragment (view)
                 ImageView image = (ImageView) v;
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                // Allow user to bring back previous fragment when back button is pressed
                 transaction.addToBackStack(null);
-                // Sets icons in navigation bar
                 initButtons();
 
 

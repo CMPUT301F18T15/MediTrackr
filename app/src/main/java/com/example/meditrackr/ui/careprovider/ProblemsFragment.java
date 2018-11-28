@@ -91,6 +91,7 @@ public class ProblemsFragment extends Fragment  {
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         patientList.addItemDecoration(decoration);
 
+        // On click listener for viewing all of records/problems of a patient in a map view
         gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

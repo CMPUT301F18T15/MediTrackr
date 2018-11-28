@@ -98,10 +98,8 @@ public class RecordsFragment extends Fragment {
 
         // Adapt items into recycler view
         records.setHasFixedSize(false);
-        // Creates RecordsAdapter for recyclerview
         adapter = new RecordsAdapter(getActivity(), recordList);
         records.setAdapter(adapter);
-        // Creates LinearLayoutManager object for recyclerview
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         records.setLayoutManager(manager); // Set records layout context
         manager = new LinearLayoutManager(getActivity());
@@ -141,8 +139,10 @@ public class RecordsFragment extends Fragment {
             }
         };
 
+
         // OnClickListener for each message
         messageClick.setOnClickListener(listener);
+
 
         // Floating button on click listener to go to add a problem page
         addRecord.setOnClickListener(new View.OnClickListener() {

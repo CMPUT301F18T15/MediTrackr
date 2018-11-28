@@ -44,12 +44,10 @@ public class PatientQR extends Fragment {
                 R.layout.fragment_patient_qr, container, false);
 
         final ImageView qrCode = (ImageView) rootView.findViewById(R.id.qr_code);
-
-
         String username = getArguments().getString("USERNAME");
 
-        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
             BitMatrix bitMatrix = multiFormatWriter.encode(username, BarcodeFormat.QR_CODE,200,200);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();

@@ -160,6 +160,7 @@ public class EditProblemFragment extends Fragment {
             return rootView;
         }
 
+
     // Check that the user has inputted at least a title and description to their problem
     public boolean checkInputs(EditText title, EditText description){
 

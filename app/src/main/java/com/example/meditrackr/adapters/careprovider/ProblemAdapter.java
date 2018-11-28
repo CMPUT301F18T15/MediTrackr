@@ -129,17 +129,17 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // Class objects
         private ProblemAdapter adapter;
-        public ImageView problemImage;
+        private ImageView problemImage;
         public TextView title;
         public TextView date;
         public TextView description;
-        public TextView totalRecords;
-        public MaterialIconView deleteProblem;
-        public MaterialIconView editProblem;
+        private TextView totalRecords;
+        private MaterialIconView deleteProblem;
+        private MaterialIconView editProblem;
 
 
         // Constructor and gets the corresponding data for each view
-        public ViewHolder(View itemView, final ProblemAdapter adapter){
+        private ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
             date = itemView.findViewById(R.id.problem_date);
@@ -168,7 +168,6 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                     if(images.getSize() == 0){ // Make not clickable if there is no image for the problem
                         problemImage.setClickable(false);
                         problemImage.setVisibility(View.INVISIBLE);
-                        Log.d("ImageTest", "we should be getting here");
                     }
                     else { // Make clickable and switch to FullScreenViewActivity on click
                         Intent intent = new Intent(adapter.activity, FullScreenViewActivity.class);

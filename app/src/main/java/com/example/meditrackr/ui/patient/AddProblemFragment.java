@@ -134,8 +134,10 @@ public class AddProblemFragment extends Fragment {
             public void onClick(View v) {
                 if(checkInputs(title, description)){ // If checkInputs is true
                     // Set user inputs as data
-                    Problem problem = new Problem(title.getText().toString(),
-                            dateSelector.getText().toString(), description.getText().toString());
+                    Problem problem = new Problem(
+                            title.getText().toString(),
+                            dateSelector.getText().toString(),
+                            description.getText().toString());
 
                     // Ask the problem controller to add the problem to the patient
                     // And then save it locally and to ElasticSearch

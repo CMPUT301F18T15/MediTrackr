@@ -27,6 +27,8 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
+import com.example.meditrackr.models.ProblemList;
+import com.example.meditrackr.models.Profile;
 
 import es.dmoral.toasty.Toasty;
 
@@ -44,6 +46,8 @@ import es.dmoral.toasty.Toasty;
 
 // Controller class for problem objects
 public class ProblemController {
+    private static Patient patient = LazyLoadingManager.getPatient();
+
 
     /**
      * adds problem to database
@@ -54,16 +58,20 @@ public class ProblemController {
     // Add problem to problem list
     public static void addProblem(Context context, Problem problem) {
         // Get patient profile and problem
-        Patient patient = LazyLoadingManager.getPatient();
         patient.getProblems().addProblem(problem);
 
         // Save the problem both locally and elastic search
         ThreadSaveController.save(context, patient);
-        //ElasticSearch.updateUser(patient);
-        //SaveLoad.saveProfile(context, patient);
         Log.d("ProblemAdd", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
 
         // let the user know everything was successful
         Toasty.success(context, "Problem successfully added", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void deleteProblem(Context context, int index, ProblemList problems){
+        problems.removeProblem(index);
+        ThreadSaveController.save(context, patient);
+
+
     }
 }

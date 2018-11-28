@@ -135,8 +135,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
 
 
 
-
-
         // Set onClick listener for each patient, so they can be viewed
         @Override
         public void onClick(View v) {

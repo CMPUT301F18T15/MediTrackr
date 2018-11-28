@@ -36,11 +36,11 @@ import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Profile;
 
 /**
- * this fragment allows the user to change thier username, phone number and email
+ * this fragment allows the user to change their username, phone number and email
  * there is also a button that will change the information that they had to the new data and
  * saves it to the database. after that it will take the user to the view profile fragment (UserFragment)
  * @author  Orest Cokan
- * @version 2.0 Nov 4, 2018.
+ * @version 1.0 Nov 4, 2018.
  * @see UserFragment
  */
 
@@ -61,7 +61,6 @@ public class UserEditFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_user_edit, container, false);
-        final Bundle bundle = getArguments();
 
         // Initialize ui attributes
         ImageView user_image = rootView.findViewById(R.id.patient_image);
@@ -86,8 +85,7 @@ public class UserEditFragment extends Fragment {
                 profile.setEmail(email.getText().toString());
                 profile.setPhone(phone.getText().toString());
                 ThreadSaveController.save(getContext(), profile);
-                //ElasticSearch.updateUser(profile); // Saves profile in ES
-                //SaveLoad.saveProfile(getContext(),profile);
+
 
 
                 // Swap back to the user fragment and display the fragment_user view

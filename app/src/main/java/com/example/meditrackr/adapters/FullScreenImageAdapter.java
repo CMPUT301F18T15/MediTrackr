@@ -94,11 +94,11 @@ import com.example.meditrackr.utils.ConvertImage;
             byte[] image = images.getImage(position);
             // Convert a Base64 String into an image
             imgDisplay.setImageBitmap(ConvertImage.convertByteToBitmap(image));
-
             ((ViewPager) container).addView(viewLayout);
-
             return viewLayout; // return image
         }
+
+
         // Handle the close button for image view?
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {

@@ -18,6 +18,7 @@ import com.example.meditrackr.R;
 
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.ThreadSaveController;
+import com.example.meditrackr.controllers.model.ProblemController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.PhotoList;
@@ -159,15 +160,14 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     // Only delete the problem if the answer was yes
-                                    adapter.problems.removeProblem(position);
+                                    ProblemController.deleteProblem(adapter.context, position, adapter.problems);
+
+                                    //adapter.problems.removeProblem(position);
                                     adapter.notifyItemRemoved(position);
                                     adapter.notifyItemRangeChanged(position,
                                             adapter.problems.getSize());
-                                    Log.d("DeleteProblem", "Position: " + position);
+
                                     // Save changes to memory and ES
-                                    ThreadSaveController.save(adapter.context, LazyLoadingManager.getPatient());
-                                    //SaveLoad.saveProfile(adapter.context, LazyLoadingManager.getPatient());
-                                    //ElasticSearch.updateUser(LazyLoadingManager.getPatient());
                                     dialog.cancel(); // Close alert dialog box
                                 }
                             });

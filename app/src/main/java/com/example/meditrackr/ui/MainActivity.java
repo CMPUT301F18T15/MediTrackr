@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         search = (ImageView) findViewById(R.id.search);
         profile = (ImageView) findViewById(R.id.profile);
 
-        // Get userType
+        // Set home view depending on user type
         setHomeView(isCareProvider);
 
         // Initialize navigation bar

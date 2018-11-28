@@ -93,8 +93,8 @@ public class CustomFilter {
         return recordIndex;
     }
 
-    public void setRexordIndex(int rexordIndex) {
-        this.recordIndex = rexordIndex;
+    public void setRecordIndex(int recordIndex) {
+        this.recordIndex = recordIndex;
     }
 
     public String getTitle() {

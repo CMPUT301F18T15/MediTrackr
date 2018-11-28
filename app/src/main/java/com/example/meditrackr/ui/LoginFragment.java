@@ -104,7 +104,7 @@ public class LoginFragment extends Fragment {
         });
 
 
-        // qrCodeButton
+        // On click for qrCodeButton
         qrButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,7 +121,7 @@ public class LoginFragment extends Fragment {
         return rootView;
     }
 
-
+    // Get the information from the QR code
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);

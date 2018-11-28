@@ -128,6 +128,8 @@ public class SearchFragment extends Fragment {
                         parseText(newText, patients.get(i));
                     }
                 }
+
+
                 SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter);
                 rv.setAdapter(adapter);
 
@@ -138,8 +140,7 @@ public class SearchFragment extends Fragment {
         return rootView;
     }
 
-    // Parse the inputted text and regex it for all keywords
-    // afterwards it will call customer filter to find the relevant info
+
     public void parseText(String query, Patient patient){
         String[] keywords = query.split(" ");
 
@@ -177,7 +178,6 @@ public class SearchFragment extends Fragment {
         }
     }
 
-    // Show every single record/problem initially
     public void onCreate(){
         customFilter = new ArrayList<>();
         if(!profile.getisCareProvider()) {

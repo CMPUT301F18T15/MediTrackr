@@ -2,26 +2,22 @@ package com.example.meditrackr.ui.patient;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.controllers.model.RecordController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
@@ -55,13 +51,7 @@ public class EditRecordFragment extends Fragment implements OnMapReadyCallback {
     // Location variables
     private double latitude;
     private double longitude;
-    private String addressName;
-    private Place place;
     private TextView addressView;
-
-    // Map variables
-    private GoogleMap mGoogleMap;
-    private MapView mapView;
     private View rootView;
 
 
@@ -91,8 +81,10 @@ public class EditRecordFragment extends Fragment implements OnMapReadyCallback {
 
 
         // Gets index and records as an argument from bundle
+        assert getArguments() != null;
         final int index = getArguments().getInt("INDEX");
         final RecordList records = (RecordList) getArguments().getSerializable("RECORDS");
+        assert records != null;
         record = records.getRecord(index);
 
 
@@ -120,15 +112,13 @@ public class EditRecordFragment extends Fragment implements OnMapReadyCallback {
                             description.getText().toString(),
                             geolocation,
                             record);
-
-                    // Transition back to problems fragment view
-                    FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    ProblemsFragment fragment = ProblemsFragment.newInstance();
-                    transaction.addToBackStack(null);
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit();
                 }
+
+                // Transition back to RecordsFragment after editing
+                FragmentManager manager = getFragmentManager();
+                assert manager != null;
+                int count = manager.getBackStackEntryCount();
+                manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
 
@@ -158,11 +148,10 @@ public class EditRecordFragment extends Fragment implements OnMapReadyCallback {
     // or for getting geolocation information depending on the request code
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
-            place = PlacePicker.getPlace(data, getContext());
+            Place place = PlacePicker.getPlace(data, getContext());
             // Indicate location with toast
             String toastMsg = String.format("Place: %s", place.getName());
             addressView.setText(place.getName().toString());
-            addressName = place.getName().toString();
 
             // Get latitude and longitude of location
             LatLng latLng = place.getLatLng();
@@ -177,7 +166,7 @@ public class EditRecordFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mapView = (MapView) rootView.findViewById(R.id.map_view);
+        MapView mapView = (MapView) rootView.findViewById(R.id.map_view);
         if(mapView != null){
             mapView.onCreate(null);
             mapView.onResume();
@@ -192,7 +181,7 @@ public class EditRecordFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         // Initialize google map
         MapsInitializer.initialize(getContext());
-        mGoogleMap = googleMap;
+        // Map variables
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         // Add a marker to google map

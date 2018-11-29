@@ -110,6 +110,7 @@ public class RecordController {
         return record;
     }
 
+
     /*---------------------------------------------------------------------------
      * DELETE A RECORD
      *--------------------------------------------------------------------------*/
@@ -117,6 +118,7 @@ public class RecordController {
         records.removeRecord(index);
         ThreadSaveController.save(context, patient);
     }
+
 
     /*---------------------------------------------------------------------------
      * EDIT A RECORD
@@ -133,7 +135,6 @@ public class RecordController {
         ThreadSaveController.save(context, patient);
 
     }
-
 
 }
 

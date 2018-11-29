@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.ThreadSaveController;
+import com.example.meditrackr.controllers.model.ProblemController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 
@@ -77,12 +78,13 @@ public class EditProblemFragment extends Fragment {
             final EditText dateSelector = (EditText) rootView.findViewById(R.id.edit_problem_date_selector);
             final EditText description = (EditText) rootView.findViewById(R.id.edit_problem_description_field);
             final Button saveButton = (Button) rootView.findViewById(R.id.edit_problem_save_button);
-            // Defines date format
             final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.CANADA);
             final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
-            // Gets index as an argument from bundle
-            final int index = getArguments().getInt("INDEX");
 
+
+            // Gets index as an argument from bundle
+            assert getArguments() != null;
+            final int index = getArguments().getInt("INDEX");
 
             // Set the problem start date to the current date
             dateSelector.setText(format.format(calendar.getTime()));
@@ -94,16 +96,14 @@ public class EditProblemFragment extends Fragment {
             description.setText(problem.getDescription());
 
 
-            // Date picker
+            // Set date text
             final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear,
                                       int dayOfMonth) {
-
                     calendar.set(Calendar.YEAR, year);
                     calendar.set(Calendar.MONTH, monthOfYear);
                     calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                    // Update the editText label
                     dateSelector.setText(format.format(calendar.getTime()));
                 }
             };
@@ -130,29 +130,21 @@ public class EditProblemFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if(checkInputs(title, description)){
+
                         // Store user input
                         Problem problem = patient.getProblem(index);
-                        problem.setTitle(title.getText().toString());
-                        problem.setDate(dateSelector.getText().toString());
-                        problem.setDescription(description.getText().toString());
+                        ProblemController.editProblem(getContext(),
+                                problem,
+                                title.getText().toString(),
+                                description.getText().toString(),
+                                dateSelector.getText().toString());
 
-                        // Save problem into ES and memory
-                        ThreadSaveController.save(getContext(), patient);
-                        //ElasticSearch.updateUser(patient);
-                        //SaveLoad.saveProfile(getContext(), patient);
-                        Log.d("EditProblem", "Profile: " + patient.getUsername() + " Problems: "
-                                + patient.getProblems());
 
                         // Transition back to problems fragment view
                         FragmentManager manager = getFragmentManager();
-                        FragmentTransaction transaction = manager.beginTransaction();
-                        // Switch to ProblemsFragment
-                        ProblemsFragment fragment = ProblemsFragment.newInstance();
-                        // Allow user to bring back previous fragment when back button is pressed
-                        transaction.addToBackStack(null);
-                        transaction.replace(R.id.content, fragment);
-                        // Commit changes to fragment
-                        transaction.commit();
+                        assert manager != null;
+                        int count = manager.getBackStackEntryCount();
+                        manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     }
                 }
             });

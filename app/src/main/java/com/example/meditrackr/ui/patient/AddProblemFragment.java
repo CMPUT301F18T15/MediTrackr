@@ -145,6 +145,7 @@ public class AddProblemFragment extends Fragment {
 
                     // Transition back to ProblemsFragment after adding
                     FragmentManager manager = getFragmentManager();
+                    assert manager != null;
                     int count = manager.getBackStackEntryCount();
                     manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 }

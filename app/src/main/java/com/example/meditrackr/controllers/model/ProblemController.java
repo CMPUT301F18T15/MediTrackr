@@ -41,7 +41,7 @@ import es.dmoral.toasty.Toasty;
  * and on ElasticSearch
  *
  * @author  Veronica Salm
- * @version 1.0 Nov 18, 2018
+ * @version 1.1 Nov 28, 2018
  */
 
 // Controller class for problem objects
@@ -68,8 +68,20 @@ public class ProblemController {
         Toasty.success(context, "Problem successfully added", Toast.LENGTH_SHORT).show();
     }
 
+    // Delete a problem
     public static void deleteProblem(Context context, int index, ProblemList problems){
         problems.removeProblem(index);
         ThreadSaveController.save(context, patient);
+    }
+
+    // Edit a problem
+    public static void editProblem(Context context, Problem problem, String title, String description, String date){
+        problem.setTitle(title);
+        problem.setDate(date);
+        problem.setDescription(description);
+
+        // Save problem into ES and memory
+        ThreadSaveController.save(context, patient);
+
     }
 }

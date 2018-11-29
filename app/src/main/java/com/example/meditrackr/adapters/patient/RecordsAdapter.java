@@ -147,7 +147,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
                     final int position = getAdapterPosition(); // Returns position that was clicked
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(adapter.activity,
                             R.style.AlertDialogStyle);
-                    builder1.setMessage("Are you sure you want to delete the problem?");
+                    builder1.setMessage("Are you sure you want to delete the Record?");
                     builder1.setCancelable(true);
                     builder1.setPositiveButton(
                             "Yes",
@@ -160,8 +160,9 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
                                     adapter.notifyItemRemoved(position);
                                     adapter.notifyItemRangeChanged(position,
                                             adapter.records.getSize());
+
                                     // Save changes to memory and ES
-                                    dialog.cancel(); // Close alert dialog box
+                                    dialog.cancel();
                                 }
                             });
 
@@ -169,8 +170,6 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
                             "No",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    // Do not delete the record and close
-                                    // Alert Dialog box
                                     dialog.cancel();
                                 }
                             });

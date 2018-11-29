@@ -104,6 +104,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                 break;
             case 2:
                 holder.typeTxt.setText("Geolocation");
+                holder.distanceTxt.setText("Distance: "+
+                        results.get(position).getGeolocation().getDistance());
                 break;
             case 3:
                 holder.typeTxt.setText("Bodylocation");
@@ -127,7 +129,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private SearchAdapter adapter;
     private ImageView img;
-    private TextView titleTxt, typeTxt, descriptionTxt, usernameTxt;
+    private TextView titleTxt, typeTxt, descriptionTxt, usernameTxt, distanceTxt;
 
 
     // Constructor and gets the corresponding data for each view
@@ -138,6 +140,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder implements View.O
         this.typeTxt = (TextView) itemView.findViewById(R.id.typeText);
         this.descriptionTxt = (TextView)itemView.findViewById(R.id.descriptionText);
         this.usernameTxt = (TextView) itemView.findViewById(R.id.usernameText);
+        this.distanceTxt = (TextView) itemView.findViewById(R.id.distanceText);
         itemView.setOnClickListener(this);
         this.adapter = adapter;
         }

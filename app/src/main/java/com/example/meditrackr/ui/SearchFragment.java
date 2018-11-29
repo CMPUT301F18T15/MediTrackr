@@ -77,6 +77,7 @@ public class SearchFragment extends Fragment {
     private RecyclerView rv;
     private int selected;
     private RadioButton regularButton, geoLocationButton, bodyLocationButton;
+    private double latitude, longitude;
 
     // Indicator/Request code
     private static final int PLACE_PICKER_REQUEST = 2;
@@ -101,6 +102,8 @@ public class SearchFragment extends Fragment {
         geoLocationButton = (RadioButton) rootView.findViewById(R.id.geolocation_search_button);
         bodyLocationButton = (RadioButton) rootView.findViewById(R.id.bodylocation_search_button);
         regularButton.setChecked(true);
+        selected = 1;
+
         // UI beautify
         icon.setColorFilter(Color.BLACK);
         mSearch.setIconified(false);
@@ -125,11 +128,11 @@ public class SearchFragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 customFilter = new ArrayList<>();
                 if(!profile.getisCareProvider()) {
-                    customFilter = ParseText.parseRecordProblem(query, patient, customFilter);
+                    customFilter = swapSetting(customFilter, query, patient);
                 }else {
                     ArrayList<Patient> patients = LazyLoadingManager.getPatients();
                     for(int i = 0; i < patients.size(); i++){
-                        customFilter = ParseText.parseRecordProblem(query, patients.get(i), customFilter);
+                        customFilter = swapSetting(customFilter, query, patients.get(i));
                     }
                 }
                 SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter, selected);
@@ -143,14 +146,13 @@ public class SearchFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 customFilter = new ArrayList<>();
                 if(!profile.getisCareProvider()) {
-                    customFilter = ParseText.parseRecordProblem(newText, patient, customFilter);
+                    customFilter = swapSetting(customFilter, newText, patient);
                 }else {
                     ArrayList<Patient> patients = LazyLoadingManager.getPatients();
                     for(int i = 0; i < patients.size(); i++){
-                        customFilter = ParseText.parseRecordProblem(newText, patients.get(i), customFilter);
+                        customFilter = swapSetting(customFilter, newText, patients.get(i));
                     }
                 }
-
 
                 SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter, selected);
                 rv.setAdapter(adapter);
@@ -207,6 +209,33 @@ public class SearchFragment extends Fragment {
         }
         SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter, selected);
         rv.setAdapter(adapter);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK) {
+            Place place = PlacePicker.getPlace(data, getContext());
+
+            // Get latitude and longitude of location
+            LatLng latLng = place.getLatLng();
+            latitude = latLng.latitude;
+            longitude = latLng.longitude;
+        }
+    }
+
+    private ArrayList<CustomFilter> swapSetting(ArrayList<CustomFilter> customFilter, String query, Patient patient){
+        switch (selected){
+            case 1:
+                customFilter = ParseText.parseRecordProblem(query, patient, customFilter);
+                break;
+            case 2:
+                customFilter = ParseText.parseGeolocation(query, patient, customFilter, latitude, longitude);
+                break;
+            case 3:
+                break;
+        }
+
+        return customFilter;
     }
 
 }

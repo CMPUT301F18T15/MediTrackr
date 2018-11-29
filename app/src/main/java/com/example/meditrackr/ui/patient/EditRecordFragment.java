@@ -89,9 +89,8 @@ public class EditRecordFragment extends Fragment implements OnMapReadyCallback {
 
 
         // Set the record title and date so they can be edited
-        Problem problem = patient.getProblem(index);
-        title.setText(problem.getTitle());
-        description.setText(problem.getDescription());
+        title.setText(record.getTitle());
+        description.setText(record.getDescription());
         addressView.setText(record.getGeoLocation().getAddress());
 
 

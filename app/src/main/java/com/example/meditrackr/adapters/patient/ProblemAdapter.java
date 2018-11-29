@@ -112,13 +112,13 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // Class objects
         private ProblemAdapter adapter;
-        public ImageView problemImage;
+        private ImageView problemImage;
         public TextView title;
         public TextView date;
         public TextView description;
-        public TextView totalRecords;
-        public MaterialIconView deleteProblem;
-        public MaterialIconView editProblem;
+        private TextView totalRecords;
+        private MaterialIconView deleteProblem;
+        private MaterialIconView editProblem;
 
         /**
          * This function puts information about each problem into its own view so we won't
@@ -131,7 +131,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
 
 
         // Constructor and gets the corresponding data for each view
-        public ViewHolder(View itemView, final ProblemAdapter adapter){
+        private ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
             date = itemView.findViewById(R.id.problem_date);
@@ -187,7 +187,6 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                     alert11.show();
                 }
             });
-
 
 
             // Onclick listener for edit a problem

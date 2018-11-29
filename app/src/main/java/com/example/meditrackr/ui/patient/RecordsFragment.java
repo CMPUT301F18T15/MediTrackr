@@ -98,7 +98,7 @@ public class RecordsFragment extends Fragment {
 
         // Adapt items into recycler view
         records.setHasFixedSize(false);
-        adapter = new RecordsAdapter(getActivity(), recordList);
+        adapter = new RecordsAdapter(getActivity(), recordList, getContext());
         records.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         records.setLayoutManager(manager); // Set records layout context

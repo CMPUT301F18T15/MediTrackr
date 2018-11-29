@@ -71,7 +71,5 @@ public class ProblemController {
     public static void deleteProblem(Context context, int index, ProblemList problems){
         problems.removeProblem(index);
         ThreadSaveController.save(context, patient);
-
-
     }
 }

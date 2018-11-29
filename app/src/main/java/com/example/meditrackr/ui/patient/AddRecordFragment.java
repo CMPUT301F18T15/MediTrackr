@@ -158,7 +158,6 @@ public class AddRecordFragment extends Fragment{
         date = DateUtils.formatAppTime();
 
 
-
         //On click listener for adding a record
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override

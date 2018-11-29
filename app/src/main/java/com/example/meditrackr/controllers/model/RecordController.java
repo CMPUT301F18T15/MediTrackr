@@ -28,9 +28,11 @@ import android.widget.Toast;
 
 import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.controllers.LazyLoadingManager;
+import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.utils.ConvertImage;
 
 import es.dmoral.toasty.Toasty;
@@ -42,12 +44,14 @@ import es.dmoral.toasty.Toasty;
  * a record into both Elastic Search and
  * Memory
  *
- * @author  Veronica Salm
- * @version 1.0 Nov 10, 2018.
+ * @author  Orest Cokan
+ * @version 1.1 Nov 28, 2018.
  */
 
 // Controller class for record objects
 public class RecordController {
+    private static Patient patient = LazyLoadingManager.getPatient();
+
 
     /**
      * adds problem to elastic search and locally
@@ -104,6 +108,30 @@ public class RecordController {
         }
 
         return record;
+    }
+
+    /*---------------------------------------------------------------------------
+     * DELETE A RECORD
+     *--------------------------------------------------------------------------*/
+    public static void deleteRecord(Context context, int index, RecordList records){
+        records.removeRecord(index);
+        ThreadSaveController.save(context, patient);
+    }
+
+    /*---------------------------------------------------------------------------
+     * EDIT A RECORD
+     *--------------------------------------------------------------------------*/
+    public static void editRecord(Context context,
+                                  String title,
+                                  String description,
+                                  Geolocation geolocation,
+                                  Record record){
+
+        record.setTitle(title);
+        record.setDescription(description);
+        record.setGeoLocation(geolocation);
+        ThreadSaveController.save(context, patient);
+
     }
 
 

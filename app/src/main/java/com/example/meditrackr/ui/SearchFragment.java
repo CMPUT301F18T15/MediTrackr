@@ -19,6 +19,8 @@
 package com.example.meditrackr.ui;
 
 //imports
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,6 +35,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 
 import com.example.meditrackr.R;
@@ -44,11 +47,21 @@ import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.utils.CustomFilter;
+import com.example.meditrackr.utils.ImageRecognition;
+import com.example.meditrackr.utils.ParseText;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.model.LatLng;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import br.com.mauker.materialsearchview.MaterialSearchView;
+import es.dmoral.toasty.Toasty;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -64,6 +77,9 @@ public class SearchFragment extends Fragment {
     private RecyclerView rv;
     private int selected;
     private RadioButton regularButton, geoLocationButton, bodyLocationButton;
+
+    // Indicator/Request code
+    private static final int PLACE_PICKER_REQUEST = 2;
 
     // Create new fragment instance
     public static SearchFragment newInstance() {
@@ -84,9 +100,7 @@ public class SearchFragment extends Fragment {
         regularButton = (RadioButton) rootView.findViewById(R.id.regular_search_button);
         geoLocationButton = (RadioButton) rootView.findViewById(R.id.geolocation_search_button);
         bodyLocationButton = (RadioButton) rootView.findViewById(R.id.bodylocation_search_button);
-
-
-
+        regularButton.setChecked(true);
         // UI beautify
         icon.setColorFilter(Color.BLACK);
         mSearch.setIconified(false);
@@ -111,11 +125,11 @@ public class SearchFragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 customFilter = new ArrayList<>();
                 if(!profile.getisCareProvider()) {
-                    parseText(query, patient);
+                    customFilter = ParseText.parseRecordProblem(query, patient, customFilter);
                 }else {
                     ArrayList<Patient> patients = LazyLoadingManager.getPatients();
                     for(int i = 0; i < patients.size(); i++){
-                        parseText(query, patients.get(i));
+                        customFilter = ParseText.parseRecordProblem(query, patients.get(i), customFilter);
                     }
                 }
                 SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter, selected);
@@ -129,11 +143,11 @@ public class SearchFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 customFilter = new ArrayList<>();
                 if(!profile.getisCareProvider()) {
-                    parseText(newText, patient);
+                    customFilter = ParseText.parseRecordProblem(newText, patient, customFilter);
                 }else {
                     ArrayList<Patient> patients = LazyLoadingManager.getPatients();
                     for(int i = 0; i < patients.size(); i++){
-                        parseText(newText, patients.get(i));
+                        customFilter = ParseText.parseRecordProblem(newText, patients.get(i), customFilter);
                     }
                 }
 
@@ -159,6 +173,13 @@ public class SearchFragment extends Fragment {
                 }else if (v == geoLocationButton){
                     geoLocationButton.toggle();
                     selected = 2;
+                    PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                    try{
+                        startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+                    }
+                    catch (Exception e){
+                        Log.d("Error","Place Picker Error");
+                    }
                 } else {
                     bodyLocationButton.toggle();
                     selected = 3;
@@ -169,57 +190,19 @@ public class SearchFragment extends Fragment {
         geoLocationButton.setOnClickListener(listener);
         bodyLocationButton.setOnClickListener(listener);
 
-
         return rootView;
     }
 
-    // Parse the input text the user inputted
-    public void parseText(String query, Patient patient){
-        String[] keywords = query.split(" ");
 
-        for (String keyword : keywords) {
-            for (int i = 0; i < patient.getProblems().getSize(); i++) {
-                Problem problem = patient.getProblem(i);
-                if (problem.getDescription().contains(keyword)
-                        || problem.getTitle().contains(keyword)) {
-                    CustomFilter filter = new CustomFilter(
-                            patient.getUsername(),
-                            false,
-                            problem.getTitle(),
-                            problem.getDescription(),
-                            problem.getDate(),
-                            i);
-                    customFilter.add(filter);
-                }
-
-                for (int j = 0; j < problem.getRecords().getSize(); j++) {
-                    Record record = problem.getRecord(j);
-                    if (record.getDescription().contains(keyword)
-                            || record.getTitle().contains(keyword)) {
-                        CustomFilter filter = new CustomFilter(
-                                patient.getUsername(),
-                                true,
-                                record.getTitle(),
-                                record.getDescription(),
-                                record.getDate(),
-                                i,
-                                j);
-                        customFilter.add(filter);
-
-                    }
-                }
-            }
-        }
-    }
 
     public void onCreate(){
         customFilter = new ArrayList<>();
         if(!profile.getisCareProvider()) {
-            parseText("", patient);
+            customFilter = ParseText.parseRecordProblem("", patient, customFilter);
         }else {
             ArrayList<Patient> patients = LazyLoadingManager.getPatients();
             for(int i = 0; i < patients.size(); i++){
-                parseText("", patients.get(i));
+                customFilter = ParseText.parseRecordProblem("", patients.get(i),customFilter);
             }
         }
         SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter, selected);

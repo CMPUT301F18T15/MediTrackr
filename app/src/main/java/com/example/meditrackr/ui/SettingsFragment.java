@@ -1,4 +1,4 @@
-package com.example.meditrackr.ui.patient;
+package com.example.meditrackr.ui;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -20,16 +20,16 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
  * Activities that contain this fragment must implement the
  *
  */
-public class PatientQR extends Fragment {
+public class SettingsFragment extends Fragment {
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment PatientQR.
+     * @return A new instance of fragment SettingsFragment.
      */
-    public static PatientQR newInstance(String username) {
-        PatientQR fragment = new PatientQR();
+    public static SettingsFragment newInstance(String username) {
+        SettingsFragment fragment = new SettingsFragment();
         Bundle bundle = new Bundle();
         bundle.putString("USERNAME", username);
         fragment.setArguments(bundle);
@@ -41,7 +41,7 @@ public class PatientQR extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_patient_qr, container, false);
+                R.layout.fragment_settings, container, false);
 
         final ImageView qrCode = (ImageView) rootView.findViewById(R.id.qr_code);
         String username = getArguments().getString("USERNAME");

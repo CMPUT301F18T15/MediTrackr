@@ -87,7 +87,6 @@ public class UserEditFragment extends Fragment {
                 ThreadSaveController.save(getContext(), profile);
 
 
-
                 // Swap back to the user fragment and display the fragment_user view
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();

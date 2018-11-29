@@ -34,7 +34,6 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Profile;
-import com.example.meditrackr.ui.patient.PatientQR;
 
 /**
  * this fragment shows the users username, phone number, email and an image of the patient if they added one
@@ -71,7 +70,7 @@ public class UserFragment extends Fragment {
         final TextView email = rootView.findViewById(R.id.patient_email);
         final TextView phone = rootView.findViewById(R.id.patient_phone);
         final Button editButton = rootView.findViewById(R.id.edit_button);
-        final ImageButton qrButton = rootView.findViewById(R.id.qr_code_button);
+        final ImageButton settingButton = rootView.findViewById(R.id.setting_button);
 
 
         // Set users info in the page
@@ -85,28 +84,23 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager manager = getFragmentManager();
-                // Allow editing on fragment
                 FragmentTransaction transaction = manager.beginTransaction();
-                // Allows user to bring back previous fragment when back button is pressed
                 transaction.addToBackStack(null);
-                // Switches to UserEditFragment
                 UserEditFragment fragment = UserEditFragment.newInstance().newInstance();
-                // Replace current fragment with new info
                 transaction.replace(R.id.content, fragment);
-                // Make permanent all changes made in the transaction
                 transaction.commit();
             }
         });
 
 
-        // Onclick listener to go to QR code
-        qrButton.setOnClickListener(new View.OnClickListener() {
+        // Onclick listener to go to settings page
+        settingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.addToBackStack(null);
-                PatientQR fragment = PatientQR.newInstance(profile.getUsername());
+                SettingsFragment fragment = SettingsFragment.newInstance(profile.getUsername());
                 transaction.replace(R.id.content, fragment);
                 transaction.commit();
             }

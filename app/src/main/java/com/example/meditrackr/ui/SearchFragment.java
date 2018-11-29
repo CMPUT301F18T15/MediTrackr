@@ -196,7 +196,7 @@ public class SearchFragment extends Fragment {
     }
 
 
-
+    // Display all records/problems in the list upon creation of view
     public void onCreate(){
         customFilter = new ArrayList<>();
         if(!profile.getisCareProvider()) {
@@ -223,6 +223,7 @@ public class SearchFragment extends Fragment {
         }
     }
 
+    // Swap what to do search for (Records/Problem vs Geolocation vs Bodylocation)
     private ArrayList<CustomFilter> swapSetting(ArrayList<CustomFilter> customFilter, String query, Patient patient){
         switch (selected){
             case 1:

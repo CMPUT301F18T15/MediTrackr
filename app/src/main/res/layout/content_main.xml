@@ -1,37 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.meditrackr.ui.MainActivity"
-    tools:showIn="@layout/activity_main">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <android.support.v7.widget.SearchView
+        android:id="@+id/mSearch"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:defaultQueryHint="Search.."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.v7.widget.SearchView
-            android:id="@+id/mSearch"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:defaultQueryHint="Search..">
+    </android.support.v7.widget.SearchView>
 
-        </android.support.v7.widget.SearchView>
+    <RadioButton
+        android:id="@+id/regular_search_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Regular"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/geolocation_search_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mSearch" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/myRecycler"
-            class="android.support.v7.widget.RecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/mSearch"
-            android:backgroundTint="@color/background2" />
+    <RadioButton
+        android:id="@+id/geolocation_search_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Geolocation"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/bodylocation_search_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/regular_search_button"
+        app:layout_constraintTop_toBottomOf="@+id/mSearch" />
 
-    </LinearLayout>
-</RelativeLayout>
+    <RadioButton
+        android:id="@+id/bodylocation_search_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Bodylocation"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/geolocation_search_button"
+        app:layout_constraintTop_toBottomOf="@+id/mSearch" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/myRecycler"
+        class="android.support.v7.widget.RecyclerView"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/background2"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/geolocation_search_button" />
+
+</android.support.constraint.ConstraintLayout>

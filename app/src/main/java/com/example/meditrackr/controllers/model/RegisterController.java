@@ -82,9 +82,7 @@ public class RegisterController {
         // If both saves to memory and ES did not work
         if (!finish || !done) {
             // Indicate that new profile uses an existing username
-            Log.d("RegisterFragmentMeme", "done is " + done + " finish is " + finish);
             Toasty.error(context, "Username taken", Toast.LENGTH_SHORT).show();
-
         // If no exceptions were caught
         } else {
             Toasty.success(context, "Registration successful", Toast.LENGTH_SHORT).show();

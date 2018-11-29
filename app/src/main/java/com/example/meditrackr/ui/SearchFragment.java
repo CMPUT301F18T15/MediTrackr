@@ -32,6 +32,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 
 
 import com.example.meditrackr.R;
@@ -56,13 +57,13 @@ import br.com.mauker.materialsearchview.MaterialSearchView;
 
 // Class creates search fragment
 public class SearchFragment extends Fragment {
-
     // Initialize class objects
     private Profile profile = LazyLoadingManager.getProfile();
-    private SearchView mSearch;
     private ArrayList<CustomFilter> customFilter;
     private Patient patient;
     private RecyclerView rv;
+    private View rootView;
+    private RadioButton regularButton, geoLocationButton, bodyLocationButton;
 
     // Create new fragment instance
     public static SearchFragment newInstance() {
@@ -74,12 +75,19 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
+        rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_search, container, false);
 
         // Initialize ui attributes
-        mSearch = (SearchView) rootView.findViewById(R.id.mSearch);
+        SearchView mSearch = (SearchView) rootView.findViewById(R.id.mSearch);
         ImageView icon = mSearch.findViewById(android.support.v7.appcompat.R.id.search_button);
+        regularButton = (RadioButton) rootView.findViewById(R.id.regular_search_button);
+        geoLocationButton = (RadioButton) rootView.findViewById(R.id.geolocation_search_button);
+        bodyLocationButton = (RadioButton) rootView.findViewById(R.id.bodylocation_search_button);
+
+
+
+        // UI beautify
         icon.setColorFilter(Color.BLACK);
         mSearch.setIconified(false);
         mSearch.setClickable(true);
@@ -137,10 +145,32 @@ public class SearchFragment extends Fragment {
             }
         });
 
+
+        // Onclick listener for one of three parameters to search for
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                regularButton.setChecked(false);
+                geoLocationButton.setChecked(false);
+                bodyLocationButton.setChecked(false);
+                if(v == regularButton){
+                    regularButton.toggle();
+                }else if (v == geoLocationButton){
+                    geoLocationButton.toggle();
+                } else {
+                    bodyLocationButton.toggle();
+                }
+            }
+        };
+        regularButton.setOnClickListener(listener);
+        geoLocationButton.setOnClickListener(listener);
+        bodyLocationButton.setOnClickListener(listener);
+
+
         return rootView;
     }
 
-
+    // Parse the input text the user inputted
     public void parseText(String query, Patient patient){
         String[] keywords = query.split(" ");
 
@@ -158,6 +188,7 @@ public class SearchFragment extends Fragment {
                             i);
                     customFilter.add(filter);
                 }
+
                 for (int j = 0; j < problem.getRecords().getSize(); j++) {
                     Record record = problem.getRecord(j);
                     if (record.getDescription().contains(keyword)
@@ -191,6 +222,7 @@ public class SearchFragment extends Fragment {
         SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter);
         rv.setAdapter(adapter);
     }
+
 }
 
 

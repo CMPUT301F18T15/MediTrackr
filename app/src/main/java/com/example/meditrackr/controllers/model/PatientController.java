@@ -21,22 +21,20 @@ import es.dmoral.toasty.Toasty;
  */
 public class PatientController {
 
+    // Add a patient as a careprovider
     public static boolean addPatient(Context context, Patient patient){
-
         CareProvider careProvider = LazyLoadingManager.getCareProvider();
         ArrayList<Patient> patients = LazyLoadingManager.getPatients();
-        // If patient does not exist under the care provider
-        Log.d("PATIENTIS", "2: "+patient.getUsername());
-        if(!careProvider.patientExists(patient.getUsername()) &&
-                !patient.getisCareProvider()) {
-            careProvider.addPatient(patient.getUsername()); // Add patient
-            patients.add(patient);
 
+        // If patient does not exist under the care provider
+        if(!careProvider.patientExists(patient.getUsername())
+                && !patient.getisCareProvider()) {
+
+            careProvider.addPatient(patient.getUsername());
+            patients.add(patient);
 
             // Save both to ES and memory
             ThreadSaveController.save(context, careProvider);
-            //ElasticSearch.updateUser(careProvider);
-            //SaveLoad.saveProfile(context, careProvider);
             return true;
 
         } else {
@@ -47,6 +45,7 @@ public class PatientController {
 
     }
 
+    // Search for patient, first on the phone, then on ES
     public static Patient searchPatient(Context context, String username){
         Profile profile;
         profile = SaveLoad.loadProfile(context, username);
@@ -67,8 +66,6 @@ public class PatientController {
             Patient patient = (Patient) profile;
             return patient;
         }
-
-
 
     }
 }

@@ -62,7 +62,7 @@ public class SearchFragment extends Fragment {
     private ArrayList<CustomFilter> customFilter;
     private Patient patient;
     private RecyclerView rv;
-    private View rootView;
+    private int selected;
     private RadioButton regularButton, geoLocationButton, bodyLocationButton;
 
     // Create new fragment instance
@@ -75,7 +75,7 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = (ViewGroup) inflater.inflate(
+        View rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_search, container, false);
 
         // Initialize ui attributes
@@ -118,7 +118,7 @@ public class SearchFragment extends Fragment {
                         parseText(query, patients.get(i));
                     }
                 }
-                SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter);
+                SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter, selected);
                 rv.setAdapter(adapter);
 
 
@@ -138,7 +138,7 @@ public class SearchFragment extends Fragment {
                 }
 
 
-                SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter);
+                SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter, selected);
                 rv.setAdapter(adapter);
 
                 return false;
@@ -155,10 +155,13 @@ public class SearchFragment extends Fragment {
                 bodyLocationButton.setChecked(false);
                 if(v == regularButton){
                     regularButton.toggle();
+                    selected = 1;
                 }else if (v == geoLocationButton){
                     geoLocationButton.toggle();
+                    selected = 2;
                 } else {
                     bodyLocationButton.toggle();
+                    selected = 3;
                 }
             }
         };
@@ -219,7 +222,7 @@ public class SearchFragment extends Fragment {
                 parseText("", patients.get(i));
             }
         }
-        SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter);
+        SearchAdapter adapter = new SearchAdapter(getActivity(), getContext(), customFilter, selected);
         rv.setAdapter(adapter);
     }
 

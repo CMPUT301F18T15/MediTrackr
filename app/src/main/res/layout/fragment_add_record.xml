@@ -108,19 +108,84 @@
 
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Body Location"
+                    android:textSize="18sp" />
+
+                <ImageButton
+                    android:id="@+id/body_button_img"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@color/background2"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/camera"
+                    tools:layout_conversion_absoluteHeight="48dp"
+                    tools:layout_conversion_absoluteWidth="88dp" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2"
+                    app:layout_constraintTop_toBottomOf="@+id/body_button_img">
+
+                    <ImageView
+                        android:id="@+id/body_image_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
+
+                    <ImageView
+                        android:id="@+id/body_image_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop" />
+
+                </TableRow>
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintlayoutphoto"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
                 android:background="@color/background2"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="@+id/tablepicturelayout"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
                 <TextView
                     android:id="@+id/photos_title"
@@ -160,8 +225,8 @@
                     android:layout_height="60dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
-                    android:scaleType="centerCrop"
                     android:background="@color/background2"
+                    android:scaleType="centerCrop"
                     app:layout_constraintStart_toEndOf="@+id/photos_title"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/camera"

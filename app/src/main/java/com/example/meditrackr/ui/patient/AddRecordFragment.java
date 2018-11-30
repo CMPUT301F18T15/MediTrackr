@@ -43,6 +43,7 @@ import android.widget.Toast;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.model.RecordController;
+import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.utils.ConvertImage;
@@ -84,10 +85,14 @@ public class AddRecordFragment extends Fragment{
     // Indicators and request codes
     private static final int IMAGE_REQUEST_CODE = 1;
     private static final int PLACE_PICKER_REQUEST = 2;
+    private static final int IMAGE_BODY_REQUEST_CODE = 3;
+
 
     // Image variables
     private ImageView[] images = new ImageView[10];
+    private ImageView[] bodyImages = new ImageView[2];
     private Bitmap[] bitmaps = new Bitmap[10];
+    private Bitmap[] bodyBitmaps = new Bitmap[2];
 
 
     // Location variables
@@ -128,6 +133,7 @@ public class AddRecordFragment extends Fragment{
         final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
+        final ImageButton addBodyImage = (ImageButton) rootView.findViewById(R.id.body_button_img);
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
 
         // Initialize ui attributes for each button of notification frequency
@@ -142,6 +148,11 @@ public class AddRecordFragment extends Fragment{
         images[8] = (ImageView) rootView.findViewById(R.id.image_9);
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
 
+        // Body location images
+        bodyImages[0] = (ImageView) rootView.findViewById(R.id.body_image_1);
+        bodyImages[1] = (ImageView) rootView.findViewById(R.id.body_image_2);
+
+
 
         // Set the location
         boolean done = controller.canGetLocation();
@@ -150,7 +161,6 @@ public class AddRecordFragment extends Fragment{
             latitude = controller.getLatitude();
             addressName = controller.geoLocate();
             addressView.setText(addressName);
-            Log.d("debugMAPS", "long: " + longitude + " lat: " + latitude + "name: " + addressName);
         }
 
 
@@ -162,14 +172,14 @@ public class AddRecordFragment extends Fragment{
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    // Create the new record
                     Record record = RecordController.createRecord(recordTitle,
                             recordDescription,
                             latitude,
                             longitude,
                             addressName,
                             date,
-                            bitmaps);
+                            bitmaps,
+                            bodyBitmaps);
                     // Add the record
                     RecordController.addRecord(getContext(), record, index);
 
@@ -180,6 +190,7 @@ public class AddRecordFragment extends Fragment{
             }
             }
         );
+
 
 
         /*---------------------------------------------------------------------------
@@ -197,6 +208,27 @@ public class AddRecordFragment extends Fragment{
 
                 } else {
                     Toasty.error(getContext(), "Unable to add more than 10 photos!"
+                            , Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        /*---------------------------------------------------------------------------
+         * ADD BODY LOCATION TO RECORD
+         *--------------------------------------------------------------------------*/
+        // OnClickListener handles camera button
+        addBodyImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (bitmaps[1] == null) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivityForResult(intent, IMAGE_BODY_REQUEST_CODE);                    }
+
+                } else {
+                    Toasty.error(getContext(), "Unable to add more than 2 body location photos!"
                             , Toast.LENGTH_SHORT).show();
                 }
             }
@@ -256,6 +288,25 @@ public class AddRecordFragment extends Fragment{
             }
         }
 
+        else if( requestCode == IMAGE_BODY_REQUEST_CODE && resultCode == RESULT_OK) {
+            Bitmap bmp = (Bitmap) data.getExtras().get("data");
+            assert bmp != null;
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+
+            // Populate body location images
+            for(int i = 0; i < bodyBitmaps.length; i++){
+                Log.d("BODYLOCATIONNUMBER", "length of array: "+bodyBitmaps.length);
+                Log.d("BODYLOCATIONNUMBER", ""+i);
+                if(bodyBitmaps[i] == null){
+                    Bitmap newBitmap = Bitmap.createScaledBitmap(bmp,350, 700, false);
+                    bodyBitmaps[i] = newBitmap;
+                    bodyImages[i].setImageBitmap(newBitmap);
+                    break;
+                }
+            }
+
+        }
         // Allows intent to pick a place location
         else if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
             place = PlacePicker.getPlace(data, getContext());

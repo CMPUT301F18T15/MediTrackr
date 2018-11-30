@@ -89,7 +89,14 @@ public class RecordController {
      * CREATE NEW RECORD
      *--------------------------------------------------------------------------*/
     // Creates and returns a new record object using the required information from the view
-    public static Record createRecord(EditText title, EditText description, double latitude, double longitude, String addressName, String date, Bitmap[] bitmaps) {
+    public static Record createRecord(EditText title,
+                                      EditText description,
+                                      double latitude,
+                                      double longitude,
+                                      String addressName,
+                                      String date,
+                                      Bitmap[] bitmaps,
+                                      Bitmap[] bodyBitmaps) {
         Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
         // In new record include user input title and description
 
@@ -104,6 +111,13 @@ public class RecordController {
             if(bitmap != null) { // If image is not null convert image into base64 string
                 byte[] byteArray = ConvertImage.convertBitmapToBytes(bitmap);
                 record.getImages().addImage(byteArray); // Save each image to record
+            }
+        }
+
+        for(Bitmap bitmap: bodyBitmaps){
+            if(bitmap != null){
+                byte[] byteArray = ConvertImage.convertBitmapToBytes(bitmap);
+                record.getBodyLocation().getPhotoList().addImage(byteArray);
             }
         }
 

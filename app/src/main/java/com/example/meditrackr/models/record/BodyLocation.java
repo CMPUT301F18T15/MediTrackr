@@ -43,6 +43,7 @@ public class BodyLocation implements Serializable {
     private double[] bodyCoordinate;
     private String bodyFace;
     private String bodyLocation;
+    private PhotoList photoList;
 
     /**
      * Creates a new BodyLocation object.
@@ -122,5 +123,27 @@ public class BodyLocation implements Serializable {
     public void setBodyLocation(String bodyLocation) {
         this.bodyLocation = bodyLocation;
     }
+
+
+    /**
+     * Gets the recordphoto list holding
+     * bodylocation photos
+     * @author  Orest Cokan
+     */
+    public PhotoList getPhotoList() {
+        return photoList;
+    }
+
+    /**
+     * Sets the bodyphotolist that
+     * holds the images of body
+     * locations
+     * @author  Orest Cokan
+     * @param photoList the photoList holding body location photos
+     */
+    public void setPhotoList(PhotoList photoList) {
+        this.photoList = photoList;
+    }
+
 
 }

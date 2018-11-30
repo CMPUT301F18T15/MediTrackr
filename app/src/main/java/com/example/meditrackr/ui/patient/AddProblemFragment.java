@@ -134,8 +134,10 @@ public class AddProblemFragment extends Fragment {
             public void onClick(View v) {
                 if(checkInputs(title, description)){ // If checkInputs is true
                     // Set user inputs as data
-                    Problem problem = new Problem(title.getText().toString(),
-                            dateSelector.getText().toString(), description.getText().toString());
+                    Problem problem = new Problem(
+                            title.getText().toString(),
+                            dateSelector.getText().toString(),
+                            description.getText().toString());
 
                     // Ask the problem controller to add the problem to the patient
                     // And then save it locally and to ElasticSearch
@@ -143,6 +145,7 @@ public class AddProblemFragment extends Fragment {
 
                     // Transition back to ProblemsFragment after adding
                     FragmentManager manager = getFragmentManager();
+                    assert manager != null;
                     int count = manager.getBackStackEntryCount();
                     manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 }
@@ -169,6 +172,7 @@ public class AddProblemFragment extends Fragment {
         }
         return false;
     }
+
 
     /*-----------------------------------------------------------------------
      * CHECK INPUTS FILLED: TITLE AND DESCRIPTION

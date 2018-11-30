@@ -1,15 +1,12 @@
 package com.example.meditrackr.controllers.model;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.utils.SaveLoad;
+import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
@@ -24,22 +21,20 @@ import es.dmoral.toasty.Toasty;
  */
 public class PatientController {
 
+    // Add a patient as a careprovider
     public static boolean addPatient(Context context, Patient patient){
-
         CareProvider careProvider = LazyLoadingManager.getCareProvider();
         ArrayList<Patient> patients = LazyLoadingManager.getPatients();
-        // If patient does not exist under the care provider
-        Log.d("PATIENTIS", "2: "+patient.getUsername());
-        if(!careProvider.patientExists(patient.getUsername()) &&
-                !patient.getisCareProvider()) {
-            careProvider.addPatient(patient.getUsername()); // Add patient
-            patients.add(patient);
 
+        // If patient does not exist under the care provider
+        if(!careProvider.patientExists(patient.getUsername())
+                && !patient.getisCareProvider()) {
+
+            careProvider.addPatient(patient.getUsername());
+            patients.add(patient);
 
             // Save both to ES and memory
             ThreadSaveController.save(context, careProvider);
-            //ElasticSearchController.updateUser(careProvider);
-            //SaveLoadController.saveProfile(context, careProvider);
             return true;
 
         } else {
@@ -50,11 +45,12 @@ public class PatientController {
 
     }
 
+    // Search for patient, first on the phone, then on ES
     public static Patient searchPatient(Context context, String username){
         Profile profile;
-        profile = SaveLoadController.loadProfile(context, username);
+        profile = SaveLoad.loadProfile(context, username);
         if(profile == null) {
-            profile = ElasticSearchController.searchProfile(username); // Search for patient
+            profile = ElasticSearch.searchProfile(username); // Search for patient
         }
 
         if(profile == null){ // If user not found indicate so
@@ -70,8 +66,6 @@ public class PatientController {
             Patient patient = (Patient) profile;
             return patient;
         }
-
-
 
     }
 }

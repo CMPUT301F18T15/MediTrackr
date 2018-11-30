@@ -23,6 +23,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -38,6 +40,14 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.ui.MainActivity;
 import com.example.meditrackr.utils.ConvertImage;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * shows user a list of the records associated with that problem in a recycler view.
@@ -55,10 +65,13 @@ import com.example.meditrackr.utils.ConvertImage;
  */
 
 // Class creates a Record Fragment for patients
-public class RecordFragment extends Fragment {
+public class RecordFragment extends Fragment implements OnMapReadyCallback {
     // Initialize class object record and image view array
     private Record record;
     private ImageView[] images = new ImageView[10];
+    private GoogleMap mGoogleMap;
+    private MapView mapView;
+    private View rootView;
 
     // Creates new instance fragment and maps record as a serializable value in bundle
     public static RecordFragment newInstance(Record record) {
@@ -73,7 +86,7 @@ public class RecordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
+        rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_record, container, false);
 
 
@@ -121,5 +134,39 @@ public class RecordFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mapView = (MapView) rootView.findViewById(R.id.map_view);
+        if(mapView != null){
+            mapView.onCreate(null);
+            mapView.onResume();
+            mapView.getMapAsync(this);
 
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        MapsInitializer.initialize(getContext());
+        mGoogleMap = googleMap;
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(
+                record.getGeoLocation().getLatitude(),
+                record.getGeoLocation().getLongitude()))
+                .title(record.getTitle())
+                .snippet(record.getDescription()));
+
+        CameraPosition recordMap = CameraPosition.builder().target(
+                new LatLng(record.getGeoLocation().getLatitude(),
+                record.getGeoLocation()
+                        .getLongitude()))
+                .zoom(15)
+                .bearing(0)
+                .tilt(0)
+                .build();
+
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(recordMap));
+
+    }
 }

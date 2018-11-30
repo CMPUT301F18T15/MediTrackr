@@ -86,19 +86,16 @@ import com.example.meditrackr.utils.ConvertImage;
             // Get view to display an image view based on image in XML
             imgDisplay = (ImageView) viewLayout.findViewById(R.id.imgDisplay);
 
-            // Set image configurations
+            // Create the bitmap and display it on a full screen view
             BitmapFactory.Options options = new BitmapFactory.Options();
-            // Each pixel in a bitmap image will be stored on 4 bytes
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            // Get byte array of the image
             byte[] image = images.getImage(position);
-            // Convert a Base64 String into an image
             imgDisplay.setImageBitmap(ConvertImage.convertByteToBitmap(image));
-
             ((ViewPager) container).addView(viewLayout);
-
             return viewLayout; // return image
         }
+
+
         // Handle the close button for image view?
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {

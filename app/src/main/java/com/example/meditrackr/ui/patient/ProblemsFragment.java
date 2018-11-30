@@ -57,7 +57,6 @@ import com.example.meditrackr.ui.careprovider.PatientsFragment;
 public class ProblemsFragment extends Fragment {
     // Initialize adapter and create new ProblemsFragment object
     private ProblemAdapter adapter;
-    private ImageView imageProblem;
 
 
     // Constructor

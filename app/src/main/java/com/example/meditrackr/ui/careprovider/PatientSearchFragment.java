@@ -67,7 +67,6 @@ public class PatientSearchFragment extends Fragment{
     private TextView patientUsername;
     private TextView patientEmail;
     private TextView patientPhone;
-    private Profile profile;
     private Patient patient;
 
 
@@ -119,7 +118,6 @@ public class PatientSearchFragment extends Fragment{
 
 
 
-
         // On click listener button to add a patient to your list
         addPatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +157,7 @@ public class PatientSearchFragment extends Fragment{
     }
 
 
+    // return what the scanned QR code and set the username field to the qr code text
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -192,6 +191,8 @@ public class PatientSearchFragment extends Fragment{
         }
     }
 
+
+    // get permission to use the camera
     private void getCameraPermission() {
         String[] permissions = {Manifest.permission.CAMERA};
 
@@ -205,6 +206,7 @@ public class PatientSearchFragment extends Fragment{
     }
 
 
+    // update all text fields once qr code is scanned or username is typed in
     public void updateTextFields(Patient patient){
         patientUsername.setText(patient.getUsername());
         patientEmail.setText(patient.getEmail());

@@ -71,6 +71,18 @@ public class RecordList implements Serializable {
 
 
     /**
+     * Removes a Record object from the RecordList.
+     *
+     * @author  Orest Cokan
+     * @param index    the index of the record to remove from the list
+     */
+    public void removeRecord(int index){
+        records.remove(index);
+    }
+
+
+
+    /**
      * Checks if a record is in the RecordList and returns
      * true or false accordingly.
      *

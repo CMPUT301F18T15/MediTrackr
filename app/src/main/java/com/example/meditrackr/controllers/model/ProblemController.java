@@ -19,17 +19,16 @@
 
 package com.example.meditrackr.controllers.model;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
+import com.example.meditrackr.models.ProblemList;
+import com.example.meditrackr.models.Profile;
 
 import es.dmoral.toasty.Toasty;
 
@@ -42,11 +41,13 @@ import es.dmoral.toasty.Toasty;
  * and on ElasticSearch
  *
  * @author  Veronica Salm
- * @version 1.0 Nov 18, 2018
+ * @version 1.1 Nov 28, 2018
  */
 
 // Controller class for problem objects
 public class ProblemController {
+    private static Patient patient = LazyLoadingManager.getPatient();
+
 
     /**
      * adds problem to database
@@ -57,16 +58,30 @@ public class ProblemController {
     // Add problem to problem list
     public static void addProblem(Context context, Problem problem) {
         // Get patient profile and problem
-        Patient patient = LazyLoadingManager.getPatient();
         patient.getProblems().addProblem(problem);
 
         // Save the problem both locally and elastic search
         ThreadSaveController.save(context, patient);
-        //ElasticSearchController.updateUser(patient);
-        //SaveLoadController.saveProfile(context, patient);
         Log.d("ProblemAdd", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
 
         // let the user know everything was successful
         Toasty.success(context, "Problem successfully added", Toast.LENGTH_SHORT).show();
+    }
+
+    // Delete a problem
+    public static void deleteProblem(Context context, int index, ProblemList problems){
+        problems.removeProblem(index);
+        ThreadSaveController.save(context, patient);
+    }
+
+    // Edit a problem
+    public static void editProblem(Context context, Problem problem, String title, String description, String date){
+        problem.setTitle(title);
+        problem.setDate(date);
+        problem.setDescription(description);
+
+        // Save problem into ES and memory
+        ThreadSaveController.save(context, patient);
+
     }
 }

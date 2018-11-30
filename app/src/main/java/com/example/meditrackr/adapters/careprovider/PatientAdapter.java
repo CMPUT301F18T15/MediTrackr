@@ -20,13 +20,10 @@ package com.example.meditrackr.adapters.careprovider;
 
 //imports
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,15 +31,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.models.PatientList;
-import com.example.meditrackr.ui.MainActivity;
-import com.example.meditrackr.ui.careprovider.PatientsFragment;
 import com.example.meditrackr.ui.careprovider.ProblemsFragment;
-import com.example.meditrackr.ui.patient.MapActivity;
 
 import java.util.ArrayList;
 
@@ -141,8 +132,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             itemView.setOnClickListener(this);
             this.adapter = adapter;
         }
-
-
 
 
 

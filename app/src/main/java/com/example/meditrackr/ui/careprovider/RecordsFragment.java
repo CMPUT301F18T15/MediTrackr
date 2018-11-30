@@ -96,8 +96,8 @@ public class RecordsFragment extends Fragment {
                 }
             }
         };
-
         messageClick.setOnClickListener(listener);
+
 
         // Hide the floating action button
         // Care providers cannot add records for patients

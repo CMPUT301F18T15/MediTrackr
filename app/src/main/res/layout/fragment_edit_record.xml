@@ -31,7 +31,7 @@
                 android:orientation="vertical">
 
 
-                <TextView
+                <EditText
                     android:id="@+id/record"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -40,14 +40,14 @@
                     android:layout_marginRight="40dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="32dp"
-                    android:text="RECORD"
+                    android:text="EDIT RECORD"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/record_title"
+                <EditText
+                    android:id="@+id/edit_record_title"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginEnd="40dp"
@@ -58,7 +58,6 @@
                     android:background="@color/editTextBackground"
                     android:drawableLeft="@drawable/ic_accessibility"
                     android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:selectAllOnFocus="false"
                     android:singleLine="true"
@@ -66,8 +65,8 @@
                     android:textColorHint="@color/editTextHint"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/record_date"
+                <EditText
+                    android:id="@+id/edit_record_date"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginEnd="40dp"
@@ -79,14 +78,13 @@
                     android:drawableLeft="@drawable/time"
                     android:focusable="false"
                     android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:textColor="@color/colorPrimaryBlack"
                     android:textColorHint="@color/editTextHint"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/record_location"
+                    android:id="@+id/edit_record_location"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginEnd="40dp"
@@ -98,7 +96,6 @@
                     android:drawableLeft="@drawable/ic_map"
                     android:focusable="false"
                     android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:textColor="@color/colorPrimaryBlack"
                     android:textColorHint="@color/editTextHint"
@@ -114,8 +111,8 @@
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp" />
 
-                <TextView
-                    android:id="@+id/record_description"
+                <EditText
+                    android:id="@+id/edit_record_description"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginStart="40dp"
@@ -135,73 +132,23 @@
 
             </LinearLayout>
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/constraintLayout4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Body Location"
-                    android:textSize="18sp" />
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2"
-                    app:layout_constraintTop_toBottomOf="@+id/textView">
-
-                    <ImageView
-                        android:id="@+id/record_body_image_1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:scaleType="centerCrop" />
-
-                    <ImageView
-                        android:id="@+id/record_body_image_2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:scaleType="centerCrop" />
-
-                </TableRow>
-            </android.support.constraint.ConstraintLayout>
-
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintlayoutphoto"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
+                android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
+                android:layout_marginStart="40dp"
                 android:background="@color/background2"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                 <TextView
-                    android:id="@+id/photos_title"
+                    android:id="@+id/edit_photos_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Photos"
@@ -233,7 +180,7 @@
                     android:weightSum="2">
 
                     <ImageView
-                        android:id="@+id/record_image_1"
+                        android:id="@+id/edit_record_image_1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -243,7 +190,7 @@
                         android:scaleType="centerCrop" />
 
                     <ImageView
-                        android:id="@+id/record_image_2"
+                        android:id="@+id/edit_record_image_2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -260,7 +207,7 @@
                     android:weightSum="2">
 
                     <ImageView
-                        android:id="@+id/record_image_3"
+                        android:id="@+id/edit_record_image_3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -270,7 +217,7 @@
                         android:scaleType="centerCrop" />
 
                     <ImageView
-                        android:id="@+id/record_image_4"
+                        android:id="@+id/edit_record_image_4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -287,7 +234,7 @@
                     android:weightSum="2">
 
                     <ImageView
-                        android:id="@+id/record_image_5"
+                        android:id="@+id/edit_record_image_5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -297,7 +244,7 @@
                         android:scaleType="centerCrop" />
 
                     <ImageView
-                        android:id="@+id/record_image_6"
+                        android:id="@+id/edit_record_image_6"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -314,7 +261,7 @@
                     android:weightSum="2">
 
                     <ImageView
-                        android:id="@+id/record_image_7"
+                        android:id="@+id/edit_record_image_7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -324,7 +271,7 @@
                         android:scaleType="centerCrop" />
 
                     <ImageView
-                        android:id="@+id/record_image_8"
+                        android:id="@+id/edit_record_image_8"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -343,7 +290,7 @@
 
 
                     <ImageView
-                        android:id="@+id/record_image_9"
+                        android:id="@+id/edit_record_image_9"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -353,7 +300,7 @@
                         android:scaleType="centerCrop" />
 
                     <ImageView
-                        android:id="@+id/record_image_10"
+                        android:id="@+id/edit_record_image_10"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -366,6 +313,27 @@
                 </TableRow>
 
             </TableLayout>
+
+            <Button
+                android:id="@+id/edit_record_save_button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/gradient"
+                android:text="SAVE"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tablepicturelayout" />
 
 
         </android.support.constraint.ConstraintLayout>

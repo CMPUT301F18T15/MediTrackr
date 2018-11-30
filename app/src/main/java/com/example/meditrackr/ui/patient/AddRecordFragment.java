@@ -19,17 +19,17 @@
 package com.example.meditrackr.ui.patient;
 
 //imports
-
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
-
 import android.graphics.Bitmap;
-
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,14 +44,25 @@ import android.widget.Toast;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.model.RecordController;
+import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.DateUtils;
-
+import com.example.meditrackr.utils.ImageRecognition;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.Gson;
+import com.microsoft.projectoxford.vision.VisionServiceClient;
+import com.microsoft.projectoxford.vision.VisionServiceRestClient;
+import com.microsoft.projectoxford.vision.contract.AnalysisResult;
+import com.microsoft.projectoxford.vision.contract.Caption;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
 
 
 import es.dmoral.toasty.Toasty;
@@ -75,10 +86,14 @@ public class AddRecordFragment extends Fragment{
     // Indicators and request codes
     private static final int IMAGE_REQUEST_CODE = 1;
     private static final int PLACE_PICKER_REQUEST = 2;
+    private static final int IMAGE_BODY_REQUEST_CODE = 3;
+
 
     // Image variables
     private ImageView[] images = new ImageView[10];
+    private ImageView[] bodyImages = new ImageView[2];
     private Bitmap[] bitmaps = new Bitmap[10];
+    private Bitmap[] bodyBitmaps = new Bitmap[2];
 
 
     // Location variables
@@ -108,39 +123,18 @@ public class AddRecordFragment extends Fragment{
                 R.layout.fragment_add_record, container, false);
 
         LocationController controller = new LocationController(getContext());
-
-        // Initialize address and set it
-        addressView = (TextView) rootView.findViewById(R.id.addresss_field);
-        boolean done = controller.canGetLocation();
         final int index = getArguments().getInt("INDEX");
-
-
-        if(done){
-            for(int i = 0; i < 10; i++) {
-                longitude = controller.getLongitude();
-                latitude = controller.getLatitude();
-                addressName = controller.geoLocate();
-                addressView.setText(addressName);
-                Log.d("debugMAPS", "long: " + longitude + " lat: " + latitude + "name: " + addressName);
-            }
-        }
 
 
         /*---------------------------------------------------------------------------
          * INITIALIZE UI COMPONENTS
          *--------------------------------------------------------------------------*/
-
         final EditText recordTitle = (EditText) rootView.findViewById(R.id.record_title_field);
         final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
-
-        // Initialize address and set it
+        final ImageButton addBodyImage = (ImageButton) rootView.findViewById(R.id.body_button_img);
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
-
-
-        // Set date
-        date = DateUtils.formatAppTime();
 
         // Initialize ui attributes for each button of notification frequency
         images[0] = (ImageView) rootView.findViewById(R.id.image_1);
@@ -153,25 +147,48 @@ public class AddRecordFragment extends Fragment{
         images[7] = (ImageView) rootView.findViewById(R.id.image_8);
         images[8] = (ImageView) rootView.findViewById(R.id.image_9);
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
+        // Body location images
+        bodyImages[0] = (ImageView) rootView.findViewById(R.id.body_image_1);
+        bodyImages[1] = (ImageView) rootView.findViewById(R.id.body_image_2);
 
+
+        // Set the location
+        boolean done = controller.canGetLocation();
+        if(done){
+            longitude = controller.getLongitude();
+            latitude = controller.getLatitude();
+            addressName = controller.geoLocate();
+            addressView.setText(addressName);
+        }
+
+
+        // Set date
+        date = DateUtils.formatAppTime();
 
 
         //On click listener for adding a record
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    // Create the new record
-                    Record record = createRecord(recordTitle, recordDescription);
+                    Record record = RecordController.createRecord(recordTitle,
+                            recordDescription,
+                            latitude,
+                            longitude,
+                            addressName,
+                            date,
+                            bitmaps,
+                            bodyBitmaps);
+                    // Add the record
                     RecordController.addRecord(getContext(), record, index);
 
                     // Transition back to all the records
                     FragmentManager manager = getFragmentManager();
                     int count = manager.getBackStackEntryCount();
                     manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
             }
             }
         );
+
 
 
         /*---------------------------------------------------------------------------
@@ -189,6 +206,27 @@ public class AddRecordFragment extends Fragment{
 
                 } else {
                     Toasty.error(getContext(), "Unable to add more than 10 photos!"
+                            , Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        /*---------------------------------------------------------------------------
+         * ADD BODY LOCATION TO RECORD
+         *--------------------------------------------------------------------------*/
+        // OnClickListener handles camera button
+        addBodyImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (bitmaps[1] == null) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivityForResult(intent, IMAGE_BODY_REQUEST_CODE);                    }
+
+                } else {
+                    Toasty.error(getContext(), "Unable to add more than 2 body location photos!"
                             , Toast.LENGTH_SHORT).show();
                 }
             }
@@ -213,33 +251,9 @@ public class AddRecordFragment extends Fragment{
             }
         });
 
+
         return rootView;
-    }
 
-
-    /*---------------------------------------------------------------------------
-     * CREATE NEW RECORD
-     *--------------------------------------------------------------------------*/
-    // Creates and returns a new record object using the required information from the view
-    private Record createRecord(EditText title, EditText description) {
-        Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
-        // In new record include user input title and description
-
-        Record record = new Record(
-                title.getText().toString(),
-                description.getText().toString(),
-                date,
-                null);
-
-        record.setGeoLocation(geolocation);
-        for(Bitmap bitmap: bitmaps){ // For each image
-            if(bitmap != null) { // If image is not null convert image into base64 string
-                byte[] byteArray = ConvertImage.convertBitmapToBytes(bitmap);
-                record.getImages().addImage(byteArray); // Save each image to record
-            }
-        }
-
-        return record;
     }
 
 
@@ -255,7 +269,13 @@ public class AddRecordFragment extends Fragment{
             getActivity();
             Bitmap bmp = (Bitmap) data.getExtras().get("data");
             assert bmp != null;
-            Log.d("BMP", bmp.getHeight()+"   " +bmp.getWidth()+"");
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+            final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+
+            // Image recognition
+            ImageRecognition.mContext = getContext();
+            ImageRecognition.recognizeImage(inputStream);
 
             // Populate image
             for(int i = 0; i < bitmaps.length; i++){
@@ -268,22 +288,37 @@ public class AddRecordFragment extends Fragment{
             }
         }
 
+        else if( requestCode == IMAGE_BODY_REQUEST_CODE && resultCode == RESULT_OK) {
+            Bitmap bmp = (Bitmap) data.getExtras().get("data");
+            assert bmp != null;
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+
+            // Populate body location images
+            for(int i = 0; i < bodyBitmaps.length; i++){
+                if(bodyBitmaps[i] == null){
+                    Bitmap newBitmap = Bitmap.createScaledBitmap(bmp,350, 700, false);
+                    bodyBitmaps[i] = newBitmap;
+                    bodyImages[i].setImageBitmap(newBitmap);
+                    break;
+                }
+            }
+
+        }
         // Allows intent to pick a place location
         else if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
             place = PlacePicker.getPlace(data, getContext());
             // Indicate location with toast
             String toastMsg = String.format("Place: %s", place.getName());
-            // Set picked location name on map and set it to addressName
             addressView.setText(place.getName().toString());
             addressName = place.getName().toString();
+
             // Get latitude and longitude of location
             LatLng latLng = place.getLatLng();
             latitude = latLng.latitude;
             longitude = latLng.longitude;
-            Log.d("debugMAPS", "long: " + longitude + " lat: " + latitude + "name: " + addressName);
             Toasty.info(getContext(), toastMsg, Toast.LENGTH_LONG).show();
         }
     }
-
 
 }

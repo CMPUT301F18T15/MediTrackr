@@ -118,15 +118,16 @@
         app:layout_constraintTop_toBottomOf="@+id/patient_phone" />
 
     <ImageButton
-        android:id="@+id/qr_code_button"
+        android:id="@+id/setting_button"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@color/background2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/qr_code_button" />
+        app:srcCompat="@drawable/ic_settings" />
 
 
 </android.support.constraint.ConstraintLayout>

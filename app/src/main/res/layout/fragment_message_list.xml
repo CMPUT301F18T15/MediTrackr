@@ -59,7 +59,7 @@
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:layout_gravity="bottom"
-            android:background="#6867A9"
+            android:background="@color/main9"
             android:clickable="true"
             android:gravity="center"
             android:text="SEND"

@@ -160,7 +160,7 @@
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/gradient"
+        android:background="@drawable/gradient_main"
         android:text="CREATE ACCOUNT"
         android:textAlignment="center"
         android:textColor="@color/white"

@@ -34,6 +34,27 @@
     <color name="default_indicator_light_off">#777777</color>
     <color name="search_layover_bg">#50000000</color>
     <color name="login_but">#6867A9</color>
+    
+    <color name="blue1">#EDEDFC</color>
+    <color name="blue2">#CAC9DD</color>
+    <color name="blue3">#9493C8</color>
+    <color name="blue4">#6867A9</color>
+    <color name="blue5">#3B3A84</color>
+
+
+    <color name="main1">#EDEDFC</color>
+    <color name="main2">#CAC9DD</color>
+    <color name="main3">#9493C8</color>
+    <color name="main4">#6867A9</color>
+    <color name="main5">#3B3A84</color>
+    <color name="main6">#D17FC4</color>
+    <color name="main7">#AD5BAC</color>
+    <color name="main8">#812E85</color>
+    <color name="main9">#66FCFC</color>
+    <color name="main10">#7BD2DD</color>
+    <color name="main11">#7BD2DD</color>
+    <color name="main12">#7664A6</color>
+    <color name="main13">#A81385</color>
 
 
 </resources>
@@ -71,6 +92,7 @@
     <color name="default_indicator_light_on">#111111</color>
     <color name="default_indicator_light_off">#777777</color>
     <color name="search_layover_bg">#50000000</color>
+
 
 </resources>
 

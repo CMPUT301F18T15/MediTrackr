@@ -53,7 +53,7 @@
         android:layout_marginBottom="32dp"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="?attr/colorPrimaryDark"
+        app:backgroundTint="@color/login_but"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />

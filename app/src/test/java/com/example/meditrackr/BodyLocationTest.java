@@ -42,7 +42,7 @@ public class BodyLocationTest {
         final double[] location = {0, 0};
         final String bodyFace = "initial back";
         final String bodyLocation = "initial arm";
-        body = new BodyLocation(location, bodyFace, bodyLocation);
+        body = new BodyLocation();
     }
     
     // test if body location is constructed with its attributes
@@ -52,7 +52,7 @@ public class BodyLocationTest {
         String face = "BodyFace";
         String location = "BodyLocation";
         BodyLocation bodyLocation =
-                new BodyLocation(coords, face, location);
+                new BodyLocation();
         assertEquals(coords, bodyLocation.getBodyCoordinate());
         assertEquals(face, bodyLocation.getBodyFace());
         assertEquals(location, bodyLocation.getBodyLocation());

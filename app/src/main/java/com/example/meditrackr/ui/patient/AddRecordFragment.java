@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -128,7 +129,6 @@ public class AddRecordFragment extends Fragment{
         /*---------------------------------------------------------------------------
          * INITIALIZE UI COMPONENTS
          *--------------------------------------------------------------------------*/
-
         final EditText recordTitle = (EditText) rootView.findViewById(R.id.record_title_field);
         final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
@@ -147,11 +147,9 @@ public class AddRecordFragment extends Fragment{
         images[7] = (ImageView) rootView.findViewById(R.id.image_8);
         images[8] = (ImageView) rootView.findViewById(R.id.image_9);
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
-
         // Body location images
         bodyImages[0] = (ImageView) rootView.findViewById(R.id.body_image_1);
         bodyImages[1] = (ImageView) rootView.findViewById(R.id.body_image_2);
-
 
 
         // Set the location
@@ -253,7 +251,9 @@ public class AddRecordFragment extends Fragment{
             }
         });
 
+
         return rootView;
+
     }
 
 
@@ -296,8 +296,6 @@ public class AddRecordFragment extends Fragment{
 
             // Populate body location images
             for(int i = 0; i < bodyBitmaps.length; i++){
-                Log.d("BODYLOCATIONNUMBER", "length of array: "+bodyBitmaps.length);
-                Log.d("BODYLOCATIONNUMBER", ""+i);
                 if(bodyBitmaps[i] == null){
                     Bitmap newBitmap = Bitmap.createScaledBitmap(bmp,350, 700, false);
                     bodyBitmaps[i] = newBitmap;
@@ -305,6 +303,13 @@ public class AddRecordFragment extends Fragment{
                     break;
                 }
             }
+
+            FragmentManager manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.addToBackStack(null);
+            ProblemsFragment fragment = ProblemsFragment.newInstance();
+            transaction.replace(R.id.content, fragment);
+            transaction.commit();
 
         }
         // Allows intent to pick a place location

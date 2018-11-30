@@ -1,4 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryBlack">#000000</color>
+    <color name="colorPrimaryDark">#233142</color>
+    <color name="colorAccent">#ff5500</color>
+    <color name="background_material_light">#ededed</color>
+    <color name="text_color_primary">#dd000000</color>
+    <color name="background">#f2f2f2</color>
+    <color name="background2">#F1F1FD</color>
+    <color name="editTextBackground">#FFFFFF</color>
+    <color name="editTextHint">#999999</color>
+    <color name="subtitle">#6a6c6e</color>
+    <color name="white">#ffffff</color>
+    <color name="primaryOrDarkCenterColor">#1a1b26</color>
+    <color name="primaryButtonColor">#0B78E3</color>
+    <color name="darkButtonColor">#FF04396C</color>
+    <color name="whiteColor">#FFFFFF</color>
+    <color name="littleWhite">#efe3e3</color>
+    <color name="colorDivider">#BDBDBD</color>
+    <color name="yellow">#FF9AAB07</color>
+    <color name="lightPrimary">#FF1C1D2E</color>
+    <color name="cardHeaderView">#595b93</color>
+    <color name="red">#FFC7182A</color>
+    <color name="colorRedDark">#FF9B0B1A</color>
+    <color name="colorMainBackground">#393b52</color>
+    <color name="colorProfileCard">#43456B</color>
+    <color name="colorMap">#242f3e</color>
+    <color name="colorGreen">#FF1F8F06</color>
+    <color name="default_indicator_on">#FFFFFF</color>
+    <color name="default_indicator_off">#333333</color>
+    <color name="default_indicator_light_on">#111111</color>
+    <color name="default_indicator_light_off">#777777</color>
+    <color name="search_layover_bg">#50000000</color>
+    <color name="login_but">#6867A9</color>
+
+</resources>
+    <!-- staticText
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryBlack">#000000</color>
@@ -34,3 +72,24 @@
     <color name="search_layover_bg">#50000000</color>
 
 </resources>
+
+-->
+    <!-- staticText
+long term potentiation has been mist frequently studied inn the hippocampus
+amygdala <-
+
+any nmda receptor
+
+the nmda receptor is a type of __ receptor
+hypoglutamate receptor
+
+aplysia shows which of the following kinds of be
+habituation senesitization
+differential conditioning
+all of the above <-
+
+nmda stands for n-methyl d-aspartate
+homosynaptic
+hetero synaptic
+
+-->

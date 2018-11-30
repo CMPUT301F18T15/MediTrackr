@@ -43,7 +43,7 @@ public class BodyLocation implements Serializable {
     private double[] bodyCoordinate;
     private String bodyFace;
     private String bodyLocation;
-    private PhotoList photoList;
+    private PhotoList images = new PhotoList();
 
     /**
      * Creates a new BodyLocation object.
@@ -51,13 +51,6 @@ public class BodyLocation implements Serializable {
      * @param bodyCoordinate the number that is mapped to a body location
      * @param bodyFace       a string name of a face location
      * @param bodyLocation   the name of the body part
-     */
-    public BodyLocation(double[] bodyCoordinate, String bodyFace, String bodyLocation){
-        this.bodyCoordinate = bodyCoordinate;
-        this.bodyFace = bodyFace;
-        this.bodyLocation = bodyLocation;
-    }
-
 
     /*--------------------------------------------------------------------------
      * GETTERS AND SETTERS
@@ -130,8 +123,8 @@ public class BodyLocation implements Serializable {
      * bodylocation photos
      * @author  Orest Cokan
      */
-    public PhotoList getPhotoList() {
-        return photoList;
+    public PhotoList getImages() {
+        return images;
     }
 
     /**
@@ -139,10 +132,10 @@ public class BodyLocation implements Serializable {
      * holds the images of body
      * locations
      * @author  Orest Cokan
-     * @param photoList the photoList holding body location photos
+     * @param images the photoList holding body location photos
      */
-    public void setPhotoList(PhotoList photoList) {
-        this.photoList = photoList;
+    public void setImages(PhotoList images) {
+        this.images = images;
     }
 
 

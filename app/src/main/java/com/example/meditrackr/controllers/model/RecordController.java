@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
+import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.controllers.LazyLoadingManager;
@@ -113,11 +114,12 @@ public class RecordController {
                 record.getImages().addImage(byteArray); // Save each image to record
             }
         }
-
+        BodyLocation bodyLocation = new BodyLocation();
+        record.setBodyLocation(bodyLocation);
         for(Bitmap bitmap: bodyBitmaps){
             if(bitmap != null){
                 byte[] byteArray = ConvertImage.convertBitmapToBytes(bitmap);
-                record.getBodyLocation().getPhotoList().addImage(byteArray);
+                record.getBodyLocation().getImages().addImage(byteArray);
             }
         }
 

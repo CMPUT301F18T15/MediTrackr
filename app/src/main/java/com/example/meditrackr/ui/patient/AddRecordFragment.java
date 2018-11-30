@@ -304,13 +304,6 @@ public class AddRecordFragment extends Fragment{
                 }
             }
 
-            FragmentManager manager = getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.addToBackStack(null);
-            ProblemsFragment fragment = ProblemsFragment.newInstance();
-            transaction.replace(R.id.content, fragment);
-            transaction.commit();
-
         }
         // Allows intent to pick a place location
         else if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){

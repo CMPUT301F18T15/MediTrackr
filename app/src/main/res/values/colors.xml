@@ -41,6 +41,17 @@
     <color name="blue4">#6867A9</color>
     <color name="blue5">#3B3A84</color>
 
+    <color name="green1">#E7E8D0</color>
+    <color name="green2">#A8A88D</color>
+    <color name="green3">#8E8E41</color>
+    <color name="green4">#656523</color>
+    <color name="green5">#434315</color>
+
+    <color name="red1">#F8DAE0</color>
+    <color name="red2">#ED98A7</color>
+    <color name="red3">#E6536E</color>
+    <color name="red4">#C02344</color>
+    <color name="red5">#840F2B</color>
 
     <color name="main1">#EDEDFC</color>
     <color name="main2">#CAC9DD</color>
@@ -58,7 +69,7 @@
 
 
 </resources>
-    <!-- staticText
+    <!--The Old settings
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryBlack">#000000</color>

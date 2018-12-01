@@ -1,23 +1,4 @@
-/*
- *Apache 2.0 License Notice
- *
- *Copyright 2018 CMPUT301F18T15
- *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
- *
- */
 package com.example.meditrackr.adapters.patient;
-
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -35,12 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.meditrackr.R;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.ThreadSaveController;
+import com.example.meditrackr.controllers.model.ProblemController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
-import com.example.meditrackr.models.record.ImageSave;
+import com.example.meditrackr.models.record.PhotoList;
 import com.example.meditrackr.ui.FullScreenViewActivity;
 import com.example.meditrackr.ui.patient.EditProblemFragment;
 import com.example.meditrackr.ui.patient.RecordsFragment;
@@ -65,27 +46,35 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
  *
  * @author  Orest Cokan
  * @version 1.0 Nov 10, 2018
- * @see
  *
  */
+
+// Class shows a patient's problem list and info for patients in a recycler view
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder>{
+    // Class objects
     private FragmentActivity activity;
     private Context context;
     private Patient patient = LazyLoadingManager.getPatient();
     private ProblemList problems = patient.getProblems();
 
-    // constructor
-    public ProblemAdapter(FragmentActivity activity, Context context) {
+    /**
+     * creating variables activity for the other functions to use
+     *
+     * @author  Orest Cokan
+     * @param activity this is the activity to pass the data
+     */
 
+    // Constructor
+    public ProblemAdapter(FragmentActivity activity, Context context) {
         this.activity = activity;
         this.context = context;
     }
 
 
-    // display the view
+    // Display the view
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //creates view objects based on layouts in XML
+        // Creates view objects based on layouts in XML
         LayoutInflater inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View problemView = inflater.inflate(R.layout.problem_entry, parent, false);
@@ -93,45 +82,56 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
     }
 
 
-    // set the data into each viewHolder (ie. place the problem info into the view)
+    // Set the data into each viewHolder (ie. place the problem info into the view)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        // Display each problem's title, date, description, number of records, and image in each viewHolder
         holder.title.setText(problems.getProblem(position).getTitle());
         holder.date.setText(problems.getProblem(position).getDate());
         holder.description.setText(problems.getProblem(position).getDescription());
         holder.totalRecords.setText("Number of records: " +
                 problems.getProblem(position).getRecords().getSize());
         if(problems.getProblem(position).getImageAll().getSize() == 0){
-            holder.problemImage.setImageBitmap(null);
+            holder.problemImage.setImageBitmap(null); // If the problem does not have any images set image to null
             Log.d("ImageTest", "New profile this should be shown!");
-        }else {
-            holder.problemImage.setImageBitmap(ConvertImage.base64Decode(
+        }else { // Else show image pertaining to the problem
+            holder.problemImage.setImageBitmap(ConvertImage.convertByteToBitmap(
                     problems.getProblem(position).getImageAll().getImage(0)));
         }
     }
 
 
-    // get the number of problems in RecyclerView
+    // Return the number of problems currently in RecyclerView
     @Override
     public int getItemCount() {
         return problems.getSize();
     }
 
 
-    // place each problem into its corresponding view
+    // Class places each problem into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        // Class objects
         private ProblemAdapter adapter;
-        public ImageView problemImage;
+        private ImageView problemImage;
         public TextView title;
         public TextView date;
         public TextView description;
-        public TextView totalRecords;
-        public MaterialIconView deleteProblem;
-        public MaterialIconView editProblem;
+        private TextView totalRecords;
+        private MaterialIconView deleteProblem;
+        private MaterialIconView editProblem;
+
+        /**
+         * This function puts information about each problem into its own view so we won't
+         * display information from one problem as another. This function mainly serves an organizational
+         * purpose but can also be used to delete or edit a problem using the corresponding buttons.
+         *
+         * @param itemView
+         * @param adapter
+         */
 
 
-        //gets the corresponding data for each view
-        public ViewHolder(View itemView, final ProblemAdapter adapter){
+        // Constructor and gets the corresponding data for each view
+        private ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
             date = itemView.findViewById(R.id.problem_date);
@@ -140,18 +140,17 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             deleteProblem = itemView.findViewById(R.id.problem_delete_button);
             editProblem = itemView.findViewById(R.id.problem_edit_button);
             problemImage = itemView.findViewById(R.id.problem_image);
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this); // Sets onClickListener on view
             this.adapter = adapter;
 
 
-
-            // onclick listener for delete problem
+            // Onclick listener for delete problem
             deleteProblem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // print a confirmation message
-                    // to ensure that the user will not accidentally delete the problem
-                    final int position = getAdapterPosition();
+                    // Creates an alert dialog box to confirm and
+                    // To ensure that the user will not accidentally delete the problem
+                    final int position = getAdapterPosition(); // Returns position that was clicked
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(adapter.activity,
                             R.style.AlertDialogStyle);
                     builder1.setMessage("Are you sure you want to delete the problem?");
@@ -160,15 +159,16 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                             "Yes",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    // only delete the problem if the answer was yes
-                                    adapter.problems.removeProblem(position);
+                                    // Only delete the problem if the answer was yes
+                                    ProblemController.deleteProblem(adapter.context, position, adapter.problems);
+
+                                    //adapter.problems.removeProblem(position);
                                     adapter.notifyItemRemoved(position);
                                     adapter.notifyItemRangeChanged(position,
                                             adapter.problems.getSize());
-                                    Log.d("DeleteProblem", "Position: " + position);
-                                    SaveLoadController.saveProfile(adapter.context, LazyLoadingManager.getPatient());
-                                    ElasticSearchController.updateUser(LazyLoadingManager.getPatient());
-                                    dialog.cancel();
+
+                                    // Save changes to memory and ES
+                                    dialog.cancel(); // Close alert dialog box
                                 }
                             });
 
@@ -176,29 +176,33 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                             "No",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
+                                    // Do not delete the problem and close
+                                    // Alert Dialog box
                                     dialog.cancel();
                                 }
                             });
 
+                    // Create and show alert dialog box
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
                 }
             });
 
 
-
-            // onclick listener for edit a problem
+            // Onclick listener for edit a problem
             editProblem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = getAdapterPosition();
+                    int position = getAdapterPosition(); // Returns position that was clicked
+                    // Prepare for fragment transaction
                     FragmentManager manager = adapter.activity.getSupportFragmentManager();
                     FragmentTransaction transaction =  manager.beginTransaction();
+                    // Transition to EditProblemFragment page
                     EditProblemFragment fragment = EditProblemFragment.newInstance(position);
+                    // Allow user to bring back previous fragment when back button is pressed
                     transaction.addToBackStack(null);
                     transaction.replace(R.id.content, fragment);
-                    transaction.commit();
-
+                    transaction.commit(); // Make permanent all changes performed in the transaction
                 }
             });
 
@@ -207,13 +211,15 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             problemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ImageSave images = LazyLoadingManager.getImages();
+                    int position = getAdapterPosition();
+                    PhotoList images = adapter.problems.getProblem(position).getImageAll();
                     if(images.getSize() == 0){
                         problemImage.setClickable(false);
                         problemImage.setVisibility(View.INVISIBLE);
                         Log.d("ImageTest", "we should be getting here");
                     }
                     else {
+                        LazyLoadingManager.setImages(images);
                         Intent intent = new Intent(adapter.activity, FullScreenViewActivity.class);
                         adapter.activity.startActivity(intent);
                     }
@@ -223,16 +229,18 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         }
 
 
-        // set onClick listener for each problem to be viewed
+        // Set onClick listener for each problem to be viewed
         @Override
         public void onClick(View v) {
+            // Return the position of the click in the recycler view
             int position = getAdapterPosition();
+
+            // Transition to the problem page of the patient
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             LazyLoadingManager.setImages(adapter.problems.getProblem(position).getImageAll());
             FragmentTransaction transaction =  manager.beginTransaction();
             LazyLoadingManager.setProblemIndex(position);
             RecordsFragment fragment = RecordsFragment.newInstance(position);
-            //allows user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
             transaction.commit();

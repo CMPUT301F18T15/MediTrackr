@@ -19,9 +19,12 @@
 package com.example.meditrackr.ui.patient;
 
 //imports
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -36,7 +39,16 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.record.Record;
+import com.example.meditrackr.ui.MainActivity;
 import com.example.meditrackr.utils.ConvertImage;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * shows user a list of the records associated with that problem in a recycler view.
@@ -54,34 +66,39 @@ import com.example.meditrackr.utils.ConvertImage;
  */
 
 // Class creates a Record Fragment for patients
-public class RecordFragment extends Fragment {
-    // Set variables
+public class RecordFragment extends Fragment implements OnMapReadyCallback {
+    // Initialize class object record and image view array
     private Record record;
     private ImageView[] images = new ImageView[10];
+    private GoogleMap mGoogleMap;
+    private MapView mapView;
+    private View rootView;
 
-    // Creates new instance fragment and saves it as bundle
+    // Creates new instance fragment and maps record as a serializable value in bundle
     public static RecordFragment newInstance(Record record) {
         RecordFragment fragment = new RecordFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("Record", record); // Inserts a serializable record into the mapping of this bundle
+        bundle.putSerializable("Record", record);
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    // Creates record fragment view
+    // Creates record fragment view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
+        rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_record, container, false);
 
-        // Sets text placeholders in record page
+
+        // Initialize ui attributes
         final TextView title = rootView.findViewById(R.id.record_title);
         final TextView date = rootView.findViewById(R.id.record_date);
-        final TextView location = rootView.findViewById(R.id.record_location);
+        final TextView locationTxt = rootView.findViewById(R.id.record_location);
         final TextView description = rootView.findViewById(R.id.record_description);
         record = (Record) getArguments().getSerializable(
                 "Record");
+
 
         // Allows 10 images for each record
         images[0] = rootView.findViewById(R.id.record_image_1);
@@ -95,36 +112,18 @@ public class RecordFragment extends Fragment {
         images[8] = rootView.findViewById(R.id.record_image_9);
         images[9] = rootView.findViewById(R.id.record_image_10);
 
-        // Buttons for choosing reminder frequency
-        final Button[] days = new Button[]{
-                rootView.findViewById(R.id.button_1D),
-                rootView.findViewById(R.id.button_2D),
-                rootView.findViewById(R.id.button_3D),
-                rootView.findViewById(R.id.button_5D),
-                rootView.findViewById(R.id.button_1W),
-                rootView.findViewById(R.id.button_2W),
-                rootView.findViewById(R.id.button_1M)
-        };
-
-        // Sets reminder in record page
-        for(int i = 0; i < days.length; i++){
-            if(record.getReminder(i)){
-                Drawable background = ContextCompat.getDrawable(getContext(), R.drawable.gradient);
-                days[i].setBackgroundDrawable(background);
-            }
-        }
 
         // Populate a record with data
         title.setText(record.getTitle());
         description.setText(record.getDescription());
         date.setText(record.getDate());
-        location.setText(record.getGeoLocation().getAddress());
+        locationTxt.setText(record.getGeoLocation().getAddress());
 
 
         // Populate with images
         try {
-            for (int i = 0; i < record.getImagesSave().getSize(); i++) {
-                Bitmap bitmap = ConvertImage.base64Decode(record.getImageSave(i));
+            for (int i = 0; i < record.getImages().getSize(); i++) {
+                Bitmap bitmap = ConvertImage.convertByteToBitmap(record.getImages().getImage(i));
                 images[i].setImageBitmap(bitmap);
             }
         }catch (NullPointerException e){
@@ -132,25 +131,59 @@ public class RecordFragment extends Fragment {
         }
 
         // set a click listener for each photo to allow viewing or adding a body location
-        for (int i = 0; i < 10; ++i) {
-            final int index = i;
-            images[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
-                    BodyLocationPhotosFragment fragment = BodyLocationPhotosFragment.newInstance(index);
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit();
-
-                }
-            });
-
-        }
+//        for (int i = 0; i < 10; ++i) {
+//            final int index = i;
+//            images[i].setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    FragmentManager manager = getFragmentManager();
+//                    FragmentTransaction transaction = manager.beginTransaction();
+//                    transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
+//                    BodyLocationPhotosFragment fragment = BodyLocationPhotosFragment.newInstance(index);
+//                    transaction.replace(R.id.content, fragment);
+//                    transaction.commit();
+//
+//                }
+//            });
+//
+//        }
 
         return rootView;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mapView = (MapView) rootView.findViewById(R.id.map_view);
+        if(mapView != null){
+            mapView.onCreate(null);
+            mapView.onResume();
+            mapView.getMapAsync(this);
 
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        MapsInitializer.initialize(getContext());
+        mGoogleMap = googleMap;
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(
+                record.getGeoLocation().getLatitude(),
+                record.getGeoLocation().getLongitude()))
+                .title(record.getTitle())
+                .snippet(record.getDescription()));
+
+        CameraPosition recordMap = CameraPosition.builder().target(
+                new LatLng(record.getGeoLocation().getLatitude(),
+                record.getGeoLocation()
+                        .getLongitude()))
+                .zoom(15)
+                .bearing(0)
+                .tilt(0)
+                .build();
+
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(recordMap));
+
+    }
 }

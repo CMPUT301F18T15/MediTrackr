@@ -24,8 +24,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * this class adds spaces between each item in a recycler view across the project.
- * this allows for more of a comfortable experience for the user
+ * This class adds spaces between each item in a recycler view across the project.
+ * This allows for more of a comfortable experience for the user
  *
  * @author  Orest Cokan
  * @version 1.0 Nov 10, 2018
@@ -34,15 +34,31 @@ import android.view.View;
 
 // Class creates VerticalSpaceController for RecyclerView
 public class VerticalSpaceController extends RecyclerView.ItemDecoration {
-
-    //Initialize class variables/objects
+    //Initialize class objects
     private final int verticalSpaceHeight;
 
+
+    /**
+     * sets the integer of space between items
+     *
+     * @author  Orest Cokan
+     * @param verticalSpaceHeight the integer to set the space to
+     */
+    // Sets the height of padding
     public VerticalSpaceController(int verticalSpaceHeight) {
         this.verticalSpaceHeight = verticalSpaceHeight;
     }
 
-    // Add spacing between views
+
+    /**
+     * sets the integer of space between items
+     *
+     * @author  Orest Cokan
+     * @param outRect  the shape we want to change
+     * @param view     the view it is a part of
+     * @param parent   the recycler view to change
+     */
+    // Adds padding between views
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
                                RecyclerView.State state) {

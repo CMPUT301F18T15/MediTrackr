@@ -59,11 +59,12 @@ import com.example.meditrackr.ui.MessageListFragment;
 
 // Class creates the Records Fragment for patients
 public class RecordsFragment extends Fragment {
-    // Set variables
+    // Initialize class objects
     private RecordsAdapter adapter;
     private Patient patient = LazyLoadingManager.getPatient();
 
-    // Creates new instance fragment and saves it as a bundle
+
+    // Creates new instance fragment and maps index as argument in bundle
     public static RecordsFragment newInstance(int index){
         RecordsFragment fragment = new RecordsFragment();
         Bundle bundle = new Bundle();
@@ -73,51 +74,59 @@ public class RecordsFragment extends Fragment {
         return fragment;
     }
 
-    // Creates records fragments view
+    // Creates  records fragment view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_records, container, false);
 
-        // Enable recycler view and add record button
+
+        // Initialize ui attributes
         final RecyclerView records = (RecyclerView) rootView.findViewById(R.id.records_recyclerview);
         final FloatingActionButton addRecord = (FloatingActionButton) rootView.findViewById(R.id.add_record_floating);
         final TextView messageClick = (TextView) rootView.findViewById(R.id.message_click);
         final TextView recordsClick = (TextView) rootView.findViewById(R.id.records_click);
 
 
-        // Set bundle number as the problem index number
+        // Get index as argument from bundle
         final int index = getArguments().getInt("INDEX");
         Log.d("RecordsFragments", "we on are on index: " + index);
-        RecordList recordList = patient.getProblem(index).getRecords(); // Get records for a certain problem
+        // Derive record list using problem index number
+        RecordList recordList = patient.getProblem(index).getRecords();
 
+
+        // Adapt items into recycler view
         records.setHasFixedSize(false);
-        adapter = new RecordsAdapter(getActivity(), recordList); // Creates RecordsAdapter for recyclerview
+        adapter = new RecordsAdapter(getActivity(), recordList, getContext());
         records.setAdapter(adapter);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext()); // Creates LinearLayoutManager object for recyclerview
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
         records.setLayoutManager(manager); // Set records layout context
         manager = new LinearLayoutManager(getActivity());
         records.setLayoutManager(manager); // Set records layout activity
 
         // Add spacing between views
-        VerticalSpaceController decoration = new VerticalSpaceController(75); // Reinforces vertical layout of fragment
+        VerticalSpaceController decoration = new VerticalSpaceController(75);
         records.addItemDecoration(decoration);
 
 
-        // onclick listener for messages
+        // Onclick listener for messages
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(messageClick == v){
+                    // Prepare for fragment transaction
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.addToBackStack(null);
+                    // Switch to MessageListFragment
                     MessageListFragment fragment = MessageListFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
+                    // Commit changes in fragment
                     transaction.commit();
                 }
                 else if (recordsClick == v) {
+                    // Prepare for fragment transaction
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.addToBackStack(null);
@@ -128,7 +137,10 @@ public class RecordsFragment extends Fragment {
             }
         };
 
+
+        // OnClickListener for each message
         messageClick.setOnClickListener(listener);
+
 
         // Floating button on click listener to go to add a problem page
         addRecord.setOnClickListener(new View.OnClickListener() {
@@ -136,9 +148,12 @@ public class RecordsFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
-                AddRecordFragment fragment = AddRecordFragment.newInstance(index); // Switch to AddRecordFragment
+                // Allows user to bring back previous fragment when back button is pressed
+                transaction.addToBackStack(null);
+                // Switch to AddRecordFragment
+                AddRecordFragment fragment = AddRecordFragment.newInstance(index);
                 transaction.replace(R.id.content, fragment);
+                // Commit any changes to fragment
                 transaction.commit();
             }
         });

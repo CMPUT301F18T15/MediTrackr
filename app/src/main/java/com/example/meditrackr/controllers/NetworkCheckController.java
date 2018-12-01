@@ -1,7 +1,3 @@
-
-package com.example.meditrackr.controllers;
-
-
 /*
  *Apache 2.0 License Notice
  *
@@ -20,7 +16,9 @@ package com.example.meditrackr.controllers;
  *limitations under the License.
  *
  */
+package com.example.meditrackr.controllers;
 
+//
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -38,12 +36,20 @@ import java.net.SocketAddress;
  * this class can use isOnline to check to see if we are online or not.
  * after it checks if we are online then it will return true if we are online or it will return
  * false if we are offline
+ *
  * @author Orest Cokan
  * @version 2.0 Nov 14, 2018
  */
 
 // Class connects app to internet
 public class NetworkCheckController {
+
+    /**
+     * Checks if internet access is available.
+     *
+     * @author Orest Cokan
+     * @return boolean
+     */
     public boolean isNetWorkAvaliable(Context context){ // Connects to network
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -51,11 +57,13 @@ public class NetworkCheckController {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+
     /**
      * Checks if internet access is available. Do not call from main thread.
+     *
+     * @author Orest Cokan
      * @return whether internet access is available
      */
-
     // Connects to server proxy
     public static boolean isOnline() {
         try {

@@ -1,5 +1,24 @@
+/*
+ *    Apache 2.0 License Notice
+ *
+ *    Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.adapters;
 
+//imports
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -27,10 +46,18 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import es.dmoral.toasty.Toasty;
+
 /**
- * Created by Skryt on Nov, 16 2018
+ * This class gives the users autofill options for when they are editing items. This is so that data they enter matches the format that the app uses throughout the project.
+ * The class itself comes up with the predictive autofill but then uses placeAutocompleteAdapter to display to the user what auto complete results came up.
+ *This class can use getView to
+
+ *@author Orest Cokan
+ *@version 1.0 Nov 16, 2018
  */
 
+// Class enables autocomplete functionality when filling out edit text box
 public class PlaceAutocompleteAdapter
         extends ArrayAdapter<AutocompletePrediction> implements Filterable {
 
@@ -201,7 +228,7 @@ public class PlaceAutocompleteAdapter
             // Confirm that the query completed successfully, otherwise return null
             final Status status = autocompletePredictions.getStatus();
             if (!status.isSuccess()) {
-                Toast.makeText(getContext(), "Error contacting API: " + status.toString(),
+                Toasty.error(getContext(), "Error contacting API: " + status.toString(),
                         Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "Error getting autocomplete prediction API call: " + status.toString());
                 autocompletePredictions.release();

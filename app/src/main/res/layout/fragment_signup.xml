@@ -57,15 +57,13 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/patient_username" />
+        app:layout_constraintTop_toBottomOf="@+id/patient_email" />
 
     <EditText
-        android:id="@+id/patient_phone"
+        android:id="@+id/patient_email"
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
         android:background="#FFFFFF"
         android:drawableLeft="@drawable/icon_email"
         android:drawablePadding="10dp"
@@ -76,9 +74,9 @@
         android:textColorHint="#999999"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/phone_number" />
+        app:layout_constraintTop_toBottomOf="@+id/patient_username" />
 
     <TextView
         android:id="@+id/select_role_title"
@@ -94,7 +92,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/Patient"
         app:layout_constraintStart_toStartOf="@+id/CareProvider"
-        app:layout_constraintTop_toBottomOf="@+id/patient_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/phone_number" />
 
     <TextView
         android:id="@+id/display_careprovider"

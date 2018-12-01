@@ -1,8 +1,28 @@
+/*
+ *    Apache 2.0 License Notice
+ *
+ *    Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
+
 package com.example.meditrackr;
 
+//imports
 import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.models.record.Geolocation;
-import com.example.meditrackr.models.record.ImageList;
+import com.example.meditrackr.models.record.PhotoList;
 import com.example.meditrackr.models.record.Record;
 
 import org.junit.Before;
@@ -18,6 +38,8 @@ import static org.junit.Assert.*;
 public class RecordTest {
     private Record record;
 
+    public RecordTest() {}
+
     // Initialize a new base record
     @Before
     public void initRecord() {
@@ -28,7 +50,25 @@ public class RecordTest {
         record = new Record
                 ("", "", "", bodyLoc);
         record.setGeoLocation(geoLoc);
-        }
+    }
+    
+    // test if a Record is constructed with its attributes
+    @Test
+    public void constructorTest() {
+        String title = "Record";
+        String desc = "Description";
+        String date = "Date";
+        double[] coords = {25, 12};
+        String face = "bodyface";
+        String location = "bodylocation";
+        BodyLocation bodylocation = new BodyLocation();
+        Record testrecord =
+                new Record(title, desc, date, bodylocation);
+        assertEquals(title, testrecord.getTitle());
+        assertEquals(desc, testrecord.getDescription());
+        assertEquals(date, testrecord.getDate());
+        assertEquals(bodylocation, testrecord.getBodyLocation());
+    }
 
     // Test if the record can have its properties modified
     @Test
@@ -55,7 +95,11 @@ public class RecordTest {
 
         final String face = "Body Face";
         final BodyLocation newBodyLoc = new BodyLocation
+<<<<<<< HEAD
                 (x, y, face);
+=======
+                ();
+>>>>>>> master
 
         record.setBodyLocation(newBodyLoc);
 
@@ -100,7 +144,7 @@ public class RecordTest {
     // Test if images can be added to the record
     @Test
     public void setImageTest() {
-        final ImageList imgList = new ImageList();
+        final PhotoList imgList = new PhotoList();
 
         record.setImages(imgList);
 

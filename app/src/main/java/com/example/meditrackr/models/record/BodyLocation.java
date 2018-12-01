@@ -1,37 +1,42 @@
 /*
- *Apache 2.0 License Notice
+ * BodyLocation
  *
- *Copyright 2018 CMPUT301F18T15
+ * Version 1.0
+ * Oct 24, 2018.
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Apache 2.0 License Notice
+ *
+ * Copyright 2018 CMPUT301F18T15
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
+
 package com.example.meditrackr.models.record;
 
 //imports
 import java.io.Serializable;
 
 /**
- * This class will create a Body coordinate on our model and then associate it with with a body location
- * it uses getters and setters to get the body coordinate
- * it also uses getters and setters to get the bodyFace
+ * BodyLocation: create a body coordinate on a mannequin/body location photo
+ * and then associate it with with the photos of a particular record.
  *
+ * Note that this functionality is not yet implemented in our app
+ * and will be added for part 5.
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  */
-
-// A BodyLocation class that holds all information pertaining to BodyLocation
 public class BodyLocation implements Serializable {
 
     // Initialize class variables
@@ -40,7 +45,7 @@ public class BodyLocation implements Serializable {
     private String bodyLocationPhotoName;
 
     /**
-     * creates variables for the other functions to use
+     * Creates a new BodyLocation object.
      * @author  Orest Cokan
      * @version 1.0 Oct 24, 2018.
      * @param x  the x coordinate of a body location
@@ -54,6 +59,15 @@ public class BodyLocation implements Serializable {
         this.bodyLocationPhotoName = bodyLocationPhotoName;
     }
 
+    /*--------------------------------------------------------------------------
+     * GETTERS AND SETTERS
+     *------------------------------------------------------------------------*/
+
+    /**
+     * Gets the x coordinate array.
+     * @author  Orest Cokan
+     * @return the x coordinate of the body location
+     */
     public int getXCoordinate() {
         return x;
     }

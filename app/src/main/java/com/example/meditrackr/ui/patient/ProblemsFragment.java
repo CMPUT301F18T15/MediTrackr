@@ -34,6 +34,7 @@ import android.widget.ImageView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.patient.ProblemAdapter;
 import com.example.meditrackr.controllers.VerticalSpaceController;
+import com.example.meditrackr.ui.careprovider.PatientsFragment;
 
 /**
  * shows user a list of their created problems in a recycler view.
@@ -56,28 +57,27 @@ import com.example.meditrackr.controllers.VerticalSpaceController;
 public class ProblemsFragment extends Fragment {
     // Initialize adapter and create new ProblemsFragment object
     private ProblemAdapter adapter;
-    private ImageView imageProblem;
 
 
-    // constructor
+    // Constructor
     public static ProblemsFragment newInstance(){
         ProblemsFragment fragment = new ProblemsFragment();
         return fragment;
     }
 
-    // Create problems fragment view
+    // Creates  problems fragment view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_problems, container, false);
 
-        // Initialize add problem button and recycler view
+        // Initialize ui attributes
         final FloatingActionButton addProblem = (FloatingActionButton) rootView.findViewById(R.id.add_problem_floating);
         final RecyclerView problems = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
-        imageProblem = (ImageView) rootView.findViewById(R.id.problem_image);
 
-        // Initializes problem adapter, linear layout manager, and vertical space controller for recycler view
+
+        // Adapt items into recycler view
         problems.setHasFixedSize(false);
         adapter = new ProblemAdapter(getActivity(), getContext());
         problems.setAdapter(adapter);
@@ -86,9 +86,11 @@ public class ProblemsFragment extends Fragment {
         manager = new LinearLayoutManager(getActivity());
         problems.setLayoutManager(manager);
 
+
         // Add spacing between views
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         problems.addItemDecoration(decoration);
+
 
         // Floating button on click listener for adding problems
         addProblem.setOnClickListener(new View.OnClickListener() {
@@ -97,10 +99,10 @@ public class ProblemsFragment extends Fragment {
                 // Prepares to switch fragments when button is clicked
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
+                AddProblemFragment fragment = AddProblemFragment.newInstance();
                 transaction.addToBackStack(null);
-                AddProblemFragment fragment = AddProblemFragment.newInstance(); // Switches to AddProblemFragment
                 transaction.replace(R.id.content, fragment);
-                transaction.commit(); // Commit any changes
+                transaction.commit();
             }
         });
 

@@ -19,6 +19,8 @@
 package com.example.meditrackr.ui;
 
 //imports
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -35,17 +37,31 @@ import com.example.meditrackr.R;
 // Class creates Login Activity
 public class LoginActivity extends AppCompatActivity {
 
-    // Creates login activity view by switching to login fragment
+    // Creates login view objects based on layouts in XML
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        FragmentManager manager = getSupportFragmentManager(); // Prepares to switch fragments
+        // Prepares to switch fragments
+        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        LoginFragment fragment = LoginFragment.newInstance(); // Switch to LoginFragment
+        // Switch to LoginFragment
+        LoginFragment fragment = LoginFragment.newInstance();
         transaction.replace(R.id.content, fragment);
-        transaction.commit(); // Make permanent any changes
+        // Make permanent any changes
+        transaction.commit();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onBackPressed() {
+        FragmentManager manager = getSupportFragmentManager();
+        if(manager.getBackStackEntryCount() == 0) {
+            finishAffinity();
+        }else{
+            super.onBackPressed();
+        }
 
     }
 }

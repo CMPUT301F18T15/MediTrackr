@@ -19,30 +19,38 @@
 package com.example.meditrackr.ui.careprovider;
 
 //imports
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.model.PatientController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 
 /**
- *shows all infoermation associated with the patient that showed up from the search
+ *shows all information associated with the patient that showed up from the search
  *if no patient was found then it returns "User not found"
  *
  * @author  Orest Cokan
@@ -50,12 +58,17 @@ import com.example.meditrackr.models.Profile;
  */
 
 // Class creates PatientSearchFragment for care providers
-public class PatientSearchFragment extends Fragment {
-    // Initialize variables
-    private Profile profile;
+public class PatientSearchFragment extends Fragment{
+    // Initialize class objects
     private CareProvider careProvider;
     private ConstraintLayout searchLayout;
     private ConstraintLayout searchDisplayPatient;
+    private static final String CAMERA = Manifest.permission.CAMERA;
+    private TextView patientUsername;
+    private TextView patientEmail;
+    private TextView patientPhone;
+    private Patient patient;
+
 
     // Creates new instance fragment
     public static PatientSearchFragment newInstance(){
@@ -63,9 +76,10 @@ public class PatientSearchFragment extends Fragment {
         return fragment;
     }
 
-    // Creates patient search fragment view
+
+    // Creates view objects based on layouts in XML
     @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_patient, container, false);
@@ -73,16 +87,18 @@ public class PatientSearchFragment extends Fragment {
         // Set constraint layouts for fragment
         searchLayout = (ConstraintLayout) rootView.findViewById(R.id.search_constraint);
         searchDisplayPatient = (ConstraintLayout) rootView.findViewById(R.id.search_display_patient);
+        getCameraPermission();
 
 
         // Initialize ui attributes
         final EditText searchPatient = (EditText) rootView.findViewById(R.id.search_patient);
         final Button searchPatientButton = (Button) rootView.findViewById(R.id.careprovider_search_for_patient_button);
         final ImageView patientProfileImage = (ImageView) rootView.findViewById(R.id.patient_image);
-        final TextView patientUsername = (TextView) rootView.findViewById(R.id.patient_username);
-        final TextView patientEmail = (TextView) rootView.findViewById(R.id.patient_phone);
-        final TextView patientPhone = (TextView) rootView.findViewById(R.id.search_phone);
         final Button addPatientButton = (Button) rootView.findViewById(R.id.search_add_patient_button);
+        final ImageButton qrButton = (ImageButton) rootView.findViewById(R.id.qr_button);
+        patientUsername = (TextView) rootView.findViewById(R.id.patient_username);
+        patientEmail = (TextView) rootView.findViewById(R.id.patient_email);
+        patientPhone = (TextView) rootView.findViewById(R.id.search_phone);
         changeViewVisibility(1);
 
 
@@ -91,58 +107,77 @@ public class PatientSearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String username = searchPatient.getText().toString(); // Get patient username from input
-                profile = ElasticSearchController.searchProfile(username); // Search for patient
-                if(profile == null){
-                    Toast.makeText(getContext(), "User not found", Toast.LENGTH_LONG).show();
-                }
-                else if(profile.getisCareProvider()){
-                    Toast.makeText(getContext(), "Cannot add other careproviders!", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    // Set data according to user information
-                    Patient patient = (Patient) profile;
-                    patientUsername.setText(patient.getUsername());
-                    patientEmail.setText(patient.getEmail());
-                    patientPhone.setText(patient.getPhone());
+                patient = PatientController.searchPatient(getContext(), username);
+                if(patient != null){
+                    Log.d("PATIENTIS", ""+patient.getUsername());
+                    updateTextFields(patient);
                     changeViewVisibility(0);
                 }
-
             }
         });
+
+
 
         // On click listener button to add a patient to your list
         addPatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                careProvider = LazyLoadingManager.getCareProvider();
-                Patient patient = (Patient) profile;
-                // If patient does not exist under the care provider
-                if(!careProvider.patientExists(patient.getUsername()) &&
-                        !patient.getisCareProvider()) {
-                    careProvider.addPatient(patient.getUsername()); // Add patient
-
-                    // Save both to ES and memory
-                    ElasticSearchController.updateUser(careProvider);
-                    SaveLoadController.saveProfile(getContext(), careProvider);
-
+                boolean finish = PatientController.addPatient(getContext(), patient);
+                if(finish){
                     // Transition back to patients page
                     FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.addToBackStack(null);
-                    PatientsFragment fragment = PatientsFragment.newInstance();
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit();
+                    int count = manager.getBackStackEntryCount();
+                    manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-                } else { // Else if patient already exists under the care provider
+                } else {
+                    // change view back to searching for patient
                     changeViewVisibility(1);
-                    // Create toast message that user cannot add the patient twice
-                    Toast.makeText(getContext(), "Cannot add the same patient twice!", Toast.LENGTH_LONG).show();
                 }
+
+
+            }
+        });
+
+
+        // qrCodeButton
+        qrButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator integrator = new IntentIntegrator(getActivity());
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                integrator.setPrompt("Scan!");
+                integrator.setCameraId(0);
+                integrator.setBeepEnabled(true);
+                integrator.setBarcodeImageEnabled(true);
+                integrator.forSupportFragment(PatientSearchFragment.this).initiateScan();
             }
         });
 
         return rootView;
     }
+
+
+    // return what the scanned QR code and set the username field to the qr code text
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result!=null){
+            if(result.getContents() == null){
+                Toast.makeText(getContext(), "You cancelled the scanning!", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(getContext(), result.getContents(), Toast.LENGTH_LONG).show();
+
+                String username = result.getContents(); // Get patient username from input
+                patient = PatientController.searchPatient(getContext(), username);
+                if(patient != null){
+                    updateTextFields(patient);
+                    changeViewVisibility(0);
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     // 1 for search mode layout, any other value set to Add Patient
     public void changeViewVisibility(int value){
@@ -155,4 +190,28 @@ public class PatientSearchFragment extends Fragment {
             searchDisplayPatient.setVisibility(View.VISIBLE);
         }
     }
+
+
+    // get permission to use the camera
+    private void getCameraPermission() {
+        String[] permissions = {Manifest.permission.CAMERA};
+
+        if (ContextCompat.checkSelfPermission(getContext(),
+                CAMERA) == PackageManager.PERMISSION_GRANTED) {
+
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),
+                    permissions, 1234);
+        }
+    }
+
+
+    // update all text fields once qr code is scanned or username is typed in
+    public void updateTextFields(Patient patient){
+        patientUsername.setText(patient.getUsername());
+        patientEmail.setText(patient.getEmail());
+        patientPhone.setText(patient.getPhone());
+
+    }
+
 }

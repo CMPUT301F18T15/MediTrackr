@@ -20,9 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.models.record.BodyLocationPhoto;
@@ -66,21 +64,21 @@ public class AddBodyPhotoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (checkInputs(photoID)) {
-                    // add the new body location photo to the patient
-                    BodyLocationPhoto photo = new BodyLocationPhoto(photoID.getText().toString(), bitmap);
-                    patient.addBodyPhoto(photo);
-                    // update both elasticsearch and local storage
-                    ElasticSearchController.updateUser(patient); // Save problem to ES
-                    SaveLoadController.saveProfile(getContext(), patient); // Save problem to memory
-                    Log.d("BodyPhotoAdd", "Profile: " + patient.getUsername() + " Photos: " + patient.getBodyLocationPhotos());
-
-
-                    // transition back to all the photos
-                    FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    BodyLocationPhotosFragment fragment = BodyLocationPhotosFragment.newInstance(index);
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit();
+//                    // add the new body location photo to the patient
+//                    BodyLocationPhoto photo = new BodyLocationPhoto(photoID.getText().toString(), bitmap);
+//                    patient.addBodyPhoto(photo);
+//                    // update both elasticsearch and local storage
+//                    ElasticSearchController.updateUser(patient); // Save problem to ES
+//                    SaveLoadController.saveProfile(getContext(), patient); // Save problem to memory
+//                    Log.d("BodyPhotoAdd", "Profile: " + patient.getUsername() + " Photos: " + patient.getBodyLocationPhotos());
+//
+//
+//                    // transition back to all the photos
+//                    FragmentManager manager = getFragmentManager();
+//                    FragmentTransaction transaction = manager.beginTransaction();
+//                    BodyLocationPhotosFragment fragment = BodyLocationPhotosFragment.newInstance(index);
+//                    transaction.replace(R.id.content, fragment);
+//                    transaction.commit();
                 } else {
                     Toast.makeText(getContext(), "Please enter a unique name for the body photo", Toast.LENGTH_LONG).show();
                 }

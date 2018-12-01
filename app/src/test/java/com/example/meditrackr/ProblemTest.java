@@ -1,5 +1,25 @@
+/*
+ *    Apache 2.0 License Notice
+ *
+ *    Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
+
 package com.example.meditrackr;
 
+//imports
 import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.models.record.Record;
 
@@ -17,6 +37,8 @@ import static org.junit.Assert.*;
 public class ProblemTest {
     private Problem problem;
 
+    public ProblemTest() {}
+
     // Initialize a simple problem to be used in the tests
     @Before
     public void initProblemTest() {
@@ -24,6 +46,19 @@ public class ProblemTest {
         final String initDate = "";
         final String initDesc = "";
         problem = new Problem(initTitle, initDate, initDesc);
+    }
+    
+    // test if Problem is constructed with its attributes (title, date, desc)
+    @Test
+    public void constructorTest() {
+        final String title = "";
+        final String date = "";
+        final String desc = "";
+        Problem prob =
+                new Problem(title, date, desc);
+        assertEquals(title, prob.getTitle());
+        assertEquals(date, prob.getDate());
+        assertEquals(desc, prob.getDescription());
     }
 
     // Test the setting of a new problem
@@ -60,7 +95,7 @@ public class ProblemTest {
                 problem.getRecords().recordExists(record));
 
         // Deletion
-        problem.getRecords().removeRecord(0);
+        problem.getRecords().removeRecord(record);
         assertFalse(problem.getRecords().recordExists(record));
     }
 

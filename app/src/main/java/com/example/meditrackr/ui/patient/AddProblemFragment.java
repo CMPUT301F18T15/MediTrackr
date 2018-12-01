@@ -20,6 +20,9 @@ package com.example.meditrackr.ui.patient;
 
 //imports
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -42,6 +45,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * Allows user to add a title to the problem, change the date that was assigned and add a description.
  * to create this problem user will press the add button
@@ -49,39 +54,43 @@ import java.util.TimeZone;
  * @author  Orest Cokan
  * @version 1.0 Nov 8, 2018.
  */
-
-// Class creates Add Problem Fragment for patients
 public class AddProblemFragment extends Fragment {
 
-    /************************************************************************
+    /*-----------------------------------------------------------------------
      * CREATE ADD PROBLEM FRAGMENT OBJECT
-     ************************************************************************/
+     *-----------------------------------------------------------------------*/
+
     public static AddProblemFragment newInstance(){
+        // Initialize fragment object
         AddProblemFragment fragment = new AddProblemFragment();
         return fragment;
     }
 
-    // Create add problem fragment view
+    // Creates view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_problem, container, false);
 
-        /************************************************************************
+
+        hasPermissionInManifest(getContext(), "CAMERA");
+
+        /*-----------------------------------------------------------------------
          * INITIALIZE UI ATTRIBUTES
-         ************************************************************************/
+         *-----------------------------------------------------------------------*/
+        // Initialize ui attributes
         final EditText title = (EditText) rootView.findViewById(R.id.problem_title_field);
         final EditText dateSelector = (EditText) rootView.findViewById(R.id.problem_date_selector);
         final EditText description = (EditText) rootView.findViewById(R.id.problem_description_field);
         final Button addButton = (Button) rootView.findViewById(R.id.problem_add_button);
-        final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d yyyy", Locale.CANADA);
+        final SimpleDateFormat format = new SimpleDateFormat("EEE MMM d yyyy", Locale.CANADA);
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
 
 
-        /************************************************************************
+        /*-----------------------------------------------------------------------
          * SET PROBLEM START DATE
-         ************************************************************************/
+         *-----------------------------------------------------------------------*/
         // Automatically set the problem start date to the current date
         dateSelector.setText(format.format(calendar.getTime()));
         Log.d("CurrentDate", format.format(calendar.getTime()));
@@ -116,48 +125,71 @@ public class AddProblemFragment extends Fragment {
         });
 
 
-        /************************************************************************
+        /*-----------------------------------------------------------------------
          * ADD PROBLEM TO PATIENT
-         ************************************************************************/
+         *----------------------------------------------------------------------*/
+        // Handles button for adding patient
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(checkInputs(title, description)){ // If checkInputs is true
                     // Set user inputs as data
-                    Problem problem = new Problem(title.getText().toString(),
-                            dateSelector.getText().toString(), description.getText().toString());
+                    Problem problem = new Problem(
+                            title.getText().toString(),
+                            dateSelector.getText().toString(),
+                            description.getText().toString());
 
-                    // ask the problem controller to add the problem to the patient
-                    // and then save it locally and to ElasticSearch
+                    // Ask the problem controller to add the problem to the patient
+                    // And then save it locally and to ElasticSearch
                     ProblemController.addProblem(getContext(), problem);
 
                     // Transition back to ProblemsFragment after adding
                     FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    ProblemsFragment fragment = ProblemsFragment.newInstance(); // Switch to ProblemsFragment
-                    transaction.replace(R.id.content, fragment);
-                    transaction.commit();
-                }
-                else { // If checkInputs is false
-                    // Create toast message indicating that problem could not be added
-                    Toast.makeText(getContext(), "Unable to add Problem", Toast.LENGTH_LONG).show();
+                    assert manager != null;
+                    int count = manager.getBackStackEntryCount();
+                    manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 }
             }
         });
         return rootView;
     }
 
-    /************************************************************************
+    public boolean hasPermissionInManifest(Context context, String permissionName) {
+        final String packageName = context.getPackageName();
+        try {
+            final PackageInfo packageInfo = context.getPackageManager()
+                    .getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
+            final String[] declaredPermisisons = packageInfo.requestedPermissions;
+            if (declaredPermisisons != null && declaredPermisisons.length > 0) {
+                for (String p : declaredPermisisons) {
+                    if (p.equals(permissionName)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        }
+        return false;
+    }
+
+
+    /*-----------------------------------------------------------------------
      * CHECK INPUTS FILLED: TITLE AND DESCRIPTION
-     ************************************************************************/
+     *----------------------------------------------------------------------*/
+    // Checks if user input fulfills title and description requirement
     public boolean checkInputs(EditText title, EditText description){
-        if(((title != null && !title.getText().toString().isEmpty())
-                && (description != null && !description.getText().toString().isEmpty()))){
-            return true; // Return true if there is a title and description
+        if (title != null && title.getText().toString().length() > 30) {
+            Toasty.error(getContext(), "Title cannot exceed 30 characters", Toast.LENGTH_SHORT).show();
+            return false;
         }
-        else { // New problem is missing a requirement
-            return false; // Return false if one of requirements is missing
+
+        if (description != null && description.getText().toString().length() > 300) {
+            Toasty.error(getContext(), "Description cannot exceed 300 characters", Toast.LENGTH_SHORT).show();
+            return false;
         }
+
+        return true;
     }
 
 }

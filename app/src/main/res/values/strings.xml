@@ -59,7 +59,12 @@
     <string name="profile_email">Email:</string>
     <string name="edit">EDIT</string>
     <string name="google_maps_api">AIzaSyBNKS2wCXodzBcGNKrob7XRwS783ueiCF0</string>
+    <string name="azure_api">2aa6c1dbee28492baa5a91a44929d57f</string>
+    <string name="azure_website">https://westcentralus.api.cognitive.microsoft.com/vision/v2.0</string>
     <string name="already_have_an_account">Already have an account? <font color='#0099CC'>Login</font></string>
     <string name="not_a_member">Not a member? <font color='#0099CC'>Sign Up.</font></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

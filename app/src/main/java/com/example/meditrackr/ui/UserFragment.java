@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,14 +45,16 @@ import com.example.meditrackr.models.Profile;
 
 // Class displays user profile
 public class UserFragment extends Fragment {
-    // Set variables
+    // Initiaize class variables and create new fragment instance
     Profile profile = LazyLoadingManager.getProfile();
+
     public static UserFragment newInstance(){
         UserFragment fragment = new UserFragment();
         return fragment;
     }
 
-    // Creates view for fragment
+
+    // Creates user profile view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,28 +63,46 @@ public class UserFragment extends Fragment {
 
 
 
-        // Set ui definitions
-        ImageView user_image = rootView.findViewById(R.id.patient_image);
-        TextView username = rootView.findViewById(R.id.patient_username);
-        TextView email = rootView.findViewById(R.id.patient_email);
-        TextView phone = rootView.findViewById(R.id.patient_phone);
-        Button editButton = rootView.findViewById(R.id.edit_button);
+
+        // Initialize ui attributes
+        final ImageView user_image = rootView.findViewById(R.id.patient_image);
+        final TextView username = rootView.findViewById(R.id.patient_username);
+        final TextView email = rootView.findViewById(R.id.patient_email);
+        final TextView phone = rootView.findViewById(R.id.patient_phone);
+        final Button editButton = rootView.findViewById(R.id.edit_button);
+        final ImageButton settingButton = rootView.findViewById(R.id.setting_button);
+
 
         // Set users info in the page
         username.setText(profile.getUsername());
         email.setText(profile.getEmail());
         phone.setText(profile.getPhone());
 
+
         // Oncick listener for profile edit button
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction(); // Allow editing on fragment
-                transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
-                UserEditFragment fragment = UserEditFragment.newInstance().newInstance(); // Creates new instance of user edit fragment
-                transaction.replace(R.id.content, fragment); // Replace current fragment with new info
-                transaction.commit(); // Make permanent all changes made in the transaction
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.addToBackStack(null);
+                UserEditFragment fragment = UserEditFragment.newInstance().newInstance();
+                transaction.replace(R.id.content, fragment);
+                transaction.commit();
+            }
+        });
+
+
+        // Onclick listener to go to settings page
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.addToBackStack(null);
+                SettingsFragment fragment = SettingsFragment.newInstance(profile.getUsername());
+                transaction.replace(R.id.content, fragment);
+                transaction.commit();
             }
         });
 

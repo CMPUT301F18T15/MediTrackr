@@ -55,7 +55,7 @@ public class PatientsFragment extends Fragment {
         return fragment;
     }
 
-    // Creates patients fragment view
+    // Creates view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,6 +80,7 @@ public class PatientsFragment extends Fragment {
         // Add spacing between views
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         patientList.addItemDecoration(decoration);
+
 
         // Search for patient onclick listener
         searchForPatient.setOnClickListener(new View.OnClickListener() {

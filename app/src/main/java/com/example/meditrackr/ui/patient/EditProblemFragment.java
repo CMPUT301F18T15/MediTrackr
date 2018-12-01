@@ -34,9 +34,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.controllers.ThreadSaveController;
+import com.example.meditrackr.controllers.model.ProblemController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 
@@ -44,6 +44,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * Created by Skryt on Nov 14, 2018
@@ -54,7 +56,7 @@ public class EditProblemFragment extends Fragment {
     // Initialize variables
     private Patient patient = LazyLoadingManager.getPatient();
 
-    // Creates new instance fragment and saves it as a bundle
+    // Creates new instance fragment and maps index as an argument in bundle
     public static EditProblemFragment newInstance(int index){
             EditProblemFragment fragment = new EditProblemFragment();
             Bundle bundle = new Bundle();
@@ -63,7 +65,7 @@ public class EditProblemFragment extends Fragment {
             return fragment;
         }
 
-        // Creates edit problem fragment view
+        // Creates view objects based on layouts in XML
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -71,15 +73,18 @@ public class EditProblemFragment extends Fragment {
                     R.layout.fragment_edit_problem, container, false);
 
 
-            // Initializes text placeholders for user input and buttons for saving or cancelling
+            // Initializes ui attributes
             final EditText title = (EditText) rootView.findViewById(R.id.edit_problem_title_field);
             final EditText dateSelector = (EditText) rootView.findViewById(R.id.edit_problem_date_selector);
             final EditText description = (EditText) rootView.findViewById(R.id.edit_problem_description_field);
             final Button saveButton = (Button) rootView.findViewById(R.id.edit_problem_save_button);
-            final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.CANADA); // Defines date format
+            final SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.CANADA);
             final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Edmonton"));
-            final int index = getArguments().getInt("INDEX"); // Sets bundle number as the problem's index number
 
+
+            // Gets index as an argument from bundle
+            assert getArguments() != null;
+            final int index = getArguments().getInt("INDEX");
 
             // Set the problem start date to the current date
             dateSelector.setText(format.format(calendar.getTime()));
@@ -91,16 +96,14 @@ public class EditProblemFragment extends Fragment {
             description.setText(problem.getDescription());
 
 
-            // Date picker
+            // Set date text
             final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear,
                                       int dayOfMonth) {
-
                     calendar.set(Calendar.YEAR, year);
                     calendar.set(Calendar.MONTH, monthOfYear);
                     calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                    // Update the editText label
                     dateSelector.setText(format.format(calendar.getTime()));
                 }
             };
@@ -127,28 +130,21 @@ public class EditProblemFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if(checkInputs(title, description)){
+
                         // Store user input
                         Problem problem = patient.getProblem(index);
-                        problem.setTitle(title.getText().toString());
-                        problem.setDate(dateSelector.getText().toString());
-                        problem.setDescription(description.getText().toString());
+                        ProblemController.editProblem(getContext(),
+                                problem,
+                                title.getText().toString(),
+                                description.getText().toString(),
+                                dateSelector.getText().toString());
 
-                        // Save problem into ES and memory
-                        ElasticSearchController.updateUser(patient);
-                        SaveLoadController.saveProfile(getContext(), patient);
-                        Log.d("EditProblem", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
 
                         // Transition back to problems fragment view
                         FragmentManager manager = getFragmentManager();
-                        FragmentTransaction transaction = manager.beginTransaction();
-                        ProblemsFragment fragment = ProblemsFragment.newInstance(); // Switch to ProblemsFragment
-                        transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
-                        transaction.replace(R.id.content, fragment);
-                        transaction.commit();
-                    }
-                    else {
-                        // Else if checkInputs return false indicate that problem cannot be added
-                        Toast.makeText(getContext(), "The title and description cannot be empty", Toast.LENGTH_LONG).show();
+                        assert manager != null;
+                        int count = manager.getBackStackEntryCount();
+                        manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     }
                 }
             });
@@ -156,15 +152,21 @@ public class EditProblemFragment extends Fragment {
             return rootView;
         }
 
+
     // Check that the user has inputted at least a title and description to their problem
     public boolean checkInputs(EditText title, EditText description){
-        if(((title != null && !title.getText().toString().isEmpty())
-                && (description != null && !description.getText().toString().isEmpty()))){
-            return true;
-        }
-        else {
+
+        if (title != null && title.getText().toString().length() > 30) {
+            Toasty.error(getContext(), "Title cannot exceed 30 characters", Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        if (description != null && description.getText().toString().length() > 300) {
+            Toasty.error(getContext(), "Description cannot exceed 300 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
 }

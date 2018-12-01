@@ -31,51 +31,52 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
+import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Profile;
 
 /**
- * this fragment allows the user to change thier username, phone number and email
+ * this fragment allows the user to change their username, phone number and email
  * there is also a button that will change the information that they had to the new data and
  * saves it to the database. after that it will take the user to the view profile fragment (UserFragment)
  * @author  Orest Cokan
- * @version 2.0 Nov 4, 2018.
+ * @version 1.0 Nov 4, 2018.
  * @see UserFragment
  */
 
 // Class creates user profile edit fragment
 public class UserEditFragment extends Fragment {
-    // Set variables
+    // Initialize class objects and create new fragment instance
     Profile profile = LazyLoadingManager.getProfile();
+
     public static UserEditFragment newInstance(){
         UserEditFragment fragment = new UserEditFragment();
         return fragment;
     }
 
-    // Creates view for fragment
+
+    // Creates edit fragment view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_user_edit, container, false);
 
-        // Get fragment bundle
-        final Bundle bundle = getArguments();
-
-        // Set ui definitions
+        // Initialize ui attributes
         ImageView user_image = rootView.findViewById(R.id.patient_image);
         final TextView username = rootView.findViewById(R.id.patient_username);
         final TextView email = rootView.findViewById(R.id.patient_email);
         final TextView phone = rootView.findViewById(R.id.patient_phone);
         Button editButton = rootView.findViewById(R.id.save_edits_button);
 
+
         // Set users info in the page
         username.setText(profile.getUsername());
         email.setText(profile.getEmail());
         phone.setText(profile.getPhone());
 
-        // Onclick listener for create account button which allows user to switch fragments to view their profile
+
+        // Onclick listener for save account button which allows user to switch fragments to view their profile
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,16 +84,19 @@ public class UserEditFragment extends Fragment {
                 profile.setUsername(username.getText().toString());
                 profile.setEmail(email.getText().toString());
                 profile.setPhone(phone.getText().toString());
-                ElasticSearchController.updateUser(profile); // Saves profile in ES
+                ThreadSaveController.save(getContext(), profile);
 
+
+                // Swap back to the user fragment and display the fragment_user view
                 FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction(); // Allow editing on fragment
-                transaction.addToBackStack(null); // Allows user to bring back previous fragment when back button is pressed
-                UserFragment fragment = UserFragment.newInstance().newInstance(); // Creates new instance of user edit fragment
-                transaction.replace(R.id.content, fragment); // Replace current fragment with new info
-                transaction.commit(); // Make permanent all changes made in the transaction
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.addToBackStack(null);
+                UserFragment fragment = UserFragment.newInstance().newInstance();
+                transaction.replace(R.id.content, fragment);
+                transaction.commit();
             }
         });
+
 
         return rootView;
     }

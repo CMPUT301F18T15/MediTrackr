@@ -10,10 +10,10 @@
         android:id="@+id/patient_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/person"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
@@ -48,34 +48,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/patient_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="cokan@ualberta.ca"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/colorPrimaryBlack"
-            android:textSize="18sp"
-            android:textStyle="italic"
-            app:layout_constraintStart_toStartOf="@+id/patient_username"
-            app:layout_constraintTop_toBottomOf="@+id/patient_username" />
-
-        <TextView
-            android:id="@+id/patient_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:text="780-868-2648"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/colorPrimaryBlack"
-            android:textSize="18sp"
-            android:textStyle="italic"
-            app:layout_constraintStart_toStartOf="@+id/patient_email"
-            app:layout_constraintTop_toBottomOf="@+id/patient_email" />
 
     </android.support.constraint.ConstraintLayout>
 

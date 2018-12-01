@@ -8,33 +8,34 @@
 
     <ImageView
         android:id="@+id/time"
-        android:layout_width="300dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="15dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/problem_date"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/time" />
 
     <TextView
         android:id="@+id/problem_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
+        android:layout_width="100dp"
+        android:layout_height="18dp"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/subtitle"
+        android:textColor="@color/colorPrimaryBlack"
         android:textSize="14sp"
         android:textStyle="italic"
-        app:layout_constraintStart_toEndOf="@+id/time"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/problem_title"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorPrimaryBlack"
         android:textSize="20sp"
@@ -49,13 +50,13 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
         android:ellipsize="marquee"
         android:singleLine="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/colorPrimaryBlack"
+        android:textColor="@color/subtitle"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/problem_image"
-        app:layout_constraintStart_toStartOf="@+id/problem_title"
         app:layout_constraintTop_toBottomOf="@+id/problem_title" />
 
     <TextView
@@ -64,7 +65,7 @@
         android:layout_height="25dp"
         android:layout_marginTop="6dp"
         android:layout_marginRight="8dp"
-        android:textColor="@color/colorPrimaryBlack"
+        android:textColor="@color/subtitle"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time" />

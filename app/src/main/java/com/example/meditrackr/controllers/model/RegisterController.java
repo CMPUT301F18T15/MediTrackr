@@ -25,9 +25,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
+import com.example.meditrackr.utils.SaveLoad;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.ui.MainActivity;
 
@@ -62,8 +62,8 @@ public class RegisterController {
         boolean finish;
 
         // Save account into ES and memory
-        done = ElasticSearchController.addProfile(profile);
-        finish = SaveLoadController.addNewProfile(context, profile);
+        done = ElasticSearch.addProfile(profile);
+        finish = SaveLoad.addNewProfile(context, profile);
 
         // Indicate with a toast that account has been added
         Log.d("RegisterFragmentMeme", "done is " + done + " finish is " + finish);
@@ -82,9 +82,7 @@ public class RegisterController {
         // If both saves to memory and ES did not work
         if (!finish || !done) {
             // Indicate that new profile uses an existing username
-            Log.d("RegisterFragmentMeme", "done is " + done + " finish is " + finish);
             Toasty.error(context, "Username taken", Toast.LENGTH_SHORT).show();
-
         // If no exceptions were caught
         } else {
             Toasty.success(context, "Registration successful", Toast.LENGTH_SHORT).show();

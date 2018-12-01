@@ -44,6 +44,7 @@ public class Geolocation implements Serializable {
     // Initialize class variables
     private double longitude;
     private double latitude;
+    private String distance;
     private String address;
 
 
@@ -120,6 +121,15 @@ public class Geolocation implements Serializable {
      */
     public void setAddress(String address) {
         this.address = address;
+    }
+
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 
 }

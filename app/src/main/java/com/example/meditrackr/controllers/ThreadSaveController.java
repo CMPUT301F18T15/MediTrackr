@@ -21,9 +21,9 @@ package com.example.meditrackr.controllers;
 //imports
 import android.content.Context;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.Profile;
+import com.example.meditrackr.utils.ElasticSearch;
+import com.example.meditrackr.utils.SaveLoad;
 
 /**
  * LoginController
@@ -51,8 +51,8 @@ public class ThreadSaveController {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                ElasticSearchController.updateUser(profile);
-                SaveLoadController.saveProfile(context, profile);
+                ElasticSearch.updateUser(profile);
+                SaveLoad.saveProfile(context, profile);
             }
         });
 

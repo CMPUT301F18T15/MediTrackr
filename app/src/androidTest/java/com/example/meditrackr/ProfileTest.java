@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.ui.LoginActivity;
 import com.example.meditrackr.ui.MainActivity;
 
@@ -41,7 +41,7 @@ public class ProfileTest extends ActivityTestRule<MainActivity>  {
 
     @Before
     public void login() {
-        if (ElasticSearchController.searchProfile(testDoctorName) == null) {
+        if (ElasticSearch.searchProfile(testDoctorName) == null) {
             createTestDoctor();
         } else {
             // Login to testDoctor

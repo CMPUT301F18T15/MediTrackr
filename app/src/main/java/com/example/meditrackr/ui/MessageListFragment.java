@@ -32,9 +32,7 @@ import android.widget.EditText;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.MessageListAdapter;
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.Comment;
 import com.example.meditrackr.models.CommentList;
@@ -59,7 +57,6 @@ public class MessageListFragment extends Fragment {
         return fragment;
     }
 
-
     // Creates message list view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,18 +70,13 @@ public class MessageListFragment extends Fragment {
 
         // Load user profile
         profile = LazyLoadingManager.getProfile();
-        Log.d("WOOT", profile.getUsername());
-
 
         // Need to fix this in the future, this is way too hacky
         if(profile.getisCareProvider()){
-            Log.d("WOOT", "do i get here?");
             patient = LazyLoadingManager.getCarePatient();
             comments = patient.getProblem(LazyLoadingManager.getProblemIndex()).getComments();
         }else{
             patient = LazyLoadingManager.getPatient();
-            Log.d("WOOT", "i should be logged in as patient: " + patient.getUsername());
-            Log.d("WOOT", LazyLoadingManager.getProblemIndex()+"");
             comments = patient.getProblem(LazyLoadingManager.getProblemIndex()).getComments();
         }
 
@@ -114,9 +106,8 @@ public class MessageListFragment extends Fragment {
                     comments.addComment(comment);
                     adapter.notifyDataSetChanged();
                     chatBox.setText(null);
+
                     ThreadSaveController.save(getContext(), patient);
-                    //SaveLoadController.saveProfile(getContext(), patient);
-                    //ElasticSearchController.updateUser(patient);
                     messageList.smoothScrollToPosition(comments.getSize());
                 }
                 else{
@@ -125,6 +116,7 @@ public class MessageListFragment extends Fragment {
                 }
             }
         });
+
 
         return rootView;
     }

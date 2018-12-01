@@ -24,9 +24,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.utils.SaveLoad;
+import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PatientList;
@@ -68,11 +68,11 @@ public class LoginController {
             @Override
             public void run() {
                 // Search for profile in ES
-                Profile checkProfile = ElasticSearchController.searchProfile(profile.getUsername());
+                Profile checkProfile = ElasticSearch.searchProfile(profile.getUsername());
                 if (checkProfile == null) { // If profile doesn't exist add profile to ES
-                    ElasticSearchController.addProfile(profile);
+                    ElasticSearch.addProfile(profile);
                 } else { // Else update profile changes to ES
-                    ElasticSearchController.updateUser(profile);
+                    ElasticSearch.updateUser(profile);
                 }
 
             }
@@ -87,7 +87,7 @@ public class LoginController {
                 Patient patient;
                 if(profile.getisCareProvider()){
                     CareProvider careProviderMem = (CareProvider) profile;
-                    CareProvider careProvider = (CareProvider) ElasticSearchController.searchProfile(profile.getUsername());
+                    CareProvider careProvider = (CareProvider) ElasticSearch.searchProfile(profile.getUsername());
                     if(careProvider.getPatients().getSize() > careProviderMem.getPatients().getSize()){
                         //nothing
                     }
@@ -97,15 +97,11 @@ public class LoginController {
                     PatientList patientList = careProvider.getPatients();
                     ArrayList<Patient> patients = new ArrayList<>();
                     for(int i = 0; i < patientList.getSize(); i++){
-                        Log.d("THREADMEMESS", patientList.getPatient(i)+"");
-                        Profile profileCheck = SaveLoadController.loadProfile(context, patientList.getPatient(i));
+                        Profile profileCheck = SaveLoad.loadProfile(context, patientList.getPatient(i));
                         if(profileCheck != null){
                             patient = (Patient) profileCheck;
-                            Log.d("THREADMEMESS", "mem");
-
                         } else {
-                            Log.d("THREADMEMESS", "es");
-                            patient = (Patient) ElasticSearchController.searchProfile(patientList.getPatient(i));
+                            patient = (Patient) ElasticSearch.searchProfile(patientList.getPatient(i));
                         }
                         patients.add(patient);
 
@@ -120,7 +116,7 @@ public class LoginController {
         // Set profile with LazyLoadingManager and save profile in memory
         LazyLoadingManager.setProfile(profile);
         LazyLoadingManager.setCurrentUsername(profile.getUsername());
-        SaveLoadController.saveProfile(context, profile);
+        SaveLoad.saveProfile(context, profile);
 
         // Display MainActivity depending on the kind of user
         Intent intent = new Intent(activity, MainActivity.class);
@@ -141,7 +137,7 @@ public class LoginController {
     public static void checkProfile(Activity activity, Context context, String username) {
         // Gets profile from memory
         Profile profile;
-        profile = SaveLoadController.loadProfile(context, username);
+        profile = SaveLoad.loadProfile(context, username);
 
         // If profile exists and belongs to a care provider set as so and log in
         if (profile != null && profile.getisCareProvider()) {
@@ -168,9 +164,9 @@ public class LoginController {
      * @param activity  the LoginFragments activity
      * @param username  the username to be checked
      */
-    public static void checkProfileES(Activity activity, Context context, String username) {
+    private static void checkProfileES(Activity activity, Context context, String username) {
         // Gets profile from ES
-        Profile profile = ElasticSearchController.searchProfile(username);
+        Profile profile = ElasticSearch.searchProfile(username);
 
         // If profile exists and belongs to a care provider set as so and log in
         if (profile != null && profile.getisCareProvider()) {

@@ -31,7 +31,6 @@ import android.widget.ImageButton;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.careprovider.ProblemAdapter;
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
 import com.example.meditrackr.models.Patient;
@@ -92,6 +91,7 @@ public class ProblemsFragment extends Fragment  {
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         patientList.addItemDecoration(decoration);
 
+        // On click listener for viewing all of records/problems of a patient in a map view
         gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -24,26 +24,22 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
-import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.controllers.model.LoginController;
-import com.example.meditrackr.models.CareProvider;
-import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.R;
+import com.example.meditrackr.controllers.model.PatientController;
 import com.example.meditrackr.models.Profile;
-
-import org.w3c.dom.Text;
+import com.example.meditrackr.ui.careprovider.PatientSearchFragment;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 /**
  * the main parts to this fragment is a text box where user can input their username which will send
@@ -62,6 +58,7 @@ import org.w3c.dom.Text;
 
 // Class creates Login Fragment
 public class LoginFragment extends Fragment {
+     private EditText username;
 
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
@@ -75,9 +72,10 @@ public class LoginFragment extends Fragment {
                 R.layout.fragment_login, container, false);
 
         // Initialize ui attributes
-        final EditText username = rootView.findViewById(R.id.patient_username);
+        username = rootView.findViewById(R.id.patient_username);
         final Button login = (Button) rootView.findViewById(R.id.login_button);
         final TextView signup = (TextView) rootView.findViewById(R.id.not_member);
+        final ImageButton qrButton = (ImageButton) rootView.findViewById(R.id.qr_button_login);
 
 
 
@@ -89,6 +87,7 @@ public class LoginFragment extends Fragment {
                 LoginController.checkProfile(getActivity(),getContext(), userName);
             }
         });
+
 
         // Onclick listener for signup
         signup.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +104,43 @@ public class LoginFragment extends Fragment {
             }
         });
 
+
+        // On click for qrCodeButton
+        qrButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator integrator = new IntentIntegrator(getActivity());
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                integrator.setPrompt("Scan!");
+                integrator.setCameraId(0);
+                integrator.setBeepEnabled(true);
+                integrator.setBarcodeImageEnabled(true);
+                integrator.forSupportFragment(LoginFragment.this).initiateScan();
+            }
+        });
+
         return rootView;
+    }
+
+
+    // Get the information from the QR code
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result!=null){
+            if(result.getContents() == null){
+                Toast.makeText(getContext(), "You cancelled the scanning!", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(getContext(), result.getContents(), Toast.LENGTH_LONG).show();
+
+                String usernameCheck = result.getContents(); // Get patient username from input
+                Profile profile = PatientController.searchPatient(getContext(), usernameCheck);
+                if(profile != null){
+                    username.setText(profile.getUsername());
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

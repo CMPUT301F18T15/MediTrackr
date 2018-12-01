@@ -12,7 +12,7 @@ Our app allows for patients to record any medical problems they have on their bo
 | Orest Cokan| cokan|
 | Muhammad Usman| usman1|
 | Veronica Salm| vsalm |
-| Gillien Frolian | frolian |
+| Gillien Froilan | froilan |
 | Jonathan Armfield| jarmfiel |
 | Kyle Chatterley| chatterl |
 

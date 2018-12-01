@@ -161,12 +161,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mGps = (ImageView) findViewById(R.id.ic_gps);
         mInfo = (ImageView) findViewById(R.id.place_info);
 
-<<<<<<< HEAD
-        // Get location permissions
-=======
-
         checkUser();
->>>>>>> master
         getLocationPermission();
 
 
@@ -274,12 +269,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
 
-<<<<<<< HEAD
-        // Create a new instance of FusedLocationProviderClient for use in a non-activity context
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-=======
         FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
->>>>>>> master
 
         try {
             // If location permission was granted
@@ -295,13 +285,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             Log.d(TAG, "onComplete: found location!");
                             // Set location
                             Location currentLocation = (Location) task.getResult();
-<<<<<<< HEAD
-
-                            // Move map to display current location
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM,
-                                    "My Location");
-=======
                             try {
                                 moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                         DEFAULT_ZOOM,
@@ -309,7 +292,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             } catch(NullPointerException e){
                                 e.printStackTrace();
                             }
->>>>>>> master
 
                         } else { // Location does not exist or could not be found indicate so
                             Log.d(TAG, "onComplete: current location is null");
@@ -459,40 +441,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     // Place markers on map according to user info
     public void placeMarkers() {
         Profile profile = LazyLoadingManager.getProfile();
-<<<<<<< HEAD
-        if(!profile.getisCareProvider()) { // If account belongs to a patient
-            Patient patient = LazyLoadingManager.getPatient();
-            for (int i = 0; i < patient.getProblems().getSize(); i++) { // Set a marker on map for each problem
-                Log.d("MAPMARKER", "problemlist size" + patient.getProblems().getSize());
-                for (int j = 0; j < patient.getProblem(i).getRecords().getSize(); j++) {
-                    Geolocation geolocation = patient.getProblem(i).getRecords().getRecord(j).getGeoLocation();
-                    Record record = patient.getProblem(i).getRecords().getRecord(j);
-
-                    // Initialize custom window for google maps
-                    mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
-
-                    try { // Include date and description in a snippet
-                        String snippet =
-                                "Record #: " + j + "\n" +
-                                        "Date: " + record.getDate() + "\n" +
-                                        "Description: " + record.getDescription() + "\n";
-
-                        // For each marker set location, set the location title, and snippet
-                        MarkerOptions options = new MarkerOptions()
-                                .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
-                                .title(patient.getProblem(i).getDescription())
-                                .snippet(snippet);
-
-                        // Add patient problem markers on map
-                        mMarker = mMap.addMarker(options);
-
-                    } catch (NullPointerException e) { // Throw exception if map has nothing to show
-                        Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage());
-                    }
-
-                    // Hide keyboard
-                    hideSoftKeyboard();
-=======
         if (!profile.getisCareProvider()) {
             Patient patient = LazyLoadingManager.getPatient();
             extractInformation(patient);
@@ -534,21 +482,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                 } catch (NullPointerException e) {
                     Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage());
->>>>>>> master
                 }
 
 
                 hideSoftKeyboard();
                 Log.d("Adding no markers", "adding no markers");
             }
-<<<<<<< HEAD
-        }else { // Else if there are no marker do not add markers
-            Log.d("Adding no materkers", "adding no markers");
-        }else {
-            Log.d("Adding no markers", "adding no markers");
-=======
 
->>>>>>> master
         }
     }
 

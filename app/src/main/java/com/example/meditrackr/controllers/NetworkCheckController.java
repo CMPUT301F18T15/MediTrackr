@@ -43,6 +43,9 @@ import java.net.SocketAddress;
 
 // Class connects app to internet
 public class NetworkCheckController {
+    private static String HOSTNAME = "8.8.8.8";
+    private static int PORT = 53;
+    private static int timeoutMs = 1500;
 
     /**
      * Checks if internet access is available.
@@ -67,9 +70,8 @@ public class NetworkCheckController {
     // Connects to server proxy
     public static boolean isOnline() {
         try {
-            int timeoutMs = 1500;
             Socket socket = new Socket();
-            SocketAddress sockaddr = new InetSocketAddress("8.8.8.8", 53); //Creates proxy info
+            SocketAddress sockaddr = new InetSocketAddress(HOSTNAME, PORT); //Creates proxy info
 
             // Connect to IP address
             socket.connect(sockaddr, timeoutMs);

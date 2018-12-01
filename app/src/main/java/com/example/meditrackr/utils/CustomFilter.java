@@ -42,7 +42,7 @@ public class CustomFilter {
     private Geolocation geolocation;
 
 
-
+    // Filter for a problem
     public CustomFilter(String username, boolean isRecord, String title, String description, String date, int problemIndex){
 
         this.username = username;
@@ -53,7 +53,7 @@ public class CustomFilter {
         this.problemIndex = problemIndex;
         this.recordIndex = -1;
     }
-
+    // Filter for a record
     public CustomFilter(String username, boolean isRecord, String title, String description, String date, Geolocation geolocation, int problemIndex, int recordIndex){
         this.username = username;
         this.isRecord = isRecord;
@@ -67,7 +67,7 @@ public class CustomFilter {
     }
 
 
-
+    // Getters and Setters
     public boolean isProblem() {
         return isProblem;
     }

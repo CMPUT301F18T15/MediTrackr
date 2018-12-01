@@ -1,4 +1,4 @@
-package com.example.meditrackr.controllers;
+package com.example.meditrackr.utils;
 
 import android.content.Context;
 
@@ -18,7 +18,7 @@ import com.example.meditrackr.utils.SaveLoad;
  * @version 1.0 Nov 25, 2018
  */
 
-public class ThreadSaveController {
+public class ThreadSave {
 
     /**
      * saves the profile to

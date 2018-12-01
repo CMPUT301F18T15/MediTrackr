@@ -16,7 +16,7 @@
  *limitations under the License.
  *
  */
-package com.example.meditrackr.controllers;
+package com.example.meditrackr.utils;
 
 //
 import android.content.Context;
@@ -42,7 +42,7 @@ import java.net.SocketAddress;
  */
 
 // Class connects app to internet
-public class NetworkCheckController {
+public class NetworkCheck {
     private static String HOSTNAME = "8.8.8.8";
     private static int PORT = 53;
     private static int timeoutMs = 1500;

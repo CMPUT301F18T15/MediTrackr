@@ -44,6 +44,7 @@ public class BodyLocation implements Serializable {
     private float y;
     private String bodyLocationPhotoName;
     private PhotoList images = new PhotoList();
+    private int photoID;
 
     // Constructor
     public BodyLocation(int x, int y, String bodyLocationPhotoName){
@@ -75,6 +76,10 @@ public class BodyLocation implements Serializable {
     public void setBodyLocationPhotoName(String bodyLocationPhotoName) {
         this.bodyLocationPhotoName = bodyLocationPhotoName;
     }
+
+    public void setID(int id) { photoID = id; }
+
+    public int getID() { return photoID; }
 
     /**
      * Gets the recordphoto list holding

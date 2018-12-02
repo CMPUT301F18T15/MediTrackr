@@ -64,7 +64,7 @@ public class BodyLocationPhotosFragment extends Fragment {
                 // Prepares to switch fragments when button is clicked
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                AddProblemFragment fragment = AddProblemFragment.newInstance();
+                AddBodyPhotoFragment fragment = AddBodyPhotoFragment.newInstance(index);
                 transaction.addToBackStack(null);
                 transaction.replace(R.id.content, fragment);
                 transaction.commit();

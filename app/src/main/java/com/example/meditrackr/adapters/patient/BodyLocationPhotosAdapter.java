@@ -1,6 +1,7 @@
 package com.example.meditrackr.adapters.patient;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +18,7 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.BodyLocationPhotoList;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.ui.patient.AddRecordFragment;
+import com.example.meditrackr.utils.ConvertImage;
 
 public class BodyLocationPhotosAdapter extends RecyclerView.Adapter<BodyLocationPhotosAdapter.ViewHolder>{
     private FragmentActivity activity;
@@ -49,9 +51,9 @@ public class BodyLocationPhotosAdapter extends RecyclerView.Adapter<BodyLocation
             holder.photo.setImageBitmap(null);
             Log.d("ImageTest", "New profile this should be shown!");
         }else {
-            holder.photo.setImageBitmap(photos.getImage(position).getImage());
+            Bitmap bitmap = ConvertImage.convertByteToBitmap(photos.getImage(position).getImage());
+            holder.photo.setImageBitmap(bitmap);
         }
-        holder.photo.setImageBitmap(photos.getImage(position).getImage());
     }
 
 

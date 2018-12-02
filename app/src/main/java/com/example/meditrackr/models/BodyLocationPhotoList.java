@@ -7,14 +7,22 @@ public class BodyLocationPhotoList implements Serializable {
 
     // Create array of bitmaps
     private transient ArrayList<BodyLocationPhoto> images = new ArrayList<>();
+    private transient int id = 0;
 
     // Calls to ImageList methods
     public void addImage(BodyLocationPhoto newImage) {
+        newImage.setID(id);
+        ++id;
         images.add(newImage);
     }
 
-    public void removeImage(int imageIndex){
-        images.remove(imageIndex);
+    public void removeImage(int imageID){
+        for (int i = 0; i < images.size(); ++i) {
+            if (images[i].getID() == imageID) {
+                images.remove(i);
+                return;
+            }
+        }
     }
 
     public Boolean imageExists(BodyLocationPhoto image){
@@ -37,18 +45,6 @@ public class BodyLocationPhotoList implements Serializable {
             if (i != images.size()-1) result += " ";
         }
         return result;
-    }
-
-    // checks to see if a name already exists in the list
-    // this is to ensure that body location photo names are unique
-    public boolean nameInList(String name) {
-        for (BodyLocationPhoto p : images) {
-            // if the name was found, return true
-            if (p.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public BodyLocationPhoto getImage(int index){

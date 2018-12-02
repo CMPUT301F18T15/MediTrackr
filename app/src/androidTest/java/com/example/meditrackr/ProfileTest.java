@@ -1,13 +1,12 @@
 package com.example.meditrackr;
 
-import android.app.Instrumentation;
 import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
 
-import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.ui.LoginActivity;
 import com.example.meditrackr.ui.MainActivity;
+import com.example.meditrackr.utils.ElasticSearch;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -15,7 +14,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressBack;
@@ -25,11 +23,10 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ProfileTest extends ActivityTestRule<MainActivity>  {
+public class ProfileTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
-    final String testDoctorName = "TestDoctorAcc";
-    final String newName = testDoctorName + "New";
-    Instrumentation.ActivityMonitor activityMonitor;
+    private final String testDoctorName = "TestDoctorAcc";
+    private final String newName = testDoctorName + "New";
 
     public ProfileTest() {
         super(MainActivity.class);
@@ -42,11 +39,9 @@ public class ProfileTest extends ActivityTestRule<MainActivity>  {
     @Before
     public void login() {
         if (ElasticSearch.searchProfile(testDoctorName) == null) {
-            createTestDoctor();
+            createTestProfile();
         } else {
             // Login to testDoctor
-            activityMonitor = getInstrumentation().addMonitor
-                    (MainActivity.class.getName(), null, false);
             Intent start = new Intent();
             loginIntent.launchActivity(start);
         }
@@ -61,9 +56,7 @@ public class ProfileTest extends ActivityTestRule<MainActivity>  {
 
         onView(withId(R.id.profile)).perform(click());
         onView(withId(R.id.edit_button)).perform(click());
-        final long startTime = System.currentTimeMillis();
-        final long end = startTime + 1000;
-        while (System.currentTimeMillis() < end);
+        pauseTest(1);
         onView(withId(R.id.patient_username)).perform(click(), replaceText(newName), pressBack());
         onView(withId(R.id.save_edits_button)).perform(click());
     }
@@ -77,15 +70,13 @@ public class ProfileTest extends ActivityTestRule<MainActivity>  {
 
         onView(withId(R.id.profile)).perform(click());
         onView(withId(R.id.edit_button)).perform(click());
-        final long startTime = System.currentTimeMillis();
-        final long end = startTime + 1000;
-        while (System.currentTimeMillis() < end);
+        pauseTest(1);
 
         onView(withId(R.id.patient_username)).perform(click(), replaceText(testDoctorName), pressBack());
         onView(withId(R.id.save_edits_button)).perform(click());
     }
 
-    private void createTestDoctor() {
+    public void createTestProfile() {
         Intent start = new Intent();
         loginIntent.launchActivity(start);
         onView(withId(R.id.not_member)).perform(click());
@@ -94,6 +85,11 @@ public class ProfileTest extends ActivityTestRule<MainActivity>  {
         onView(withId(R.id.patient_email)).perform(click(), typeText("testDoctor@test.com"), pressBack());
         onView(withId(R.id.CareProvider)).perform(click());
         onView(withId(R.id.signup_button)).perform(click());
+    }
+
+    public void pauseTest(int seconds) {
+        final long start = System.currentTimeMillis();
+        while (System.currentTimeMillis() < start + (long) seconds) { }
     }
 
 }

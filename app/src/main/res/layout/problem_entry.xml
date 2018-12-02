@@ -35,12 +35,12 @@
 
     <TextView
         android:id="@+id/problem_title"
-        android:layout_width="100dp"
+        android:layout_width="175dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorPrimaryBlack"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:singleLine="true"
         app:layout_constraintStart_toEndOf="@+id/problem_image"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +57,7 @@
         android:singleLine="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/subtitle"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/problem_image"
         app:layout_constraintTop_toBottomOf="@+id/problem_title"
         app:layout_constraintStart_toStartOf="@+id/problem_title"/>

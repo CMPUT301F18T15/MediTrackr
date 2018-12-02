@@ -32,9 +32,9 @@ import static org.junit.Assert.fail;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RecordTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
+    private final String testPatientName = "InstrumentationTestPatient";
     private final String problemName = "Hydrophobia";
     private final String problemDesc = "Water D:";
-    private final String testPatientName = "InstrumentationTestPatient";
     private final String recordName = "Spooked";
     private final String recordDesc = "Water is spooking me OwO";
 
@@ -79,17 +79,13 @@ public class RecordTest extends ActivityTestRule<MainActivity> implements Intent
 
         onView(withId(R.id.record_title_field)).perform(click(), typeText(recordName), pressBack());
         onView(withId(R.id.add_record_button)).perform(scrollTo(), click());
-        onView(withId(R.id.record_title_field)).perform(scrollTo(), click(), replaceText(""), pressBack());
-        onView(withId(R.id.record_description_field)).perform(scrollTo(), click(), typeText(recordDesc), pressBack());
-        onView(withId(R.id.add_record_button)).perform(scrollTo(), click());
 
         try {
-            onView(withId(R.id.add_record_button)).check(matches(isDisplayed()));
+            onView(withId(R.id.add_record_floating)).check(matches(isDisplayed()));
         } catch (NoMatchingViewException e) {
-            fail("Record was added without a name");
+            fail("Record was not added");
         }
 
-        Espresso.pressBack();
         Espresso.pressBack();
         onView(withId(R.id.problem_delete_button)).perform(click());
         onView(withText("YES")).perform(click());

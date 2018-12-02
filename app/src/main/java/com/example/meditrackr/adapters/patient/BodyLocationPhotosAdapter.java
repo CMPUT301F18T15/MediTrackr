@@ -18,6 +18,7 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.BodyLocationPhotoList;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.ui.patient.AddRecordFragment;
+import com.example.meditrackr.ui.patient.SelectBodyLocationFragment;
 import com.example.meditrackr.utils.ConvertImage;
 
 public class BodyLocationPhotosAdapter extends RecyclerView.Adapter<BodyLocationPhotosAdapter.ViewHolder>{
@@ -25,11 +26,15 @@ public class BodyLocationPhotosAdapter extends RecyclerView.Adapter<BodyLocation
     private Context context;
     private Patient patient = LazyLoadingManager.getPatient();
     private BodyLocationPhotoList photos = patient.getBodyLocationPhotos();
+    private static int problemIndex;
 
     // constructor
-    public BodyLocationPhotosAdapter(FragmentActivity activity, Context context) {
+    public BodyLocationPhotosAdapter(FragmentActivity activity, Context context, int problem) {
         this.activity = activity;
         this.context = context;
+        // so we know which problem to add the record to
+        problemIndex = problem;
+
     }
 
 
@@ -82,16 +87,16 @@ public class BodyLocationPhotosAdapter extends RecyclerView.Adapter<BodyLocation
         // set onClick listener for each record so you can view it in greater detail
         @Override
         public void onClick(View v) {
-//            int position = getAdapterPosition();
-//            FragmentManager manager = getFragmentManager();
-//            FragmentTransaction transaction = manager.beginTransaction();
-//            // Allows user to bring back previous fragment when back button is pressed
-//            transaction.addToBackStack(null);
-//            // Switch to AddRecordFragment
-//            AddRecordFragment fragment = AddRecordFragment.newInstance(index);
-//            transaction.replace(R.id.content, fragment);
-//            // Commit any changes to fragment
-//            transaction.commit();
+            int position = getAdapterPosition();
+            FragmentManager manager = adapter.activity.getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            // Allows user to bring back previous fragment when back button is pressed
+            transaction.addToBackStack(null);
+            // Switch to AddRecordFragment
+            SelectBodyLocationFragment fragment = SelectBodyLocationFragment.newInstance(problemIndex, position);
+            transaction.replace(R.id.content, fragment);
+            // Commit any changes to fragment
+            transaction.commit();
         }
     }
 }

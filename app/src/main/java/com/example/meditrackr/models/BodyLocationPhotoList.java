@@ -18,11 +18,30 @@ public class BodyLocationPhotoList implements Serializable {
 
     public void removeImage(int imageID){
         for (int i = 0; i < images.size(); ++i) {
-            if (images[i].getID() == imageID) {
+            if (images.get(i).getID() == imageID) {
                 images.remove(i);
                 return;
             }
         }
+    }
+
+    public BodyLocationPhoto getPhotoByID(int imageID){
+        for (int i = 0; i < images.size(); ++i) {
+            if (images.get(i).getID() == imageID) {
+                return images.get(i);
+            }
+        }
+        return null;
+    }
+
+    public int getIndexByID(int imageID){
+        for (int i = 0; i < images.size(); ++i) {
+            if (images.get(i).getID() == imageID) {
+                return i;
+            }
+        }
+        // return a negative index to indicate that the id was not found
+        return -1;
     }
 
     public Boolean imageExists(BodyLocationPhoto image){

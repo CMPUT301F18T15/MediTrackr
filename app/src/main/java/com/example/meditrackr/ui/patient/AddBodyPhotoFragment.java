@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
@@ -31,9 +34,12 @@ import com.example.meditrackr.models.BodyLocationPhoto;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.ImageRecognition;
+import com.example.meditrackr.utils.PermissionRequest;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 import es.dmoral.toasty.Toasty;
 
@@ -45,6 +51,7 @@ public class AddBodyPhotoFragment extends Fragment {
     private Bitmap bitmap;
 
     // needed for getting new body location photo image
+    private static final int UPLOAD_REQUEST_CODE = 1;
     private static final int IMAGE_REQUEST_CODE = 2;
 
     public static AddBodyPhotoFragment newInstance() {
@@ -58,13 +65,15 @@ public class AddBodyPhotoFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_add_body_location_photo, container, false);
 
-        getCameraPermission();
+        PermissionRequest.verifyPermission(getActivity());
 
 
         // general ui attributes
         final EditText photoID = (EditText) rootView.findViewById(R.id.photo_name_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.photo_button_img);
+        final ImageButton uploadPhoto = (ImageButton) rootView.findViewById(R.id.upload_body_location);
         final Button addPhoto = (Button) rootView.findViewById(R.id.confirm_bodyphoto_button);
+
         bodyPhoto = (ImageView) rootView.findViewById(R.id.body_image);
 
 
@@ -77,6 +86,8 @@ public class AddBodyPhotoFragment extends Fragment {
                     byte[] bitmapByte = ConvertImage.convertBitmapToBytes(bitmap);
                     BodyLocationPhoto photo = new BodyLocationPhoto(photoID.getText().toString(), bitmapByte);
                     BodyPhotoController.addPhoto(getContext(), photo);
+
+                    MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, photoID.getText().toString(), "");
 
                     // Transition back to taking another photo
                     FragmentManager manager = getFragmentManager();
@@ -94,12 +105,19 @@ public class AddBodyPhotoFragment extends Fragment {
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Log.d("ImageTest", "body location photo: do we get here");
                 startActivityForResult(intent,
                         IMAGE_REQUEST_CODE);
-                Log.d("ImageTest", "body location photo: do we get here2");
+            }
+        });
+
+        // onclick listener for uploading a new bodylocation photo
+        uploadPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(intent, UPLOAD_REQUEST_CODE);
             }
         });
         return rootView;
@@ -123,17 +141,17 @@ public class AddBodyPhotoFragment extends Fragment {
             ImageRecognition.mContext = getContext();
             ImageRecognition.recognizeImage(inputStream);
 
-        }
-    }
-
-    private static final int MY_CAMERA_REQUEST_CODE = 100;
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void getCameraPermission() {
-    if(getContext().checkSelfPermission(Manifest.permission.CAMERA)
-                        !=PackageManager.PERMISSION_GRANTED) {
-        requestPermissions(new String[]{Manifest.permission.CAMERA},
-                MY_CAMERA_REQUEST_CODE);
+        } else if (requestCode == UPLOAD_REQUEST_CODE && resultCode == RESULT_OK) {
+            getActivity();
+            Uri targetUri = data.getData();
+            try {
+                bitmap = BitmapFactory.decodeStream(getContext().getContentResolver().openInputStream(targetUri));
+                Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, 1450, 1500, false);
+                bodyPhoto.setImageBitmap(newBitmap);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 

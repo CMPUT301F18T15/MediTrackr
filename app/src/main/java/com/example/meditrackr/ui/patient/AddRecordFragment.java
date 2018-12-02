@@ -19,12 +19,8 @@
 package com.example.meditrackr.ui.patient;
 
 //imports
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -42,6 +38,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
+import com.example.meditrackr.adapters.patient.SelectBodyLocationAdapter;
 import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.model.RecordController;
 import com.example.meditrackr.models.record.Record;
@@ -123,6 +120,7 @@ public class AddRecordFragment extends Fragment{
         final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
+        final TextView bodyLocation = (TextView) rootView.findViewById(R.id.body_location_title);
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
 
         // Initialize ui attributes for each button of notification frequency
@@ -178,6 +176,22 @@ public class AddRecordFragment extends Fragment{
             }
         );
 
+
+        /*---------------------------------------------------------------------------
+         * ADD NEW BODYLOCATIONS TO RECORD
+         *--------------------------------------------------------------------------*/
+        // Onclick listener for adding a body location
+        bodyLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.addToBackStack(null);
+                SelectBodyLocationPhotoFragment fragment = SelectBodyLocationPhotoFragment.newInstance();
+                transaction.replace(R.id.content, fragment);
+                transaction.commit();
+            }
+        });
 
 
         /*---------------------------------------------------------------------------

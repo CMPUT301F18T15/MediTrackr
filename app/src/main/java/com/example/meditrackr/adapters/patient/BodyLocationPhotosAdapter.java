@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.controllers.model.BodyPhotoController;
 import com.example.meditrackr.controllers.model.RecordController;
 import com.example.meditrackr.models.BodyLocationPhoto;
@@ -28,6 +27,7 @@ import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.ui.patient.AddRecordFragment;
 import com.example.meditrackr.ui.patient.SelectBodyLocationFragment;
 import com.example.meditrackr.utils.ConvertImage;
+import com.example.meditrackr.utils.ThreadSave;
 
 public class BodyLocationPhotosAdapter extends RecyclerView.Adapter<BodyLocationPhotosAdapter.ViewHolder>{
     private FragmentActivity activity;
@@ -108,7 +108,7 @@ public class BodyLocationPhotosAdapter extends RecyclerView.Adapter<BodyLocation
                                 public void onClick(DialogInterface dialog, int id) {
                                     // Only delete the problem if the answer was yes
                                     BodyPhotoController.deletePhoto(adapter.context, position);
-                                    ThreadSaveController.save(adapter.context, patient);
+                                    ThreadSave.save(adapter.context, patient);
                                     adapter.notifyItemRemoved(position);
                                     adapter.notifyItemRangeChanged(position,
                                     patient.getBodyLocationPhotos().getSize());

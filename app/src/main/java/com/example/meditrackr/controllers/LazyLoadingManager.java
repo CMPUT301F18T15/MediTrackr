@@ -19,6 +19,7 @@
 package com.example.meditrackr.controllers;
 
 //imports
+import com.example.meditrackr.models.BodyLocationPhoto;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PatientList;
@@ -45,6 +46,7 @@ public class LazyLoadingManager {
     private static int problemIndex;
     private static PhotoList images;
     private static ArrayList<Patient> patients;
+    private static BodyLocationPhoto bodyLocationPhoto;
 
 
     /**
@@ -227,5 +229,14 @@ public class LazyLoadingManager {
         LazyLoadingManager.patients = patients;
     }
 
+
+
+    public static BodyLocationPhoto getBodyLocationPhoto() {
+        return bodyLocationPhoto;
+    }
+
+    public static void setBodyLocationPhoto(BodyLocationPhoto bodyLocationPhoto) {
+        LazyLoadingManager.bodyLocationPhoto = bodyLocationPhoto;
+    }
 }
 

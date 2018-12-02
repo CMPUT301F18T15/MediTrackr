@@ -5,10 +5,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.models.BodyLocationPhoto;
 import com.example.meditrackr.models.BodyLocationPhotoList;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.utils.ThreadSave;
 
 import es.dmoral.toasty.Toasty;
 
@@ -27,7 +27,7 @@ public class BodyPhotoController {
         patient.getBodyLocationPhotos().addBodyLocation(photo);
 
         // Save the photo both locally and elastic search
-        ThreadSaveController.save(context, patient);
+        ThreadSave.save(context, patient);
         Log.d("PhotoAdd", "Profile: " + patient.getUsername() + " Photos: " + patient.getBodyLocationPhotos());
 
         // let the user know everything was successful
@@ -39,7 +39,7 @@ public class BodyPhotoController {
         Patient patient = LazyLoadingManager.getPatient();
         BodyLocationPhotoList photos = patient.getBodyLocationPhotos();
         photos.removeBodyLocation(index);
-        ThreadSaveController.save(context, patient);
+        ThreadSave.save(context, patient);
     }
 }
 

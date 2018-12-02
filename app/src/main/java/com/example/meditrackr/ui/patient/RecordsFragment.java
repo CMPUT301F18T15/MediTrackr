@@ -149,7 +149,7 @@ public class RecordsFragment extends Fragment {
                 // Allows user to bring back previous fragment when back button is pressed
                 transaction.addToBackStack(null);
                 // Switch to AddRecordFragment
-                BodyLocationPhotosFragment fragment = BodyLocationPhotosFragment.newInstance(index);
+                AddRecordFragment fragment = AddRecordFragment.newInstance(index);
                 transaction.replace(R.id.content, fragment);
                 // Commit any changes to fragment
                 transaction.commit();

@@ -26,7 +26,10 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 public class ProfileTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
     private final String testDoctorName = "TestDoctorAcc";
-    private final String newName = testDoctorName + "New";
+    private final String testDoctorEmail = "testDoctor@test.com";
+    private final String testDoctorPhone = "7808471293";
+    private final String newEmail = "testDoctor@gmail.com";
+    private final String newPhone = "7801234567";
 
     public ProfileTest() {
         super(MainActivity.class);
@@ -57,22 +60,8 @@ public class ProfileTest extends ActivityTestRule<MainActivity> implements Inten
         onView(withId(R.id.profile)).perform(click());
         onView(withId(R.id.edit_button)).perform(click());
         pauseTest(1);
-        onView(withId(R.id.patient_username)).perform(click(), replaceText(newName), pressBack());
-        onView(withId(R.id.save_edits_button)).perform(click());
-    }
-
-
-    @Test
-    public void testBLoginNewProfile() {
-        onView(withId(R.id.patient_username)).perform
-                (click(), typeText(newName), pressBack());
-        onView(withId(R.id.login_button)).perform(click());
-
-        onView(withId(R.id.profile)).perform(click());
-        onView(withId(R.id.edit_button)).perform(click());
-        pauseTest(1);
-
-        onView(withId(R.id.patient_username)).perform(click(), replaceText(testDoctorName), pressBack());
+        onView(withId(R.id.patient_email)).perform(click(), replaceText(newEmail), pressBack());
+        onView(withId(R.id.patient_phone)).perform(click(), replaceText(newPhone), pressBack());
         onView(withId(R.id.save_edits_button)).perform(click());
     }
 

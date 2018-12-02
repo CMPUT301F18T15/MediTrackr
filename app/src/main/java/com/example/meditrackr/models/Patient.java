@@ -83,6 +83,5 @@ public class Patient extends Profile implements Serializable{
 
     // allows getting bodylocationphotos and adding new images
     public BodyLocationPhotoList getBodyLocationPhotos() { return bodyPhotos; }
-    public void addBodyPhoto(BodyLocationPhoto image) { bodyPhotos.addImage(image); }
 }
 

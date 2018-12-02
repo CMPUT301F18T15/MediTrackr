@@ -32,7 +32,7 @@ public class ThreadSaveController {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                //ElasticSearch.updateUser(profile);
+                ElasticSearch.updateUser(profile);
                 SaveLoad.saveProfile(context, profile);
             }
         });

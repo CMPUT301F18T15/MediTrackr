@@ -25,7 +25,6 @@ public class BodyLocationPhotosFragment extends Fragment {
     public static BodyLocationPhotosFragment newInstance(int index){
         BodyLocationPhotosFragment fragment = new BodyLocationPhotosFragment();
         Bundle bundle = new Bundle();
-        Log.d("test", index + "");
         bundle.putInt("INDEX", index);
         fragment.setArguments(bundle);
         return fragment;
@@ -40,14 +39,12 @@ public class BodyLocationPhotosFragment extends Fragment {
 
         // Enable recycler view for displaying body location photos and create the add body photo button
         final RecyclerView photos = (RecyclerView) rootView.findViewById(R.id.bodylocationphoto_recyclerview);
-        final FloatingActionButton addPhoto = (FloatingActionButton) rootView.findViewById(R.id.add_bodylocationphoto_floating);
         final Button skipButton = (Button) rootView.findViewById(R.id.skip_button);
-        // Set bundle number as the photo index number (for adding a body location to a particular photo)
-        final int index = getArguments().getInt("INDEX");
-        Log.d("PhotosFragments", "we on are on index: " + index);
+
+
 
         photos.setHasFixedSize(false);
-        adapter = new BodyLocationPhotosAdapter(getActivity(), getContext(), index); // Creates BodyLocationPhotosAdapter for recyclerview
+        adapter = new BodyLocationPhotosAdapter(getActivity(), getContext()); // Creates BodyLocationPhotosAdapter for recyclerview
         photos.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         photos.setLayoutManager(manager);
@@ -58,24 +55,12 @@ public class BodyLocationPhotosFragment extends Fragment {
         VerticalSpaceController decoration = new VerticalSpaceController(75); // Reinforces vertical layout of fragment
         photos.addItemDecoration(decoration);
 
-        // Floating button on click listener to allow the user to add a new body location photo
-        addPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Prepares to switch fragments when button is clicked
-                FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                AddBodyPhotoFragment fragment = AddBodyPhotoFragment.newInstance(index);
-                transaction.addToBackStack(null);
-                transaction.replace(R.id.content, fragment);
-                transaction.commit();
-            }
-        });
-
+        // Skip adding a bodylocation to a record
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Prepares to switch fragments when button is clicked
+                final int index = getArguments().getInt("INDEX");
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.addToBackStack(null);

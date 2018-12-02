@@ -33,7 +33,8 @@ public class SelectBodyLocationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.select_body_location, container, false);
+                R.layout.fragment_select_body_location, container, false);
+
 
         final ImageView bodyPhotoView = (ImageView) rootView.findViewById(R.id.body_location_image);
         final Button saveButton = (Button) rootView.findViewById(R.id.save_body_button);
@@ -43,7 +44,7 @@ public class SelectBodyLocationFragment extends Fragment {
         final int bodyPhotoIndex = getArguments().getInt("IMAGE_INDEX");
 
         // set bodyPhoto to the current photo
-        BodyLocationPhoto bodyPhoto = patient.getBodyLocationPhotos().getImage(bodyPhotoIndex);
+        BodyLocationPhoto bodyPhoto = patient.getBodyLocationPhotos().getBodyLocationPhoto(bodyPhotoIndex);
         Bitmap bitmap = ConvertImage.convertByteToBitmap(bodyPhoto.getImage());
         bodyPhotoView.setImageBitmap(bitmap);
 

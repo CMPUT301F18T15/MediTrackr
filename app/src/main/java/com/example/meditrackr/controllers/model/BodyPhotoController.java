@@ -24,7 +24,7 @@ public class BodyPhotoController {
     // Add problem to problem list
     public static void addPhoto(Context context, BodyLocationPhoto photo) {
         // Get patient profile and problem
-        patient.addBodyPhoto(photo);
+        patient.getBodyLocationPhotos().addBodyLocation(photo);
 
         // Save the photo both locally and elastic search
         ThreadSaveController.save(context, patient);
@@ -35,10 +35,11 @@ public class BodyPhotoController {
     }
 
     // Delete a photo
-    public static void deletePhoto(Context context, int index, BodyLocationPhotoList photos){
-        photos.removeImage(index);
+    public static void deletePhoto(Context context, int index){
+        Patient patient = LazyLoadingManager.getPatient();
+        BodyLocationPhotoList photos = patient.getBodyLocationPhotos();
+        photos.removeBodyLocation(index);
         ThreadSaveController.save(context, patient);
     }
-
 }
 

@@ -119,10 +119,8 @@ public class RecordsFragment extends Fragment {
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.addToBackStack(null);
-                    // Switch to MessageListFragment
                     MessageListFragment fragment = MessageListFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
-                    // Commit changes in fragment
                     transaction.commit();
                 }
                 else if (recordsClick == v) {
@@ -151,7 +149,7 @@ public class RecordsFragment extends Fragment {
                 // Allows user to bring back previous fragment when back button is pressed
                 transaction.addToBackStack(null);
                 // Switch to AddRecordFragment
-                AddRecordFragment fragment = AddRecordFragment.newInstance(index);
+                BodyLocationPhotosFragment fragment = BodyLocationPhotosFragment.newInstance(index);
                 transaction.replace(R.id.content, fragment);
                 // Commit any changes to fragment
                 transaction.commit();

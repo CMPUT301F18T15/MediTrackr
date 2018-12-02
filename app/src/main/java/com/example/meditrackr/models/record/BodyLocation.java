@@ -24,99 +24,62 @@
 
 package com.example.meditrackr.models.record;
 
-//imports
 import java.io.Serializable;
 
 /**
- * BodyLocation: create a body coordinate on a mannequin/body location photo
- * and then associate it with with the photos of a particular record.
+ * This class will create a Body coordinate on our model and then associate it with with a body location
+ * it uses getters and setters to get the body coordinate
+ * it also uses getters and setters to get the bodyFace
  *
- * Note that this functionality is not yet implemented in our app
- * and will be added for part 5.
  *
  * @author  Orest Cokan
  * @version 1.0 Oct 24, 2018.
  */
+
+// A BodyLocation class that holds all information pertaining to BodyLocation
 public class BodyLocation implements Serializable {
 
     // Initialize class variables
-    private double[] bodyCoordinate;
-    private String bodyFace;
-    private String bodyLocation;
+    private float x;
+    private float y;
+    private String bodyLocationPhotoName;
     private PhotoList images = new PhotoList();
+    private int photoID;
 
-    /**
-     * Creates a new BodyLocation object.
-     * @author  Orest Cokan
-     * @param bodyCoordinate the number that is mapped to a body location
-     * @param bodyFace       a string name of a face location
-     * @param bodyLocation   the name of the body part
-
-    /*--------------------------------------------------------------------------
-     * GETTERS AND SETTERS
-     *------------------------------------------------------------------------*/
-
-    /**
-     * Gets the body coordinate array.
-     * @author  Orest Cokan
-     * @return the array of body coordinates
-     */
-    public double[] getBodyCoordinate() {
-        return bodyCoordinate;
+    // Constructor
+    public BodyLocation(int x, int y, String bodyLocationPhotoName){
+        this.x = x;
+        this.y = y;
+        this.bodyLocationPhotoName = bodyLocationPhotoName;
     }
 
+    public BodyLocation() {}
 
-    /**
-     * Sets the body coordinate array.
-     * @author  Orest Cokan
-     * @param bodyCoordinate an array representing a body location
-     */
-    public void setBodyCoordinate(double[] bodyCoordinate) {
-        this.bodyCoordinate = bodyCoordinate;
+
+    // Getters/Setters
+    public float getXCoordinate() {
+        return x;
     }
 
+    public void setXCoordinate(int x) { this.x = x; }
 
-    /**
-     * Gets the string name (id) of the type of body location photo or mannequin (eg,
-     * front or back).
-     * @author  Orest Cokan
-     * @return bodyFace, the name of a body location photo
-     */
-    public String getBodyFace() {
-        return bodyFace;
+    public float getYCoordinate() {
+        return y;
     }
 
-    /**
-     * Sets the string name (id) of the type of body location photo or mannequin (eg,
-     * front or back) used for this body location.
-     * @author  Orest Cokan
-     * @param bodyFace the name of a body location direction (face)
-     */
-    public void setBodyFace(String bodyFace) {
-        this.bodyFace = bodyFace;
+    public void setYCoordinate(int y) { this.y = y; }
+
+    public String getBodyLocationPhotoName() {
+        return bodyLocationPhotoName;
     }
 
-
-    /**
-     * Gets the string name (id) of the body location photo or mannequin.
-     * @author  Orest Cokan
-     * @return bodyLocation, the name of a body location direction (face)
-     */
-    public String getBodyLocation() {
-        return bodyLocation;
+    public void setBodyLocationPhotoName(String bodyLocationPhotoName) {
+        this.bodyLocationPhotoName = bodyLocationPhotoName;
     }
 
+    public void setID(int id) { photoID = id; }
 
-    /**
-     * Sets the string name (id) of the body location photo or
-     * mannequin used for this body location.
-     * @author  Orest Cokan
-     * @param bodyLocation the name of a body location photo
-     */
-    public void setBodyLocation(String bodyLocation) {
-        this.bodyLocation = bodyLocation;
-    }
-
+    public int getID() { return photoID; }
 
     /**
      * Gets the recordphoto list holding
@@ -140,3 +103,4 @@ public class BodyLocation implements Serializable {
 
 
 }
+

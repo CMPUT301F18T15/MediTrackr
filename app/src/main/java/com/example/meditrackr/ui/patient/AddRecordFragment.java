@@ -44,24 +44,14 @@ import android.widget.Toast;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.model.RecordController;
-import com.example.meditrackr.models.record.BodyLocation;
-import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
-import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.DateUtils;
 import com.example.meditrackr.utils.ImageRecognition;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.gson.Gson;
-import com.microsoft.projectoxford.vision.VisionServiceClient;
-import com.microsoft.projectoxford.vision.VisionServiceRestClient;
-import com.microsoft.projectoxford.vision.contract.AnalysisResult;
-import com.microsoft.projectoxford.vision.contract.Caption;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 
 
 
@@ -133,7 +123,6 @@ public class AddRecordFragment extends Fragment{
         final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
-        final ImageButton addBodyImage = (ImageButton) rootView.findViewById(R.id.body_button_img);
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
 
         // Initialize ui attributes for each button of notification frequency
@@ -184,7 +173,7 @@ public class AddRecordFragment extends Fragment{
                     // Transition back to all the records
                     FragmentManager manager = getFragmentManager();
                     int count = manager.getBackStackEntryCount();
-                    manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    manager.popBackStack(count - 2, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
             }
         );
@@ -210,28 +199,6 @@ public class AddRecordFragment extends Fragment{
                 }
             }
         });
-
-
-        /*---------------------------------------------------------------------------
-         * ADD BODY LOCATION TO RECORD
-         *--------------------------------------------------------------------------*/
-        // OnClickListener handles camera button
-        addBodyImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (bitmaps[1] == null) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                        startActivityForResult(intent, IMAGE_BODY_REQUEST_CODE);                    }
-
-                } else {
-                    Toasty.error(getContext(), "Unable to add more than 2 body location photos!"
-                            , Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
 
 
         /*---------------------------------------------------------------------------

@@ -41,6 +41,7 @@ import java.io.Serializable;
 public class Patient extends Profile implements Serializable{
     // Initialize class variables
     private ProblemList problems = new ProblemList();
+    private BodyLocationPhotoList bodyPhotos = new BodyLocationPhotoList();
 
     /**
      * Creates a new Patient object.
@@ -79,5 +80,9 @@ public class Patient extends Profile implements Serializable{
     public Problem getProblem(int index){
         return problems.getProblem(index);
     }
+
+    // allows getting bodylocationphotos and adding new images
+    public BodyLocationPhotoList getBodyLocationPhotos() { return bodyPhotos; }
+    public void addBodyPhoto(BodyLocationPhoto image) { bodyPhotos.addImage(image); }
 }
 

@@ -47,32 +47,5 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <net.steamcrafted.materialiconlib.MaterialIconView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/problem_edit_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@android:color/white"
-        android:scaleType="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/problem_delete_button"
-        app:materialIcon="folder_edit"
-        app:materialIconColor="#000"
-        app:materialIconSize="30dp" />
-
-    <net.steamcrafted.materialiconlib.MaterialIconView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/problem_delete_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@android:color/white"
-        android:scaleType="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toTopOf="@+id/problem_edit_button"
-        app:layout_constraintTop_toBottomOf="@+id/problem_edit_button"
-        app:materialIcon="delete"
-        app:materialIconColor="#000"
-        app:materialIconSize="30dp" />
-
 
 </android.support.constraint.ConstraintLayout>

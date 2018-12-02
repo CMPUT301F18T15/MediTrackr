@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize navigation bar
         initButtons();
-        problems.setImageDrawable(getResources().getDrawable(R.drawable.icon_doc_1));
+        problems.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
 
 
 
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 // If Problem add button icon is clicked
                 if(v == problems){
                     // Darken icon to indicate it is clicked
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.icon_doc_1));
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.cross_full));
                     if(!isCareProvider) {
                         // If user is a patient show Add Problems Fragment
                         ProblemsFragment fragment = ProblemsFragment.newInstance();
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 else if (v == map) {
                     // Check if we have persomission to use google maps, if so then go to that activity
                     if(isServicesOK()) {
-                        image.setImageDrawable(getResources().getDrawable(R.drawable.icon_map_1));
+                        image.setImageDrawable(getResources().getDrawable(R.drawable.map_full));
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
                         startActivity(intent);
                     }
@@ -141,14 +141,14 @@ public class MainActivity extends AppCompatActivity {
                 // If Search button icon is clicked
                 else if (v == search) {
                     // If Search button icon is clicked
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.icon_search_1));
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.search_full));
                     SearchFragment fragment = SearchFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
                 }
                 // Clicked profile page
                 else{
                     // Darken Profile icon
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.icon_profile_1));
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.person_full));
                     // Switch to User Fragment
                     UserFragment fragment = UserFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
@@ -215,11 +215,11 @@ public class MainActivity extends AppCompatActivity {
 
     // Initialize button icons on bottom bar
     public void initButtons(){
-        problems.setImageDrawable(getResources().getDrawable(R.drawable.icon_doc_0));
-        map.setImageDrawable(getResources().getDrawable(R.drawable.icon_map_0));
-        camera.setImageDrawable(getResources().getDrawable(R.drawable.icon_camera_0));
-        search.setImageDrawable(getResources().getDrawable(R.drawable.icon_search_0));
-        profile.setImageDrawable(getResources().getDrawable(R.drawable.icon_profile_0));
+        problems.setImageDrawable(getResources().getDrawable(R.drawable.cross));
+        map.setImageDrawable(getResources().getDrawable(R.drawable.map));
+        camera.setImageDrawable(getResources().getDrawable(R.drawable.new_camera_icon));
+        search.setImageDrawable(getResources().getDrawable(R.drawable.search));
+        profile.setImageDrawable(getResources().getDrawable(R.drawable.person));
     }
 
 

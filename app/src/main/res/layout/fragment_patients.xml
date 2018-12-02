@@ -17,7 +17,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
-        android:text="PATIENTS"
+        android:text="Patients"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@color/colorPrimaryBlack"

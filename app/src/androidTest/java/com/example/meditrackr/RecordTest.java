@@ -121,8 +121,6 @@ public class RecordTest extends ActivityTestRule<MainActivity> implements Intent
         onView(withId(R.id.add_record_button)).perform(scrollTo(), click());
 
         Espresso.pressBack();
-        Espresso.pressBack();
-        Espresso.pressBack();
         onView(withId(R.id.problem_delete_button)).perform(click());
         onView(withText("YES")).perform(click());
     }

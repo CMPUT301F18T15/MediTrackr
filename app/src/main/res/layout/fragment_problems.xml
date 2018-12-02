@@ -53,7 +53,7 @@
         android:layout_marginRight="36dp"
         android:layout_marginBottom="36dp"
         android:clickable="true"
-        app:backgroundTint="@color/main13"
+        app:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />

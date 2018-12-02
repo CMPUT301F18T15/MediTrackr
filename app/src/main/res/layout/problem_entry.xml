@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/rounded_white_border"
+    android:backgroundTint="@color/white" >
 
     <ImageView
         android:id="@+id/time"
         android:layout_width="15dp"
         android:layout_height="18dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         app:layout_constraintEnd_toStartOf="@+id/problem_date"
@@ -21,7 +22,7 @@
         android:id="@+id/problem_date"
         android:layout_width="110dp"
         android:layout_height="18dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginEnd="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -50,16 +51,16 @@
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:ellipsize="marquee"
         android:singleLine="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/subtitle"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/problem_image"
-        app:layout_constraintTop_toBottomOf="@+id/problem_title" />
+        app:layout_constraintTop_toBottomOf="@+id/problem_title"
+        app:layout_constraintStart_toStartOf="@+id/problem_title"/>
 
     <TextView
         android:id="@+id/number_records_title"

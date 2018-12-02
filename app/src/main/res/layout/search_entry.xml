@@ -3,7 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="100dp"
     android:layout_margin="5dp"
     android:background="@color/background"
     android:backgroundTint="@color/background"
@@ -40,7 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:padding="10dp"
+            android:padding="2dp"
+            android:textSize="20sp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/usernameText" />
@@ -50,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:text="Position"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/black"
@@ -63,10 +64,11 @@
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:padding="8dp"
             android:textColor="@color/black"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintStart_toStartOf="@+id/titleText"
             card_view:layout_constraintTop_toBottomOf="@+id/titleText" />
 
     </android.support.constraint.ConstraintLayout>

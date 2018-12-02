@@ -16,10 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.meditrackr.R;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.SaveLoadController;
 import com.example.meditrackr.controllers.ThreadSaveController;
+import com.example.meditrackr.controllers.model.ProblemController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.PhotoList;
@@ -113,13 +112,13 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // Class objects
         private ProblemAdapter adapter;
-        public ImageView problemImage;
+        private ImageView problemImage;
         public TextView title;
         public TextView date;
         public TextView description;
-        public TextView totalRecords;
-        public MaterialIconView deleteProblem;
-        public MaterialIconView editProblem;
+        private TextView totalRecords;
+        private MaterialIconView deleteProblem;
+        private MaterialIconView editProblem;
 
         /**
          * This function puts information about each problem into its own view so we won't
@@ -132,7 +131,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
 
 
         // Constructor and gets the corresponding data for each view
-        public ViewHolder(View itemView, final ProblemAdapter adapter){
+        private ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);
             title = itemView.findViewById(R.id.problem_title);
             date = itemView.findViewById(R.id.problem_date);
@@ -161,15 +160,14 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     // Only delete the problem if the answer was yes
-                                    adapter.problems.removeProblem(position);
+                                    ProblemController.deleteProblem(adapter.context, position, adapter.problems);
+
+                                    //adapter.problems.removeProblem(position);
                                     adapter.notifyItemRemoved(position);
                                     adapter.notifyItemRangeChanged(position,
                                             adapter.problems.getSize());
-                                    Log.d("DeleteProblem", "Position: " + position);
+
                                     // Save changes to memory and ES
-                                    ThreadSaveController.save(adapter.context, LazyLoadingManager.getPatient());
-                                    //SaveLoadController.saveProfile(adapter.context, LazyLoadingManager.getPatient());
-                                    //ElasticSearchController.updateUser(LazyLoadingManager.getPatient());
                                     dialog.cancel(); // Close alert dialog box
                                 }
                             });
@@ -189,7 +187,6 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                     alert11.show();
                 }
             });
-
 
 
             // Onclick listener for edit a problem
@@ -237,19 +234,15 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         public void onClick(View v) {
             // Return the position of the click in the recycler view
             int position = getAdapterPosition();
-            // Prepare for fragment transaction
+
+            // Transition to the problem page of the patient
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
-            // Load all the problems images
             LazyLoadingManager.setImages(adapter.problems.getProblem(position).getImageAll());
             FragmentTransaction transaction =  manager.beginTransaction();
-            // Load the problem index on the position that was cliclked
             LazyLoadingManager.setProblemIndex(position);
-            // Transitions to RecordsFragment page
             RecordsFragment fragment = RecordsFragment.newInstance(position);
-            // Allow user to bring back previous fragment when back button is pressed
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);
-            // Make permanent all changes made in transaction
             transaction.commit();
         }
     }

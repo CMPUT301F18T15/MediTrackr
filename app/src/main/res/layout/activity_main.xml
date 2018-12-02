@@ -37,16 +37,14 @@
             android:layout_height="40dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="4dp"
-            android:adjustViewBounds="false"
-            android:contentDescription="TODO"
-            android:cropToPadding="false"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/gradient"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/search"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/map"
-            app:srcCompat="@drawable/icon_camera_0" />
+            app:srcCompat="@drawable/new_camera_icon" />
 
         <ImageView
             android:id="@+id/map"
@@ -59,12 +57,12 @@
             app:layout_constraintEnd_toStartOf="@+id/camera"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/problems"
-            app:srcCompat="@drawable/icon_map_0" />
+            app:srcCompat="@drawable/map" />
 
         <ImageView
             android:id="@+id/search"
-            android:layout_width="37dp"
-            android:layout_height="46dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="8dp"
@@ -72,12 +70,12 @@
             app:layout_constraintEnd_toStartOf="@+id/profile"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/camera"
-            app:srcCompat="@drawable/icon_search_0" />
+            app:srcCompat="@drawable/search" />
 
         <ImageView
             android:id="@+id/profile"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
@@ -85,7 +83,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/search"
-            app:srcCompat="@drawable/icon_profile_0" />
+            app:srcCompat="@drawable/person" />
 
         <ImageView
             android:id="@+id/problems"
@@ -100,8 +98,7 @@
             app:layout_constraintEnd_toStartOf="@+id/map"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/icon_doc_0"
-            tools:srcCompat="@drawable/icon_doc_1" />
+            app:srcCompat="@drawable/cross" />
     </android.support.constraint.ConstraintLayout>
 
 

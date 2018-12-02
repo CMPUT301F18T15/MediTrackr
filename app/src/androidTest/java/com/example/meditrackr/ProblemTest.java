@@ -8,7 +8,7 @@ import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
 
-import com.example.meditrackr.controllers.ElasticSearchController;
+import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.ui.LoginActivity;
 import com.example.meditrackr.ui.MainActivity;
 
@@ -46,7 +46,7 @@ public class ProblemTest extends ActivityTestRule<MainActivity> {
 
         Context instrumentationCtx;
 
-        if (ElasticSearchController.searchProfile(testPatientName) == null) {
+        if (ElasticSearch.searchProfile(testPatientName) == null) {
             createTestPatient();
 
         } else {

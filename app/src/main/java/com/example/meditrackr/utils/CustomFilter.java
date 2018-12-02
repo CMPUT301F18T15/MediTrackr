@@ -21,6 +21,7 @@ package com.example.meditrackr.utils;
 //imports
 import com.example.meditrackr.adapters.SearchAdapter;
 import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.record.Geolocation;
 
 import android.widget.Filter;
 
@@ -38,9 +39,10 @@ public class CustomFilter {
     private String description;
     private String date;
     private String username;
+    private Geolocation geolocation;
 
 
-
+    // Filter for a problem
     public CustomFilter(String username, boolean isRecord, String title, String description, String date, int problemIndex){
 
         this.username = username;
@@ -51,8 +53,8 @@ public class CustomFilter {
         this.problemIndex = problemIndex;
         this.recordIndex = -1;
     }
-
-    public CustomFilter(String username, boolean isRecord, String title, String description, String date, int problemIndex, int recordIndex){
+    // Filter for a record
+    public CustomFilter(String username, boolean isRecord, String title, String description, String date, Geolocation geolocation, int problemIndex, int recordIndex){
         this.username = username;
         this.isRecord = isRecord;
         this.title = title;
@@ -60,11 +62,12 @@ public class CustomFilter {
         this.date = date;
         this.problemIndex = problemIndex;
         this.recordIndex = recordIndex;
+        this.geolocation = geolocation;
 
     }
 
 
-
+    // Getters and Setters
     public boolean isProblem() {
         return isProblem;
     }
@@ -93,8 +96,8 @@ public class CustomFilter {
         return recordIndex;
     }
 
-    public void setRexordIndex(int rexordIndex) {
-        this.recordIndex = rexordIndex;
+    public void setRecordIndex(int recordIndex) {
+        this.recordIndex = recordIndex;
     }
 
     public String getTitle() {
@@ -128,6 +131,14 @@ public class CustomFilter {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Geolocation getGeolocation() {
+        return geolocation;
+    }
+
+    public void setGeolocation(Geolocation geolocation) {
+        this.geolocation = geolocation;
     }
 
 

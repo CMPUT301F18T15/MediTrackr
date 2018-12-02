@@ -81,6 +81,7 @@ public class PatientsFragment extends Fragment {
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         patientList.addItemDecoration(decoration);
 
+
         // Search for patient onclick listener
         searchForPatient.setOnClickListener(new View.OnClickListener() {
             @Override

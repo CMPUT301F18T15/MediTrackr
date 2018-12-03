@@ -38,7 +38,7 @@ import java.io.Serializable;
  * @version 1.0 Nov 8, 2018.
  */
 
-// A Geolocation class that holds all methods pertaining to Geolocation
+// A model class that holds all methods pertaining to Geolocation
 public class Geolocation implements Serializable {
 
     // Initialize class variables

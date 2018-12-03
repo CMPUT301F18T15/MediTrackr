@@ -43,6 +43,7 @@ import java.io.Serializable;
  * @see Geolocation
  */
 
+// A model class holding all information pertaining to records
 public class Record implements Serializable {
 
     // Initialize class variables

@@ -23,6 +23,7 @@
  */
 package com.example.meditrackr.models;
 
+//imports
 import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
@@ -35,7 +36,7 @@ import io.searchbox.annotations.JestId;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A Profile class that holds all methods pertaining to Profile
+// A model class that holds all methods pertaining to Profile
 public class Profile implements Serializable {
 
     // Initialize class variables

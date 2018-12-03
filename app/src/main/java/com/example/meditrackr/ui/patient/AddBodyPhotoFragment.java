@@ -1,5 +1,24 @@
+/*
+ *    Apache 2.0 License Notice
+ *
+ *    Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.ui.patient;
 
+//imports
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -41,13 +60,15 @@ import es.dmoral.toasty.Toasty;
 
 import static android.app.Activity.RESULT_OK;
 
+//Class creates add body location photo fragment for patients
 public class AddBodyPhotoFragment extends Fragment {
+    // Class objects
     private ImageView bodyPhoto;
     private Bitmap bitmap;
     private EditText photoID;
     private String pictureImagePath = "";
 
-    // needed for getting new body location photo image
+    // Needed for getting new body location photo image
     private static final int UPLOAD_REQUEST_CODE = 1;
     private static final int IMAGE_REQUEST_CODE = 2;
 
@@ -56,6 +77,7 @@ public class AddBodyPhotoFragment extends Fragment {
         return fragment;
     }
 
+    // Creates view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,7 +87,7 @@ public class AddBodyPhotoFragment extends Fragment {
         PermissionRequest.verifyPermission(getActivity());
 
 
-        // general ui attributes
+        // Initializes ui attributes
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.photo_button_img);
         final ImageButton uploadPhoto = (ImageButton) rootView.findViewById(R.id.upload_body_location);
         final Button addPhoto = (Button) rootView.findViewById(R.id.confirm_bodyphoto_button);
@@ -74,11 +96,11 @@ public class AddBodyPhotoFragment extends Fragment {
 
 
 
-        // onclick listener for adding a photo
+        // Onclick listener for adding a photo
         addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // add the new body location photo to the patient
+                // Add the new body location photo to the patient
                 if (bitmap != null) {
                     byte[] bitmapByte = ConvertImage.convertBitmapToBytes(bitmap);
                     BodyLocation photo = new BodyLocation(photoID.getText().toString(),
@@ -100,7 +122,7 @@ public class AddBodyPhotoFragment extends Fragment {
         });
 
 
-        // onclick listener for taking a new bodylocation photo
+        // Onclick listener for taking a new bodylocation photo
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +142,7 @@ public class AddBodyPhotoFragment extends Fragment {
             }
         });
 
-        // onclick listener for uploading a new bodylocation photo
+        // Onclick listener for uploading a new bodylocation photo
         uploadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,13 +215,13 @@ public class AddBodyPhotoFragment extends Fragment {
             in = getContext().getContentResolver().openInputStream(uri);
             if (scale > 1) {
                 scale--;
-                // scale to max possible inSampleSize that still yields an image
-                // larger than target
+                // Scale to max possible inSampleSize that still yields an image
+                // Larger than target
                 o = new BitmapFactory.Options();
                 o.inSampleSize = scale;
                 b = BitmapFactory.decodeStream(in, null, o);
 
-                // resize to desired dimensions
+                // Resize to desired dimensions
                 int height = b.getHeight();
                 int width = b.getWidth();
                 Log.d("", "1th scale operation dimenions - width: " + width + ", height: " + height);

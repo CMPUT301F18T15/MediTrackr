@@ -23,6 +23,7 @@
  */
 package com.example.meditrackr.models;
 
+//imports
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -36,8 +37,9 @@ import java.util.ArrayList;
  * @author Orest Cokan
  * @version 1.0 Nov 15, 2018
  */
+// A model class holding all information pertaining to comment list
 public class CommentList implements Serializable {
-    // initialize an empty list of comments
+    // Initialize an empty list of comments
     private ArrayList<Comment> comments = new ArrayList<>();
 
 

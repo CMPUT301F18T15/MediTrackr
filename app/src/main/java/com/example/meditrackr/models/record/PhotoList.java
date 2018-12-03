@@ -42,7 +42,7 @@ import java.util.ArrayList;
 // A model class that holds all information pertaining to listing photos
 public class PhotoList implements Serializable {
 
-    // creates an array of Bitmap images
+    // Creates an array of Bitmap images
     private  ArrayList<byte[]> images = new ArrayList<>();
 
 

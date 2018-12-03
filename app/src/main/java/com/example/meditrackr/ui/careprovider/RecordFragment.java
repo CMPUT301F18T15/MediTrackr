@@ -39,6 +39,7 @@ public class RecordFragment extends Fragment {
     private Record record;
     private ImageView[] images = new ImageView[10];
 
+    // Creates new instance fragment and saves it as bundle
     public static RecordFragment newInstance(Record record) {
         RecordFragment fragment = new RecordFragment();
         Bundle bundle = new Bundle();

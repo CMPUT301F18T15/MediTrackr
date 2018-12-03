@@ -142,6 +142,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback {
         return rootView;
     }
 
+    // Creates view objects based on layouts in XML
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -154,6 +155,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    // Initialize google maps
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());

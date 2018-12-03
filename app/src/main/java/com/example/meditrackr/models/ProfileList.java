@@ -23,7 +23,7 @@
  */
 package com.example.meditrackr.models;
 
-//import
+//imports
 import java.util.ArrayList;
 
 /**
@@ -37,7 +37,7 @@ import java.util.ArrayList;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A ProfileList class that holds all methods pertaining to ProfileList
+// A model class that holds all methods pertaining to ProfileList
 public class ProfileList {
 
     // Create array of profiles

@@ -39,7 +39,7 @@ import java.util.List;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A ProblemList class that holds all methods pertaining to ProblemList
+// A model class that holds all methods pertaining to ProblemList
 public class ProblemList implements Serializable {
 
     // Create array of problems

@@ -47,7 +47,7 @@ import java.io.Serializable;
  */
 
 
-// A Problem class that holds all methods pertaining to Problem
+// A model class that holds all methods pertaining to problem
 public class Problem implements Serializable {
 
     // Initialize class variables

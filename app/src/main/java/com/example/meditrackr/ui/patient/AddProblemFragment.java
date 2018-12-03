@@ -54,6 +54,7 @@ import es.dmoral.toasty.Toasty;
  * @author  Orest Cokan
  * @version 1.0 Nov 8, 2018.
  */
+// Class creates add problem fragment
 public class AddProblemFragment extends Fragment {
 
     /*-----------------------------------------------------------------------

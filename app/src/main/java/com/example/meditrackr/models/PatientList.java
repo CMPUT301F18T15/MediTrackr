@@ -23,6 +23,7 @@
  */
 package com.example.meditrackr.models;
 
+//imports
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ import java.util.ArrayList;
  * @version 1.0 Nov 7, 2018.
  */
 
-// A PatientList class that holds all methods pertaining to PatientList
+// A model class that holds all methods pertaining to PatientList
 public class PatientList implements Serializable {
 
 

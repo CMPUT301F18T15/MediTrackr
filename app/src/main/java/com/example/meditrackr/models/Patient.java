@@ -23,6 +23,7 @@
  */
 package com.example.meditrackr.models;
 
+//imports
 import java.io.Serializable;
 
 /**
@@ -37,7 +38,7 @@ import java.io.Serializable;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A Patient class holding all methods pertaining to Patient
+// A model class holding all methods pertaining to Patient
 public class Patient extends Profile implements Serializable{
     // Initialize class variables
     private ProblemList problems = new ProblemList();

@@ -21,9 +21,9 @@
  * limitations under the License.
  *
  */
-
 package com.example.meditrackr.models;
 
+// imports
 import java.io.Serializable;
 
 /**
@@ -40,6 +40,7 @@ import java.io.Serializable;
  * @see Profile
  * @see PatientList
  */
+// A model class holding all information pertaining to care provider
 public class CareProvider extends Profile implements Serializable {
     private PatientList patients = new PatientList();
 

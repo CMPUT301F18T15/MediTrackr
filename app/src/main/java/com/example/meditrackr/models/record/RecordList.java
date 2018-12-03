@@ -40,7 +40,7 @@ import java.util.ArrayList;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A RecordList class that holds all methods pertaining to RecordList
+// A model class that holds all methods pertaining to RecordList
 public class RecordList implements Serializable {
 
     // Create array of records

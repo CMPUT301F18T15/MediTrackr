@@ -21,9 +21,9 @@
  * limitations under the License.
  *
  */
-
 package com.example.meditrackr.models;
 
+//imports
 import com.example.meditrackr.utils.DateUtils;
 
 import java.io.Serializable;
@@ -36,6 +36,7 @@ import java.io.Serializable;
  * @author Orest Cokan
  * @version 1.0 Nov 15, 2018
  */
+// A model class holding all information pertaining to user comments
 public class Comment implements Serializable {
     // A comment has a date, string text (comment), and
     private String date = DateUtils.formatAppTime();

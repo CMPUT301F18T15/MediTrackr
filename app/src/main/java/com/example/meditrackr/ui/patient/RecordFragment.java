@@ -125,7 +125,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback {
         try {
             for (int i = 0; i < record.getImages().getSize(); i++) {
                 Bitmap bitmap = ConvertImage.convertByteToBitmap(record.getImages().getImage(i));
-                images[i].setImageBitmap(bitmap);
+                images[i].setImageBitmap(ConvertImage.scaleBitmap(bitmap, 350, 600));
             }
         }catch (NullPointerException e){
             Log.d("Images", "size of array is zero, no images");

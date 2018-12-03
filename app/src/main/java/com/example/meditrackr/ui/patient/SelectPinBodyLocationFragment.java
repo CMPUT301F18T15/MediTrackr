@@ -82,7 +82,7 @@ public class SelectPinBodyLocationFragment extends DialogFragment {
                 bitmap = saveBitmapImage();
                 AddRecordFragment.bodyLocationAdd = new BodyLocation(
                         bodyLocation.getName(),
-                        ConvertImage.convertBitmapToBytes(mutableBitmap),
+                        ConvertImage.convertBitmapToBytes(bitmap),
                         bodyLocation.getID(),
                         x,
                         y);

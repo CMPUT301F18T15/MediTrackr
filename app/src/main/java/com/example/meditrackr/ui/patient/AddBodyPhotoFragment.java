@@ -146,12 +146,12 @@ public class AddBodyPhotoFragment extends Fragment {
 
 
                 // Image recognition
-                //ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                //final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                newBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
-                //ImageRecognition.mContext = getContext();
-                //ImageRecognition.recognizeImage(inputStream);
+                ImageRecognition.mContext = getContext();
+                ImageRecognition.recognizeImage(inputStream);
             }
 
         } else if (requestCode == UPLOAD_REQUEST_CODE && resultCode == RESULT_OK) {

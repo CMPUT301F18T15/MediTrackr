@@ -1,7 +1,11 @@
 package com.example.meditrackr.utils;
 
 /**
- * Crated by Skryt on Nov 23, 2018
+ * this class gets the time and is able to set it for where it is needed
+ * this class can also check to see if the time is set on an item
+ *
+ * @author Orest Cokan
+ * @version 1.0 Nov 23, 2018
  */
 
 
@@ -50,6 +54,11 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         this.isSet = true;
     }
 
+    /**
+     * this class will get the hour that is already set or the current hour if it is nod22QQQQQQQ2qqqt already set
+     * @author Orest cokan
+     * @return      returns the hour that was retrieved
+     */
     public int getHour(){
         if (isSet){
             return this.hour;
@@ -59,6 +68,11 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         }
     }
 
+    /**
+     * this class will get the minute that is already set or the current minute if it is not already set
+     * @author Orest cokan
+     * @return      returns the minute that was retrieved
+     */
     public int getMinute(){
         if (isSet){
             return this.minute;
@@ -67,7 +81,11 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
             return Calendar.getInstance().get(Calendar.MINUTE);
         }
     }
-
+    /**
+     * this class will check to see if the item is already set. if it is return true if not return false
+     * @author Orest cokan
+     * @return      returns ture if it is set or false if it is not
+     */
     public boolean getIsSet(){
         return this.isSet;
     }

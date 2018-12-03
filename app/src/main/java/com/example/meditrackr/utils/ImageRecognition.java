@@ -43,7 +43,9 @@ import es.dmoral.toasty.Toasty;
  * @author Orest Cokan
  * @version Nov 27, 2018
  */
+// Utility class allows ImageRecognition functionality
 public class ImageRecognition {
+    // Initialize class objects
     private static String api = "d28b3a28f0d448ff8f079b9be652249d";
     private static String website = "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0";
     public static Context mContext;
@@ -67,6 +69,7 @@ public class ImageRecognition {
      * @author Orest Cokan
      * @return strResult, this is a string of what the AI found in the photo
      */
+    // Hooks up image to AI database to recognize image
     private static class visionTask extends AsyncTask<InputStream, String, String>{
         ProgressDialog mDialog = new ProgressDialog(mContext);
         @Override
@@ -96,11 +99,13 @@ public class ImageRecognition {
         protected void onPostExecute (String s){
         mDialog.dismiss();
 
+        // Retrives aasociated image from visionServiceClient AI
         AnalysisResult result = new Gson().fromJson(s, AnalysisResult.class);
         StringBuilder stringBuilder = new StringBuilder();
         for (Caption caption : result.description.captions) {
             stringBuilder.append(caption.text);
         }
+        // Indicates to the user what AI has recognized
         Toasty.success(mContext, "You took an image of:" + stringBuilder, Toast.LENGTH_LONG).show();
 
     }

@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    // Exits app if back button is pressed
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBackPressed() {

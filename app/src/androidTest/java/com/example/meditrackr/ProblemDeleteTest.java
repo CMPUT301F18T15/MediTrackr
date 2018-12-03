@@ -41,7 +41,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
 public class ProblemDeleteTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
-
+    // Initialize test variables
     private final String problemName = "Hydrophobia";
     private final String problemDesc = "Water D:";
     private final String testPatientName;

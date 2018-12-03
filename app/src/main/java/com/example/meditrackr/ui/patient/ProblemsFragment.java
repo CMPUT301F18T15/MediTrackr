@@ -59,13 +59,13 @@ public class ProblemsFragment extends Fragment {
     private ProblemAdapter adapter;
 
 
-    // Constructor
+    // Creates new instance fragment
     public static ProblemsFragment newInstance(){
         ProblemsFragment fragment = new ProblemsFragment();
         return fragment;
     }
 
-    // Creates  problems fragment view objects based on layouts in XML
+    // Creates  problems view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

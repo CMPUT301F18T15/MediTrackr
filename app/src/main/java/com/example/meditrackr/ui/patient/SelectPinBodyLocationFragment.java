@@ -1,5 +1,24 @@
+/*
+ *    Apache 2.0 License Notice
+ *
+ *    Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.ui.patient;
 
+//imports
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -21,8 +40,9 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.utils.ConvertImage;
 
+// Class creates select pin body location fragment
 public class SelectPinBodyLocationFragment extends DialogFragment {
-
+    // Class objects
     private ImageView bodyPhotoView;
     private ImageView bodyPhotoCanvas;
     private Button saveBodyLocationButton;
@@ -35,8 +55,10 @@ public class SelectPinBodyLocationFragment extends DialogFragment {
     private float x;
     private float y;
 
+    // Loads body location photo
     private BodyLocation bodyLocation = LazyLoadingManager.getBodyLocationPhoto();
 
+    // Creates new instance fragment and saves it as a bundle
     public static SelectPinBodyLocationFragment newInstance(BodyLocation photo) {
         SelectPinBodyLocationFragment fragment = new SelectPinBodyLocationFragment();
         Bundle bundle = new Bundle();
@@ -45,6 +67,7 @@ public class SelectPinBodyLocationFragment extends DialogFragment {
         return fragment;
     }
 
+    // Creates  select pin body location view objects based on layouts in XML
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
@@ -58,7 +81,7 @@ public class SelectPinBodyLocationFragment extends DialogFragment {
         saveButton = (Button) rootView.findViewById(R.id.save_body_button);
 
 
-        // set bodyPhoto to the current photo
+        // Set bodyPhoto to the current photo
         bodyLocation = LazyLoadingManager.getBodyLocationPhoto();
         bitmap = ConvertImage.convertByteToBitmap(bodyLocation.getImage());
 
@@ -71,7 +94,7 @@ public class SelectPinBodyLocationFragment extends DialogFragment {
         paint.setColor(Color.RED);
 
 
-
+        // On click button listener for save button
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +114,7 @@ public class SelectPinBodyLocationFragment extends DialogFragment {
             }
         });
 
-
+        // OnTouchListener for body location canvas
         bodyPhotoView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -113,11 +136,13 @@ public class SelectPinBodyLocationFragment extends DialogFragment {
 
     }
 
+    // Draws point wherever the user clicks on the canvas
     private void drawPoint(float x, float y) {
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
         canvas.drawCircle(x, y, 10, paint);
     }
 
+    // Save image with the point drawn on
     private Bitmap saveBitmapImage() {
         Bitmap res = ConvertImage.convertByteToBitmap(bodyPhotoSrc.getImage());
         Canvas overlay = new Canvas(res);

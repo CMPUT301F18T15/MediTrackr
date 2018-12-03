@@ -77,8 +77,9 @@ import io.searchbox.core.SearchResult;
  * @throws IOException
  */
 
-// Controller class for Elastic Search search engine
+// Utility class allows ElasticSearch functionality
 public class ElasticSearch {
+    // Initialize class objects
     private static JestClient client = null;
     private static String INDEX_NAME = "cmput301f18t15test";
     private static String PROFILE_TYPE = "profile";

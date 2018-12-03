@@ -37,7 +37,7 @@ import java.util.TimeZone;
  */
 // got this from https://github.com/smilefam/SendBird-Android
 
-// Class contains information pertaining to date utilities
+// Utility class allows DateUtils functionality
 public class DateUtils {
 
     // This class should not be initialized

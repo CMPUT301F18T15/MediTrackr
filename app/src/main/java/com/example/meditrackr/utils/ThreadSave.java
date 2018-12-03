@@ -36,7 +36,7 @@ import com.example.meditrackr.utils.SaveLoad;
  * @author Orest Cokan
  * @version 1.0 Nov 25, 2018
  */
-
+// Utility class allows ThreadSave functionality
 public class ThreadSave {
 
     /**

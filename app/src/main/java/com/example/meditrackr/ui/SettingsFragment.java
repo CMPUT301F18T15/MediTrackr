@@ -39,6 +39,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
  * Activities that contain this fragment must implement the
  *
  */
+// Class creates SettingsFragment
 public class SettingsFragment extends Fragment {
 
     /**
@@ -47,6 +48,7 @@ public class SettingsFragment extends Fragment {
      *
      * @return A new instance of fragment SettingsFragment.
      */
+    // Creates new instance fragment and saves it as bundle
     public static SettingsFragment newInstance(String username) {
         SettingsFragment fragment = new SettingsFragment();
         Bundle bundle = new Bundle();
@@ -55,6 +57,7 @@ public class SettingsFragment extends Fragment {
         return fragment;
     }
 
+    // Creates settings view objects based on layouts in XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,7 +70,7 @@ public class SettingsFragment extends Fragment {
 
 
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-        try {
+        try { // Initialize QR code
             BitMatrix bitMatrix = multiFormatWriter.encode(username, BarcodeFormat.QR_CODE,200,200);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);

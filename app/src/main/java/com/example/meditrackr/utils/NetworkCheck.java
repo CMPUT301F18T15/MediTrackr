@@ -41,7 +41,7 @@ import java.net.SocketAddress;
  * @version 2.0 Nov 14, 2018
  */
 
-// Class connects app to internet
+// Utility class allows NetworkCheck functionality
 public class NetworkCheck {
     private static String HOSTNAME = "8.8.8.8";
     private static int PORT = 53;

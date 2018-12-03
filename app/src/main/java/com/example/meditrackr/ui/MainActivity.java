@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    // Exits app if back button is pressed
     @Override
     public void onBackPressed() {
         FragmentManager manager = getSupportFragmentManager();
@@ -206,10 +206,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean isServicesOK(){
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
         if(available == ConnectionResult.SUCCESS){
-            //everything is okay, user can make map requests
+            // Everything is okay, user can make map requests
             return true;
         }else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
-            // an error occured but we can resolve it
+            // An error occured but we can resolve it
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
         }

@@ -27,7 +27,9 @@ import android.support.v4.app.ActivityCompat;
 /**
  * Crated by Skryt on Dec 02, 2018
  */
+// Utility class allows PermissionRequest functionality
 public class PermissionRequest {
+    // Set permission
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSION_STORAGE = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -36,6 +38,7 @@ public class PermissionRequest {
 
     };
 
+    // Checks if permissions are granted if not request again
     public static void verifyPermission(Activity activity){
         int permission = ActivityCompat.checkSelfPermission(activity,Manifest.permission.WRITE_EXTERNAL_STORAGE);
 

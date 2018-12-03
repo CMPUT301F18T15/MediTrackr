@@ -1,21 +1,26 @@
-/*
- *    Apache 2.0 License Notice
+/*--------------------------------------------------------------------------
+ * FILE: SearchAdapter.java
  *
- *    Copyright 2018 CMPUT301F18T15
+ * PURPOSE: Tracks the list of results when searching for a problem or
+ *          record using keywords, geolocation, or bodylocation.
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ *     Apache 2.0 License Notice
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * Copyright 2018 CMPUT301F18T15
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ --------------------------------------------------------------------------*/
 package com.example.meditrackr.adapters;
 
 //imports
@@ -24,7 +29,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,20 +40,11 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
 import com.example.meditrackr.models.record.Record;
-import com.example.meditrackr.ui.patient.ProblemsFragment;
 import com.example.meditrackr.ui.patient.RecordFragment;
 import com.example.meditrackr.ui.patient.RecordsFragment;
 import com.example.meditrackr.utils.CustomFilter;
 
 import java.util.ArrayList;
-
-/**
- * creates a s search adapter for a user to use. allows user to search for items throughout the app
- * ie look for problem, look for care provider, etc
- *
- * @author Orest Cokan
- * @version 1.0 Nov 18, 2018
- */
 
 // Class shows a result list in a recycler view
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{

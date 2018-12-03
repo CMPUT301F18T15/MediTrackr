@@ -19,12 +19,8 @@
 package com.example.meditrackr.ui.patient;
 
 //imports
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -42,26 +38,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
+import com.example.meditrackr.adapters.patient.SelectBodyLocationAdapter;
 import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.model.RecordController;
 import com.example.meditrackr.models.record.BodyLocation;
-import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
-import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.DateUtils;
 import com.example.meditrackr.utils.ImageRecognition;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.gson.Gson;
-import com.microsoft.projectoxford.vision.VisionServiceClient;
-import com.microsoft.projectoxford.vision.VisionServiceRestClient;
-import com.microsoft.projectoxford.vision.contract.AnalysisResult;
-import com.microsoft.projectoxford.vision.contract.Caption;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 
 
 
@@ -91,9 +79,10 @@ public class AddRecordFragment extends Fragment{
 
     // Image variables
     private ImageView[] images = new ImageView[10];
-    private ImageView[] bodyImages = new ImageView[2];
+    private static ImageView[] bodyImages = new ImageView[1];
     private Bitmap[] bitmaps = new Bitmap[10];
-    private Bitmap[] bodyBitmaps = new Bitmap[2];
+    public static Bitmap[] bodyBitmaps = new Bitmap[1];
+    public static BodyLocation bodyLocationAdd;
 
 
     // Location variables
@@ -133,7 +122,7 @@ public class AddRecordFragment extends Fragment{
         final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
-        final ImageButton addBodyImage = (ImageButton) rootView.findViewById(R.id.body_button_img);
+        final TextView bodyLocation = (TextView) rootView.findViewById(R.id.body_location_title);
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
 
         // Initialize ui attributes for each button of notification frequency
@@ -149,7 +138,6 @@ public class AddRecordFragment extends Fragment{
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
         // Body location images
         bodyImages[0] = (ImageView) rootView.findViewById(R.id.body_image_1);
-        bodyImages[1] = (ImageView) rootView.findViewById(R.id.body_image_2);
 
 
         // Set the location
@@ -177,18 +165,39 @@ public class AddRecordFragment extends Fragment{
                             addressName,
                             date,
                             bitmaps,
-                            bodyBitmaps);
+                            bodyLocationAdd);
                     // Add the record
                     RecordController.addRecord(getContext(), record, index);
 
                     // Transition back to all the records
                     FragmentManager manager = getFragmentManager();
                     int count = manager.getBackStackEntryCount();
-                    manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    manager.popBackStack(count - 2, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
             }
         );
 
+        // Set the body bitmap images (if they exist)
+        for(int i = 0; i < bodyBitmaps.length; i++){
+            bodyImages[i].setImageBitmap(bodyBitmaps[i]);
+        }
+
+        /*---------------------------------------------------------------------------
+         * ADD NEW BODYLOCATIONS TO RECORD
+         *--------------------------------------------------------------------------*/
+        // Onclick listener for adding a body location
+        bodyLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.addToBackStack(null);
+                SelectBodyLocationPhotoFragment fragment = SelectBodyLocationPhotoFragment.newInstance();
+                transaction.replace(R.id.content, fragment);
+                transaction.commit();
+
+            }
+        });
 
 
         /*---------------------------------------------------------------------------
@@ -210,28 +219,6 @@ public class AddRecordFragment extends Fragment{
                 }
             }
         });
-
-
-        /*---------------------------------------------------------------------------
-         * ADD BODY LOCATION TO RECORD
-         *--------------------------------------------------------------------------*/
-        // OnClickListener handles camera button
-        addBodyImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (bitmaps[1] == null) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                        startActivityForResult(intent, IMAGE_BODY_REQUEST_CODE);                    }
-
-                } else {
-                    Toasty.error(getContext(), "Unable to add more than 2 body location photos!"
-                            , Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
 
 
         /*---------------------------------------------------------------------------
@@ -321,4 +308,10 @@ public class AddRecordFragment extends Fragment{
         }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        bodyBitmaps = new Bitmap[1];
+        bodyImages = new ImageView[1];
+    }
 }

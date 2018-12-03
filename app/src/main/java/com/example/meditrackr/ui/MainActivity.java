@@ -35,6 +35,9 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.ui.careprovider.PatientsFragment;
+import com.example.meditrackr.ui.patient.AddBodyPhotoFragment;
+import com.example.meditrackr.ui.patient.AddRecordFragment;
+import com.example.meditrackr.ui.patient.BodyLocationView;
 import com.example.meditrackr.ui.patient.MapActivity;
 import com.example.meditrackr.ui.patient.ProblemsFragment;
 import com.google.android.gms.common.ConnectionResult;
@@ -134,8 +137,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // If Camera button icon is clicked
                 else if (v == camera) {
-                    // Darken camera icon
-                    //image.setImageDrawable(getResources().getDrawable(R.drawable.camera_full));
+                    if(!isCareProvider) {
+                        Log.d("MAINACTIVITY", "DO WE GET HERE");
+                        BodyLocationView fragment = BodyLocationView.newInstance();
+                        transaction.replace(R.id.content, fragment);
+                    }
                 }
 
                 // If Search button icon is clicked

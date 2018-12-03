@@ -1,13 +1,12 @@
 package com.example.meditrackr.controllers.model;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.meditrackr.utils.SaveLoad;
 import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.ThreadSaveController;
+import com.example.meditrackr.utils.ThreadSave;
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Profile;
@@ -34,7 +33,7 @@ public class PatientController {
             patients.add(patient);
 
             // Save both to ES and memory
-            ThreadSaveController.save(context, careProvider);
+            ThreadSave.save(context, careProvider);
             return true;
 
         } else {

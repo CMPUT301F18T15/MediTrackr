@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.ThreadSaveController;
 import com.example.meditrackr.controllers.model.ProblemController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.ProblemList;

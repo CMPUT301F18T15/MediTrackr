@@ -32,7 +32,7 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.ThreadSaveController;
+import com.example.meditrackr.utils.ThreadSave;
 import com.example.meditrackr.models.Profile;
 
 /**
@@ -84,7 +84,7 @@ public class UserEditFragment extends Fragment {
                 profile.setUsername(username.getText().toString());
                 profile.setEmail(email.getText().toString());
                 profile.setPhone(phone.getText().toString());
-                ThreadSaveController.save(getContext(), profile);
+                ThreadSave.save(getContext(), profile);
 
 
                 // Swap back to the user fragment and display the fragment_user view

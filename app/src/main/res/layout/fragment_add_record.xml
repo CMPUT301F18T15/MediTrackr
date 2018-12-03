@@ -21,7 +21,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/background2">
 
             <LinearLayout
@@ -41,7 +41,7 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
-                    android:text="ADD RECORD"
+                    android:text="Add Record"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textSize="30sp"
@@ -56,7 +56,8 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
-                    android:background="@color/editTextBackground"
+                    android:background="@drawable/rounded_white_border"
+                    android:backgroundTint="@color/white"
                     android:hint="Title"
                     android:inputType="text"
                     android:paddingLeft="20dp"
@@ -76,7 +77,8 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
-                    android:background="@color/editTextBackground"
+                    android:background="@drawable/rounded_white_border"
+                    android:backgroundTint="@color/white"
                     android:hint="Comment"
                     android:inputType="text"
                     android:paddingLeft="20dp"
@@ -94,7 +96,8 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
-                    android:background="@color/editTextBackground"
+                    android:background="@drawable/rounded_white_border"
+                    android:backgroundTint="@color/white"
                     android:drawableRight="@drawable/ic_gps_fixed_black_24dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
@@ -121,49 +124,32 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/body_location_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Body Location"
-                    android:textSize="18sp" />
-
-                <ImageButton
-                    android:id="@+id/body_button_img"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
-                    android:background="@color/background2"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintStart_toEndOf="@+id/textView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/camera"
-                    tools:layout_conversion_absoluteHeight="48dp"
-                    tools:layout_conversion_absoluteWidth="88dp" />
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="Body Location"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
 
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:weightSum="2"
-                    app:layout_constraintTop_toBottomOf="@+id/body_button_img">
+                    app:layout_constraintTop_toBottomOf="@+id/body_location_title">
 
                     <ImageView
                         android:id="@+id/body_image_1"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:scaleType="centerCrop"/>
-
-                    <ImageView
-                        android:id="@+id/body_image_2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
                         android:scaleType="centerCrop" />
@@ -182,8 +168,7 @@
                 android:layout_marginRight="40dp"
                 android:background="@color/background2"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="@+id/tablepicturelayout"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
@@ -204,11 +189,11 @@
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     android:background="@color/background2"
                     android:scaleType="centerCrop"
-                    app:layout_constraintStart_toEndOf="@+id/photos_title"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/camera"
                     tools:layout_conversion_absoluteHeight="48dp"
@@ -379,14 +364,12 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/gradient"
+                android:background="@drawable/gradient_main"
                 android:text="ADD"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

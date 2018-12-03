@@ -43,10 +43,8 @@ public class RecordTest {
     // Initialize a new base record
     @Before
     public void initRecord() {
-        final double[] tempCoords = new double[2];
-        tempCoords[0] = 0.0;
-        tempCoords[1] = 0.0;
-        final BodyLocation bodyLoc = new BodyLocation();
+        final byte[] img = {};
+        final BodyLocation bodyLoc = new BodyLocation("", img, "");
         final Geolocation geoLoc = new Geolocation(0.0, 0.0, "");
         record = new Record
                 ("", "", "", bodyLoc);
@@ -59,10 +57,10 @@ public class RecordTest {
         String title = "Record";
         String desc = "Description";
         String date = "Date";
-        double[] coords = {25, 12};
+        byte[] img = {};
         String face = "bodyface";
         String location = "bodylocation";
-        BodyLocation bodylocation = new BodyLocation();
+        BodyLocation bodylocation = new BodyLocation("", img, "");
         Record testrecord =
                 new Record(title, desc, date, bodylocation);
         assertEquals(title, testrecord.getTitle());
@@ -94,11 +92,11 @@ public class RecordTest {
         final double[] tempCoords = new double[2];
         tempCoords[0] = 1.0;
         tempCoords[1] = 2.0;
+        final byte[] img = {};
 
         final String face = "Body Face";
         final String loc = "Body Location";
-        final BodyLocation newBodyLoc = new BodyLocation
-                ();
+        final BodyLocation newBodyLoc = new BodyLocation("", img, "");
 
         record.setBodyLocation(newBodyLoc);
 

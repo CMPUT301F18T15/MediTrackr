@@ -50,7 +50,7 @@ import java.io.OutputStreamWriter;
  * if something goes wrong it throws an error(java.io.IOException)
  *
  * to add a new profile the class will use addNewProfile this will take a profile with information
- * already in it and save it to the database.
+ * already in it and save it to disk.
  *
  * @author Orest Cokan
  * @version 2.0 Nov 5, 2018

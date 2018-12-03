@@ -1,0 +1,13 @@
+com.example.meditrackr
+com.example.meditrackr.adapters
+com.example.meditrackr.adapters.careprovider
+com.example.meditrackr.adapters.patient
+com.example.meditrackr.controllers
+com.example.meditrackr.controllers.model
+com.example.meditrackr.interfaces
+com.example.meditrackr.models
+com.example.meditrackr.models.record
+com.example.meditrackr.ui
+com.example.meditrackr.ui.careprovider
+com.example.meditrackr.ui.patient
+com.example.meditrackr.utils

@@ -14,7 +14,7 @@
         android:layout_height="95dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,12 +36,14 @@
         app:layout_constraintTop_toBottomOf="@+id/meditrackr_logo"
         app:srcCompat="@drawable/non_gender_neutral_logo_please_dont_get_upset" />
 
+
     <EditText
         android:id="@+id/patient_username"
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginTop="24dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/rounded_white_border"
+        android:backgroundTint="@color/white"
         android:drawableLeft="@drawable/icon_user"
         android:drawablePadding="10dp"
         android:hint="Username"
@@ -60,7 +62,7 @@
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/gradient"
+        android:background="@drawable/gradient_main"
         android:text="LOGIN"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
@@ -100,17 +102,15 @@
 
     <ImageButton
         android:id="@+id/qr_button_login"
-        android:layout_width="106dp"
-        android:layout_height="87dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@color/background2"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/not_member"
-        app:srcCompat="@drawable/hospital_hollow" />
+        app:srcCompat="@drawable/qr_code_button" />
 
 
 </android.support.constraint.ConstraintLayout>

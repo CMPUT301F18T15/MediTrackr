@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.controllers.model;
 
+//imports
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -56,7 +57,7 @@ public class RegisterController {
      */
     // Registers account into memory and ES
     public static void RegisterAccount(Activity activity, Context context, Profile profile) {
-
+        // Class objects
         Bundle bundle = new Bundle();
         boolean done;
         boolean finish;

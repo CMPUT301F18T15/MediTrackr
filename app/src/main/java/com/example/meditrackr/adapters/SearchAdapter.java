@@ -159,25 +159,25 @@ public static class ViewHolder extends RecyclerView.ViewHolder implements View.O
         if(!profile.getisCareProvider()){
             Patient patient = (Patient) profile;
 
-            // going in as a PATIENT
-            if(adapter.results.get(position).isRecord()){
+            // When searching as a patient
+            if(adapter.results.get(position).isRecord()){ // If patient is searching for a record
                 Record record = patient.getProblem(filter.getProblemIndex())
                         .getRecord(filter.getRecordIndex());
                 RecordFragment fragment = RecordFragment.newInstance(record);
                 transaction.addToBackStack(null);
                 transaction.replace(R.id.content, fragment);
             }
-            else {
+            else { // If patient is searching for a problem
                 RecordsFragment fragment = RecordsFragment.newInstance(filter.getProblemIndex());
                 transaction.addToBackStack(null);
                 transaction.replace(R.id.content, fragment);
             }
-            transaction.commit();
+            transaction.commit(); // Commit changes made in fragment
 
-        } else { // going in as a doctor
+        } else { // When searching as a care provider
             String username = adapter.results.get(position).getUsername();
             ArrayList<Patient> patients = LazyLoadingManager.getPatients();
-            if(adapter.results.get(position).isRecord()){
+            if(adapter.results.get(position).isRecord()){ // If the care provider is searching for a record
                 for(Patient patient: patients){
                     if(patient.getUsername().equals(username)){
                         Record record = patient.getProblem(filter.getProblemIndex()).getRecord(filter.getRecordIndex());
@@ -186,7 +186,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder implements View.O
                         transaction.replace(R.id.content, fragment);
                     }
                 }
-            }else{
+            }else{ // If care provider is searching for a problem
                 for(Patient patient: patients){
                     if(patient.getUsername().equals(username)){
                         com.example.meditrackr.ui.careprovider.RecordsFragment fragment =

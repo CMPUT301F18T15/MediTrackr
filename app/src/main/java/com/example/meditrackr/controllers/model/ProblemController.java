@@ -16,9 +16,9 @@
  *limitations under the License.
  *
  */
-
 package com.example.meditrackr.controllers.model;
 
+//imports
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -63,7 +63,7 @@ public class ProblemController {
         ThreadSave.save(context, patient);
         Log.d("ProblemAdd", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
 
-        // let the user know everything was successful
+        // Let the user know everything was successful
         Toasty.success(context, "Problem successfully added", Toast.LENGTH_SHORT).show();
     }
 

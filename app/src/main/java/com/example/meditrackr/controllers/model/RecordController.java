@@ -81,7 +81,7 @@ public class RecordController {
         Log.d("RecordAdd", "Profile: " + patient.getUsername()
                 + " Records: " + patient.getProblem(position).getRecords());
 
-        // let the user know everything was successful
+        // Let the user know everything was successful
         Toasty.success(context, "Record successfully added", Toast.LENGTH_SHORT).show();
     }
 
@@ -125,7 +125,7 @@ public class RecordController {
      *--------------------------------------------------------------------------*/
     public static void deleteRecord(Context context, int index, RecordList records){
         records.removeRecord(index);
-        ThreadSave.save(context, patient);
+        ThreadSave.save(context, patient); // Saves new changes
     }
 
 
@@ -141,7 +141,7 @@ public class RecordController {
         record.setTitle(title);
         record.setDescription(description);
         record.setGeoLocation(geolocation);
-        ThreadSave.save(context, patient);
+        ThreadSave.save(context, patient); // Save new changes to record
 
     }
 

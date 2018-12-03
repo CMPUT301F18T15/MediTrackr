@@ -35,6 +35,7 @@ import static android.app.Activity.RESULT_OK;
 public class AddBodyPhotoFragment extends Fragment {
     private ImageView bodyPhoto;
     private Bitmap bitmap;
+    private EditText photoID;
 
     // needed for getting new body location photo image
     private static final int UPLOAD_REQUEST_CODE = 1;
@@ -55,12 +56,12 @@ public class AddBodyPhotoFragment extends Fragment {
 
 
         // general ui attributes
-        final EditText photoID = (EditText) rootView.findViewById(R.id.photo_name_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.photo_button_img);
         final ImageButton uploadPhoto = (ImageButton) rootView.findViewById(R.id.upload_body_location);
         final Button addPhoto = (Button) rootView.findViewById(R.id.confirm_bodyphoto_button);
-
         bodyPhoto = (ImageView) rootView.findViewById(R.id.body_image);
+        photoID = (EditText) rootView.findViewById(R.id.photo_name_field);
+
 
 
         // onclick listener for adding a photo
@@ -71,7 +72,8 @@ public class AddBodyPhotoFragment extends Fragment {
                 if (bitmap != null) {
                     byte[] bitmapByte = ConvertImage.convertBitmapToBytes(bitmap);
                     BodyLocation photo = new BodyLocation(photoID.getText().toString(),
-                            bitmapByte, photoID.getText().toString());
+                            bitmapByte,
+                            photoID.getText().toString());
                     BodyPhotoController.addPhoto(getContext(), photo);
 
                     MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, photoID.getText().toString(), "");

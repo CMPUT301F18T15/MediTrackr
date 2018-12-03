@@ -62,6 +62,10 @@ public class BodyLocation implements Serializable {
         this.y = y;
     }
 
+
+
+
+
     // Getters/Setters
     public float getXCoordinate() {
         return x;
@@ -92,8 +96,8 @@ public class BodyLocation implements Serializable {
         return image;
     }
 
-    public void setImage(byte[] photo) {
-        this.image = photo;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
 

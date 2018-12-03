@@ -40,12 +40,12 @@ public class BodyPhotoController {
     public static void deletePhoto(Context context, int index) {
         Patient patient = LazyLoadingManager.getPatient();
         BodyLocationPhotoList photos = patient.getBodyLocationPhotos();
-        byte[] image = photos.getBodyLocationPhoto(index).getImage();
+        String id = photos.getBodyLocationPhoto(index).getID();
         for (int i = 0; i < patient.getProblems().getSize(); i++) {
             Problem problem = patient.getProblem(i);
             for (int j = 0; j < problem.getRecords().getSize(); j++) {
                 Record record = problem.getRecord(j);
-                if (record.getBodyLocation().getImage() == image) {
+                if (record.getBodyLocation().getID() == id) {
                     record.setBodyLocation(null);
                 }
             }

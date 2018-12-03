@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.models.BodyLocationPhoto;
 import com.example.meditrackr.models.BodyLocationPhotoList;
 import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.ui.patient.AddRecordFragment;
+import com.example.meditrackr.models.record.BodyLocation;
+import com.example.meditrackr.ui.patient.SelectPinBodyLocationFragment;
 import com.example.meditrackr.utils.ConvertImage;
 
 /**
@@ -54,7 +54,7 @@ public class SelectBodyLocationAdapter extends RecyclerView.Adapter<SelectBodyLo
             holder.photo.setImageBitmap(null);
             Log.d("ImageTest", "New profile this should be shown!");
         }else {
-            BodyLocationPhoto photo = photos.getBodyLocationPhoto(position);
+            BodyLocation photo = photos.getBodyLocationPhoto(position);
             Bitmap bitmap = ConvertImage.convertByteToBitmap(photos.getBodyLocationPhoto(position).getImage());
             holder.photo.setImageBitmap(bitmap);
             if(photo.getName() != null){
@@ -96,11 +96,13 @@ public class SelectBodyLocationAdapter extends RecyclerView.Adapter<SelectBodyLo
         // Set onClick listener for each record, so the record can be viewed
         @Override
         public void onClick(View v) {
-            int position = getAdapterPosition();
+            final int position = getAdapterPosition();
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            AddRecordFragment fragment = AddRecordFragment.newInstance(position);
-
+            LazyLoadingManager.setBodyLocationPhoto(adapter.photos.getBodyLocationPhoto(position));
+            SelectPinBodyLocationFragment fragment = SelectPinBodyLocationFragment.newInstance();
+            transaction.replace(R.id.content, fragment);
+            transaction.commit();
         }
 
     }

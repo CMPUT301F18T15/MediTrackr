@@ -41,6 +41,7 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.patient.SelectBodyLocationAdapter;
 import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.model.RecordController;
+import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.utils.DateUtils;
 import com.example.meditrackr.utils.ImageRecognition;
@@ -78,9 +79,10 @@ public class AddRecordFragment extends Fragment{
 
     // Image variables
     private ImageView[] images = new ImageView[10];
-    private ImageView[] bodyImages = new ImageView[2];
+    private static ImageView[] bodyImages = new ImageView[1];
     private Bitmap[] bitmaps = new Bitmap[10];
-    private Bitmap[] bodyBitmaps = new Bitmap[2];
+    public static Bitmap[] bodyBitmaps = new Bitmap[1];
+    public static BodyLocation bodyLocationAdd;
 
 
     // Location variables
@@ -136,7 +138,6 @@ public class AddRecordFragment extends Fragment{
         images[9] = (ImageView) rootView.findViewById(R.id.image_10);
         // Body location images
         bodyImages[0] = (ImageView) rootView.findViewById(R.id.body_image_1);
-        bodyImages[1] = (ImageView) rootView.findViewById(R.id.body_image_2);
 
 
         // Set the location
@@ -164,7 +165,7 @@ public class AddRecordFragment extends Fragment{
                             addressName,
                             date,
                             bitmaps,
-                            bodyBitmaps);
+                            bodyLocationAdd);
                     // Add the record
                     RecordController.addRecord(getContext(), record, index);
 
@@ -176,6 +177,10 @@ public class AddRecordFragment extends Fragment{
             }
         );
 
+        // Set the body bitmap images (if they exist)
+        for(int i = 0; i < bodyBitmaps.length; i++){
+            bodyImages[i].setImageBitmap(bodyBitmaps[i]);
+        }
 
         /*---------------------------------------------------------------------------
          * ADD NEW BODYLOCATIONS TO RECORD
@@ -190,6 +195,7 @@ public class AddRecordFragment extends Fragment{
                 SelectBodyLocationPhotoFragment fragment = SelectBodyLocationPhotoFragment.newInstance();
                 transaction.replace(R.id.content, fragment);
                 transaction.commit();
+
             }
         });
 
@@ -302,4 +308,10 @@ public class AddRecordFragment extends Fragment{
         }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        bodyBitmaps = new Bitmap[1];
+        bodyImages = new ImageView[1];
+    }
 }

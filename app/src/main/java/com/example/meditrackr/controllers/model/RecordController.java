@@ -96,7 +96,8 @@ public class RecordController {
                                       String addressName,
                                       String date,
                                       Bitmap[] bitmaps,
-                                      Bitmap[] bodyBitmaps) {
+                                      BodyLocation bodyLocation) {
+
         Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
         // In new record include user input title and description
 
@@ -113,15 +114,8 @@ public class RecordController {
                 record.getImages().addImage(byteArray); // Save each image to record
             }
         }
-        BodyLocation bodyLocation = new BodyLocation();
-        record.setBodyLocation(bodyLocation);
-        for(Bitmap bitmap: bodyBitmaps){
-            if(bitmap != null){
-                byte[] byteArray = ConvertImage.convertBitmapToBytes(bitmap);
-                record.getBodyLocation().getImages().addImage(byteArray);
-            }
-        }
 
+        record.setBodyLocation(bodyLocation);
         return record;
     }
 

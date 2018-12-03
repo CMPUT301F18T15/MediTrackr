@@ -9,14 +9,14 @@ import java.util.ArrayList;
 public class BodyLocationPhotoList implements Serializable {
 
     // Create array of bitmaps
-    private ArrayList<BodyLocationPhoto> bodyLocations = new ArrayList<>();
+    private ArrayList<BodyLocation> bodyLocations = new ArrayList<>();
 
 
-    public void addBodyLocation(BodyLocationPhoto newBodyLocation) {
+    public void addBodyLocation(BodyLocation newBodyLocation) {
         bodyLocations.add(newBodyLocation);
     }
 
-    public void removeBodyLocation(BodyLocationPhoto bodyLocationPhoto){
+    public void removeBodyLocation(BodyLocation bodyLocationPhoto){
         bodyLocations.remove(bodyLocationPhoto);
     }
 
@@ -24,7 +24,7 @@ public class BodyLocationPhotoList implements Serializable {
         bodyLocations.remove(index);
     }
 
-    public BodyLocationPhoto getBodyLocationPhoto(int index){
+    public BodyLocation getBodyLocationPhoto(int index){
         return bodyLocations.get(index);
     }
 

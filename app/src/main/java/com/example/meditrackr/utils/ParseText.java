@@ -28,14 +28,13 @@ public class ParseText {
     /**
      * Parse for records/problems only
      *
-     * @author Orest Cokan
-     * @param query Keywords to search for
+     * @param query        Keywords to search for
      * @param customFilter the array list that will hold the records
-     * @param patient the patient that we are parsing
-     *
+     * @param patient      the patient that we are parsing
      * @return customfilter Holds the parsed information pertaining to the searched query
+     * @author Orest Cokan
      */
-    public static ArrayList<CustomFilter> parseRecordProblem(String query, Patient patient, ArrayList<CustomFilter> customFilter){
+    public static ArrayList<CustomFilter> parseRecordProblem(String query, Patient patient, ArrayList<CustomFilter> customFilter) {
         String[] keywords = query.split(" ");
 
         for (String keyword : keywords) {
@@ -79,16 +78,15 @@ public class ParseText {
     /**
      * Parse for geolocation records
      *
-     * @author Orest Cokan
-     * @param query Keywords to search for
+     * @param query        Keywords to search for
      * @param customFilter the array list that will hold the records
-     * @param patient the patient that we are parsing
-     * @param latitude the latitude where the user specified to search
-     * @param  longtitude the longitude where the user specified to search for geo-locations
-     *
+     * @param patient      the patient that we are parsing
+     * @param latitude     the latitude where the user specified to search
+     * @param longtitude   the longitude where the user specified to search for geo-locations
      * @return customfilter Holds the parsed information pertaining to the searched query
+     * @author Orest Cokan
      */
-    public static ArrayList<CustomFilter> parseGeolocation(String query, Patient patient, ArrayList<CustomFilter> customFilter, double latitude, double longtitude){
+    public static ArrayList<CustomFilter> parseGeolocation(String query, Patient patient, ArrayList<CustomFilter> customFilter, double latitude, double longtitude) {
         String[] keywords = query.split(" ");
         for (String keyword : keywords) {
             for (int i = 0; i < patient.getProblems().getSize(); i++) {
@@ -124,7 +122,7 @@ public class ParseText {
         Collections.sort(customFilter, new Comparator<CustomFilter>() {
             @Override
             public int compare(CustomFilter o1, CustomFilter o2) {
-                if(o1.getGeolocation().getDistance().compareTo(o2.getGeolocation().getDistance()) <= 0){
+                if (o1.getGeolocation().getDistance().compareTo(o2.getGeolocation().getDistance()) <= 0) {
                     return -1;
                 }
                 return 0;
@@ -137,16 +135,41 @@ public class ParseText {
     /**
      * Parse for bodylocations records
      *
-     * @author Orest Cokan
-     * @param query Keywords to search for
+     * @param query        Keywords to search for
      * @param customFilter the array list that will hold the records
-     * @param patient the patient that we are parsing
-     *
+     * @param patient      the patient that we are parsing
      * @return customfilter Holds the parsed information pertaining to the searched query
+     * @author Orest Cokan
      */
-    public static ArrayList<CustomFilter> parseBodylocation(String query, Patient patient, ArrayList<CustomFilter> customFilter){
-        return null;
+    public static ArrayList<CustomFilter> parseBodylocation(String query, Patient patient, ArrayList<CustomFilter> customFilter, String bodylocation) {
+        String[] keywords = query.split(" ");
+        for (String keyword : keywords) {
+            for (int i = 0; i < patient.getProblems().getSize(); i++) {
+                Problem problem = patient.getProblem(i);
+                for (int j = 0; j < problem.getRecords().getSize(); j++) {
+                    Record record = problem.getRecord(j);
+                    if (record.getBodyLocation().getName().contains(bodylocation))
+                        if (record.getDescription().contains(keyword)
+                                || record.getTitle().contains(keyword)) {
+                            CustomFilter filter = new CustomFilter(
+                                    patient.getUsername(),
+                                    true,
+                                    record.getTitle(),
+                                    record.getDescription(),
+                                    record.getDate(),
+                                    record.getGeoLocation(),
+                                    i,
+                                    j);
+                            customFilter.add(filter);
+
+                        }
+                }
+            }
+        }
+        return customFilter;
     }
+
+
 
 
     /**

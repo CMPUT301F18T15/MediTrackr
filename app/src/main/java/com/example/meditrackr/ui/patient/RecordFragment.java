@@ -69,7 +69,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback {
     // Initialize class object record and image view array
     private Record record;
     private ImageView[] images = new ImageView[10];
-    private GoogleMap mGoogleMap;
+    private ImageView[] bodyImage = new ImageView[1];
     private MapView mapView;
     private View rootView;
 
@@ -110,6 +110,8 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback {
         images[7] = rootView.findViewById(R.id.record_image_8);
         images[8] = rootView.findViewById(R.id.record_image_9);
         images[9] = rootView.findViewById(R.id.record_image_10);
+        bodyImage[0] = rootView.findViewById(R.id.record_body_image_1);
+
 
 
         // Populate a record with data
@@ -129,7 +131,13 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback {
             Log.d("Images", "size of array is zero, no images");
         }
 
-
+        // Populate with images
+        try {
+            Bitmap bitmap = ConvertImage.convertByteToBitmap(record.getBodyLocation().getImage());
+            bodyImage[0].setImageBitmap(bitmap);
+        }catch (NullPointerException e){
+            Log.d("Images", "size of array is zero, no images");
+        }
 
         return rootView;
     }
@@ -149,7 +157,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
-        mGoogleMap = googleMap;
+        GoogleMap mGoogleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.addMarker(new MarkerOptions().position(new LatLng(
                 record.getGeoLocation().getLatitude(),

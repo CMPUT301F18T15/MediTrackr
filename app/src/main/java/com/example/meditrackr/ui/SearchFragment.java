@@ -19,6 +19,8 @@
 package com.example.meditrackr.ui;
 
 //imports
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -29,10 +31,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -78,6 +82,8 @@ public class SearchFragment extends Fragment {
     private int selected;
     private RadioButton regularButton, geoLocationButton, bodyLocationButton;
     private double latitude, longitude;
+    private String text = "";
+
 
     // Indicator/Request code
     private static final int PLACE_PICKER_REQUEST = 2;
@@ -185,6 +191,7 @@ public class SearchFragment extends Fragment {
                 } else {
                     bodyLocationButton.toggle();
                     selected = 3;
+                    getBodyLocation();
                 }
             }
         };
@@ -233,10 +240,38 @@ public class SearchFragment extends Fragment {
                 customFilter = ParseText.parseGeolocation(query, patient, customFilter, latitude, longitude);
                 break;
             case 3:
+                customFilter = ParseText.parseBodylocation(query, patient, customFilter, text);
                 break;
         }
 
         return customFilter;
+    }
+
+    private String getBodyLocation(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AlertDialogStyle);
+        builder.setTitle("Bodylocation");
+
+
+        final EditText input = new EditText(getContext());
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        builder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                text = input.getText().toString();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+        return text;
     }
 
 }

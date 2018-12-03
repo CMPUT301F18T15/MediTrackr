@@ -43,18 +43,24 @@ public class BodyLocation implements Serializable {
     private float x;
     private float y;
     private String bodyLocationPhotoName;
-    private PhotoList images = new PhotoList();
-    private int photoID;
+    private byte[] image;
+    private String photoID;
 
     // Constructor
-    public BodyLocation(int x, int y, String bodyLocationPhotoName){
-        this.x = x;
-        this.y = y;
+    public BodyLocation(String bodyLocationPhotoName, byte[] image, String photoID){
         this.bodyLocationPhotoName = bodyLocationPhotoName;
+        this.image = image;
+        this.photoID = photoID;
     }
 
-    public BodyLocation() {}
-
+    // Constructor
+    public BodyLocation(String bodyLocationPhotoName, byte[] image, String photoID, float x, float y){
+        this.bodyLocationPhotoName = bodyLocationPhotoName;
+        this.image = image;
+        this.photoID = photoID;
+        this.x = x;
+        this.y = y;
+    }
 
     // Getters/Setters
     public float getXCoordinate() {
@@ -69,36 +75,25 @@ public class BodyLocation implements Serializable {
 
     public void setYCoordinate(int y) { this.y = y; }
 
-    public String getBodyLocationPhotoName() {
+    public String getName() {
         return bodyLocationPhotoName;
     }
 
-    public void setBodyLocationPhotoName(String bodyLocationPhotoName) {
+    public void setName(String bodyLocationPhotoName) {
         this.bodyLocationPhotoName = bodyLocationPhotoName;
     }
 
-    public void setID(int id) { photoID = id; }
+    public void setID(String id) { photoID = id; }
 
-    public int getID() { return photoID; }
+    public String getID() { return photoID; }
 
-    /**
-     * Gets the recordphoto list holding
-     * bodylocation photos
-     * @author  Orest Cokan
-     */
-    public PhotoList getImages() {
-        return images;
+
+    public byte[] getImage() {
+        return image;
     }
 
-    /**
-     * Sets the bodyphotolist that
-     * holds the images of body
-     * locations
-     * @author  Orest Cokan
-     * @param images the photoList holding body location photos
-     */
-    public void setImages(PhotoList images) {
-        this.images = images;
+    public void setImage(byte[] photo) {
+        this.image = photo;
     }
 
 

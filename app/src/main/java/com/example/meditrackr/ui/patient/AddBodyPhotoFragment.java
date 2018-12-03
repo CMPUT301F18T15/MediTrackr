@@ -1,23 +1,13 @@
 package com.example.meditrackr.ui.patient;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,23 +18,19 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.meditrackr.R;
-import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.model.BodyPhotoController;
-import com.example.meditrackr.models.BodyLocationPhoto;
-import com.example.meditrackr.models.Patient;
+import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.ImageRecognition;
 import com.example.meditrackr.utils.PermissionRequest;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 
 import es.dmoral.toasty.Toasty;
 
 import static android.app.Activity.RESULT_OK;
-import static com.example.meditrackr.utils.ConvertImage.convertBitmapToBytes;
 
 public class AddBodyPhotoFragment extends Fragment {
     private ImageView bodyPhoto;
@@ -84,7 +70,8 @@ public class AddBodyPhotoFragment extends Fragment {
                 // add the new body location photo to the patient
                 if (bitmap != null) {
                     byte[] bitmapByte = ConvertImage.convertBitmapToBytes(bitmap);
-                    BodyLocationPhoto photo = new BodyLocationPhoto(photoID.getText().toString(), bitmapByte);
+                    BodyLocation photo = new BodyLocation(photoID.getText().toString(),
+                            bitmapByte, photoID.getText().toString());
                     BodyPhotoController.addPhoto(getContext(), photo);
 
                     MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, photoID.getText().toString(), "");

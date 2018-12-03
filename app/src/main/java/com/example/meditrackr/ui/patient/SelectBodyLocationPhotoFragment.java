@@ -43,8 +43,7 @@ public class SelectBodyLocationPhotoFragment extends Fragment {
         photos.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         photos.setLayoutManager(manager);
-        manager = new LinearLayoutManager(getActivity());
-        photos.setLayoutManager(manager);
+
 
         // Add spacing between views
         VerticalSpaceController decoration = new VerticalSpaceController(75); // Reinforces vertical layout of fragment

@@ -4,10 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,12 +17,9 @@ import android.widget.TextView;
 import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.model.BodyPhotoController;
-import com.example.meditrackr.controllers.model.RecordController;
-import com.example.meditrackr.models.BodyLocationPhoto;
 import com.example.meditrackr.models.BodyLocationPhotoList;
 import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.ui.patient.AddRecordFragment;
-import com.example.meditrackr.ui.patient.SelectBodyLocationFragment;
+import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.ThreadSave;
 
@@ -58,7 +52,7 @@ public class BodyLocationPhotosAdapter extends RecyclerView.Adapter<BodyLocation
             holder.photo.setImageBitmap(null);
             Log.d("ImageTest", "New profile this should be shown!");
         }else {
-            BodyLocationPhoto photo = photos.getBodyLocationPhoto(position);
+            BodyLocation photo = photos.getBodyLocationPhoto(position);
             Bitmap bitmap = ConvertImage.convertByteToBitmap(photos.getBodyLocationPhoto(position).getImage());
             holder.photo.setImageBitmap(bitmap);
             if(photo.getName() != null){

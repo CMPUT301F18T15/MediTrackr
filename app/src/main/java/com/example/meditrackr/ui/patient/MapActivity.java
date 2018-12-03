@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: MapActivity.java
  *
- * PURPOSE:
+ * PURPOSE: For showing a Google Maps display.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +22,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui.patient;
 
-//imports
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -94,7 +93,6 @@ import es.dmoral.toasty.Toasty;
 
 // taken from coding with mitch youtube series
 // this class works and don't touch it
-
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener {
     Profile profile = LazyLoadingManager.getProfile();

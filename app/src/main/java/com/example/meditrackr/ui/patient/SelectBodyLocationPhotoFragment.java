@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: SelectBodyLocationPhotoFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for selecting a new body location photo.
  *
  *     Apache 2.0 License Notice
  *

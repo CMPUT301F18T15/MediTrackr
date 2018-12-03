@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: RecordFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for displaying the information associated with a given
+ *          record of a patient.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +23,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui.careprovider;
 
-//imports
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,10 +32,6 @@ import android.widget.ImageView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.record.Record;
-
-/**
- * Created by Skryt on Nov 15, 2018
- */
 
 // Class creates Record Fragment for care providers
 public class RecordFragment extends Fragment {

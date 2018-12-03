@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: RecordsFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for showing the records associated to a problem, when
+ *          viewed by a care provider.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +23,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui.careprovider;
 
-//imports
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;

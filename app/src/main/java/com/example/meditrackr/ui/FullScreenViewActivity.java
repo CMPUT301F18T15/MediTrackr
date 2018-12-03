@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: FullScreenViewActivity.java
  *
- * PURPOSE:
+ * PURPOSE: For viewing the photo slideshow.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +22,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui;
 
-//imports
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;

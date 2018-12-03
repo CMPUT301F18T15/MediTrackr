@@ -13,31 +13,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f4507ba-b1b6-4087-802a-dcff70dc6105" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/FullScreenViewActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/FullScreenViewActivity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/LoginActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/LoginActivity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/LoginFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/LoginFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/MainActivity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/MessageListFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/MessageListFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/PatientsFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/PatientsFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/ProblemsFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/ProblemsFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/RecordFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/RecordFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/RecordsFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/RecordsFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/AddBodyPhotoFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/AddBodyPhotoFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/AddProblemFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/AddProblemFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/AddRecordFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/AddRecordFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/BodyLocationView.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/BodyLocationView.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/CameraFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/CameraFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/EditProblemFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/EditProblemFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/EditRecordFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/EditRecordFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/MapActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/MapActivity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/MapFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/MapFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/ProblemsFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/ProblemsFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/RecordFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/RecordFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/RecordsFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/RecordsFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/SelectBodyLocationPhotoFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/SelectBodyLocationPhotoFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/SelectPinBodyLocationFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/SelectPinBodyLocationFragment.java" />
-    </list>
+    <list default="true" id="5f4507ba-b1b6-4087-802a-dcff70dc6105" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -152,9 +128,10 @@
       <file leaf-file-name="MessageListFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/MessageListFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+            <state relative-caret-position="396">
+              <caret line="22" column="34" lean-forward="false" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
               <folding>
+                <element signature="e#0#4775#0" expanded="true" />
                 <element signature="e#3788#4737#0" expanded="true" />
                 <element signature="e#4736#4737#0" expanded="true" />
               </folding>
@@ -3277,9 +3254,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/MessageListFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+        <state relative-caret-position="396">
+          <caret line="22" column="34" lean-forward="false" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
           <folding>
+            <element signature="e#0#4775#0" expanded="true" />
             <element signature="e#3788#4737#0" expanded="true" />
             <element signature="e#4736#4737#0" expanded="true" />
           </folding>

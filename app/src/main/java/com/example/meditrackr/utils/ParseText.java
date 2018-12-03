@@ -39,47 +39,54 @@ public class ParseText {
     public static ArrayList<CustomFilter> parseRecordProblem(String query, Patient patient, ArrayList<CustomFilter> customFilter) {
         String[] keywords = query.split(" ");
 
-        for (String keyword : keywords) {
-            for (int i = 0; i < patient.getProblems().getSize(); i++) {
-                Problem problem = patient.getProblem(i);
-                if (problem.getDescription().contains(keyword)
-                        || problem.getTitle().contains(keyword)) {
-                    for(int k = 0; k < customFilter.size(); k++){
-                        if(i != customFilter.get(k).getProblemIndex()){
-                            CustomFilter filter = new CustomFilter(
-                                    patient.getUsername(),
-                                    false,
-                                    problem.getTitle(),
-                                    problem.getDescription(),
-                                    problem.getDate(),
-                                    i);
-                            customFilter.add(filter);
-                        }
+        for (int i = 0; i < patient.getProblems().getSize(); i++) {
+            Problem problem = patient.getProblem(i);
+
+            boolean matches = true;
+            for (String keyword : keywords) {
+                if (!problem.getDescription().contains(keyword)
+                        && !problem.getTitle().contains(keyword)) {
+                    matches = false;
+                    break;
+                }
+            }
+            if (matches) {
+                CustomFilter filter = new CustomFilter(
+                        patient.getUsername(),
+                        false,
+                        problem.getTitle(),
+                        problem.getDescription(),
+                        problem.getDate(),
+                        i);
+                customFilter.add(filter);
+            }
+
+            for (int j = 0; j < problem.getRecords().getSize(); j++) {
+                Record record = problem.getRecord(j);
+                matches = true;
+                for (String keyword : keywords) {
+                    if (!record.getDescription().contains(keyword)
+                            && !record.getTitle().contains(keyword)) {
+                        matches = false;
+                        break;
                     }
                 }
 
-                for (int j = 0; j < problem.getRecords().getSize(); j++) {
-                    Record record = problem.getRecord(j);
-                    if (record.getDescription().contains(keyword)
-                            || record.getTitle().contains(keyword)) {
-                        for(int l = 0; l < customFilter.size(); l++){
-                            if(i != customFilter.get(l).getProblemIndex() && j != customFilter.get(l).getRecordIndex()){
-                                CustomFilter filter = new CustomFilter(
-                                        patient.getUsername(),
-                                        true,
-                                        record.getTitle(),
-                                        record.getDescription(),
-                                        record.getDate(),
-                                        record.getGeoLocation(),
-                                        i,
-                                        j);
-                                customFilter.add(filter);
-                            }
-                        }
-                    }
+                if (matches) {
+                    CustomFilter filter = new CustomFilter(
+                            patient.getUsername(),
+                            true,
+                            record.getTitle(),
+                            record.getDescription(),
+                            record.getDate(),
+                            record.getGeoLocation(),
+                            i,
+                            j);
+                    customFilter.add(filter);
                 }
             }
         }
+
         return customFilter;
     }
 
@@ -97,11 +104,11 @@ public class ParseText {
      */
     public static ArrayList<CustomFilter> parseGeolocation(String query, Patient patient, ArrayList<CustomFilter> customFilter, double latitude, double longtitude) {
         String[] keywords = query.split(" ");
-        for (String keyword : keywords) {
-            for (int i = 0; i < patient.getProblems().getSize(); i++) {
-                Problem problem = patient.getProblem(i);
-                for (int j = 0; j < problem.getRecords().getSize(); j++) {
-                    Record record = problem.getRecord(j);
+        for (int i = 0; i < patient.getProblems().getSize(); i++) {
+            Problem problem = patient.getProblem(i);
+            for (int j = 0; j < problem.getRecords().getSize(); j++) {
+                Record record = problem.getRecord(j);
+                for (String keyword : keywords) {
                     if (record.getDescription().contains(keyword)
                             || record.getTitle().contains(keyword)) {
                         Geolocation geolocation = record.getGeoLocation();
@@ -122,11 +129,12 @@ public class ParseText {
                                 i,
                                 j);
                         customFilter.add(filter);
-
+                        break;
                     }
                 }
             }
         }
+
         // sort it by distance
         Collections.sort(customFilter, new Comparator<CustomFilter>() {
             @Override
@@ -170,6 +178,7 @@ public class ParseText {
                                     i,
                                     j);
                             customFilter.add(filter);
+                            break;
 
                         }
                 }

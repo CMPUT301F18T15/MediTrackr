@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: Problem.java
  *
- * PURPOSE:
+ * PURPOSE: Stores information associated with a problem (including the
+ *          list of records).
  *
  *     Apache 2.0 License Notice
  *
@@ -22,8 +23,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.models;
 
-//imports
-import com.example.meditrackr.interfaces.Photo;
 import com.example.meditrackr.models.record.PhotoList;
 import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.models.record.RecordList;

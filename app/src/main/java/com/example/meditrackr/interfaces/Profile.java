@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: Profile.java
  *
- * PURPOSE:
+ * PURPOSE: Functions related to profile information.
  *
  *     Apache 2.0 License Notice
  *

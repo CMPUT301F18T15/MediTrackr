@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------------------
- * FILE: LocationController.java
+ * FILE: VerticalSpaceController.java
  *
  * PURPOSE: For spacing items in recycler views.
  *

@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: Photo.java
  *
- * PURPOSE:
+ * PURPOSE: Functions related to adding and removing photos.
  *
  *     Apache 2.0 License Notice
  *

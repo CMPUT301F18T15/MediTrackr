@@ -43,7 +43,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class AddBodyPhotoFragment extends Fragment {
     private ImageView bodyPhoto;
-    private Bitmap bitmap;
+    private Bitmap bitmap, newBitmap, newBitmap2;
     private EditText photoID;
     private String pictureImagePath = "";
 
@@ -79,13 +79,12 @@ public class AddBodyPhotoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // add the new body location photo to the patient
-                if (bitmap != null) {
-                    byte[] bitmapByte = ConvertImage.convertBitmapToBytes(bitmap);
+                if (newBitmap2 != null) {
+                    byte[] bitmapByte = ConvertImage.convertBitmapToBytes(newBitmap2);
                     BodyLocation photo = new BodyLocation(photoID.getText().toString(),
                             bitmapByte,
                             photoID.getText().toString());
                     BodyPhotoController.addPhoto(getContext(), photo);
-
                     MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, photoID.getText().toString(), "");
 
                     // Transition back to taking another photo
@@ -120,6 +119,7 @@ public class AddBodyPhotoFragment extends Fragment {
             }
         });
 
+
         // onclick listener for uploading a new bodylocation photo
         uploadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,15 +139,16 @@ public class AddBodyPhotoFragment extends Fragment {
             getActivity();
             File imgFile = new  File(pictureImagePath);
             if(imgFile.exists()) {
-                Log.d("BITMSPIMAGE", "do we get here");
                 bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                bodyPhoto.setImageBitmap(bitmap);
+                newBitmap = ConvertImage.scaleBitmap(bitmap,750, 750);
+                newBitmap2 = ConvertImage.RotateBitmap(newBitmap, 90);
+                bodyPhoto.setImageBitmap(newBitmap2);
 
 
                 // Image recognition
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+                //ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                //final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
                 //ImageRecognition.mContext = getContext();
                 //ImageRecognition.recognizeImage(inputStream);
@@ -158,7 +159,7 @@ public class AddBodyPhotoFragment extends Fragment {
             Uri targetUri = data.getData();
             try {
                 bitmap = BitmapFactory.decodeStream(getContext().getContentResolver().openInputStream(targetUri));
-                Bitmap newBitmap = ConvertImage.scaleBitmap(bitmap, 1450, 1500);
+                Bitmap newBitmap = ConvertImage.scaleBitmap(bitmap, 750, 750);
                 bodyPhoto.setImageBitmap(newBitmap);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

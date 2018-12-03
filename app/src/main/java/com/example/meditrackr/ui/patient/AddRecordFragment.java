@@ -79,7 +79,7 @@ import static android.app.Activity.RESULT_OK;
 public class AddRecordFragment extends Fragment{
     private String date;
     private String pictureImagePath = "";
-    private Bitmap bitmap;
+    private Bitmap bitmap, newBitmap, newBitmap2;
 
 
     // Indicators and request codes
@@ -280,16 +280,20 @@ public class AddRecordFragment extends Fragment{
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
                 final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                newBitmap = ConvertImage.scaleBitmap(bitmap,750, 750);
+                newBitmap2 = ConvertImage.RotateBitmap(newBitmap, 90);
+
 
                 // Image recognition
-                ImageRecognition.mContext = getContext();
-                ImageRecognition.recognizeImage(inputStream);
+                //ImageRecognition.mContext = getContext();
+                //ImageRecognition.recognizeImage(inputStream);
 
                 // Populate image
                 for (int i = 0; i < bitmaps.length; i++) {
                     if (bitmaps[i] == null) {
-                        bitmaps[i] = bitmap;
-                        images[i].setImageBitmap(ConvertImage.scaleBitmap(bitmap, 350, 450));
+                        bitmaps[i] = newBitmap2;
+                        images[i].setImageBitmap(ConvertImage.scaleBitmap(newBitmap2, 350, 450));
                         break;
                     }
                 }

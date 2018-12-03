@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: ProblemList.java
  *
- * PURPOSE:
+ * PURPOSE: Stores the problem list of a patient.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +22,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.models;
 
-//imports
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

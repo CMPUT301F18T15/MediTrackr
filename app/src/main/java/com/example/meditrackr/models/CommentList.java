@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: CommentList.java
  *
- * PURPOSE:
+ * PURPOSE: Stores a list of messages (comments) from care provider-patient
+ *          messaging.
  *
  *     Apache 2.0 License Notice
  *

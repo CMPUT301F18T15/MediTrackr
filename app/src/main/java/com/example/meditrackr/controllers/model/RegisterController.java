@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: RegisterController.java
  *
- * PURPOSE:
+ * PURPOSE: Manages registration of new users (Patient, CareProvider) and
+ *          saving them both locally and on ElasticSearch.
  *
  *     Apache 2.0 License Notice
  *

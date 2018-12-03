@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: LoginController.java
  *
- * PURPOSE:
+ * PURPOSE: Manages logging in and checking for profiles both locally
+ *          and on ElasticSearch.
  *
  *     Apache 2.0 License Notice
  *

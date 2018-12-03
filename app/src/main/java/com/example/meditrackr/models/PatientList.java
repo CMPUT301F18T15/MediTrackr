@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: PatientList.java
  *
- * PURPOSE:
+ * PURPOSE: Stores a list of patients (for a care provider).
  *
  *     Apache 2.0 License Notice
  *

@@ -22,7 +22,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui;
 
-//imports
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,7 +36,6 @@ import android.widget.EditText;
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.MessageListAdapter;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.utils.ThreadSave;
 import com.example.meditrackr.models.Comment;
 import com.example.meditrackr.models.CommentList;

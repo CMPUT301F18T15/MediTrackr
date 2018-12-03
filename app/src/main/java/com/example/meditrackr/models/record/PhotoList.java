@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: PhotoList.java
  *
- * PURPOSE:
+ * PURPOSE: A list of photos, used for record photos and body location
+ *          photos.
  *
  *     Apache 2.0 License Notice
  *

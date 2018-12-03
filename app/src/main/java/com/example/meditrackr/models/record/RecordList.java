@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: RecordList.java
  *
- * PURPOSE:
+ * PURPOSE: Stores the list of Record objects associated with a problem.
  *
  *     Apache 2.0 License Notice
  *

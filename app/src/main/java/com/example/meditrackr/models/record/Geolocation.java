@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: Geolocation.java
  *
- * PURPOSE:
+ * PURPOSE: Stores information related to geolocation for records.
  *
  *     Apache 2.0 License Notice
  *

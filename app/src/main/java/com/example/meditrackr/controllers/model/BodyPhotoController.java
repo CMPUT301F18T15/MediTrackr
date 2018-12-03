@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: BodyPhotoController.java
  *
- * PURPOSE:
+ * PURPOSE: Manages adding and deleting body location photos both locally
+ *          and from ElasticSearch.
  *
  *     Apache 2.0 License Notice
  *

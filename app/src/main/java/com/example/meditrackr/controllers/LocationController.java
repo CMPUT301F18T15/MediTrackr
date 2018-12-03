@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: LocationController.java
  *
- * PURPOSE:
+ * PURPOSE: For extracting the user's current location (when adding
+ *          geolocations to a record).
  *
  *     Apache 2.0 License Notice
  *

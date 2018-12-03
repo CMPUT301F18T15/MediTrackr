@@ -54,6 +54,16 @@ public class BodyLocation implements Serializable {
     }
 
     // Constructor
+
+    /**
+     * sets all the variables that the class's needs to work
+     * @author Orest Cokan
+     * @param bodyLocationPhotoName     name of the body location photo
+     * @param image                     the image that will be associated with that body location
+     * @param photoID                   the id of the body location photo
+     * @param x                         the x coordinate of the body location within the photo
+     * @param y                         the y coordinate of the body location within the photo
+     */
     public BodyLocation(String bodyLocationPhotoName, byte[] image, String photoID, float x, float y){
         this.bodyLocationPhotoName = bodyLocationPhotoName;
         this.image = image;
@@ -69,7 +79,8 @@ public class BodyLocation implements Serializable {
     // Getters/Setters
 
     /**
-     * gets the x coordinate
+     * gets the x coordinate of the body location
+     *
      * @author  Orest Cokan
      * @return x, the x coordinate
      */
@@ -77,10 +88,17 @@ public class BodyLocation implements Serializable {
         return x;
     }
 
+    /**
+     * sets the x coordinate of the body location
+     *
+     * @author  Orest Cokan
+     * @param x  the x coordinate that was retrieved from earlier
+     */
     public void setXCoordinate(int x) { this.x = x; }
 
     /**
-     * gets the y coordinate
+     * gets the y coordinate of the body location
+     *
      * @author  Orest Cokan
      * @return y, the y coordinate
      */
@@ -88,6 +106,12 @@ public class BodyLocation implements Serializable {
         return y;
     }
 
+    /**
+     * sets the y coordinate of the body location
+     *
+     * @author  Orest Cokan
+     * @param y  the y coordinate that was retrieved from earlier
+     */
     public void setYCoordinate(int y) { this.y = y; }
 
     /**
@@ -95,15 +119,24 @@ public class BodyLocation implements Serializable {
      * @author  Orest Cokan
      * @return  bodyLocationPhotoName, the name of the body location photo
      */
+
     public String getName() {
         return bodyLocationPhotoName;
     }
 
+    /**
+     * sets the photo id of the body location
+     *
+     * @author  Orest Cokan
+     * @param bodyLocationPhotoName  the name of the photo that we will use to set bodyLocationPhotoName
+     */
     public void setName(String bodyLocationPhotoName) {
         this.bodyLocationPhotoName = bodyLocationPhotoName;
     }
+
     /**
      * sets the photo id of the body location
+     *
      * @author  Orest Cokan
      * @param id  the id that we will use to set the photoID
      */
@@ -111,6 +144,7 @@ public class BodyLocation implements Serializable {
 
     /**
      * gets the ID of the body location photo
+     *
      * @author  Orest Cokan
      * @return  photoID, the ID of the body location photo
      */
@@ -119,6 +153,7 @@ public class BodyLocation implements Serializable {
 
     /**
      * gets the image(photo) of the body location
+     *
      * @author  Orest Cokan
      * @return  Image, the image(photo) of the body location
      */
@@ -128,6 +163,7 @@ public class BodyLocation implements Serializable {
 
     /**
      * sets the image(photo) of the body location
+     *
      * @author  Orest Cokan
      * @param image  the image(photo) that we will use to set the photo
      */

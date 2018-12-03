@@ -18,9 +18,12 @@ import java.io.InputStream;
 import es.dmoral.toasty.Toasty;
 
 /**
- * Crated by Skryt on Nov 27, 2018
+ * this class will take an image and put it into a database. this data base uses AI to detect objects
+ * in the image and will return what it detects in the photo.
+ *
+ * @author Orest Cokan
+ * @version Nov 27, 2018
  */
-
 public class ImageRecognition {
     private static String api = "d28b3a28f0d448ff8f079b9be652249d";
     private static String website = "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0";
@@ -28,11 +31,23 @@ public class ImageRecognition {
     private static VisionServiceClient visionServiceClient = new VisionServiceRestClient(
             api, website);
 
-
+    /**
+     * this class takes the image and passes it into the VisionTask class
+     *
+     * @author Orest Cokan
+     * @param inputStream       the image that the AI will be looking at
+     * @see ByteArrayInputStream
+     */
     public static void recognizeImage(ByteArrayInputStream inputStream){
         new visionTask().execute(inputStream);
     }
 
+    /**
+     * this class takes the image and uses the AI database to find an object in the photo
+     * and provide a toast pop up message telling the user what the object in the photo is
+     * @author Orest Cokan
+     * @return strResult, this is a string of what the AI found in the photo
+     */
     private static class visionTask extends AsyncTask<InputStream, String, String>{
         ProgressDialog mDialog = new ProgressDialog(mContext);
         @Override

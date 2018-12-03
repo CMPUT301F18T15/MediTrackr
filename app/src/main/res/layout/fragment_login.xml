@@ -36,12 +36,14 @@
         app:layout_constraintTop_toBottomOf="@+id/meditrackr_logo"
         app:srcCompat="@drawable/non_gender_neutral_logo_please_dont_get_upset" />
 
+
     <EditText
         android:id="@+id/patient_username"
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginTop="24dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/rounded_white_border"
+        android:backgroundTint="@color/white"
         android:drawableLeft="@drawable/icon_user"
         android:drawablePadding="10dp"
         android:hint="Username"
@@ -60,7 +62,7 @@
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/gradient"
+        android:background="@drawable/gradient_main"
         android:text="LOGIN"
         android:textAlignment="center"
         android:textColor="#FFFFFF"

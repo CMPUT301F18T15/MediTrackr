@@ -140,13 +140,19 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         // Set onClick listener for each patient, so they can be viewed
         @Override
         public void onClick(View v) {
-            int position = getAdapterPosition();
+            final int position = getAdapterPosition();
 
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
-            Patient patient = adapter.patients.get(position);
-            patient = (Patient) ElasticSearch.searchProfile(patient.getUsername());
-            LazyLoadingManager.setCarePatient(patient);
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Patient patient = adapter.patients.get(position);
+                    patient = (Patient) ElasticSearch.searchProfile(patient.getUsername());
+                    LazyLoadingManager.setCarePatient(patient);
+                }
+            });
+            thread.start();
             ProblemsFragment fragment = ProblemsFragment.newInstance(position);
             transaction.addToBackStack(null);
             transaction.replace(R.id.content, fragment);

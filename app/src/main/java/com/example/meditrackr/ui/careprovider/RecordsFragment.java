@@ -39,6 +39,7 @@ import com.example.meditrackr.models.CommentList;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.MessageListFragment;
+import com.example.meditrackr.utils.ElasticSearch;
 
 /**
  * @author  Orest Cokan
@@ -76,7 +77,18 @@ public class RecordsFragment extends Fragment {
 
         // Gets records and comments from bundle
         RecordList records = (RecordList)getArguments().getSerializable("Records");
-        final CommentList comments = (CommentList) getArguments().getSerializable("Comments");
+
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Patient patient = carePatient;
+                patient = (Patient) ElasticSearch.searchProfile(patient.getUsername());
+                LazyLoadingManager.setCarePatient(patient);
+            }
+        });
+        thread.start();
+
 
         // Onclick listener for messages
         View.OnClickListener listener = new View.OnClickListener() {

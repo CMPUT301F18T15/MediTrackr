@@ -39,6 +39,7 @@ import com.example.meditrackr.controllers.VerticalSpaceController;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.MessageListFragment;
+import com.example.meditrackr.utils.ElasticSearch;
 
 /**
  * shows user a list of their created records in a recycler view.
@@ -87,6 +88,15 @@ public class RecordsFragment extends Fragment {
         final FloatingActionButton addRecord = (FloatingActionButton) rootView.findViewById(R.id.add_record_floating);
         final TextView messageClick = (TextView) rootView.findViewById(R.id.message_click);
         final TextView recordsClick = (TextView) rootView.findViewById(R.id.records_click);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                patient = (Patient)ElasticSearch.searchProfile(patient.getUsername());
+                LazyLoadingManager.setProfile(patient);
+            }
+        });
+        thread.start();
 
 
         // Get index as argument from bundle

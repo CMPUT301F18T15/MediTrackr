@@ -19,9 +19,15 @@
 package com.example.meditrackr.ui.patient;
 
 //imports
+import android.app.Activity;
+import android.app.Dialog;
+import android.arch.lifecycle.LifecycleOwner;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -34,10 +40,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,12 +55,19 @@ import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.model.RecordController;
 import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.models.record.Record;
+import com.example.meditrackr.utils.CapturePreview;
 import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.DateUtils;
 import com.example.meditrackr.utils.ImageRecognition;
+import com.example.meditrackr.utils.PermissionRequest;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
+import com.otaliastudios.cameraview.CameraListener;
+import com.otaliastudios.cameraview.CameraOptions;
+import com.otaliastudios.cameraview.CameraUtils;
+import com.otaliastudios.cameraview.CameraView;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -78,7 +93,7 @@ import static android.app.Activity.RESULT_OK;
 public class AddRecordFragment extends Fragment{
     private String date;
     private String pictureImagePath = "";
-    private Bitmap bitmap;
+    private Bitmap bitmap, newBitmap, newBitmap2;
 
 
     // Indicators and request codes
@@ -93,6 +108,7 @@ public class AddRecordFragment extends Fragment{
     private Bitmap[] bitmaps = new Bitmap[10];
     public static Bitmap[] bodyBitmaps = new Bitmap[1];
     public static BodyLocation bodyLocationAdd;
+    private File imgFile;
 
 
     // Location variables
@@ -123,7 +139,7 @@ public class AddRecordFragment extends Fragment{
 
         LocationController controller = new LocationController(getContext());
         final int index = getArguments().getInt("INDEX");
-
+        PermissionRequest.verifyPermission(getActivity());
 
         /*---------------------------------------------------------------------------
          * INITIALIZE UI COMPONENTS
@@ -134,6 +150,8 @@ public class AddRecordFragment extends Fragment{
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
         final TextView bodyLocation = (TextView) rootView.findViewById(R.id.body_location_title);
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
+
+
 
         // Initialize ui attributes for each button of notification frequency
         images[0] = (ImageView) rootView.findViewById(R.id.image_1);
@@ -210,6 +228,8 @@ public class AddRecordFragment extends Fragment{
         });
 
 
+
+
         /*---------------------------------------------------------------------------
          * ADD NEW IMAGES TO RECORD
          *--------------------------------------------------------------------------*/
@@ -217,25 +237,7 @@ public class AddRecordFragment extends Fragment{
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (bitmaps[9] == null) {
-                    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                    StrictMode.setVmPolicy(builder.build());
-                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                    String imageFileName = timeStamp + ".jpg";
-                    File storageDir = Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_PICTURES);
-                    pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
-                    File file = new File(pictureImagePath);
-                    Uri outputFileUri = Uri.fromFile(file);
-
-                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-                    startActivityForResult(cameraIntent, IMAGE_REQUEST_CODE);
-                } else {
-                    Toasty.error(getContext(), "Unable to add more than 10 photos!"
-                            , Toast.LENGTH_SHORT).show();
-                }
+                showImage();
             }
         });
 
@@ -273,23 +275,27 @@ public class AddRecordFragment extends Fragment{
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             // Allows intent to extract image taken by phone's camera
             getActivity();
-            File imgFile = new  File(pictureImagePath);
+            imgFile = new  File(pictureImagePath);
             if(imgFile.exists()) {
                 Log.d("BITMSPIMAGE", "do we get here");
                 bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
                 final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                newBitmap = ConvertImage.scaleBitmap(bitmap,750, 750);
+                newBitmap2 = ConvertImage.RotateBitmap(newBitmap, 90);
+
 
                 // Image recognition
-                ImageRecognition.mContext = getContext();
-                ImageRecognition.recognizeImage(inputStream);
+                //ImageRecognition.mContext = getContext();
+                //ImageRecognition.recognizeImage(inputStream);
 
                 // Populate image
                 for (int i = 0; i < bitmaps.length; i++) {
                     if (bitmaps[i] == null) {
-                        bitmaps[i] = bitmap;
-                        images[i].setImageBitmap(ConvertImage.scaleBitmap(bitmap, 350, 450));
+                        bitmaps[i] = newBitmap2;
+                        images[i].setImageBitmap(ConvertImage.scaleBitmap(newBitmap2, 350, 600));
                         break;
                     }
                 }
@@ -331,10 +337,65 @@ public class AddRecordFragment extends Fragment{
         }
     }
 
+
     @Override
     public void onStop() {
         super.onStop();
         bodyBitmaps = new Bitmap[1];
         bodyImages = new ImageView[1];
+    }
+
+
+    public void showImage() {
+        Dialog builder = new Dialog(getContext());
+        builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        builder.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                if(bitmaps[9] == null) {
+                    takePhoto();
+                } else {
+                    Toasty.error(getContext(), "Unable to add more than 10 photos!"
+                            , Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        if(bitmaps[0] == null){
+            takePhoto();
+        }
+
+
+        ImageView imageView = new ImageView(getContext());
+        for(int i = 9; i >= 0; i--){
+            if(bitmaps[i] != null){
+                Bitmap set = ConvertImage.scaleBitmap(bitmaps[i], 800, 800);
+                imageView.setImageBitmap(set);
+                builder.addContentView(imageView, new RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT));
+                builder.show();
+                Toasty.success(getContext(), "This is what your previous photo looked like!", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+    }
+
+    private void takePhoto(){
+        StrictMode.VmPolicy.Builder builder2 = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder2.build());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = timeStamp + ".jpg";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
+        File file = new File(pictureImagePath);
+        Uri outputFileUri = Uri.fromFile(file);
+
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+        startActivityForResult(cameraIntent, IMAGE_REQUEST_CODE);
     }
 }

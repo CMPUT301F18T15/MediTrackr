@@ -108,8 +108,8 @@ public class ConvertImage {
 
     public static Bitmap convertByteToBitmap(byte[] bytes){
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 425, false);
-        return newBitmap;
+        //Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 425, false);
+        return bitmap;
     }
 
     /**
@@ -138,5 +138,12 @@ public class ConvertImage {
         canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
 
         return scaledBitmap;
+    }
+
+    public static Bitmap RotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 }

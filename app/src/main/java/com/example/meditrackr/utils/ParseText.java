@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * ParseText
@@ -42,31 +44,38 @@ public class ParseText {
                 Problem problem = patient.getProblem(i);
                 if (problem.getDescription().contains(keyword)
                         || problem.getTitle().contains(keyword)) {
-                    CustomFilter filter = new CustomFilter(
-                            patient.getUsername(),
-                            false,
-                            problem.getTitle(),
-                            problem.getDescription(),
-                            problem.getDate(),
-                            i);
-                    customFilter.add(filter);
+                    for(int k = 0; k < customFilter.size(); k++){
+                        if(i != customFilter.get(k).getProblemIndex()){
+                            CustomFilter filter = new CustomFilter(
+                                    patient.getUsername(),
+                                    false,
+                                    problem.getTitle(),
+                                    problem.getDescription(),
+                                    problem.getDate(),
+                                    i);
+                            customFilter.add(filter);
+                        }
+                    }
                 }
 
                 for (int j = 0; j < problem.getRecords().getSize(); j++) {
                     Record record = problem.getRecord(j);
                     if (record.getDescription().contains(keyword)
                             || record.getTitle().contains(keyword)) {
-                        CustomFilter filter = new CustomFilter(
-                                patient.getUsername(),
-                                true,
-                                record.getTitle(),
-                                record.getDescription(),
-                                record.getDate(),
-                                record.getGeoLocation(),
-                                i,
-                                j);
-                        customFilter.add(filter);
-
+                        for(int l = 0; l < customFilter.size(); l++){
+                            if(i != customFilter.get(l).getProblemIndex() && j != customFilter.get(l).getRecordIndex()){
+                                CustomFilter filter = new CustomFilter(
+                                        patient.getUsername(),
+                                        true,
+                                        record.getTitle(),
+                                        record.getDescription(),
+                                        record.getDate(),
+                                        record.getGeoLocation(),
+                                        i,
+                                        j);
+                                customFilter.add(filter);
+                            }
+                        }
                     }
                 }
             }

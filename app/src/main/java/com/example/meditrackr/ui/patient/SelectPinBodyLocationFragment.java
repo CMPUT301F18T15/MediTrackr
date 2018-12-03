@@ -61,12 +61,13 @@ public class SelectPinBodyLocationFragment extends DialogFragment {
         // set bodyPhoto to the current photo
         bodyLocation = LazyLoadingManager.getBodyLocationPhoto();
         bitmap = ConvertImage.convertByteToBitmap(bodyLocation.getImage());
+        final Bitmap mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888,true);
 
 
         bodyPhotoView.setImageBitmap(bodyPhotoBitmap);
-        bodyPhotoCanvas.setImageBitmap(bitmap);
+        bodyPhotoCanvas.setImageBitmap(mutableBitmap);
 
-        canvas = new Canvas(bitmap);
+        canvas = new Canvas(mutableBitmap);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.RED);
 
@@ -115,13 +116,13 @@ public class SelectPinBodyLocationFragment extends DialogFragment {
 
     private void drawPoint(float x, float y) {
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        canvas.drawCircle(x, y, 10, paint);
+        canvas.drawCircle(x, y, 15, paint);
     }
 
     private Bitmap saveBitmapImage() {
-        Bitmap res = ConvertImage.convertByteToBitmap(bodyPhotoSrc.getImage());
+        Bitmap res = bitmap.copy(Bitmap.Config.ARGB_8888, true);
         Canvas overlay = new Canvas(res);
-        overlay.drawCircle(x, y,10, paint);
+        overlay.drawCircle(x, y,15, paint);
         return res;
     }
 

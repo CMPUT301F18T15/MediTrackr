@@ -1,41 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="125dp"
     android:layout_marginBottom="-16dp"
     android:background="@drawable/rounded_white_border"
     android:backgroundTint="@color/white">
 
     <TextView
         android:id="@+id/record_date"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/colorPrimaryBlack"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/subtitle"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/record_description"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:ellipsize="marquee"
         android:singleLine="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/subtitle"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/record_date"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/record_edit_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/record_title" />
 
+
+    <TextView
+        android:id="@+id/record_title"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="marquee"
+        android:singleLine="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <net.steamcrafted.materialiconlib.MaterialIconView
         android:id="@+id/record_delete_button"
@@ -58,9 +79,9 @@
         android:id="@+id/record_edit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
         android:layout_marginBottom="12dp"
         android:background="@android:color/white"
         android:scaleType="center"

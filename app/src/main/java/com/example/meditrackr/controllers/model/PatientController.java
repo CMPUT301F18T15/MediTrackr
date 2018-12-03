@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: PatientController.java
  *
- * PURPOSE:
+ * PURPOSE: Manages adding and searching for patients both locally
+ *          and from ElasticSearch (for care provider patient lists).
  *
  *     Apache 2.0 License Notice
  *

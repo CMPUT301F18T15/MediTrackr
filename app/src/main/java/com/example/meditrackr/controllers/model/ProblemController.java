@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: ProblemController.java
  *
- * PURPOSE:
+ * PURPOSE: Manages adding, editing, and deleting problems and saving them
+ *           both locally and on ElasticSearch.
  *
  *     Apache 2.0 License Notice
  *

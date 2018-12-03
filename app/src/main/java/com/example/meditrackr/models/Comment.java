@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: Comment.java
  *
- * PURPOSE:
+ * PURPOSE: Stores comments (messages) from the doctor patient messaging.
  *
  *     Apache 2.0 License Notice
  *

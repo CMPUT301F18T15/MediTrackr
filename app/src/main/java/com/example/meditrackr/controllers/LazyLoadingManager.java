@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: LazyLoadingManager.java
  *
- * PURPOSE:
+ * PURPOSE: Manages lazy loading of information so that not everything is
+ *          loaded immediately. Information is loaded as needed.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +23,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.controllers;
 
-//imports
 import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PatientList;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 /**
  * LazyLoadingManager.java primary purpose is to assist in lazy loading information, rather than holding
  * every single piece of information about a user at any given moment, each attribute below is
- * initialized whenever it is necessary. F
+ * initialized whenever it is necessary.
  *
  * @author Orest Cokan
  * @version 2.0 Nov 7, 2018

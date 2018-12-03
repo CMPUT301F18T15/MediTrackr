@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: BodyLocationPhotoList.java
  *
- * PURPOSE:
+ * PURPOSE: Stores body location photos for a given record.
  *
  *     Apache 2.0 License Notice
  *
@@ -24,7 +24,6 @@
 package com.example.meditrackr.models;
 
 import com.example.meditrackr.models.record.BodyLocation;
-import com.example.meditrackr.models.record.Record;
 
 import java.io.Serializable;
 import java.util.ArrayList;

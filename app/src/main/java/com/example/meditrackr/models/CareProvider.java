@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: CareProvider.java
  *
- * PURPOSE:
+ * PURPOSE: Stores information related to the CareProvider profile.
  *
  *     Apache 2.0 License Notice
  *

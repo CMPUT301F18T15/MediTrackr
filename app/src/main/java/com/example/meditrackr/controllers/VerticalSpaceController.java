@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: LocationController.java
  *
- * PURPOSE:
+ * PURPOSE: For spacing items in recycler views.
  *
  *     Apache 2.0 License Notice
  *

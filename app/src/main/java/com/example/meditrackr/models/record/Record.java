@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: Record.java
  *
- * PURPOSE:
+ * PURPOSE: Stores information related to a record of a given problem.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +22,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.models.record;
 
-//imports
 import android.support.annotation.NonNull;
 import java.io.Serializable;
 

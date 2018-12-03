@@ -33,7 +33,7 @@ import android.widget.EditText;
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.MessageListAdapter;
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.ThreadSaveController;
+import com.example.meditrackr.utils.ThreadSave;
 import com.example.meditrackr.models.Comment;
 import com.example.meditrackr.models.CommentList;
 import com.example.meditrackr.models.Patient;
@@ -107,7 +107,7 @@ public class MessageListFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                     chatBox.setText(null);
 
-                    ThreadSaveController.save(getContext(), patient);
+                    ThreadSave.save(getContext(), patient);
                     messageList.smoothScrollToPosition(comments.getSize());
                 }
                 else{

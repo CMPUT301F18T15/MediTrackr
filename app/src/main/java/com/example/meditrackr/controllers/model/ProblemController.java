@@ -24,11 +24,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.meditrackr.controllers.LazyLoadingManager;
-import com.example.meditrackr.controllers.ThreadSaveController;
+import com.example.meditrackr.utils.ThreadSave;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.Problem;
 import com.example.meditrackr.models.ProblemList;
-import com.example.meditrackr.models.Profile;
 
 import es.dmoral.toasty.Toasty;
 
@@ -61,7 +60,7 @@ public class ProblemController {
         patient.getProblems().addProblem(problem);
 
         // Save the problem both locally and elastic search
-        ThreadSaveController.save(context, patient);
+        ThreadSave.save(context, patient);
         Log.d("ProblemAdd", "Profile: " + patient.getUsername() + " Problems: " + patient.getProblems());
 
         // let the user know everything was successful
@@ -71,7 +70,7 @@ public class ProblemController {
     // Delete a problem
     public static void deleteProblem(Context context, int index, ProblemList problems){
         problems.removeProblem(index);
-        ThreadSaveController.save(context, patient);
+        ThreadSave.save(context, patient);
     }
 
     // Edit a problem
@@ -81,7 +80,7 @@ public class ProblemController {
         problem.setDescription(description);
 
         // Save problem into ES and memory
-        ThreadSaveController.save(context, patient);
+        ThreadSave.save(context, patient);
 
     }
 }

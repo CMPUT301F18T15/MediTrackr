@@ -26,9 +26,8 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.meditrackr.controllers.ThreadSaveController;
+import com.example.meditrackr.utils.ThreadSave;
 import com.example.meditrackr.models.Patient;
-import com.example.meditrackr.models.ProblemList;
 import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.models.record.Geolocation;
 import com.example.meditrackr.models.record.Record;
@@ -76,7 +75,7 @@ public class RecordController {
         patient.getProblem(position).getRecords().addRecord(record);
 
         // Save in ElasticSearch and memory
-        ThreadSaveController.save(context, patient);
+        ThreadSave.save(context, patient);
         //ElasticSearch.updateUser(patient);
         //SaveLoad.saveProfile(context, patient);
         Log.d("RecordAdd", "Profile: " + patient.getUsername()
@@ -97,7 +96,8 @@ public class RecordController {
                                       String addressName,
                                       String date,
                                       Bitmap[] bitmaps,
-                                      Bitmap[] bodyBitmaps) {
+                                      BodyLocation bodyLocation) {
+
         Geolocation geolocation = new Geolocation(latitude, longitude, addressName);
         // In new record include user input title and description
 
@@ -114,15 +114,8 @@ public class RecordController {
                 record.getImages().addImage(byteArray); // Save each image to record
             }
         }
-        BodyLocation bodyLocation = new BodyLocation();
-        record.setBodyLocation(bodyLocation);
-        for(Bitmap bitmap: bodyBitmaps){
-            if(bitmap != null){
-                byte[] byteArray = ConvertImage.convertBitmapToBytes(bitmap);
-                record.getBodyLocation().getImages().addImage(byteArray);
-            }
-        }
 
+        record.setBodyLocation(bodyLocation);
         return record;
     }
 
@@ -132,7 +125,7 @@ public class RecordController {
      *--------------------------------------------------------------------------*/
     public static void deleteRecord(Context context, int index, RecordList records){
         records.removeRecord(index);
-        ThreadSaveController.save(context, patient);
+        ThreadSave.save(context, patient);
     }
 
 
@@ -148,7 +141,7 @@ public class RecordController {
         record.setTitle(title);
         record.setDescription(description);
         record.setGeoLocation(geolocation);
-        ThreadSaveController.save(context, patient);
+        ThreadSave.save(context, patient);
 
     }
 

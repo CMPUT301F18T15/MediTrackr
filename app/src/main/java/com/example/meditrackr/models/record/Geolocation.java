@@ -108,7 +108,7 @@ public class Geolocation implements Serializable {
     /**
      * Gets the address name.
      * @author  Orest Cokan
-     * @return adress, the name of the address location
+     * @return address, the name of the address location
      */
     public String getAddress() {
         return address;
@@ -123,11 +123,20 @@ public class Geolocation implements Serializable {
         this.address = address;
     }
 
-
+    /**
+     * Gets the distance of the address
+     * @author  Orest Cokan
+     * @return distance the string value of distance from the users location
+     */
     public String getDistance() {
         return distance;
     }
 
+    /**
+     * Takes a new string value and sets the distance.
+     * @author  Orest Cokan
+     * @param distance the distance of the location
+     */
     public void setDistance(String distance) {
         this.distance = distance;
     }

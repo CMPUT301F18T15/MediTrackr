@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: AddBodyPhotoFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for adding body location photos.
  *
  *     Apache 2.0 License Notice
  *

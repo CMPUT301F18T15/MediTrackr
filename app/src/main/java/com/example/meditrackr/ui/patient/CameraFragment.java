@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: CameraFragment.java
  *
- * PURPOSE:
+ * PURPOSE: For camera display.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +22,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui.patient;
 
-//imports
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: AddProblemFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for a patient to add new problems. Problem information is
+ *          sent to the ProblemController.
  *
  *     Apache 2.0 License Notice
  *

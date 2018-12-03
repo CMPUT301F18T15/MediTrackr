@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: LoginActivity.java
  *
- * PURPOSE:
+ * PURPOSE: A view for logging in to the app.
  *
  *     Apache 2.0 License Notice
  *

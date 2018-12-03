@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: ProfileList.java
  *
- * PURPOSE:
+ * PURPOSE: A list of profiles (Care Provider or Patient).
  *
  *     Apache 2.0 License Notice
  *

@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: AddRecordFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for adding new records. Record information is sent to the
+ *          record controller for creating and saving the record.
  *
  *     Apache 2.0 License Notice
  *

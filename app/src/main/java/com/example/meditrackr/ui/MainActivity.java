@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: MainActivity.java
  *
- * PURPOSE:
+ * PURPOSE: The main activity for the app. Most views are fragments overlaid
+ *          on this activity.
  *
  *     Apache 2.0 License Notice
  *

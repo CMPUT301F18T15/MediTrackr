@@ -12,12 +12,20 @@ import com.example.meditrackr.utils.ThreadSave;
 
 import es.dmoral.toasty.Toasty;
 
+/**
+ * this class can add and delete body location photos from the database
+ *
+ * @author Orest Cokan
+ * @version 1.0 Dec 2, 2018
+ */
 public class BodyPhotoController {
     private static Patient patient = LazyLoadingManager.getPatient();
 
     /**
      * adds problem to database
      *
+     * @author Orest Cokan
+     * @version 1.0 Dec 2, 2018
      * @param context the context the controller will user
      * @param photo   the photo we will add to the database
      */
@@ -34,6 +42,14 @@ public class BodyPhotoController {
         Toasty.success(context, "Body Location Photo successfully added", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * this class takes the index that a photo is located at and deletes that photo from the database
+     *
+     * author Orest Cokan
+     * @version 1.0 Dec 2, 2018
+     * @param context   the context the controller will user
+     * @param index     the index that the photo is located
+     */
     // Delete a photo
     public static void deletePhoto(Context context, int index) {
         Patient patient = LazyLoadingManager.getPatient();

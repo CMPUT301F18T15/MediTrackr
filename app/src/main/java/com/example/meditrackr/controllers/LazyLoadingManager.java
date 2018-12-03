@@ -66,6 +66,7 @@ public class LazyLoadingManager {
      * sets the profile
      *
      * @author Orest Cokan
+     * @param profile the profile that was retrieved from getProfile
      */
     // Profile setter
     public static void setProfile(Profile profile) {

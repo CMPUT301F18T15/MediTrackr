@@ -44,7 +44,7 @@ import java.io.ByteArrayOutputStream;
 
 // Taken from https://stackoverflow.com/questions/9224056/android-bitmap-to-base64-string
 
-// A ConvertImage class that holds all information pertaining to image conversion
+// Utility class allows ConvertImage functionality
 public class ConvertImage {
 
     /**
@@ -124,7 +124,7 @@ public class ConvertImage {
      */
     public static Bitmap scaleBitmap(Bitmap bitmap, int newWidth, int newHeight) {
         Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
-
+        // Set scaling configurations
         float scaleX = newWidth / (float) bitmap.getWidth();
         float scaleY = newHeight / (float) bitmap.getHeight();
         float pivotX = 0;
@@ -133,6 +133,7 @@ public class ConvertImage {
         Matrix scaleMatrix = new Matrix();
         scaleMatrix.setScale(scaleX, scaleY, pivotX, pivotY);
 
+        // Scales image
         Canvas canvas = new Canvas(scaledBitmap);
         canvas.setMatrix(scaleMatrix);
         canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));

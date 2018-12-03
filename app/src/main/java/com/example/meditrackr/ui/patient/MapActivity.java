@@ -457,6 +457,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
+    // Add snippet pertaining information to record in specific location
     public void extractInformation(Patient patient){
         for (int i = 0; i < patient.getProblems().getSize(); i++) {
             Log.d("MAPMARKER", "problemlist size" + patient.getProblems().getSize());
@@ -493,6 +494,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
+    // Checks whether a careprovider has any patient records
     public void checkUser(){
         if (profile.getisCareProvider()) {
             Intent intent = getIntent();

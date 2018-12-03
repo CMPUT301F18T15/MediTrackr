@@ -58,7 +58,7 @@ import java.io.OutputStreamWriter;
  * @throw java.io.IOException
  */
 
-// A SaveLoad class holding all information pertaining to SaveLoad
+// Utility class allows SaveLoad functionality
 public class SaveLoad {
 
 

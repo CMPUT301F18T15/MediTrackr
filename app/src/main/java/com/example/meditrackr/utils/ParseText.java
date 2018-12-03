@@ -41,7 +41,7 @@ import java.util.Comparator;
  * @author Orest Cokan
  * @version 2.0 Nov 28, 2018
  */
-
+// Utility class allows ParseText functionality
 public class ParseText {
 
     /**
@@ -53,14 +53,16 @@ public class ParseText {
      * @return customfilter Holds the parsed information pertaining to the searched query
      * @author Orest Cokan
      */
+    // Parse for matching keywords in records/problems
     public static ArrayList<CustomFilter> parseRecordProblem(String query, Patient patient, ArrayList<CustomFilter> customFilter) {
         String[] keywords = query.split(" ");
-
         for (String keyword : keywords) {
             for (int i = 0; i < patient.getProblems().getSize(); i++) {
                 Problem problem = patient.getProblem(i);
                 if (problem.getDescription().contains(keyword)
                         || problem.getTitle().contains(keyword)) {
+                    // If either problem title or problem description matches keyword
+                    // retrieve problem information
                     CustomFilter filter = new CustomFilter(
                             patient.getUsername(),
                             false,
@@ -75,6 +77,8 @@ public class ParseText {
                     Record record = problem.getRecord(j);
                     if (record.getDescription().contains(keyword)
                             || record.getTitle().contains(keyword)) {
+                        // If either record title or record description matches keyword
+                        // retrieve record information
                         CustomFilter filter = new CustomFilter(
                                 patient.getUsername(),
                                 true,
@@ -105,6 +109,7 @@ public class ParseText {
      * @return customfilter Holds the parsed information pertaining to the searched query
      * @author Orest Cokan
      */
+    // Parse for matching geolocation keywords
     public static ArrayList<CustomFilter> parseGeolocation(String query, Patient patient, ArrayList<CustomFilter> customFilter, double latitude, double longtitude) {
         String[] keywords = query.split(" ");
         for (String keyword : keywords) {
@@ -137,7 +142,7 @@ public class ParseText {
                 }
             }
         }
-        // sort it by distance
+        // Sort it by distance
         Collections.sort(customFilter, new Comparator<CustomFilter>() {
             @Override
             public int compare(CustomFilter o1, CustomFilter o2) {
@@ -160,6 +165,7 @@ public class ParseText {
      * @return customfilter Holds the parsed information pertaining to the searched query
      * @author Orest Cokan
      */
+    // Parse for matching bodylocation keywords
     public static ArrayList<CustomFilter> parseBodylocation(String query, Patient patient, ArrayList<CustomFilter> customFilter, String bodylocation) {
         String[] keywords = query.split(" ");
         for (String keyword : keywords) {
@@ -200,6 +206,7 @@ public class ParseText {
      * el2 End altitude in meters
      * @returns Distance in meters
      */
+    // Finds distance between two locations
     public static String distance(double lat1, double lat2, double lon1,
                                   double lon2, double el1, double el2) {
 

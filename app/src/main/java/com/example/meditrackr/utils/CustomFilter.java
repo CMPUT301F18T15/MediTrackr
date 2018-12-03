@@ -35,8 +35,9 @@ import android.widget.Filter;
  * @version 1.0 Nov 18, 2018
  */
 
-
+// Utility class allows CustomFilter functionality
 public class CustomFilter {
+    // Class objects
     private boolean isProblem;
     private boolean isRecord;
     private int problemIndex;

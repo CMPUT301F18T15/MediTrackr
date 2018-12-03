@@ -77,12 +77,12 @@ import es.dmoral.toasty.Toasty;
 public class LocationController extends Service implements LocationListener {
     private final Context context;
 
-    // flags
+    // Set flags
     boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
     boolean canGetLocation = false;
 
-    // location vars
+    // Location variables
     Location location;
     double latitude;
     double longitude;
@@ -108,10 +108,12 @@ public class LocationController extends Service implements LocationListener {
      * get the current location based on GPS
      * @param context the context activity
      */
+    // Get current location
     public LocationController(Context context) {
         this.context = context;
 
         if(!hasPermissions((Activity)context, PERMISSIONS)){
+            // Request permissions if user doesn't have access to camera and gps functionality
             ActivityCompat.requestPermissions((Activity)context, PERMISSIONS, PERMISSION_ALL);
         }
         getLocation();

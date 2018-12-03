@@ -21,7 +21,6 @@
  * limitations under the License.
  *
  */
-
 package com.example.meditrackr.models.record;
 
 import java.io.Serializable;
@@ -36,7 +35,7 @@ import java.io.Serializable;
  * @version 1.0 Oct 24, 2018.
  */
 
-// A BodyLocation class that holds all information pertaining to BodyLocation
+// A model class that holds all information pertaining to BodyLocation
 public class BodyLocation implements Serializable {
 
     // Initialize class variables

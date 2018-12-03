@@ -21,9 +21,9 @@
  * limitations under the License.
  *
  */
-
 package com.example.meditrackr.models.record;
 
+//imports
 import android.graphics.Bitmap;
 
 import java.io.Serializable;
@@ -39,6 +39,7 @@ import java.util.ArrayList;
  * @author Orest Cokan
  * @version 1.0 Nov 13, 2018
  */
+// A model class that holds all information pertaining to listing photos
 public class PhotoList implements Serializable {
 
     // creates an array of Bitmap images

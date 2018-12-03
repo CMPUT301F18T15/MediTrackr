@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.controllers.model;
 
+//imports
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -83,24 +84,25 @@ public class LoginController {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                // hacks
+                // When logging in as a care provider provide care provider account
                 Patient patient;
                 if(profile.getisCareProvider()){
                     CareProvider careProviderMem = (CareProvider) profile;
                     CareProvider careProvider = (CareProvider) ElasticSearch.searchProfile(profile.getUsername());
                     if(careProvider.getPatients().getSize() > careProviderMem.getPatients().getSize()){
-                        //nothing
+                        // If number of patients is actually longer than shown in careprovider profile
+                        // Do nothing
                     }
-                    else{
+                    else{ // Else access care provider profile
                         careProvider = careProviderMem;
                     }
                     PatientList patientList = careProvider.getPatients();
                     ArrayList<Patient> patients = new ArrayList<>();
                     for(int i = 0; i < patientList.getSize(); i++){
                         Profile profileCheck = SaveLoad.loadProfile(context, patientList.getPatient(i));
-                        if(profileCheck != null){
+                        if(profileCheck != null){ // If patient profile is not null get profile
                             patient = (Patient) profileCheck;
-                        } else {
+                        } else { // Else if patient profile is null search for it
                             patient = (Patient) ElasticSearch.searchProfile(patientList.getPatient(i));
                         }
                         patients.add(patient);
@@ -133,7 +135,7 @@ public class LoginController {
      * @param activity  the LoginFragments activity
      * @param username  the username to be checked
      */
-
+    // Checks whether the profile exists or is null
     public static void checkProfile(Activity activity, Context context, String username) {
         // Gets profile from memory
         Profile profile;

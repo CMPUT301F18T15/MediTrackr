@@ -224,18 +224,18 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             });
 
 
-            // onclick listener for problem image
+            // Onclick listener for problem image
             problemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     PhotoList images = adapter.problems.getProblem(position).getImageAll();
-                    if(images.getSize() == 0){
+                    if(images.getSize() == 0){ // If there are no photos make image button unavailable
                         problemImage.setClickable(false);
                         problemImage.setVisibility(View.INVISIBLE);
                         Log.d("ImageTest", "we should be getting here");
                     }
-                    else {
+                    else { // If there are images then load images
                         LazyLoadingManager.setImages(images);
                         Intent intent = new Intent(adapter.activity, FullScreenViewActivity.class);
                         adapter.activity.startActivity(intent);

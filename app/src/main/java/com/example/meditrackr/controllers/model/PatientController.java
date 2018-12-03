@@ -18,6 +18,7 @@
  */
 package com.example.meditrackr.controllers.model;
 
+//imports
 import android.content.Context;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ import es.dmoral.toasty.Toasty;
 /**
  * Crated by Skryt on Nov 21, 2018
  */
+
+// Controller class for patients asscoiated with a careprovider
 public class PatientController {
 
     // Add a patient as a careprovider

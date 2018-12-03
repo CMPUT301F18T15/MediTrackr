@@ -9,10 +9,8 @@ import com.example.meditrackr.ui.MainActivity;
 import com.example.meditrackr.utils.ElasticSearch;
 
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -21,8 +19,6 @@ import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
-
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProfileTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
     private final String testDoctorName = "TestDoctorAcc";
@@ -50,9 +46,9 @@ public class ProfileTest extends ActivityTestRule<MainActivity> implements Inten
         }
     }
 
-
+    // Run this test when account email and phone are different from newEmail and newPhone.
     @Test
-    public void testAModifyProfile() {
+    public void testModifyProfile() {
         onView(withId(R.id.patient_username)).perform
                 (click(), typeText(testDoctorName), pressBack());
         onView(withId(R.id.login_button)).perform(click());
@@ -70,8 +66,8 @@ public class ProfileTest extends ActivityTestRule<MainActivity> implements Inten
         loginIntent.launchActivity(start);
         onView(withId(R.id.not_member)).perform(click());
         onView(withId(R.id.patient_username)).perform(click(), typeText(testDoctorName), pressBack());
-        onView(withId(R.id.phone_number)).perform(click(), typeText("7808471293"), pressBack());
-        onView(withId(R.id.patient_email)).perform(click(), typeText("testDoctor@test.com"), pressBack());
+        onView(withId(R.id.phone_number)).perform(click(), typeText(testDoctorPhone), pressBack());
+        onView(withId(R.id.patient_email)).perform(click(), typeText(testDoctorEmail), pressBack());
         onView(withId(R.id.CareProvider)).perform(click());
         onView(withId(R.id.signup_button)).perform(click());
     }

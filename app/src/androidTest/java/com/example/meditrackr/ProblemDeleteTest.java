@@ -1,7 +1,6 @@
 package com.example.meditrackr;
 
 import android.content.Intent;
-import android.support.test.espresso.Espresso;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
@@ -11,30 +10,26 @@ import com.example.meditrackr.ui.MainActivity;
 import com.example.meditrackr.utils.ElasticSearch;
 
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.pressBack;
-import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.action.ViewActions.*;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static junit.framework.TestCase.fail;
+import static org.junit.Assert.*;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SearchPatientTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
+public class ProblemDeleteTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
-    private final String testDoctorName = "TestDoctorAcc";
-    private final String testDoctorEmail = "testDoctor@test.com";
-    private final String testDoctorPhone = "7808471293";
+    private final String problemName = "Hydrophobia";
+    private final String problemDesc = "Water D:";
+    private final String testPatientName;
 
-    public SearchPatientTest() {
+    public ProblemDeleteTest() {
         super(MainActivity.class);
+        testPatientName = "InstrumentationTestPatient";
     }
 
     @Rule
@@ -43,7 +38,7 @@ public class SearchPatientTest extends ActivityTestRule<MainActivity> implements
 
     @Before
     public void reset() {
-        if (ElasticSearch.searchProfile(testDoctorName) == null) {
+        if (ElasticSearch.searchProfile(testPatientName) == null) {
             createTestProfile();
         } else {
             // Login to testPatient
@@ -55,15 +50,42 @@ public class SearchPatientTest extends ActivityTestRule<MainActivity> implements
         }
     }
 
+
+    @Test
+    public void testDeleteProblem() {
+        // Create problem
+        onView(withId(R.id.add_problem_floating)).perform(click());
+        onView(withId(R.id.problem_title_field)).perform(click(), typeText(problemName), pressBack());
+        onView(withId(R.id.problem_description_field)).perform
+                (click(), closeSoftKeyboard(), typeText(problemDesc), pressBack());
+        onView(withId(R.id.problem_add_button)).perform(click());
+
+        try {
+            onView(withId(R.id.add_problem_floating)).check(matches(isDisplayed()));
+        } catch (NoMatchingViewException e) {
+            fail("Problem was not added");
+        }
+
+        onView(withId(R.id.problem_delete_button)).perform(click());
+        onView(withText("YES")).perform(click());
+
+        try {
+            onView(withId(R.id.add_problem_floating)).check(matches(isDisplayed()));
+        } catch (NoMatchingViewException e) {
+            fail("Problem was not deleted");
+        }
+
+    }
+
     // Creates the test patient account in case it wasn't created
     public void createTestProfile() {
         Intent start = new Intent();
         loginIntent.launchActivity(start);
         onView(withId(R.id.not_member)).perform(click());
-        onView(withId(R.id.patient_username)).perform(click(), typeText(testDoctorName), pressBack());
-        onView(withId(R.id.phone_number)).perform(click(), typeText("7808471293"), pressBack());
-        onView(withId(R.id.patient_email)).perform(click(), typeText("testDoctor@test.com"), pressBack());
-        onView(withId(R.id.CareProvider)).perform(click());
+        onView(withId(R.id.patient_username)).perform(click(), typeText(testPatientName), pressBack());
+        onView(withId(R.id.phone_number)).perform(click(), typeText("18002263001"), pressBack());
+        onView(withId(R.id.patient_email)).perform(click(), typeText("testPatient@test.com"), pressBack());
+        onView(withId(R.id.Patient)).perform(click());
         onView(withId(R.id.signup_button)).perform(click());
     }
 

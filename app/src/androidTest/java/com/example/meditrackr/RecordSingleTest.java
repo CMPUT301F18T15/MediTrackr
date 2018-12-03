@@ -18,22 +18,26 @@ import org.junit.runners.MethodSorters;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.pressBack;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static junit.framework.TestCase.fail;
+import static org.junit.Assert.fail;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SearchProblemTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
+public class RecordSingleTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
-    private final String problemNameFirst = "Celiac";
-    private final String problemNameSecond = "Celiac Disease";
     private final String testPatientName = "InstrumentationTestPatient";
+    private final String problemName = "Hydrophobia";
+    private final String problemDesc = "Water D:";
+    private final String recordName = "Spooked";
+    private final String recordDesc = "Water is spooking me OwO";
 
-    public SearchProblemTest() {
+    public RecordSingleTest() {
         super(MainActivity.class);
     }
 
@@ -42,7 +46,7 @@ public class SearchProblemTest extends ActivityTestRule<MainActivity> implements
             new IntentsTestRule<>(LoginActivity.class, false, false);
 
     @Before
-    public void reset() {
+    public void login() {
         if (ElasticSearch.searchProfile(testPatientName) == null) {
             createTestProfile();
         } else {
@@ -50,32 +54,42 @@ public class SearchProblemTest extends ActivityTestRule<MainActivity> implements
             Intent start = new Intent();
             loginIntent.launchActivity(start);
             onView(withId(R.id.patient_username)).perform
-                    (click(), typeText("InstrumentationTestPatient"), pressBack());
+                    (click(), typeText(testPatientName), pressBack());
             onView(withId(R.id.login_button)).perform(click());
         }
     }
 
 
     @Test
-    public void testASearchOneProblem() {
+    public void testNewRecord() {
         onView(withId(R.id.add_problem_floating)).perform(click());
-        onView(withId(R.id.problem_title_field)).perform(click(), typeText(problemNameFirst), pressBack());
+        onView(withId(R.id.problem_title_field)).perform(click(), typeText(problemName), pressBack());
+        onView(withId(R.id.problem_description_field)).perform
+                (click(), closeSoftKeyboard(), typeText(problemDesc), pressBack());
         onView(withId(R.id.problem_add_button)).perform(click());
-        onView(withId(R.id.search)).perform(click());
-        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.problem_description)).perform(click());
+        onView(withId(R.id.add_record_floating)).perform(click());
+
+        pauseTest(3);
+        // Allow accessing location
+        try {
+            onView(withText("ALLOW")).perform(click());
+        } catch (NoMatchingViewException e) {}
+
+        onView(withId(R.id.record_title_field)).perform(click(), typeText(recordName), pressBack());
+        onView(withId(R.id.add_record_button)).perform(scrollTo(), click());
 
         try {
-            onView(withText(problemNameFirst)).check(matches(isDisplayed()));
+            onView(withId(R.id.add_record_floating)).check(matches(isDisplayed()));
         } catch (NoMatchingViewException e) {
-            fail("Added problem not found in search");
+            fail("Record was not added");
         }
 
-        onView(withId(R.id.problems)).perform(click());
+        Espresso.pressBack();
         onView(withId(R.id.problem_delete_button)).perform(click());
         onView(withText("YES")).perform(click());
     }
 
-    // Creates the test patient account in case it wasn't created
     public void createTestProfile() {
         Intent start = new Intent();
         loginIntent.launchActivity(start);

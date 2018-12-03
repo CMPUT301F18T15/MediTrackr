@@ -20,7 +20,6 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.pressBack;
-import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -30,7 +29,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.fail;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RecordTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
+public class RecordMultipleTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
     private final String testPatientName = "InstrumentationTestPatient";
     private final String problemName = "Hydrophobia";
@@ -38,7 +37,7 @@ public class RecordTest extends ActivityTestRule<MainActivity> implements Intent
     private final String recordName = "Spooked";
     private final String recordDesc = "Water is spooking me OwO";
 
-    public RecordTest() {
+    public RecordMultipleTest() {
         super(MainActivity.class);
     }
 
@@ -60,40 +59,8 @@ public class RecordTest extends ActivityTestRule<MainActivity> implements Intent
         }
     }
 
-
     @Test
-    public void testANewProblem() {
-        onView(withId(R.id.add_problem_floating)).perform(click());
-        onView(withId(R.id.problem_title_field)).perform(click(), typeText(problemName), pressBack());
-        onView(withId(R.id.problem_description_field)).perform
-                (click(), closeSoftKeyboard(), typeText(problemDesc), pressBack());
-        onView(withId(R.id.problem_add_button)).perform(click());
-        onView(withId(R.id.problem_description)).perform(click());
-        onView(withId(R.id.add_record_floating)).perform(click());
-
-        pauseTest(3);
-        // Allow accessing location
-        try {
-            onView(withText("ALLOW")).perform(click());
-        } catch (NoMatchingViewException e) {}
-
-        onView(withId(R.id.record_title_field)).perform(click(), typeText(recordName), pressBack());
-        onView(withId(R.id.add_record_button)).perform(scrollTo(), click());
-
-        try {
-            onView(withId(R.id.add_record_floating)).check(matches(isDisplayed()));
-        } catch (NoMatchingViewException e) {
-            fail("Record was not added");
-        }
-
-        Espresso.pressBack();
-        onView(withId(R.id.problem_delete_button)).perform(click());
-        onView(withText("YES")).perform(click());
-    }
-
-
-    @Test
-    public void testBTwoRecords() {
+    public void testTwoRecords() {
         onView(withId(R.id.add_problem_floating)).perform(click());
         onView(withId(R.id.problem_title_field)).perform(click(), typeText(problemName), pressBack());
         onView(withId(R.id.problem_description_field)).perform

@@ -11,30 +11,23 @@ import com.example.meditrackr.ui.MainActivity;
 import com.example.meditrackr.utils.ElasticSearch;
 
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.pressBack;
-import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.action.ViewActions.*;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static junit.framework.TestCase.fail;
+import static org.junit.Assert.*;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SearchProblemTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
+public class ProblemTooLongTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
-    private final String problemNameFirst = "Celiac";
-    private final String problemNameSecond = "Celiac Disease";
-    private final String testPatientName = "InstrumentationTestPatient";
+    private final String testPatientName;
 
-    public SearchProblemTest() {
+    public ProblemTooLongTest() {
         super(MainActivity.class);
+        testPatientName = "InstrumentationTestPatient";
     }
 
     @Rule
@@ -57,22 +50,42 @@ public class SearchProblemTest extends ActivityTestRule<MainActivity> implements
 
 
     @Test
-    public void testASearchOneProblem() {
+    public void testLongProblem() {
+
+        final String longTitle = "This problem has a very long name (over 30 characters)";
+        final String shortDesc = "But a short description";
+
+        final String shortTtile = "Short problem";
+        final String longDesc = "A very long description: over 300 characters. GJDFIGUGEHJW9EF0J90FJFIDNVIUNQ9 RQDU9SFHDUIFHUDFH 2UJ3JD9IJFDSFSFOJWIDJ9023JOSJFOIDSHFIOGJ4 98JJFIDFJOGIJ40 JEIFJEIFJDIFJ9WFJ4 UDSFJ9UJ4FI9 JEWIFJEFJ92IFJIFEJFIJFIW9J9EWJFI9WFI9FJI9FJW9FJEI9 FJE9WFJE 8FJE9FJ9FJ9IFJE39J FE9JF9J3F93JF93F9E9FJ9EJF9J3F93J9E8jkDNADASSIFUSF";
+
+        // Long title, short description
         onView(withId(R.id.add_problem_floating)).perform(click());
-        onView(withId(R.id.problem_title_field)).perform(click(), typeText(problemNameFirst), pressBack());
+        onView(withId(R.id.problem_title_field)).perform(click(), typeText(longTitle), pressBack());
+        onView(withId(R.id.problem_description_field)).perform
+                (click(), closeSoftKeyboard(), typeText(shortDesc), pressBack());
         onView(withId(R.id.problem_add_button)).perform(click());
-        onView(withId(R.id.search)).perform(click());
-        Espresso.closeSoftKeyboard();
 
         try {
-            onView(withText(problemNameFirst)).check(matches(isDisplayed()));
+            onView(withId(R.id.problem_add_button)).check(matches(isDisplayed()));
         } catch (NoMatchingViewException e) {
-            fail("Added problem not found in search");
+            fail("Problem was added with a long title");
         }
 
-        onView(withId(R.id.problems)).perform(click());
-        onView(withId(R.id.problem_delete_button)).perform(click());
-        onView(withText("YES")).perform(click());
+        // Short title, long description
+        onView(withId(R.id.problem_title_field)).perform(click(), replaceText(shortTtile), pressBack());
+        onView(withId(R.id.problem_description_field)).perform
+                (click(), replaceText(longDesc), pressBack());
+        pauseTest(3);
+        onView(withId(R.id.problem_add_button)).perform(click());
+
+        try {
+            onView(withId(R.id.problem_add_button)).check(matches(isDisplayed()));
+        } catch (NoMatchingViewException e) {
+            fail("Problem was added without a title");
+        }
+
+        // Return to Main
+        Espresso.pressBack();
     }
 
     // Creates the test patient account in case it wasn't created

@@ -50,6 +50,7 @@ import com.example.meditrackr.models.record.Record;
 import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.DateUtils;
 import com.example.meditrackr.utils.ImageRecognition;
+import com.example.meditrackr.utils.PermissionRequest;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
@@ -123,7 +124,7 @@ public class AddRecordFragment extends Fragment{
 
         LocationController controller = new LocationController(getContext());
         final int index = getArguments().getInt("INDEX");
-
+        PermissionRequest.verifyPermission(getActivity());
 
         /*---------------------------------------------------------------------------
          * INITIALIZE UI COMPONENTS
@@ -217,7 +218,6 @@ public class AddRecordFragment extends Fragment{
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (bitmaps[9] == null) {
                     StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
                     StrictMode.setVmPolicy(builder.build());

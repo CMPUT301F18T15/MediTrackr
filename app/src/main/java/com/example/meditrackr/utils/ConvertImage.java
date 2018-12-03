@@ -108,8 +108,8 @@ public class ConvertImage {
 
     public static Bitmap convertByteToBitmap(byte[] bytes){
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 425, false);
-        return newBitmap;
+        //Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 425, false);
+        return bitmap;
     }
 
     /**

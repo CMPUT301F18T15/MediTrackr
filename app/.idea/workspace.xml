@@ -14,20 +14,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f4507ba-b1b6-4087-802a-dcff70dc6105" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/CustomInfoWindowAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/CustomInfoWindowAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/FullScreenImageAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/FullScreenImageAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/MessageListAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/MessageListAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/PlaceAutocompleteAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/PlaceAutocompleteAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/SearchAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/SearchAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/careprovider/PatientAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/careprovider/PatientAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/careprovider/ProblemAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/careprovider/ProblemAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/careprovider/RecordAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/careprovider/RecordAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/BodyLocationPhotosAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/BodyLocationPhotosAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/ProblemAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/ProblemAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/RecordsAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/RecordsAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/SelectBodyLocationAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/SelectBodyLocationAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/LazyLoadingManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/LazyLoadingManager.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/LocationController.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/LocationController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/VerticalSpaceController.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/VerticalSpaceController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/BodyPhotoController.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/BodyPhotoController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/LoginController.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/LoginController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/PatientController.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/PatientController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/ProblemController.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/ProblemController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/RecordController.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/RecordController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/RegisterController.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/RegisterController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Details.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Details.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/ElasticCallBack.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/ElasticCallBack.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Photo.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Photo.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Profile.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Profile.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/BodyLocationPhotoList.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/BodyLocationPhotoList.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/CareProvider.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/CareProvider.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Comment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Comment.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/CommentList.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/CommentList.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Patient.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Patient.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/PatientList.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/PatientList.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/PlaceInfo.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/PlaceInfo.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Problem.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Problem.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/ProblemList.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/ProblemList.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Profile.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Profile.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/ProfileList.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/ProfileList.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/BodyLocation.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/BodyLocation.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/Geolocation.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/Geolocation.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/PhotoList.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/PhotoList.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/Record.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/Record.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/RecordList.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/RecordList.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/PatientSearchFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/PatientSearchFragment.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,132 +66,102 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RecordAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/careprovider/RecordAdapter.java">
+      <file leaf-file-name="Comment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Comment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="60" column="13" lean-forward="false" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#5457#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecordsAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/RecordsAdapter.java">
+      <file leaf-file-name="CommentList.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/CommentList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1188">
-              <caret line="66" column="13" lean-forward="false" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#9702#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProblemAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/ProblemAdapter.java">
+      <file leaf-file-name="Patient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Patient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
-              <caret line="75" column="13" lean-forward="false" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#12269#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SelectBodyLocationAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/SelectBodyLocationAdapter.java">
+      <file leaf-file-name="PatientList.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/PatientList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="846">
-              <caret line="47" column="13" lean-forward="false" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#5254#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomInfoWindowAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/CustomInfoWindowAdapter.java">
+      <file leaf-file-name="PlaceInfo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/PlaceInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#3105#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FullScreenImageAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/FullScreenImageAdapter.java">
+      <file leaf-file-name="Problem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Problem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="756">
-              <caret line="42" column="13" lean-forward="false" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#3678#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MessageListAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/MessageListAdapter.java">
+      <file leaf-file-name="ProblemList.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/ProblemList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="882">
-              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#6522#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlaceAutocompleteAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/PlaceAutocompleteAdapter.java">
+      <file leaf-file-name="Profile.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Profile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1098">
-              <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="63" selection-end-column="7" />
-              <folding>
-                <element signature="e#0#9614#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchAdapter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/SearchAdapter.java">
+      <file leaf-file-name="ProfileList.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/ProfileList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3456">
-              <caret line="194" column="13" lean-forward="false" selection-start-line="194" selection-start-column="13" selection-end-line="194" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#8111#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BodyLocationPhotosAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/patient/BodyLocationPhotosAdapter.java">
+      <file leaf-file-name="PatientSearchFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/PatientSearchFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="49" column="13" lean-forward="false" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#6584#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="30" lean-forward="false" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -2475,15 +2461,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/res/layout/fragment_login.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Patient.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/RecordsFragment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/BodyPhotoController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/BodyLocation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/BodyLocationPhoto.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/AddBodyPhotoFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/ThreadSaveController.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/fragment_body_location_photos.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/BodyLocationPhotoList.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/BodyLocationPhotosFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/SelectBodyLocationFragment.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/select_body_location.xml" />
@@ -2499,6 +2481,36 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/MessageListAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/PlaceAutocompleteAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/adapters/SearchAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/BodyPhotoController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/PatientController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/ProblemController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/RecordController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/RegisterController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/LazyLoadingManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/LocationController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/VerticalSpaceController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Details.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/ElasticCallBack.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Photo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Profile.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/BodyLocation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/Geolocation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/PhotoList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/Record.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/RecordList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/BodyLocationPhotoList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/CareProvider.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Comment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/CommentList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Patient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/PatientList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/PlaceInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Problem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/ProblemList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Profile.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/ProfileList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/PatientSearchFragment.java" />
       </list>
     </option>
   </component>
@@ -2585,6 +2597,50 @@
               <item name="meditrackr" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="meditrackr" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="interfaces" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="meditrackr" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="meditrackr" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="record" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="meditrackr" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="meditrackr" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="careprovider" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="meditrackr" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -2766,6 +2822,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="317" y="24" width="1603" height="1056" extended-state="4" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -2783,7 +2840,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24983944" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32901832" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32901832" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -2807,239 +2864,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/RecordList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="43" column="13" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/ProblemList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="42" column="13" lean-forward="false" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Problem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="26" column="7" lean-forward="false" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/PhotoList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/BodyLocationPhoto.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/LocationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="76" column="13" lean-forward="false" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/NetworkCheckController.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/ThreadSaveController.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/VerticalSpaceController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="35" column="13" lean-forward="false" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/LoginFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="59" column="13" lean-forward="false" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/RecordFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="137" column="56" lean-forward="false" selection-start-line="137" selection-start-column="54" selection-end-line="137" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/RecordController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="34" column="46" lean-forward="false" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/LazyLoadingManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="200" column="32" lean-forward="false" selection-start-line="200" selection-start-column="32" selection-end-line="200" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/FullScreenViewActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="59" column="40" lean-forward="false" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/ProblemController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="48" column="41" lean-forward="false" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/BodyPhotoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="30" column="33" lean-forward="false" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_problems.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/AddProblemFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="73" column="58" lean-forward="false" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/patient/RecordsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="141" column="48" lean-forward="false" selection-start-line="141" selection-start-column="48" selection-end-line="141" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/BodyLocation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-78">
-          <caret line="51" column="19" lean-forward="false" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-810">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_login.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1081">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/custom_info_window.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_add_body_location_photo.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2809">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_add_patient.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3331">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_add_record.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="409" column="17" lean-forward="false" selection-start-line="409" selection-start-column="17" selection-end-line="409" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_camera.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_edit_problem.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1872">
-          <caret line="104" column="47" lean-forward="false" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/BodyLocationPhotoList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="38" lean-forward="false" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_edit_record.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3118,8 +2942,8 @@
         <state relative-caret-position="190">
           <caret line="60" column="13" lean-forward="false" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
           <folding>
-            <element signature="e#0#5457#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#5457#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3129,8 +2953,8 @@
         <state relative-caret-position="190">
           <caret line="49" column="13" lean-forward="false" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
           <folding>
-            <element signature="e#0#6584#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#6584#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3140,8 +2964,8 @@
         <state relative-caret-position="1350">
           <caret line="75" column="13" lean-forward="false" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
           <folding>
-            <element signature="e#0#12269#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#12269#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3151,8 +2975,8 @@
         <state relative-caret-position="1188">
           <caret line="66" column="13" lean-forward="false" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
           <folding>
-            <element signature="e#0#9702#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#9702#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3162,8 +2986,8 @@
         <state relative-caret-position="702">
           <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
           <folding>
-            <element signature="e#0#3105#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#3105#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3173,8 +2997,8 @@
         <state relative-caret-position="846">
           <caret line="47" column="13" lean-forward="false" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
           <folding>
-            <element signature="e#0#5254#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#5254#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3184,8 +3008,8 @@
         <state relative-caret-position="756">
           <caret line="42" column="13" lean-forward="false" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
           <folding>
-            <element signature="e#0#3678#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#3678#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3195,8 +3019,8 @@
         <state relative-caret-position="882">
           <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
-            <element signature="e#0#6522#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#6522#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3206,8 +3030,8 @@
         <state relative-caret-position="1098">
           <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="63" selection-end-column="7" />
           <folding>
-            <element signature="e#0#9614#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#9614#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3217,9 +3041,257 @@
         <state relative-caret-position="3456">
           <caret line="194" column="13" lean-forward="false" selection-start-line="194" selection-start-column="13" selection-end-line="194" selection-end-column="13" />
           <folding>
-            <element signature="e#0#8111#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#8111#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/BodyPhotoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="77" />
+          <folding>
+            <element signature="e#0#2468#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/PatientController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/ProblemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/RecordController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="15" lean-forward="false" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/model/RegisterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/LazyLoadingManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="27" lean-forward="false" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/LocationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/controllers/VerticalSpaceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Details.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="64" lean-forward="true" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/ElasticCallBack.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#945#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Photo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/interfaces/Profile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/BodyLocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/Geolocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/PhotoList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/Record.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="15" lean-forward="false" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/record/RecordList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/BodyLocationPhotoList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="30" lean-forward="false" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/CareProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Comment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/CommentList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Patient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/PatientList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/PlaceInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Problem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/ProblemList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/Profile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/models/ProfileList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/meditrackr/ui/careprovider/PatientSearchFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="30" lean-forward="false" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>

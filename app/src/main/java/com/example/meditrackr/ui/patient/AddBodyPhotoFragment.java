@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ import es.dmoral.toasty.Toasty;
 
 import static android.app.Activity.RESULT_OK;
 
-public class AddBodyPhotoFragment extends Fragment {
+public class AddBodyPhotoFragment extends DialogFragment {
     private ImageView bodyPhoto;
     private Bitmap bitmap;
     private EditText photoID;

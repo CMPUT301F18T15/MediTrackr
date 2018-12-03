@@ -83,7 +83,7 @@ public class ElasticSearch {
     private static String INDEX_NAME = "cmput301f18t15test";
     private static String PROFILE_TYPE = "profile";
     private static String IS_CAREPROVIDER = "isCareProvider";
-    private static String DATABASE = "http://cmput301.softwareprocess.es:8080/";
+    private static String DATABASE = "http://es2.softwareprocess.ca:8080/";
 
 
 

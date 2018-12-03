@@ -1,7 +1,12 @@
 package com.example.meditrackr.ui.patient;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -16,16 +21,27 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.utils.ConvertImage;
 
-public class SelectPinBodyLocationFragment extends Fragment{
+public class SelectPinBodyLocationFragment extends DialogFragment {
 
-    private float XPercent;
-    private float YPercent;
     private ImageView bodyPhotoView;
-    private ImageView pin;
+    private ImageView bodyPhotoCanvas;
+    private Button saveBodyLocationButton;
+    private BodyLocation bodyPhotoSrc;
+    private Canvas canvas;
+    private Paint paint;
+    private Button saveButton;
+    private Bitmap bitmap;
+    private Bitmap bodyPhotoBitmap;
+    private float x;
+    private float y;
+
     private BodyLocation bodyLocation = LazyLoadingManager.getBodyLocationPhoto();
 
-    public static SelectPinBodyLocationFragment newInstance() {
+    public static SelectPinBodyLocationFragment newInstance(BodyLocation photo) {
         SelectPinBodyLocationFragment fragment = new SelectPinBodyLocationFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("data", photo);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -34,16 +50,26 @@ public class SelectPinBodyLocationFragment extends Fragment{
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_select_body_location, container, false);
 
+        bodyPhotoSrc = (BodyLocation) getArguments().getSerializable("data");
+        bodyPhotoBitmap = ConvertImage.convertByteToBitmap(bodyPhotoSrc.getImage());
 
         bodyPhotoView = (ImageView) rootView.findViewById(R.id.body_location_image);
-        pin = (ImageView) rootView.findViewById(R.id.pin);
-        final Button saveButton = (Button) rootView.findViewById(R.id.save_body_button);
+        bodyPhotoCanvas = (ImageView) rootView.findViewById(R.id.body_location_canvas);
+        saveButton = (Button) rootView.findViewById(R.id.save_body_button);
 
 
         // set bodyPhoto to the current photo
-        bodyLocation= LazyLoadingManager.getBodyLocationPhoto();
-        final Bitmap bitmap = ConvertImage.convertByteToBitmap(bodyLocation.getImage());
-        bodyPhotoView.setImageBitmap(bitmap);
+        bodyLocation = LazyLoadingManager.getBodyLocationPhoto();
+        bitmap = ConvertImage.convertByteToBitmap(bodyLocation.getImage());
+
+
+        bodyPhotoView.setImageBitmap(bodyPhotoBitmap);
+        bodyPhotoCanvas.setImageBitmap(bitmap);
+
+        canvas = new Canvas(bitmap);
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(Color.RED);
+
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -52,13 +78,15 @@ public class SelectPinBodyLocationFragment extends Fragment{
                 // Prepares to switch fragments when button is clicked
                 FragmentManager manager = getFragmentManager();
                 int count = manager.getBackStackEntryCount();
+                bitmap = saveBitmapImage();
                 AddRecordFragment.bodyLocationAdd = new BodyLocation(
                         bodyLocation.getName(),
                         ConvertImage.convertBitmapToBytes(bitmap),
                         bodyLocation.getID(),
-                        XPercent,
-                        YPercent);
+                        x,
+                        y);
                 AddRecordFragment.bodyBitmaps[0] = bitmap;
+                dismiss();
                 manager.popBackStack(count - 1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
@@ -67,13 +95,15 @@ public class SelectPinBodyLocationFragment extends Fragment{
         bodyPhotoView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-                    // makes the pin more centered
-                    XPercent = (float) (event.getX() + 0.5 * pin.getWidth()) / v.getWidth();
-                    YPercent = event.getY() / v.getHeight();
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        // we have to scale from phone view dimensions to pixels on canvas
+                        x = canvas.getWidth() * (event.getX()/v.getWidth());
+                        y = canvas.getHeight() * (event.getY()/v.getHeight());
 
-                    // update the pin location
-                    updatePin(bodyPhotoView, pin);
+                        drawPoint(x, y);
+                        v.invalidate();
+                        return true;
                 }
                 return false;
             }
@@ -83,11 +113,16 @@ public class SelectPinBodyLocationFragment extends Fragment{
 
     }
 
+    private void drawPoint(float x, float y) {
+        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+        canvas.drawCircle(x, y, 10, paint);
+    }
 
-    private void updatePin(ImageView bodyPhotoView, ImageView pin) {
-        pin.setX((bodyPhotoView.getWidth()*XPercent) - pin.getWidth()/5);
-        pin.setY((bodyPhotoView.getHeight()*YPercent) - pin.getHeight()/5);
-        pin.setVisibility(View.VISIBLE);
+    private Bitmap saveBitmapImage() {
+        Bitmap res = ConvertImage.convertByteToBitmap(bodyPhotoSrc.getImage());
+        Canvas overlay = new Canvas(res);
+        overlay.drawCircle(x, y,10, paint);
+        return res;
     }
 
 }

@@ -60,7 +60,6 @@ public class BodyLocationView extends Fragment {
             }
         });
 
-
         return rootView;
     }
 

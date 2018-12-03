@@ -89,14 +89,6 @@ public class RecordsFragment extends Fragment {
         final TextView messageClick = (TextView) rootView.findViewById(R.id.message_click);
         final TextView recordsClick = (TextView) rootView.findViewById(R.id.records_click);
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                patient = (Patient)ElasticSearch.searchProfile(patient.getUsername());
-                LazyLoadingManager.setProfile(patient);
-            }
-        });
-        thread.start();
 
 
         // Get index as argument from bundle

@@ -27,8 +27,14 @@ import android.widget.Filter;
 
 
 /**
- * Crated by Skryt on Nov 18, 2018
+ * CustomerFilter
+ *
+ * The following class is an adapter type that makes parsing for search querys much easier
+
+ * @author Orest Cokan
+ * @version 1.0 Nov 18, 2018
  */
+
 
 public class CustomFilter {
     private boolean isProblem;

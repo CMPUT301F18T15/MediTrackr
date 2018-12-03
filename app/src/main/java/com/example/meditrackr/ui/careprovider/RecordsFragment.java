@@ -104,6 +104,7 @@ public class RecordsFragment extends Fragment {
         addRecord.setVisibility(View.INVISIBLE);
         addRecord.setClickable(false);
 
+
         // Initialize adapter to put the records in the recyclerview
         recordsList.setHasFixedSize(false);
         adapter = new RecordAdapter(getActivity(), records);

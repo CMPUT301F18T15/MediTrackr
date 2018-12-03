@@ -155,7 +155,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/body_location_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Body Location"
@@ -166,24 +166,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="2"
-                    app:layout_constraintTop_toBottomOf="@+id/textView">
+                    app:layout_constraintTop_toBottomOf="@+id/body_location_title">
 
                     <ImageView
                         android:id="@+id/record_body_image_1"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:scaleType="centerCrop" />
-
-                    <ImageView
-                        android:id="@+id/record_body_image_2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
                         android:scaleType="centerCrop" />

@@ -20,6 +20,7 @@ import es.dmoral.toasty.Toasty;
 /**
  * Crated by Skryt on Nov 27, 2018
  */
+
 public class ImageRecognition {
     private static String api = "2aa6c1dbee28492baa5a91a44929d57f";
     private static String website = "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0";

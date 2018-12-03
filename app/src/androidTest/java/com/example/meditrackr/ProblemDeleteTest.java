@@ -40,6 +40,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
+// Test class for deleting problems
 public class ProblemDeleteTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
     // Initialize test variables
     private final String problemName = "Hydrophobia";

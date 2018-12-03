@@ -45,6 +45,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.TestCase.fail;
 
+// Test class for searching for problems
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SearchProblemTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 

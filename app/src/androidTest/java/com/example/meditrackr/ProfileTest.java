@@ -38,6 +38,7 @@ import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
+// Test class for profiles
 public class ProfileTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
     private final String testDoctorName = "TestDoctorAcc";

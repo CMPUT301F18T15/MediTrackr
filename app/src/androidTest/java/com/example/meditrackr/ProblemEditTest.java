@@ -40,6 +40,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
+// Test class for editing problems
 public class ProblemEditTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
     private final String problemName = "Hydrophobia";

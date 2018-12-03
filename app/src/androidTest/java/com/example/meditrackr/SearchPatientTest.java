@@ -39,7 +39,7 @@ import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
-
+// Test class for searching for patients
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SearchPatientTest extends ActivityTestRule<MainActivity> {
 

@@ -40,6 +40,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.*;
 
+// Test class for too long problem titles
 public class ProblemTooLongTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
     private final String testPatientName;

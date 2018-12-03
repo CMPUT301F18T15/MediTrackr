@@ -43,6 +43,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 import static org.junit.Assert.*;
 
+// Test class for registering
 public class RegisterTest extends ActivityTestRule<LoginActivity> {
 
     private Context instrumentationCtx;

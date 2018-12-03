@@ -61,7 +61,7 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
  * @version 1.0 Nov 10, 2018
  */
 
-// Class shows a patient's record list and info for patients in a recycler view
+// Adapter class shows a patient's record list and info for patients in a recycler view
 public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHolder>{
     // Class objects
     private FragmentActivity activity;

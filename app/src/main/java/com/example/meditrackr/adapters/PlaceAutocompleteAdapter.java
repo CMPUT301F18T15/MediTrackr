@@ -57,7 +57,7 @@ import es.dmoral.toasty.Toasty;
  *@version 1.0 Nov 16, 2018
  */
 
-// Class enables autocomplete functionality when filling out edit text box
+// Adapter class enables autocomplete functionality when filling out edit text box
 public class PlaceAutocompleteAdapter
         extends ArrayAdapter<AutocompletePrediction> implements Filterable {
 

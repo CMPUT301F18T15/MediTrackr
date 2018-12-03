@@ -1,5 +1,24 @@
+/*
+ *    Apache 2.0 License Notice
+ *
+ *    Copyright 2018 CMPUT301F18T15
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ *
+ */
 package com.example.meditrackr.adapters.patient;
 
+//imports
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.app.FragmentActivity;
@@ -25,46 +44,51 @@ import com.example.meditrackr.utils.ConvertImage;
 /**
  * Crated by Skryt on Dec 02, 2018
  */
+
+// Adapter class allows patient to select a body location from a recycler view
 public class SelectBodyLocationAdapter extends RecyclerView.Adapter<SelectBodyLocationAdapter.ViewHolder> {
+    // Class objects
     private FragmentActivity activity;
     private Context context;
     private static Patient patient = LazyLoadingManager.getPatient();
     private BodyLocationPhotoList photos = patient.getBodyLocationPhotos();
 
-    // constructor
+    // Constructor
     public SelectBodyLocationAdapter(FragmentActivity activity, Context context) {
         this.activity = activity;
         this.context = context;
     }
 
-    // display the view
+    // Display the view
     @Override
     public SelectBodyLocationAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Creates view objects based on layouts in XML
         LayoutInflater inflater = (LayoutInflater) activity
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE); //creates view objects based on layouts in XML
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View bodyView = inflater.inflate(R.layout.body_location_entry, parent, false);
         return new SelectBodyLocationAdapter.ViewHolder(bodyView, this);
     }
 
 
-    // set the data into each viewHolder (ie. place what each record has into the view)
+    // Set the data into each viewHolder (ie. place what each record has into the view)
     @Override
     public void onBindViewHolder(SelectBodyLocationAdapter.ViewHolder holder, int position) {
         if(photos.getBodyLocationPhoto(position).getImage() == null){
+            // If body location photo is null set image in holder to null
             holder.photo.setImageBitmap(null);
             Log.d("ImageTest", "New profile this should be shown!");
-        }else {
+        }else { // Else if photo is not null display photo
             BodyLocation photo = photos.getBodyLocationPhoto(position);
             Bitmap bitmap = ConvertImage.convertByteToBitmap(photos.getBodyLocationPhoto(position).getImage());
             holder.photo.setImageBitmap(bitmap);
-            if(photo.getName() != null){
+            if(photo.getName() != null){ // Indicate photo's body location with text
                 holder.labelPhoto.setText(photo.getName());
             }
         }
     }
 
 
-    //get the number of records in RecyclerView
+    // Get the number of records in RecyclerView
     @Override
     public int getItemCount() {
         try {
@@ -75,13 +99,13 @@ public class SelectBodyLocationAdapter extends RecyclerView.Adapter<SelectBodyLo
     }
 
 
-    // place each record into its corresponding view
+    // Place each record into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private SelectBodyLocationAdapter adapter;
         public ImageView photo;
         public TextView labelPhoto;
 
-        //gets the corresponding data for each view
+        // Gets the corresponding data for each view
         public ViewHolder(View itemView, final SelectBodyLocationAdapter adapter){
             super(itemView);
             photo = itemView.findViewById(R.id.image_item_view);

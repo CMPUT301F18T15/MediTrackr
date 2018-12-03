@@ -44,14 +44,14 @@ import com.example.meditrackr.utils.CustomFilter;
 import java.util.ArrayList;
 
 /**
- * creates a s search adapter for a user to use. allows user to search for items throughout the app
+ * creates a search adapter for a user to use. allows user to search for items throughout the app
  * ie look for problem, look for care provider, etc
  *
  * @author Orest Cokan
  * @version 1.0 Nov 18, 2018
  */
 
-// Class shows a result list in a recycler view
+// Adapter class shows a result list in a recycler view
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
     // Class objects
     private FragmentActivity activity;
@@ -88,26 +88,26 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
 
-    // Class places each search item into its corresponding view
+    // Places each search item into its corresponding view
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.titleTxt.setText(results.get(position).getTitle());
         holder.descriptionTxt.setText(results.get(position).getDescription());
 
         switch (type){
-            case 1:
+            case 1: // If the user is searching for a record keyword
                 if(results.get(position).isRecord()){
                     holder.typeTxt.setText("Record");
                 }else {
                     holder.typeTxt.setText("Problem");
                 }
                 break;
-            case 2:
+            case 2: // If the user is searching for a geolocation keyword
                 holder.typeTxt.setText("Geolocation");
                 holder.distanceTxt.setText("Distance: "+
                         results.get(position).getGeolocation().getDistance());
                 break;
-            case 3:
+            case 3: // If the user is searching for a body location keyword
                 holder.typeTxt.setText("Bodylocation");
                 break;
         }
@@ -125,8 +125,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
 
-
+// Displays recycler view
 public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    // Class objects
     private SearchAdapter adapter;
     private ImageView img;
     private TextView titleTxt, typeTxt, descriptionTxt, usernameTxt, distanceTxt;
@@ -146,8 +147,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder implements View.O
         }
 
 
-    // onclick listener for each problem to be viewed
-    // this onclick listener is Gods work
+    // Onclick listener for each problem to be viewed
     @Override
     public void onClick(View v) {
         int position = getAdapterPosition();

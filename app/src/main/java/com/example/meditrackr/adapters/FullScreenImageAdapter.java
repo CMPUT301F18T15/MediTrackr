@@ -25,7 +25,7 @@ package com.example.meditrackr.adapters;
      * @version 1.0  Nov 17, 2018
      */
 
-
+// imports
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -42,8 +42,9 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.models.record.PhotoList;
 import com.example.meditrackr.utils.ConvertImage;
 
+    // Adapter class for viewing images in a slideshow
     public class FullScreenImageAdapter extends PagerAdapter {
-
+        // Class objects
         private Activity activity;
         private PhotoList images;
         private LayoutInflater inflater;
@@ -56,23 +57,26 @@ import com.example.meditrackr.utils.ConvertImage;
          * @param activity      the activity that it is using
          * @param images        the images that the class will display
          */
-        // constructor
+        // Constructor
         public FullScreenImageAdapter(Activity activity,
                                       PhotoList images) {
             this.activity = activity;
             this.images = images;
         }
 
+        // Returns number of images
         @Override
         public int getCount() {
             return this.images.getSize();
         }
 
+        // Returns view for each object/image
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view == ((RelativeLayout) object);
         }
 
+        // Instantiate view for slideshow
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView imgDisplay;
@@ -91,7 +95,7 @@ import com.example.meditrackr.utils.ConvertImage;
             byte[] image = images.getImage(position);
             imgDisplay.setImageBitmap(ConvertImage.convertByteToBitmap(image));
             ((ViewPager) container).addView(viewLayout);
-            return viewLayout; // return image
+            return viewLayout; // Return image
         }
 
 

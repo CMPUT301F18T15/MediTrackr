@@ -66,7 +66,7 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
  *
  */
 
-// Class shows a patient's problem list and info for patients in a recycler view
+// Adapter class shows a patient's problem list and info for patients in a recycler view
 public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder>{
     // Class objects
     private FragmentActivity activity;

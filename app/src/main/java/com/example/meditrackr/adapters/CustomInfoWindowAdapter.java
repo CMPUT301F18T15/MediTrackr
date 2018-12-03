@@ -35,7 +35,7 @@ import com.google.android.gms.maps.model.Marker;
  * @version 1.0 Nov 18, 2018
  */
 
-// Class that provides the customized rendering of the mini Google Map view
+// Adapter class that provides the customized rendering of the mini Google Map view
 public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     // Class objects
     private final View mWindow;

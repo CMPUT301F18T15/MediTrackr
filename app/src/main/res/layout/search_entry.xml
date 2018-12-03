@@ -31,8 +31,9 @@
             android:id="@+id/usernameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:textColor="@color/black"
-            android:textSize="22sp"
+            android:textSize="18sp"
             card_view:layout_constraintStart_toEndOf="@+id/playerImage"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -57,7 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="20sp"
             android:textStyle="bold"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/usernameText" />
@@ -68,10 +71,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginRight="8dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:text="Position"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/black"
+            android:textSize="14sp"
             card_view:layout_constraintRight_toRightOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -81,7 +85,9 @@
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
             android:textColor="@color/black"
+            android:textSize="12sp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"

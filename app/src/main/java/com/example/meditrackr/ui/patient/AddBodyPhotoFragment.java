@@ -139,7 +139,6 @@ public class AddBodyPhotoFragment extends DialogFragment {
                 Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, 1450, 1500, false);
                 bodyPhoto.setImageBitmap(newBitmap);
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

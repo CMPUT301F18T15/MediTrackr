@@ -101,6 +101,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
         // Display each record's date and description in each viewHolder
         holder.date.setText(records.getRecord(position).getDate());
         holder.description.setText(records.getRecord(position).getDescription());
+        holder.title.setText(records.getRecord(position).getTitle());
     }
 
     // Return the number of records currently in RecyclerView
@@ -124,6 +125,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
         private RecordsAdapter adapter;
         public TextView date;
         public TextView description;
+        private TextView title;
         private MaterialIconView deleteRecord;
         private MaterialIconView editRecord;
 
@@ -131,6 +133,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
         private ViewHolder(View itemView, final RecordsAdapter adapter){
             super(itemView);
             date = itemView.findViewById(R.id.record_date);
+            title = itemView.findViewById(R.id.record_title);
             description = itemView.findViewById(R.id.record_description);
             deleteRecord = itemView.findViewById(R.id.record_delete_button);
             editRecord= itemView.findViewById(R.id.record_edit_button);

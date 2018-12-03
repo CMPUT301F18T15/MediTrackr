@@ -1,15 +1,14 @@
 package com.example.meditrackr;
 
-import android.app.Instrumentation;
 import android.content.Intent;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
 
-import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.ui.LoginActivity;
 import com.example.meditrackr.ui.MainActivity;
+import com.example.meditrackr.utils.ElasticSearch;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -17,32 +16,28 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.pressBack;
-import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.fail;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RecordTest extends ActivityTestRule<MainActivity> {
+public class RecordMultipleTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
-    final String problemName = "Hydrophobia";
-    final String problemDesc = "Water D:";
-    final String testPatientName = "InstrumentationTestPatient";
-    final String recordName = "Spooked";
-    final String recordDesc = "Water is spooking me OwO";
-    Instrumentation.ActivityMonitor activityMonitor;
+    private final String testPatientName = "InstrumentationTestPatient";
+    private final String problemName = "Hydrophobia";
+    private final String problemDesc = "Water D:";
+    private final String recordName = "Spooked";
+    private final String recordDesc = "Water is spooking me OwO";
 
-    public RecordTest() {
+    public RecordMultipleTest() {
         super(MainActivity.class);
     }
 
@@ -53,11 +48,9 @@ public class RecordTest extends ActivityTestRule<MainActivity> {
     @Before
     public void login() {
         if (ElasticSearch.searchProfile(testPatientName) == null) {
-            createTestPatient();
+            createTestProfile();
         } else {
             // Login to testPatient
-            activityMonitor = getInstrumentation().addMonitor
-                    (MainActivity.class.getName(), null, false);
             Intent start = new Intent();
             loginIntent.launchActivity(start);
             onView(withId(R.id.patient_username)).perform
@@ -66,48 +59,8 @@ public class RecordTest extends ActivityTestRule<MainActivity> {
         }
     }
 
-
     @Test
-    public void testANewProblem() {
-        onView(withId(R.id.add_problem_floating)).perform(click());
-        onView(withId(R.id.problem_title_field)).perform(click(), typeText(problemName), pressBack());
-        onView(withId(R.id.problem_description_field)).perform
-                (click(), closeSoftKeyboard(), typeText(problemDesc), pressBack());
-        onView(withId(R.id.problem_add_button)).perform(click());
-        onView(withId(R.id.problem_description)).perform(click());
-        onView(withId(R.id.add_record_floating)).perform(click());
-
-        // Allow accessing location
-        try {
-            onView(withText("ALLOW")).perform(click());
-        } catch (NoMatchingViewException e) {}
-
-        onView(withId(R.id.record_title_field)).perform(click(), typeText(recordName), pressBack());
-        onView(withId(R.id.add_record_button)).perform(scrollTo(), click());
-        try {
-            onView(withId(R.id.add_record_button)).check(matches(isDisplayed()));
-        } catch (NoMatchingViewException e) {
-            fail("Record was added without a description");
-        }
-
-        onView(withId(R.id.record_title_field)).perform(scrollTo(), click(), replaceText(""), pressBack());
-        onView(withId(R.id.record_description_field)).perform(scrollTo(), click(), typeText(recordDesc), pressBack());
-        onView(withId(R.id.add_record_button)).perform(scrollTo(), click());
-        try {
-            onView(withId(R.id.add_record_button)).check(matches(isDisplayed()));
-        } catch (NoMatchingViewException e) {
-            fail("Record was added without a name");
-        }
-
-        Espresso.pressBack();
-        Espresso.pressBack();
-        onView(withId(R.id.problem_delete_button)).perform(click());
-        onView(withText("YES")).perform(click());
-    }
-
-
-    @Test
-    public void testBTwoRecords() {
+    public void testTwoRecords() {
         onView(withId(R.id.add_problem_floating)).perform(click());
         onView(withId(R.id.problem_title_field)).perform(click(), typeText(problemName), pressBack());
         onView(withId(R.id.problem_description_field)).perform
@@ -117,17 +70,12 @@ public class RecordTest extends ActivityTestRule<MainActivity> {
         onView(withId(R.id.add_record_floating)).perform(click());
         try { // Allow accessing location
             onView(withText("ALLOW")).perform(click());
-        } catch (NoMatchingViewException e) {}
+        } catch (NoMatchingViewException e){ }
 
         // First Record
         onView(withId(R.id.record_title_field)).perform(click(), typeText(recordName), pressBack());
         onView(withId(R.id.record_description_field)).perform(scrollTo(), click(), typeText(recordDesc), pressBack());
         onView(withId(R.id.add_record_button)).perform(scrollTo(), click());
-        try {
-            onView(withId(R.id.add_record_floating)).check(matches(isDisplayed()));
-        } catch (NoMatchingViewException e) {
-            fail("Record was added without a name");
-        }
 
         // Second Record
         onView(withId(R.id.add_record_floating)).perform(click());
@@ -138,16 +86,14 @@ public class RecordTest extends ActivityTestRule<MainActivity> {
         onView(withId(R.id.record_description_field))
                 .perform(scrollTo(), click(), typeText("Press F to pay respects"), pressBack());
         onView(withId(R.id.add_record_button)).perform(scrollTo(), click());
-        
-        Espresso.pressBack();
-        Espresso.pressBack();
+
         Espresso.pressBack();
         onView(withId(R.id.problem_delete_button)).perform(click());
         onView(withText("YES")).perform(click());
     }
 
 
-    private void createTestPatient() {
+    public void createTestProfile() {
         Intent start = new Intent();
         loginIntent.launchActivity(start);
         onView(withId(R.id.not_member)).perform(click());
@@ -156,5 +102,10 @@ public class RecordTest extends ActivityTestRule<MainActivity> {
         onView(withId(R.id.patient_email)).perform(click(), typeText("testPatient@test.com"), pressBack());
         onView(withId(R.id.Patient)).perform(click());
         onView(withId(R.id.signup_button)).perform(click());
+    }
+
+    public void pauseTest(int seconds) {
+        final long start = System.currentTimeMillis();
+        while (System.currentTimeMillis() < start + (long) seconds) { }
     }
 }

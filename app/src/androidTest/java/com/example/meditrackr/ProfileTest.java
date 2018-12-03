@@ -1,21 +1,17 @@
 package com.example.meditrackr;
 
-import android.app.Instrumentation;
 import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
 
-import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.ui.LoginActivity;
 import com.example.meditrackr.ui.MainActivity;
+import com.example.meditrackr.utils.ElasticSearch;
 
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressBack;
@@ -23,13 +19,13 @@ import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
+public class ProfileTest extends ActivityTestRule<MainActivity> implements IntentTestInterface {
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ProfileTest extends ActivityTestRule<MainActivity>  {
-
-    final String testDoctorName = "TestDoctorAcc";
-    final String newName = testDoctorName + "New";
-    Instrumentation.ActivityMonitor activityMonitor;
+    private final String testDoctorName = "TestDoctorAcc";
+    private final String testDoctorEmail = "testDoctor@test.com";
+    private final String testDoctorPhone = "7808471293";
+    private final String newEmail = "testDoctor@gmail.com";
+    private final String newPhone = "7801234567";
 
     public ProfileTest() {
         super(MainActivity.class);
@@ -42,58 +38,43 @@ public class ProfileTest extends ActivityTestRule<MainActivity>  {
     @Before
     public void login() {
         if (ElasticSearch.searchProfile(testDoctorName) == null) {
-            createTestDoctor();
+            createTestProfile();
         } else {
             // Login to testDoctor
-            activityMonitor = getInstrumentation().addMonitor
-                    (MainActivity.class.getName(), null, false);
             Intent start = new Intent();
             loginIntent.launchActivity(start);
         }
     }
 
-
+    // Run this test when account email and phone are different from newEmail and newPhone.
     @Test
-    public void testAModifyProfile() {
+    public void testModifyProfile() {
         onView(withId(R.id.patient_username)).perform
                 (click(), typeText(testDoctorName), pressBack());
         onView(withId(R.id.login_button)).perform(click());
 
         onView(withId(R.id.profile)).perform(click());
         onView(withId(R.id.edit_button)).perform(click());
-        final long startTime = System.currentTimeMillis();
-        final long end = startTime + 1000;
-        while (System.currentTimeMillis() < end);
-        onView(withId(R.id.patient_username)).perform(click(), replaceText(newName), pressBack());
+        pauseTest(1);
+        onView(withId(R.id.patient_email)).perform(click(), replaceText(newEmail), pressBack());
+        onView(withId(R.id.patient_phone)).perform(click(), replaceText(newPhone), pressBack());
         onView(withId(R.id.save_edits_button)).perform(click());
     }
 
-
-    @Test
-    public void testBLoginNewProfile() {
-        onView(withId(R.id.patient_username)).perform
-                (click(), typeText(newName), pressBack());
-        onView(withId(R.id.login_button)).perform(click());
-
-        onView(withId(R.id.profile)).perform(click());
-        onView(withId(R.id.edit_button)).perform(click());
-        final long startTime = System.currentTimeMillis();
-        final long end = startTime + 1000;
-        while (System.currentTimeMillis() < end);
-
-        onView(withId(R.id.patient_username)).perform(click(), replaceText(testDoctorName), pressBack());
-        onView(withId(R.id.save_edits_button)).perform(click());
-    }
-
-    private void createTestDoctor() {
+    public void createTestProfile() {
         Intent start = new Intent();
         loginIntent.launchActivity(start);
         onView(withId(R.id.not_member)).perform(click());
         onView(withId(R.id.patient_username)).perform(click(), typeText(testDoctorName), pressBack());
-        onView(withId(R.id.phone_number)).perform(click(), typeText("7808471293"), pressBack());
-        onView(withId(R.id.patient_email)).perform(click(), typeText("testDoctor@test.com"), pressBack());
+        onView(withId(R.id.phone_number)).perform(click(), typeText(testDoctorPhone), pressBack());
+        onView(withId(R.id.patient_email)).perform(click(), typeText(testDoctorEmail), pressBack());
         onView(withId(R.id.CareProvider)).perform(click());
         onView(withId(R.id.signup_button)).perform(click());
+    }
+
+    public void pauseTest(int seconds) {
+        final long start = System.currentTimeMillis();
+        while (System.currentTimeMillis() < start + (long) seconds) { }
     }
 
 }

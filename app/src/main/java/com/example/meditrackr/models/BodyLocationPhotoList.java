@@ -25,9 +25,7 @@ import com.example.meditrackr.models.record.Record;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
 // A model class holding all information pertaining to the body location photo list
-=======
 /**
  * this class creates a list of body locations which it can add to the list, delete from the list
  * get a photo from the list, and get the number of photos in the list
@@ -35,7 +33,6 @@ import java.util.ArrayList;
  * @author Veronica Salm
  * @version 1.0 Dec 2, 2018
  */
->>>>>>> 22f1a1687bb4f66be89da2427ef2c49d85879c95
 public class BodyLocationPhotoList implements Serializable {
 
     // Create array of bitmaps

@@ -5,10 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,16 +30,22 @@ import com.example.meditrackr.utils.PermissionRequest;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import es.dmoral.toasty.Toasty;
 
 import static android.app.Activity.RESULT_OK;
 
-public class AddBodyPhotoFragment extends DialogFragment {
+public class AddBodyPhotoFragment extends Fragment {
     private ImageView bodyPhoto;
     private Bitmap bitmap;
     private EditText photoID;
+    private String pictureImagePath = "";
 
     // needed for getting new body location photo image
     private static final int UPLOAD_REQUEST_CODE = 1;
@@ -95,9 +104,19 @@ public class AddBodyPhotoFragment extends DialogFragment {
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,
-                        IMAGE_REQUEST_CODE);
+                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                StrictMode.setVmPolicy(builder.build());
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String imageFileName = timeStamp + ".jpg";
+                File storageDir = Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES);
+                pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
+                File file = new File(pictureImagePath);
+                Uri outputFileUri = Uri.fromFile(file);
+
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+                startActivityForResult(cameraIntent, IMAGE_REQUEST_CODE);
             }
         });
 
@@ -118,29 +137,94 @@ public class AddBodyPhotoFragment extends DialogFragment {
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             // Allows intent to extract image taken by phone's camera
             getActivity();
-            bitmap = (Bitmap) data.getExtras().get("data");
-            assert bitmap != null;
-            Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, 1450, 1500, false);
-            bodyPhoto.setImageBitmap(newBitmap);
+            File imgFile = new  File(pictureImagePath);
+            if(imgFile.exists()) {
+                Log.d("BITMSPIMAGE", "do we get here");
+                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                bodyPhoto.setImageBitmap(bitmap);
 
-            // Image recognition
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-            final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
-            ImageRecognition.mContext = getContext();
-            ImageRecognition.recognizeImage(inputStream);
+                // Image recognition
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+
+                ImageRecognition.mContext = getContext();
+                ImageRecognition.recognizeImage(inputStream);
+            }
 
         } else if (requestCode == UPLOAD_REQUEST_CODE && resultCode == RESULT_OK) {
             getActivity();
             Uri targetUri = data.getData();
             try {
                 bitmap = BitmapFactory.decodeStream(getContext().getContentResolver().openInputStream(targetUri));
-                Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, 1450, 1500, false);
+                Bitmap newBitmap = ConvertImage.scaleBitmap(bitmap, 1450, 1500);
                 bodyPhoto.setImageBitmap(newBitmap);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+
+    private Bitmap getBitmap(String path) {
+
+        Uri uri = Uri.fromFile(new File(path));
+        InputStream in = null;
+        try {
+            final int IMAGE_MAX_SIZE = 1200000; // 1.2MP
+            in = getContext().getContentResolver().openInputStream(uri);
+
+            // Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(in, null, o);
+            in.close();
+
+
+            int scale = 1;
+            while ((o.outWidth * o.outHeight) * (1 / Math.pow(scale, 2)) >
+                    IMAGE_MAX_SIZE) {
+                scale++;
+            }
+            Log.d("", "scale = " + scale + ", orig-width: " + o.outWidth + ", orig-height: " + o.outHeight);
+
+            Bitmap b = null;
+            in = getContext().getContentResolver().openInputStream(uri);
+            if (scale > 1) {
+                scale--;
+                // scale to max possible inSampleSize that still yields an image
+                // larger than target
+                o = new BitmapFactory.Options();
+                o.inSampleSize = scale;
+                b = BitmapFactory.decodeStream(in, null, o);
+
+                // resize to desired dimensions
+                int height = b.getHeight();
+                int width = b.getWidth();
+                Log.d("", "1th scale operation dimenions - width: " + width + ", height: " + height);
+
+                double y = Math.sqrt(IMAGE_MAX_SIZE
+                        / (((double) width) / height));
+                double x = (y / height) * width;
+
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(b, (int) x,
+                        (int) y, true);
+                b.recycle();
+                b = scaledBitmap;
+
+                System.gc();
+            } else {
+                b = BitmapFactory.decodeStream(in);
+            }
+            in.close();
+
+            Log.d("", "bitmap size - width: " + b.getWidth() + ", height: " +
+                    b.getHeight());
+            return b;
+        } catch (IOException e) {
+            Log.e("", e.getMessage(), e);
+            return null;
         }
     }
 

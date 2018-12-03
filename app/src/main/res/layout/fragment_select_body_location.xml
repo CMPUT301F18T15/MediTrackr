@@ -17,7 +17,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
-        android:text="TAP TO SELECT BODY LOCATION"
+        android:text="Tap To Select Body Location"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="25sp"

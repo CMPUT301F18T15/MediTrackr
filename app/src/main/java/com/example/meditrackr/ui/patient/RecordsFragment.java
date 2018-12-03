@@ -90,12 +90,25 @@ public class RecordsFragment extends Fragment {
         final TextView recordsClick = (TextView) rootView.findViewById(R.id.records_click);
 
 
-
         // Get index as argument from bundle
         final int index = getArguments().getInt("INDEX");
         Log.d("RecordsFragments", "we on are on index: " + index);
         // Derive record list using problem index number
         RecordList recordList = patient.getProblem(index).getRecords();
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Patient patient2 = (Patient) ElasticSearch.searchProfile(patient.getUsername());
+                try {
+                    patient.getProblem(index).setComments(patient2.getProblem(index).getComments());
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
 
 
         // Adapt items into recycler view

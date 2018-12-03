@@ -178,6 +178,10 @@ public class Problem implements Serializable {
      */
     public CommentList getComments() {return comments;}
 
+    public void  setComments(CommentList comments){
+        this.comments = comments;
+    }
+
 
     /**
      * gets all the images on the problem

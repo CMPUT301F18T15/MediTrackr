@@ -33,6 +33,7 @@ import android.widget.EditText;
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.MessageListAdapter;
 import com.example.meditrackr.controllers.LazyLoadingManager;
+import com.example.meditrackr.utils.ElasticSearch;
 import com.example.meditrackr.utils.ThreadSave;
 import com.example.meditrackr.models.Comment;
 import com.example.meditrackr.models.CommentList;
@@ -74,11 +75,11 @@ public class MessageListFragment extends Fragment {
         // Need to fix this in the future, this is way too hacky
         if(profile.getisCareProvider()){
             patient = LazyLoadingManager.getCarePatient();
-            comments = patient.getProblem(LazyLoadingManager.getProblemIndex()).getComments();
         }else{
             patient = LazyLoadingManager.getPatient();
-            comments = patient.getProblem(LazyLoadingManager.getProblemIndex()).getComments();
         }
+
+        comments = patient.getProblem(LazyLoadingManager.getProblemIndex()).getComments();
 
 
         // Initialize the messageList adapter

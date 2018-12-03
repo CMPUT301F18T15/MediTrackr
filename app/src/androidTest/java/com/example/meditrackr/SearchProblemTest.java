@@ -55,9 +55,8 @@ public class SearchProblemTest extends ActivityTestRule<MainActivity> implements
         }
     }
 
-
     @Test
-    public void testASearchOneProblem() {
+    public void testSearchOneProblem() {
         onView(withId(R.id.add_problem_floating)).perform(click());
         onView(withId(R.id.problem_title_field)).perform(click(), typeText(problemNameFirst), pressBack());
         onView(withId(R.id.problem_add_button)).perform(click());

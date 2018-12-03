@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: BodyLocationView.java
  *
- * PURPOSE:
+ * PURPOSE: A view for displaying a body location.
  *
  *     Apache 2.0 License Notice
  *

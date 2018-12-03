@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: PatientSearchFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for searching for patients by username or QR code.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +22,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui.careprovider;
 
-//imports
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;

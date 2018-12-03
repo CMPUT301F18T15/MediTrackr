@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: RecordsFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for displaying all records associated with a problem
+ *          (patient view).
  *
  *     Apache 2.0 License Notice
  *

@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: SelectPinBodyLocationFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for selecting a body location by placing a pin on the
+ *          body location photo.
  *
  *     Apache 2.0 License Notice
  *

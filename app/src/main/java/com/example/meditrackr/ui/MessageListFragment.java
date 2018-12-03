@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: MessageListFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for displaying patient / care provider messages.
  *
  *     Apache 2.0 License Notice
  *

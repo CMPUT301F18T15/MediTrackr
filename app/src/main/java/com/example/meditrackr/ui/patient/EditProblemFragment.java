@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: EditProblemFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for editing patient problems.
  *
  *     Apache 2.0 License Notice
  *

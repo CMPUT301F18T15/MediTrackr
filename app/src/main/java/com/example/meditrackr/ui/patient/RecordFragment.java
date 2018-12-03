@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: RecordFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for displaying record information to patients.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,27 +22,20 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui.patient;
 
-//imports
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.models.record.Record;
-import com.example.meditrackr.ui.MainActivity;
 import com.example.meditrackr.utils.ConvertImage;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

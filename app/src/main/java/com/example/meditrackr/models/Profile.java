@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: Profile.java
  *
- * PURPOSE:
+ * PURPOSE: Tracks information common to both types of profiles (Profile or
+ *          Care Provider).
  *
  *     Apache 2.0 License Notice
  *

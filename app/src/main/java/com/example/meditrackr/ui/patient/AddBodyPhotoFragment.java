@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: AddBodyPhotoFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for adding body location photos.
  *
  *     Apache 2.0 License Notice
  *
@@ -66,7 +66,7 @@ import static android.app.Activity.RESULT_OK;
 public class AddBodyPhotoFragment extends Fragment {
     private ImageView bodyPhoto;
     private Bitmap bitmap, newBitmap, newBitmap2;
-    private EditText photoID;
+    private EditText photoName;
     private String pictureImagePath = "";
 
     // needed for getting new body location photo image
@@ -92,7 +92,7 @@ public class AddBodyPhotoFragment extends Fragment {
         final ImageButton uploadPhoto = (ImageButton) rootView.findViewById(R.id.upload_body_location);
         final Button addPhoto = (Button) rootView.findViewById(R.id.confirm_bodyphoto_button);
         bodyPhoto = (ImageView) rootView.findViewById(R.id.body_image);
-        photoID = (EditText) rootView.findViewById(R.id.photo_name_field);
+        photoName = (EditText) rootView.findViewById(R.id.photo_name_text_body);
 
 
 
@@ -101,13 +101,14 @@ public class AddBodyPhotoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // add the new body location photo to the patient
-                if (newBitmap != null) {
+                if ((newBitmap != null) && (photoName.getText() != null)) {
                     byte[] bitmapByte = ConvertImage.convertBitmapToBytes(newBitmap);
-                    BodyLocation photo = new BodyLocation(photoID.getText().toString(),
+                    BodyLocation photo = new BodyLocation(
+                            photoName.getText().toString(),
                             bitmapByte,
-                            photoID.getText().toString());
+                            photoName.getText().toString());
                     BodyPhotoController.addPhoto(getContext(), photo);
-                    MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, photoID.getText().toString(), "");
+                    MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, photoName.getText().toString(), "");
 
                     // Transition back to taking another photo
                     FragmentManager manager = getFragmentManager();

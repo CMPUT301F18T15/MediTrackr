@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: ProblemsFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for showing all problems associated with a patient
+ *          (A patient view).
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +23,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui.patient;
 
-//imports
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;

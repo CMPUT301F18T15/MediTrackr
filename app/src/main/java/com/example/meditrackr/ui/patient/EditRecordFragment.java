@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: EditRecordFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for editing records.
  *
  *     Apache 2.0 License Notice
  *

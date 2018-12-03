@@ -48,7 +48,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/photo_name_field"
+                    android:id="@+id/photo_name_text_body"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginStart="40dp"

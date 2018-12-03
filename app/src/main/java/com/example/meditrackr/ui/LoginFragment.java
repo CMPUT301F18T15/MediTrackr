@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: LoginFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for displaying login information.
  *
  *     Apache 2.0 License Notice
  *

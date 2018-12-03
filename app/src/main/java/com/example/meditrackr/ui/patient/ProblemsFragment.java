@@ -33,8 +33,11 @@ import android.widget.ImageView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.patient.ProblemAdapter;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
+import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.ui.careprovider.PatientsFragment;
+import com.example.meditrackr.utils.ElasticSearch;
 
 /**
  * shows user a list of their created problems in a recycler view.
@@ -75,7 +78,6 @@ public class ProblemsFragment extends Fragment {
         // Initialize ui attributes
         final FloatingActionButton addProblem = (FloatingActionButton) rootView.findViewById(R.id.add_problem_floating);
         final RecyclerView problems = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
-
 
         // Adapt items into recycler view
         problems.setHasFixedSize(false);

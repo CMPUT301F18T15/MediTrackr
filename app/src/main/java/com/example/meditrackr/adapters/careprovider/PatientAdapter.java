@@ -34,6 +34,7 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.ui.careprovider.ProblemsFragment;
+import com.example.meditrackr.utils.ElasticSearch;
 
 import java.util.ArrayList;
 
@@ -122,6 +123,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         private TextView patientEmail;
         private TextView patientPhone;
         private ImageButton gps;
+        private Patient patient;
 
         // Constructor and gets the corresponding data for each view
         private ViewHolder(View itemView, final PatientAdapter adapter) {
@@ -143,6 +145,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             FragmentManager manager = adapter.activity.getSupportFragmentManager();
             FragmentTransaction transaction =  manager.beginTransaction();
             Patient patient = adapter.patients.get(position);
+            patient = (Patient) ElasticSearch.searchProfile(patient.getUsername());
             LazyLoadingManager.setCarePatient(patient);
             ProblemsFragment fragment = ProblemsFragment.newInstance(position);
             transaction.addToBackStack(null);

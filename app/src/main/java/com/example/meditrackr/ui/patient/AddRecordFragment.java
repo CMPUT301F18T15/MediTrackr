@@ -21,7 +21,11 @@ package com.example.meditrackr.ui.patient;
 //imports
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -43,6 +47,7 @@ import com.example.meditrackr.controllers.LocationController;
 import com.example.meditrackr.controllers.model.RecordController;
 import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.models.record.Record;
+import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.DateUtils;
 import com.example.meditrackr.utils.ImageRecognition;
 import com.google.android.gms.location.places.Place;
@@ -50,7 +55,9 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 import es.dmoral.toasty.Toasty;
@@ -70,6 +77,9 @@ import static android.app.Activity.RESULT_OK;
 // Class creates Add Record Fragment for patients
 public class AddRecordFragment extends Fragment{
     private String date;
+    private String pictureImagePath = "";
+    private Bitmap bitmap;
+
 
     // Indicators and request codes
     private static final int IMAGE_REQUEST_CODE = 1;
@@ -209,10 +219,19 @@ public class AddRecordFragment extends Fragment{
             public void onClick(View view) {
 
                 if (bitmaps[9] == null) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                        startActivityForResult(intent, IMAGE_REQUEST_CODE);                    }
+                    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                    StrictMode.setVmPolicy(builder.build());
+                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                    String imageFileName = timeStamp + ".jpg";
+                    File storageDir = Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES);
+                    pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
+                    File file = new File(pictureImagePath);
+                    Uri outputFileUri = Uri.fromFile(file);
 
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+                    startActivityForResult(cameraIntent, IMAGE_REQUEST_CODE);
                 } else {
                     Toasty.error(getContext(), "Unable to add more than 10 photos!"
                             , Toast.LENGTH_SHORT).show();
@@ -254,25 +273,29 @@ public class AddRecordFragment extends Fragment{
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             // Allows intent to extract image taken by phone's camera
             getActivity();
-            Bitmap bmp = (Bitmap) data.getExtras().get("data");
-            assert bmp != null;
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
-            final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+            File imgFile = new  File(pictureImagePath);
+            if(imgFile.exists()) {
+                Log.d("BITMSPIMAGE", "do we get here");
+                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
-            // Image recognition
-            ImageRecognition.mContext = getContext();
-            ImageRecognition.recognizeImage(inputStream);
+                // Image recognition
+                ImageRecognition.mContext = getContext();
+                ImageRecognition.recognizeImage(inputStream);
 
-            // Populate image
-            for(int i = 0; i < bitmaps.length; i++){
-                if(bitmaps[i] == null){
-                    Bitmap newBitmap = Bitmap.createScaledBitmap(bmp,350, 425, false);
-                    bitmaps[i] = newBitmap;
-                    images[i].setImageBitmap(newBitmap);
-                    break;
+                // Populate image
+                for (int i = 0; i < bitmaps.length; i++) {
+                    if (bitmaps[i] == null) {
+                        bitmaps[i] = bitmap;
+                        images[i].setImageBitmap(ConvertImage.scaleBitmap(bitmap, 350, 450));
+                        break;
+                    }
                 }
             }
+
+
         }
 
         else if( requestCode == IMAGE_BODY_REQUEST_CODE && resultCode == RESULT_OK) {

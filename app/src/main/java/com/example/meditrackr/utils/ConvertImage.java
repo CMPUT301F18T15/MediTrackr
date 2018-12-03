@@ -21,6 +21,9 @@ package com.example.meditrackr.utils;
 //imports
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.util.Base64;
 import android.util.Log;
 
@@ -107,5 +110,33 @@ public class ConvertImage {
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 425, false);
         return newBitmap;
+    }
+
+    /**
+     * Scales the provided bitmap to have the height and width provided.
+     * (Alternative method for scaling bitmaps
+     * since Bitmap.createScaledBitmap(...) produces bad (blocky) quality bitmaps.)
+     *
+     * @param bitmap is the bitmap to scale.
+     * @param newWidth is the desired width of the scaled bitmap.
+     * @param newHeight is the desired height of the scaled bitmap.
+     * @return the scaled bitmap.
+     */
+    public static Bitmap scaleBitmap(Bitmap bitmap, int newWidth, int newHeight) {
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+
+        float scaleX = newWidth / (float) bitmap.getWidth();
+        float scaleY = newHeight / (float) bitmap.getHeight();
+        float pivotX = 0;
+        float pivotY = 0;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(scaleX, scaleY, pivotX, pivotY);
+
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
+
+        return scaledBitmap;
     }
 }

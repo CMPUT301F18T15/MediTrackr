@@ -82,11 +82,13 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="8dp"
+            android:background="@color/background2"
             android:layout_marginRight="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/careprovider_search_for_patient_button"
-            app:srcCompat="@drawable/hospital_hollow" />
+            app:srcCompat="@drawable/qr_code_button">
+        </ImageButton>
 
     </android.support.constraint.ConstraintLayout>
 
@@ -158,7 +160,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_username" />
+            app:layout_constraintTop_toBottomOf="@+id/patient_username"/>
 
         <TextView
             android:id="@+id/search_phone"

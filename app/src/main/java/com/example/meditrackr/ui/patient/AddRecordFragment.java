@@ -109,6 +109,7 @@ public class AddRecordFragment extends Fragment{
     public static Bitmap[] bodyBitmaps = new Bitmap[1];
     public static BodyLocation bodyLocationAdd;
     private File imgFile;
+    private Uri outputFileUri;
 
 
     // Location variables
@@ -148,7 +149,7 @@ public class AddRecordFragment extends Fragment{
         final EditText recordDescription = (EditText) rootView.findViewById(R.id.record_description_field);
         final ImageButton addImage = (ImageButton) rootView.findViewById(R.id.button_img);
         final Button addRecord = (Button) rootView.findViewById(R.id.add_record_button);
-        final TextView bodyLocation = (TextView) rootView.findViewById(R.id.body_location_title);
+        final Button bodyLocation = (Button) rootView.findViewById(R.id.body_location_title);
         addressView = (TextView) rootView.findViewById(R.id.addresss_field);
 
 
@@ -279,23 +280,14 @@ public class AddRecordFragment extends Fragment{
             if(imgFile.exists()) {
                 Log.d("BITMSPIMAGE", "do we get here");
                 bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 newBitmap = ConvertImage.scaleBitmap(bitmap,750, 750);
-                newBitmap2 = ConvertImage.RotateBitmap(newBitmap, 90);
 
-
-                // Image recognition
-                //ImageRecognition.mContext = getContext();
-                //ImageRecognition.recognizeImage(inputStream);
 
                 // Populate image
                 for (int i = 0; i < bitmaps.length; i++) {
                     if (bitmaps[i] == null) {
-                        bitmaps[i] = newBitmap2;
-                        images[i].setImageBitmap(ConvertImage.scaleBitmap(newBitmap2, 350, 600));
+                        bitmaps[i] = newBitmap;
+                        images[i].setImageBitmap(ConvertImage.scaleBitmap(newBitmap, 350, 600));
                         break;
                     }
                 }
@@ -347,6 +339,10 @@ public class AddRecordFragment extends Fragment{
 
 
     public void showImage() {
+        if(bitmaps[0] == null){
+            takePhoto();
+        }
+
         Dialog builder = new Dialog(getContext());
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
         builder.getWindow().setBackgroundDrawable(
@@ -363,9 +359,7 @@ public class AddRecordFragment extends Fragment{
             }
         });
 
-        if(bitmaps[0] == null){
-            takePhoto();
-        }
+
 
 
         ImageView imageView = new ImageView(getContext());
@@ -392,8 +386,8 @@ public class AddRecordFragment extends Fragment{
                 Environment.DIRECTORY_PICTURES);
         pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
         File file = new File(pictureImagePath);
-        Uri outputFileUri = Uri.fromFile(file);
-
+        outputFileUri = Uri.fromFile(file);
+        PermissionRequest.verifyPermission(getActivity());
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
         startActivityForResult(cameraIntent, IMAGE_REQUEST_CODE);

@@ -101,8 +101,8 @@ public class AddBodyPhotoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // add the new body location photo to the patient
-                if (newBitmap2 != null) {
-                    byte[] bitmapByte = ConvertImage.convertBitmapToBytes(newBitmap2);
+                if (newBitmap != null) {
+                    byte[] bitmapByte = ConvertImage.convertBitmapToBytes(newBitmap);
                     BodyLocation photo = new BodyLocation(photoID.getText().toString(),
                             bitmapByte,
                             photoID.getText().toString());
@@ -163,8 +163,7 @@ public class AddBodyPhotoFragment extends Fragment {
             if(imgFile.exists()) {
                 bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 newBitmap = ConvertImage.scaleBitmap(bitmap,750, 750);
-                newBitmap2 = ConvertImage.RotateBitmap(newBitmap, 90);
-                bodyPhoto.setImageBitmap(newBitmap2);
+                bodyPhoto.setImageBitmap(newBitmap);
 
 
                 // Image recognition

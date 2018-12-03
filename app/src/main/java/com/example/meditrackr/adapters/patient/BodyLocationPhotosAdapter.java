@@ -41,7 +41,12 @@ import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.utils.ConvertImage;
 import com.example.meditrackr.utils.ThreadSave;
-
+/**
+ * this class takes a body location and displays it in a recycler view
+ *
+ * @author Veronica Salm
+ * @version 1.0 Dec 2, 2018.
+ */
 // Adapter class displays body location in a recyclerview
 public class BodyLocationPhotosAdapter extends RecyclerView.Adapter<BodyLocationPhotosAdapter.ViewHolder>{
     // Class objects
@@ -97,6 +102,13 @@ public class BodyLocationPhotosAdapter extends RecyclerView.Adapter<BodyLocation
 
 
     // Place each record into its corresponding view
+
+    /**
+     * this class takes each record and will put it in the appropriate view
+     *
+     * @author Veronica Salm
+     * @version 1.0 Nov 7, 2018.
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private BodyLocationPhotosAdapter adapter;
         public ImageView photo;

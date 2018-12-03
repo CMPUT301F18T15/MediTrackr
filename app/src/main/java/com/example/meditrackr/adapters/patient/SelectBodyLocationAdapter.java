@@ -42,8 +42,12 @@ import com.example.meditrackr.ui.patient.SelectPinBodyLocationFragment;
 import com.example.meditrackr.utils.ConvertImage;
 
 /**
- * Crated by Skryt on Dec 02, 2018
+ * this class displays body locations on a recycler view for a user to select to
+ *
+ * @author Orest Cokan
+ * @version 1.0 Dec 2, 2018.
  */
+
 
 // Adapter class allows patient to select a body location from a recycler view
 public class SelectBodyLocationAdapter extends RecyclerView.Adapter<SelectBodyLocationAdapter.ViewHolder> {
@@ -98,7 +102,12 @@ public class SelectBodyLocationAdapter extends RecyclerView.Adapter<SelectBodyLo
         }
     }
 
-
+    /**
+     * this class takes a record and puts it in to the appropriate view
+     *
+     * @author Orest Cokan
+     * @version 1.0 Dec 2, 2018.
+     */
     // Place each record into its corresponding view
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private SelectBodyLocationAdapter adapter;

@@ -1,3 +1,25 @@
+/*--------------------------------------------------------------------------
+ * FILE: AddBodyPhotoFragment.java
+ *
+ * PURPOSE:
+ *
+ *     Apache 2.0 License Notice
+ *
+ * Copyright 2018 CMPUT301F18T15
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui.patient;
 
 import android.content.Intent;
@@ -43,7 +65,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class AddBodyPhotoFragment extends Fragment {
     private ImageView bodyPhoto;
-    private Bitmap bitmap;
+    private Bitmap bitmap, newBitmap, newBitmap2;
     private EditText photoID;
     private String pictureImagePath = "";
 
@@ -79,13 +101,12 @@ public class AddBodyPhotoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // add the new body location photo to the patient
-                if (bitmap != null) {
-                    byte[] bitmapByte = ConvertImage.convertBitmapToBytes(bitmap);
+                if (newBitmap != null) {
+                    byte[] bitmapByte = ConvertImage.convertBitmapToBytes(newBitmap);
                     BodyLocation photo = new BodyLocation(photoID.getText().toString(),
                             bitmapByte,
                             photoID.getText().toString());
                     BodyPhotoController.addPhoto(getContext(), photo);
-
                     MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, photoID.getText().toString(), "");
 
                     // Transition back to taking another photo
@@ -120,6 +141,7 @@ public class AddBodyPhotoFragment extends Fragment {
             }
         });
 
+
         // onclick listener for uploading a new bodylocation photo
         uploadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,14 +161,14 @@ public class AddBodyPhotoFragment extends Fragment {
             getActivity();
             File imgFile = new  File(pictureImagePath);
             if(imgFile.exists()) {
-                Log.d("BITMSPIMAGE", "do we get here");
                 bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                bodyPhoto.setImageBitmap(bitmap);
+                newBitmap = ConvertImage.scaleBitmap(bitmap,750, 750);
+                bodyPhoto.setImageBitmap(newBitmap);
 
 
                 // Image recognition
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                newBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
                 final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
                 ImageRecognition.mContext = getContext();
@@ -158,74 +180,11 @@ public class AddBodyPhotoFragment extends Fragment {
             Uri targetUri = data.getData();
             try {
                 bitmap = BitmapFactory.decodeStream(getContext().getContentResolver().openInputStream(targetUri));
-                Bitmap newBitmap = ConvertImage.scaleBitmap(bitmap, 1450, 1500);
+                Bitmap newBitmap = ConvertImage.scaleBitmap(bitmap, 750, 750);
                 bodyPhoto.setImageBitmap(newBitmap);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
     }
-
-
-    private Bitmap getBitmap(String path) {
-
-        Uri uri = Uri.fromFile(new File(path));
-        InputStream in = null;
-        try {
-            final int IMAGE_MAX_SIZE = 1200000; // 1.2MP
-            in = getContext().getContentResolver().openInputStream(uri);
-
-            // Decode image size
-            BitmapFactory.Options o = new BitmapFactory.Options();
-            o.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(in, null, o);
-            in.close();
-
-
-            int scale = 1;
-            while ((o.outWidth * o.outHeight) * (1 / Math.pow(scale, 2)) >
-                    IMAGE_MAX_SIZE) {
-                scale++;
-            }
-            Log.d("", "scale = " + scale + ", orig-width: " + o.outWidth + ", orig-height: " + o.outHeight);
-
-            Bitmap b = null;
-            in = getContext().getContentResolver().openInputStream(uri);
-            if (scale > 1) {
-                scale--;
-                // scale to max possible inSampleSize that still yields an image
-                // larger than target
-                o = new BitmapFactory.Options();
-                o.inSampleSize = scale;
-                b = BitmapFactory.decodeStream(in, null, o);
-
-                // resize to desired dimensions
-                int height = b.getHeight();
-                int width = b.getWidth();
-                Log.d("", "1th scale operation dimenions - width: " + width + ", height: " + height);
-
-                double y = Math.sqrt(IMAGE_MAX_SIZE
-                        / (((double) width) / height));
-                double x = (y / height) * width;
-
-                Bitmap scaledBitmap = Bitmap.createScaledBitmap(b, (int) x,
-                        (int) y, true);
-                b.recycle();
-                b = scaledBitmap;
-
-                System.gc();
-            } else {
-                b = BitmapFactory.decodeStream(in);
-            }
-            in.close();
-
-            Log.d("", "bitmap size - width: " + b.getWidth() + ", height: " +
-                    b.getHeight());
-            return b;
-        } catch (IOException e) {
-            Log.e("", e.getMessage(), e);
-            return null;
-        }
-    }
-
 }

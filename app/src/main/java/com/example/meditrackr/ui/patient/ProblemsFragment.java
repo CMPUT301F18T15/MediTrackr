@@ -1,21 +1,25 @@
-/*
- *Apache 2.0 License Notice
+/*--------------------------------------------------------------------------
+ * FILE: ProblemsFragment.java
  *
- *Copyright 2018 CMPUT301F18T15
+ * PURPOSE:
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ *     Apache 2.0 License Notice
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * Copyright 2018 CMPUT301F18T15
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui.patient;
 
 //imports
@@ -33,8 +37,11 @@ import android.widget.ImageView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.patient.ProblemAdapter;
+import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.controllers.VerticalSpaceController;
+import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.ui.careprovider.PatientsFragment;
+import com.example.meditrackr.utils.ElasticSearch;
 
 /**
  * shows user a list of their created problems in a recycler view.
@@ -75,7 +82,6 @@ public class ProblemsFragment extends Fragment {
         // Initialize ui attributes
         final FloatingActionButton addProblem = (FloatingActionButton) rootView.findViewById(R.id.add_problem_floating);
         final RecyclerView problems = (RecyclerView) rootView.findViewById(R.id.problem_recyclerview);
-
 
         // Adapt items into recycler view
         problems.setHasFixedSize(false);

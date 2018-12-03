@@ -1,21 +1,25 @@
-/*
- *Apache 2.0 License Notice
+/*--------------------------------------------------------------------------
+ * FILE: RecordsFragment.java
  *
- *Copyright 2018 CMPUT301F18T15
+ * PURPOSE:
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ *     Apache 2.0 License Notice
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * Copyright 2018 CMPUT301F18T15
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui.careprovider;
 
 //imports
@@ -39,6 +43,7 @@ import com.example.meditrackr.models.CommentList;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.MessageListFragment;
+import com.example.meditrackr.utils.ElasticSearch;
 
 /**
  * @author  Orest Cokan
@@ -76,7 +81,18 @@ public class RecordsFragment extends Fragment {
 
         // Gets records and comments from bundle
         RecordList records = (RecordList)getArguments().getSerializable("Records");
-        final CommentList comments = (CommentList) getArguments().getSerializable("Comments");
+
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Patient patient = carePatient;
+                patient = (Patient) ElasticSearch.searchProfile(patient.getUsername());
+                LazyLoadingManager.setCarePatient(patient);
+            }
+        });
+        thread.start();
+
 
         // Onclick listener for messages
         View.OnClickListener listener = new View.OnClickListener() {

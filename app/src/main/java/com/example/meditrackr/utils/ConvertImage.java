@@ -1,21 +1,25 @@
-/*
- *    Apache 2.0 License Notice
+/*--------------------------------------------------------------------------
+ * FILE: ConvertImage.java
  *
- *    Copyright 2018 CMPUT301F18T15
+ * PURPOSE:
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ *     Apache 2.0 License Notice
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * Copyright 2018 CMPUT301F18T15
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ --------------------------------------------------------------------------*/
 package com.example.meditrackr.utils;
 
 //imports
@@ -108,8 +112,8 @@ public class ConvertImage {
 
     public static Bitmap convertByteToBitmap(byte[] bytes){
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 425, false);
-        return newBitmap;
+        //Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap,350, 425, false);
+        return bitmap;
     }
 
     /**
@@ -138,5 +142,12 @@ public class ConvertImage {
         canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
 
         return scaledBitmap;
+    }
+
+    public static Bitmap RotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 }

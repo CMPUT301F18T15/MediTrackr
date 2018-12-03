@@ -1,21 +1,26 @@
-/*
- *    Apache 2.0 License Notice
+/*--------------------------------------------------------------------------
+ * FILE: MessageListAdapter.java
  *
- *    Copyright 2018 CMPUT301F18T15
+ * PURPOSE: Tracks the messages sent to and from patients and care providers
+ *          for the problem messaging feature.
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ *     Apache 2.0 License Notice
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * Copyright 2018 CMPUT301F18T15
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ --------------------------------------------------------------------------*/
 package com.example.meditrackr.adapters;
 
 //imports
@@ -32,19 +37,9 @@ import com.example.meditrackr.controllers.LazyLoadingManager;
 import com.example.meditrackr.models.Comment;
 import com.example.meditrackr.models.CommentList;
 
-/**
-*This class displays all messages that the user has.
-*This class uses getItemViewType to tell the user whether the messages they see were sent by them or recived.
-*This class uses onBindViewHolder just turns the message we have as a model into an adapter for the user to see.
-*This class uses SentMessageHolder to take the model of messages that the user sent and display them as an adapter. The adapter makes it clear that these messages were sent by the user and not recived. It also shows the time it was sent along with the message.
-*This class uses ReceivedMessageHolder to take the model of messages that the user has gotten from others and display them as an adapter. The adapter makes it clear that these messages were received by the user and not sent. It also shows the time it was received along with the message.
-*@author Orest Cokan
-*@version 1.0 Nov 12, 2018
-*/
 
 // got this from https://github.com/smilefam/SendBird-Android
-
-// Class shows a patient's and care provider's messages in a recycler view
+// Shows a patient's and care provider's messages in a recycler view
 public class MessageListAdapter extends RecyclerView.Adapter {
     // Enumeration values for 2 states of message
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
@@ -52,14 +47,6 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     // Class objects
     private Context mContext;
     private CommentList comments;
-
-    /**
-     * creates variables for the class to use
-     * @author Orest Cokan
-     * @version 1.0 Nov 12, 2018
-     * @param context           the context for the adapter
-     * @param messageList       a list of messages
-     */
 
     // Constructor
     public MessageListAdapter(Context context, CommentList messageList) {

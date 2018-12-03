@@ -1,3 +1,25 @@
+/*--------------------------------------------------------------------------
+ * FILE: SelectPinBodyLocationFragment.java
+ *
+ * PURPOSE:
+ *
+ *     Apache 2.0 License Notice
+ *
+ * Copyright 2018 CMPUT301F18T15
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui.patient;
 
 import android.graphics.Bitmap;
@@ -61,12 +83,13 @@ public class SelectPinBodyLocationFragment extends DialogFragment {
         // set bodyPhoto to the current photo
         bodyLocation = LazyLoadingManager.getBodyLocationPhoto();
         bitmap = ConvertImage.convertByteToBitmap(bodyLocation.getImage());
+        final Bitmap mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888,true);
 
 
         bodyPhotoView.setImageBitmap(bodyPhotoBitmap);
-        bodyPhotoCanvas.setImageBitmap(bitmap);
+        bodyPhotoCanvas.setImageBitmap(mutableBitmap);
 
-        canvas = new Canvas(bitmap);
+        canvas = new Canvas(mutableBitmap);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.RED);
 
@@ -115,13 +138,13 @@ public class SelectPinBodyLocationFragment extends DialogFragment {
 
     private void drawPoint(float x, float y) {
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        canvas.drawCircle(x, y, 10, paint);
+        canvas.drawCircle(x, y, 15, paint);
     }
 
     private Bitmap saveBitmapImage() {
-        Bitmap res = ConvertImage.convertByteToBitmap(bodyPhotoSrc.getImage());
+        Bitmap res = bitmap.copy(Bitmap.Config.ARGB_8888, true);
         Canvas overlay = new Canvas(res);
-        overlay.drawCircle(x, y,10, paint);
+        overlay.drawCircle(x, y,15, paint);
         return res;
     }
 

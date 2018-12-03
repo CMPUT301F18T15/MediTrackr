@@ -87,6 +87,7 @@ public class SelectBodyLocationAdapter extends RecyclerView.Adapter<SelectBodyLo
             photo = itemView.findViewById(R.id.image_item_view);
             ImageButton deleteBodyPhoto = (ImageButton) itemView.findViewById(R.id.image_remove_button);
             deleteBodyPhoto.setVisibility(View.INVISIBLE);
+
             labelPhoto = (TextView) itemView.findViewById(R.id.body_location_label);
             itemView.setOnClickListener(this);
             this.adapter = adapter;

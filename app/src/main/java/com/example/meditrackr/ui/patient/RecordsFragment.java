@@ -119,10 +119,8 @@ public class RecordsFragment extends Fragment {
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.addToBackStack(null);
-                    // Switch to MessageListFragment
                     MessageListFragment fragment = MessageListFragment.newInstance();
                     transaction.replace(R.id.content, fragment);
-                    // Commit changes in fragment
                     transaction.commit();
                 }
                 else if (recordsClick == v) {

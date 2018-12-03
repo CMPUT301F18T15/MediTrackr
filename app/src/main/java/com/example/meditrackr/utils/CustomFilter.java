@@ -27,8 +27,14 @@ import android.widget.Filter;
 
 
 /**
- * Crated by Skryt on Nov 18, 2018
+ * CustomerFilter
+ *
+ * The following class is an adapter type that makes parsing for search querys much easier
+
+ * @author Orest Cokan
+ * @version 1.0 Nov 18, 2018
  */
+
 
 public class CustomFilter {
     private boolean isProblem;
@@ -42,7 +48,7 @@ public class CustomFilter {
     private Geolocation geolocation;
 
 
-
+    // Filter for a problem
     public CustomFilter(String username, boolean isRecord, String title, String description, String date, int problemIndex){
 
         this.username = username;
@@ -53,7 +59,7 @@ public class CustomFilter {
         this.problemIndex = problemIndex;
         this.recordIndex = -1;
     }
-
+    // Filter for a record
     public CustomFilter(String username, boolean isRecord, String title, String description, String date, Geolocation geolocation, int problemIndex, int recordIndex){
         this.username = username;
         this.isRecord = isRecord;
@@ -67,7 +73,7 @@ public class CustomFilter {
     }
 
 
-
+    // Getters and Setters
     public boolean isProblem() {
         return isProblem;
     }

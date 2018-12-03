@@ -46,7 +46,7 @@ public class RecordTest {
         final double[] tempCoords = new double[2];
         tempCoords[0] = 0.0;
         tempCoords[1] = 0.0;
-        final BodyLocation bodyLoc = new BodyLocation();
+        final BodyLocation bodyLoc = new BodyLocation(XPercent, YPercent, bodyLocationPhoto.getName(), bodyLocationPhoto.getID());
         final Geolocation geoLoc = new Geolocation(0.0, 0.0, "");
         record = new Record
                 ("", "", "", bodyLoc);
@@ -62,7 +62,7 @@ public class RecordTest {
         double[] coords = {25, 12};
         String face = "bodyface";
         String location = "bodylocation";
-        BodyLocation bodylocation = new BodyLocation();
+        BodyLocation bodylocation = new BodyLocation(XPercent, YPercent, bodyLocationPhoto.getName(), bodyLocationPhoto.getID());
         Record testrecord =
                 new Record(title, desc, date, bodylocation);
         assertEquals(title, testrecord.getTitle());
@@ -98,7 +98,7 @@ public class RecordTest {
         final String face = "Body Face";
         final String loc = "Body Location";
         final BodyLocation newBodyLoc = new BodyLocation
-                ();
+                (XPercent, YPercent, bodyLocationPhoto.getName(), bodyLocationPhoto.getID());
 
         record.setBodyLocation(newBodyLoc);
 

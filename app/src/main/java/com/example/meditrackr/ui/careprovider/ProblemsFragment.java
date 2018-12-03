@@ -87,9 +87,11 @@ public class ProblemsFragment extends Fragment  {
         manager = new LinearLayoutManager(getActivity());
         patientList.setLayoutManager(manager);
 
+
         // Add spacing between views
         VerticalSpaceController decoration = new VerticalSpaceController(75);
         patientList.addItemDecoration(decoration);
+
 
         // On click listener for viewing all of records/problems of a patient in a map view
         gps.setOnClickListener(new View.OnClickListener() {

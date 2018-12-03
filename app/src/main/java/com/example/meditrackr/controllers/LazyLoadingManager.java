@@ -23,6 +23,7 @@ import com.example.meditrackr.models.CareProvider;
 import com.example.meditrackr.models.Patient;
 import com.example.meditrackr.models.PatientList;
 import com.example.meditrackr.models.Profile;
+import com.example.meditrackr.models.record.BodyLocation;
 import com.example.meditrackr.models.record.PhotoList;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class LazyLoadingManager {
     private static int problemIndex;
     private static PhotoList images;
     private static ArrayList<Patient> patients;
+    private static BodyLocation bodyLocationPhoto;
 
 
     /**
@@ -227,5 +229,14 @@ public class LazyLoadingManager {
         LazyLoadingManager.patients = patients;
     }
 
+
+
+    public static BodyLocation getBodyLocationPhoto() {
+        return bodyLocationPhoto;
+    }
+
+    public static void setBodyLocationPhoto(BodyLocation bodyLocationPhoto) {
+        LazyLoadingManager.bodyLocationPhoto = bodyLocationPhoto;
+    }
 }
 

@@ -22,7 +22,7 @@ import es.dmoral.toasty.Toasty;
  */
 
 public class ImageRecognition {
-    private static String api = "2aa6c1dbee28492baa5a91a44929d57f";
+    private static String api = "d28b3a28f0d448ff8f079b9be652249d";
     private static String website = "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0";
     public static Context mContext;
     private static VisionServiceClient visionServiceClient = new VisionServiceRestClient(

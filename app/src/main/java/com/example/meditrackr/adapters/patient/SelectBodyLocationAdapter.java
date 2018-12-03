@@ -87,6 +87,7 @@ public class SelectBodyLocationAdapter extends RecyclerView.Adapter<SelectBodyLo
             photo = itemView.findViewById(R.id.image_item_view);
             ImageButton deleteBodyPhoto = (ImageButton) itemView.findViewById(R.id.image_remove_button);
             deleteBodyPhoto.setVisibility(View.INVISIBLE);
+
             labelPhoto = (TextView) itemView.findViewById(R.id.body_location_label);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
@@ -97,12 +98,11 @@ public class SelectBodyLocationAdapter extends RecyclerView.Adapter<SelectBodyLo
         @Override
         public void onClick(View v) {
             final int position = getAdapterPosition();
-            FragmentManager manager = adapter.activity.getSupportFragmentManager();
-            FragmentTransaction transaction =  manager.beginTransaction();
             LazyLoadingManager.setBodyLocationPhoto(adapter.photos.getBodyLocationPhoto(position));
-            SelectPinBodyLocationFragment fragment = SelectPinBodyLocationFragment.newInstance();
-            transaction.replace(R.id.content, fragment);
-            transaction.commit();
+            FragmentManager manager = adapter.activity.getSupportFragmentManager();
+            SelectPinBodyLocationFragment fragment = SelectPinBodyLocationFragment.newInstance(patient.getBodyLocationPhotos().getBodyLocationPhoto(position));
+            fragment.show(manager, "fragment_body_location");
+
         }
 
     }

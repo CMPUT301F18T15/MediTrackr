@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: CapturePreview.java
  *
- * PURPOSE:
+ * PURPOSE: For displaying a preview of the image the user took most
+ *          recently to remind them to take the same image.
  *
  *     Apache 2.0 License Notice
  *

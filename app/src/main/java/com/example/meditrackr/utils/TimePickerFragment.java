@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: TimePickerFragment.java
  *
- * PURPOSE:
+ * PURPOSE: For selecting date and time for a problem.
  *
  *     Apache 2.0 License Notice
  *

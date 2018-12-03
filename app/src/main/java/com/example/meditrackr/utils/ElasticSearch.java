@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: ElasticSearch.java
  *
- * PURPOSE:
+ * PURPOSE: For interfacing with Elastic Search database.
  *
  *     Apache 2.0 License Notice
  *

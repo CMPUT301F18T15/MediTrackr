@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: UserFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for displaying user information and the settings wheel.
  *
  *     Apache 2.0 License Notice
  *

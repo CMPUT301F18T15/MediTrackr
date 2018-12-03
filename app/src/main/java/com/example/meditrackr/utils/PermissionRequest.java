@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: PermissionRequest.java
  *
- * PURPOSE:
+ * PURPOSE: For getting permissions for camera, location, and storage requests.
  *
  *     Apache 2.0 License Notice
  *

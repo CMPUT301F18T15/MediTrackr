@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: ImageRecognition.java
  *
- * PURPOSE:
+ * PURPOSE: Used for AI image recognition.
  *
  *     Apache 2.0 License Notice
  *

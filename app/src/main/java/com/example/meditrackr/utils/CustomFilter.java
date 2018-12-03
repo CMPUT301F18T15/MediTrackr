@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: CustomFilter.java
  *
- * PURPOSE:
+ * PURPOSE: For filtering problems and records by keyword.
  *
  *     Apache 2.0 License Notice
  *

@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: UserEditFragment.java
  *
- * PURPOSE:
+ * PURPOSE: A view for editing user contact information.
  *
  *     Apache 2.0 License Notice
  *

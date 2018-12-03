@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: RegisterFragment.java
  *
- * PURPOSE:
+ * PURPOSE: For new user registration. Allows adding contact information
+ *          and specifying whether the user is a patient or care provider.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +23,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.ui;
 
-//imports
 import android.graphics.Typeface;
 import android.os.Bundle;
 
@@ -61,7 +61,7 @@ import es.dmoral.toasty.Toasty;
  * if user doesn't choose one a toast message will appear to tell user to pick one
  *
  * lastly there is an login button which a user must press for all of the data they entered to
- * be put into the database. if all entry's are good then user will be taken to the main page (MainActivity)
+ * be put into the database. if all entries are good then user will be taken to the main page (MainActivity)
  *
  * there is also a already_member button which will take the user to the login page page (RegisterFragment)
  *

@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: SettingsFragment.java
  *
- * PURPOSE:
+ * PURPOSE: Displays the QR code for the current user.
  *
  *     Apache 2.0 License Notice
  *

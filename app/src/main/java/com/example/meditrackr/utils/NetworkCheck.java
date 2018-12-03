@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: NetworkCheck.java
  *
- * PURPOSE:
+ * PURPOSE: Used to check for network connectivity.
  *
  *     Apache 2.0 License Notice
  *

@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: SearchFragment.java
  *
- * PURPOSE:
+ * PURPOSE: Displays the search interface and allows searching for keywords
+ *          and records with specific body and geolocations.
  *
  *     Apache 2.0 License Notice
  *

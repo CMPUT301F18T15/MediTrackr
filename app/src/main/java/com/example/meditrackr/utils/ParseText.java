@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: ParseText.java
  *
- * PURPOSE:
+ * PURPOSE: For parsing text and extracting keywords for searching.
  *
  *     Apache 2.0 License Notice
  *

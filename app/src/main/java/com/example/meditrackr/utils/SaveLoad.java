@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: SaveLoad.java
  *
- * PURPOSE:
+ * PURPOSE: For saving and retrieving patient or careprovider information.
  *
  *     Apache 2.0 License Notice
  *

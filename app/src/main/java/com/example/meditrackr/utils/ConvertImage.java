@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------
  * FILE: ConvertImage.java
  *
- * PURPOSE:
+ * PURPOSE: For scaling and compressing images to be under the required size.
  *
  *     Apache 2.0 License Notice
  *
@@ -22,7 +22,6 @@
  --------------------------------------------------------------------------*/
 package com.example.meditrackr.utils;
 
-//imports
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;

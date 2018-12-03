@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------------------
  * FILE: ThreadSave.java
  *
- * PURPOSE:
+ * PURPOSE: For saving patient and care provider information using multiple
+ *          threads.
  *
  *     Apache 2.0 License Notice
  *

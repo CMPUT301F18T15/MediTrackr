@@ -38,6 +38,8 @@ import com.example.meditrackr.R;
 import com.example.meditrackr.models.record.RecordList;
 import com.example.meditrackr.ui.patient.RecordFragment;
 
+import net.steamcrafted.materialiconlib.MaterialIconView;
+
 /**
  * This class displays all of the records of a problem selected from a previous page (using the
  * problem adapter) in a recycler view.
@@ -113,12 +115,18 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         private RecordAdapter adapter;
         public TextView date;
         public TextView description;
+        private MaterialIconView deleteRecord;
+        private MaterialIconView editRecord;
 
         // Constructor and gets the corresponding data for each view
         public ViewHolder(View itemView, final RecordAdapter adapter){
             super(itemView);
             date = itemView.findViewById(R.id.record_date);
             description = itemView.findViewById(R.id.record_description);
+            deleteRecord = itemView.findViewById(R.id.record_delete_button);
+            editRecord= itemView.findViewById(R.id.record_edit_button);
+            deleteRecord.setVisibility(View.INVISIBLE);
+            editRecord.setVisibility(View.INVISIBLE);
             itemView.setOnClickListener(this);
             this.adapter = adapter;
         }

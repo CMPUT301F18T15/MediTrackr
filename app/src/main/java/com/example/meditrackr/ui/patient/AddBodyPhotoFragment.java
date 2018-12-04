@@ -181,7 +181,7 @@ public class AddBodyPhotoFragment extends Fragment {
             Uri targetUri = data.getData();
             try {
                 bitmap = BitmapFactory.decodeStream(getContext().getContentResolver().openInputStream(targetUri));
-                Bitmap newBitmap = ConvertImage.scaleBitmap(bitmap, 750, 750);
+                newBitmap = ConvertImage.scaleBitmap(bitmap, 750, 750);
                 bodyPhoto.setImageBitmap(newBitmap);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

@@ -32,6 +32,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.careprovider.ProblemAdapter;
@@ -57,6 +58,10 @@ public class ProblemsFragment extends Fragment  {
     // Initialize object
     private ProblemAdapter adapter;
     private ArrayList<Patient> patients = LazyLoadingManager.getPatients();
+    private TextView patientUsername;
+    private TextView patientEmail;
+    private TextView patientPhone;
+
 
     // Creates new instance fragment and saves it as bundle
     public static ProblemsFragment newInstance(int index){
@@ -80,7 +85,12 @@ public class ProblemsFragment extends Fragment  {
 
         // Set bundle number as problem index
         final int index = getArguments().getInt("PatientIndex");
-
+        patientUsername = rootView.findViewById(R.id.patient_username);
+        patientEmail = rootView.findViewById(R.id.patient_email);
+        patientPhone = rootView.findViewById(R.id.patient_phone);
+        patientUsername.setText(patients.get(index).getUsername());
+        patientEmail.setText(patients.get(index).getEmail());
+        patientPhone.setText(patients.get(index).getPhone());
 
         // Adapt items into recycler view
         patientList.setHasFixedSize(false);

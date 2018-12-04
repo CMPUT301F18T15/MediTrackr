@@ -10,13 +10,13 @@
 
     <ImageView
         android:id="@+id/meditrackr_logo"
-        android:layout_width="0dp"
-        android:layout_height="95dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="310dp"
+        android:layout_height="55dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,11 +25,11 @@
 
     <ImageView
         android:id="@+id/qr_code"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="148dp"
+        android:layout_height="133dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"

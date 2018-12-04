@@ -282,7 +282,7 @@ public class AddRecordFragment extends Fragment{
                 Log.d("BITMSPIMAGE", "do we get here");
                 bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 newBitmap = ConvertImage.scaleBitmap(bitmap,750, 750);
-                newBitmap = ConvertImage.RotateBitmap(newBitmap, 90);
+                //newBitmap = ConvertImage.RotateBitmap(newBitmap, 90);
 
 
 

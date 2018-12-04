@@ -142,8 +142,6 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
         private TextView totalRecords;
         private MaterialIconView deleteProblem;
         private MaterialIconView editProblem;
-
-
         // Constructor and gets the corresponding data for each view
         private ViewHolder(View itemView, final ProblemAdapter adapter){
             super(itemView);

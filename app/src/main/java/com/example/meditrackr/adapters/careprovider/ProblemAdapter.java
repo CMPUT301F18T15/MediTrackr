@@ -26,6 +26,7 @@ package com.example.meditrackr.adapters.careprovider;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -167,6 +168,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
             problemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.d("DOWEGETHERE", "WHATTHEUFK");
+                    LazyLoadingManager.setProblemIndex(getAdapterPosition());
                     PhotoList images = problems.getProblem(getAdapterPosition()).getImageAll();
                     LazyLoadingManager.setImages(images);
 
@@ -176,6 +179,10 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                     }
                     else { // Make clickable and switch to FullScreenViewActivity on click
                         Intent intent = new Intent(adapter.activity, FullScreenViewActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("index", getAdapterPosition());
+                        Log.d("DOWEGETHERE", ""+getAdapterPosition());
+                        intent.putExtras(bundle);
                         adapter.activity.startActivity(intent);
                     }
                 }

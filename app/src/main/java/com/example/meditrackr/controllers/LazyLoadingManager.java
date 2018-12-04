@@ -51,6 +51,7 @@ public class LazyLoadingManager {
     private static PhotoList images;
     private static ArrayList<Patient> patients;
     private static BodyLocation bodyLocationPhoto;
+    private static int position;
 
 
     /**
@@ -242,5 +243,14 @@ public class LazyLoadingManager {
     public static void setBodyLocationPhoto(BodyLocation bodyLocationPhoto) {
         LazyLoadingManager.bodyLocationPhoto = bodyLocationPhoto;
     }
+
+    public static int getPosition() {
+        return position;
+    }
+
+    public static void setPosition(int position) {
+        LazyLoadingManager.position = position;
+    }
+
 }
 

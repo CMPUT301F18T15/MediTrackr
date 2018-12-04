@@ -244,6 +244,7 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHold
                     else {
                         LazyLoadingManager.setImages(images);
                         Intent intent = new Intent(adapter.activity, FullScreenViewActivity.class);
+                        LazyLoadingManager.setProblemIndex(getAdapterPosition());
                         adapter.activity.startActivity(intent);
                     }
                 }

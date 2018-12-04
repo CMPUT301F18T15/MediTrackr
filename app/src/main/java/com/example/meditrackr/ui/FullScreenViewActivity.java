@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.example.meditrackr.R;
 import com.example.meditrackr.adapters.FullScreenImageAdapter;
@@ -45,6 +46,7 @@ public class FullScreenViewActivity extends AppCompatActivity{
     private FullScreenImageAdapter adapter;
     protected PhotoList images;
     protected Patient patient;
+    private int position = LazyLoadingManager.getProblemIndex();
 
 
     // Creates image as view object
@@ -55,8 +57,9 @@ public class FullScreenViewActivity extends AppCompatActivity{
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
-        Intent intent = getIntent();
-        int position = intent.getIntExtra("position", 0);
+
+        //int position = (int) getIntent().getExtras().getSerializable("index");
+        //Log.d("DOWEGETHERE", position+"");
 
         Profile profile = LazyLoadingManager.getProfile();
         if(profile.getisCareProvider()){

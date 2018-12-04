@@ -155,6 +155,7 @@ public class AddBodyPhotoFragment extends Fragment {
         return rootView;
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -164,6 +165,7 @@ public class AddBodyPhotoFragment extends Fragment {
             if(imgFile.exists()) {
                 bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 newBitmap = ConvertImage.scaleBitmap(bitmap,750, 750);
+                newBitmap = ConvertImage.RotateBitmap(newBitmap, 90);
                 bodyPhoto.setImageBitmap(newBitmap);
 
 
@@ -182,7 +184,15 @@ public class AddBodyPhotoFragment extends Fragment {
             try {
                 bitmap = BitmapFactory.decodeStream(getContext().getContentResolver().openInputStream(targetUri));
                 newBitmap = ConvertImage.scaleBitmap(bitmap, 750, 750);
+                newBitmap = ConvertImage.RotateBitmap(newBitmap, 90);
                 bodyPhoto.setImageBitmap(newBitmap);
+                // Image recognition
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                newBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+
+                ImageRecognition.mContext = getContext();
+                ImageRecognition.recognizeImage(inputStream);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

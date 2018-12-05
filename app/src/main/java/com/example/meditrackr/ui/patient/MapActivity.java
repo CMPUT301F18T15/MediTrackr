@@ -425,14 +425,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                 try {
                     String snippet =
-                            "Record #: " + j + "\n" +
+                            "Record #" + j + "\n" +
                                     "Username: " + patient.getUsername() + "\n"+
                                     "Date: " + record.getDate() + "\n" +
-                                    "Description: " + record.getDescription() + "\n";
+                                    "Description: " + record.getTitle() + "\n";
 
                     MarkerOptions options = new MarkerOptions()
                             .position(new LatLng(geolocation.getLatitude(), geolocation.getLongitude()))
-                            .title(patient.getProblem(i).getDescription())
+                            .title(patient.getProblem(i).getTitle())
                             .snippet(snippet);
 
                     mMarker = mMap.addMarker(options);

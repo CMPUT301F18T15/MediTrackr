@@ -9,7 +9,7 @@ Our app allows for patients to record any medical problems they have on their bo
 
 | Group Members| CCID|
 | :--- | --- |
-| Orest Cokan| cokan|
+| | |
 | Muhammad Usman| usman1|
 | Veronica Salm| vsalm |
 | Gillien Froilan | froilan |
